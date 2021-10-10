@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
-#include <fstream>
+#include "struct.hpp"
 
-void get_instructions(const std::string);
+void init_memory(MEMORY&);
