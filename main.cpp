@@ -1,16 +1,19 @@
 #include <iostream>
 #include <string>
 #include <map>
-#include "struct.h"
+#include "struct.hpp"
 #include "memory.hpp"
 #include "decode.hpp"
 #include "util.hpp"
 
 int main(int argc, char* argv[]){
     CPU cpu;
-    MEMORY mem;
-    std::map<std::string, int> label;
+    MEMORY mem, submem; // submem for library
+    std::map<std::string, int> lbl, sublbl;
+    collect_label(argv[1], lbl);
+    if(argc >= 3) collect_label(argv[2], sublbl);
+    decode(argv[1], mem, lbl, sublbl);
+    if(argc >= 3) decode(argv[2], submem, sublbl, lbl);
 
-    decode(argv[1], mem, label);
     return 0;
 }
