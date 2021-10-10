@@ -1,5 +1,6 @@
 #include "decode.hpp"
 #include "struct.hpp"
+#include "util.hpp"
 
 enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "add") return ADD;
@@ -170,7 +171,7 @@ void put_instr_into_memory(std::string& str, MEMORY& mem, std::map<std::string, 
     }
 }
 
-void decode(const std::string& file, MEMORY &mem, std::map<std::string, int>& label){
+void decode(const char* file, MEMORY &mem, std::map<std::string, int>& label){
     std::ifstream ifs(file);
 
     if(!ifs){
@@ -182,10 +183,22 @@ void decode(const std::string& file, MEMORY &mem, std::map<std::string, int>& la
 
     int cnt = 0;
     while(std::getline(ifs, str)){
-        if(str[0] != '\t' && str[0] != '#') label[str] = cnt;
-        else cnt++;
+        if(str[0] == '#') continue;
+        else if(str[0] != '\t'){
+            str = remove_chars(str, " \t:")[0];
+            label[str] = cnt;
+        }
+        else{
+            if(str[1] == '.') continue;
+            else cnt++;
+        }
     }
+
+    ifs.clear();
     ifs.seekg(0);
 
-    while(std::getline(ifs, str)) put_instr_into_memory(str, mem, label);
+    while(std::getline(ifs, str)){
+        if(str[0] == '\t' && str[1] == '.') continue;
+        put_instr_into_memory(str, mem, label);
+    }
 }
