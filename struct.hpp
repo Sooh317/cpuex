@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 #include <iostream>
+#include <vector>
 
 using GPR = int32_t; // general purpose register
 using FPR = float; // floating point register
@@ -14,9 +15,11 @@ struct cpu_t{
     CR cr;
     LR lr;
     CTR ctr;
-    GPR gpr[GPR_SIZE];
-    FPR fpr[FPR_SIZE];
+    std::vector<GPR> gpr;
+    std::vector<FPR> fpr;
     unsigned int pc;
+
+    cpu_t():cr(0), lr(0), ctr(0), gpr(GPR_SIZE), fpr(FPR_SIZE){}
 
     void show_gpr(){
         for(int i = 0; i < GPR_SIZE; i++){
@@ -32,14 +35,13 @@ struct cpu_t{
 using CPU = cpu_t;
 
 struct instr_t{
-    uint8_t opcode;
-    uint8_t rd; // rd or rs
+    uint32_t opcode;
+    uint32_t rd; // rd or rs
     int32_t ra;
     int32_t rb;
 
-    instr_t(uint8_t _opcode,uint8_t _rd,uint8_t _ra, int32_t _rb):
-        opcode(_opcode), rd(_rd), ra(_ra), rb(_rb){}
-    
+    instr_t(uint8_t _opcode,uint8_t _rd,uint8_t _ra, int32_t _rb):opcode(_opcode), rd(_rd), ra(_ra), rb(_rb){}
+    instr_t(){}
 };
 using INSTR = instr_t;
 
@@ -78,8 +80,9 @@ enum INSTR_KIND{
 
 struct memory_t{
     int index;
-    INSTR instr[INSTR_SIZE]; 
-    int32_t data[DATA_SIZE]; 
-};
+    std::vector<INSTR> instr; 
+    std::vector<int32_t> data;
 
+    memory_t():index(0), instr(INSTR_SIZE), data(DATA_SIZE){} 
+};
 using MEMORY = memory_t;
