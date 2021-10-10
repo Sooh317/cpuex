@@ -1,4 +1,5 @@
 #pragma once 
+#include "struct.hpp"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -6,7 +7,8 @@
 #include <cassert>
 #include <map>
 
-enum INSTR_KIND opcode_of_instr(const std::string&);
+
+INSTR_KIND opcode_of_instr(const std::string&);
 int reg_number(const std::string&, int);
 void recognize_instr(MEMORY& , const std::vector<std::string>&, std::map<std::string, int>&);
 std::vector<std::string> remove_chars(std::string&, const std::string&);
