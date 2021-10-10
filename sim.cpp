@@ -11,6 +11,7 @@ int simulate_whole(CPU& cpu, MEMORY &mem){
         INSTR next = instr_fetch(cpu.pc, mem);
         execute_instr(next, cpu);
     }
+    return 0;
 }
 
 void execute_instr(const INSTR& instr, CPU &cpu){
