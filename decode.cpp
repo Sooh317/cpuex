@@ -24,6 +24,7 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
 
 // lo16...(rd)の修正必要
 int reg_number(const std::string& s, int flag){
+    if(s[0] == 'l' || s[0] == 'h') return -1;
     if(flag == 0){ // gpr
         return stoi(s.substr(1, s.size() - 1));
     }
