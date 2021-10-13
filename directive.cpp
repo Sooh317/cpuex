@@ -1,0 +1,34 @@
+#include "directive.hpp"
+#include <string>
+
+enum DIRECTIVE_KIND directive_kind(const std::string &ss){
+    if(ss == ".align") return ALIGN;
+    else if(ss == ".ascii") return ASCII;
+    else if(ss == ".long") return LONG;
+    /*
+    else if(ss == ".cstring") return CSTRING;
+    else if(ss == ".global") return GLOBL;
+    else if(ss == ".indirect_symbol") return INDIRECT_SYMBOL;
+    else if(ss == ".lazy_symbol_pointer") return LAZY_SYMBOL_POINTER;
+    else if(ss == ".literal8") return LITERAL8;
+    else if(ss == ".non_lazy_symbol_pointer") return NON_LAZY_SYMBOL_POINTER;
+    else if(ss == ".section") return SECTION;
+    else if(ss == ".subsections_via_symbols") return SUBSECTIONS_VIA_SYMBOLS;
+    */
+    else if(ss[0] == '.') return SOME_DIRECTIVE;
+    else return NOT_DIRECTIVE;
+}
+
+void process_long_directive(MEMORY& mem, const std::string& s){
+    mem.instr[mem.index >> 2].opcode = 0;
+    mem.instr[mem.index >> 2].ra = stoi(s);
+}
+
+void process_ascii_directive(MEMORY& mem, const std::string& s){ // "...\0"の形
+    int index = mem.index;
+    for(int i = 1; i < s.size(); i++){
+        mem.instr[mem.index >> 2].ra = ((uint8_t)s[i]) << (mem.index % 4);
+        mem.index++;
+    }
+    mem.index = index;
+}

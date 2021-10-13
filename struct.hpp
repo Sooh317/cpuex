@@ -35,12 +35,13 @@ struct cpu_t{
 using CPU = cpu_t;
 
 struct instr_t{
-    uint32_t opcode;
+    uint16_t opcode;
     uint32_t rd; // rd or rs
     int32_t ra;
     int32_t rb;
-
+    uint16_t sub;
     instr_t(uint8_t _opcode,uint8_t _rd,uint8_t _ra, int32_t _rb):opcode(_opcode), rd(_rd), ra(_ra), rb(_rb){}
+    instr_t(uint8_t _opcode,uint8_t _rd,uint8_t _ra, int32_t _rb, int32_t _sub):opcode(_opcode), rd(_rd), ra(_ra), rb(_rb), sub(_sub){}
     instr_t(){}
 };
 using INSTR = instr_t;
@@ -52,8 +53,10 @@ enum INSTR_KIND{
     // arithmetic operation
     ADD, 
     ADDI,
-    LI, // addi 0
-    SUBI, 
+    ADDIS, 
+    /*LI, // addi 0 */
+    /*SUBI, */
+
     // logic operation
 
     // comparison
@@ -62,20 +65,41 @@ enum INSTR_KIND{
     BGT,
     BL,
     BLR, // jump to LINK Register
+    BCL,
+    BCTR,
     // load
     LWZ,
-    LMW, // load multiple word
+    LWZU,
+    /* LMW, // load multiple word */
     // store
     STW,
-    STMW, // store multiple word
+    /* STMW, // store multiple word */
     STWU, // store word with update
     // link register
-    MFLR, // move from link register
+    MFSPR, // move from link register
     // move
     MR,   // move register
-    MTLR, // refer to p526 
+    MTSPR, // refer to p526 
 
     INSTR_UNKNOWN
+};
+
+// http://apfel.mathematik.uni-ulm.de/~lehn/sghpc_ws14/OSXAssembler.pdf
+enum DIRECTIVE_KIND{
+    ALIGN, 
+    ASCII,
+    CSTRING, 
+    GLOBL,
+    INDIRECT_SYMBOL,
+    LAZY_SYMBOL_POINTER,
+    LITERAL8,
+    LONG, 
+    NON_LAZY_SYMBOL_POINTER,
+    SECTION,
+    SUBSECTIONS_VIA_SYMBOLS,
+    TEXT,
+    SOME_DIRECTIVE,
+    NOT_DIRECTIVE
 };
 
 struct memory_t{

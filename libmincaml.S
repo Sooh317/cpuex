@@ -1,18 +1,18 @@
-	.cstring
+	.cstring # cstring secontion begins from here
 	.align 	2
 LC0:
 	.ascii	"%d\0"
 	.align	2
 LC1:
 	.ascii 	"%lf\0"
-	.literal8
+	.literal8 # literal8 secontion begins from here
 	.align 	3
 LC2:
-	.long	1127219200
+	.long	1127219200 # long は1行につき1つまでにしてもらう
 	.long	-2147483648
-	.text
+	.text # text section begins from here
 	.align	2
-	.globl 	min_caml_print_newline
+	.globl 	min_caml_print_newline # min_caml_print_newline が外から見えるようにしてる
 min_caml_print_newline:
 	mflr 	r0
 	stmw 	r30, -8(r1)
@@ -46,7 +46,7 @@ L1spb:
 	.lazy_symbol_pointer
 putchar_lazy:
 	.indirect_symbol _putchar
-	.long	dyld_stub_binding_helper
+	.long	dyld_stub_binding_helper # to be replaced by _putchar's address (http://mirror.informatimago.com/next/developer.apple.com/documentation/DeveloperTools/Reference/Assembler/ASMDirectives/chapter_5_section_2.html)
 	.subsections_via_symbols
 #	print_int
 	.text
@@ -64,8 +64,8 @@ min_caml_print_int:
 L2pb:
 	mflr 	r31
 	mr	r4, r2
-	addis 	r2, r31, ha16(LC0 - L2pb)
-	la 	r3, lo16(LC0 - L2pb)(r2)
+	addis 	r2, r31, ha16(LC0-L2pb)
+	la 	r3, lo16(LC0-L2pb)(r2)
 	bl	printf
 	lwz 	r1, 0(r1)
 	lwz 	r0, 8(r1)
@@ -132,12 +132,12 @@ L3pb:
 	mr	r6, r2
 	mr	r2, r5
 	mr	r5, r6
-	addis 	r2, r31, ha16(L - L3pb)
-	lwz 	r2, lo16(L - L3pb)(r2)
+	addis 	r2, r31, ha16(L-L3pb)
+	lwz 	r2, lo16(L-L3pb)(r2)
 	addi 	r0, r2, 176
 	mr 	r3, r0
-	addis 	r2, r31, ha16(LC0 - L3pb)
-	la 	r4, lo16(LC0 - L3pb)(r2)
+	addis 	r2, r31, ha16(LC0-L3pb)
+	la 	r4, lo16(LC0-L3pb)(r2)
 	bl 	fprintf
 	lwz 	r1, 0(r1)
 	lwz 	r0, 8(r1)
@@ -158,9 +158,9 @@ fprintf:
 	bcl 	20, 31, L3spb
 L3spb:
 	mflr 	r11
-	addis 	r11, r11, ha16(fprintf_lazy - L3spb)
+	addis 	r11, r11, ha16(fprintf_lazy-L3spb)
 	mtlr 	r0
-	lwzu 	r12, lo16(fprintf_lazy - L3spb)(r11)
+	lwzu 	r12, lo16(fprintf_lazy-L3spb)(r11)
 	mtctr 	r12
 	bctr
 	.lazy_symbol_pointer
@@ -184,8 +184,8 @@ min_caml_prerr_byte:
 L4pb:
 	mflr	r31
 	mr	r3, r2
-	addis 	r2, r31, ha16(L - L4pb)
-	lwz	r2, lo16(L - L4pb)(r2)
+	addis 	r2, r31, ha16(L-L4pb)
+	lwz	r2, lo16(L-L4pb)(r2)
 	addi	r0, r2, 176
 	mr	r4, r0
 	bl	fputc
@@ -204,9 +204,9 @@ fputc:
 	bcl	20, 31, L4spb
 L4spb:
 	mflr	r11
-	addis	r11, r11, ha16(fputc_lazy - L4spb)
+	addis	r11, r11, ha16(fputc_lazy-L4spb)
 	mtlr	r0
-	lwzu	r12, lo16(fputc_lazy - L4spb)(r11)
+	lwzu	r12, lo16(fputc_lazy-L4spb)(r11)
 	mtctr	r12
 	bctr
 	.lazy_symbol_pointer
@@ -229,8 +229,8 @@ min_caml_prerr_float:
 	bcl 	20, 31, L5pb
 L5pb:
 	mflr 	r31
-	addis 	r2, r31, ha16(L - L5pb)
-	lwz 	r2, lo16(L - L5pb)(r2)
+	addis 	r2, r31, ha16(L-L5pb)
+	lwz 	r2, lo16(L-L5pb)(r2)
 	addi 	r29, r2, 176
 	stfd 	f0, 64(r30)
 	lwz 	r2, 64(r30)
@@ -242,8 +242,8 @@ L5pb:
 	lfd 	f13, 64(r30)
 #	fmr 	f0, f13
 	mr 	r3, r29
-	addis 	r2, r31, ha16(LC1 - L5pb)
-	la 	r4, lo16(LC1 - L5pb)(r2)
+	addis 	r2, r31, ha16(LC1-L5pb)
+	la 	r4, lo16(LC1-L5pb)(r2)
 	mr 	r5, r9
 	mr 	r6, r10
 	fmr 	f1, f0
@@ -270,8 +270,8 @@ min_caml_read_int:
 	bcl 	20, 31, L6pb
 L6pb:
 	mflr 	r31
-	addis 	r2, r31, ha16(LC0 - L6pb)
-	la 	r3, lo16(LC0 - L6pb)(r2)
+	addis 	r2, r31, ha16(LC0-L6pb)
+	la 	r3, lo16(LC0-L6pb)(r2)
 	addi 	r4, r30, 56
 	bl 	scanf
 	lwz 	r2, 56(r30)
@@ -290,9 +290,9 @@ scanf:
 	bcl 	20, 31, L6spb
 L6spb:
 	mflr 	r11
-	addis 	r11, r11, ha16(scanf_lazy - L6spb)
+	addis 	r11, r11, ha16(scanf_lazy-L6spb)
 	mtlr 	r0
-	lwzu 	r12, lo16(scanf_lazy - L6spb)(r11)
+	lwzu 	r12, lo16(scanf_lazy-L6spb)(r11)
 	mtctr 	r12
 	bctr
 	.lazy_symbol_pointer
@@ -315,8 +315,8 @@ min_caml_read_float:
 	bcl 	20, 31, L7pb
 L7pb:
 	mflr	r31
-	addis	r2, r31, ha16(LC1 - L7pb)
-	la	r3, lo16(LC1 - L7pb)(r2)
+	addis	r2, r31, ha16(LC1-L7pb)
+	la	r3, lo16(LC1-L7pb)(r2)
 	addi	r4, r30, 56
 	bl	scanf
 	lfd	f0, 56(r30)
@@ -396,9 +396,9 @@ sqrt:
 	bcl 	20, 31, L8spb
 L8spb:
 	mflr 	r11
-	addis 	r11, r11, ha16(sqrt_lazy - L8spb)
+	addis 	r11, r11, ha16(sqrt_lazy-L8spb)
 	mtlr 	r0
-	lwzu 	r12, lo16(sqrt_lazy - L8spb)(r11)
+	lwzu 	r12, lo16(sqrt_lazy-L8spb)(r11)
 	mtctr 	r12
 	bctr
 	.lazy_symbol_pointer
@@ -438,9 +438,9 @@ floor:
 	bcl 	20, 31, L9spb
 L9spb:
 	mflr 	r11
-	addis 	r11, r11, ha16(floor_lazy - L9spb)
+	addis 	r11, r11, ha16(floor_lazy-L9spb)
 	mtlr 	r0
-	lwzu 	r12, lo16(floor_lazy - L9spb)(r11)
+	lwzu 	r12, lo16(floor_lazy-L9spb)(r11)
 	mtctr 	r12
 	bctr
 	.lazy_symbol_pointer
@@ -483,8 +483,8 @@ Lapb:
 	stw 	r2, 72(r30)
 	lwz 	r0, 72(r30)
 	lis 	r2, 0x4330
-	addis 	r9, r10, ha16(LC2 - Lapb)
-	lfd 	f13, lo16(LC2 - Lapb)(r9)
+	addis 	r9, r10, ha16(LC2-Lapb)
+	lfd 	f13, lo16(LC2-Lapb)(r9)
 	xoris 	r0, r0, 0x8000
 	stw 	r0, 28(r30)
 	stw 	r2, 24(r30)
@@ -528,9 +528,9 @@ cos:
 	bcl 	20, 31, Lbspb
 Lbspb:
 	mflr 	r11
-	addis 	r11, r11, ha16(cos_lazy - Lbspb)
+	addis 	r11, r11, ha16(cos_lazy-Lbspb)
 	mtlr 	r0
-	lwzu 	r12,lo16(cos_lazy - Lbspb)(r11)
+	lwzu 	r12,lo16(cos_lazy-Lbspb)(r11)
 	mtctr 	r12
 	bctr
 	.lazy_symbol_pointer
@@ -571,9 +571,9 @@ sin:
 	bcl 	20, 31, Lcspb
 Lcspb:	
 	mflr 	r11
-	addis 	r11, r11, ha16(sin_lazy - Lcspb)
+	addis 	r11, r11, ha16(sin_lazy-Lcspb)
 	mtlr 	r0
-	lwzu 	r12, lo16(sin_lazy - Lcspb)(r11)
+	lwzu 	r12, lo16(sin_lazy-Lcspb)(r11)
 	mtctr 	r12
 	bctr
 	.lazy_symbol_pointer
@@ -614,9 +614,9 @@ atan:
 	bcl 	20, 31, Ldspb
 Ldspb:
 	mflr 	r11
-	addis 	r11, r11, ha16(atan_lazy - Ldspb)
+	addis 	r11, r11, ha16(atan_lazy-Ldspb)
 	mtlr 	r0
-	lwzu 	r12, lo16(atan_lazy - Ldspb)(r11)
+	lwzu 	r12, lo16(atan_lazy-Ldspb)(r11)
 	mtctr 	r12
 	bctr
 	.lazy_symbol_pointer
