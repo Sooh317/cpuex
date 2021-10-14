@@ -225,4 +225,3 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "mtspr") return MTSPR;
     return INSTR_UNKNOWN;
 }
-

@@ -20,12 +20,13 @@ enum DIRECTIVE_KIND directive_kind(const std::string &ss){
 }
 
 void process_long_directive(MEMORY& mem, const std::string& s){
-    mem.instr[mem.index >> 2].opcode = 0;
+    mem.instr[mem.index >> 2].opcode = NOT_INSTR;
     mem.instr[mem.index >> 2].ra = stoi(s);
 }
 
 void process_ascii_directive(MEMORY& mem, const std::string& s){ // "...\0"の形
     int index = mem.index;
+    mem.instr[index].opcode = NOT_INSTR;
     for(int i = 1; i < s.size(); i++){
         mem.instr[mem.index >> 2].ra = ((uint8_t)s[i]) << (mem.index % 4);
         mem.index++;

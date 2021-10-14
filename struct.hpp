@@ -8,6 +8,7 @@ using FPR = float; // floating point register
 using CR = uint32_t; // condition register
 using LR = uint32_t; // link register
 using CTR = uint32_t; // count register
+using XER = uint32_t; // xer register
 #define GPR_SIZE 32
 #define FPR_SIZE 32
 
@@ -15,11 +16,12 @@ struct cpu_t{
     CR cr;
     LR lr;
     CTR ctr;
+    XER xer;
     std::vector<GPR> gpr;
     std::vector<FPR> fpr;
     unsigned int pc;
 
-    cpu_t():cr(0), lr(0), ctr(0), gpr(GPR_SIZE), fpr(FPR_SIZE){}
+    cpu_t():cr(0), lr(0), ctr(0), xer(0),pc(0), gpr(GPR_SIZE), fpr(FPR_SIZE){}
 
     void show_gpr(){
         for(int i = 0; i < GPR_SIZE; i++){
@@ -33,23 +35,6 @@ struct cpu_t{
     }
 };
 using CPU = cpu_t;
-
-struct instr_t{
-    uint32_t opcode;
-    uint32_t rd; // rd or rs
-    int32_t ra;
-    int32_t rb;
-    instr_t(uint8_t _opcode,uint8_t _rd,uint8_t _ra, int32_t _rb):opcode(_opcode), rd(_rd), ra(_ra), rb(_rb){}
-    instr_t(){}
-
-    void show(){
-        std::cout << "opcode : " << opcode << "\n" << "rd : " << rd << "\n" << "ra : " << ra << "\n" <<  "rb : " << rb << std::endl;
-    }
-};
-using INSTR = instr_t;
-
-#define INSTR_SIZE 1024*1024
-#define DATA_SIZE 1024*1024
 
 enum INSTR_KIND{
     // arithmetic operation
@@ -82,9 +67,26 @@ enum INSTR_KIND{
     // move
     MR,   // move register
     MTSPR, // refer to p526 
-
+    NOT_INSTR,
     INSTR_UNKNOWN
 };
+
+struct instr_t{
+    INSTR_KIND opcode;
+    uint32_t rd; // rd or rs
+    int32_t ra;
+    int32_t rb;
+    instr_t(INSTR_KIND _opcode,uint8_t _rd,uint8_t _ra, int32_t _rb):opcode(_opcode), rd(_rd), ra(_ra), rb(_rb){}
+    instr_t(){}
+
+    void show(){
+        std::cout << "opcode : " << opcode << "\n" << "rd : " << rd << "\n" << "ra : " << ra << "\n" <<  "rb : " << rb << std::endl;
+    }
+};
+using INSTR = instr_t;
+
+#define INSTR_SIZE 1024*1024
+#define DATA_SIZE 1024*1024
 
 // http://apfel.mathematik.uni-ulm.de/~lehn/sghpc_ws14/OSXAssembler.pdf
 enum DIRECTIVE_KIND{

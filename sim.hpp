@@ -2,6 +2,6 @@
 #include <assert.h>
 #include "struct.hpp"
 
-INSTR instr_fetch(unsigned int, const MEMORY&);
-int simulate_whole(CPU&, const MEMORY&);
-void execute_instr(const INSTR&, CPU&);
+INSTR instr_fetch(CPU& cpu, const MEMORY&);
+int simulate_whole(CPU&, MEMORY&, MEMORY&);
+void exec(INSTR, CPU&, MEMORY&);
