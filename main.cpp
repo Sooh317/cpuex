@@ -16,6 +16,5 @@ int main(int argc, char* argv[]){
     if(argc >= 3) collect_label(argv[2], sublbl);
     decode(argv[1], mem, lbl, sublbl);
     if(argc >= 3) decode(argv[2], submem, sublbl, lbl);
-
     return 0;
 }

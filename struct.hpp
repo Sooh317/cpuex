@@ -35,14 +35,16 @@ struct cpu_t{
 using CPU = cpu_t;
 
 struct instr_t{
-    uint16_t opcode;
+    uint32_t opcode;
     uint32_t rd; // rd or rs
     int32_t ra;
     int32_t rb;
-    uint16_t sub;
     instr_t(uint8_t _opcode,uint8_t _rd,uint8_t _ra, int32_t _rb):opcode(_opcode), rd(_rd), ra(_ra), rb(_rb){}
-    instr_t(uint8_t _opcode,uint8_t _rd,uint8_t _ra, int32_t _rb, int32_t _sub):opcode(_opcode), rd(_rd), ra(_ra), rb(_rb), sub(_sub){}
     instr_t(){}
+
+    void show(){
+        std::cout << "opcode : " << opcode << "\n" << "rd : " << rd << "\n" << "ra : " << ra << "\n" <<  "rb : " << rb << std::endl;
+    }
 };
 using INSTR = instr_t;
 
@@ -88,16 +90,18 @@ enum INSTR_KIND{
 enum DIRECTIVE_KIND{
     ALIGN, 
     ASCII,
+    LONG, 
+/*
     CSTRING, 
     GLOBL,
     INDIRECT_SYMBOL,
     LAZY_SYMBOL_POINTER,
     LITERAL8,
-    LONG, 
     NON_LAZY_SYMBOL_POINTER,
     SECTION,
     SUBSECTIONS_VIA_SYMBOLS,
     TEXT,
+*/
     SOME_DIRECTIVE,
     NOT_DIRECTIVE
 };

@@ -143,6 +143,7 @@ void recognize_instr(MEMORY& mem, const std::vector<std::string> &s, std::map<st
             break;
         case MFSPR: // move from LR
             rd = call(1, 0);
+            ra = call(2, 0);
             break;  
         case MR:
             rd = call(1, 0);
@@ -150,6 +151,7 @@ void recognize_instr(MEMORY& mem, const std::vector<std::string> &s, std::map<st
             break;
         case MTSPR: // move to LR
             rd = call(1, 0);
+            ra = call(2, 0);
             break;
         default:
             warning(s[0]);
