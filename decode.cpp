@@ -33,6 +33,7 @@ void next_memory_address(int &cnt, const std::vector<std::string> &s){
     else if(kind == ALIGN){
         assert(s.size() >= 2);
         int k = 1 << stoi(s[1]);
+        if(cnt % k == 0) return;
         cnt += k - cnt % k;
     }
     else if(kind == ASCII){ // need to remove " \ ", which is 3 chars
@@ -64,11 +65,11 @@ void decode(const char* file, MEMORY &mem, std::map<std::string, int>& label, st
 
     std::string str;
     while(std::getline(ifs, str)){
-        print(str);
-        int k = mem.index >> 2;
-        std::cerr << "k : " << k << std::endl;
+        //print(str);
+        //int k = mem.index >> 2;
+        //std::cerr << "k : " << k << std::endl;
         put_instr_into_memory(str, mem, label, sublbl);
-        mem.instr[k].show();
+        //mem.instr[k].show();
     }
 }
 
