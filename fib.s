@@ -38,7 +38,7 @@ _min_caml_start: # main entry point
 	stw	r0, 8(r1)
 	stwu	r1, -96(r1)
 #	main program starts
-	addi	r2, 0, 2
+	addi	r2, 0, 5
 	mfspr	r31, 8
 	stw	r31, 4(r3)
 	addi	r3, r3, 8

@@ -14,7 +14,7 @@ INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
 
 // submem と mem の切り替え
 int simulate_whole(CPU& cpu, MEMORY &mem){
-    for(int i = 0; i <= 100; i++){
+    while(true){
         INSTR next = instr_fetch(cpu, mem);
         if(exec(next, cpu, mem)) return 0;
     }
@@ -64,7 +64,7 @@ bool exec(INSTR instr, CPU& cpu, MEMORY&mem){
             ctr_ok = kth_bit(bo, 2, 5) || ((cpu.ctr != 0) ^ kth_bit(bo, 3, 5));
             cond_ok = kth_bit(bo, 0, 5) || (kth_bit(cpu.cr, bi) ^ (!kth_bit(bo, 1, 5)));
             if(ctr_ok && cond_ok) cpu.pc = segment(cpu.lr, 0, 29) << 2;
-            else return false;
+            return false;
         case BCL: // わかんない
             cpu.lr = cpu.pc;
             if(!kth_bit(bo, 2, 5)) cpu.ctr--;
