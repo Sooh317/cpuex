@@ -13,25 +13,17 @@ INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
 }
 
 // submem と mem の切り替え
-int simulate_whole(CPU& cpu, MEMORY &mem, MEMORY &submem){
-    for(int i = 0; i <= 200; i++){
+int simulate_whole(CPU& cpu, MEMORY &mem){
+    for(int i = 0; i <= 100; i++){
         INSTR next = instr_fetch(cpu, mem);
-        if(cpu.pc < mem.index){
-            if(exec(next, cpu, mem)) return 0;
-        }
-        else{
-            while(cpu.pc >= mem.index){
-                INSTR subnext = instr_fetch(cpu, submem);
-                exec(subnext, cpu, mem);
-            }
-        }
+        if(exec(next, cpu, mem)) return 0;
     }
     return 0;
 }
 
 bool exec(INSTR instr, CPU& cpu, MEMORY&mem){
     auto[opc, d, a, b] = instr;
-    std::cout << opcode_to_string(opc) << " " << d << " " << a << " " << b << std::endl;
+    std::cout << cpu.pc - 4 << " " << opcode_to_string(opc) << " " << d << " " << a << " " << b << std::endl;
     int c, bo, bi, ea, tmp;
     bool cond_ok, ctr_ok;
     switch(opc){
@@ -66,19 +58,19 @@ bool exec(INSTR instr, CPU& cpu, MEMORY&mem){
             cpu.pc = d;
             return false;
         case BLR: // 未完成
+            if(cpu.pc == mem.index) return true; // program ends
             bo = 20, bi = 0;
             if(!kth_bit(bo, 2, 5)) cpu.ctr--;
             ctr_ok = kth_bit(bo, 2, 5) || ((cpu.ctr != 0) ^ kth_bit(bo, 3, 5));
             cond_ok = kth_bit(bo, 0, 5) || (kth_bit(cpu.cr, bi) ^ (!kth_bit(bo, 1, 5)));
             if(ctr_ok && cond_ok) cpu.pc = segment(cpu.lr, 0, 29) << 2;
-            if(cpu.pc == mem.index) return true; // program ends
             else return false;
-        case BCL:
+        case BCL: // わかんない
             cpu.lr = cpu.pc;
             if(!kth_bit(bo, 2, 5)) cpu.ctr--;
             ctr_ok = kth_bit(bo, 2, 5) || ((cpu.ctr != 0) ^ kth_bit(bo, 3, 5));
             cond_ok = kth_bit(bo, 0, 5) || (kth_bit(cpu.cr, bi) ^ (!kth_bit(bo, 1, 5)));
-            if(ctr_ok && cond_ok) cpu.pc = cpu.pc - 4 + b;
+            if(ctr_ok && cond_ok) cpu.pc = cpu.pc - 4 + (b << 2);
             return false;
         case BCTR:
             bo = 20, bi = 0;
@@ -113,9 +105,10 @@ bool exec(INSTR instr, CPU& cpu, MEMORY&mem){
             return false;
         case MTSPR:
             assert((a >> 5) == 0);
-            if(a == 0b00001) cpu.xer = cpu.gpr[d];
-            else if(a == 0b01000) cpu.lr = cpu.gpr[d];
-            else if(a == 0b01001) cpu.ctr = cpu.gpr[d];
+            if(d == 0b00001) cpu.xer = cpu.gpr[a];
+            else if(d == 0b01000) cpu.lr = cpu.gpr[a];
+            else if(d == 0b01001) cpu.ctr = cpu.gpr[a];
+            else assert(false);
             return false;
         default:
             assert(false);

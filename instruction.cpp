@@ -2,7 +2,7 @@
 #include "util.hpp"
 #include "struct.hpp"
 
-int internal_reg_number(const std::string& s, bool in_paren, std::map<std::string, int>& lbl, std::map<std::string, int>& sublbl){
+int internal_reg_number(const std::string& s, bool in_paren, std::map<std::string, int>& lbl){
     if(in_paren){
         int lparen = -1, rparen = s.size() - 1;
         for(int i = s.size() - 2; i >= 0; i--){
@@ -11,7 +11,7 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
                 break;
             }
         }
-        return internal_reg_number(s.substr(lparen + 1, rparen - lparen - 1), 0, lbl, sublbl);
+        return internal_reg_number(s.substr(lparen + 1, rparen - lparen - 1), 0, lbl);
     }
     if(s[0] == 'l' && s[1] == 'o' || s[0] == 'h' && s[1] == 'a'){ // lo16() or ha16()
         auto calc = [&]()->int{
@@ -30,9 +30,6 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
                 if(lbl.find(label1) != lbl.end()){
                     return (s[0] == 'l' ? lo16(lbl[label1] - lbl[label2]) : ha16(lbl[label1] - lbl[label2]));
                 }
-                else if(sublbl.find(label1) != sublbl.end()){
-                    return (s[0] == 'l' ? lo16(sublbl[label1] - sublbl[label2]) : ha16(sublbl[label1] - sublbl[label2]));
-                }
                 else{
                     assert(false);
                     return 0;
@@ -42,9 +39,6 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
                 std::string label = s.substr(lparen + 1, rparen - lparen - 1);
                 if(lbl.find(label) != lbl.end()){
                     return (s[0] == 'l' ? lo16(lbl[label]) : ha16(lbl[label]));
-                }
-                else if(sublbl.find(label) != sublbl.end()){
-                    return (s[0] == 'l' ? lo16(sublbl[label]) : ha16(lbl[label]));
                 }
                 else{
                     assert(false);
@@ -80,8 +74,8 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
 
 
 
-void recognize_instr(MEMORY& mem, const std::vector<std::string> &s, std::map<std::string, int> &lbl, std::map<std::string, int>& sublbl){
-    auto call = [&](int id, bool in_flag)->int{return internal_reg_number(s[id], in_flag, lbl, sublbl);};
+void recognize_instr(MEMORY& mem, const std::vector<std::string> &s, std::map<std::string, int> &lbl){
+    auto call = [&](int id, bool in_flag)->int{return internal_reg_number(s[id], in_flag, lbl);};
     INSTR_KIND opc = opcode_of_instr(s[0]);
     int rd = 0, ra = 0, rb = 0, sub = 0;
     switch (opc){
@@ -109,25 +103,25 @@ void recognize_instr(MEMORY& mem, const std::vector<std::string> &s, std::map<st
             if(s.size() == 3){
                 rd = call(1, 0);
                 if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
-                else ra = sublbl[s[2]];
+                else assert(false);
             }
             else if(s.size() == 2){
                 if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
-                else ra = sublbl[s[2]];
+                else assert(false);
             }
             else assert(false);
             break;
         case BL:
             if(lbl.find(s[1]) != lbl.end()) rd = lbl[s[1]];
-            else rd = sublbl[s[1]];
+            else assert(false);
             break;
         case BLR: // 無条件分岐 to LR
             break;
         case BCL: // 注 : 常にラベルがくると仮定
             rd = call(1, 0);
             ra = call(2, 0);
-            if(lbl.find(s[2]) != lbl.end()) rb = lbl[s[2]];
-            else rb = sublbl[s[2]];
+            if(lbl.find(s[3]) != lbl.end()) rb = lbl[s[3]];
+            else assert(false);
             break;
         case BCTR: // 無条件分岐
             break;
@@ -166,6 +160,7 @@ void recognize_instr(MEMORY& mem, const std::vector<std::string> &s, std::map<st
         case NOT_INSTR:
             break;
         default:
+            //std::cerr << "line " << mem.index << std::endl;
             //warning(s[0]);
             break;
     }

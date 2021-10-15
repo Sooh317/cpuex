@@ -43,20 +43,21 @@ void next_memory_address(int &cnt, const std::vector<std::string> &s){
     }
 }
 
-void put_instr_into_memory(std::string& str, MEMORY& mem, std::map<std::string, int>& label, std::map<std::string, int>& sublbl){
+void put_instr_into_memory(std::string& str, MEMORY& mem, std::map<std::string, int>& label){
     std::vector<std::string> s = remove_chars(str, ", \t\n");
     if(s.size() >= 1){
         if(s[0].back() == ':') return; // label
         DIRECTIVE_KIND kind = directive_kind(s[0]);
         if(kind == LONG) process_long_directive(mem, s[1]);
         else if(kind == ASCII) process_ascii_directive(mem, s[1]);
-        else if(kind == SOME_DIRECTIVE || kind == ALIGN); // do nothing
-        else recognize_instr(mem, s, label, sublbl);
+        else if(kind == SOME_DIRECTIVE) return;
+        else if(kind == ALIGN);
+        else recognize_instr(mem, s, label);
         next_memory_address(mem.index, s);
     }
 }
 
-void decode(const char* file, MEMORY &mem, std::map<std::string, int>& label, std::map<std::string, int>& sublbl){
+void decode(const char* file, MEMORY &mem, std::map<std::string, int>& label){
     std::ifstream ifs(file);
 
     if(!ifs){
@@ -65,16 +66,18 @@ void decode(const char* file, MEMORY &mem, std::map<std::string, int>& label, st
     }
 
     std::string str;
-    while(std::getline(ifs, str)) put_instr_into_memory(str, mem, label, sublbl);
+    while(std::getline(ifs, str)){
+        put_instr_into_memory(str, mem, label);
+    }
 }
 
-void collect_label(const char* file, std::map<std::string, int>& label){
+int collect_label(const char* file, std::map<std::string, int>& label, int tmp){
     std::ifstream ifs(file);
     if(!ifs){
         std::cerr << "cannot open file" << std::endl;
         std::exit(1);
     }
-    int cnt = 0;
+    int cnt = tmp;
     std::string str;
     while(std::getline(ifs, str)){
         if(str[0] == '#') continue; // comment
@@ -87,4 +90,5 @@ void collect_label(const char* file, std::map<std::string, int>& label){
             next_memory_address(cnt, ss);
         }
     }
+    return cnt;
 }

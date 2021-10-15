@@ -33,6 +33,25 @@ struct cpu_t{
             std::cerr << "fpr[" << i << "] = " << fpr[i] << '\n';
         }
     }
+    void show_cr(){
+        std::cerr << "cr : ";
+        for(int i = 31; i >= 0; i--){
+            std::cerr << (cr >> i & 1);
+        }
+        std::cerr << std::endl;
+    }
+    void show_lr(){
+        /*std::cerr << "lr : ";
+        for(int i = 31; i >= 0; i--){
+            std::cerr << (lr >> i & 1);
+        }
+        std::cerr << std::endl;*/
+        std::cout << "lr : ";
+        for(int i = 31; i >= 0; i--){
+            std::cout << (lr >> i & 1);
+        }
+        std::cout << std::endl;
+    }
 };
 using CPU = cpu_t;
 

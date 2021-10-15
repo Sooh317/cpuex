@@ -1,10 +1,12 @@
 #include "memory.hpp"
 #include "decode.hpp"
+#include "util.hpp"
 
 
-void init_memory(int argc, char *argv[], MEMORY& mem, MEMORY& submem, std::map<std::string, int>&lbl, std::map<std::string, int>& sublbl){
-    collect_label(argv[1], lbl);
-    if(argc >= 3) collect_label(argv[2], sublbl);
-    decode(argv[1], mem, lbl, sublbl);
-    if(argc >= 3) decode(argv[2], submem, sublbl, lbl);
+void init_memory(int argc, char *argv[], MEMORY& mem, std::map<std::string, int>&lbl){
+    int tmp = 0;
+    if(argc >= 3) tmp = collect_label(argv[2], lbl, tmp);
+    collect_label(argv[1], lbl, tmp);
+    if(argc >= 3) decode(argv[2], mem, lbl);
+    decode(argv[1], mem, lbl);
 }

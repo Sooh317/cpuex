@@ -53,8 +53,10 @@ putchar_lazy:
 	.align 	2
 	.globl	min_caml_print_int
 min_caml_print_int:
-	mflr 	r0
-	stmw 	r30, -8(r1)
+	mfspr 	r0, 8
+#	stmw 	r30, -8(r1)
+    stw     r30, -8(r1)
+    stw     r31, -4(r1)
 	stw 	r0, 8(r1)
 	stw	r3, 12(r1)
 	stw	r4, 16(r1)
@@ -62,10 +64,10 @@ min_caml_print_int:
 	mr 	r30, r1
 	bcl 	20, 31, L2pb
 L2pb:
-	mflr 	r31
+	mfspr 	r31, 8
 	mr	r4, r2
 	addis 	r2, r31, ha16(LC0-L2pb)
-	la 	r3, lo16(LC0-L2pb)(r2)
+	addi 	r3, r2, lo16(LC0-L2pb)
 	bl	printf
 	lwz 	r1, 0(r1)
 	lwz 	r0, 8(r1)
@@ -78,12 +80,12 @@ L2pb:
 	.align 	5
 printf:
 	.indirect_symbol _printf$LDBLStub
-	mflr 	r0
+	mfspr 	r0, 8
 	bcl 	20, 31, L2spb
 L2spb:
-	mflr 	r11
+	mfspr 	r11, 8
 	addis 	r11, r11, ha16(printf_lazy-L2spb)
-	mtlr 	r0
+	mtspr 	8, r0
 	lwzu 	r12, lo16(printf_lazy-L2spb)(r11)
 	mtctr 	r12
 	bctr
@@ -194,7 +196,9 @@ L4pb:
 	lwz	r3, 12(r1)
 	lwz	r4, 16(r1)
 	mtlr	r0
-	lmw	r30, -8(r1)
+#   lmw	    r30, -8(r1)
+    lwz      r30, -8(r1)
+    lwz      r31, -4(r1)
 	blr
 	.section __TEXT, __picsymbolstub1, symbol_stubs, pure_instructions, 32
 	.align 	5
@@ -252,8 +256,11 @@ L5pb:
 	lwz 	r0, 8(r1)
 	lwz	r3, 12(r1)
 	lwz	r4, 16(r1)
-	mtlr 	r0
-	lmw 	r29, -12(r1)
+#	mtspr 	8, r0
+#	lmw 	r29, -12(r1)
+    lwz      r29, -12(r1)
+    lwz      r30, -8(r1)
+    lwz      r31, -4(r1)
 	blr	
 #	read_int
 	.text
@@ -279,19 +286,21 @@ L6pb:
 	lwz 	r0, 8(r1)
 	lwz	r3, 12(r1)
 	lwz	r4, 16(r1)
-	mtlr	r0
-	lmw 	r30, -8(r1)
+	mtspr	8, r0
+#	lmw 	r30, -8(r1)
+    lwz      r30, -8(r1)
+    lwz      r30, -4(r1)
 	blr
 	.section __TEXT, __picsymbolstub1, symbol_stubs, pure_instructions, 32
 	.align 	5
 scanf:	
 	.indirect_symbol _scanf$LDBLStub
-	mflr 	r0
+	mfspr 	r0, 8
 	bcl 	20, 31, L6spb
 L6spb:
 	mflr 	r11
 	addis 	r11, r11, ha16(scanf_lazy-L6spb)
-	mtlr 	r0
+	mtspr 	8, r0
 	lwzu 	r12, lo16(scanf_lazy-L6spb)(r11)
 	mtctr 	r12
 	bctr
