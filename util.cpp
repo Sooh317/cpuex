@@ -1,71 +1,48 @@
 #include "util.hpp"
 
+// [0,1,2,...,31]
+// MSB        LSB
+// 自分から見た2進とは異なることに注意
+// i -> (31 - i) 桁目として計算すると都合が良い
+
+// [0,1,2...,31]をプリント
 void print_binary_int(int a){
-    for(int i = 31; i >= 0; i--){
+    for(int i = 0; i < 32; i++){
         std::cerr << (a >> i & 1);
     }
     std::cerr << std::endl;
 }
 
+int bp(int k){
+    assert(k <= 31);
+    return 31 - k;
+}
+
+// 以下全てマニュアルの処理を実現する関数
+// kth_bit は実際には 31 - k 桁目にあるとして扱う
+
 void clear_and_set(int &k, int l, int r, int v){ // clear [l, r] and substitute v
-    int tmp = ~0;
-    for(int i = l; i <= r; i++) tmp ^= 1 << i;
-    k = (k & tmp) | (v << l);
+    l = bp(l), r = bp(r);
+    for(int i = r; i <= l; i++){
+        k &= ((~0) ^ (1<<i)); // i桁目zero-clear
+        k |= (v >> (i - r) & 1) << i;
+    }
 }
 
 int kth_bit(int a, int k){
-    return (a >> k) & 1;
+    return (a >> bp(k)) & 1;
 }
 
 int segment(int a, int l, int r){
     int res = 0;
-    for(int i = 0; l + i <= r; i++){
-        res |= ((a >> (l + i)) & 1) << i;
+    l = bp(l), r = bp(r);
+    for(int i = 0; r + i <= l; i++){
+        res |= (a >> (r + i) & 1) << i;
     }
     return res;
 }
 
+// low -> [16, ..., 31]
 int lo16(int x){return (x & 0xffff);}
-int ha16(int x){return (x & 0xffff0000);}
-
-std::string opcode_to_string(INSTR_KIND kind){
-    switch (kind){
-    case ADD:
-        return "add";
-    case ADDI:
-        return "addi";
-    case ADDIS:
-        return "addis";
-    case CMPWI:
-        return "cmpwi";
-    case BGT:
-        return "bgt";
-    case BL:
-        return "bl";
-    case BLR:
-        return "blr";
-    case BCL:
-        return "bcl";
-    case BCTR:
-        return "bctr";
-    case LWZ:
-        return "lwz";
-    case LWZU:
-        return "lwzu";
-    case STW:
-        return "stw";
-    case STWU:
-        return "stwu";
-    case MFSPR:
-        return "mfspr";
-    case MR:
-        return "mr";
-    case MTSPR:
-        return "mtspr";
-    case NOT_INSTR:
-        return "not_instr";
-    default:
-        return "instr_unknown";
-    }
-    return "-1";
-}
+// high -> [0, ..., 15]
+int ha16(int x){return (x & 0xffff0000) >> 16;}

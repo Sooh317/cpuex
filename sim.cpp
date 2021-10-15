@@ -13,9 +13,11 @@ INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
 }
 
 int simulate_whole(CPU& cpu, MEMORY &mem, MEMORY &submem){
-    for(int i = 0; i < mem.index >> 2; i++){
+    for(int i = 0; i < 100; i++){
         INSTR next = instr_fetch(cpu, mem);
-        if(cpu.pc < mem.index) exec(next, cpu, mem);
+        if(cpu.pc < mem.index){
+            if(exec(next, cpu, mem)) return 0;
+        }
         else{
             while(cpu.pc >= mem.index){
                 INSTR subnext = instr_fetch(cpu, submem);
@@ -26,7 +28,7 @@ int simulate_whole(CPU& cpu, MEMORY &mem, MEMORY &submem){
     return 0;
 }
 
-void exec(INSTR instr, CPU& cpu, MEMORY&mem){
+bool exec(INSTR instr, CPU& cpu, MEMORY&mem){
     auto[opc, d, a, b] = instr;
     std::cout << opcode_to_string(opc) << " " << d << " " << a << " " << b << std::endl;
     int c, bo, bi, ea, tmp;
@@ -34,14 +36,16 @@ void exec(INSTR instr, CPU& cpu, MEMORY&mem){
     switch(opc){
         case ADD:
             cpu.gpr[d] = cpu.gpr[a] + cpu.gpr[b];
-            return;
+            return false;
         case ADDI:
             cpu.gpr[d] = (a ? cpu.gpr[a] : 0) + b;
-            return;
+            return false;
         case ADDIS:
             cpu.gpr[d] = (a ? cpu.gpr[a] : 0) + b << 16;
-            return;
+            return false;
         case CMPWI:
+            std::cerr << opcode_to_string(CMPWI) << " " << cpu.gpr[a] << " " << b << std::endl;
+            print_binary_int(cpu.xer);
             c = 0;
             if(cpu.gpr[a] < b) c = 0b100;
             else if(cpu.gpr[a] > b) c = 0b010;
@@ -49,70 +53,72 @@ void exec(INSTR instr, CPU& cpu, MEMORY&mem){
             tmp = cpu.cr;
             clear_and_set(tmp, 4*d, 4*d + 3, c << (cpu.xer & 1));
             cpu.cr = tmp;
-            return;
+            return false;
         case BGT:   
-            bo = 12, bi = 1;
+            bo = 12, bi = d*4 + 1;
             if(!kth_bit(bo, 2)) cpu.ctr--;
             ctr_ok = kth_bit(bo, 2) || ((cpu.ctr != 0) ^ kth_bit(bo, 3));
             cond_ok = kth_bit(bo, 0) || (kth_bit(cpu.cr, bi) == kth_bit(bo, 1));
             if(ctr_ok && cond_ok) cpu.pc = a;
-            return;
+            return false;
         case BL:    
+            cpu.lr = cpu.pc;
             cpu.pc = d;
-            return;
+            return false;
         case BLR: // 未完成
             bo = 20, bi = 0;
             if(!kth_bit(bo, 2)) cpu.ctr--;
             ctr_ok = kth_bit(bo, 2) || ((cpu.ctr != 0) ^ kth_bit(bo, 3));
             cond_ok = kth_bit(bo, 0) || (kth_bit(cpu.cr, bi) == kth_bit(bo, 1));
             if(ctr_ok && cond_ok) cpu.pc = segment(cpu.lr, 0, 29) << 2;
-            return;
+            if(cpu.pc == mem.index) return true; // program ends
+            else return false;
         case BCL:
-            cpu.lr = cpu.pc + 4;
+            cpu.lr = cpu.pc;
             if(!kth_bit(bo, 2)) cpu.ctr--;
             ctr_ok = kth_bit(bo, 2) || ((cpu.ctr != 0) ^ kth_bit(bo, 3));
             cond_ok = kth_bit(bo, 0) || (kth_bit(cpu.cr, bi) == kth_bit(bo, 1));
             if(ctr_ok && cond_ok) cpu.pc = cpu.pc - 4 + b;
-            return;
+            return false;
         case BCTR:
             bo = 20, bi = 0;
             cond_ok = kth_bit(bo, 0) || (kth_bit(cpu.cr, bi) == kth_bit(bo, 1));
             if(cond_ok) cpu.pc = segment(cpu.ctr, 0, 29) << 2;
-            return;
+            return false;
         case LWZ:
             cpu.gpr[d] = mem.data[addr_to_index((b ? cpu.gpr[b] : 0) + a)];
-            return;
+            return false;
         case LWZU:
             ea = cpu.gpr[b] + a;
             cpu.gpr[d] = mem.data[addr_to_index(ea)];
             cpu.gpr[b] = ea;
-            return;
+            return false;
         case STW:   
             mem.data[addr_to_index((b ? cpu.gpr[b] : 0) + a)] = cpu.gpr[d];
-            return;
+            return false;
         case STWU:
             ea = cpu.gpr[b] + a;
             mem.data[addr_to_index(ea)] = cpu.gpr[d];
             cpu.gpr[b] = ea;
-            return;
+            return false;
         case MFSPR:
             assert((a >> 5) == 0);
             if(a == 0b00001) cpu.gpr[d] = cpu.xer;
             else if(a == 0b01000) cpu.gpr[d] = cpu.lr;
             else if(a == 0b01001) cpu.gpr[d] = cpu.ctr;
             else assert(false);
-            return;
+            return false;
         case MR:
             cpu.gpr[d] = cpu.gpr[a];
-            return;
+            return false;
         case MTSPR:
             assert((a >> 5) == 0);
             if(a == 0b00001) cpu.xer = cpu.gpr[d];
             else if(a == 0b01000) cpu.lr = cpu.gpr[d];
             else if(a == 0b01001) cpu.ctr = cpu.gpr[d];
-            return;
+            return false;
         default:
             assert(false);
-            return;
+            return false;
     }
 }
