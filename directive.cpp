@@ -19,8 +19,13 @@ enum DIRECTIVE_KIND directive_kind(const std::string &ss){
     else return NOT_DIRECTIVE;
 }
 
+// まだ改善が必要(dyld_stub_binding_helper)
 void process_long_directive(MEMORY& mem, const std::string& s){
     mem.instr[mem.index >> 2].opcode = NOT_INSTR;
+    for(int i = 0; i < s.size(); i++){
+        if('0' <= s[i] && s[i] <= '9') continue;
+        else return;
+    }
     mem.instr[mem.index >> 2].ra = stoi(s);
 }
 

@@ -28,6 +28,7 @@ std::vector<std::string> remove_chars(std::string& str, const std::string &chrs)
 }
 
 void next_memory_address(int &cnt, const std::vector<std::string> &s){
+    if(s.size() == 0) return;
     DIRECTIVE_KIND kind = directive_kind(s[0]);
     if(kind == NOT_DIRECTIVE || kind == LONG) cnt += 1 << 2;
     else if(kind == ALIGN){
@@ -49,8 +50,8 @@ void put_instr_into_memory(std::string& str, MEMORY& mem, std::map<std::string, 
         DIRECTIVE_KIND kind = directive_kind(s[0]);
         if(kind == LONG) process_long_directive(mem, s[1]);
         else if(kind == ASCII) process_ascii_directive(mem, s[1]);
-        else if(kind == SOME_DIRECTIVE || kind == ALIGN) return;
-        recognize_instr(mem, s, label, sublbl);
+        else if(kind == SOME_DIRECTIVE || kind == ALIGN); // do nothing
+        else recognize_instr(mem, s, label, sublbl);
         next_memory_address(mem.index, s);
     }
 }
@@ -64,13 +65,7 @@ void decode(const char* file, MEMORY &mem, std::map<std::string, int>& label, st
     }
 
     std::string str;
-    while(std::getline(ifs, str)){
-        //print(str);
-        //int k = mem.index >> 2;
-        //std::cerr << "k : " << k << std::endl;
-        put_instr_into_memory(str, mem, label, sublbl);
-        //mem.instr[k].show();
-    }
+    while(std::getline(ifs, str)) put_instr_into_memory(str, mem, label, sublbl);
 }
 
 void collect_label(const char* file, std::map<std::string, int>& label){

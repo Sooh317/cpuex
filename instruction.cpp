@@ -153,6 +153,8 @@ void recognize_instr(MEMORY& mem, const std::vector<std::string> &s, std::map<st
             rd = call(1, 0);
             ra = call(2, 0);
             break;
+        case NOT_INSTR:
+            break;
         default:
             warning(s[0]);
             break;

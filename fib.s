@@ -32,7 +32,9 @@ ble_else.24:
 	blr
 _min_caml_start: # main entry point
 	mfspr	r0, 8
-	stmw	r30, -8(r1)
+#	stmw	r30, -8(r1)
+    stw     r30, -8(r1)
+    stw     r31, -4(r1)
 	stw	r0, 8(r1)
 	stwu	r1, -96(r1)
 #	main program starts
@@ -55,5 +57,7 @@ _min_caml_start: # main entry point
 	lwz	r1, 0(r1)
 	lwz	r0, 8(r1)
 	mtspr	8, r0
-	lmw	r30, -8(r1)
+#   lmw	   r30, -8(r1)
+    lwz    r30, -8(r1)
+    lwz    r31, -4(r1)
 	blr
