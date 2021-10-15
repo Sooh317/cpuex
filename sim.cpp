@@ -3,9 +3,11 @@
 #include "struct.hpp"
 #include "util.hpp"
 
+int addr_to_index(int k){return k >> 2;}
+
 INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
     assert(cpu.pc < mem.index);
-    unsigned int pc = cpu.pc >> 2;
+    unsigned int pc = addr_to_index(cpu.pc);
     cpu.pc += 4;
     return mem.instr[pc];
 }
@@ -26,6 +28,7 @@ int simulate_whole(CPU& cpu, MEMORY &mem, MEMORY &submem){
 
 void exec(INSTR instr, CPU& cpu, MEMORY&mem){
     auto[opc, d, a, b] = instr;
+    std::cout << opcode_to_string(opc) << " " << d << " " << a << " " << b << std::endl;
     int c, bo, bi, ea, tmp;
     bool cond_ok, ctr_ok;
     switch(opc){
@@ -77,19 +80,19 @@ void exec(INSTR instr, CPU& cpu, MEMORY&mem){
             if(cond_ok) cpu.pc = segment(cpu.ctr, 0, 29) << 2;
             return;
         case LWZ:
-            cpu.gpr[d] = mem.data[((b ? cpu.gpr[b] : 0) + a)];
+            cpu.gpr[d] = mem.data[addr_to_index((b ? cpu.gpr[b] : 0) + a)];
             return;
         case LWZU:
             ea = cpu.gpr[b] + a;
-            cpu.gpr[d] = mem.data[ea];
+            cpu.gpr[d] = mem.data[addr_to_index(ea)];
             cpu.gpr[b] = ea;
             return;
         case STW:   
-            mem.data[(b ? cpu.gpr[b] : 0) + a] = cpu.gpr[d];
+            mem.data[addr_to_index((b ? cpu.gpr[b] : 0) + a)] = cpu.gpr[d];
             return;
         case STWU:
             ea = cpu.gpr[b] + a;
-            mem.data[ea] = cpu.gpr[d];
+            mem.data[addr_to_index(ea)] = cpu.gpr[d];
             cpu.gpr[b] = ea;
             return;
         case MFSPR:

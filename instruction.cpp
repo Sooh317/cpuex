@@ -64,10 +64,12 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
         return stoi(s.substr(2, s.size() - 2));
     }
     else{ //数字から始まる
-        int lparen = -1, rparen = -1;
+        int lparen = -1;
         for(int i = 0; i < s.size(); i++){
-            if(s[i] == '(') lparen = i;
-            else if(s[i] == ')') rparen = i;
+            if(s[i] == '('){
+                lparen = i;
+                break;
+            }
         }
         if(lparen == -1) return stoi(s);
         else{
@@ -131,6 +133,7 @@ void recognize_instr(MEMORY& mem, const std::vector<std::string> &s, std::map<st
             rd = call(1, 0);
             ra = call(2, 0);
             rb = call(2, 1);
+            break;
         case STW:
             rd = call(1, 0);
             ra = call(2, 0);
@@ -156,7 +159,7 @@ void recognize_instr(MEMORY& mem, const std::vector<std::string> &s, std::map<st
         case NOT_INSTR:
             break;
         default:
-            warning(s[0]);
+            //warning(s[0]);
             break;
     }
     mem.instr[mem.index >> 2] = INSTR(opc, rd, ra, rb);
