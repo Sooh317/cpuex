@@ -11,5 +11,5 @@ void print_binary_int(int);
 int lo16(int);
 int ha16(int);
 void clear_and_set(int&, int, int, int);
-int kth_bit(int, int);
+int kth_bit(int, int, int field = 32);
 int segment(int, int, int);

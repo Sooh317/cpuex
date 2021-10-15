@@ -73,7 +73,7 @@ enum INSTR_KIND{
 
 struct instr_t{
     INSTR_KIND opcode;
-    uint32_t rd; // rd or rs
+    int32_t rd; // rd or rs
     int32_t ra;
     int32_t rb;
     instr_t(INSTR_KIND _opcode,uint32_t _rd,int32_t _ra, int32_t _rb):opcode(_opcode), rd(_rd), ra(_ra), rb(_rb){}

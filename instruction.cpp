@@ -105,22 +105,29 @@ void recognize_instr(MEMORY& mem, const std::vector<std::string> &s, std::map<st
             ra = call(2, 0);
             rb = call(3, 0);
             break;
-        case BGT: // 注 : 常にラベルがくると仮定
-            rd = call(1, 0);
-            if(lbl.find(s[2]) != lbl.end()) ra = sublbl[s[2]];
-            else ra = lbl[s[2]];
+        case BGT:
+            if(s.size() == 3){
+                rd = call(1, 0);
+                if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
+                else ra = sublbl[s[2]];
+            }
+            else if(s.size() == 2){
+                if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
+                else ra = sublbl[s[2]];
+            }
+            else assert(false);
             break;
-        case BL: // 注 : 常にラベルがくると仮定
-            if(lbl.find(s[1]) != lbl.end()) rd = -sublbl[s[1]];
-            else rd = lbl[s[1]];
+        case BL:
+            if(lbl.find(s[1]) != lbl.end()) rd = lbl[s[1]];
+            else rd = sublbl[s[1]];
             break;
         case BLR: // 無条件分岐 to LR
             break;
         case BCL: // 注 : 常にラベルがくると仮定
             rd = call(1, 0);
             ra = call(2, 0);
-            if(lbl.find(s[2]) != lbl.end()) rb = sublbl[s[2]];
-            else rb = lbl[s[2]];
+            if(lbl.find(s[2]) != lbl.end()) rb = lbl[s[2]];
+            else rb = sublbl[s[2]];
             break;
         case BCTR: // 無条件分岐
             break;

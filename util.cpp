@@ -7,7 +7,7 @@
 
 // [0,1,2...,31]をプリント
 void print_binary_int(int a){
-    for(int i = 0; i < 32; i++){
+    for(int i = 31; i >= 0; i--){
         std::cerr << (a >> i & 1);
     }
     std::cerr << std::endl;
@@ -29,8 +29,9 @@ void clear_and_set(int &k, int l, int r, int v){ // clear [l, r] and substitute 
     }
 }
 
-int kth_bit(int a, int k){
-    return (a >> bp(k)) & 1;
+int kth_bit(int a, int k, int field){
+    assert(k < field);
+    return (a >> (field - 1 - k)) & 1;
 }
 
 int segment(int a, int l, int r){
