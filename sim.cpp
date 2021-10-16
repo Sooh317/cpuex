@@ -23,7 +23,7 @@ int simulate_whole(CPU& cpu, MEMORY &mem){
 
 bool exec(INSTR instr, CPU& cpu, MEMORY&mem){
     auto[opc, d, a, b] = instr;
-    std::cout << cpu.pc - 4 << " " << opcode_to_string(opc) << " " << d << " " << a << " " << b << std::endl;
+    //std::cout << cpu.pc - 4 << " " << opcode_to_string(opc) << " " << d << " " << a << " " << b << '\n';
     int c, bo, bi, ea, tmp;
     bool cond_ok, ctr_ok;
     switch(opc){
