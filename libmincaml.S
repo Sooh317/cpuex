@@ -63,6 +63,7 @@ min_caml_print_int:
 	stwu 	r1, -80(r1)
 	mr 	r30, r1
 	bcl 	20, 31, L2pb
+#分岐先を間違えている可能性
 L2pb:
 	mfspr 	r31, 8
 	mr	r4, r2
@@ -84,6 +85,7 @@ printf:
 	.indirect_symbol _printf$LDBLStub
 	mfspr 	r0, 8
 	bcl 	20, 31, L2spb
+#分岐先を間違えている可能性
 L2spb:
 	mfspr 	r11, 8
 	addis 	r11, r11, ha16(printf_lazy-L2spb)

@@ -17,9 +17,7 @@ int main(int argc, char* argv[]){
     std::map<std::string, int> lbl;
     init_memory(argc, argv, mem, lbl);
 
-    show_lable(lbl);
-
-    init_cpu(cpu, lbl, "_min_caml_start");
+    init_cpu(cpu, lbl, "_min_caml_start", 1024);
 
     simulate_whole(cpu, mem);
 

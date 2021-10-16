@@ -3,7 +3,6 @@
 #include "struct.hpp"
 
 int internal_reg_number(const std::string& s, bool in_paren, std::map<std::string, int>& lbl){
-    printerr(s);
     if(in_paren){
         int lparen = -1, rparen = s.size() - 1;
         for(int i = s.size() - 2; i >= 0; i--){

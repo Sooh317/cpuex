@@ -3,7 +3,9 @@
 #include "struct.hpp"
 #include "util.hpp"
 
-int addr_to_index(int k){return k >> 2;}
+int addr_to_index(int k){
+    return k >> 2;
+}
 
 INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
     assert(cpu.pc < mem.index);
@@ -69,19 +71,19 @@ bool exec(INSTR instr, CPU& cpu, MEMORY&mem){
             cpu.pc = segment(cpu.ctr, 0, 29) << 2;
             return false;
         case LWZ:
-            cpu.gpr[d] = mem.data[addr_to_index((b ? cpu.gpr[b] : 0) + a)];
+            cpu.gpr[d] = mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + a));
             return false;
         case LWZU:
             ea = cpu.gpr[b] + a;
-            cpu.gpr[d] = mem.data[addr_to_index(ea)];
+            cpu.gpr[d] = mem.data.at(addr_to_index(ea));
             cpu.gpr[b] = ea;
             return false;
         case STW:   
-            mem.data[addr_to_index((b ? cpu.gpr[b] : 0) + a)] = cpu.gpr[d];
+            mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + a)) = cpu.gpr[d];
             return false;
         case STWU:
             ea = cpu.gpr[b] + a;
-            mem.data[addr_to_index(ea)] = cpu.gpr[d];
+            mem.data.at(addr_to_index(ea)) = cpu.gpr[d];
             cpu.gpr[b] = ea;
             return false;
         case MFSPR:
