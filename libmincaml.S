@@ -1,18 +1,18 @@
-	.cstring # cstring secontion begins from here
+	.cstring
 	.align 	2
 LC0:
 	.ascii	"%d\0"
 	.align	2
 LC1:
 	.ascii 	"%lf\0"
-	.literal8 # literal8 secontion begins from here
+	.literal8
 	.align 	3
 LC2:
-	.long	1127219200 # long は1行につき1つまでにしてもらう
+	.long	1127219200
 	.long	-2147483648
-	.text # text section begins from here
+	.text
 	.align	2
-	.globl 	min_caml_print_newline # min_caml_print_newline が外から見えるようにしてる
+	.globl 	min_caml_print_newline
 min_caml_print_newline:
 	mflr 	r0
 	stmw 	r30, -8(r1)
@@ -46,7 +46,7 @@ L1spb:
 	.lazy_symbol_pointer
 putchar_lazy:
 	.indirect_symbol _putchar
-	.long	dyld_stub_binding_helper # to be replaced by _putchar's address (http://mirror.informatimago.com/next/developer.apple.com/documentation/DeveloperTools/Reference/Assembler/ASMDirectives/chapter_5_section_2.html)
+	.long	dyld_stub_binding_helper
 	.subsections_via_symbols
 #	print_int
 	.text
@@ -54,7 +54,7 @@ putchar_lazy:
 	.globl	min_caml_print_int
 min_caml_print_int:
 	mfspr 	r0, 8
-#	stmw 	r30, -8(r1)
+#    stmw 	r30, -8(r1)
     stw     r30, -8(r1)
     stw     r31, -4(r1)
 	stw 	r0, 8(r1)
@@ -67,14 +67,16 @@ L2pb:
 	mfspr 	r31, 8
 	mr	r4, r2
 	addis 	r2, r31, ha16(LC0-L2pb)
-	addi 	r3, r2, lo16(LC0-L2pb)
+	addi 	r3, r2,  lo16(LC0-L2pb)
 	bl	printf
 	lwz 	r1, 0(r1)
 	lwz 	r0, 8(r1)
 	lwz	r3, 12(r1)
 	lwz	r4, 16(r1)
-	mtlr 	r0
-	lmw 	r30, -8(r1)
+	mtspr 	8, r0
+#    lmw 	r30, -8(r1)
+    lwz     r30, -8(r1)
+    lwz     r30, -4(r1)
 	blr
 	.section __TEXT, __picsymbolstub1, symbol_stubs, pure_instructions, 32
 	.align 	5
@@ -87,7 +89,7 @@ L2spb:
 	addis 	r11, r11, ha16(printf_lazy-L2spb)
 	mtspr 	8, r0
 	lwzu 	r12, lo16(printf_lazy-L2spb)(r11)
-	mtctr 	r12
+	mtspr 	9, r12
 	bctr
 	.lazy_symbol_pointer
 printf_lazy:
@@ -196,9 +198,7 @@ L4pb:
 	lwz	r3, 12(r1)
 	lwz	r4, 16(r1)
 	mtlr	r0
-#   lmw	    r30, -8(r1)
-    lwz      r30, -8(r1)
-    lwz      r31, -4(r1)
+	lmw	r30, -8(r1)
 	blr
 	.section __TEXT, __picsymbolstub1, symbol_stubs, pure_instructions, 32
 	.align 	5
@@ -256,11 +256,8 @@ L5pb:
 	lwz 	r0, 8(r1)
 	lwz	r3, 12(r1)
 	lwz	r4, 16(r1)
-#	mtspr 	8, r0
-#	lmw 	r29, -12(r1)
-    lwz      r29, -12(r1)
-    lwz      r30, -8(r1)
-    lwz      r31, -4(r1)
+	mtlr 	r0
+	lmw 	r29, -12(r1)
 	blr	
 #	read_int
 	.text
@@ -286,21 +283,19 @@ L6pb:
 	lwz 	r0, 8(r1)
 	lwz	r3, 12(r1)
 	lwz	r4, 16(r1)
-	mtspr	8, r0
-#	lmw 	r30, -8(r1)
-    lwz      r30, -8(r1)
-    lwz      r30, -4(r1)
+	mtlr	r0
+	lmw 	r30, -8(r1)
 	blr
 	.section __TEXT, __picsymbolstub1, symbol_stubs, pure_instructions, 32
 	.align 	5
 scanf:	
 	.indirect_symbol _scanf$LDBLStub
-	mfspr 	r0, 8
+	mflr 	r0
 	bcl 	20, 31, L6spb
 L6spb:
 	mflr 	r11
 	addis 	r11, r11, ha16(scanf_lazy-L6spb)
-	mtspr 	8, r0
+	mtlr 	r0
 	lwzu 	r12, lo16(scanf_lazy-L6spb)(r11)
 	mtctr 	r12
 	bctr

@@ -4,7 +4,8 @@
 #include <string>
 #include <cassert>
 
-#define print(x) std::cerr << x << std::endl;
+#define printerr(x) std::cerr << (x) << std::endl;
+#define printout(x) std::cout << (x) << std::endl;
 #define warning(x) std::cerr << "## WARNING ##\n" << x << " is unknown" << std::endl;
 
 void print_binary_int(int);

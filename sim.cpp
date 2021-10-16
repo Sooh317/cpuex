@@ -12,9 +12,8 @@ INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
     return mem.instr[pc];
 }
 
-// submem と mem の切り替え
 int simulate_whole(CPU& cpu, MEMORY &mem){
-    while(true){
+    for(int i = 0; i <= 150; i++){
         INSTR next = instr_fetch(cpu, mem);
         if(exec(next, cpu, mem)) return 0;
     }
@@ -23,7 +22,7 @@ int simulate_whole(CPU& cpu, MEMORY &mem){
 
 bool exec(INSTR instr, CPU& cpu, MEMORY&mem){
     auto[opc, d, a, b] = instr;
-    //std::cout << cpu.pc - 4 << " " << opcode_to_string(opc) << " " << d << " " << a << " " << b << '\n';
+    std::cout << cpu.pc - 4 << " " << opcode_to_string(opc) << " " << d << " " << a << " " << b << std::endl;
     int c, bo, bi, ea, tmp;
     bool cond_ok, ctr_ok;
     switch(opc){
@@ -34,7 +33,7 @@ bool exec(INSTR instr, CPU& cpu, MEMORY&mem){
             cpu.gpr[d] = (a ? cpu.gpr[a] : 0) + b;
             return false;
         case ADDIS:
-            cpu.gpr[d] = (a ? cpu.gpr[a] : 0) + b << 16;
+            cpu.gpr[d] = (a ? cpu.gpr[a] : 0) + (b << 16);
             return false;
         case CMPWI:
             //std::cerr << opcode_to_string(CMPWI) << " " << cpu.gpr[a] << " " << b << std::endl;
@@ -47,35 +46,27 @@ bool exec(INSTR instr, CPU& cpu, MEMORY&mem){
             cpu.cr = tmp;
             return false;
         case BGT:   
-            bo = 12, bi = d*4 + 1;
-            if(!kth_bit(bo, 2, 5)) cpu.ctr--;
-            ctr_ok = kth_bit(bo, 2, 5) || ((cpu.ctr != 0) ^ kth_bit(bo, 3, 5));
-            cond_ok = kth_bit(bo, 0, 5) || (kth_bit(cpu.cr, bi) ^ (!kth_bit(bo, 1, 5)));
-            if(ctr_ok && cond_ok) cpu.pc = a;
+            bo = 0b01100, bi = d*4 + 1;
+            cond_ok = kth_bit(cpu.cr, bi);
+            if(cond_ok) cpu.pc = a;
             return false;
         case BL:    
             cpu.lr = cpu.pc;
             cpu.pc = d;
             return false;
-        case BLR: // 未完成
+        case BLR:
             if(cpu.pc == mem.index) return true; // program ends
-            bo = 20, bi = 0;
-            if(!kth_bit(bo, 2, 5)) cpu.ctr--;
-            ctr_ok = kth_bit(bo, 2, 5) || ((cpu.ctr != 0) ^ kth_bit(bo, 3, 5));
-            cond_ok = kth_bit(bo, 0, 5) || (kth_bit(cpu.cr, bi) ^ (!kth_bit(bo, 1, 5)));
-            if(ctr_ok && cond_ok) cpu.pc = segment(cpu.lr, 0, 29) << 2;
+            cpu.pc = segment(cpu.lr, 0, 29) << 2;
             return false;
-        case BCL: // わかんない
+        case BCL:
             cpu.lr = cpu.pc;
-            if(!kth_bit(bo, 2, 5)) cpu.ctr--;
-            ctr_ok = kth_bit(bo, 2, 5) || ((cpu.ctr != 0) ^ kth_bit(bo, 3, 5));
-            cond_ok = kth_bit(bo, 0, 5) || (kth_bit(cpu.cr, bi) ^ (!kth_bit(bo, 1, 5)));
-            if(ctr_ok && cond_ok) cpu.pc = cpu.pc - 4 + (b << 2);
+            if(!kth_bit(d, 2, 5)) cpu.ctr--;
+            ctr_ok = kth_bit(d, 2, 5) || ((cpu.ctr != 0) ^ kth_bit(d, 3, 5));
+            cond_ok = kth_bit(d, 0, 5) || (kth_bit(cpu.cr, a) ^ (!kth_bit(d, 1, 5)));
+            if(ctr_ok && cond_ok) cpu.pc = b;
             return false;
         case BCTR:
-            bo = 20, bi = 0;
-            cond_ok = kth_bit(bo, 0, 5) || (kth_bit(cpu.cr, bi) ^ (!kth_bit(bo, 1, 5)));
-            if(cond_ok) cpu.pc = segment(cpu.ctr, 0, 29) << 2;
+            cpu.pc = segment(cpu.ctr, 0, 29) << 2;
             return false;
         case LWZ:
             cpu.gpr[d] = mem.data[addr_to_index((b ? cpu.gpr[b] : 0) + a)];
@@ -104,13 +95,14 @@ bool exec(INSTR instr, CPU& cpu, MEMORY&mem){
             cpu.gpr[d] = cpu.gpr[a];
             return false;
         case MTSPR:
-            assert((a >> 5) == 0);
+            assert((d >> 5) == 0);
             if(d == 0b00001) cpu.xer = cpu.gpr[a];
             else if(d == 0b01000) cpu.lr = cpu.gpr[a];
             else if(d == 0b01001) cpu.ctr = cpu.gpr[a];
             else assert(false);
             return false;
         default:
+            warning(opcode_to_string(opc));
             assert(false);
             return false;
     }
