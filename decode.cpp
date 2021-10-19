@@ -81,7 +81,7 @@ int collect_label(const char* file, std::map<std::string, int>& label, int tmp){
     std::string str;
     while(std::getline(ifs, str)){
         if(str[0] == '#') continue; // comment
-        else if(str[0] != '\t'){ // label
+        else if(str[0] != '\t' && str[0] != ' '){ // label
             str = remove_chars(str, " \t:")[0];
             label[str] = cnt;
         }

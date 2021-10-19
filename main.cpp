@@ -11,16 +11,18 @@
 
 
 int main(int argc, char* argv[]){
-    std::ios_base::sync_with_stdio(false);
+    //std::ios_base::sync_with_stdio(false);
     CPU cpu;
-    MEMORY mem; // submem for library
+    MEMORY mem;
     std::map<std::string, int> lbl;
+
     init_memory(argc, argv, mem, lbl);
-    init_cpu(cpu, lbl, "_min_caml_start");
+
+    init_cpu(cpu, lbl, "_min_caml_start", 1024);
 
     simulate_whole(cpu, mem);
 
-    cpu.show_gpr();
+    printout(cpu.gpr[2]);
     
     return 0;
 }

@@ -25,7 +25,7 @@ struct cpu_t{
 
     void show_gpr(){
         for(int i = 0; i < GPR_SIZE; i++){
-            std::cerr << "gpr[" << i << "] = " << gpr[i] << '\n';
+            std::cout << "gpr[" << i << "] = " << gpr[i] << '\n';
         }
     }
     void show_fpr(){
@@ -49,6 +49,13 @@ struct cpu_t{
         std::cout << "lr : ";
         for(int i = 31; i >= 0; i--){
             std::cout << (lr >> i & 1);
+        }
+        std::cout << std::endl;
+    }
+    void show_ctr(){
+        std::cout << "ctr : ";
+        for(int i = 31; i >= 0; i--){
+            std::cout << (ctr >> i & 1);
         }
         std::cout << std::endl;
     }
@@ -95,7 +102,7 @@ struct instr_t{
     int32_t rd; // rd or rs
     int32_t ra;
     int32_t rb;
-    instr_t(INSTR_KIND _opcode,uint32_t _rd,int32_t _ra, int32_t _rb):opcode(_opcode), rd(_rd), ra(_ra), rb(_rb){}
+    instr_t(INSTR_KIND _opcode,int32_t _rd,int32_t _ra, int32_t _rb):opcode(_opcode), rd(_rd), ra(_ra), rb(_rb){}
     instr_t(){}
 
     void show(){
