@@ -38,7 +38,7 @@ _min_caml_start: # main entry point
     stw r0, 8(r1)
     stwu    r1, -96(r1)
 #   main program starts
-    addi  r2, 0, 1
+    addi  r2, 0, 10
     mfspr    r31, 8
     stw r31, 4(r3)
     addi    r3, r3, 8
@@ -47,17 +47,18 @@ _min_caml_start: # main entry point
     lwz r31, 4(r3)
     mtspr    8, r31
     mfspr    r31, 8
-    stw r31, 4(r3)
-    addi    r3, r3, 8
-    bl  min_caml_print_int
-    addi    r3, r3, -8
-    lwz r31, 4(r3)
+#
+#    stw r31, 4(r3)
+#    addi    r3, r3, 8
+#    bl  min_caml_print_int
+#    addi    r3, r3, -8
+#    lwz r31, 4(r3)
     mtspr    8, r31
 #   main program ends
     lwz r1, 0(r1)
     lwz r0, 8(r1)
-    mtlr    r0
+    mtspr    8, r0
 #    lmw r30, -8(r1)
-    lw  r30, -8(r1)
-    lw  r31, -4(r1)
+    lwz  r30, -8(r1)
+    lwz  r31, -4(r1)
     blr

@@ -15,7 +15,7 @@ INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
 }
 
 int simulate_whole(CPU& cpu, MEMORY &mem){
-    for(int i = 0; i <= 150; i++){
+    while(true){
         INSTR next = instr_fetch(cpu, mem);
         if(exec(next, cpu, mem)) return 0;
     }
@@ -70,7 +70,7 @@ bool exec(INSTR instr, CPU& cpu, MEMORY&mem){
         case BCTR:
             cpu.pc = segment(cpu.ctr, 0, 29) << 2;
             return false;
-        case LWZ:
+        case LWZ: 
             cpu.gpr[d] = mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + a));
             return false;
         case LWZU:
@@ -82,6 +82,7 @@ bool exec(INSTR instr, CPU& cpu, MEMORY&mem){
             mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + a)) = cpu.gpr[d];
             return false;
         case STWU:
+            if(b < 0) return false;
             ea = cpu.gpr[b] + a;
             mem.data.at(addr_to_index(ea)) = cpu.gpr[d];
             cpu.gpr[b] = ea;
