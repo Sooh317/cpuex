@@ -18,12 +18,14 @@ git clone git@github.com:Sooh317/cpu_experiment.git
 cd cpu_experiment
 ```
 "assembly.txt" には読ませたいアセンブリのファイル名を列挙してください.
+
 _min_caml_start のラベルがついた命令から順に実行します.
 
 ```bash
 make
 ```
 make をすると "sim" という実行ファイルが生成されます.
+
 実際に実行する場合は以下を参照してください.
 
 
