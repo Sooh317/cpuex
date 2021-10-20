@@ -11,8 +11,8 @@ struct option_t{
     option_t():exec_mode(0), jump_to_label(false){}
 
     void label_ask(std::map<std::string, int> &mp){
-        printerr("ラベル名を入力してください");
-        printerr("jumbしない場合はNと入力してください");
+        printerr("次にjumpしたいラベル名を入力してください");
+        printerr("jumpしない場合はNと入力してください");
         std::string s; 
         std::cin >> s;
         if(s == "N"){

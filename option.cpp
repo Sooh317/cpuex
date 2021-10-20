@@ -12,6 +12,7 @@ void init_option(OPTION& option, int argc, char* argv[], std::map<std::string, i
                     std::cin >> s;
                     if(mp.find(s) != mp.end()){
                         option.label_addr = mp[s];
+                        return;
                     }
                     else{
                         std::cerr << "ラベル " << s << " は存在しません" << std::endl;
