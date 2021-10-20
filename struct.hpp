@@ -2,6 +2,8 @@
 #include <stdint.h>
 #include <iostream>
 #include <vector>
+#include <string>
+#include <map>
 
 using GPR = int32_t; // general purpose register
 using FPR = float; // floating point register
@@ -78,8 +80,8 @@ enum INSTR_KIND{
     BGT,
     BL,
     BLR, // jump to LINK Register
-    BCL,
     BCTR,
+    BCL,
     // load
     LWZ,
     LWZU,
@@ -138,6 +140,7 @@ struct memory_t{
     int index;
     std::vector<INSTR> instr; 
     std::vector<int32_t> data;
+    std::map<std::string, int> lbl;
 
     memory_t():index(0), instr(INSTR_SIZE), data(DATA_SIZE){} 
 };

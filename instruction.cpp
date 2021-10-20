@@ -74,8 +74,8 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
 
 
 
-void recognize_instr(MEMORY& mem, const std::vector<std::string> &s, std::map<std::string, int> &lbl){
-    auto call = [&](int id, bool in_flag)->int{return internal_reg_number(s[id], in_flag, lbl);};
+void recognize_instr(MEMORY& mem, const std::vector<std::string> &s){
+    auto call = [&](int id, bool in_flag)->int{return internal_reg_number(s[id], in_flag, mem.lbl);};
     INSTR_KIND opc = opcode_of_instr(s[0]);
     int rd = 0, ra = 0, rb = 0, sub = 0;
     switch (opc){
@@ -102,17 +102,17 @@ void recognize_instr(MEMORY& mem, const std::vector<std::string> &s, std::map<st
         case BGT:
             if(s.size() == 3){
                 rd = call(1, 0);
-                if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
+                if(mem.lbl.find(s[2]) != mem.lbl.end()) ra = mem.lbl[s[2]];
                 else assert(false);
             }
             else if(s.size() == 2){
-                if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
+                if(mem.lbl.find(s[2]) != mem.lbl.end()) ra = mem.lbl[s[2]];
                 else assert(false);
             }
             else assert(false);
             break;
         case BL:
-            if(lbl.find(s[1]) != lbl.end()) rd = lbl[s[1]];
+            if(mem.lbl.find(s[1]) != mem.lbl.end()) rd = mem.lbl[s[1]];
             else assert(false);
             break;
         case BLR: // 無条件分岐 to LR
@@ -120,7 +120,7 @@ void recognize_instr(MEMORY& mem, const std::vector<std::string> &s, std::map<st
         case BCL: // 注 : 常にラベルがくると仮定
             rd = call(1, 0);
             ra = call(2, 0);
-            if(lbl.find(s[3]) != lbl.end()) rb = lbl[s[3]];
+            if(mem.lbl.find(s[3]) != mem.lbl.end()) rb = mem.lbl[s[3]];
             else assert(false);
             break;
         case BCTR: // 無条件分岐

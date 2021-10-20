@@ -7,6 +7,7 @@
 #include "memory.hpp"
 #include "cpu.hpp"
 #include "instruction.hpp"
+#include "option.hpp"
 #include "util.hpp"
 
 
@@ -14,13 +15,16 @@ int main(int argc, char* argv[]){
     //std::ios_base::sync_with_stdio(false);
     CPU cpu;
     MEMORY mem;
-    std::map<std::string, int> lbl;
+    OPTION option;
 
-    init_memory(argc, argv, mem, lbl);
+    init_memory(mem);
 
-    init_cpu(cpu, lbl, "_min_caml_start", 1024);
+    // assuming the entry point is _min_caml_start
+    init_cpu(cpu, mem.lbl, "_min_caml_start", 1024);
 
-    simulate_whole(cpu, mem);
+    init_option(option, argc, argv, mem.lbl);
+
+    execution(cpu, mem, option);
 
     printout(cpu.gpr[2]);
     

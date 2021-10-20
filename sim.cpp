@@ -14,17 +14,42 @@ INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
     return mem.instr[pc];
 }
 
-int simulate_whole(CPU& cpu, MEMORY &mem){
-    while(true){
-        INSTR next = instr_fetch(cpu, mem);
-        if(exec(next, cpu, mem)) return 0;
+void execution(CPU& cpu, MEMORY& mem, OPTION& option){
+    if(option.exec_mode == 0) simulate_whole(cpu, mem, option);
+    else if(option.exec_mode == 1) simulate_step(cpu, mem, option);
+}
+
+int simulate_whole(CPU& cpu, MEMORY &mem, OPTION& option){
+    int cnt = 0;
+    while(!exec(cpu, mem, cnt, option));
+    return 0;
+}
+
+int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
+    int cnt = 0;
+    if(option.jump_to_label){
+        while(cpu.pc != option.label_addr){
+            if(exec(cpu, mem, cnt, option)){
+                std::cerr << "program finished!" << std::endl;
+                return 0;
+            }
+        }
+        option.label_ask(mem.lbl);
+    }
+    std::istream::int_type ch;
+    while((ch = std::cin.get()) != EOF){
+        if(exec(cpu, mem, cnt, option)){
+            std::cerr << "program finished!" << std::endl;
+            return 0;
+        }
     }
     return 0;
 }
 
-bool exec(INSTR instr, CPU& cpu, MEMORY&mem){
-    auto[opc, d, a, b] = instr;
-    std::cout << cpu.pc - 4 << " " << opcode_to_string(opc) << " " << d << " " << a << " " << b << std::endl;
+bool exec(CPU& cpu, MEMORY&mem, int& cnt, OPTION& option){
+    auto[opc, d, a, b] = instr_fetch(cpu, mem);
+    if(option.exec_mode == 1) std::cerr << cnt << "th :  " << opcode_to_string(opc) << " " << d << " " << a << " " << b << std::endl;
+    cnt++;
     int c, bo, bi, ea, tmp;
     bool cond_ok, ctr_ok;
     switch(opc){

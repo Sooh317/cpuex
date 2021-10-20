@@ -43,7 +43,7 @@ void next_memory_address(int &cnt, const std::vector<std::string> &s){
     }
 }
 
-void put_instr_into_memory(std::string& str, MEMORY& mem, std::map<std::string, int>& label){
+void put_instr_into_memory(std::string& str, MEMORY& mem){
     std::vector<std::string> s = remove_chars(str, ", \t\n");
     if(s.size() >= 1){
         if(s[0].back() == ':') return; // label
@@ -52,12 +52,12 @@ void put_instr_into_memory(std::string& str, MEMORY& mem, std::map<std::string, 
         else if(kind == ASCII) process_ascii_directive(mem, s[1]);
         else if(kind == SOME_DIRECTIVE) return;
         else if(kind == ALIGN);
-        else recognize_instr(mem, s, label);
+        else recognize_instr(mem, s);
         next_memory_address(mem.index, s);
     }
 }
 
-void decode(const char* file, MEMORY &mem, std::map<std::string, int>& label){
+void decode(const std::string file, MEMORY &mem){
     std::ifstream ifs(file);
 
     if(!ifs){
@@ -67,11 +67,11 @@ void decode(const char* file, MEMORY &mem, std::map<std::string, int>& label){
 
     std::string str;
     while(std::getline(ifs, str)){
-        put_instr_into_memory(str, mem, label);
+        put_instr_into_memory(str, mem);
     }
 }
 
-int collect_label(const char* file, std::map<std::string, int>& label, int tmp){
+int collect_label(const std::string file, std::map<std::string, int>& label, int tmp){
     std::ifstream ifs(file);
     if(!ifs){
         std::cerr << "cannot open file" << std::endl;
