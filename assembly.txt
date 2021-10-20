@@ -1,3 +1,2 @@
-2
 libmincaml.S
 fib.s
