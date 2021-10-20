@@ -27,7 +27,10 @@ int simulate_whole(CPU& cpu, MEMORY &mem, OPTION& option){
 
 int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
     int cnt = 0;
-    if(option.jump_to_label){
+    bool tmp = false;
+    std::swap(tmp, option.display);
+    while(option.jump_to_label){
+        exec(cpu, mem, cnt, option);
         while(cpu.pc != option.label_addr){
             if(exec(cpu, mem, cnt, option)){
                 std::cerr << "program finished!" << std::endl;
@@ -36,6 +39,8 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
         }
         option.label_ask(mem.lbl);
     }
+    std::swap(tmp, option.display);
+
     std::istream::int_type ch;
     while((ch = std::cin.get()) != EOF){
         if(exec(cpu, mem, cnt, option)){
@@ -48,7 +53,7 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
 
 bool exec(CPU& cpu, MEMORY&mem, int& cnt, OPTION& option){
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
-    if(option.exec_mode == 1) std::cerr << cnt << "th :  " << opcode_to_string(opc) << " " << d << " " << a << " " << b << std::endl;
+    if(option.display) std::cerr << cnt << "th :  " << opcode_to_string(opc) << " " << d << " " << a << " " << b << std::endl;
     cnt++;
     int c, bo, bi, ea, tmp;
     bool cond_ok, ctr_ok;

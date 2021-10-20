@@ -8,7 +8,8 @@ struct option_t{
     int exec_mode;
     bool jump_to_label;
     int label_addr;
-    option_t():exec_mode(0), jump_to_label(false){}
+    bool display;
+    option_t():display(0),exec_mode(0), jump_to_label(false){}
 
     void label_ask(std::map<std::string, int> &mp){
         printerr("次にjumpしたいラベル名を入力してください");

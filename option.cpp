@@ -3,7 +3,10 @@
 void init_option(OPTION& option, int argc, char* argv[], std::map<std::string, int>&mp){
     for(int i = 0; i < argc; i++){
         if(argv[i][0] == '-'){
-            if(argv[i][1] == 's') option.exec_mode = 1;
+            if(argv[i][1] == 's'){
+                option.exec_mode = 1;
+                option.display = 1;
+            }
             else if(argv[i][1] == 'j'){
                 option.jump_to_label = 1;
                 std::cerr << "ラベル名を入力してください" << std::endl;
@@ -19,6 +22,7 @@ void init_option(OPTION& option, int argc, char* argv[], std::map<std::string, i
                     }
                 }
             }
+            else if(argv[i][1] == 'd') option.display = 1;
         }
     }
 }
@@ -27,7 +31,7 @@ void show_option(OPTION option){
     if(option.exec_mode == 0){
         std::cerr << "一気に実行" << std::endl;
         if(option.jump_to_label == 1){
-            std::cerr << "### warning ###\n" << "無駄な指定です" << std::endl;
+            std::cerr << "### warning ###\n" << "-jは無駄な指定です" << std::endl;
         }
     }
     else if(option.exec_mode == 1){
