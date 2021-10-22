@@ -53,7 +53,7 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
 
 bool exec(CPU& cpu, MEMORY&mem, int& cnt, OPTION& option){
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
-    if(option.display) std::cerr << cnt << "th :  " << opcode_to_string(opc) << " " << d << " " << a << " " << b << std::endl;
+    if(option.display) show_instr(opc, d, a, b);
     cnt++;
     int c, bo, bi, ea, tmp;
     bool cond_ok, ctr_ok;

@@ -274,3 +274,7 @@ std::string opcode_to_string(INSTR_KIND kind){
     }
     return "-1";
 }
+
+void show_instr(INSTR_KIND instr, int d, int a, int b){
+    
+}
