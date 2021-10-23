@@ -51,7 +51,10 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
 
 bool exec(CPU& cpu, MEMORY&mem, OPTION& option){
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
-    if(option.display) show_instr(opc, d, a, b);
+    if(option.display){
+        show_instr(opc, d, a, b);
+        show_instr_binary(opc, d, a, b);
+    }
     int c, bo, bi, ea, tmp;
     bool cond_ok, ctr_ok;
     switch(opc){

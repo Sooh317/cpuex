@@ -25,6 +25,14 @@ void init_option(OPTION& option, int argc, char* argv[], std::map<std::string, i
             else if(argv[i][1] == 'd') option.display = 1;
         }
     }
+    if(option.exec_mode == 0 && option.display){
+        std::cerr << "大量の命令列がターミナルに吐かれる恐れがあります" << std::endl;
+        std::cerr << "displayを行いますか? Y/N" << std::endl;
+        char c; std::cin >> c;
+        if(c == 'n' || c == 'N') option.display = 0;
+        else if(c != 'y' || c != 'n') return;
+        else assert(false);
+    }
 }
 
 void show_option(OPTION option){

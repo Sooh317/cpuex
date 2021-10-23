@@ -209,7 +209,7 @@ int opcode_to_bit(INSTR_KIND kind){
     case MTSPR: // s spr 0x1d3 0
         return 0x1f;
     default: // 生データが入っているとする
-        return 0x0; // 数字は 0, 文字列は0x1にする？
+        return (~0x0); // 数字は 0, 文字列は0x1にする？
         break;
     }
 }
@@ -336,4 +336,62 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
     default:
         fprintf(stderr, "## WARNING ##\nUNKNOWN_INSTRUCTION\n");
     }
+}
+
+void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
+    unsigned int res = opcode_to_bit(instr) << 26;
+    switch (instr){
+    case ADD:
+        res |= (d << 21) | (a << 16) | (b << 11) | ((0x10A) << 1);
+        break;
+    case ADDI:
+        res |= (d << 21) | (a << 16) | b;
+        break;
+    case ADDIS:
+        res |= (d << 21) | (a << 16) | b;
+        break;
+    case CMPWI:
+        res |= (d << 23) | (a << 16) | b;
+        break;
+    case BGT:
+        res |= (12 << 21) | (d << 16) | (a << 2);
+        break;
+    case BL:
+        res |= (d << 2) | 1;
+        break;
+    case BLR:
+        res |= (20 << 21) | (16 << 1);
+        break;
+    case BCL:
+        res |= (d << 21) | (a << 16) | (b << 2) | 1;
+        break;
+    case BCTR:
+        res |= (d << 21) | (a << 16) | (528 << 1);
+        break;
+    case LWZ:
+        res |= (d << 21) | (a << 16) | b;
+        break;
+    case LWZU:
+        res |= (d << 21) | (a << 16) | b;
+        break;
+    case STW:
+        res |= (d << 21) | (a << 16) | b;
+        break;
+    case STWU:
+        res |= (d << 21) | (a << 16) | b;
+        break;
+    case MFSPR:
+        res |= (d << 21) | (a << 11) | (339 << 1);
+        break;
+    case MR:
+        res |= (a << 21) | (d << 16) | (a << 11) | (444 << 1);
+        break;
+    case MTSPR:
+        res |= (a << 21) | (d << 11) | (467 << 1);
+        break;
+    default:
+        printerr("## WARNING ##\nNOT instruction : maybe some raw data");
+        break;
+    }
+    print_binary_int(res);
 }

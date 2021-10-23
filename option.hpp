@@ -29,6 +29,12 @@ struct option_t{
             label_addr = mp[s];
         }
     }
+    void show_option(){
+        if(exec_mode == 0) std::cerr << "simulate whole" << std::endl;
+        else if(exec_mode == 1) std::cerr << "step execution" << std::endl;
+        if(jump_to_label) std::cerr << "break point(the address) is set here : " << label_addr << std::endl;
+        if(display) std::cerr << "display instructions" << std::endl;
+    }
 };
 using OPTION = option_t;
 

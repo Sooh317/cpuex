@@ -22,6 +22,7 @@ int main(int argc, char* argv[]){
     init_cpu(cpu, mem.lbl, "_min_caml_start", 1024);
 
     init_option(option, argc, argv, mem.lbl);
+    option.show_option();
 
     execution(cpu, mem, option);
 
