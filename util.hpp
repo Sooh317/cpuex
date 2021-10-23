@@ -4,6 +4,15 @@
 #include <string>
 #include <cassert>
 
+#define MASK3 0x111
+#define MASK5 0b11111
+#define MASK10 0x3ff
+#define MASK14 0x3fff
+#define MASK16 0xffff
+#define MASK24 0xffffff
+
+
+
 #define printerr(x) std::cerr << (x) << std::endl;
 #define printout(x) std::cout << (x) << std::endl;
 #define warning(x) std::cerr << "## WARNING ##\n" << x << " is unknown" << std::endl;
