@@ -8,5 +8,5 @@
 INSTR instr_fetch(CPU& cpu, const MEMORY&);
 int simulate_whole(CPU&, MEMORY&, OPTION&);
 int simulate_step(CPU&, MEMORY&, OPTION&);
-bool exec(CPU&, MEMORY&, int&, OPTION&);
+bool exec(CPU&, MEMORY&, OPTION&);
 void execution(CPU&, MEMORY&, OPTION&);
