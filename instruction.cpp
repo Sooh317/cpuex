@@ -106,6 +106,7 @@ void recognize_instr(MEMORY& mem, const std::vector<std::string> &s){
                 else assert(false);
             }
             else if(s.size() == 2){
+                rd = -1;
                 if(mem.lbl.find(s[2]) != mem.lbl.end()) ra = mem.lbl[s[2]];
                 else assert(false);
             }
@@ -276,5 +277,63 @@ std::string opcode_to_string(INSTR_KIND kind){
 }
 
 void show_instr(INSTR_KIND instr, int d, int a, int b){
-    
+    switch (instr){
+    case ADD:
+        fprintf(stderr, "add r%d, r%d, r%d\n", d, a, b);
+        return;
+    case ADDI:
+        if(a == 0) fprintf(stderr, "addi r%d, 0, %d\n", d, a, b);
+        else fprintf(stderr, "addi r%d, r%d, %d\n", d, a, b);
+        return;
+    case ADDIS:
+        if(a == 0) fprintf(stderr, "addis r%d, 0, %d\n", d, a, b);
+        else fprintf(stderr, "addis r%d, r%d, %d\n", d, a, b);
+        return;
+    case CMPWI:
+        fprintf(stderr, "cmpwi crf%d, r%d, %d\n", d, a, b);
+        return;
+    case BGT:
+        if(d == -1) fprintf(stderr, "bgt %d\n", a);
+        else fprintf(stderr, "bgt cr%d, %d\n", d, a);
+        return;
+    case BL:
+        fprintf(stderr, "bl %d\n", d);
+        return;
+    case BLR:
+        fprintf(stderr, "blr\n");
+        return;
+    case BCL:
+        fprintf(stderr, "bcl, %d, %d, %d\n", d, a, b);
+        return;
+    case BCTR:
+        fprintf(stderr, "bctr\n");
+        return;
+    case LWZ:
+        if(b == 0) fprintf(stderr, "lwz, r%d, %d(0)\n", d, a);
+        else fprintf(stderr, "lwz, r%d, %d(r%d)\n", d, a, b);
+        return;
+    case LWZU:
+        fprintf(stderr, "lwzu, r%d, %d(r%d)\n", d, a, b);
+        return;
+    case STW:
+        if(b == 0) fprintf(stderr, "stw, r%d, %d(0)\n", d, a);
+        else fprintf(stderr, "lwz, r%d, %d(r%d)\n", d, a, b);
+        return;
+    case STWU:
+        fprintf(stderr, "lwz, r%d, %d(r%d)\n", d, a, b);
+        return;
+    case MFSPR:
+        fprintf(stderr, "mfspr, r%d, %d\n", d, a);
+        return;
+    case MR:
+        fprintf(stderr, "mr, r%d, r%d\n", d, a);
+        return;
+    case MTSPR:
+        fprintf(stderr, "mtspr, %d, r%d\n", d, a);
+        return;
+    case NOT_INSTR:
+        return;
+    default:
+        fprintf(stderr, "## WARNING ##\nUNKNOWN_INSTRUCTION\n");
+    }
 }

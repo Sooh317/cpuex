@@ -2,6 +2,7 @@
 #include <map>
 #include <cassert>
 #include <string>
+#include <stdio.h>
 #include "struct.hpp"
 
 enum INSTR_KIND opcode_of_instr(const std::string&);
