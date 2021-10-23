@@ -53,7 +53,7 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
 
 bool exec(CPU& cpu, MEMORY&mem, int& cnt, OPTION& option){
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
-    if(option.display) std::cerr << cnt << "th :  " << opcode_to_string(opc) << " " << d << " " << a << " " << b << std::endl;
+    if(option.display) show_instr(opc, d, a, b);
     cnt++;
     int c, bo, bi, ea, tmp;
     bool cond_ok, ctr_ok;
@@ -68,7 +68,6 @@ bool exec(CPU& cpu, MEMORY&mem, int& cnt, OPTION& option){
             cpu.gpr[d] = (a ? cpu.gpr[a] : 0) + (b << 16);
             return false;
         case CMPWI:
-            //std::cerr << opcode_to_string(CMPWI) << " " << cpu.gpr[a] << " " << b << std::endl;
             c = 0;
             if(cpu.gpr[a] < b) c = 0b100;
             else if(cpu.gpr[a] > b) c = 0b010;
@@ -112,7 +111,6 @@ bool exec(CPU& cpu, MEMORY&mem, int& cnt, OPTION& option){
             mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + a)) = cpu.gpr[d];
             return false;
         case STWU:
-            if(b < 0) return false;
             ea = cpu.gpr[b] + a;
             mem.data.at(addr_to_index(ea)) = cpu.gpr[d];
             cpu.gpr[b] = ea;
