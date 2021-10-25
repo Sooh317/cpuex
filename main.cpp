@@ -17,9 +17,14 @@ int main(int argc, char* argv[]){
     OPTION option;
 
     init_option(option, argc, argv);
-    
-    init_memory(mem, option);
 
+    if(option.binTOasm){
+        translator(option);
+        return 0;
+    }
+
+    init_memory(mem, option);
+    
     // assuming the entry point is _min_caml_start
     init_cpu(cpu, option, mem.lbl, 1024);
 

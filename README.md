@@ -10,7 +10,6 @@ PowerPC 32bit版のシミュレータです.
  
 * gcc 11.1.0
  
- 
 # Usage
   
 ```bash

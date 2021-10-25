@@ -16,13 +16,13 @@ void init_memory(MEMORY& mem, OPTION& option){
     else{
         std::ifstream ifs("binary.txt");
         std::string s;
-        while(ifs >> s) decode_bin(s, mem);
+        while(ifs >> s) mem.instr[mem.index++] = decode_bin(s);
     }
 }
 
 void show_lable(const std::map<std::string, int>& lbl){
     for(auto[str, line] : lbl){
-        std::cerr << str << " " << line << std::endl;
+        std::cout << str << " " << line << std::endl;
     }
 }
 

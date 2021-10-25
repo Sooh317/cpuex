@@ -4,7 +4,7 @@
 #include <string>
 #include <cassert>
 
-#define MASK3 0x111
+#define MASK3 0b111
 #define MASK5 0b11111
 #define MASK10 0x3ff
 #define MASK14 0x3fff

@@ -1,6 +1,7 @@
 #include "sim.hpp"
 #include "instruction.hpp"
 #include "struct.hpp"
+#include "decode.hpp"
 #include "util.hpp"
 
 int addr_to_index(int k){
@@ -25,8 +26,9 @@ int simulate_whole(CPU& cpu, MEMORY &mem, OPTION& option){
 }
 
 int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
-    bool tmp = false;
-    std::swap(tmp, option.display);
+    bool tmpb = false, tmpa = false;
+    std::swap(tmpa, option.display_assembly);
+    std::swap(tmpb, option.display_binary);
     while(1){
         option.label_ask(mem.lbl);
         if(!option.jump_to_label) break;
@@ -38,7 +40,8 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
             }
         }
     }
-    std::swap(tmp, option.display);
+    std::swap(tmpa, option.display_assembly);
+    std::swap(tmpb, option.display_binary);
 
     std::istream::int_type ch;
     while((ch = std::cin.get()) != EOF){
@@ -52,10 +55,8 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
 
 bool exec(CPU& cpu, MEMORY&mem, OPTION& option){
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
-    if(option.display){
-        show_instr(opc, d, a, b);
-        show_instr_binary(opc, d, a, b);
-    }
+    if(option.display_assembly) show_instr(opc, d, a, b);
+    if(option.display_binary) show_instr_binary(opc, d, a, b);
     int c, bo, bi, ea, tmp;
     bool cond_ok, ctr_ok;
     switch(opc){
@@ -137,5 +138,15 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option){
             warning(opcode_to_string(opc));
             assert(false);
             return false;
+    }
+}
+
+void translator(OPTION& option){
+    std::ifstream ifs;
+    if(option.binary) ifs.open("binary.txt");
+    std::string s;
+    while((option.binary ? ifs : std::cin) >> s){
+        auto[opc, d, a, b] = decode_bin(s);
+        show_instr(opc, d, a, b);
     }
 }

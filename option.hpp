@@ -9,8 +9,10 @@ struct option_t{
     bool jump_to_label;
     int label_addr;
     bool binary;
-    bool display;
-    option_t():display(0),exec_mode(0), jump_to_label(false){}
+    bool binTOasm;
+    bool display_binary;
+    bool display_assembly;
+    option_t():display_binary(0), display_assembly(0),exec_mode(0), jump_to_label(false), binary(0), binTOasm(0){}
 
     void label_ask(std::map<std::string, int> &mp){
         printerr("次にjumpしたいラベル名を入力してください");
@@ -31,10 +33,15 @@ struct option_t{
         }
     }
     void show_option(){
+        if(binTOasm){
+            std::cerr << "translate binary to assembly" << std::endl;
+            return;
+        }
         if(exec_mode == 0) std::cerr << "simulate whole" << std::endl;
         else if(exec_mode == 1) std::cerr << "step execution" << std::endl;
         if(jump_to_label) std::cerr << "break point(the address) is set here : " << label_addr << std::endl;
-        if(display) std::cerr << "display instructions" << std::endl;
+        if(display_assembly) std::cerr << "display instructions in assembly" << std::endl;
+        if(display_binary) std::cerr << "display instructions in binary" << std::endl;
         if(binary) std::cerr << "reading binary" << std::endl;
         else std::cerr << "reading assembly" << std::endl;
     }

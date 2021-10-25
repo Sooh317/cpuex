@@ -8,9 +8,9 @@
 // [0,1,2...,31]をプリント
 void print_binary_int(int a){
     for(int i = 31; i >= 0; i--){
-        std::cerr << (a >> i & 1);
+        std::cout << (a >> i & 1);
     }
-    std::cerr << std::endl;
+    std::cout << std::endl;
 }
 
 int bp(int k){

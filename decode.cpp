@@ -93,7 +93,7 @@ int collect_label(const std::string file, std::map<std::string, int>& label, int
     return cnt;
 }
 
-void decode_bin(const std::string& bit, MEMORY& mem){
+INSTR decode_bin(const std::string& bit){
     int val = btoi(bit.substr(0, 6));
     INSTR_KIND opcode;
     int d = 0, a = 0, b = 0, imm;
@@ -125,13 +125,13 @@ void decode_bin(const std::string& bit, MEMORY& mem){
     case 0xe: // addi
         opcode = ADDI;
         d = btoi(bit.substr(6, 5));
-        a = btoi(bit.substr(11, 10));
+        a = btoi(bit.substr(11, 5));
         b = exts(bit.substr(16, 16));
         break;
     case 0xf: // addis
         opcode = ADDIS;
         d = btoi(bit.substr(6, 5));
-        a = btoi(bit.substr(11, 10));
+        a = btoi(bit.substr(11, 5));
         b = exts(bit.substr(16, 16));
         break;
     case 0x0b: // cmpwi
@@ -192,6 +192,5 @@ void decode_bin(const std::string& bit, MEMORY& mem){
     default:
         break;
     }
-    mem.instr[mem.index] = INSTR(opcode, d, a, b);
-    mem.index++;
+    return INSTR(opcode, d, a, b);
 }
