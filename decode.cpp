@@ -92,3 +92,106 @@ int collect_label(const std::string file, std::map<std::string, int>& label, int
     }
     return cnt;
 }
+
+void decode_bin(const std::string& bit, MEMORY& mem){
+    int val = btoi(bit.substr(0, 6));
+    INSTR_KIND opcode;
+    int d = 0, a = 0, b = 0, imm;
+    switch (val){
+    case 0x1f: // add, mfspr, mr, mtspr
+        imm = btoi(bit.substr(21, 10));
+        if(imm == 0x153){ // mfspr
+            opcode = MFSPR;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(11, 10));
+        }
+        else if(imm == 0x1d3){ // mtspr
+            opcode = MTSPR;
+            d = btoi(bit.substr(11, 10));
+            a = btoi(bit.substr(6, 5));
+        }
+        else if(imm == 0x1bc){ // mr
+            opcode = MR;
+            d = btoi(bit.substr(11, 5));
+            a = btoi(bit.substr(6, 5));
+        }
+        else{ // add
+            opcode = ADD;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(11, 5));
+            b = btoi(bit.substr(16, 5));
+        }
+        break;
+    case 0xe: // addi
+        opcode = ADDI;
+        d = btoi(bit.substr(6, 5));
+        a = btoi(bit.substr(11, 10));
+        b = exts(bit.substr(16, 16));
+        break;
+    case 0xf: // addis
+        opcode = ADDIS;
+        d = btoi(bit.substr(6, 5));
+        a = btoi(bit.substr(11, 10));
+        b = exts(bit.substr(16, 16));
+        break;
+    case 0x0b: // cmpwi
+        opcode = CMPWI;
+        d = btoi(bit.substr(6, 3));
+        a = btoi(bit.substr(11, 5));
+        b = exts(bit.substr(16, 16));
+        break;
+    case 0x10: // bgt,  bcl
+        if(bit[30] == '0' && bit[31] == '1'){
+            opcode = BCL;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(11, 5));
+            b = exts(bit.substr(16, 14), 2);
+        }
+        else if(bit[30] == '0' && bit[31] == '0'){
+            if(btoi(bit.substr(6, 5)) == 0b01100) opcode = BGT;
+            d = btoi(bit.substr(11, 5));
+            a = exts(bit.substr(16, 14), 2);
+        }
+        else assert(false);
+        break;
+    case 0x12: // bl
+        opcode = BL;
+        d = exts(bit.substr(6, 24), 2);
+        assert(d >= 0 && d % 4 == 0);
+        break;
+    case 0x13: // bctr, blr
+        imm = btoi(bit.substr(21, 10));
+        if(imm == 16) opcode = BLR;
+        else if(imm == 528) opcode = BCTR;
+        else assert(false);
+        break;
+    case 0x20: // lwz
+        opcode = LWZ;
+        d = btoi(bit.substr(6, 5));
+        a = exts(bit.substr(16, 16));
+        b = btoi(bit.substr(11, 5));
+        break;
+    case 0x21: // lwzu
+        opcode = LWZU;
+        d = btoi(bit.substr(6, 5));
+        a = exts(bit.substr(16, 16));
+        b = btoi(bit.substr(11, 5));
+        break;
+    case 0x24: // stw
+        opcode = STW;
+        d = btoi(bit.substr(6, 5));
+        a = exts(bit.substr(16, 16));
+        b = btoi(bit.substr(11, 5));
+        break;
+    case 0x25: // stwu
+        opcode = STWU;
+        d = btoi(bit.substr(6, 5));
+        a = exts(bit.substr(16, 16));
+        b = btoi(bit.substr(11, 5));
+        break;
+    default:
+        break;
+    }
+    mem.instr[mem.index] = INSTR(opcode, d, a, b);
+    mem.index++;
+}

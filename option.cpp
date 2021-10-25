@@ -1,30 +1,18 @@
 #include "option.hpp"
 
-void init_option(OPTION& option, int argc, char* argv[], std::map<std::string, int>&mp){
+void init_option(OPTION& option, int argc, char* argv[]){
     for(int i = 0; i < argc; i++){
         if(argv[i][0] == '-'){
             if(argv[i][1] == 's'){
                 option.exec_mode = 1;
                 option.display = 1;
             }
-            else if(argv[i][1] == 'j'){
-                option.jump_to_label = 1;
-                std::cerr << "ラベル名を入力してください" << std::endl;
-                std::string s;
-                while(true){
-                    std::cin >> s;
-                    if(mp.find(s) != mp.end()){
-                        option.label_addr = mp[s];
-                        return;
-                    }
-                    else{
-                        std::cerr << "ラベル " << s << " は存在しません" << std::endl;
-                    }
-                }
-            }
+            else if(argv[i][1] == 'j') option.jump_to_label = 1;
             else if(argv[i][1] == 'd') option.display = 1;
+            else if(argv[i][1] == 'b') option.binary = 1;
         }
     }
+
     if(option.exec_mode == 0 && option.display){
         std::cerr << "大量の命令列がターミナルに吐かれる恐れがあります" << std::endl;
         std::cerr << "displayを行いますか? Y/N" << std::endl;

@@ -24,3 +24,5 @@ int ha16(int);
 void clear_and_set(int&, int, int, int);
 int kth_bit(int, int, int field = 32);
 int segment(int, int, int);
+int btoi(const std::string&);
+int exts(const std::string&, int base = 0);

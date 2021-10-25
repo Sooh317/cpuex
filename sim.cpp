@@ -27,7 +27,9 @@ int simulate_whole(CPU& cpu, MEMORY &mem, OPTION& option){
 int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
     bool tmp = false;
     std::swap(tmp, option.display);
-    while(option.jump_to_label){
+    while(1){
+        option.label_ask(mem.lbl);
+        if(!option.jump_to_label) break;
         exec(cpu, mem, option);
         while(cpu.pc != option.label_addr){
             if(exec(cpu, mem, option)){
@@ -35,7 +37,6 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
                 return 0;
             }
         }
-        option.label_ask(mem.lbl);
     }
     std::swap(tmp, option.display);
 

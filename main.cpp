@@ -16,12 +16,13 @@ int main(int argc, char* argv[]){
     MEMORY mem;
     OPTION option;
 
-    init_memory(mem);
+    init_option(option, argc, argv);
+    
+    init_memory(mem, option);
 
     // assuming the entry point is _min_caml_start
-    init_cpu(cpu, mem.lbl, "_min_caml_start", 1024);
+    init_cpu(cpu, option, mem.lbl, 1024);
 
-    init_option(option, argc, argv, mem.lbl);
     option.show_option();
 
     execution(cpu, mem, option);

@@ -187,7 +187,7 @@ int opcode_to_bit(INSTR_KIND kind){
         return 0x12;
     case BLR: // bo bi bd aa lk
          // bc
-        return 0x10;
+        return 0x13;
     case BCL: 
         // bc
         return 0x10;

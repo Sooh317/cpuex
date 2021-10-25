@@ -47,3 +47,20 @@ int segment(int a, int l, int r){
 int lo16(int x){return (x & 0xffff);}
 // high -> [0, ..., 15]
 int ha16(int x){return (x & 0xffff0000) >> 16;}
+
+int btoi(const std::string& s){
+    int res = 0;
+    for(int i = 0; i < s.size(); i++){
+        res |= (s[s.size() - 1 - i] - '0') << i;
+    }
+    return res;
+}
+
+int exts(const std::string& s, int base){
+    int res = btoi(s);
+    res <<= base;
+    if(s[0] == '1'){
+        if(s.size() == 16) res |= 0xffff0000;
+    }
+    return res;
+}
