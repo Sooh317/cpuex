@@ -53,6 +53,7 @@ struct option_t{
         if(binary) std::cerr << "reading binary" << std::endl;
         if(assembly) std::cerr << "### invalid option ###\nreading assembly.s" << std::endl;
         else std::cerr << "reading assembly" << std::endl;
+        std::cerr << std::endl;
     }
 };
 using OPTION = option_t;
