@@ -5,16 +5,16 @@
 #include "util.hpp"
 
 struct option_t{
-    int exec_mode;
-    bool jump_to_label;
-    int label_addr;
-    bool binary;
-    bool assembly;
-    bool binTOasm;
-    bool asmTObin;
     bool display_binary;
     bool display_assembly;
-    option_t():display_binary(0), display_assembly(0),exec_mode(0), jump_to_label(false), binary(0), binTOasm(0), asmTObin(0), assembly(0){}
+    int exec_mode;
+    bool jump_to_label;
+    bool binary;
+    bool binTOasm;
+    bool asmTObin;
+    bool assembly;
+    int label_addr;
+    option_t():display_binary(0), display_assembly(0),exec_mode(0), jump_to_label(false), binary(0), binTOasm(0), asmTObin(0), assembly(0), label_addr(0){}
 
     void label_ask(std::map<std::string, int> &mp){
         printerr("次にjumpしたいラベル名を入力してください");

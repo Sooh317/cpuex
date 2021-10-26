@@ -98,7 +98,7 @@ int collect_label(const std::string file, std::map<std::string, int>& label, int
 
 INSTR decode_bin(const std::string& bit){
     int val = btoi(bit.substr(0, 6));
-    INSTR_KIND opcode;
+    INSTR_KIND opcode = NOT_INSTR;
     int d = 0, a = 0, b = 0, imm;
     switch (val){
     case 0x1f: // add, mfspr, mr, mtspr

@@ -4,8 +4,8 @@
 
 int internal_reg_number(const std::string& s, bool in_paren, std::map<std::string, int>& lbl){
     if(in_paren){
-        int lparen = -1, rparen = s.size() - 1;
-        for(int i = s.size() - 2; i >= 0; i--){
+        int lparen = -1, rparen = (int)s.size() - 1;
+        for(int i = (int)s.size() - 2; i >= 0; i--){
             if(s[i] == '('){
                 lparen = i;
                 break;
@@ -13,10 +13,10 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
         }
         return internal_reg_number(s.substr(lparen + 1, rparen - lparen - 1), 0, lbl);
     }
-    if(s[0] == 'l' && s[1] == 'o' || s[0] == 'h' && s[1] == 'a'){ // lo16() or ha16()
+    if((s[0] == 'l' && s[1] == 'o') || (s[0] == 'h' && s[1] == 'a')){ // lo16() or ha16()
         auto calc = [&]()->int{
             int lparen = 4, rparen = -1, minus = 0;
-            for(int i = 5; i < s.size(); i++){
+            for(int i = 5; i < (int)s.size(); i++){
                 if(s[i] == '-') minus = i;
                 if(s[i] == ')'){
                     rparen = i;
@@ -59,7 +59,7 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
     }
     else{ //数字から始まる
         int lparen = -1;
-        for(int i = 0; i < s.size(); i++){
+        for(int i = 0; i < (int)s.size(); i++){
             if(s[i] == '('){
                 lparen = i;
                 break;
@@ -77,7 +77,7 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
 INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::string> &s){
     auto call = [&](int id, bool in_flag)->int{return internal_reg_number(s[id], in_flag, lbl);};
     INSTR_KIND opc = opcode_of_instr(s[0]);
-    int rd = 0, ra = 0, rb = 0, sub = 0;
+    int rd = 0, ra = 0, rb = 0;
     switch (opc){
         case ADD:
             rd = call(1, 0);
@@ -282,11 +282,11 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
         fprintf(stdout, "add r%d, r%d, r%d\n", d, a, b);
         return;
     case ADDI:
-        if(a == 0) fprintf(stdout, "addi r%d, 0, %d\n", d, a, b);
+        if(a == 0) fprintf(stdout, "addi r%d, 0, %d\n", d, b);
         else fprintf(stdout, "addi r%d, r%d, %d\n", d, a, b);
         return;
     case ADDIS:
-        if(a == 0) fprintf(stdout, "addis r%d, 0, %d\n", d, a, b);
+        if(a == 0) fprintf(stdout, "addis r%d, 0, %d\n", d, b);
         else fprintf(stdout, "addis r%d, r%d, %d\n", d, a, b);
         return;
     case CMPWI:

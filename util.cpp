@@ -50,7 +50,7 @@ int ha16(int x){return (x & 0xffff0000) >> 16;}
 
 int btoi(const std::string& s){
     int res = 0;
-    for(int i = 0; i < s.size(); i++){
+    for(int i = 0; i < (int)s.size(); i++){
         res |= (s[s.size() - 1 - i] - '0') << i;
     }
     return res;

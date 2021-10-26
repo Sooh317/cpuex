@@ -5,7 +5,7 @@
 
 void init_memory(MEMORY& mem, OPTION& option){
     if(!option.binary){
-        int cnt, tmp = 0;
+        int tmp = 0;
         std::ifstream ifs("assembly.txt");
         std::string s;
         while(ifs >> s) tmp = collect_label(s, mem.lbl, tmp);

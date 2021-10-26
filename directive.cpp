@@ -22,7 +22,7 @@ enum DIRECTIVE_KIND directive_kind(const std::string &ss){
 // まだ改善が必要(dyld_stub_binding_helper)
 void process_long_directive(MEMORY& mem, const std::string& s){
     mem.instr[mem.index >> 2].opcode = NOT_INSTR;
-    for(int i = 0; i < s.size(); i++){
+    for(int i = 0; i < (int)s.size(); i++){
         if('0' <= s[i] && s[i] <= '9') continue;
         else return;
     }
@@ -32,7 +32,7 @@ void process_long_directive(MEMORY& mem, const std::string& s){
 void process_ascii_directive(MEMORY& mem, const std::string& s){ // "...\0"の形
     int index = mem.index;
     mem.instr[index].opcode = NOT_INSTR;
-    for(int i = 1; i < s.size(); i++){
+    for(int i = 1; i < (int)s.size(); i++){
         mem.instr[mem.index >> 2].ra = ((uint8_t)s[i]) << (mem.index % 4);
         mem.index++;
     }

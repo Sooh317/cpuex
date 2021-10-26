@@ -9,7 +9,7 @@ int addr_to_index(int k){
 }
 
 INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
-    assert(cpu.pc < mem.index);
+    assert(cpu.pc < (unsigned int)mem.index);
     unsigned int pc = addr_to_index(cpu.pc);
     cpu.pc += 4;
     return mem.instr[pc];
@@ -29,7 +29,7 @@ SHOW show_what(const std::string& s){
     SHOW ss;
     if(s == "s") return ss;
     ss.next = 1;
-    for(int i = 0; i < s.size(); i++){
+    for(int i = 0; i < (int)s.size(); i++){
         if(s[i] == 'g') ss.gr = true;
         else if(s[i] == 'f') ss.fr = true;
         else if(s[i] == 'c') ss.cr = true;
@@ -51,7 +51,7 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
         option.label_ask(mem.lbl);
         if(!option.jump_to_label) break;
         exec(cpu, mem, option);
-        while(cpu.pc != option.label_addr){
+        while(cpu.pc != (unsigned int)option.label_addr){
             if(exec(cpu, mem, option)){
                 std::cerr << "program finished!" << std::endl;
                 return 0;
@@ -86,7 +86,8 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option){
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
     if(option.display_assembly) show_instr(opc, d, a, b);
     if(option.display_binary) show_instr_binary(opc, d, a, b);
-    int c, bo, bi, ea, tmp;
+    int c, bi, ea, tmp;
+    [[maybe_unused]] int bo;
     bool cond_ok, ctr_ok;
     switch(opc){
         case ADD:
@@ -108,7 +109,8 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option){
             cpu.cr = tmp;
             return false;
         case BGT:   
-            bo = 0b01100, bi = d*4 + 1;
+            //bo = 0b01100;
+            bi = d*4 + 1;
             cond_ok = kth_bit(cpu.cr, bi);
             if(cond_ok) cpu.pc = a;
             return false;
@@ -117,7 +119,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option){
             cpu.pc = d;
             return false;
         case BLR:
-            if(cpu.pc == mem.index) return true; // program ends
+            if(cpu.pc == (unsigned int)mem.index) return true; // program ends
             cpu.pc = segment(cpu.lr, 0, 29) << 2;
             return false;
         case BCL:

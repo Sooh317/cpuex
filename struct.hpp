@@ -19,9 +19,9 @@ struct cpu_t{
     LR lr;
     CTR ctr;
     XER xer;
+    unsigned int pc;
     std::vector<GPR> gpr;
     std::vector<FPR> fpr;
-    unsigned int pc;
 
     cpu_t():cr(0), lr(0), ctr(0), xer(0),pc(0), gpr(GPR_SIZE), fpr(FPR_SIZE){}
 
@@ -148,8 +148,8 @@ using MEMORY = memory_t;
 
 struct show_t{
     bool gr, fr, lr, cr, ctr, m;
-    bool next;
     int addr;
+    bool next;
     show_t():gr(0), fr(0), lr(0), cr(0), ctr(0), m(0), addr(0), next(0){}
 };
 using SHOW = show_t;
