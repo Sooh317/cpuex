@@ -25,6 +25,24 @@ int simulate_whole(CPU& cpu, MEMORY &mem, OPTION& option){
     return 0;
 }
 
+SHOW show_what(const std::string& s){
+    SHOW ss;
+    if(s == "s") return ss;
+    ss.next = 1;
+    for(int i = 0; i < s.size(); i++){
+        if(s[i] == 'g') ss.gr = true;
+        else if(s[i] == 'f') ss.fr = true;
+        else if(s[i] == 'c') ss.cr = true;
+        else if(s[i] == 't') ss.ctr = true;
+        else if(s[i] == 'l') ss.lr = true;
+        else if(s[i] == 'm'){
+            ss.m = true;
+            ss.addr = stoi(s.substr(i + 1, s.size() - i - 1));
+        }
+    }
+    return ss;
+}
+
 int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
     bool tmpb = false, tmpa = false;
     std::swap(tmpa, option.display_assembly);
@@ -43,31 +61,21 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
     std::swap(tmpa, option.display_assembly);
     std::swap(tmpb, option.display_binary);
 
-    char ch;
-    while(std::cin >> ch){
-        if(ch == 'g'){
-            cpu.show_gpr();
-            continue;
-            std::cerr << "hi" << std::endl;
-        }
-        else if(ch == 'f'){
-            cpu.show_fpr();
-            continue;
-        }
-        else if(ch == 'l'){
-            cpu.show_lr();
-            continue;
-        }
-        else if(ch == 'c'){
-            cpu.show_cr();
-            cpu.show_ctr();
-            continue;
-        }
-        else if(ch == 's' && exec(cpu, mem, option)){
+    std::string s;
+    while(std::cin >> s){
+        SHOW ss = show_what(s);
+        if(ss.gr) cpu.show_gpr();
+        if(ss.fr) cpu.show_fpr();
+        if(ss.lr) cpu.show_lr();
+        if(ss.cr) cpu.show_cr();
+        if(ss.ctr) cpu.show_ctr();
+        if(ss.m) std::cerr << "mem[" << ss.addr << "] = " << mem.data[ss.addr >> 2] << std::endl;
+        if(ss.next) continue;
+        if(s == "s" && exec(cpu, mem, option)){
             std::cerr << "program finished!" << std::endl;
             return 0;
         }
-        else if(ch != 's'){
+        else if(s != "s"){
             std::cerr << "次を実行するには s を入力してください" << std::endl;
         }
     }

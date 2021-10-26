@@ -145,3 +145,11 @@ struct memory_t{
     memory_t():index(0), instr(INSTR_SIZE), data(DATA_SIZE){} 
 };
 using MEMORY = memory_t;
+
+struct show_t{
+    bool gr, fr, lr, cr, ctr, m;
+    bool next;
+    int addr;
+    show_t():gr(0), fr(0), lr(0), cr(0), ctr(0), m(0), addr(0), next(0){}
+};
+using SHOW = show_t;
