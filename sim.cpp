@@ -43,11 +43,32 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
     std::swap(tmpa, option.display_assembly);
     std::swap(tmpb, option.display_binary);
 
-    std::istream::int_type ch;
-    while((ch = std::cin.get()) != EOF){
-        if(exec(cpu, mem, option)){
+    char ch;
+    while(std::cin >> ch){
+        if(ch == 'g'){
+            cpu.show_gpr();
+            continue;
+            std::cerr << "hi" << std::endl;
+        }
+        else if(ch == 'f'){
+            cpu.show_fpr();
+            continue;
+        }
+        else if(ch == 'l'){
+            cpu.show_lr();
+            continue;
+        }
+        else if(ch == 'c'){
+            cpu.show_cr();
+            cpu.show_ctr();
+            continue;
+        }
+        else if(ch == 's' && exec(cpu, mem, option)){
             std::cerr << "program finished!" << std::endl;
             return 0;
+        }
+        else if(ch != 's'){
+            std::cerr << "次を実行するには s を入力してください" << std::endl;
         }
     }
     return 0;
