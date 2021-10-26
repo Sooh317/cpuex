@@ -9,10 +9,12 @@ struct option_t{
     bool jump_to_label;
     int label_addr;
     bool binary;
+    bool assembly;
     bool binTOasm;
+    bool asmTObin;
     bool display_binary;
     bool display_assembly;
-    option_t():display_binary(0), display_assembly(0),exec_mode(0), jump_to_label(false), binary(0), binTOasm(0){}
+    option_t():display_binary(0), display_assembly(0),exec_mode(0), jump_to_label(false), binary(0), binTOasm(0), asmTObin(0), assembly(0){}
 
     void label_ask(std::map<std::string, int> &mp){
         printerr("次にjumpしたいラベル名を入力してください");
@@ -35,6 +37,12 @@ struct option_t{
     void show_option(){
         if(binTOasm){
             std::cerr << "translate binary to assembly" << std::endl;
+            if(binary) std::cerr << "reading binary.txt" << std::endl;
+            return;
+        }
+        if(asmTObin){
+            std::cerr << "translate assembly to binary" << std::endl;
+            if(assembly) std::cerr << "reading assembly.s" << std::endl;
             return;
         }
         if(exec_mode == 0) std::cerr << "simulate whole" << std::endl;
@@ -43,6 +51,7 @@ struct option_t{
         if(display_assembly) std::cerr << "display instructions in assembly" << std::endl;
         if(display_binary) std::cerr << "display instructions in binary" << std::endl;
         if(binary) std::cerr << "reading binary" << std::endl;
+        if(assembly) std::cerr << "### invalid option ###\nreading assembly.s" << std::endl;
         else std::cerr << "reading assembly" << std::endl;
     }
 };

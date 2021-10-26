@@ -14,7 +14,11 @@ void init_option(OPTION& option, int argc, char* argv[]){
                 else if(argv[i][2] == 'b') option.display_assembly = 0;
             }
             else if(argv[i][1] == 'b') option.binary = 1;
-            else if(argv[i][1] == 't') option.binTOasm = 1;
+            else if(argv[i][1] == 't'){
+                if(argv[i][2] == 'b') option.binTOasm = 1;
+                else if(argv[i][2] == 'a') option.asmTObin = 1;
+            }
+            else if(argv[i][1] == 'a') option.assembly = 1;
         }
     }
     if(option.exec_mode == 0 && (option.display_binary || option.display_assembly)){

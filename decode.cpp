@@ -52,7 +52,10 @@ void put_instr_into_memory(std::string& str, MEMORY& mem){
         else if(kind == ASCII) process_ascii_directive(mem, s[1]);
         else if(kind == SOME_DIRECTIVE) return;
         else if(kind == ALIGN);
-        else recognize_instr(mem, s);
+        else{
+            auto ins = recognize_instr(mem.lbl, s);
+            mem.instr[mem.index >> 2] = ins;
+        }
         next_memory_address(mem.index, s);
     }
 }

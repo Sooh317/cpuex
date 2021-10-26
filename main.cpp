@@ -17,8 +17,9 @@ int main(int argc, char* argv[]){
     OPTION option;
 
     init_option(option, argc, argv);
+    option.show_option();
 
-    if(option.binTOasm){
+    if(option.binTOasm || option.asmTObin){
         translator(option);
         return 0;
     }
@@ -28,7 +29,6 @@ int main(int argc, char* argv[]){
     // assuming the entry point is _min_caml_start
     init_cpu(cpu, option, mem.lbl, 1024);
 
-    option.show_option();
 
     execution(cpu, mem, option);
 

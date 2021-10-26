@@ -143,10 +143,20 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option){
 
 void translator(OPTION& option){
     std::ifstream ifs;
-    if(option.binary) ifs.open("binary.txt");
     std::string s;
-    while((option.binary ? ifs : std::cin) >> s){
-        auto[opc, d, a, b] = decode_bin(s);
-        show_instr(opc, d, a, b);
+    if(option.binTOasm){
+        if(option.binary) ifs.open("binary.txt");
+        while((option.binary ? ifs : std::cin) >> s){
+            auto[opc, d, a, b] = decode_bin(s);
+            show_instr(opc, d, a, b);
+        }
+    }
+    else{
+        std::map<std::string, int> mp;
+        if(option.assembly) ifs.open("assembly.s");
+        while(std::getline(option.assembly ? ifs : std::cin, s)){
+            auto [opc, d, a, b] = recognize_instr(mp, remove_chars(s, " ,\t\n"));
+            show_instr_binary(opc, d, a, b);
+        }
     }
 }
