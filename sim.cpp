@@ -62,7 +62,7 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
     std::swap(tmpb, option.display_binary);
 
     std::string s;
-    while(std::cin >> s){
+    while(std::cout << "> " << std::flush, std::cin >> s){
         SHOW ss = show_what(s);
         if(ss.gr) cpu.show_gpr();
         if(ss.fr) cpu.show_fpr();

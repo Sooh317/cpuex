@@ -19,7 +19,8 @@ struct option_t{
     void label_ask(std::map<std::string, int> &mp){
         printerr("次にjumpしたいラベル名を入力してください");
         printerr("jumpしない場合はNと入力してください");
-        std::string s; 
+        std::string s;
+        std::cout << "> " << std::flush; 
         std::cin >> s;
         if(s == "N"){
             jump_to_label = 0;
@@ -29,6 +30,7 @@ struct option_t{
             while(mp.find(s) == mp.end()){
                 std::cerr << s << " は存在しないラベルです" << std::endl;
                 printerr("ラベル名を入力してください");
+                std::cout << "> " << std::flush;
                 std::cin >> s;
             }
             label_addr = mp[s];
