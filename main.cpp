@@ -29,10 +29,7 @@ int main(int argc, char* argv[]){
     // assuming the entry point is _min_caml_start
     init_cpu(cpu, option, mem.lbl, 1024);
 
-
     execution(cpu, mem, option);
-
-    printout(cpu.gpr[2]);
     
     return 0;
 }

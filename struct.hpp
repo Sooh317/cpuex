@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <assert.h>
+
 
 using GPR = int32_t; // general purpose register
 using FPR = float; // floating point register
@@ -26,21 +28,29 @@ struct cpu_t{
     cpu_t():cr(0), lr(0), ctr(0), xer(0),pc(0), gpr(GPR_SIZE), fpr(FPR_SIZE){}
 
     void show_gpr(){
+        std::cerr << "\033[1;31m";
         for(int i = 0; i < GPR_SIZE; i++){
-            std::cout << "gpr[" << i << "] = " << gpr[i] << '\n';
+            std::cerr << "gpr[" << i << "] = " << gpr[i] << std::endl;
         }
+        std::cerr << "\033[m\n";
     }
     void show_fpr(){
+        std::cerr << "\033[1;32m";
         for(int i = 0; i < FPR_SIZE; i++){
             std::cerr << "fpr[" << i << "] = " << fpr[i] << '\n';
         }
+        std::cerr << "\033[m\n";
     }
     void show_cr(){
+        std::cerr << "\033[1;33m";
         std::cerr << "cr : ";
         for(int i = 31; i >= 0; i--){
+            if(i % 8 == 7) std::cerr << " ";
             std::cerr << (cr >> i & 1);
         }
+        std::cerr << "\033[m\n";
         std::cerr << std::endl;
+
     }
     void show_lr(){
         /*std::cerr << "lr : ";
@@ -48,18 +58,24 @@ struct cpu_t{
             std::cerr << (lr >> i & 1);
         }
         std::cerr << std::endl;*/
-        std::cout << "lr : ";
+        std::cerr << "\033[1;34m";
+        std::cerr << "lr : ";
         for(int i = 31; i >= 0; i--){
-            std::cout << (lr >> i & 1);
+            if(i % 8 == 7) std::cerr << " ";
+            std::cerr << (lr >> i & 1);
         }
-        std::cout << std::endl;
+        std::cerr << "\033[m\n";
+        std::cerr << std::endl;
     }
     void show_ctr(){
-        std::cout << "ctr : ";
+        std::cerr << "\033[1;35m";
+        std::cerr << "ctr : ";
         for(int i = 31; i >= 0; i--){
-            std::cout << (ctr >> i & 1);
+            if(i % 8 == 7) std::cerr << " ";
+            std::cerr << (ctr >> i & 1);
         }
-        std::cout << std::endl;
+        std::cerr << "\033[m\n";
+        std::cerr << std::endl;
     }
 };
 using CPU = cpu_t;
@@ -136,6 +152,17 @@ enum DIRECTIVE_KIND{
     NOT_DIRECTIVE
 };
 
+
+struct show_t{
+    bool gr, fr, lr, cr, ctr, m, M;
+    bool next;
+    int wid;
+    std::vector<int> addr;
+    show_t():gr(0), fr(0), lr(0), cr(0), ctr(0), m(0), M(0),next(1), wid(3){}
+};
+using SHOW = show_t;
+
+
 struct memory_t{
     int index;
     std::vector<INSTR> instr; 
@@ -143,13 +170,42 @@ struct memory_t{
     std::map<std::string, int> lbl;
 
     memory_t():index(0), instr(INSTR_SIZE), data(DATA_SIZE){} 
+
+    void show_memory(const SHOW& show){
+        std::cerr << "\033[1m";
+        if(show.m){
+            for(const int& ad : show.addr){
+                assert(ad == (ad >> 2) << 2);
+                std::cerr << "around " << ad << std::endl;
+                for(int j = std::max(-(ad >> 2), -show.wid); j <= std::min(DATA_SIZE - 1 - (ad >> 2), show.wid); j++){
+                    std::cerr << "mem[" << ad + 4*j << "~" << ad + 4*j + 3 << "] = " << data[(ad >> 2) + j] << "  0b";
+                    for(int i = 31; i >= 0; i--){
+                        std::cerr << (data[(ad >> 2) + j] >> i & 1);
+                        if(i % 8 == 0) std::cerr << " ";
+                    }
+                    std::cerr << std::endl;
+                }
+                std::cerr << std::endl;
+            }
+        }
+        else{ // show.M = 1
+            for(int i = 0; i < (int)show.addr.size(); i += 2){
+                assert(show.addr[i] < DATA_SIZE && show.addr[i + 1] < DATA_SIZE && show.addr[i] >= 0 && show.addr[i + 1] >= 0);
+                std::cerr << "from " << show.addr[i] << " to " << show.addr[i + 1] << std::endl;
+                for(int j = show.addr[i]; j <= show.addr[i + 1]; j += 4){
+                    std::cerr << "mem[" << j << "~" << j + 3 << "] = " << data[j >> 2] << "  0b";
+                    for(int i = 31; i >= 0; i--){
+                        std::cerr << (data[j >> 2] >> i & 1);
+                        if(i % 8 == 0) std::cerr << " ";
+                    }
+                    std::cerr << std::endl;
+                }
+                std::cerr << "\n";
+            }
+        }
+        std::cerr << "\033[m";
+    }
 };
 using MEMORY = memory_t;
 
-struct show_t{
-    bool gr, fr, lr, cr, ctr, m;
-    int addr;
-    bool next;
-    show_t():gr(0), fr(0), lr(0), cr(0), ctr(0), m(0), addr(0), next(0){}
-};
-using SHOW = show_t;
+

@@ -24,8 +24,9 @@ void init_option(OPTION& option, int argc, char* argv[]){
     if(option.exec_mode == 0 && (option.display_binary || option.display_assembly)){
         std::cerr << "ファイルに出力しない場合、大量の命令列がターミナルに吐かれる恐れがあります" << std::endl;
         std::cerr << "displayを行いますか? Y/N" << std::endl;
-        std::cout << "> " << std::flush;
+        std::cerr << "\033[36m> " << std::flush;
         char c; std::cin >> c;
+        std::cerr << "\033[m";
         if(c == 'n' || c == 'N') option.display_binary = option.display_assembly = 0;
         else if(c != 'y' || c != 'n') return;
         else assert(false);

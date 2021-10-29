@@ -9,6 +9,7 @@
 void print_binary_int(int a){
     for(int i = 31; i >= 0; i--){
         std::cout << (a >> i & 1);
+        if(i % 8 == 0) std::cout << " ";
     }
     std::cout << std::endl;
 }

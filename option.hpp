@@ -20,20 +20,26 @@ struct option_t{
         printerr("次にjumpしたいラベル名を入力してください");
         printerr("jumpしない場合はNと入力してください");
         std::string s;
-        std::cout << "> " << std::flush; 
+        std::cerr << "\033[36m";
+        std::cerr << "> " << std::flush; 
         std::cin >> s;
+        std::cerr << "\033[m";
         if(s == "N"){
             jump_to_label = 0;
             return;
         }
         else{
-            while(mp.find(s) == mp.end()){
+            while(mp.find(s) == mp.end() && s != "N"){
                 std::cerr << s << " は存在しないラベルです" << std::endl;
-                printerr("ラベル名を入力してください");
-                std::cout << "> " << std::flush;
+                printerr("次にjumpしたいラベル名を入力してください");
+                printerr("jumpしない場合はNと入力してください");
+                std::cerr << "\033[36m";
+                std::cerr << "> " << std::flush;
                 std::cin >> s;
+                std::cerr << "\033[m";
             }
-            label_addr = mp[s];
+            if(s == "N") jump_to_label = 0;
+            else label_addr = mp[s];
         }
     }
     void show_option(){
@@ -50,13 +56,13 @@ struct option_t{
         }
         if(exec_mode == 0) std::cerr << "simulate whole" << std::endl;
         else if(exec_mode == 1) std::cerr << "step execution" << std::endl;
-        if(jump_to_label) std::cerr << "break point(the address) is set here : " << label_addr << std::endl;
+        if(jump_to_label) std::cerr << "You can set break points" << std::endl;
         if(display_assembly) std::cerr << "display instructions in assembly" << std::endl;
         if(display_binary) std::cerr << "display instructions in binary" << std::endl;
         if(binary) std::cerr << "reading binary" << std::endl;
-        if(assembly) std::cerr << "### invalid option ###\nreading assembly.s" << std::endl;
+        if(assembly) std::cerr << "### invalid option ###\nYou can use -a only if you use -tb" << std::endl;
         else std::cerr << "reading assembly" << std::endl;
-        std::cerr << "### options end ###" << std::endl;
+        std::cerr << "### options end ###\n" << std::endl;
     }
 };
 using OPTION = option_t;

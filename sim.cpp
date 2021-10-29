@@ -25,20 +25,20 @@ int simulate_whole(CPU& cpu, MEMORY &mem, OPTION& option){
     return 0;
 }
 
-SHOW show_what(const std::string& s){
+SHOW show_what(const std::vector<std::string>& s){
     SHOW ss;
-    if(s == "s") return ss;
-    ss.next = 1;
-    for(int i = 0; i < (int)s.size(); i++){
-        if(s[i] == 'g') ss.gr = true;
-        else if(s[i] == 'f') ss.fr = true;
-        else if(s[i] == 'c') ss.cr = true;
-        else if(s[i] == 't') ss.ctr = true;
-        else if(s[i] == 'l') ss.lr = true;
-        else if(s[i] == 'm'){
-            ss.m = true;
-            ss.addr = stoi(s.substr(i + 1, s.size() - i - 1));
-        }
+    for(const char& c : s[0]){
+        if(c == 's') ss.next = false;
+        else if(c == 'g') ss.gr = true;
+        else if(c == 'f') ss.fr = true;
+        else if(c == 'c') ss.cr = true;
+        else if(c == 't') ss.ctr = true;
+        else if(c == 'l') ss.lr = true;
+        else if(c == 'M') ss.M = true;
+        else if(c == 'm') ss.m = true;
+    }
+    if(s.size() >= 2){
+        for(int i = 1; i < (int)s.size(); i++) ss.addr.emplace_back(stoi(s[i]));
     }
     return ss;
 }
@@ -62,14 +62,17 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
     std::swap(tmpb, option.display_binary);
 
     std::string s;
-    while(std::cout << "> " << std::flush, std::cin >> s){
-        SHOW ss = show_what(s);
+    std::getline(std::cin, s);
+    while(std::cout << "\033[36m> " << std::flush, std::getline(std::cin, s)){
+        std::cout << "\033[m";
+        SHOW ss = show_what(remove_chars(s, " -,"));
         if(ss.gr) cpu.show_gpr();
         if(ss.fr) cpu.show_fpr();
         if(ss.lr) cpu.show_lr();
         if(ss.cr) cpu.show_cr();
         if(ss.ctr) cpu.show_ctr();
-        if(ss.m) std::cerr << "mem[" << ss.addr << "] = " << mem.data[ss.addr >> 2] << std::endl;
+        if(ss.m) mem.show_memory(ss);
+        else if(ss.M) mem.show_memory(ss);
         if(ss.next) continue;
         if(s == "s" && exec(cpu, mem, option)){
             std::cerr << "program finished!" << std::endl;
