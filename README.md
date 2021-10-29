@@ -110,7 +110,7 @@ make をすると "sim" という実行ファイルが生成されます.
 ```
 assembly.sに書いてあるアセンブリをバイナリに変換してres.txtに格納します.
 
-# ステップ実行
+# step execution specifications
  - s : 次の命令の実行
  - g : 汎用レジスタ(gpr)の表示
  - f : 浮動小数点レジスタ(fpr)の表示
