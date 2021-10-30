@@ -4,11 +4,14 @@
 #include <string>
 #include <cassert>
 
+#define MASK2 0b11
 #define MASK3 0b111
+#define MASK4 0xf
 #define MASK5 0b11111
 #define MASK10 0x3ff
 #define MASK14 0x3fff
 #define MASK16 0xffff
+#define MASK18 0x3ffff
 #define MASK24 0xffffff
 
 
