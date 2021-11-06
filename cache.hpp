@@ -20,13 +20,13 @@ private:
     const int k = CACHE_LINE_SIZE / 32;
     int hit, miss, write_back;
     std::vector<state_t> state;
-    std::vector<std::vector<int>> data;
+    std::vector<std::vector<DATA>> data;
 public:
     cache_t():hit(0), miss(0), write_back(0){
-        data.resize(CACHE_LINE_NUM, std::vector<int>(k));
+        data.resize(CACHE_LINE_NUM, std::vector<DATA>(k));
         state.resize(CACHE_LINE_NUM);
     }
-    void find(bool lw, int32_t addr, MEMORY& mem, int d = 0){
+    void find(bool lw, int32_t addr, MEMORY& mem, DATA d = DATA{0}){
         int offset = addr & MASK5;
         int index = (addr >> CACHE_OFFSET_SIZE) & MASK4;
         int tag = (addr >> (CACHE_INDEX_SIZE + CACHE_OFFSET_SIZE)) & MASK18;

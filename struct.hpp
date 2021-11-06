@@ -111,6 +111,13 @@ enum INSTR_KIND{
     // move
     MR,   // move register
     MTSPR, // refer to p526 
+
+    // 1st architecture
+    FABS, 
+    FCTIWZ,
+    XORIS, 
+
+    // ゴミ
     NOT_INSTR,
     INSTR_UNKNOWN
 };
@@ -162,25 +169,31 @@ struct show_t{
 };
 using SHOW = show_t;
 
+union data_t{
+    int i;
+    float f;
+};
+using DATA = data_t;
 
 struct memory_t{
     int index;
     std::vector<INSTR> instr; 
-    std::vector<int32_t> data;
+    std::vector<DATA> data;
+    std::vector<bool> type; // type = 1 : float
     std::map<std::string, int> lbl;
 
-    memory_t():index(0), instr(INSTR_SIZE), data(DATA_SIZE){} 
+    memory_t():index(0), instr(INSTR_SIZE), data(DATA_SIZE), type(DATA_SIZE){} 
 
     void show_memory(const SHOW& show){
         std::cerr << "\033[1m";
         if(show.m){
-            for(const int& ad : show.addr){
-                assert(ad == (ad >> 2) << 2);
+            for(int ad : show.addr){
+                ad = ((ad >> 2) << 2);
                 std::cerr << "around " << ad << std::endl;
                 for(int j = std::max(-(ad >> 2), -show.wid); j <= std::min(DATA_SIZE - 1 - (ad >> 2), show.wid); j++){
-                    std::cerr << "mem[" << ad + 4*j << "~" << ad + 4*j + 3 << "] = " << data[(ad >> 2) + j] << "  0b";
+                    std::cerr << "mem[" << ad + 4*j << "~" << ad + 4*j + 3 << "] = " << (type[(ad >> 2) + j] ? data[(ad >> 2) + j].f : data[(ad >> 2) + j].i) << "  0b'";
                     for(int i = 31; i >= 0; i--){
-                        std::cerr << (data[(ad >> 2) + j] >> i & 1);
+                        std::cerr << (data[(ad >> 2) + j].i >> i & 1);
                         if(i % 8 == 0) std::cerr << " ";
                     }
                     std::cerr << std::endl;
@@ -193,9 +206,9 @@ struct memory_t{
                 assert(show.addr[i] < DATA_SIZE && show.addr[i + 1] < DATA_SIZE && show.addr[i] >= 0 && show.addr[i + 1] >= 0);
                 std::cerr << "from " << show.addr[i] << " to " << show.addr[i + 1] << std::endl;
                 for(int j = show.addr[i]; j <= show.addr[i + 1]; j += 4){
-                    std::cerr << "mem[" << j << "~" << j + 3 << "] = " << data[j >> 2] << "  0b";
+                    std::cerr << "mem[" << j << "~" << j + 3 << "] = " << (type[j >> 2] ? data[j >> 2].f : data[j >> 2].i) << "  0b'";
                     for(int i = 31; i >= 0; i--){
-                        std::cerr << (data[j >> 2] >> i & 1);
+                        std::cerr << (data[j >> 2].i >> i & 1);
                         if(i % 8 == 0) std::cerr << " ";
                     }
                     std::cerr << std::endl;

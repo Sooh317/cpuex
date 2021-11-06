@@ -72,19 +72,19 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option){
             cpu.pc = segment(cpu.ctr, 0, 29) << 2;
             return false;
         case LWZ: 
-            cpu.gpr[d] = mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + a));
+            cpu.gpr[d] = mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + a)).i;
             return false;
         case LWZU:
             ea = cpu.gpr[b] + a;
-            cpu.gpr[d] = mem.data.at(addr_to_index(ea));
+            cpu.gpr[d] = mem.data.at(addr_to_index(ea)).i;
             cpu.gpr[b] = ea;
             return false;
         case STW:   
-            mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + a)) = cpu.gpr[d];
+            mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + a)).i = cpu.gpr[d];
             return false;
         case STWU:
             ea = cpu.gpr[b] + a;
-            mem.data.at(addr_to_index(ea)) = cpu.gpr[d];
+            mem.data.at(addr_to_index(ea)).i = cpu.gpr[d];
             cpu.gpr[b] = ea;
             return false;
         case MFSPR:
@@ -104,6 +104,13 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option){
             else if(d == 0b01001) cpu.ctr = cpu.gpr[a];
             else assert(false);
             return false;
+        case FABS:
+            return false;
+        case FCTIWZ:
+            return false;
+        case XORIS:
+            cpu.gpr[d] = cpu.gpr[a] ^ (b << 16);
+            return false;
         default:
             warning(opcode_to_string(opc));
             assert(false);
@@ -113,6 +120,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option){
 
 int simulate_whole(CPU& cpu, MEMORY &mem, OPTION& option){
     while(!exec(cpu, mem, option));
+    std::cerr << "program finised!" << std::endl;
     return 0;
 }
 

@@ -33,6 +33,10 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "mfspr") return MFSPR;
     if(s == "mr") return MR;
     if(s == "mtspr") return MTSPR;
+    // 1st architecture
+    if(s == "fabs") return FABS;
+    if(s == "fctiwz") return FCTIWZ;
+    if(s == "xoris") return XORIS;
     return INSTR_UNKNOWN;
 }
 
@@ -70,6 +74,12 @@ std::string opcode_to_string(INSTR_KIND kind){
         return "mr";
     case MTSPR:
         return "mtspr";
+    case XORIS:
+        return "xoris";
+    case FABS:
+        return "fabs";
+    case FCTIWZ:
+        return "fctiwz";
     case NOT_INSTR:
         return "not_instr";
     default:
@@ -128,10 +138,21 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
         return stoi(s.substr(1, s.size() - 1));
     }
     else if(s[0] == 'f'){ // fpr
-        return stoi(s.substr(2, s.size() - 2));
+        return stoi(s.substr(1, s.size() - 1));
     }
     else if(s[0] == 'c'){ // cr
         return stoi(s.substr(2, s.size() - 2));
+    }
+    else if(s[0] == '0'){ // 0x か 0b を仮定
+        assert(s.size() >= 2);
+        int base = -1, res = 0;
+        if(s[1] == 'x') base = 16;
+        else if(s[1] == 'b') base = 2;
+        else assert(false);
+        for(int i = 2; i < (int)s.size(); i++){
+            res = res * base + (('a' <= s[i] && s[i] <= 'f') ? (10 + s[i] - 'a') : s[i] - '0');
+        }
+        return res;
     }
     else{ //数字から始まる
         int lparen = -1;
@@ -234,6 +255,20 @@ INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::st
             rd = call(1, 0);
             ra = call(2, 0);
             break;
+        // 1st architecture
+        case XORIS:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(3, 0);
+            break;
+        case FABS:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            break;
+        case FCTIWZ:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            break;
         case NOT_INSTR:
             break;
         default:
@@ -284,6 +319,12 @@ int opcode_to_bit(INSTR_KIND kind){
         return 0x1f;
     case MTSPR: // s spr 0x1d3 0
         return 0x1f;
+    case FABS:
+        return 0x3f;
+    case FCTIWZ:
+        return 0x3f;
+    case XORIS:
+        return 0x1b;
     default: // 生データが入っているとする
         return (~0x0); // 数字は 0, 文字列は0x1にする？
         break;
@@ -335,17 +376,28 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
         else fprintf(stdout, "lwz, r%d, %d(r%d)\n", d, a, b);
         return;
     case STWU:
-        fprintf(stdout, "lwz, r%d, %d(r%d)\n", d, a, b);
+        fprintf(stdout, "stwu r%d, %d(r%d)\n", d, a, b);
         return;
     case MFSPR:
-        fprintf(stdout, "mfspr, r%d, %d\n", d, a);
+        fprintf(stdout, "mfspr r%d, %d\n", d, a);
         return;
     case MR:
-        fprintf(stdout, "mr, r%d, r%d\n", d, a);
+        fprintf(stdout, "mr r%d, r%d\n", d, a);
         return;
     case MTSPR:
-        fprintf(stdout, "mtspr, %d, r%d\n", d, a);
+        fprintf(stdout, "mtspr %d, r%d\n", d, a);
         return;
+    // 1st architecture
+    case FABS:
+        fprintf(stdout, "fabs f%d, f%d\n", d, a);
+        return;
+    case FCTIWZ:
+        fprintf(stdout, "fctiwz f%d, f%d\n", d, a);
+        return;
+    case XORIS:
+        fprintf(stdout, "xoris r%d, r%d, %d\n", d, a, b);
+        return;
+
     case NOT_INSTR:
         return;
     default:
@@ -403,6 +455,16 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
         break;
     case MTSPR:
         res |= ((a & MASK5) << 21) | ((d & MASK10) << 11) | (467 << 1);
+        break;
+    // 1st architecture
+    case FABS:
+        res |= ((d & MASK5) << 21) | ((a & MASK5) << 11) | (264 << 1);
+        break;
+    case FCTIWZ:
+        res |= ((d & MASK5) << 21) | ((a & MASK5) << 11) | (15 << 1);
+        break;
+    case XORIS:
+        res |= ((a & MASK5) << 21) | ((d & MASK5) << 16) | (b & MASK16);
         break;
     default:
         printerr("## WARNING ##\nNOT instruction : maybe some raw data");
