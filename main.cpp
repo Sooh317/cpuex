@@ -9,13 +9,13 @@
 #include "instruction.hpp"
 #include "option.hpp"
 #include "util.hpp"
-#include "cache.hpp"
+//#include "cache.hpp"
 
 
 int main(int argc, char* argv[]){
     CPU cpu;
     MEMORY mem;
-    CACHE cache;
+    //CACHE cache;
     OPTION option;
 
     init_option(option, argc, argv);
