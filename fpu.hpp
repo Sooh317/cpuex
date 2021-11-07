@@ -229,7 +229,7 @@ float fmul(float f, float g){
 
     // final
     unsigned ans = (uno >> 5) + (dos >> 5);
-    std::cout << uno << " " << dos << " " << ans << std::endl;
+    //std::cout << uno << " " << dos << " " << ans << std::endl;
 
     unsigned tmp = ans, cnt = 0;
 
@@ -242,7 +242,7 @@ float fmul(float f, float g){
     if(cnt == 27) newexp++;
     if(newexp < 1 || ((a.i >> 23) & MASK8) == 0 || ((b.i >> 23) & MASK8) == 0) newexp = 0;
 
-    std::cout << newsig << " " << newexp << " " << newmanti << std::endl;
+    //std::cout << newsig << " " << newexp << " " << newmanti << std::endl;
 
     return make_float(newsig, newexp, newmanti);
 }
@@ -392,7 +392,7 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
     }
     else if(tag == 2 || tag == 3){
         int cnt = 0;
-        while(cnt < 1000){
+        while(cnt < 10000){
             f.i = mt(), g.i = mt();
             //print_binary_int(f.i);
             //print_binary_int(g.i);
@@ -401,6 +401,14 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
             if(tag == 2) myans = fmul(f.f, g.f), ans = (double)f.f * (double)g.f;
             else myans = fdiv(f.f, g.f, fpu), ans = (double)f.f / (double)g.f;
             if(!range_check(ans, LOW, HIGH)) continue;
+            if(((f.i >> 23) & MASK8) == 0 || ((g.i >> 23) & MASK8) == 0){
+                union {float f; int i;} d;
+                d.f = myans;
+                if(((d.i >> 23) & MASK8) == 0){
+                    cnt++;
+                    continue;
+                }
+            }
             l = abs(myans - ans);
             r = max({c*abs(ans), EPS});
             if(l < r){
@@ -477,18 +485,7 @@ void fpu_test(const FPU& fpu){
     for(int i = 0; i <= 5; i++){
         test(EPS, LOW, HIGH, i, fpu);
     }
-//    union{float f; int i;} a, b;
-//     a.i = 0b00000000001101110111111000011000;
-//     b.i = 0b01011001000011001111101010110000;
-//     printout("f");
-//     print_float(a.f);
-//     printout("g");
-//     print_float(b.f);
-//     double ans = a.f * b.f;
-//     printout("myans");
-//     print_float(fmul(a.f, b.f));
-//     printout("ans");
-//     print_float(ans);
+    
     return;
 }
 
