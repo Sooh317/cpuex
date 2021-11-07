@@ -68,9 +68,9 @@ public:
             ok = false;
             std::cerr << "cnt_atan : " << cnt_atan << " is less than " << ATAN_TABLE_LINE << std::endl;
         }
-        if(ok) std::cerr << "fpu check success" << std::endl;
+        if(ok) std::cerr << "fpu loading success" << std::endl;
         else{
-            std::cerr << "fpu check failed\n";
+            std::cerr << "fpu loading failed\n";
             exit(0);
         }
         return;
@@ -134,7 +134,7 @@ void print_float(float f){
 
 inline float make_float(int sig, int exp, int manti){
     union { float f; int i; } d;
-    d.i = (sig << 31) | (exp << 23) | manti;
+    d.i = (sig << 31) | (exp << 23) | (manti & MASK23);
     return d.f;
 }
 
@@ -188,56 +188,58 @@ float fmul(float f, float g){
     int manti1 = a.i & MASK23;
     int manti2 = b.i & MASK23;
 
-    // bits は leading-1 は省略してるとする
-    std::vector<int> bits = {manti1};
-    std::vector<int> carry(24, 0);
+    std::vector<int> bits = {(1 << 23 | manti1)};
+    std::vector<int> carry(23, 0);
 
     for(int i = 0; i < 23; i++){
-        if(kth_bit(manti2, i, 23)) bits.emplace_back(manti1);
+        if(kth_bit(manti2, i, 23)) bits.emplace_back((1 << 23 | manti1));
         else bits.emplace_back(0);
     }
+
     // step1 
     for(int i = 0; i < 12; i++){
-        int uno = bits[2*i] << 1;
-        int dos = uno + (1 << 23 | bits[2*i + 1]);
-        bits[2*i] = (dos & MASK24);
+        int uno = (bits[2*i] & MASK23) << 1;
+        int dos = uno + bits[2*i + 1];
+        bits[2*i] = (((bits[2*i] >> 23) & MASK1) << 24) | (dos & MASK24);
         if(dos >= (1 << 24)) carry[2*i] = 1;
     }
+
     // step2
-    // bits[2k]のleading-1は24bit目にある
     for(int i = 0; i < 6; i++){
         int uno = (bits[4*i] & MASK23) << 2;
-        int dos = uno + (1 << 24 | bits[4*i + 2]);
-        bits[4*i] = (((bits[4*i] >> 23) & 1) << 25) | (dos & MASK25);
+        int dos = uno + bits[4*i + 2];
+        bits[4*i] = (((bits[4*i] >> 23) & MASK2) << 25) | (dos & MASK25);
         if(dos >= (1 << 25)) carry[4*i + 1] = 1;
     }
+
     // step3
-    // bits[4k]のleading-1は26bit目にある
     for(int i = 0; i < 3; i++){
         int uno = (bits[8*i] & MASK23) << 4;
-        int dos = uno + (1 << 26 | bits[8*i + 4]);
-        bits[8*i] = (((bits[8*i] >> 23) & MASK3) << 27) | (dos & MASK27);
+        int dos = uno + bits[8*i + 4];
+        bits[8*i] = (((bits[8*i] >> 23) & MASK4) << 27) | (dos & MASK27);
         if(dos >= (1 << 27)) carry[8*i + 3] = 1;
     }
+    
     // step4
-    // bits[8k]のleading-1は30bit目にある
     int c = 0;
-    for(int i = 0; i < 24; i++) c |= carry[i] << (23 - i);
-    int uno = ((1 << 30) | bits[0]) + (c << 8);
-    int dos = ((((1 << 30) | bits[8]) >> 8) & MASK23) + ((((1 << 30) | bits[16]) >> 16) & MASK16);
-    // final
+    for(int i = 0; i < 23; i++) c |= carry[i] << (22 - i);
+    int uno = bits[0] + (c << 8);
+    int dos = (bits[8] >> 8) + (bits[16] >> 16);
 
+    // final
     int ans = (uno >> 5) + (dos >> 5);
+
     int tmp = ans, cnt = 0;
     while(tmp) cnt++, tmp >>= 1;
 
     int newsig = kth_bit(a.i, 0, 32) ^ kth_bit(b.i, 0, 32);
     int newexp = ((a.i >> 23) & MASK8) + ((b.i >> 23) & MASK8) - 127;
     int newmanti = ans >> (cnt - 24);
-    if(cnt == 27) newexp++;
-    if(newexp < 1 || kth_bit(a.i, 0, 32) == 0 || kth_bit(b.i, 0, 32)) newexp = 0;
 
-    return make_float(newsig, newexp, newmanti & MASK23);
+    if(cnt == 27) newexp++;
+    if(newexp < 1 || ((a.i >> 23) & MASK8) == 0 || ((b.i >> 23) & MASK8) == 0) newexp = 0;
+
+    return make_float(newsig, newexp, newmanti);
 }
 
 float fsqrt(float f, const FPU& fpu){
@@ -361,8 +363,8 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
             f.i = mt(), g.i = mt();
             if(!range_check(f.f, LOW, HIGH)) continue;
             if(!range_check(g.f, LOW, HIGH)) continue;
-            if(tag == 0) myans = fadd(f.f, g.f), ans = f.f + g.f;
-            else myans = fsub(f.f, g.f), ans = f.f - g.f;
+            if(tag == 0) myans = fadd(f.f, g.f), ans = (double)f.f + (double)g.f;
+            else myans = fsub(f.f, g.f), ans = (double)f.f - (double)g.f;
             if(!range_check(ans, LOW, HIGH)) continue;
             l = abs(myans - ans);
             r = max({c*abs(f.f), c*abs(g.f), c*abs(ans), EPS});
@@ -380,15 +382,17 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
                 exit(0);
             }
         }
+        cerr << (tag == 0 ? "fadd " : "fsub ") << "test success!" << endl; 
     }
     else if(tag == 2 || tag == 3){
         for(int i = 0; i < TEST_NUM; i++){
             f.i = mt(), g.i = mt();
             if(!range_check(f.f, LOW, HIGH)) continue;
             if((tag == 3 && g.f == 0) || !range_check(g.f, LOW, HIGH)) continue;
-            if(tag == 2) myans = fmul(f.f, g.f), ans = f.f * g.f;
-            else myans = fdiv(f.f, g.f, fpu), ans = f.f / g.f;
+            if(tag == 2) myans = fmul(f.f, g.f), ans = (double)f.f * (double)g.f;
+            else myans = fdiv(f.f, g.f, fpu), ans = (double)f.f / (double)g.f;
             if(!range_check(ans, LOW, HIGH)) continue;
+            cout << "hello" << flush;
             l = abs(myans - ans);
             r = max({c*abs(ans), EPS});
             if(l < r) continue;
@@ -405,12 +409,13 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
                 exit(0);
             }
         }
+        cerr << (tag == 2 ? "fmul " : "fdiv ") << "test success!" << endl; 
     }
     else if(tag == 4){
         for(int i = 0; i < TEST_NUM; i++){
             f.i = mt();
             if(f.f == 0 || range_check(f.f, 0, HIGH)){
-                myans = fsqrt(f.f, fpu), ans = pow(f.f, 0.5);
+                myans = fsqrt(f.f, fpu), ans = pow((double)f.f, 0.5);
                 l = abs(myans - ans);
                 r = max(c*ans, EPS);
                 if(l < r) continue;
@@ -426,12 +431,13 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
                 }
             }
         }
+        cerr << "fsqrt test success!" << endl; 
     }
     else if(tag == 5){
         for(int i = 0; i < TEST_NUM; i++){
             f.i = mt();
             if(!range_check(f.f, LOW, HIGH)) continue;
-            myans = atan(f.f, fpu), ans = atan(f.f);
+            myans = atan(f.f, fpu), ans = atan((double)f.f);
             l = abs(myans - ans);
             r = max(c*abs(ans), EPS);
             if(l < r) continue;
@@ -444,8 +450,8 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
             print_float(ans);
             exit(0);
         }
+        cerr << "atan test success!" << endl; 
     }
-    cerr << "fadd test success!" << endl; 
 }
 
 void fpu_test(const FPU& fpu){
@@ -459,4 +465,7 @@ void fpu_test(const FPU& fpu){
     for(int i = 0; i <= 5; i++){
         test(EPS, LOW, HIGH, i, fpu);
     }
+    return;
 }
+
+#undef TEST_NUM
