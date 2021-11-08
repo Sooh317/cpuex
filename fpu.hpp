@@ -509,7 +509,10 @@ void fpu_test(const FPU& fpu){
         LOW /= 2.0;
         HIGH *= 2.0;
     }
-    for(int i = 0; i <= 5; i++){
+    // for(int i = 0; i <= 3; i++){
+    //     test(EPS, LOW, HIGH, i, fpu);
+    // }
+    for(int i = 4; i <= 5; i++){
         test(EPS, LOW, HIGH, i, fpu);
     }
     return;
