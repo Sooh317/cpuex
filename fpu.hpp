@@ -254,14 +254,14 @@ float fsqrt(float f, const FPU& fpu){
     auto [midy, mydydx] = fpu.Fsqrttable(tag);
     int exp = (d.i >> 23 & 1) ? 127 : 128;
     float midx = make_float(0, exp, (((d.i >> 14) & MASK9) << 14) | (1 << 13));
-    float target = make_float(0, exp, d.i & MASK23);
+    float target = make_float(0, exp, d.i);
     float dx = fsub(target, midx);
     float ydiff = fmul(dx, mydydx);
     float myans = fadd(midy, ydiff);
     tmp.f = myans;
     int newexp = (d.i >> 24 & MASK7) - ((d.i >> 23 & 1) ? 63 : 64) + ((tmp.i >> 23) & MASK8);
     if((d.i >> 23 & MASK8) == 0) newexp = 0;
-    return make_float(0, newexp, tmp.i & MASK23);
+    return make_float(0, newexp, tmp.i);
 }
 
 float finv(float f, const FPU& fpu){
@@ -293,11 +293,21 @@ float fdiv(float f, float g, const FPU& fpu){
     unsigned sig = kth_bit(a.i, 0) ^ kth_bit(b.i, 0);
     int diffexp = (a.i >> 23 & MASK8) - (b.i >> 23 & MASK8);
     int newexp = std::max(0, (core.i >> 23 & MASK8) + diffexp);
+    if(((a.i >> 23) & MASK8) == 0 || ((b.i >> 23) & MASK8) == 0) newexp = 0;
+    if(newexp >= 256){
+        std::cerr << "### overflowing in fdiv ###" << std::endl;
+        print_float(f);
+        print_float(g);
+        print_float(f / g);
+        double res = (double)f / (double)g;
+        std::cout << res << std::endl;
+        assert(false);
+    }
     return make_float(sig, newexp, core.i & MASK23);
 }
 
 float atan(float f, const FPU& fpu){
-   union{float f; int i;} d;
+    union{float f; int i;} d;
     d.f = f;
     unsigned sig = kth_bit(d.i, 0);
     int exp = d.i >> 23 & MASK8;
@@ -311,6 +321,11 @@ float atan(float f, const FPU& fpu){
        union{float f; int i;} tmp;
         tmp.i = 0b00111111011111111111111111111011;
         return fmul(f, tmp.f);
+    }
+    if(exp == -126 + 127){
+        union{float f; int i;} tmp;
+        tmp.i = 0b00000000110000000000000000000000;
+        return make_float(sig, (tmp.i >> 23) & MASK8, tmp.i);
     }
     if(exp == -127 + 127){
         return make_float(sig, 0, 0);
@@ -364,7 +379,8 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
     else for(int i = 0; i < 20; i++) c /= 2.0;
 
     if(tag == 0 || tag == 1){
-        for(int i = 0; i < TEST_NUM; i++){
+        int cnt = 0;
+        while(cnt < TEST_NUM){
             f.i = mt(), g.i = mt();
             if(!range_check(f.f, LOW, HIGH)) continue;
             if(!range_check(g.f, LOW, HIGH)) continue;
@@ -373,7 +389,7 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
             if(!range_check(ans, LOW, HIGH)) continue;
             l = abs(myans - ans);
             r = max({c*abs(f.f), c*abs(g.f), c*abs(ans), EPS});
-            if(l < r) continue;
+            if(l < r) cnt++;
             else{
                 cout << (tag ? "fsub " : "fadd ") << "test failed:\n";
                 cout << "f \n";
@@ -392,16 +408,21 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
     }
     else if(tag == 2 || tag == 3){
         int cnt = 0;
-        while(cnt < 10000){
+        while(cnt < TEST_NUM){
             f.i = mt(), g.i = mt();
             //print_binary_int(f.i);
             //print_binary_int(g.i);
             if(!range_check(f.f, LOW, HIGH)) continue;
-            if((tag == 3 && g.f == 0) || !range_check(g.f, LOW, HIGH)) continue;
+            if(tag == 3){
+                if((((g.i >> 23) & MASK8) == 0) || !range_check(g.f, LOW, HIGH)) continue;
+                union {float f; int i;} tmp;
+                tmp.f = f.f / g.f;
+                if(((tmp.i >> 23) & MASK8) == MASK8) continue;
+            }
             if(tag == 2) myans = fmul(f.f, g.f), ans = (double)f.f * (double)g.f;
             else myans = fdiv(f.f, g.f, fpu), ans = (double)f.f / (double)g.f;
             if(!range_check(ans, LOW, HIGH)) continue;
-            if(((f.i >> 23) & MASK8) == 0 || ((g.i >> 23) & MASK8) == 0){
+            if((((f.i >> 23) & MASK8) == 0 || ((g.i >> 23) & MASK8) == 0)){
                 union {float f; int i;} d;
                 d.f = myans;
                 if(((d.i >> 23) & MASK8) == 0){
@@ -411,10 +432,7 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
             }
             l = abs(myans - ans);
             r = max({c*abs(ans), EPS});
-            if(l < r){
-                cnt++;
-                continue;
-            }
+            if(l < r) cnt++;
             else{
                 cout << (tag == 2 ? "fmul " : "fdiv ") << "test failed:\n";
                 cout << "f \n";
@@ -432,13 +450,22 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
         cerr.flush();
     }
     else if(tag == 4){
-        for(int i = 0; i < TEST_NUM; i++){
+        int cnt = 0;
+        while(cnt < TEST_NUM){
             f.i = mt();
-            if(f.f == 0 || range_check(f.f, 0, HIGH)){
+            if(((f.i >> 23) & MASK8) == 0 || range_check(f.f, 0, HIGH)){
                 myans = fsqrt(f.f, fpu), ans = pow((double)f.f, 0.5);
+                if(((f.i >> 23) & MASK8) == 0){
+                    union {float f; int i;} d;
+                    d.f = myans;
+                    if(((d.i >> 23) & MASK8) == 0){
+                        cnt++;
+                        continue;
+                    }
+                }
                 l = abs(myans - ans);
                 r = max(c*ans, EPS);
-                if(l < r) continue;
+                if(l < r) cnt++;
                 else{
                     cout << "fsqrt test failed:\n";
                     cout << "f \n";
@@ -485,7 +512,6 @@ void fpu_test(const FPU& fpu){
     for(int i = 0; i <= 5; i++){
         test(EPS, LOW, HIGH, i, fpu);
     }
-    
     return;
 }
 
