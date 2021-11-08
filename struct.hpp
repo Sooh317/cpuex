@@ -113,9 +113,26 @@ enum INSTR_KIND{
     MTSPR, // refer to p526 
 
     // 1st architecture
-    FABS, 
     FCTIWZ,
-    XORIS, 
+    XORIS,
+
+    B, 
+    BLT, 
+    BNE, 
+    CMPW, 
+    FABS, 
+    FADD, 
+    FCMPU, 
+    FDIV, 
+    FMR, 
+    FMUL, 
+    FNEG,
+    FSUB, 
+    LFD,  
+    LWZX, 
+    SLWI, 
+    STFD, 
+    STWX, 
 
     // ゴミ
     NOT_INSTR,

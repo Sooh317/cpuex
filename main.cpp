@@ -14,14 +14,13 @@
 
 
 int main(int argc, char* argv[]){
-    // CPU cpu;
-    // MEMORY mem;
-    // //CACHE cache;
-    // OPTION option;
+    CPU cpu;
+    MEMORY mem;
+    //CACHE cache;
+    OPTION option;
     FPU fpu;
     init_fpu(fpu);
-    fpu_test(fpu);
-/*
+
     init_option(option, argc, argv);
     option.show_option();
 
@@ -35,9 +34,7 @@ int main(int argc, char* argv[]){
     // assuming the entry point is _min_caml_start
     init_cpu(cpu, option, mem.lbl, 1024);
 
-    execution(cpu, mem, option);
-*/
-    
-    
+    execution(cpu, mem, option, fpu);
+
     return 0;
 }
