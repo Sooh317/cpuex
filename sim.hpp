@@ -26,7 +26,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
     if(option.display_assembly) show_instr(opc, d, a, b);
     if(option.display_binary) show_instr_binary(opc, d, a, b);
-    int c, bi, ea, tmp, r, m;
+    int c, bi, ea, tmp;
     [[maybe_unused]] int bo;
     bool cond_ok, ctr_ok;
     switch(opc){
@@ -173,9 +173,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             cpu.gpr[d] = mem.data[addr_to_index(ea)].i;
             return false;
         case SLWI:
-            r = rotl(cpu.gpr[a], b);
-            m = mask(31 - b);
-            cpu.gpr[d] = r & m;
+            cpu.gpr[d] = cpu.gpr[a] << b;
             return false;
         case STFD: // LFDと同じ
             tmp = (b == 0 ? 0 : cpu.gpr[b]);

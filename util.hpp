@@ -52,13 +52,6 @@ int cut_bit(int a, int l, int r){ // [l, r]
     return a & bitmask(l - r + 1);
 }
 
-int mask(int x){
-    return x;
-}
-int rotl(int x, int y){
-    return x;
-}
-
 // 以下全てマニュアルの処理を実現する関数
 // kth_bit は実際には 31 - k 桁目(左からk番目)にあるとして扱う
 
