@@ -21,11 +21,11 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "addi") return ADDI;
     if(s == "addis") return ADDIS;
     if(s == "cmpwi") return CMPWI;
-    if(s == "bcl") return BCL;
-    if(s == "bctr") return BCTR;
     if(s == "bgt") return BGT;
     if(s == "bl") return BL;
     if(s == "blr") return BLR;
+    if(s == "bctr") return BCTR;
+    if(s == "bcl") return BCL;
     if(s == "lwz") return LWZ;
     if(s == "lwzu") return LWZU;
     if(s == "stw") return STW;
@@ -33,6 +33,27 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "mfspr") return MFSPR;
     if(s == "mr") return MR;
     if(s == "mtspr") return MTSPR;
+    // 1st architecture
+    if(s == "fabs") return FABS;
+    if(s == "fctiwz") return FCTIWZ;
+    if(s == "xoris") return XORIS;
+    if(s == "b") return B;
+    if(s == "blt") return BLT;
+    if(s == "bne") return BNE;
+    if(s == "cmpw") return CMPW;
+    if(s == "fadd") return FADD;
+    if(s == "fcmpu") return FCMPU;
+    if(s == "fdiv") return FDIV;
+    if(s == "fmr") return FMR;   
+    if(s == "fmul") return FMUL;
+    if(s == "fneg") return FNEG;
+    if(s == "fsub") return FSUB;
+    if(s == "lfd") return LFD;
+    if(s == "lwzx") return LWZX;
+    if(s == "slwi") return SLWI;
+    if(s == "stfd") return STFD;
+    if(s == "stwx") return STWX;
+
     return INSTR_UNKNOWN;
 }
 
@@ -70,6 +91,45 @@ std::string opcode_to_string(INSTR_KIND kind){
         return "mr";
     case MTSPR:
         return "mtspr";
+    case XORIS:
+        return "xoris";
+    case FCTIWZ:
+        return "fctiwz";
+    case B:
+        return "b";
+    case BLT:
+        return "blt";
+    case BNE:
+        return "bne";
+    case CMPW:
+        return "cmpw";
+    case FABS:
+        return "fabs";
+    case FADD:
+        return "fadd";
+    case FCMPU:
+        return "fcmpu";
+    case FDIV:
+        return "fdiv";
+    case FMR:
+        return "fmr";
+    case FMUL:
+        return "fmul";
+    case FNEG:
+        return "fneg";
+    case FSUB:
+        return "fsub";
+    case LFD:
+        return "lfd";
+    case LWZX:
+        return "lwzx";
+    case SLWI:
+        return "slwi";
+    case STFD:
+        return "stfd";
+    case STWX:
+        return "stwx";
+
     case NOT_INSTR:
         return "not_instr";
     default:
@@ -128,10 +188,20 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
         return stoi(s.substr(1, s.size() - 1));
     }
     else if(s[0] == 'f'){ // fpr
-        return stoi(s.substr(2, s.size() - 2));
+        return stoi(s.substr(1, s.size() - 1));
     }
     else if(s[0] == 'c'){ // cr
         return stoi(s.substr(2, s.size() - 2));
+    }
+    else if(s.size() >= 2 && s[0] == '0' && (s[1] == 'x' || s[1] == 'b')){ // 0x か 0b を仮定
+        int base = -1, res = 0;
+        if(s[1] == 'x') base = 16;
+        else if(s[1] == 'b') base = 2;
+        else assert(false);
+        for(int i = 2; i < (int)s.size(); i++){
+            res = res * base + (('a' <= s[i] && s[i] <= 'f') ? (10 + s[i] - 'a') : s[i] - '0');
+        }
+        return res;
     }
     else{ //数字から始まる
         int lparen = -1;
@@ -181,8 +251,8 @@ INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::st
                 if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
                 else assert(false);
             }
-            else if(s.size() == 2){
-                rd = -1;
+            else if(s.size() == 2){ // 怪しいかも
+                rd = 0;
                 if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
                 else assert(false);
             }
@@ -234,6 +304,113 @@ INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::st
             rd = call(1, 0);
             ra = call(2, 0);
             break;
+        // 1st architecture
+        case XORIS:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(3, 0);
+            break;
+        case FCTIWZ:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            break;
+        case B:
+            if(lbl.find(s[1]) != lbl.end()) rd = lbl[s[1]];
+            else assert(false);
+            break;
+        case BLT:
+            if(s.size() == 3){
+                rd = call(1, 0);
+                if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
+                else assert(false);
+            }
+            else if(s.size() == 2){
+                rd = 0;
+                if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
+                else assert(false);
+            }
+            else assert(false);
+            break;
+        case BNE: //かなり怪しい
+            if(s.size() == 3){
+                rd = call(1, 0);
+                if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
+                else assert(false);
+            }
+            else if(s.size() == 2){
+                rd = 0;
+                if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
+                else assert(false);
+            }
+            else assert(false);
+            break;
+        case CMPW:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(3, 0);
+            break;
+        case FABS:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            break;
+        case FADD:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(3, 0);
+            break;
+        case FCMPU:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(3, 0);
+            break;
+        case FDIV:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(3, 0);
+            break;
+        case FMR:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            break;
+        case FMUL:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(3, 0);
+            break;
+        case FNEG:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            break;
+        case FSUB:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(3, 0);
+            break;
+        case LFD:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(2, 1);
+            break;
+        case LWZX:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(3, 0);
+            break;
+        case STFD:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(2, 1);
+            break;
+        case SLWI: // 怪しい?
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(3, 0);
+            break;
+        case STWX:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(3, 0);
+            break;
         case NOT_INSTR:
             break;
         default:
@@ -284,6 +461,45 @@ int opcode_to_bit(INSTR_KIND kind){
         return 0x1f;
     case MTSPR: // s spr 0x1d3 0
         return 0x1f;
+    //1st
+    case FCTIWZ:
+        return 0x3f;
+    case XORIS:
+        return 0x1b;
+    case B:
+        return 0x12;
+    case BLT:
+        return 0x10;
+    case BNE:
+        return 0x10;
+    case CMPW:
+        return 0x1f;
+    case FABS:
+        return 0x3f;
+    case FADD:
+        return 0x3f;
+    case FCMPU:
+        return 0x3f;
+    case FDIV:
+        return 0x3f;
+    case FMR:
+        return 0x3f;
+    case FMUL:
+        return 0x3f;
+    case FNEG:
+        return 0x3f;
+    case FSUB:
+        return 0x3f;
+    case LFD:
+        return 0x32;
+    case LWZX:
+        return 0x1f;
+    case SLWI:
+        return 0x15;
+    case STFD:
+        return 0x36;
+    case STWX:
+        return 0x1f;
     default: // 生データが入っているとする
         return (~0x0); // 数字は 0, 文字列は0x1にする？
         break;
@@ -305,14 +521,14 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
         else fprintf(stdout, "addis r%d, r%d, %d\n", d, a, b);
         return;
     case CMPWI:
-        fprintf(stdout, "cmpwi crf%d, r%d, %d\n", d, a, b);
+        fprintf(stdout, "cmpwi cr%d, r%d, %d\n", d, a, b);
         return;
     case BGT:
-        if(d == -1) fprintf(stdout, "bgt %d\n", a);
-        else fprintf(stdout, "bgt cr%d, %d\n", d, a);
+        if(d == 0) fprintf(stdout, "bgt %d\n", a);
+        else fprintf(stdout, "bgt cr%d, %d\n", d / 4, a);
         return;
     case BL:
-        fprintf(stdout, "bl %d\n", d);
+        fprintf(stdout, "bl %d\n", d / 4);
         return;
     case BLR:
         fprintf(stdout, "blr\n");
@@ -328,23 +544,83 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
         else fprintf(stdout, "lwz, r%d, %d(r%d)\n", d, a, b);
         return;
     case LWZU:
-        fprintf(stdout, "lwzu, r%d, %d(r%d)\n", d, a, b);
+        fprintf(stdout, "lwzu r%d, %d(r%d)\n", d, a, b);
+        return;
+    case LWZX:
+        fprintf(stdout, "lwzx r%d, r%d, r%d\n", d, a, b);
         return;
     case STW:
         if(b == 0) fprintf(stdout, "stw, r%d, %d(0)\n", d, a);
         else fprintf(stdout, "lwz, r%d, %d(r%d)\n", d, a, b);
         return;
     case STWU:
-        fprintf(stdout, "lwz, r%d, %d(r%d)\n", d, a, b);
+        fprintf(stdout, "stwu r%d, %d(r%d)\n", d, a, b);
         return;
     case MFSPR:
-        fprintf(stdout, "mfspr, r%d, %d\n", d, a);
+        fprintf(stdout, "mfspr r%d, %d\n", d, a);
         return;
     case MR:
-        fprintf(stdout, "mr, r%d, r%d\n", d, a);
+        fprintf(stdout, "mr r%d, r%d\n", d, a);
         return;
     case MTSPR:
-        fprintf(stdout, "mtspr, %d, r%d\n", d, a);
+        fprintf(stdout, "mtspr %d, r%d\n", d, a);
+        return;
+    // 1st architecture
+    case FCTIWZ:
+        fprintf(stdout, "fctiwz f%d, f%d\n", d, a);
+        return;
+    case XORIS:
+        fprintf(stdout, "xoris r%d, r%d, %d\n", d, a, b);
+        return;
+    case B:
+        fprintf(stdout, "b %d\n", d);
+        return;
+    case BLT:
+        if(d == -1) fprintf(stdout, "blt %d\n", a);
+        else fprintf(stdout, "blt cr%d, %d\n", d / 4, a);
+        return;
+    case BNE:
+        if(d == -1) fprintf(stdout, "bne %d\n", a);
+        else fprintf(stdout, "bne cr%d, %d\n", d / 4, a);
+        return;
+    case CMPW:
+        fprintf(stdout, "cmpw cr%d, r%d, r%d\n", d, a, b);
+        return;
+    case FABS:
+        fprintf(stdout, "fabs f%d, f%d\n", d, a);
+        return;
+    case FADD:
+        fprintf(stdout, "fadd f%d, f%d, f%d\n", d, a, b);
+        return;
+    case FCMPU:
+        fprintf(stdout, "fcmpu cr%d, f%d, f%d\n", d, a, b);
+        return;
+    case FDIV:
+        fprintf(stdout, "fdiv f%d, f%d, f%d\n", d, a, b);
+        return;
+    case FMR:
+        fprintf(stdout, "fmr f%d, f%d\n", d, a);
+        return;
+    case FMUL:
+        fprintf(stdout, "fmul f%d, f%d, f%d\n", d, a, b);
+        return;
+    case FNEG:
+        fprintf(stdout, "fneg f%d, f%d\n", d, a);
+        return;
+    case FSUB:
+        fprintf(stdout, "fsub f%d, f%d, f%d\n", d, a, b);
+        return;
+    case LFD:
+        fprintf(stdout, "lfd f%d, %d(r%d)\n", d, a, b);
+        return;
+    case SLWI:
+        fprintf(stdout, "slwi r%d, r%d, %d\n", d, a, b);
+        return;
+    case STFD:
+        fprintf(stdout, "stfd f%d, %d(r%d)\n", d, a, b);
+        return;
+    case STWX:
+        fprintf(stdout, "stwx r%d, r%d, r%d\n", d, a, b);
         return;
     case NOT_INSTR:
         return;
@@ -357,52 +633,118 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
     unsigned int res = opcode_to_bit(instr) << 26;
     switch (instr){
     case ADD:
-        res |= ((d & MASK5) << 21) | ((a & MASK5) << 16) | ((b & MASK5) << 11) | ((0x10A) << 1);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | ((0x10A) << 1);
         break;
     case ADDI:
-        res |= ((d & MASK5) << 21) | ((a & MASK5) << 16) | (MASK16 & b);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | (bitmask(16) & b);
         break;
     case ADDIS:
-        res |= ((d & MASK5) << 21) | ((a & MASK5) << 16) | (MASK16 & b);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | (bitmask(16) & b);
         break;
     case CMPWI:
-        res |= ((d & MASK3) << 23) | ((a & MASK5) << 16) | (MASK16 & b);
+        res |= ((d & bitmask(3)) << 23) | ((a & bitmask(5)) << 16) | (bitmask(16) & b);
         break;
     case BGT:
-        res |= (12 << 21) | ((d & MASK5) << 16) | ((a & MASK14) << 2);
+        d = 4*d + 1;
+        a /= 4;
+        res |= (12 << 21) | ((d & bitmask(5)) << 16) | ((a & bitmask(14)) << 2);
         break;
     case BL:
-        res |= ((d & MASK24) << 2) | 1;
+        res |= ((d & bitmask(24)) << 2) | 1;
         break;
     case BLR:
         res |= (20 << 21) | (16 << 1);
         break;
     case BCL:
-        res |= ((d & MASK5) << 21) | ((a & MASK5) << 16) | ((b & MASK14) << 2) | 1;
+        d >>= 2;
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(14)) << 2) | 1;
         break;
     case BCTR:
         res |= (20 << 21) | (528 << 1);
         break;
     case LWZ:
-        res |= ((d & MASK5) << 21) | ((b & MASK5) << 16) | (a & MASK16);
+        res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
         break;
     case LWZU:
-        res |= ((d & MASK5) << 21) | ((b & MASK5) << 16) | (a & MASK16);
+        res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
         break;
     case STW:
-        res |= ((d & MASK5) << 21) | ((b & MASK5) << 16) | (a & MASK16);
+        res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
         break;
     case STWU:
-        res |= ((d & MASK5) << 21) | ((b & MASK5) << 16) | (a & MASK16);
+        res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
         break;
     case MFSPR:
-        res |= ((d & MASK5) << 21) | ((a & MASK10) << 11) | (339 << 1);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(10)) << 11) | (339 << 1);
         break;
     case MR:
-        res |= ((a & MASK5) << 21) | ((d & MASK5) << 16) | ((a & MASK5) << 11) | (444 << 1);
+        res |= ((a & bitmask(5)) << 21) | ((d & bitmask(5)) << 16) | ((a & bitmask(5)) << 11) | (444 << 1);
         break;
     case MTSPR:
-        res |= ((a & MASK5) << 21) | ((d & MASK10) << 11) | (467 << 1);
+        res |= ((a & bitmask(5)) << 21) | ((d & bitmask(10)) << 11) | (467 << 1);
+        break;
+    // 1st architecture
+    case FCTIWZ:
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (15 << 1);
+        break;
+    case XORIS:
+        res |= ((a & bitmask(5)) << 21) | ((d & bitmask(5)) << 16) | (b & bitmask(16));
+        break;
+    case B:
+        d >>= 2;
+        res |= ((d & bitmask(24)) << 2);
+        break;
+    case BLT:
+        d *= 4;
+        a /= 4;
+        res |= (12 << 21) | ((d & bitmask(5)) << 16) | ((a & bitmask(14)) << 2);
+        break;
+    case BNE://怪しいのでとばす
+        a /= 4;
+        d = 4*d + 2;
+        res |= (4 << 21) | ((d & bitmask(5)) << 16) | ((a & bitmask(14)) << 2);
+        break;
+    case CMPW:
+        res |= ((d & bitmask(3)) << 23) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11);
+        break;
+    case FABS:
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (264 << 1);
+        break;
+    case FADD:
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (21 << 1);
+        break;
+    case FCMPU:
+        res |= ((d & bitmask(3)) << 23) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11);
+        break;
+    case FDIV:
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (18 << 1);
+        break;
+    case FMR:
+        res |= res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (72 << 1);
+        break;
+    case FMUL:
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 6) | (25 << 1);
+        break;
+    case FNEG:
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (40 << 1);
+        break;
+    case FSUB:
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (20 << 1);
+        break;
+    case LFD:
+        res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
+        break;
+    case LWZX:
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (23 << 1);
+        break;
+    case SLWI:
+        res |= ((a & bitmask(5)) << 21) | ((d & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (((31 - b) & bitmask(5)) << 1);
+        break;
+    case STFD:
+        res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
+        break;
+    case STWX:
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (151 << 1);
         break;
     default:
         printerr("## WARNING ##\nNOT instruction : maybe some raw data");

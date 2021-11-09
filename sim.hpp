@@ -8,6 +8,7 @@
 #include "struct.hpp"
 #include "decode.hpp"
 #include "util.hpp"
+#include "fpu.hpp"
 
 
 int addr_to_index(int k){
@@ -21,7 +22,7 @@ INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
     return mem.instr[pc];
 }
 
-bool exec(CPU& cpu, MEMORY&mem, OPTION& option){
+bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
     if(option.display_assembly) show_instr(opc, d, a, b);
     if(option.display_binary) show_instr_binary(opc, d, a, b);
@@ -47,10 +48,30 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option){
             clear_and_set(tmp, 4*d, 4*d + 3, (c << 1) | (cpu.xer & 1));
             cpu.cr = tmp;
             return false;
+        case CMPW:
+            a = cpu.gpr[a];
+            b = cpu.gpr[b];
+            if(a < b) c = 0b100;
+            else if(a > b) c = 0b010;
+            else c = 0b001;
+            tmp = cpu.cr;
+            clear_and_set(tmp, 4*d, 4*d + 3, (c << 1) | (cpu.xer & 1));
+            cpu.cr = tmp;
+            return false;
         case BGT:   
             //bo = 0b01100;
             bi = d*4 + 1;
             cond_ok = kth_bit(cpu.cr, bi);
+            if(cond_ok) cpu.pc = a;
+            return false;
+        case BLT:
+            bi = d*4;
+            cond_ok = kth_bit(cpu.cr, bi);
+            if(cond_ok) cpu.pc = a;
+            return false;
+        case BNE:
+            bi = d*4 + 2;
+            cond_ok = kth_bit(cpu.cr, bi) ^ 1;
             if(cond_ok) cpu.pc = a;
             return false;
         case BL:    
@@ -72,19 +93,19 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option){
             cpu.pc = segment(cpu.ctr, 0, 29) << 2;
             return false;
         case LWZ: 
-            cpu.gpr[d] = mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + a));
+            cpu.gpr[d] = mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + a)).i;
             return false;
         case LWZU:
             ea = cpu.gpr[b] + a;
-            cpu.gpr[d] = mem.data.at(addr_to_index(ea));
+            cpu.gpr[d] = mem.data.at(addr_to_index(ea)).i;
             cpu.gpr[b] = ea;
             return false;
         case STW:   
-            mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + a)) = cpu.gpr[d];
+            mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + a)).i = cpu.gpr[d];
             return false;
         case STWU:
             ea = cpu.gpr[b] + a;
-            mem.data.at(addr_to_index(ea)) = cpu.gpr[d];
+            mem.data.at(addr_to_index(ea)).i = cpu.gpr[d];
             cpu.gpr[b] = ea;
             return false;
         case MFSPR:
@@ -104,6 +125,66 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option){
             else if(d == 0b01001) cpu.ctr = cpu.gpr[a];
             else assert(false);
             return false;
+        case XORIS:
+            cpu.gpr[d] = cpu.gpr[a] ^ (b << 16);
+            return false;
+        
+        case FCTIWZ:
+            
+            return false;
+        case FABS:
+            cpu.fpr[d] = std::abs(cpu.fpr[a]); // 多分これで問題ないよね...
+            return false;
+        case FADD:
+            cpu.fpr[d] = fadd(cpu.fpr[a], cpu.fpr[b]);
+            return false;
+        case FCMPU: // NaNについては存在しないとする
+            if(cpu.fpr[a] < cpu.fpr[b]) c = 0b1000;
+            else if(cpu.fpr[a] > cpu.fpr[b]) c = 0b0100;
+            else c = 0b0010;
+            // fpcc 無視してます
+            tmp = cpu.cr;
+            clear_and_set(tmp, 4*d, 4*d + 3, c);
+            cpu.cr = tmp;
+            return false;
+        case FDIV:
+            cpu.fpr[d] = fdiv(cpu.fpr[a], cpu.fpr[b], fpu);
+            return false;
+        case FMR:
+            cpu.fpr[d] = cpu.fpr[a];
+            return false;
+        case FMUL:
+            cpu.fpr[d] = fmul(cpu.fpr[a], cpu.fpr[b]);
+            return false;
+        case FNEG:
+            cpu.fpr[d] = -cpu.fpr[a];
+            return false;
+        case FSUB:
+            cpu.fpr[d] = fsub(cpu.fpr[a], cpu.fpr[b]);
+            return false;
+        case LFD: // double word らしいけど one word でloadします
+            tmp = (b == 0 ? 0 : cpu.gpr[b]);
+            ea = tmp + a;
+            cpu.fpr[d] = mem.data[addr_to_index(ea)].f;
+            return false;
+        case LWZX:
+            tmp = (a == 0 ? 0 : cpu.gpr[a]);
+            ea = tmp + cpu.gpr[b];
+            cpu.gpr[d] = mem.data[addr_to_index(ea)].i;
+            return false;
+        case SLWI:
+            cpu.gpr[d] = cpu.gpr[a] << b;
+            return false;
+        case STFD: // LFDと同じ
+            tmp = (b == 0 ? 0 : cpu.gpr[b]);
+            ea = tmp + a;
+            mem.data[addr_to_index(ea)].f = cpu.fpr[d];
+            return false;
+        case STWX:
+            tmp = (a == 0 ? 0 : cpu.gpr[a]);
+            ea = cpu.gpr[b] + a;
+            mem.data[addr_to_index(ea)].i = cpu.gpr[d];
+            return false;
         default:
             warning(opcode_to_string(opc));
             assert(false);
@@ -111,8 +192,9 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option){
     }
 }
 
-int simulate_whole(CPU& cpu, MEMORY &mem, OPTION& option){
-    while(!exec(cpu, mem, option));
+int simulate_whole(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu){
+    while(!exec(cpu, mem, option, fpu));
+    std::cerr << "program finised!" << std::endl;
     return 0;
 }
 
@@ -135,16 +217,16 @@ SHOW show_what(const std::vector<std::string>& s){
 }
 
 
-int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
+int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu){
     bool tmpb = false, tmpa = false;
     std::swap(tmpa, option.display_assembly);
     std::swap(tmpb, option.display_binary);
     while(1){
         option.label_ask(mem.lbl);
         if(!option.jump_to_label) break;
-        exec(cpu, mem, option);
+        exec(cpu, mem, option, fpu);
         while(cpu.pc != (unsigned int)option.label_addr){
-            if(exec(cpu, mem, option)){
+            if(exec(cpu, mem, option, fpu)){
                 std::cerr << "program finished!" << std::endl;
                 return 0;
             }
@@ -166,7 +248,7 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
         if(ss.m) mem.show_memory(ss);
         else if(ss.M) mem.show_memory(ss);
         if(ss.next) continue;
-        if(exec(cpu, mem, option)){
+        if(exec(cpu, mem, option, fpu)){
             std::cerr << "program finished!" << std::endl;
             return 0;
         }
@@ -175,15 +257,15 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option){
 }
 
 
-void execution(CPU& cpu, MEMORY& mem, OPTION& option){
-    if(option.exec_mode == 0) simulate_whole(cpu, mem, option);
-    else if(option.exec_mode == 1) simulate_step(cpu, mem, option);
+void execution(CPU& cpu, MEMORY& mem, OPTION& option, FPU& fpu){
+    if(option.exec_mode == 0) simulate_whole(cpu, mem, option, fpu);
+    else if(option.exec_mode == 1) simulate_step(cpu, mem, option, fpu);
 }
 
 
 
 
-void translator(OPTION& option){
+void translator(MEMORY& mem, OPTION& option){
     std::ifstream ifs;
     std::string s;
     if(option.binTOasm){
@@ -194,10 +276,9 @@ void translator(OPTION& option){
         }
     }
     else{
-        std::map<std::string, int> mp;
         if(option.assembly) ifs.open("assembly.s");
         while(std::getline(option.assembly ? ifs : std::cin, s)){
-            auto [opc, d, a, b] = recognize_instr(mp, remove_chars(s, " ,\t\n"));
+            auto [opc, d, a, b] = recognize_instr(mem.lbl, remove_chars(s, " ,\t\n"));
             show_instr_binary(opc, d, a, b);
         }
     }
