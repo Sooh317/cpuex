@@ -24,10 +24,13 @@ int main(int argc, char* argv[]){
     init_option(option, argc, argv);
     option.show_option();
 
+    mem.lbl["label"] = 0b1010101010101100;
+    ;
     if(option.binTOasm || option.asmTObin){
-        translator(option);
+        translator(mem, option);
         return 0;
     }
+
 
     init_memory(mem, option);
     
@@ -35,6 +38,6 @@ int main(int argc, char* argv[]){
     init_cpu(cpu, option, mem.lbl, 1024);
 
     execution(cpu, mem, option, fpu);
-    
+
     return 0;
 }

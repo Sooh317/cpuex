@@ -184,6 +184,7 @@ INSTR decode_bin(const std::string& bit){
         b = exts(bit.substr(16, 16));
         break;
     case 0x10: // bgt,  bcl
+        //01000001100001111010101010101000
         if(bit[30] == '0' && bit[31] == '1'){
             opcode = BCL;
             d = btoi(bit.substr(6, 5));
@@ -292,7 +293,7 @@ INSTR decode_bin(const std::string& bit){
             d = btoi(bit.substr(6, 5));
             a = btoi(bit.substr(16, 5));
         }
-        else if(imm == 0x019){
+        else if((imm & bitmask(5)) == 0x019){
             opcode = FMUL;
             d = btoi(bit.substr(6, 5));
             a = btoi(bit.substr(11, 5));

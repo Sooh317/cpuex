@@ -193,8 +193,7 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
     else if(s[0] == 'c'){ // cr
         return stoi(s.substr(2, s.size() - 2));
     }
-    else if(s[0] == '0'){ // 0x か 0b を仮定
-        assert(s.size() >= 2);
+    else if(s.size() >= 2 && s[0] == '0' && (s[1] == 'x' || s[1] == 'b')){ // 0x か 0b を仮定
         int base = -1, res = 0;
         if(s[1] == 'x') base = 16;
         else if(s[1] == 'b') base = 2;
@@ -397,10 +396,21 @@ INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::st
             ra = call(2, 0);
             rb = call(3, 0);
             break;
+        case STFD:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(2, 1);
+            break;
         case SLWI: // 怪しい?
             rd = call(1, 0);
             ra = call(2, 0);
             rb = call(3, 0);
+            break;
+        case STWX:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(3, 0);
+            break;
         case NOT_INSTR:
             break;
         default:
@@ -515,10 +525,10 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
         return;
     case BGT:
         if(d == 0) fprintf(stdout, "bgt %d\n", a);
-        else fprintf(stdout, "bgt cr%d, %d\n", d, a);
+        else fprintf(stdout, "bgt cr%d, %d\n", d / 4, a);
         return;
     case BL:
-        fprintf(stdout, "bl %d\n", d);
+        fprintf(stdout, "bl %d\n", d / 4);
         return;
     case BLR:
         fprintf(stdout, "blr\n");
@@ -534,7 +544,10 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
         else fprintf(stdout, "lwz, r%d, %d(r%d)\n", d, a, b);
         return;
     case LWZU:
-        fprintf(stdout, "lwzu, r%d, %d(r%d)\n", d, a, b);
+        fprintf(stdout, "lwzu r%d, %d(r%d)\n", d, a, b);
+        return;
+    case LWZX:
+        fprintf(stdout, "lwzx r%d, r%d, r%d\n", d, a, b);
         return;
     case STW:
         if(b == 0) fprintf(stdout, "stw, r%d, %d(0)\n", d, a);
@@ -564,11 +577,11 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
         return;
     case BLT:
         if(d == -1) fprintf(stdout, "blt %d\n", a);
-        else fprintf(stdout, "blt cr%d, %d\n", d, a);
+        else fprintf(stdout, "blt cr%d, %d\n", d / 4, a);
         return;
     case BNE:
         if(d == -1) fprintf(stdout, "bne %d\n", a);
-        else fprintf(stdout, "bne cr%d, %d\n", d, a);
+        else fprintf(stdout, "bne cr%d, %d\n", d / 4, a);
         return;
     case CMPW:
         fprintf(stdout, "cmpw cr%d, r%d, r%d\n", d, a, b);
@@ -599,9 +612,6 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
         return;
     case LFD:
         fprintf(stdout, "lfd f%d, %d(r%d)\n", d, a, b);
-        return;
-    case LWZX:
-        fprintf(stdout, "lwzx r%d, r%d, r%d\n", d, a, b);
         return;
     case SLWI:
         fprintf(stdout, "slwi r%d, r%d, %d\n", d, a, b);
@@ -636,6 +646,7 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
         break;
     case BGT:
         d = 4*d + 1;
+        a /= 4;
         res |= (12 << 21) | ((d & bitmask(5)) << 16) | ((a & bitmask(14)) << 2);
         break;
     case BL:
@@ -645,6 +656,7 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
         res |= (20 << 21) | (16 << 1);
         break;
     case BCL:
+        d >>= 2;
         res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(14)) << 2) | 1;
         break;
     case BCTR:
@@ -679,13 +691,19 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
         res |= ((a & bitmask(5)) << 21) | ((d & bitmask(5)) << 16) | (b & bitmask(16));
         break;
     case B:
+        d >>= 2;
         res |= ((d & bitmask(24)) << 2);
         break;
     case BLT:
         d *= 4;
+        a /= 4;
         res |= (12 << 21) | ((d & bitmask(5)) << 16) | ((a & bitmask(14)) << 2);
         break;
     case BNE://怪しいのでとばす
+        a /= 4;
+        d = 4*d + 2;
+        res |= (4 << 21) | ((d & bitmask(5)) << 16) | ((a & bitmask(14)) << 2);
+        break;
     case CMPW:
         res |= ((d & bitmask(3)) << 23) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11);
         break;

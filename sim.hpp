@@ -265,7 +265,7 @@ void execution(CPU& cpu, MEMORY& mem, OPTION& option, FPU& fpu){
 
 
 
-void translator(OPTION& option){
+void translator(MEMORY& mem, OPTION& option){
     std::ifstream ifs;
     std::string s;
     if(option.binTOasm){
@@ -276,10 +276,9 @@ void translator(OPTION& option){
         }
     }
     else{
-        std::map<std::string, int> mp;
         if(option.assembly) ifs.open("assembly.s");
         while(std::getline(option.assembly ? ifs : std::cin, s)){
-            auto [opc, d, a, b] = recognize_instr(mp, remove_chars(s, " ,\t\n"));
+            auto [opc, d, a, b] = recognize_instr(mem.lbl, remove_chars(s, " ,\t\n"));
             show_instr_binary(opc, d, a, b);
         }
     }
