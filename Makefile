@@ -2,7 +2,7 @@ main:
 	g++ -I ./fmt/include -Wall -Wextra -O2 -o sim main.cpp
 
 binary_to_assembler:
-	./sim -ta -b >| assembly.txt
+	./sim -ta -b >| assembly.s
 
 assembly_to_binary:
 	./sim -tb -a >| binary.txt
