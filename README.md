@@ -24,6 +24,13 @@ _min_caml_start のラベルがついた命令から順に実行します.
 make
 ```
 make をすると "sim" という実行ファイルが生成されます.
+```bash
+make binary_to_assembly
+make assembly_to_binary
+```
+binary_to_assemblyではbinary.txt内のバイナリをアセンブリに直してassembly.txtに結果を出力します.
+
+binary_to_assemblyではassembly.s内のバイナリをアセンブリに直してbinary.txtに結果を出力します.
 
 実際に実行する場合は以下を参照してください.
 
