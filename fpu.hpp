@@ -126,36 +126,36 @@ void print_float(float f){
     d.f = f;
     std::cout << "value : " << f << '\n';
     std::cout << "sig   : " << kth_bit(d.i, 0) \
-              << "\nexp : " << ((d.i >> 23) & MASK8) << " = " << (int)((d.i >> 23) & MASK8) - 127 \
-              << "\nman : " << ((1 << 23) | (d.i & MASK23)) << '\n';
+              << "\nexp : " << ((d.i >> 23) & bitmask(8)) << " = " << (int)((d.i >> 23) & bitmask(8)) - 127 \
+              << "\nman : " << ((1 << 23) | (d.i & bitmask(23))) << '\n';
     print_binary_int(d.i);
 }
 
 
 inline float make_float(unsigned sig, int exp, unsigned manti){
    union{float f; int i;} d;
-    d.i = (sig << 31) | (exp << 23) | (manti & MASK23);
+    d.i = (sig << 31) | (exp << 23) | (manti & bitmask(23));
     return d.f;
 }
 
 float fadd(float f, float g){
    union{float f; int i;} a, b, pre, post;
     a.f = f, b.f = g;
-    int exp_a = (a.i >> 23) & MASK8, exp_b = (b.i >> 23) & MASK8;
+    int exp_a = (a.i >> 23) & bitmask(8), exp_b = (b.i >> 23) & bitmask(8);
     if(exp_a < exp_b) pre = b, post = a;
     else if(exp_a > exp_b) pre = a, post = b;
     else{
-        if((a.i & MASK23) > (b.i & MASK23)) pre = a, post = b;
+        if((a.i & bitmask(23)) > (b.i & bitmask(23))) pre = a, post = b;
         else pre = b, post = a;
     }
-    int newexp = (pre.i >> 23) & MASK8;
-    int expdiff = newexp - ((post.i >> 23) & MASK8);
+    int newexp = (pre.i >> 23) & bitmask(8);
+    int expdiff = newexp - ((post.i >> 23) & bitmask(8));
     unsigned newmanti;
 
-    if(((post.i >> 23) & MASK8) == 0) newmanti = (pre.i & MASK23); //post_exp = 0
+    if(((post.i >> 23) & bitmask(8)) == 0) newmanti = (pre.i & bitmask(23)); //post_exp = 0
     else if(kth_bit(pre.i, 0) == kth_bit(post.i, 0)){
-        newmanti = ((1 << 23) | (pre.i & MASK23));
-        if(expdiff < 32) newmanti += (((1 << 23) | (post.i & MASK23)) >> expdiff);
+        newmanti = ((1 << 23) | (pre.i & bitmask(23)));
+        if(expdiff < 32) newmanti += (((1 << 23) | (post.i & bitmask(23))) >> expdiff);
         if(newmanti >= 1 << 24){
             newmanti = (newmanti ^ (1 << 24)) >> 1; // 最上位clear
             newexp++;
@@ -163,8 +163,8 @@ float fadd(float f, float g){
         else newmanti ^= 1 << 23;
     }
     else{
-        newmanti = ((1 << 23) | (pre.i & MASK23));
-        if(expdiff < 32) newmanti -= (((1 << 23) | (post.i & MASK23)) >> expdiff);
+        newmanti = ((1 << 23) | (pre.i & bitmask(23)));
+        if(expdiff < 32) newmanti -= (((1 << 23) | (post.i & bitmask(23))) >> expdiff);
         if(newmanti == 0) newexp = 0;
         else{
             while(newmanti < (1 << 23)){
@@ -185,8 +185,8 @@ float fsub(float f, float g){
 float fmul(float f, float g){
    union{float f; int i;} a, b;
     a.f = f, b.f = g;
-    unsigned manti1 = a.i & MASK23;
-    unsigned manti2 = b.i & MASK23;
+    unsigned manti1 = a.i & bitmask(23);
+    unsigned manti2 = b.i & bitmask(23);
 
     std::vector<unsigned> bits = {(1 << 23 | manti1)};
     std::vector<unsigned> carry(23, 0);
@@ -198,25 +198,25 @@ float fmul(float f, float g){
 
     // step1 
     for(int i = 0; i < 12; i++){
-        unsigned uno = (bits[2*i] & MASK23) << 1;
+        unsigned uno = (bits[2*i] & bitmask(23)) << 1;
         unsigned dos = uno + bits[2*i + 1];
-        bits[2*i] = (((bits[2*i] >> 23) & MASK1) << 24) | (dos & MASK24);
+        bits[2*i] = (((bits[2*i] >> 23) & bitmask(1)) << 24) | (dos & bitmask(24));
         if(dos >= (1 << 24)) carry[2*i] = 1;
     }
 
     // step2
     for(int i = 0; i < 6; i++){
-        unsigned uno = (bits[4*i] & MASK23) << 2;
+        unsigned uno = (bits[4*i] & bitmask(23)) << 2;
         unsigned dos = uno + bits[4*i + 2];
-        bits[4*i] = (((bits[4*i] >> 23) & MASK2) << 25) | (dos & MASK25);
+        bits[4*i] = (((bits[4*i] >> 23) & bitmask(2)) << 25) | (dos & bitmask(25));
         if(dos >= (1 << 25)) carry[4*i + 1] = 1;
     }
 
     // step3
     for(int i = 0; i < 3; i++){
-        unsigned uno = (bits[8*i] & MASK23) << 4;
+        unsigned uno = (bits[8*i] & bitmask(23)) << 4;
         unsigned dos = uno + bits[8*i + 4];
-        bits[8*i] = (((bits[8*i] >> 23) & MASK4) << 27) | (dos & MASK27);
+        bits[8*i] = (((bits[8*i] >> 23) & bitmask(4)) << 27) | (dos & bitmask(27));
         if(dos >= (1 << 27)) carry[8*i + 3] = 1;
     }
     
@@ -236,11 +236,11 @@ float fmul(float f, float g){
     while(tmp) cnt++, tmp >>= 1;
 
     unsigned newsig = kth_bit(a.i, 0, 32) ^ kth_bit(b.i, 0, 32);
-    int newexp = ((a.i >> 23) & MASK8) + ((b.i >> 23) & MASK8) - 127;
+    int newexp = ((a.i >> 23) & bitmask(8)) + ((b.i >> 23) & bitmask(8)) - 127;
     unsigned newmanti = ans >> (cnt - 24);
 
     if(cnt == 27) newexp++;
-    if(newexp < 1 || ((a.i >> 23) & MASK8) == 0 || ((b.i >> 23) & MASK8) == 0) newexp = 0;
+    if(newexp < 1 || ((a.i >> 23) & bitmask(8)) == 0 || ((b.i >> 23) & bitmask(8)) == 0) newexp = 0;
 
     //std::cout << newsig << " " << newexp << " " << newmanti << std::endl;
 
@@ -250,17 +250,17 @@ float fmul(float f, float g){
 float fsqrt(float f, const FPU& fpu){
    union{float f; int i;} d, tmp;
     d.f = f;
-    unsigned tag = ((d.i >> 14) & MASK10) ^ (1 << 9);
+    unsigned tag = ((d.i >> 14) & bitmask(10)) ^ (1 << 9);
     auto [midy, mydydx] = fpu.Fsqrttable(tag);
     int exp = (d.i >> 23 & 1) ? 127 : 128;
-    float midx = make_float(0, exp, (((d.i >> 14) & MASK9) << 14) | (1 << 13));
+    float midx = make_float(0, exp, (((d.i >> 14) & bitmask(9)) << 14) | (1 << 13));
     float target = make_float(0, exp, d.i);
     float dx = fsub(target, midx);
     float ydiff = fmul(dx, mydydx);
     float myans = fadd(midy, ydiff);
     tmp.f = myans;
-    int newexp = (d.i >> 24 & MASK7) - ((d.i >> 23 & 1) ? 63 : 64) + ((tmp.i >> 23) & MASK8);
-    if((d.i >> 23 & MASK8) == 0) newexp = 0;
+    int newexp = (d.i >> 24 & bitmask(7)) - ((d.i >> 23 & 1) ? 63 : 64) + ((tmp.i >> 23) & bitmask(8));
+    if((d.i >> 23 & bitmask(8)) == 0) newexp = 0;
     return make_float(0, newexp, tmp.i);
 }
 
@@ -268,17 +268,17 @@ float finv(float f, const FPU& fpu){
    union{float f; int i;} d, normfl, tmp;
     d.f = f;
     unsigned sig = kth_bit(d.i, 0);
-    int oldexp = (d.i >> 23 & MASK8) - 127;
+    int oldexp = (d.i >> 23 & bitmask(8)) - 127;
     normfl.f = make_float(0, 127, d.i);
-    unsigned tag = (normfl.i >> 13) & MASK10;
+    unsigned tag = (normfl.i >> 13) & bitmask(10);
     auto [midy, mydydx] = fpu.Finvtable(tag);
     d.i = ((d.i >> 13) << 13) | (1 << 12);
     float dx = fsub(normfl.f, d.f);
     float ydiff = fmul(dx, mydydx);
     float myans = fadd(midy, ydiff);
     tmp.f = myans;
-    int newexp = (tmp.i >> 23 & MASK8) - oldexp;
-    unsigned manti = tmp.i & MASK23;
+    int newexp = (tmp.i >> 23 & bitmask(8)) - oldexp;
+    unsigned manti = tmp.i & bitmask(23);
     if(newexp < 0){
         std::cerr << "exp too small, given float.exp may be more than 126" << std::endl;
         assert(false);
@@ -291,9 +291,9 @@ float fdiv(float f, float g, const FPU& fpu){
     a.f = f, b.f = g;
     core.f = fmul(make_float(0, 127, a.i), finv(make_float(0, 127, b.i), fpu));
     unsigned sig = kth_bit(a.i, 0) ^ kth_bit(b.i, 0);
-    int diffexp = (a.i >> 23 & MASK8) - (b.i >> 23 & MASK8);
-    int newexp = std::max(0, (core.i >> 23 & MASK8) + diffexp);
-    if(((a.i >> 23) & MASK8) == 0 || ((b.i >> 23) & MASK8) == 0) newexp = 0;
+    int diffexp = (a.i >> 23 & bitmask(8)) - (b.i >> 23 & bitmask(8));
+    int newexp = std::max(0, (int)(core.i >> 23 & bitmask(8)) + diffexp);
+    if(((a.i >> 23) & bitmask(8)) == 0 || ((b.i >> 23) & bitmask(8)) == 0) newexp = 0;
     if(newexp >= 256){
         std::cerr << "### overflowing in fdiv ###" << std::endl;
         print_float(f);
@@ -303,15 +303,15 @@ float fdiv(float f, float g, const FPU& fpu){
         std::cout << res << std::endl;
         assert(false);
     }
-    return make_float(sig, newexp, core.i & MASK23);
+    return make_float(sig, newexp, core.i & bitmask(23));
 }
 
 float atan(float f, const FPU& fpu){
     union{float f; int i;} d;
     d.f = f;
     unsigned sig = kth_bit(d.i, 0);
-    int exp = d.i >> 23 & MASK8;
-    unsigned manti = d.i & MASK23;
+    int exp = d.i >> 23 & bitmask(8);
+    unsigned manti = d.i & bitmask(23);
     if(exp >= 19 + 127){
        union{float f; int i;} tmp;
         tmp.i = 0b00111111110010010000111111001111 | (sig << 31);
@@ -325,7 +325,7 @@ float atan(float f, const FPU& fpu){
     if(exp == -126 + 127){
         union{float f; int i;} tmp;
         tmp.i = 0b00000000110000000000000000000000;
-        return make_float(sig, (tmp.i >> 23) & MASK8, tmp.i);
+        return make_float(sig, (tmp.i >> 23) & bitmask(8), tmp.i);
     }
     if(exp == -127 + 127){
         return make_float(sig, 0, 0);
@@ -349,11 +349,11 @@ float atan(float f, const FPU& fpu){
     float ydiff = fmul(mydydx, mydx);
    union{float f; int i;} myans;
     myans.f = fadd(mymidy, ydiff);
-    return make_float(sig, myans.i >> 23 & MASK8, myans.i);
+    return make_float(sig, myans.i >> 23 & bitmask(8), myans.i);
 }
 
 
-#define TEST_NUM 1000000000
+#define TEST_NUM 1000000
 
 
 bool range_check(double value, double L, double R){
@@ -414,18 +414,18 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
             //print_binary_int(g.i);
             if(!range_check(f.f, LOW, HIGH)) continue;
             if(tag == 3){
-                if((((g.i >> 23) & MASK8) == 0) || !range_check(g.f, LOW, HIGH)) continue;
+                if((((g.i >> 23) & bitmask(8)) == 0) || !range_check(g.f, LOW, HIGH)) continue;
                 union {float f; int i;} tmp;
                 tmp.f = f.f / g.f;
-                if(((tmp.i >> 23) & MASK8) == MASK8) continue;
+                if(((tmp.i >> 23) & bitmask(8)) == bitmask(8)) continue;
             }
             if(tag == 2) myans = fmul(f.f, g.f), ans = (double)f.f * (double)g.f;
             else myans = fdiv(f.f, g.f, fpu), ans = (double)f.f / (double)g.f;
             if(!range_check(ans, LOW, HIGH)) continue;
-            if((((f.i >> 23) & MASK8) == 0 || ((g.i >> 23) & MASK8) == 0)){
+            if((((f.i >> 23) & bitmask(8)) == 0 || ((g.i >> 23) & bitmask(8)) == 0)){
                 union {float f; int i;} d;
                 d.f = myans;
-                if(((d.i >> 23) & MASK8) == 0){
+                if(((d.i >> 23) & bitmask(8)) == 0){
                     cnt++;
                     continue;
                 }
@@ -453,12 +453,12 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
         int cnt = 0;
         while(cnt < TEST_NUM){
             f.i = mt();
-            if(((f.i >> 23) & MASK8) == 0 || range_check(f.f, 0, HIGH)){
+            if(((f.i >> 23) & bitmask(8)) == 0 || range_check(f.f, 0, HIGH)){
                 myans = fsqrt(f.f, fpu), ans = pow((double)f.f, 0.5);
-                if(((f.i >> 23) & MASK8) == 0){
+                if(((f.i >> 23) & bitmask(8)) == 0){
                     union {float f; int i;} d;
                     d.f = myans;
-                    if(((d.i >> 23) & MASK8) == 0){
+                    if(((d.i >> 23) & bitmask(8)) == 0){
                         cnt++;
                         continue;
                     }
@@ -509,10 +509,7 @@ void fpu_test(const FPU& fpu){
         LOW /= 2.0;
         HIGH *= 2.0;
     }
-    // for(int i = 0; i <= 3; i++){
-    //     test(EPS, LOW, HIGH, i, fpu);
-    // }
-    for(int i = 4; i <= 5; i++){
+    for(int i = 0; i <= 5; i++){
         test(EPS, LOW, HIGH, i, fpu);
     }
     return;

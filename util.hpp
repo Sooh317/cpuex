@@ -3,41 +3,14 @@
 #include "struct.hpp"
 #include <string>
 #include <cassert>
+#include <cstdint>
+#include <fmt/core.h>
 
-#define MASK1 0b1
-#define MASK2 0b11
-#define MASK3 0b111
-#define MASK4 0xf
-#define MASK5 0x1f
-#define MASK6 0x3f
-#define MASK7 0x7f
-#define MASK8 0xff
-#define MASK9 0x1ff
-#define MASK10 0x3ff
-#define MASK11 0x7ff
-#define MASK12 0xfff
-#define MASK13 0x1fff
-#define MASK14 0x3fff
-#define MASK15 0x7fff
-#define MASK16 0xffff
-#define MASK17 0x1ffff
-#define MASK18 0x3ffff
-#define MASK19 0x7ffff
-#define MASK20 0xfffff
-#define MASK21 0x1fffff
-#define MASK22 0x3fffff
-#define MASK23 0x7fffff
-#define MASK24 0xffffff
-#define MASK25 0x1ffffff
-#define MASK26 0x3ffffff
-#define MASK27 0x7ffffff
-#define MASK28 0xfffffff
-#define MASK29 0x1fffffff
-#define MASK30 0x3fffffff
-#define MASK31 0x7fffffff
-#define MASK32 0xffffffff
+using u32 = std::uint32_t;
 
-
+constexpr u32 bitmask(int x) {
+    return (1u << x) - 1u;
+}
 
 #define printerr(x) std::cerr << (x) << std::endl;
 #define printout(x) std::cout << (x) << std::endl;
@@ -76,75 +49,7 @@ inline int bp(int k){
 int cut_bit(int a, int l, int r){ // [l, r]
     l = bp(l), r = bp(r);
     a >>= r;
-    switch (l - r + 1){
-    case 1:
-        return a & MASK1;
-    case 2:
-        return a & MASK2;
-    case 3:
-        return a & MASK3;
-    case 4:
-        return a & MASK4;
-    case 5:
-        return a & MASK5;
-    case 6:
-        return a & MASK6;
-    case 7:
-        return a & MASK7;
-    case 8:
-        return a & MASK8;
-    case 9:
-        return a & MASK9;
-    case 10:
-        return a & MASK10;
-    case 11:
-        return a & MASK11;
-    case 12:
-        return a & MASK12;
-    case 13:
-        return a & MASK13;
-    case 14:
-        return a & MASK14;
-    case 15:
-        return a & MASK15;
-    case 16:
-        return a & MASK16;
-    case 17:
-        return a & MASK17;
-    case 18:
-        return a & MASK18;
-    case 19:
-        return a & MASK19;
-    case 20:
-        return a & MASK20;
-    case 21:
-        return a & MASK21;
-    case 22:
-        return a & MASK22;
-    case 23:
-        return a & MASK23;
-    case 24:
-        return a & MASK24;
-    case 25:
-        return a & MASK25;
-    case 26:
-        return a & MASK26;
-    case 27:
-        return a & MASK27;
-    case 28:
-        return a & MASK28;
-    case 29:
-        return a & MASK29;
-    case 30:
-        return a & MASK30;
-    case 31:
-        return a & MASK31;
-    case 32:
-        return a & MASK32;
-    default:
-        assert(false);
-    }    
-    return -1;
+    return a & bitmask(l - r + 1);
 }
 
 int mask(int x){

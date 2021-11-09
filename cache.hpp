@@ -27,16 +27,16 @@ public:
         state.resize(CACHE_LINE_NUM);
     }
     void find(bool lw, int32_t addr, MEMORY& mem, DATA d = DATA{0}){
-        int offset = addr & MASK5;
-        int index = (addr >> CACHE_OFFSET_SIZE) & MASK4;
-        int tag = (addr >> (CACHE_INDEX_SIZE + CACHE_OFFSET_SIZE)) & MASK18;
-        addr = addr & ((~0) ^ MASK5); // 下のoffset size分だけ0にクリア
+        int offset = addr & bitmask(5);
+        int index = (addr >> CACHE_OFFSET_SIZE) & bitmask(4);
+        int tag = (addr >> (CACHE_INDEX_SIZE + CACHE_OFFSET_SIZE)) & bitmask(18);
+        addr = addr & ((~0) ^ bitmask(5)); // 下のoffset size分だけ0にクリア
         if(lw){
             if(state[index].tag != tag){
                 ++miss;
                 state[index].tag = tag;
                 for(int i = 0; i < k; i++){
-                    data[index][i] = mem.data[((addr >> 2) & MASK3) + i]; // line size により maskの長さが変わるので注意
+                    data[index][i] = mem.data[((addr >> 2) & bitmask(3)) + i]; // line size により maskの長さが変わるので注意
                 }
             }
             else ++hit;
@@ -52,13 +52,13 @@ public:
                 if(state[index].dirty){
                     write_back++;
                     for(int i = 0; i < k; i++){
-                        mem.data[((addr >> 2) & MASK3) + i] = data[index][i]; // line size により maskの長さが変わるので注意
+                        mem.data[((addr >> 2) & bitmask(3)) + i] = data[index][i]; // line size により maskの長さが変わるので注意
                     }
                 }
                 // 仕様による
                 state[index].dirty = 1;
                 for(int i = 0; i < k; i++){
-                    data[index][i] = mem.data[((addr >> 2) & MASK3) + i];
+                    data[index][i] = mem.data[((addr >> 2) & bitmask(3)) + i];
                 }
                 data[index][offset >> 2] = d;
             }

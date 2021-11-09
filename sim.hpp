@@ -48,10 +48,30 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             clear_and_set(tmp, 4*d, 4*d + 3, (c << 1) | (cpu.xer & 1));
             cpu.cr = tmp;
             return false;
+        case CMPW:
+            a = cpu.gpr[a];
+            b = cpu.gpr[b];
+            if(a < b) c = 0b100;
+            else if(a > b) c = 0b010;
+            else c = 0b001;
+            tmp = cpu.cr;
+            clear_and_set(tmp, 4*d, 4*d + 3, (c << 1) | (cpu.xer & 1));
+            cpu.cr = tmp;
+            return false;
         case BGT:   
             //bo = 0b01100;
             bi = d*4 + 1;
             cond_ok = kth_bit(cpu.cr, bi);
+            if(cond_ok) cpu.pc = a;
+            return false;
+        case BLT:
+            bi = d*4;
+            cond_ok = kth_bit(cpu.cr, bi);
+            if(cond_ok) cpu.pc = a;
+            return false;
+        case BNE:
+            bi = d*4 + 2;
+            cond_ok = kth_bit(cpu.cr, bi) ^ 1;
             if(cond_ok) cpu.pc = a;
             return false;
         case BL:    
@@ -108,6 +128,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
         case XORIS:
             cpu.gpr[d] = cpu.gpr[a] ^ (b << 16);
             return false;
+        
         case FCTIWZ:
             
             return false;

@@ -339,7 +339,7 @@ INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::st
                 else assert(false);
             }
             else if(s.size() == 2){
-                rd = -1;
+                rd = 0;
                 if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
                 else assert(false);
             }
@@ -623,110 +623,110 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
     unsigned int res = opcode_to_bit(instr) << 26;
     switch (instr){
     case ADD:
-        res |= ((d & MASK5) << 21) | ((a & MASK5) << 16) | ((b & MASK5) << 11) | ((0x10A) << 1);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | ((0x10A) << 1);
         break;
     case ADDI:
-        res |= ((d & MASK5) << 21) | ((a & MASK5) << 16) | (MASK16 & b);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | (bitmask(16) & b);
         break;
     case ADDIS:
-        res |= ((d & MASK5) << 21) | ((a & MASK5) << 16) | (MASK16 & b);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | (bitmask(16) & b);
         break;
     case CMPWI:
-        res |= ((d & MASK3) << 23) | ((a & MASK5) << 16) | (MASK16 & b);
+        res |= ((d & bitmask(3)) << 23) | ((a & bitmask(5)) << 16) | (bitmask(16) & b);
         break;
     case BGT:
         d = 4*d + 1;
-        res |= (12 << 21) | ((d & MASK5) << 16) | ((a & MASK14) << 2);
+        res |= (12 << 21) | ((d & bitmask(5)) << 16) | ((a & bitmask(14)) << 2);
         break;
     case BL:
-        res |= ((d & MASK24) << 2) | 1;
+        res |= ((d & bitmask(24)) << 2) | 1;
         break;
     case BLR:
         res |= (20 << 21) | (16 << 1);
         break;
     case BCL:
-        res |= ((d & MASK5) << 21) | ((a & MASK5) << 16) | ((b & MASK14) << 2) | 1;
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(14)) << 2) | 1;
         break;
     case BCTR:
         res |= (20 << 21) | (528 << 1);
         break;
     case LWZ:
-        res |= ((d & MASK5) << 21) | ((b & MASK5) << 16) | (a & MASK16);
+        res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
         break;
     case LWZU:
-        res |= ((d & MASK5) << 21) | ((b & MASK5) << 16) | (a & MASK16);
+        res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
         break;
     case STW:
-        res |= ((d & MASK5) << 21) | ((b & MASK5) << 16) | (a & MASK16);
+        res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
         break;
     case STWU:
-        res |= ((d & MASK5) << 21) | ((b & MASK5) << 16) | (a & MASK16);
+        res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
         break;
     case MFSPR:
-        res |= ((d & MASK5) << 21) | ((a & MASK10) << 11) | (339 << 1);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(10)) << 11) | (339 << 1);
         break;
     case MR:
-        res |= ((a & MASK5) << 21) | ((d & MASK5) << 16) | ((a & MASK5) << 11) | (444 << 1);
+        res |= ((a & bitmask(5)) << 21) | ((d & bitmask(5)) << 16) | ((a & bitmask(5)) << 11) | (444 << 1);
         break;
     case MTSPR:
-        res |= ((a & MASK5) << 21) | ((d & MASK10) << 11) | (467 << 1);
+        res |= ((a & bitmask(5)) << 21) | ((d & bitmask(10)) << 11) | (467 << 1);
         break;
     // 1st architecture
     case FCTIWZ:
-        res |= ((d & MASK5) << 21) | ((a & MASK5) << 11) | (15 << 1);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (15 << 1);
         break;
     case XORIS:
-        res |= ((a & MASK5) << 21) | ((d & MASK5) << 16) | (b & MASK16);
+        res |= ((a & bitmask(5)) << 21) | ((d & bitmask(5)) << 16) | (b & bitmask(16));
         break;
     case B:
-        res |= ((d & MASK24) << 2);
+        res |= ((d & bitmask(24)) << 2);
         break;
     case BLT:
         d *= 4;
-        res |= (12 << 21) | ((d & MASK5) << 16) | ((a & MASK14) << 2);
+        res |= (12 << 21) | ((d & bitmask(5)) << 16) | ((a & bitmask(14)) << 2);
         break;
     case BNE://怪しいのでとばす
     case CMPW:
-        res |= ((d & MASK3) << 23) | ((a & MASK5) << 16) | ((b & MASK5) << 11);
+        res |= ((d & bitmask(3)) << 23) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11);
         break;
     case FABS:
-        res |= ((d & MASK5) << 21) | ((a & MASK5) << 11) | (264 << 1);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (264 << 1);
         break;
     case FADD:
-        res |= ((d & MASK5) << 21) | ((a & MASK5) << 16) | ((b & MASK5) << 11) | (21 << 1);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (21 << 1);
         break;
     case FCMPU:
-        res |= ((d & MASK3) << 23) | ((a & MASK5) << 16) | ((b & MASK5) << 11);
+        res |= ((d & bitmask(3)) << 23) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11);
         break;
     case FDIV:
-        res |= ((d & MASK5) << 21) | ((a & MASK5) << 16) | ((b & MASK5) << 11) | (18 << 1);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (18 << 1);
         break;
     case FMR:
-        res |= res |= ((d & MASK5) << 21) | ((a & MASK5) << 11) | (72 << 1);
+        res |= res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (72 << 1);
         break;
     case FMUL:
-        res |= ((d & MASK5) << 21) | ((a & MASK5) << 16) | ((b & MASK5) << 6) | (25 << 1);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 6) | (25 << 1);
         break;
     case FNEG:
-        res |= ((d & MASK5) << 21) | ((a & MASK5) << 11) | (40 << 1);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (40 << 1);
         break;
     case FSUB:
-        res |= ((d & MASK5) << 21) | ((a & MASK5) << 16) | ((b & MASK5) << 11) | (20 << 1);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (20 << 1);
         break;
     case LFD:
-        res |= ((d & MASK5) << 21) | ((b & MASK5) << 16) | (a & MASK16);
+        res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
         break;
     case LWZX:
-        res |= ((d & MASK5) << 21) | ((a & MASK5) << 16) | ((b & MASK5) << 11) | (23 << 1);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (23 << 1);
         break;
     case SLWI:
-        res |= ((a & MASK5) << 21) | ((d & MASK5) << 16) | ((b & MASK5) << 11) | (((31 - b) & MASK5) << 1);
+        res |= ((a & bitmask(5)) << 21) | ((d & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (((31 - b) & bitmask(5)) << 1);
         break;
     case STFD:
-        res |= ((d & MASK5) << 21) | ((b & MASK5) << 16) | (a & MASK16);
+        res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
         break;
     case STWX:
-        res |= ((d & MASK5) << 21) | ((a & MASK5) << 16) | ((b & MASK5) << 11) | (151 << 1);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (151 << 1);
         break;
     default:
         printerr("## WARNING ##\nNOT instruction : maybe some raw data");
