@@ -15,6 +15,7 @@ PowerPC 32bit版のシミュレータです.
 ```bash
 git clone git@github.com:Sooh317/cpu_experiment.git
 cd cpu_experiment
+make install #重要
 ```
 "assembly.txt" には読ませたいアセンブリのファイル名を列挙してください.
 
