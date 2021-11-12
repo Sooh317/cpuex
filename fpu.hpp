@@ -5,6 +5,7 @@
 #include <vector>
 #include <random>
 #include <algorithm>
+#include <cmath>
 #include "struct.hpp"
 #include "util.hpp"
 
@@ -16,15 +17,13 @@
  * 9 ~ 31 -> manti
 **/ 
 
-/**
- * ストレステスト
-**/
-
 struct fpu_t{
 private:
     static const int FINV_TABLE_LINE = 1024;
     static const int ATAN_TABLE_LINE = 1786;
     static const int FSQRT_TABLE_LINE = 1024;
+    static const int SIN_TABLE_LINE = 405;
+    static const int COS_TABLE_LINE = 258;
     const std::vector<int> heads = {0, 1, 2, 4, 8, 16, 32, 64, 128,\
                                     256, 512, 768, 1024, 1280, 1408,\
                                     1536, 1600,1664, 1696, 1728, 1744, \
@@ -32,15 +31,23 @@ private:
     const std::vector<int> depdict = {0, 0, 1, 2, 3, 4, 5, 6, 7,\
                                       8, 8, 8, 8, 7, 7, 6, 6, 5,\
                                       5, 4, 4, 3, 3, 2, 1, 0, 0, 0, 0};
-    int cnt_sqrt, cnt_inv, cnt_atan;
+    const std::vector<int> inddict = {0, 2, 4, 6, 10, 18, 34, 66, 130, 258};
+    const std::vector<int> taglendict = {1, 1, 1, 2, 3, 4, 5, 6, 7, 8};
+    int cnt_sqrt, cnt_inv, cnt_atan, cnt_sin, cnt_cos;
     std::vector<std::pair<float, float>> fsqrttable;
     std::vector<std::pair<float, float>> finvtable;
     std::vector<std::pair<float, float>> atantable;
+    std::vector<std::pair<float, float>> sintable;
+    std::vector<std::pair<float, float>> costable;
 public:
-    fpu_t():cnt_sqrt(0), cnt_inv(0), cnt_atan(0){
+    const double PI = std::acos(-1);
+    const double HALFPI = std::acos(0);
+    fpu_t():cnt_sqrt(0), cnt_inv(0), cnt_atan(0), cnt_sin(0){
         fsqrttable.resize(FSQRT_TABLE_LINE);
         finvtable.resize(FINV_TABLE_LINE);
         atantable.resize(ATAN_TABLE_LINE);
+        sintable.resize(SIN_TABLE_LINE);
+        costable.resize(COS_TABLE_LINE);
     }
     void add_data_fsqrt(const float f, const float g){
         assert(cnt_sqrt < FSQRT_TABLE_LINE);
@@ -54,6 +61,14 @@ public:
         assert(cnt_atan < ATAN_TABLE_LINE);
         atantable[cnt_atan++] = std::make_pair(f, g);
     }
+    void add_data_sin(const float f, const float g){
+        assert(cnt_sin < SIN_TABLE_LINE);
+        sintable[cnt_sin++] = std::make_pair(f, g);
+    }
+    void add_data_cos(const float f, const float g){
+        assert(cnt_cos < COS_TABLE_LINE);
+        sintable[cnt_cos++] = std::make_pair(f, g);
+    }
     void check(){
         bool ok = true;
         if(cnt_sqrt != FSQRT_TABLE_LINE){
@@ -64,9 +79,17 @@ public:
             ok = false;
             std::cerr << "cnt_inv : " << cnt_inv << " is less than " << FINV_TABLE_LINE << std::endl;
         }
-        else if(cnt_atan != ATAN_TABLE_LINE){
+        if(cnt_atan != ATAN_TABLE_LINE){
             ok = false;
             std::cerr << "cnt_atan : " << cnt_atan << " is less than " << ATAN_TABLE_LINE << std::endl;
+        }
+        if(cnt_sin != SIN_TABLE_LINE){
+            ok = false;
+            std::cerr << "cnt_sin : " << cnt_sin << " is less than " << SIN_TABLE_LINE << std::endl;
+        }
+        if(cnt_cos != COS_TABLE_LINE){
+            ok = false;
+            std::cerr << "cnt_cos : " << cnt_cos << " is less than " << COS_TABLE_LINE << std::endl;
         }
         if(ok) std::cerr << "fpu loading success" << std::endl;
         else{
@@ -77,9 +100,13 @@ public:
     }
     int Depdict(int x)const{return depdict[10 + x];}
     int Heads(int x)const{return heads[x];}
+    int Inddict(int x)const{return inddict[9 + x];}
+    int Taglendict(int x)const{return taglendict[9 + x];}
     std::pair<float, float> Fsqrttable(int x)const{return fsqrttable[x];}
     std::pair<float, float> Finvtable(int x)const{return finvtable[x];}
     std::pair<float, float> Atantable(int x)const{return atantable[x];}
+    std::pair<float, float> Sintable(int x)const{return sintable[x];}
+    std::pair<float, float> Costable(int x)const{return costable[x];}
 };
 using FPU = fpu_t;
 
@@ -114,11 +141,23 @@ void init_fpu(FPU& fpu){
             fpu.add_data_atan(float_parse(s.substr(0, 32)), float_parse(s.substr(32, 32)));
         }
     }
+    ifs.close();
+    ifs.open("sintable.mem");
+    if(ifs){
+        std::string s;
+        while(ifs >> s){
+            fpu.add_data_sin(float_parse(s.substr(0, 32)), float_parse(s.substr(32, 32)));
+        }
+    }
+    ifs.close();
+    ifs.open("costable.mem");
+    if(ifs){
+        std::string s;
+        while(ifs >> s){
+            fpu.add_data_cos(float_parse(s.substr(0, 32)), float_parse(s.substr(32, 32)));
+        }
+    }
     fpu.check();
-}
-
-inline double tofloat64(float f){
-    return double(f);
 }
 
 void print_float(float f){
@@ -303,7 +342,7 @@ float fdiv(float f, float g, const FPU& fpu){
         std::cout << res << std::endl;
         assert(false);
     }
-    return make_float(sig, newexp, core.i & bitmask(23));
+    return make_float(sig, newexp, core.i);
 }
 
 float atan(float f, const FPU& fpu){
@@ -350,6 +389,65 @@ float atan(float f, const FPU& fpu){
    union{float f; int i;} myans;
     myans.f = fadd(mymidy, ydiff);
     return make_float(sig, myans.i >> 23 & bitmask(8), myans.i);
+}
+
+float sin_core(float f, const FPU& fpu){
+    if(double(f) > fpu.HALFPI || double(-f) > fpu.HALFPI){
+        std::cerr << "SinOutOfRange\n" << std::endl;
+        assert(false);
+    }
+    union {float f; int i;} d;
+    d.f = f;
+    int exp = (d.i >> 23) & bitmask(8);
+    if(-9 <= exp && exp <= 0){
+        int tag = (d.i & bitmask(23)) >> (23 - fpu.Taglendict(exp));
+        auto[mysep, mydydx] = fpu.Sintable(fpu.Inddict(exp) + tag);
+        return fadd(mysep, fmul(mydydx, f));
+    }
+    else if(-125 <= exp && exp <= -10){
+        d.i = 0b00111111011111111111111111010101;
+        return fmul(f, d.f);
+    }
+    else if(exp == -126){
+        d.i = 0b00000000110000000000000000000000;
+        return d.f;
+    }
+    else{
+        return make_float(0, 0, 0);
+    }
+}
+
+float cos_exp0(float f, const FPU& fpu){
+    union {float f; int i;} theta, retfromsin;
+    if(f == fpu.HALFPI){
+        theta.i = 0b00110011001110111011110100101111;
+        retfromsin.f = sin_core(theta.f, fpu);
+        return make_float(1, (retfromsin.i >> 23) & bitmask(8), retfromsin.i);
+    }
+    else{ // わからん
+        return 0.0;
+    }
+}
+
+float cos_core(float f, const FPU& fpu){
+    if(double(f), fpu.HALFPI){
+        std::cerr << "CosOutOfRange\n" << std::endl;
+        assert(false);
+    }
+    union {float f; int i;} d;
+    d.f = f;
+    int exp = int((d.i >> 23) & bitmask(8)) - 127;
+    if(-9 <= exp && exp <= -1){
+        int tag = (d.i & bitmask(23)) >> (23 - fpu.Taglendict(exp));
+        auto[mysep, mydydx] = fpu.Costable(fpu.Inddict(exp) + tag);
+        return fadd(mysep, fmul(mydydx, f));
+    }
+    else if(exp <= -10){
+        return make_float(0, 127, 0);
+    }
+    else{
+        return cos_exp0(f, fpu);
+    }
 }
 
 
