@@ -117,6 +117,7 @@ INSTR decode_bin(const std::string& bit){
     int val = btoi(bit.substr(0, 6));
     INSTR_KIND opcode = NOT_INSTR;
     int d = 0, a = 0, b = 0, imm;
+    [[maybe_unused]]int mb, me;
     switch (val){
     case 0x1b:
         opcode = XORIS;
@@ -158,6 +159,12 @@ INSTR decode_bin(const std::string& bit){
             a = btoi(bit.substr(11, 5));
             b = btoi(bit.substr(16, 5));
         }
+        else if(imm == 0x00b){
+            opcode = MULHWU;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(11, 5));
+            b = btoi(bit.substr(16, 5));
+        }
         else if(imm == 0x0){
             opcode = CMPW;
             d = btoi(bit.substr(6, 3));
@@ -182,6 +189,12 @@ INSTR decode_bin(const std::string& bit){
         d = btoi(bit.substr(6, 3));
         a = btoi(bit.substr(11, 5));
         b = exts(bit.substr(16, 16));
+        break;
+    case 0x07:
+        opcode = MULLI;
+        d = btoi(bit.substr(6, 5));
+        a = btoi(bit.substr(11, 5));
+        b = btoi(bit.substr(16, 16));
         break;
     case 0x10: // bgt,  bcl
         //01000001100001111010101010101000
@@ -217,7 +230,10 @@ INSTR decode_bin(const std::string& bit){
         else assert(false);
         break;
     case 0x15:
-        opcode = SLWI;
+        mb = btoi(bit.substr(21, 5));
+        me = btoi(bit.substr(26, 5));
+        if(me == 31) opcode = SRWI;
+        else opcode = SLWI;
         a = btoi(bit.substr(6, 5));
         d = btoi(bit.substr(11, 5));
         b = btoi(bit.substr(16, 5));

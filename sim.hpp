@@ -128,7 +128,6 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
         case XORIS:
             cpu.gpr[d] = cpu.gpr[a] ^ (b << 16);
             return false;
-        
         case FCTIWZ:
             
             return false;
@@ -172,8 +171,17 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             ea = tmp + cpu.gpr[b];
             cpu.gpr[d] = mem.data[addr_to_index(ea)].i;
             return false;
+        case MULLI:
+            cpu.gpr[d] = int(((long long)cpu.gpr[a] * (long long)cpu.gpr[b]) & bitmask(32));
+            return false;
+        case MULHWU:
+            cpu.gpr[d] = (int)((((long long)cpu.gpr[a] * (long long)cpu.gpr[b])) >> 32);
+            return false;
         case SLWI:
             cpu.gpr[d] = cpu.gpr[a] << b;
+            return false;
+        case SRWI:
+            cpu.gpr[d] = cpu.gpr[a] >> b;
             return false;
         case STFD: // LFDと同じ
             tmp = (b == 0 ? 0 : cpu.gpr[b]);

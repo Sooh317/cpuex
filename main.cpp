@@ -24,13 +24,10 @@ int main(int argc, char* argv[]){
     init_option(option, argc, argv);
     option.show_option();
 
-    mem.lbl["label"] = 0b1010101010101100;
-    ;
     if(option.binTOasm || option.asmTObin){
         translator(mem, option);
         return 0;
     }
-
 
     init_memory(mem, option);
     

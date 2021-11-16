@@ -643,10 +643,6 @@ void fpu_test(const FPU& fpu){
     for(int i = 6; i <= 7; i++){
         test(EPS, LOW, HIGH, i, fpu);
     }
-    // union {float f; int i;} d;
-    // d.i = 0b00111111100010000010000101100110;
-    // print_float(cos_core(d.f, fpu));
-    // print_float(std::cos(d.f));
     return;
 }
 

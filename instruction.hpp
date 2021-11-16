@@ -50,7 +50,10 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "fsub") return FSUB;
     if(s == "lfd") return LFD;
     if(s == "lwzx") return LWZX;
+    if(s == "mulli") return MULLI;
+    if(s == "mulhwu") return MULHWU;
     if(s == "slwi") return SLWI;
+    if(s == "srwi") return SRWI;
     if(s == "stfd") return STFD;
     if(s == "stwx") return STWX;
 
@@ -123,8 +126,14 @@ std::string opcode_to_string(INSTR_KIND kind){
         return "lfd";
     case LWZX:
         return "lwzx";
+    case MULLI:
+        return "mulli";
+    case MULHWU:
+        return "mulhwu";
     case SLWI:
         return "slwi";
+    case SRWI:
+        return "srwi";
     case STFD:
         return "stfd";
     case STWX:
@@ -396,12 +405,27 @@ INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::st
             ra = call(2, 0);
             rb = call(3, 0);
             break;
+        case MULLI:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(3, 0);
+            break;
+        case MULHWU:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(3, 0);
+            break;
         case STFD:
             rd = call(1, 0);
             ra = call(2, 0);
             rb = call(2, 1);
             break;
         case SLWI: // 怪しい?
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(3, 0);
+            break;
+        case SRWI:
             rd = call(1, 0);
             ra = call(2, 0);
             rb = call(3, 0);
@@ -494,7 +518,13 @@ int opcode_to_bit(INSTR_KIND kind){
         return 0x32;
     case LWZX:
         return 0x1f;
+    case MULLI:
+        return 0x07;
+    case MULHWU:
+        return 0x1f;
     case SLWI:
+        return 0x15;
+    case SRWI:
         return 0x15;
     case STFD:
         return 0x36;
@@ -613,8 +643,17 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
     case LFD:
         fprintf(stdout, "lfd f%d, %d(r%d)\n", d, a, b);
         return;
+    case MULLI:
+        fprintf(stdout, "mulli r%d, r%d, %d\n", d, a, b);
+        return;
+    case MULHWU:
+        fprintf(stdout, "mulhwu r%d, r%d, %d\n", d, a, b);
+        return;
     case SLWI:
         fprintf(stdout, "slwi r%d, r%d, %d\n", d, a, b);
+        return;
+    case SRWI:
+        fprintf(stdout, "srwi r%d, r%d, %d\n", d, a, b);
         return;
     case STFD:
         fprintf(stdout, "stfd f%d, %d(r%d)\n", d, a, b);
@@ -737,8 +776,17 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
     case LWZX:
         res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (23 << 1);
         break;
+    case MULLI:
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | (bitmask(16) & b);
+        break;
+    case MULHWU:
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (11 << 1);
+        break;
     case SLWI:
         res |= ((a & bitmask(5)) << 21) | ((d & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (((31 - b) & bitmask(5)) << 1);
+        break;
+    case SRWI:
+        res |= ((a & bitmask(5)) << 21) | ((d & bitmask(5)) << 16) | ((32 - int(b & bitmask(5))) << 11) | ((b & bitmask(5)) << 6) | (31 << 1);
         break;
     case STFD:
         res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));

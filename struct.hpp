@@ -130,7 +130,10 @@ enum INSTR_KIND{
     FSUB, 
     LFD,  
     LWZX, 
+    MULLI,
+    MULHWU,
     SLWI, 
+    SRWI,
     STFD, 
     STWX, 
 
