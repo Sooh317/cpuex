@@ -40,14 +40,23 @@ private:
     std::vector<std::pair<float, float>> sintable;
     std::vector<std::pair<float, float>> costable;
 public:
-    const double PI = std::acos(-1);
-    const double HALFPI = std::acos(0);
+    float PI;
+    float HALFPI;
+    double LONGHALFPI;
     fpu_t():cnt_sqrt(0), cnt_inv(0), cnt_atan(0), cnt_sin(0){
         fsqrttable.resize(FSQRT_TABLE_LINE);
         finvtable.resize(FINV_TABLE_LINE);
         atantable.resize(ATAN_TABLE_LINE);
         sintable.resize(SIN_TABLE_LINE);
         costable.resize(COS_TABLE_LINE);
+        union {float f; int i;} d;
+        d.i = 0b01000000010010010000111111011011;
+        PI = d.f;
+        d.i = 0b00111111110010010000111111011011;
+        HALFPI = d.f;
+        union {double f; uint64_t i;} e;
+        e.i = 0b11111111111001001000011111101101010100010001000010110100100000u;
+        LONGHALFPI = e.f;
     }
     void add_data_fsqrt(const float f, const float g){
         assert(cnt_sqrt < FSQRT_TABLE_LINE);
@@ -67,7 +76,7 @@ public:
     }
     void add_data_cos(const float f, const float g){
         assert(cnt_cos < COS_TABLE_LINE);
-        sintable[cnt_cos++] = std::make_pair(f, g);
+        costable[cnt_cos++] = std::make_pair(f, g);
     }
     void check(){
         bool ok = true;
@@ -392,13 +401,9 @@ float atan(float f, const FPU& fpu){
 }
 
 float sin_core(float f, const FPU& fpu){
-    if(double(f) > fpu.HALFPI || double(-f) > fpu.HALFPI){
-        std::cerr << "SinOutOfRange\n" << std::endl;
-        assert(false);
-    }
     union {float f; int i;} d;
     d.f = f;
-    int exp = (d.i >> 23) & bitmask(8);
+    int exp = ((d.i >> 23) & bitmask(8)) - 127;
     if(-9 <= exp && exp <= 0){
         int tag = (d.i & bitmask(23)) >> (23 - fpu.Taglendict(exp));
         auto[mysep, mydydx] = fpu.Sintable(fpu.Inddict(exp) + tag);
@@ -425,12 +430,15 @@ float cos_exp0(float f, const FPU& fpu){
         return make_float(1, (retfromsin.i >> 23) & bitmask(8), retfromsin.i);
     }
     else{ // わからん
-        return 0.0;
+        union {double f; uint64_t i;} tmp;
+        tmp.f = fpu.LONGHALFPI - (double)f;
+        float theta = make_float(0, int((tmp.i >> 52) & bitmask(11)) - 1023 + 127, (tmp.i >> 29) & bitmask(23));
+        return sin_core(theta, fpu);
     }
 }
 
 float cos_core(float f, const FPU& fpu){
-    if(double(f), fpu.HALFPI){
+    if(double(f) > fpu.HALFPI){
         std::cerr << "CosOutOfRange\n" << std::endl;
         assert(false);
     }
@@ -440,6 +448,7 @@ float cos_core(float f, const FPU& fpu){
     if(-9 <= exp && exp <= -1){
         int tag = (d.i & bitmask(23)) >> (23 - fpu.Taglendict(exp));
         auto[mysep, mydydx] = fpu.Costable(fpu.Inddict(exp) + tag);
+
         return fadd(mysep, fmul(mydydx, f));
     }
     else if(exp <= -10){
@@ -451,7 +460,7 @@ float cos_core(float f, const FPU& fpu){
 }
 
 
-#define TEST_NUM 1000000
+#define TEST_NUM 1000000000
 
 
 bool range_check(double value, double L, double R){
@@ -467,6 +476,8 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
     else if(tag == 3) cout << "fdiv test start!" << endl;
     else if(tag == 4) cout << "fsqrt test start!" << endl;
     else if(tag == 5) cout << "atan test start!" << endl;
+    else if(tag == 6) cout << "sin test start!" << endl;
+    else if(tag == 7) cout << "cos test start!" << endl;
     random_device rnd;
     mt19937 mt(rnd());
    union{float f; int i;} f, g;
@@ -474,8 +485,8 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
     double myans, ans, l, r;
     if(tag == 0 || tag == 1) for(int i = 0; i < 23; i++) c /= 2.0;
     else if(tag == 2) for(int i = 0; i < 22; i++) c /= 2.0;
-    else for(int i = 0; i < 20; i++) c /= 2.0;
-
+    else if(tag == 3 || tag == 4 || tag == 5) for(int i = 0; i < 20; i++) c /= 2.0;
+    else if(tag == 6 || tag == 7) for(int i = 0; i < 18; i++) c /= 2.0;
     if(tag == 0 || tag == 1){
         int cnt = 0;
         while(cnt < TEST_NUM){
@@ -597,6 +608,28 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
         }
         cerr << "atan test success!" << endl; 
     }
+    else if(tag == 6 || tag == 7){
+        for(int i = 0; i < TEST_NUM; i++){
+            f.i = mt();
+            f.i &= bitmask(30);
+            f.i |= ((1 << 7) - 1) << 23;
+            if(f.f > fpu.HALFPI || -f.f > fpu.HALFPI) continue;
+            if(tag == 6) myans = sin_core(f.f, fpu), ans = std::sin(f.f);
+            else myans = cos_core(f.f, fpu), ans = std::cos(f.f);
+            l = abs(myans - ans);
+            r = max(c*abs(ans), EPS);
+            if(l < r) continue;
+            cout << (tag == 6 ? "sin " : "cos ") << "test failed:\n";
+            cout << "f \n";
+            print_float(f.f);
+            cout << "\nmyans \n";
+            print_float(myans);
+            cout << "\nans \n";
+            print_float(ans);
+            exit(0);
+        }
+        cerr << (tag == 6 ? "sin " : "cos ") << "test finished!\n";
+    }
 }
 
 void fpu_test(const FPU& fpu){
@@ -607,9 +640,13 @@ void fpu_test(const FPU& fpu){
         LOW /= 2.0;
         HIGH *= 2.0;
     }
-    for(int i = 0; i <= 5; i++){
+    for(int i = 6; i <= 7; i++){
         test(EPS, LOW, HIGH, i, fpu);
     }
+    // union {float f; int i;} d;
+    // d.i = 0b00111111100010000010000101100110;
+    // print_float(cos_core(d.f, fpu));
+    // print_float(std::cos(d.f));
     return;
 }
 
