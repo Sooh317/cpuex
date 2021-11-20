@@ -136,7 +136,9 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
         case FCFIW:
             cpu.fpr[d] = float(cpu.gpr[a]);
             return false;
-        case IN: // とりあえず無視
+        case IN:
+            std::cin >> tmp;
+            cpu.gpr[d] = tmp;
             return false;
         case OUT: // imm + 1 byte目はどこ
             cpu.send_buf[cpu.sbptr++] = char(segment(cpu.gpr[d], 4*a, 4*a + 7));
