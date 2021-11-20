@@ -37,6 +37,9 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "fabs") return FABS;
     if(s == "fctiwz") return FCTIWZ;
     if(s == "xoris") return XORIS;
+    if(s == "in") return IN;
+    if(s == "out") return OUT;
+    if(s == "flush") return FLUSH;
     if(s == "b") return B;
     if(s == "blt") return BLT;
     if(s == "bne") return BNE;
@@ -56,6 +59,8 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "srwi") return SRWI;
     if(s == "stfd") return STFD;
     if(s == "stwx") return STWX;
+    if(s == "fcfiw") return FCFIW;
+    
 
     return INSTR_UNKNOWN;
 }
@@ -112,6 +117,8 @@ std::string opcode_to_string(INSTR_KIND kind){
         return "fadd";
     case FCMPU:
         return "fcmpu";
+    case FCFIW:
+        return "fcfiw";
     case FDIV:
         return "fdiv";
     case FMR:
@@ -122,6 +129,12 @@ std::string opcode_to_string(INSTR_KIND kind){
         return "fneg";
     case FSUB:
         return "fsub";
+    case IN:
+        return "in";
+    case OUT:
+        return "out";
+    case FLUSH:
+        return "flush";
     case LFD:
         return "lfd";
     case LWZX:
@@ -319,6 +332,15 @@ INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::st
             ra = call(2, 0);
             rb = call(3, 0);
             break;
+        case IN:
+            rd = call(1, 0);
+            break;
+        case OUT:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            break;
+        case FLUSH:
+            break;
         case FCTIWZ:
             rd = call(1, 0);
             ra = call(2, 0);
@@ -371,6 +393,10 @@ INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::st
             rd = call(1, 0);
             ra = call(2, 0);
             rb = call(3, 0);
+            break;
+        case FCFIW:
+            rd = call(1, 0);
+            ra = call(2, 0);
             break;
         case FDIV:
             rd = call(1, 0);
@@ -488,6 +514,8 @@ int opcode_to_bit(INSTR_KIND kind){
     //1st
     case FCTIWZ:
         return 0x3f;
+    case FCFIW:
+        return 0x3f;
     case XORIS:
         return 0x1b;
     case B:
@@ -530,6 +558,12 @@ int opcode_to_bit(INSTR_KIND kind){
         return 0x36;
     case STWX:
         return 0x1f;
+    case IN:
+        return 0x0;
+    case OUT:
+        return 0x1;
+    case FLUSH:
+        return 0x2;
     default: // 生データが入っているとする
         return (~0x0); // 数字は 0, 文字列は0x1にする？
         break;
@@ -598,6 +632,18 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
     // 1st architecture
     case FCTIWZ:
         fprintf(stdout, "fctiwz f%d, f%d\n", d, a);
+        return;
+    case FCFIW:
+        fprintf(stdout, "fctiwz f%d, r%d\n", d, a);
+        return;
+    case IN:
+        fprintf(stdout, "in r%d, %d\n", d, a);
+        return;
+    case OUT:
+        fprintf(stdout, "out r%d, %d\n", d, a);
+        return;
+    case FLUSH:
+        fprintf(stdout, "flush");
         return;
     case XORIS:
         fprintf(stdout, "xoris r%d, r%d, %d\n", d, a, b);
@@ -725,6 +771,17 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
     // 1st architecture
     case FCTIWZ:
         res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (15 << 1);
+        break;
+    case FCFIW:
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (16 << 1);
+        break;
+    case IN:
+        res |= ((d & bitmask(5)) << 21);
+        break;
+    case OUT:
+        res |= ((d & bitmask(5)) << 21) | (a & bitmask(16));
+        break;
+    case FLUSH:
         break;
     case XORIS:
         res |= ((a & bitmask(5)) << 21) | ((d & bitmask(5)) << 16) | (b & bitmask(16));

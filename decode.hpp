@@ -119,6 +119,18 @@ INSTR decode_bin(const std::string& bit){
     int d = 0, a = 0, b = 0, imm;
     [[maybe_unused]]int mb, me;
     switch (val){
+    case 0x0: // かわるかも
+        opcode = IN;
+        d = btoi(bit.substr(6, 5));
+        // a = btoi(bit.substr(11, 5));
+        break;
+    case 0x1:
+        opcode = OUT;
+        d = btoi(bit.substr(6, 5));
+        a = btoi(bit.substr(16, 16));
+        break;
+    case 0x2:
+        break;
     case 0x1b:
         opcode = XORIS;
         d = btoi(bit.substr(11, 5));
@@ -325,6 +337,11 @@ INSTR decode_bin(const std::string& bit){
             d = btoi(bit.substr(6, 5));
             a = btoi(bit.substr(11, 5));
             b = btoi(bit.substr(16, 5));
+        }
+        else if(imm == 0x010){
+            opcode = FCFIW;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(16, 5));
         }
         break;
     default:

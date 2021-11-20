@@ -10,6 +10,8 @@
 #include "util.hpp"
 #include "fpu.hpp"
 
+extern char flushed[1024*1024];
+int flush = 0;
 
 int addr_to_index(int k){
     return k >> 2;
@@ -129,7 +131,19 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             cpu.gpr[d] = cpu.gpr[a] ^ (b << 16);
             return false;
         case FCTIWZ:
-            
+            cpu.gpr[d] = int(std::floor(cpu.fpr[a]));
+            return false;
+        case FCFIW:
+            cpu.fpr[d] = float(cpu.gpr[a]);
+            return false;
+        case IN: // とりあえず無視
+            return false;
+        case OUT: // imm + 1 byte目はどこ
+            cpu.send_buf[cpu.sbptr++] = char(segment(cpu.gpr[d], 4*a, 4*a + 7));
+            return false;
+        case FLUSH: // 
+            for(int i = 0; i < cpu.sbptr; i++) flushed[flush++] = cpu.send_buf[i];
+            cpu.sbptr = 0;
             return false;
         case FABS:
             cpu.fpr[d] = std::abs(cpu.fpr[a]); // 多分これで問題ないよね...
@@ -277,14 +291,14 @@ void translator(MEMORY& mem, OPTION& option){
     std::ifstream ifs;
     std::string s;
     if(option.binTOasm){
-        if(option.binary) ifs.open("binary.txt");
+        if(option.binary) ifs.open("assembly_binary/binary.txt");
         while((option.binary ? ifs : std::cin) >> s){
             auto[opc, d, a, b] = decode_bin(s);
             show_instr(opc, d, a, b);
         }
     }
     else{
-        if(option.assembly) ifs.open("assembly.s");
+        if(option.assembly) ifs.open("assembly_binary/assembly.s");
         while(std::getline(option.assembly ? ifs : std::cin, s)){
             auto [opc, d, a, b] = recognize_instr(mem.lbl, remove_chars(s, " ,\t\n"));
             show_instr_binary(opc, d, a, b);

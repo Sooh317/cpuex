@@ -43,7 +43,7 @@ public:
     float PI;
     float HALFPI;
     double LONGHALFPI;
-    fpu_t():cnt_sqrt(0), cnt_inv(0), cnt_atan(0), cnt_sin(0){
+    fpu_t():cnt_sqrt(0), cnt_inv(0), cnt_atan(0), cnt_sin(0), cnt_cos(0){
         fsqrttable.resize(FSQRT_TABLE_LINE);
         finvtable.resize(FINV_TABLE_LINE);
         atantable.resize(ATAN_TABLE_LINE);
@@ -127,7 +127,7 @@ float float_parse(const std::string &s){
 }
 
 void init_fpu(FPU& fpu){
-    std::ifstream ifs("fsqrttable.mem");
+    std::ifstream ifs("fputable/fsqrttable.mem");
     if(ifs){
         std::string s;
         while(ifs >> s){
@@ -135,7 +135,7 @@ void init_fpu(FPU& fpu){
         }
     }
     ifs.close();
-    ifs.open("finvtable.mem");
+    ifs.open("fputable/finvtable.mem");
     if(ifs){
         std::string s;
         while(ifs >> s){
@@ -143,7 +143,7 @@ void init_fpu(FPU& fpu){
         }
     }
     ifs.close();
-    ifs.open("atantable.mem");
+    ifs.open("fputable/atantable.mem");
     if(ifs){
         std::string s;
         while(ifs >> s){
@@ -151,7 +151,7 @@ void init_fpu(FPU& fpu){
         }
     }
     ifs.close();
-    ifs.open("sintable.mem");
+    ifs.open("fputable/sintable.mem");
     if(ifs){
         std::string s;
         while(ifs >> s){
@@ -159,7 +159,7 @@ void init_fpu(FPU& fpu){
         }
     }
     ifs.close();
-    ifs.open("costable.mem");
+    ifs.open("fputable/costable.mem");
     if(ifs){
         std::string s;
         while(ifs >> s){

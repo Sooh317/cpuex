@@ -41,8 +41,7 @@ void print_binary_int(int a){
     std::cout << std::endl;
 }
 
-inline int bp(int k){
-    assert(k <= 31);
+constexpr int bp(int k){
     return 31 - k;
 }
 
@@ -68,12 +67,14 @@ inline int kth_bit(int a, int k, int field = 32){
 
 // [l, r]
 int segment(int a, int l, int r){
-    int res = 0;
-    l = bp(l), r = bp(r);
-    for(int i = 0; r + i <= l; i++){
-        res |= (a >> (r + i) & 1) << i;
-    }
-    return res;
+    int d = r - l + 1;
+    l = bp(l);
+    //r = bp(r);
+    // for(int i = 0; r + i <= l; i++){
+    //     res |= (a >> (r + i) & 1) << i;
+    // }
+    //return res;
+    return (a >> l) & bitmask(d);
 }
 
 // low -> [16, ..., 31]

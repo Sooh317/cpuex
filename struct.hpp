@@ -15,6 +15,8 @@ using CTR = uint32_t; // count register
 using XER = uint32_t; // xer register
 #define GPR_SIZE 32
 #define FPR_SIZE 32
+#define RECV_BUFFER_SIZE 8
+#define SEND_BUFFER_SIZE 16
 
 struct cpu_t{
     CR cr;
@@ -22,10 +24,12 @@ struct cpu_t{
     CTR ctr;
     XER xer;
     unsigned int pc;
+    int sbptr; // send buffer pointer
     std::vector<GPR> gpr;
     std::vector<FPR> fpr;
+    std::vector<char> send_buf;
 
-    cpu_t():cr(0), lr(0), ctr(0), xer(0),pc(0), gpr(GPR_SIZE), fpr(FPR_SIZE){}
+    cpu_t():cr(0), lr(0), ctr(0), xer(0),pc(0), sbptr(0), gpr(GPR_SIZE), fpr(FPR_SIZE), send_buf(SEND_BUFFER_SIZE){}
 
     void show_gpr(){
         std::cerr << "\033[1;31m";
@@ -122,12 +126,16 @@ enum INSTR_KIND{
     CMPW, 
     FABS, 
     FADD, 
-    FCMPU, 
+    FCMPU,
+    FCFIW, 
     FDIV, 
     FMR, 
     FMUL, 
     FNEG,
-    FSUB, 
+    FSUB,
+    IN, 
+    OUT, 
+    FLUSH, 
     LFD,  
     LWZX, 
     MULLI,

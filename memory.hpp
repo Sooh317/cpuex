@@ -16,7 +16,7 @@ void show_lable(const std::map<std::string, int>&);
 void init_memory(MEMORY& mem, OPTION& option){
     if(!option.binary){
         int tmp = 0;
-        std::ifstream ifs("assembly.txt");
+        std::ifstream ifs("assembly_binary/assembly.txt");
         std::string s;
         while(ifs >> s) tmp = collect_label(s, mem.lbl, tmp);
         ifs.clear();
