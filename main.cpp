@@ -31,7 +31,6 @@ int main(int argc, char* argv[]){
     }
 
     init_memory(mem, option);
-    
     // assuming the entry point is _min_caml_start
     init_cpu(cpu, option, mem.lbl, 1024);
 

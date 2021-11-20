@@ -265,7 +265,7 @@ min_caml_reduce_to_2pi:
 	# 2.0
 	addis	r2, 0, 0x4000
 	stw		r2, 0(r3)
-	addis	r5, 0, hi16(LF_PI)
+	addis	r5, 0, ha16(LF_PI)
 	add		r5, r5, lo16(LF_PI)
 	stw		r5, 4(r3)
 	lfs		f2, 0(r3)
@@ -302,13 +302,13 @@ min_caml_cos:
 	stw		r2, -4(r3)
 	fabs	f0, f0
 	bl		min_caml_reduce_to_2pi
-	addis	r5, 0, hi16(LF_PI)
+	addis	r5, 0, ha16(LF_PI)
 	add		r5, r5, lo16(LF_PI)
 	stw		r5, 0(r3)
-	addis	r6, 0, hi16(LF_HALFPI)
+	addis	r6, 0, ha16(LF_HALFPI)
 	add		r6, r6, lo16(LF_HALFPI)
 	stw		r6, 4(r3)
-	addis	r7, 0, hi16(LF_QUATPI)
+	addis	r7, 0, ha16(LF_QUATPI)
 	add		r7, r7, lo16(LF_QUATPI)
 	stw		r5, 8(r3)
 	lfs		f1, 0(r3)
@@ -363,13 +363,13 @@ Lsin_positive:
 	bl		min_caml_reduce_to_2pi
 	lwz		r2, -4(r3)		# r2 is a sgn (-1 is minus)
 	addi	r3, r3, -4
-	addis	r5, 0, hi16(LF_PI)
+	addis	r5, 0, ha16(LF_PI)
 	add		r5, r5, lo16(LF_PI)
 	stw		r5, 0(r3)
-	addis	r6, 0, hi16(LF_HALFPI)
+	addis	r6, 0, ha16(LF_HALFPI)
 	add		r6, r6, lo16(LF_HALFPI)
 	stw		r6, 4(r3)
-	addis	r7, 0, hi16(LF_QUATPI)
+	addis	r7, 0, ha16(LF_QUATPI)
 	add		r7, r7, lo16(LF_QUATPI)
 	stw		r5, 8(r3)
 	lfs		f1, 0(r3)

@@ -182,6 +182,7 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
                 }
             }
             assert(rparen != -1);
+            //std::cout << lparen << " " << minus << " " << rparen << "\n" << std::flush;
             if(minus){
                 std::string label1 = s.substr(lparen + 1, minus - lparen - 1);
                 std::string label2 = s.substr(minus + 1, rparen - minus - 1);

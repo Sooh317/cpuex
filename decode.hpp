@@ -100,7 +100,7 @@ int collect_label(const std::string file, std::map<std::string, int>& label, int
     int cnt = tmp;
     std::string str;
     while(std::getline(ifs, str)){
-        if(str[0] == '#') continue; // comment
+        if(str.size() == 0 || str[0] == '#') continue; // comment
         else if(str[0] != '\t' && str[0] != ' '){ // label
             str = remove_chars(str, " \t:")[0];
             label[str] = cnt;
