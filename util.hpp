@@ -46,9 +46,10 @@ constexpr int bp(int k){
 }
 
 int cut_bit(int a, int l, int r){ // [l, r]
-    l = bp(l), r = bp(r);
+    int d = r - l + 1;
+    r = bp(r);
     a >>= r;
-    return a & bitmask(l - r + 1);
+    return a & bitmask(d);
 }
 
 // 以下全てマニュアルの処理を実現する関数

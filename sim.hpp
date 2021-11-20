@@ -13,9 +13,7 @@
 extern char flushed[1024*1024];
 int flush = 0;
 
-int addr_to_index(int k){
-    return k >> 2;
-}
+constexpr int addr_to_index(int k){ return k >> 2;}
 
 INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
     assert(cpu.pc < (unsigned int)mem.index);
