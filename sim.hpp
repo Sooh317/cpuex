@@ -175,7 +175,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
         case FSUB:
             cpu.fpr[d] = fsub(cpu.fpr[a], cpu.fpr[b]);
             return false;
-        case LFD: // double word らしいけど one word でloadします
+        case LFS:
             tmp = (b == 0 ? 0 : cpu.gpr[b]);
             ea = tmp + a;
             cpu.fpr[d] = mem.data[addr_to_index(ea)].f;
@@ -197,7 +197,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
         case SRWI:
             cpu.gpr[d] = cpu.gpr[a] >> b;
             return false;
-        case STFD: // LFDと同じ
+        case STFS: // LFSと同じ
             tmp = (b == 0 ? 0 : cpu.gpr[b]);
             ea = tmp + a;
             mem.data[addr_to_index(ea)].f = cpu.fpr[d];

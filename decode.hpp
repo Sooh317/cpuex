@@ -71,6 +71,7 @@ void put_instr_into_memory(std::string& str, MEMORY& mem){
         else if(kind == ALIGN);
         else{
             auto ins = recognize_instr(mem.lbl, s);
+            printout(opcode_to_string(ins.opcode));
             mem.instr[mem.index >> 2] = ins;
         }
         next_memory_address(mem.index, s);
@@ -274,14 +275,14 @@ INSTR decode_bin(const std::string& bit){
         a = exts(bit.substr(16, 16));
         b = btoi(bit.substr(11, 5));
         break;
-    case 0x32:
-        opcode = LFD;
+    case 0x30:
+        opcode = LFS;
         d = btoi(bit.substr(6, 5));
         a = btoi(bit.substr(16, 16));
         b = btoi(bit.substr(11, 5));
         break;
-    case 0x36:
-        opcode = STFD;
+    case 0x34:
+        opcode = STFS;
         d = btoi(bit.substr(6, 5));
         a = btoi(bit.substr(16, 16));
         b = btoi(bit.substr(11, 5));

@@ -51,16 +51,15 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "fmul") return FMUL;
     if(s == "fneg") return FNEG;
     if(s == "fsub") return FSUB;
-    if(s == "lfd") return LFD;
+    if(s == "lfs") return LFS;
     if(s == "lwzx") return LWZX;
     if(s == "mulli") return MULLI;
     if(s == "mulhwu") return MULHWU;
     if(s == "slwi") return SLWI;
     if(s == "srwi") return SRWI;
-    if(s == "stfd") return STFD;
+    if(s == "stfs") return STFS;
     if(s == "stwx") return STWX;
     if(s == "fcfiw") return FCFIW;
-    
 
     return INSTR_UNKNOWN;
 }
@@ -135,8 +134,8 @@ std::string opcode_to_string(INSTR_KIND kind){
         return "out";
     case FLUSH:
         return "flush";
-    case LFD:
-        return "lfd";
+    case LFS:
+        return "lfs";
     case LWZX:
         return "lwzx";
     case MULLI:
@@ -147,8 +146,8 @@ std::string opcode_to_string(INSTR_KIND kind){
         return "slwi";
     case SRWI:
         return "srwi";
-    case STFD:
-        return "stfd";
+    case STFS:
+        return "stfs";
     case STWX:
         return "stwx";
 
@@ -272,18 +271,27 @@ INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::st
             if(s.size() == 3){
                 rd = call(1, 0);
                 if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
-                else assert(false);
+                else{
+                    printout(s[2]);
+                    assert(false);
+                }
             }
             else if(s.size() == 2){ // 怪しいかも
                 rd = 0;
                 if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
-                else assert(false);
+                else{
+                    printout(s[2]);
+                    assert(false);
+                }
             }
             else assert(false);
             break;
         case BL:
             if(lbl.find(s[1]) != lbl.end()) rd = lbl[s[1]];
-            else assert(false);
+            else{
+                printout(s[1]);
+                assert(false);
+            }
             break;
         case BLR: // 無条件分岐 to LR
             break;
@@ -291,7 +299,10 @@ INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::st
             rd = call(1, 0);
             ra = call(2, 0);
             if(lbl.find(s[3]) != lbl.end()) rb = lbl[s[3]];
-            else assert(false);
+            else{
+                printout(s[3]);
+                assert(false);
+            }
             break;
         case BCTR: // 無条件分岐
             break;
@@ -348,18 +359,27 @@ INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::st
             break;
         case B:
             if(lbl.find(s[1]) != lbl.end()) rd = lbl[s[1]];
-            else assert(false);
+            else{
+                printout(s[1]);
+                assert(false);
+            }
             break;
         case BLT:
             if(s.size() == 3){
                 rd = call(1, 0);
                 if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
-                else assert(false);
+                else{
+                    printout(s[2]);
+                    assert(false);
+                }
             }
             else if(s.size() == 2){
                 rd = 0;
                 if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
-                else assert(false);
+                else{
+                    printout(s[2]);
+                    assert(false);
+                }
             }
             else assert(false);
             break;
@@ -367,12 +387,18 @@ INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::st
             if(s.size() == 3){
                 rd = call(1, 0);
                 if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
-                else assert(false);
+                else{
+                    printout(s[2]);
+                    assert(false);
+                }
             }
             else if(s.size() == 2){
                 rd = 0;
                 if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
-                else assert(false);
+                else{
+                    printout(s[2]);
+                    assert(false);
+                }
             }
             else assert(false);
             break;
@@ -422,7 +448,7 @@ INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::st
             ra = call(2, 0);
             rb = call(3, 0);
             break;
-        case LFD:
+        case LFS:
             rd = call(1, 0);
             ra = call(2, 0);
             rb = call(2, 1);
@@ -442,7 +468,7 @@ INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::st
             ra = call(2, 0);
             rb = call(3, 0);
             break;
-        case STFD:
+        case STFS:
             rd = call(1, 0);
             ra = call(2, 0);
             rb = call(2, 1);
@@ -543,8 +569,8 @@ int opcode_to_bit(INSTR_KIND kind){
         return 0x3f;
     case FSUB:
         return 0x3f;
-    case LFD:
-        return 0x32;
+    case LFS:
+        return 0x30;
     case LWZX:
         return 0x1f;
     case MULLI:
@@ -555,7 +581,7 @@ int opcode_to_bit(INSTR_KIND kind){
         return 0x15;
     case SRWI:
         return 0x15;
-    case STFD:
+    case STFS:
         return 0x36;
     case STWX:
         return 0x1f;
@@ -687,8 +713,8 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
     case FSUB:
         fprintf(stdout, "fsub f%d, f%d, f%d\n", d, a, b);
         return;
-    case LFD:
-        fprintf(stdout, "lfd f%d, %d(r%d)\n", d, a, b);
+    case LFS:
+        fprintf(stdout, "lfs f%d, %d(r%d)\n", d, a, b);
         return;
     case MULLI:
         fprintf(stdout, "mulli r%d, r%d, %d\n", d, a, b);
@@ -702,8 +728,8 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
     case SRWI:
         fprintf(stdout, "srwi r%d, r%d, %d\n", d, a, b);
         return;
-    case STFD:
-        fprintf(stdout, "stfd f%d, %d(r%d)\n", d, a, b);
+    case STFS:
+        fprintf(stdout, "stfs f%d, %d(r%d)\n", d, a, b);
         return;
     case STWX:
         fprintf(stdout, "stwx r%d, r%d, r%d\n", d, a, b);
@@ -828,7 +854,7 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
     case FSUB:
         res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (20 << 1);
         break;
-    case LFD:
+    case LFS:
         res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
         break;
     case LWZX:
@@ -846,7 +872,7 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
     case SRWI:
         res |= ((a & bitmask(5)) << 21) | ((d & bitmask(5)) << 16) | ((32 - int(b & bitmask(5))) << 11) | ((b & bitmask(5)) << 6) | (31 << 1);
         break;
-    case STFD:
+    case STFS:
         res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
         break;
     case STWX:

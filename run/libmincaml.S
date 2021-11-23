@@ -123,6 +123,8 @@ Lprint_int_nonempty:
 #	print_byte
 	.text
 	.align 	2
+	.globl	min_caml_print_char
+min_caml_print_char:
 	.globl	min_caml_print_byte
 min_caml_print_byte:
 	out		r2, 0
@@ -169,12 +171,15 @@ create_float_array_loop:
 	bne		cr7, create_float_array_cont
 	blr
 create_float_array_cont:
-	stfd	f0, 0(r4)
+	stfs	f0, 0(r4)
 	subi	r5, r5, 1
 	addi	r4, r4, 8
 	b		create_float_array_loop
-	.globl	min_caml_abs_float
-min_caml_abs_float:
+#	fabs
+	.text
+	.align 	2
+	.globl	min_caml_fabs
+min_caml_fabs:
 	fabs	f0, f0
 	blr
 #	sqrt
@@ -191,6 +196,9 @@ min_caml_sqrt:
 min_caml_floor:
 	ffloor	f0, f0
 	blr
+	.text
+	.align 	2
+	.globl	min_caml_int_of_float
 min_caml_int_of_float:
 	.globl	min_caml_truncate
 min_caml_truncate:

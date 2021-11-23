@@ -1,11877 +1,10270 @@
 	.data
 	.literal4
 	.align 2
-l.12803:	 # 128.000000
+l.12835:	 # 128.000000
 	.long	1124073472
 	.align 2
-l.12785:	 # 1000000000.000000
+l.12817:	 # 1000000000.000000
 	.long	1315859240
 	.align 2
-l.12679:	 # 0.900000
+l.12711:	 # 0.900000
 	.long	1063675494
 	.align 2
-l.12678:	 # 0.200000
+l.12710:	 # 0.200000
 	.long	1045220557
 	.align 2
-l.12374:	 # 150.000000
+l.12406:	 # 150.000000
 	.long	1125515264
 	.align 2
-l.12350:	 # -150.000000
+l.12382:	 # -150.000000
 	.long	-1021968384
 	.align 2
-l.12324:	 # 0.100000
+l.12356:	 # 0.100000
 	.long	1036831949
 	.align 2
-l.12271:	 # -2.000000
+l.12303:	 # -2.000000
 	.long	-1073741824
 	.align 2
-l.12257:	 # 0.003906
+l.12289:	 # 0.003906
 	.long	998244352
 	.align 2
-l.12182:	 # 100000000.000000
+l.12214:	 # 100000000.000000
 	.long	1287568416
 	.align 2
-l.12176:	 # 255.000000
+l.12208:	 # 255.000000
 	.long	1132396544
 	.align 2
-l.12173:	 # 20.000000
+l.12205:	 # 20.000000
 	.long	1101004800
 	.align 2
-l.12172:	 # 0.050000
+l.12204:	 # 0.050000
 	.long	1028443341
 	.align 2
-l.12167:	 # 0.250000
+l.12199:	 # 0.250000
 	.long	1048576000
 	.align 2
-l.12163:	 # 10.000000
+l.12195:	 # 10.000000
 	.long	1092616192
 	.align 2
-l.12157:	 # 0.300000
+l.12189:	 # 0.300000
 	.long	1050253722
 	.align 2
-l.12156:	 # 0.500000
+l.12188:	 # 0.500000
 	.long	1056964608
 	.align 2
-l.12155:	 # 0.150000
+l.12187:	 # 0.150000
 	.long	1041865114
 	.align 2
-l.12151:	 # 3.141593
+l.12183:	 # 3.141593
 	.long	1078530011
 	.align 2
-l.12150:	 # 30.000000
+l.12182:	 # 30.000000
 	.long	1106247680
 	.align 2
-l.12149:	 # 15.000000
+l.12181:	 # 15.000000
 	.long	1097859072
 	.align 2
-l.12148:	 # 0.000100
+l.12180:	 # 0.000100
 	.long	953267991
 	.align 2
-l.11949:	 # -0.100000
+l.11981:	 # -0.100000
 	.long	-1110651699
 	.align 2
-l.11923:	 # 0.010000
+l.11955:	 # 0.010000
 	.long	1008981770
 	.align 2
-l.11922:	 # -0.200000
+l.11954:	 # -0.200000
 	.long	-1102263091
 	.align 2
-l.11675:	 # -200.000000
+l.11707:	 # -200.000000
 	.long	-1018691584
 	.align 2
-l.11673:	 # 200.000000
+l.11705:	 # 200.000000
 	.long	1128792064
 	.align 2
-l.11658:	 # 0.000000
+l.11690:	 # 0.000000
 	.long	1056964608
 	.align 2
-l.11650:	 # -1.000000
+l.11682:	 # -1.000000
 	.long	-1082130432
 	.align 2
-l.11649:	 # 1.000000
+l.11681:	 # 1.000000
 	.long	1065353216
 	.align 2
-l.11629:	 # 0.017453
+l.11661:	 # 0.017453
 	.long	1016003125
 	.align 2
-l.11614:	 # 2.000000
+l.11646:	 # 2.000000
 	.long	1073741824
 	.text
 	.globl _min_caml_start
 	.align 2
-rotate_quadratic_matrix.2595:
-	lwz	r6, 12(r30)				# 601
-	lwz	r7, 8(r30)				# 601
-	lwz	r8, 4(r30)				# 601
-	slwi	r9, r7, 2				# 603
-	lfsx	f0, r5, r9				# 603
-	stw	r2, 0(r3)				# 603
-	stw	r6, 4(r3)				# 603
-	stw	r8, 8(r3)				# 603
-	stw	r5, 12(r3)				# 603
-	stw	r7, 16(r3)				# 603
-	mfspr	r31, 8				# 603
-	stw	r31, 20(r3)				# 603
-	addi	r3, r3, 24				# 603
-	bl	min_caml_cos				# 603
-	addi	r3, r3, -24				# 603
-	lwz	r31, 20(r3)				# 603
-	mtspr	8, r31				# 603
-	lwz	r2, 16(r3)				# 604
-	slwi	r5, r2, 2				# 604
-	lwz	r6, 12(r3)				# 604
-	lfsx	f1, r6, r5				# 604
-	stfs	f0, 24(r3)				# 604
-	mfspr	r31, 8				# 604
-	fmr	f0, f1				# 604
-	stw	r31, 32(r3)				# 604
-	addi	r3, r3, 36				# 604
-	bl	min_caml_sin				# 604
-	addi	r3, r3, -36				# 604
-	lwz	r31, 32(r3)				# 604
-	mtspr	8, r31				# 604
-	lwz	r2, 8(r3)				# 605
-	slwi	r5, r2, 2				# 605
-	lwz	r6, 12(r3)				# 605
-	lfsx	f1, r6, r5				# 605
-	stfs	f0, 32(r3)				# 605
-	mfspr	r31, 8				# 605
-	fmr	f0, f1				# 605
-	stw	r31, 40(r3)				# 605
-	addi	r3, r3, 44				# 605
-	bl	min_caml_cos				# 605
-	addi	r3, r3, -44				# 605
-	lwz	r31, 40(r3)				# 605
-	mtspr	8, r31				# 605
-	lwz	r2, 8(r3)				# 606
-	slwi	r5, r2, 2				# 606
-	lwz	r6, 12(r3)				# 606
-	lfsx	f1, r6, r5				# 606
-	stfs	f0, 40(r3)				# 606
-	mfspr	r31, 8				# 606
-	fmr	f0, f1				# 606
-	stw	r31, 48(r3)				# 606
-	addi	r3, r3, 52				# 606
-	bl	min_caml_sin				# 606
-	addi	r3, r3, -52				# 606
-	lwz	r31, 48(r3)				# 606
-	mtspr	8, r31				# 606
-	lwz	r2, 4(r3)				# 607
-	slwi	r5, r2, 2				# 607
-	lwz	r6, 12(r3)				# 607
-	lfsx	f1, r6, r5				# 607
-	stfs	f0, 48(r3)				# 607
-	mfspr	r31, 8				# 607
-	fmr	f0, f1				# 607
-	stw	r31, 56(r3)				# 607
-	addi	r3, r3, 60				# 607
-	bl	min_caml_cos				# 607
-	addi	r3, r3, -60				# 607
-	lwz	r31, 56(r3)				# 607
-	mtspr	8, r31				# 607
-	lwz	r2, 4(r3)				# 608
-	slwi	r5, r2, 2				# 608
-	lwz	r6, 12(r3)				# 608
-	lfsx	f1, r6, r5				# 608
-	stfs	f0, 56(r3)				# 608
-	mfspr	r31, 8				# 608
-	fmr	f0, f1				# 608
-	stw	r31, 64(r3)				# 608
-	addi	r3, r3, 68				# 608
-	bl	min_caml_sin				# 608
-	addi	r3, r3, -68				# 608
-	lwz	r31, 64(r3)				# 608
-	mtspr	8, r31				# 608
-	lfs	f1, 56(r3)				# 610
-	lfs	f2, 40(r3)				# 610
-	fmul	f3, f2, f1				# 610
-	lfs	f4, 48(r3)				# 611
-	lfs	f5, 32(r3)				# 611
-	fmul	f6, f5, f4				# 611
-	fmul	f7, f6, f1				# 611
-	lfs	f8, 24(r3)				# 611
-	fmul	f9, f8, f0				# 611
-	fsub	f7, f7, f9				# 611
-	fmul	f9, f8, f4				# 612
-	fmul	f10, f9, f1				# 612
-	fmul	f11, f5, f0				# 612
-	fadd	f10, f10, f11				# 612
-	fmul	f11, f2, f0				# 614
-	fmul	f6, f6, f0				# 615
-	fmul	f12, f8, f1				# 615
-	fadd	f6, f6, f12				# 615
-	fmul	f0, f9, f0				# 616
-	fmul	f1, f5, f1				# 616
-	fsub	f0, f0, f1				# 616
-	stfs	f0, 64(r3)				# 618
-	stfs	f10, 72(r3)				# 618
-	stfs	f6, 80(r3)				# 618
-	stfs	f7, 88(r3)				# 618
-	stfs	f11, 96(r3)				# 618
-	stfs	f3, 104(r3)				# 618
+rotate_quadratic_matrix.2613:
+	lwz	r6, 12(r1)				# 614
+	lwz	r7, 8(r1)				# 614
+	lwz	r8, 4(r1)				# 614
+	slwi	r9, r7, 2				# 616
+	lfsx	f0, r5, r9				# 616
+	stw	r2, 0(r3)				# 616
+	stw	r6, 4(r3)				# 616
+	stw	r8, 8(r3)				# 616
+	stw	r5, 12(r3)				# 616
+	stw	r7, 16(r3)				# 616
+	mfspr	r31, 8				# 616
+	stw	r31, 20(r3)				# 616
+	addi	r3, r3, 24				# 616
+	bl	min_caml_cos				# 616
+	addi	r3, r3, -24				# 616
+	lwz	r31, 20(r3)				# 616
+	mtspr	8, r31				# 616
+	lwz	r2, 16(r3)				# 617
+	slwi	r5, r2, 2				# 617
+	lwz	r6, 12(r3)				# 617
+	lfsx	f1, r6, r5				# 617
+	stfs	f0, 24(r3)				# 617
+	mfspr	r31, 8				# 617
+	fmr	f0, f1				# 617
+	stw	r31, 32(r3)				# 617
+	addi	r3, r3, 36				# 617
+	bl	min_caml_sin				# 617
+	addi	r3, r3, -36				# 617
+	lwz	r31, 32(r3)				# 617
+	mtspr	8, r31				# 617
+	lwz	r2, 8(r3)				# 618
+	slwi	r5, r2, 2				# 618
+	lwz	r6, 12(r3)				# 618
+	lfsx	f1, r6, r5				# 618
+	stfs	f0, 32(r3)				# 618
 	mfspr	r31, 8				# 618
-	fmr	f0, f4				# 618
-	stw	r31, 112(r3)				# 618
-	addi	r3, r3, 116				# 618
-	bl	min_caml_fneg				# 618
-	addi	r3, r3, -116				# 618
-	lwz	r31, 112(r3)				# 618
+	fmr	f0, f1				# 618
+	stw	r31, 40(r3)				# 618
+	addi	r3, r3, 44				# 618
+	bl	min_caml_cos				# 618
+	addi	r3, r3, -44				# 618
+	lwz	r31, 40(r3)				# 618
 	mtspr	8, r31				# 618
-	lfs	f1, 40(r3)				# 619
-	lfs	f2, 32(r3)				# 619
-	fmul	f2, f2, f1				# 619
-	lfs	f3, 24(r3)				# 620
-	fmul	f1, f3, f1				# 620
-	lwz	r2, 16(r3)				# 623
-	slwi	r5, r2, 2				# 623
-	lwz	r6, 0(r3)				# 623
-	lfsx	f3, r6, r5				# 623
-	lwz	r5, 8(r3)				# 624
-	slwi	r7, r5, 2				# 624
-	lfsx	f4, r6, r7				# 624
-	lwz	r7, 4(r3)				# 625
-	slwi	r8, r7, 2				# 625
-	lfsx	f5, r6, r8				# 625
-	lfs	f6, 104(r3)				# 630
-	stfs	f1, 112(r3)				# 630
-	stfs	f2, 120(r3)				# 630
-	stfs	f5, 128(r3)				# 630
-	stfs	f0, 136(r3)				# 630
-	stfs	f4, 144(r3)				# 630
-	stfs	f3, 152(r3)				# 630
-	mfspr	r31, 8				# 630
-	fmr	f0, f6				# 630
-	stw	r31, 160(r3)				# 630
-	addi	r3, r3, 164				# 630
-	bl	min_caml_fsqr				# 630
-	addi	r3, r3, -164				# 630
-	lwz	r31, 160(r3)				# 630
-	mtspr	8, r31				# 630
-	lfs	f1, 152(r3)				# 630
-	fmul	f0, f1, f0				# 630
-	lfs	f2, 96(r3)				# 630
-	stfs	f0, 160(r3)				# 630
-	mfspr	r31, 8				# 630
-	fmr	f0, f2				# 630
-	stw	r31, 168(r3)				# 630
-	addi	r3, r3, 172				# 630
-	bl	min_caml_fsqr				# 630
-	addi	r3, r3, -172				# 630
-	lwz	r31, 168(r3)				# 630
-	mtspr	8, r31				# 630
-	lfs	f1, 144(r3)				# 630
-	fmul	f0, f1, f0				# 630
-	lfs	f2, 160(r3)				# 630
-	fadd	f0, f2, f0				# 630
-	lfs	f2, 136(r3)				# 630
-	stfs	f0, 168(r3)				# 630
-	mfspr	r31, 8				# 630
-	fmr	f0, f2				# 630
-	stw	r31, 176(r3)				# 630
-	addi	r3, r3, 180				# 630
-	bl	min_caml_fsqr				# 630
-	addi	r3, r3, -180				# 630
-	lwz	r31, 176(r3)				# 630
-	mtspr	8, r31				# 630
-	lfs	f1, 128(r3)				# 630
-	fmul	f0, f1, f0				# 630
-	lfs	f2, 168(r3)				# 630
-	fadd	f0, f2, f0				# 630
-	lwz	r2, 16(r3)				# 630
-	slwi	r5, r2, 2				# 630
-	lwz	r6, 0(r3)				# 630
-	stfsx	f0, r6, r5				# 630
-	lfs	f0, 88(r3)				# 631
-	mfspr	r31, 8				# 631
-	stw	r31, 176(r3)				# 631
-	addi	r3, r3, 180				# 631
-	bl	min_caml_fsqr				# 631
-	addi	r3, r3, -180				# 631
-	lwz	r31, 176(r3)				# 631
-	mtspr	8, r31				# 631
-	lfs	f1, 152(r3)				# 631
-	fmul	f0, f1, f0				# 631
-	lfs	f2, 80(r3)				# 631
-	stfs	f0, 176(r3)				# 631
-	mfspr	r31, 8				# 631
-	fmr	f0, f2				# 631
-	stw	r31, 184(r3)				# 631
-	addi	r3, r3, 188				# 631
-	bl	min_caml_fsqr				# 631
-	addi	r3, r3, -188				# 631
-	lwz	r31, 184(r3)				# 631
-	mtspr	8, r31				# 631
-	lfs	f1, 144(r3)				# 631
-	fmul	f0, f1, f0				# 631
-	lfs	f2, 176(r3)				# 631
-	fadd	f0, f2, f0				# 631
-	lfs	f2, 120(r3)				# 631
-	stfs	f0, 184(r3)				# 631
-	mfspr	r31, 8				# 631
-	fmr	f0, f2				# 631
-	stw	r31, 192(r3)				# 631
-	addi	r3, r3, 196				# 631
-	bl	min_caml_fsqr				# 631
-	addi	r3, r3, -196				# 631
-	lwz	r31, 192(r3)				# 631
-	mtspr	8, r31				# 631
-	lfs	f1, 128(r3)				# 631
-	fmul	f0, f1, f0				# 631
-	lfs	f2, 184(r3)				# 631
-	fadd	f0, f2, f0				# 631
-	lwz	r2, 8(r3)				# 631
-	slwi	r5, r2, 2				# 631
-	lwz	r6, 0(r3)				# 631
-	stfsx	f0, r6, r5				# 631
-	lfs	f0, 72(r3)				# 632
-	mfspr	r31, 8				# 632
-	stw	r31, 192(r3)				# 632
-	addi	r3, r3, 196				# 632
-	bl	min_caml_fsqr				# 632
-	addi	r3, r3, -196				# 632
-	lwz	r31, 192(r3)				# 632
-	mtspr	8, r31				# 632
-	lfs	f1, 152(r3)				# 632
-	fmul	f0, f1, f0				# 632
-	lfs	f2, 64(r3)				# 632
-	stfs	f0, 192(r3)				# 632
-	mfspr	r31, 8				# 632
-	fmr	f0, f2				# 632
-	stw	r31, 200(r3)				# 632
-	addi	r3, r3, 204				# 632
-	bl	min_caml_fsqr				# 632
-	addi	r3, r3, -204				# 632
-	lwz	r31, 200(r3)				# 632
-	mtspr	8, r31				# 632
-	lfs	f1, 144(r3)				# 632
-	fmul	f0, f1, f0				# 632
-	lfs	f2, 192(r3)				# 632
-	fadd	f0, f2, f0				# 632
-	lfs	f2, 112(r3)				# 632
-	stfs	f0, 200(r3)				# 632
-	mfspr	r31, 8				# 632
-	fmr	f0, f2				# 632
-	stw	r31, 208(r3)				# 632
-	addi	r3, r3, 212				# 632
-	bl	min_caml_fsqr				# 632
-	addi	r3, r3, -212				# 632
-	lwz	r31, 208(r3)				# 632
-	mtspr	8, r31				# 632
-	lfs	f1, 128(r3)				# 632
-	fmul	f0, f1, f0				# 632
-	lfs	f2, 200(r3)				# 632
-	fadd	f0, f2, f0				# 632
-	lwz	r2, 4(r3)				# 632
-	slwi	r5, r2, 2				# 632
-	lwz	r6, 0(r3)				# 632
-	stfsx	f0, r6, r5				# 632
-	lis	r31, ha16(l.11614)
-	addi	r31, r31, lo16(l.11614)
-	lfs	f0, 0(r31)				# 635
-	lfs	f2, 88(r3)				# 635
-	lfs	f3, 152(r3)				# 635
-	fmul	f4, f3, f2				# 635
-	lfs	f5, 72(r3)				# 635
-	fmul	f4, f4, f5				# 635
-	lfs	f6, 80(r3)				# 635
-	lfs	f7, 144(r3)				# 635
-	fmul	f8, f7, f6				# 635
-	lfs	f9, 64(r3)				# 635
-	fmul	f8, f8, f9				# 635
-	fadd	f4, f4, f8				# 635
-	lfs	f8, 120(r3)				# 635
-	fmul	f10, f1, f8				# 635
-	lfs	f11, 112(r3)				# 635
-	fmul	f10, f10, f11				# 635
-	fadd	f4, f4, f10				# 635
-	fmul	f4, f0, f4				# 635
-	lwz	r5, 16(r3)				# 635
-	slwi	r5, r5, 2				# 635
-	lwz	r6, 12(r3)				# 635
-	stfsx	f4, r6, r5				# 635
-	lfs	f4, 104(r3)				# 636
-	fmul	f3, f3, f4				# 636
-	fmul	f4, f3, f5				# 636
-	lfs	f5, 96(r3)				# 636
-	fmul	f5, f7, f5				# 636
-	fmul	f7, f5, f9				# 636
-	fadd	f4, f4, f7				# 636
-	lfs	f7, 136(r3)				# 636
-	fmul	f1, f1, f7				# 636
-	fmul	f7, f1, f11				# 636
-	fadd	f4, f4, f7				# 636
-	fmul	f4, f0, f4				# 636
-	lwz	r5, 8(r3)				# 636
-	slwi	r5, r5, 2				# 636
-	stfsx	f4, r6, r5				# 636
-	fmul	f2, f3, f2				# 637
-	fmul	f3, f5, f6				# 637
-	fadd	f2, f2, f3				# 637
-	fmul	f1, f1, f8				# 637
-	fadd	f1, f2, f1				# 637
-	fmul	f0, f0, f1				# 637
-	slwi	r2, r2, 2				# 637
-	stfsx	f0, r6, r2				# 637
+	lwz	r2, 8(r3)				# 619
+	slwi	r5, r2, 2				# 619
+	lwz	r6, 12(r3)				# 619
+	lfsx	f1, r6, r5				# 619
+	stfs	f0, 40(r3)				# 619
+	mfspr	r31, 8				# 619
+	fmr	f0, f1				# 619
+	stw	r31, 48(r3)				# 619
+	addi	r3, r3, 52				# 619
+	bl	min_caml_sin				# 619
+	addi	r3, r3, -52				# 619
+	lwz	r31, 48(r3)				# 619
+	mtspr	8, r31				# 619
+	lwz	r2, 4(r3)				# 620
+	slwi	r5, r2, 2				# 620
+	lwz	r6, 12(r3)				# 620
+	lfsx	f1, r6, r5				# 620
+	stfs	f0, 48(r3)				# 620
+	mfspr	r31, 8				# 620
+	fmr	f0, f1				# 620
+	stw	r31, 56(r3)				# 620
+	addi	r3, r3, 60				# 620
+	bl	min_caml_cos				# 620
+	addi	r3, r3, -60				# 620
+	lwz	r31, 56(r3)				# 620
+	mtspr	8, r31				# 620
+	lwz	r2, 4(r3)				# 621
+	slwi	r5, r2, 2				# 621
+	lwz	r6, 12(r3)				# 621
+	lfsx	f1, r6, r5				# 621
+	stfs	f0, 56(r3)				# 621
+	mfspr	r31, 8				# 621
+	fmr	f0, f1				# 621
+	stw	r31, 64(r3)				# 621
+	addi	r3, r3, 68				# 621
+	bl	min_caml_sin				# 621
+	addi	r3, r3, -68				# 621
+	lwz	r31, 64(r3)				# 621
+	mtspr	8, r31				# 621
+	lfs	f1, 56(r3)				# 623
+	lfs	f2, 40(r3)				# 623
+	fmul	f3, f2, f1				# 623
+	lfs	f4, 48(r3)				# 624
+	lfs	f5, 32(r3)				# 624
+	fmul	f6, f5, f4				# 624
+	fmul	f7, f6, f1				# 624
+	lfs	f8, 24(r3)				# 624
+	fmul	f9, f8, f0				# 624
+	fsub	f7, f7, f9				# 624
+	fmul	f9, f8, f4				# 625
+	fmul	f10, f9, f1				# 625
+	fmul	f11, f5, f0				# 625
+	fadd	f10, f10, f11				# 625
+	fmul	f11, f2, f0				# 627
+	fmul	f6, f6, f0				# 628
+	fmul	f12, f8, f1				# 628
+	fadd	f6, f6, f12				# 628
+	fmul	f0, f9, f0				# 629
+	fmul	f1, f5, f1				# 629
+	fsub	f0, f0, f1				# 629
+	fneg	f1, f4				# 107
+	fmul	f4, f5, f2				# 632
+	fmul	f2, f8, f2				# 633
+	lwz	r2, 16(r3)				# 636
+	slwi	r5, r2, 2				# 636
+	lwz	r6, 0(r3)				# 636
+	lfsx	f5, r6, r5				# 636
+	lwz	r5, 8(r3)				# 637
+	slwi	r7, r5, 2				# 637
+	lfsx	f8, r6, r7				# 637
+	lwz	r7, 4(r3)				# 638
+	slwi	r8, r7, 2				# 638
+	lfsx	f9, r6, r8				# 638
+	fmul	f12, f3, f3				# 103
+	fmul	f12, f5, f12				# 643
+	fmul	f13, f11, f11				# 103
+	fmul	f13, f8, f13				# 643
+	fadd	f12, f12, f13				# 643
+	fmul	f13, f1, f1				# 103
+	fmul	f13, f9, f13				# 643
+	fadd	f12, f12, f13				# 643
+	slwi	r8, r2, 2				# 643
+	stfsx	f12, r6, r8				# 643
+	fmul	f12, f7, f7				# 103
+	fmul	f12, f5, f12				# 644
+	fmul	f13, f6, f6				# 103
+	fmul	f13, f8, f13				# 644
+	fadd	f12, f12, f13				# 644
+	fmul	f13, f4, f4				# 103
+	fmul	f13, f9, f13				# 644
+	fadd	f12, f12, f13				# 644
+	slwi	r8, r5, 2				# 644
+	stfsx	f12, r6, r8				# 644
+	fmul	f12, f10, f10				# 103
+	fmul	f12, f5, f12				# 645
+	fmul	f13, f0, f0				# 103
+	fmul	f13, f8, f13				# 645
+	fadd	f12, f12, f13				# 645
+	fmul	f13, f2, f2				# 103
+	fmul	f13, f9, f13				# 645
+	fadd	f12, f12, f13				# 645
+	slwi	r8, r7, 2				# 645
+	stfsx	f12, r6, r8				# 645
+	lis	r31, ha16(l.11646)
+	addi	r31, r31, lo16(l.11646)
+	lfs	f12, 0(r31)				# 648
+	fmul	f13, f5, f7				# 648
+	fmul	f13, f13, f10				# 648
+	fmul	f14, f8, f6				# 648
+	fmul	f14, f14, f0				# 648
+	fadd	f13, f13, f14				# 648
+	fmul	f14, f9, f4				# 648
+	fmul	f14, f14, f2				# 648
+	fadd	f13, f13, f14				# 648
+	fmul	f13, f12, f13				# 648
+	slwi	r2, r2, 2				# 648
+	lwz	r6, 12(r3)				# 648
+	stfsx	f13, r6, r2				# 648
+	fmul	f3, f5, f3				# 649
+	fmul	f5, f3, f10				# 649
+	fmul	f8, f8, f11				# 649
+	fmul	f0, f8, f0				# 649
+	fadd	f0, f5, f0				# 649
+	fmul	f1, f9, f1				# 649
+	fmul	f2, f1, f2				# 649
+	fadd	f0, f0, f2				# 649
+	fmul	f0, f12, f0				# 649
+	slwi	r2, r5, 2				# 649
+	stfsx	f0, r6, r2				# 649
+	fmul	f0, f3, f7				# 650
+	fmul	f2, f8, f6				# 650
+	fadd	f0, f0, f2				# 650
+	fmul	f1, f1, f4				# 650
+	fadd	f0, f0, f1				# 650
+	fmul	f0, f12, f0				# 650
+	slwi	r2, r7, 2				# 650
+	stfsx	f0, r6, r2				# 650
 	blr
-read_nth_object.2598:
-	lwz	r5, 32(r30)				# 642
-	lwz	r6, 28(r30)				# 642
-	lwz	r7, 24(r30)				# 642
-	lwz	r8, 20(r30)				# 642
-	lwz	r9, 16(r30)				# 642
-	lwz	r10, 12(r30)				# 642
-	lwz	r11, 8(r30)				# 642
-	lfs	f0, 4(r30)				# 642
-	stw	r5, 0(r3)				# 644
-	stw	r6, 4(r3)				# 644
-	stw	r2, 8(r3)				# 644
-	stw	r7, 12(r3)				# 644
-	stw	r11, 16(r3)				# 644
-	stw	r10, 20(r3)				# 644
-	stfs	f0, 24(r3)				# 644
-	stw	r9, 32(r3)				# 644
-	stw	r8, 36(r3)				# 644
-	mfspr	r31, 8				# 644
-	stw	r31, 40(r3)				# 644
-	addi	r3, r3, 44				# 644
-	bl	min_caml_read_int				# 644
-	addi	r3, r3, -44				# 644
-	lwz	r31, 40(r3)				# 644
-	mtspr	8, r31				# 644
-	lwz	r5, 36(r3)				# 645
-	cmpw	cr7, r2, r5				# 645
-	bne	cr7, beq_else.17610				# 645
-	addi	r2, 0, 0
-	blr
-beq_else.17610:
-	stw	r2, 40(r3)				# 647
-	mfspr	r31, 8				# 647
-	stw	r31, 44(r3)				# 647
-	addi	r3, r3, 48				# 647
-	bl	min_caml_read_int				# 647
-	addi	r3, r3, -48				# 647
-	lwz	r31, 44(r3)				# 647
-	mtspr	8, r31				# 647
-	stw	r2, 44(r3)				# 648
-	mfspr	r31, 8				# 648
-	stw	r31, 48(r3)				# 648
-	addi	r3, r3, 52				# 648
-	bl	min_caml_read_int				# 648
-	addi	r3, r3, -52				# 648
-	lwz	r31, 48(r3)				# 648
-	mtspr	8, r31				# 648
-	stw	r2, 48(r3)				# 649
-	mfspr	r31, 8				# 649
-	stw	r31, 52(r3)				# 649
-	addi	r3, r3, 56				# 649
-	bl	min_caml_read_int				# 649
-	addi	r3, r3, -56				# 649
-	lwz	r31, 52(r3)				# 649
-	mtspr	8, r31				# 649
-	lfs	f0, 24(r3)				# 651
-	lwz	r5, 32(r3)				# 651
-	stw	r2, 52(r3)				# 651
-	mfspr	r31, 8				# 651
-	mr	r2, r5				# 651
-	stw	r31, 56(r3)				# 651
-	addi	r3, r3, 60				# 651
-	bl	min_caml_create_float_array				# 651
-	addi	r3, r3, -60				# 651
-	lwz	r31, 56(r3)				# 651
-	mtspr	8, r31				# 651
-	stw	r2, 56(r3)				# 652
-	mfspr	r31, 8				# 652
-	stw	r31, 60(r3)				# 652
-	addi	r3, r3, 64				# 652
-	bl	min_caml_read_float				# 652
-	addi	r3, r3, -64				# 652
-	lwz	r31, 60(r3)				# 652
-	mtspr	8, r31				# 652
-	lwz	r2, 20(r3)				# 652
-	slwi	r5, r2, 2				# 652
-	lwz	r6, 56(r3)				# 652
-	stfsx	f0, r6, r5				# 652
-	mfspr	r31, 8				# 653
-	stw	r31, 60(r3)				# 653
-	addi	r3, r3, 64				# 653
-	bl	min_caml_read_float				# 653
-	addi	r3, r3, -64				# 653
-	lwz	r31, 60(r3)				# 653
-	mtspr	8, r31				# 653
-	lwz	r2, 16(r3)				# 653
-	slwi	r5, r2, 2				# 653
-	lwz	r6, 56(r3)				# 653
-	stfsx	f0, r6, r5				# 653
-	mfspr	r31, 8				# 654
-	stw	r31, 60(r3)				# 654
-	addi	r3, r3, 64				# 654
-	bl	min_caml_read_float				# 654
-	addi	r3, r3, -64				# 654
-	lwz	r31, 60(r3)				# 654
-	mtspr	8, r31				# 654
-	lwz	r2, 12(r3)				# 654
-	slwi	r5, r2, 2				# 654
-	lwz	r6, 56(r3)				# 654
-	stfsx	f0, r6, r5				# 654
-	lfs	f0, 24(r3)				# 656
-	lwz	r5, 32(r3)				# 656
-	mfspr	r31, 8				# 656
-	mr	r2, r5				# 656
-	stw	r31, 60(r3)				# 656
-	addi	r3, r3, 64				# 656
-	bl	min_caml_create_float_array				# 656
-	addi	r3, r3, -64				# 656
-	lwz	r31, 60(r3)				# 656
-	mtspr	8, r31				# 656
-	stw	r2, 60(r3)				# 657
+read_nth_object.2616:
+	lwz	r5, 32(r1)				# 655
+	lwz	r6, 28(r1)				# 655
+	lwz	r7, 24(r1)				# 655
+	lwz	r8, 20(r1)				# 655
+	lwz	r9, 16(r1)				# 655
+	lwz	r10, 12(r1)				# 655
+	lwz	r11, 8(r1)				# 655
+	lfs	f0, 4(r1)				# 655
+	stw	r5, 0(r3)				# 657
+	stw	r6, 4(r3)				# 657
+	stw	r2, 8(r3)				# 657
+	stw	r7, 12(r3)				# 657
+	stw	r11, 16(r3)				# 657
+	stw	r10, 20(r3)				# 657
+	stfs	f0, 24(r3)				# 657
+	stw	r9, 32(r3)				# 657
+	stw	r8, 36(r3)				# 657
 	mfspr	r31, 8				# 657
-	stw	r31, 64(r3)				# 657
-	addi	r3, r3, 68				# 657
-	bl	min_caml_read_float				# 657
-	addi	r3, r3, -68				# 657
-	lwz	r31, 64(r3)				# 657
+	stw	r31, 40(r3)				# 657
+	addi	r3, r3, 44				# 657
+	bl	min_caml_read_int				# 657
+	addi	r3, r3, -44				# 657
+	lwz	r31, 40(r3)				# 657
 	mtspr	8, r31				# 657
-	lwz	r2, 20(r3)				# 657
-	slwi	r5, r2, 2				# 657
-	lwz	r6, 60(r3)				# 657
-	stfsx	f0, r6, r5				# 657
-	mfspr	r31, 8				# 658
-	stw	r31, 64(r3)				# 658
-	addi	r3, r3, 68				# 658
-	bl	min_caml_read_float				# 658
-	addi	r3, r3, -68				# 658
-	lwz	r31, 64(r3)				# 658
-	mtspr	8, r31				# 658
-	lwz	r2, 16(r3)				# 658
-	slwi	r5, r2, 2				# 658
-	lwz	r6, 60(r3)				# 658
-	stfsx	f0, r6, r5				# 658
-	mfspr	r31, 8				# 659
-	stw	r31, 64(r3)				# 659
-	addi	r3, r3, 68				# 659
-	bl	min_caml_read_float				# 659
-	addi	r3, r3, -68				# 659
-	lwz	r31, 64(r3)				# 659
-	mtspr	8, r31				# 659
-	lwz	r2, 12(r3)				# 659
-	slwi	r5, r2, 2				# 659
-	lwz	r6, 60(r3)				# 659
-	stfsx	f0, r6, r5				# 659
+	lwz	r5, 36(r3)				# 658
+	cmpw	cr7, r2, r5				# 658
+	bne	cr7, beq_else.15779				# 658
+	addi	r2, 0, 0
+	blr
+beq_else.15779:
+	stw	r2, 40(r3)				# 660
+	mfspr	r31, 8				# 660
+	stw	r31, 44(r3)				# 660
+	addi	r3, r3, 48				# 660
+	bl	min_caml_read_int				# 660
+	addi	r3, r3, -48				# 660
+	lwz	r31, 44(r3)				# 660
+	mtspr	8, r31				# 660
+	stw	r2, 44(r3)				# 661
 	mfspr	r31, 8				# 661
-	stw	r31, 64(r3)				# 661
-	addi	r3, r3, 68				# 661
-	bl	min_caml_read_float				# 661
-	addi	r3, r3, -68				# 661
-	lwz	r31, 64(r3)				# 661
+	stw	r31, 48(r3)				# 661
+	addi	r3, r3, 52				# 661
+	bl	min_caml_read_int				# 661
+	addi	r3, r3, -52				# 661
+	lwz	r31, 48(r3)				# 661
 	mtspr	8, r31				# 661
-	mfspr	r31, 8				# 661
-	stw	r31, 64(r3)				# 661
-	addi	r3, r3, 68				# 661
-	bl	min_caml_fisneg				# 661
-	addi	r3, r3, -68				# 661
-	lwz	r31, 64(r3)				# 661
-	mtspr	8, r31				# 661
-	lfs	f0, 24(r3)				# 663
-	lwz	r5, 12(r3)				# 663
-	stw	r2, 64(r3)				# 663
-	mfspr	r31, 8				# 663
-	mr	r2, r5				# 663
-	stw	r31, 68(r3)				# 663
-	addi	r3, r3, 72				# 663
-	bl	min_caml_create_float_array				# 663
-	addi	r3, r3, -72				# 663
-	lwz	r31, 68(r3)				# 663
-	mtspr	8, r31				# 663
-	stw	r2, 68(r3)				# 664
+	stw	r2, 48(r3)				# 662
+	mfspr	r31, 8				# 662
+	stw	r31, 52(r3)				# 662
+	addi	r3, r3, 56				# 662
+	bl	min_caml_read_int				# 662
+	addi	r3, r3, -56				# 662
+	lwz	r31, 52(r3)				# 662
+	mtspr	8, r31				# 662
+	lfs	f0, 24(r3)				# 664
+	lwz	r5, 32(r3)				# 664
+	stw	r2, 52(r3)				# 664
 	mfspr	r31, 8				# 664
-	stw	r31, 72(r3)				# 664
-	addi	r3, r3, 76				# 664
-	bl	min_caml_read_float				# 664
-	addi	r3, r3, -76				# 664
-	lwz	r31, 72(r3)				# 664
+	mr	r2, r5				# 664
+	stw	r31, 56(r3)				# 664
+	addi	r3, r3, 60				# 664
+	bl	min_caml_create_float_array				# 664
+	addi	r3, r3, -60				# 664
+	lwz	r31, 56(r3)				# 664
 	mtspr	8, r31				# 664
-	lwz	r2, 20(r3)				# 664
-	slwi	r5, r2, 2				# 664
-	lwz	r6, 68(r3)				# 664
-	stfsx	f0, r6, r5				# 664
+	stw	r2, 56(r3)				# 665
 	mfspr	r31, 8				# 665
-	stw	r31, 72(r3)				# 665
-	addi	r3, r3, 76				# 665
+	stw	r31, 60(r3)				# 665
+	addi	r3, r3, 64				# 665
 	bl	min_caml_read_float				# 665
-	addi	r3, r3, -76				# 665
-	lwz	r31, 72(r3)				# 665
+	addi	r3, r3, -64				# 665
+	lwz	r31, 60(r3)				# 665
 	mtspr	8, r31				# 665
-	lwz	r2, 16(r3)				# 665
+	lwz	r2, 20(r3)				# 665
 	slwi	r5, r2, 2				# 665
-	lwz	r6, 68(r3)				# 665
+	lwz	r6, 56(r3)				# 665
 	stfsx	f0, r6, r5				# 665
-	lfs	f0, 24(r3)				# 667
-	lwz	r5, 32(r3)				# 667
+	mfspr	r31, 8				# 666
+	stw	r31, 60(r3)				# 666
+	addi	r3, r3, 64				# 666
+	bl	min_caml_read_float				# 666
+	addi	r3, r3, -64				# 666
+	lwz	r31, 60(r3)				# 666
+	mtspr	8, r31				# 666
+	lwz	r2, 16(r3)				# 666
+	slwi	r5, r2, 2				# 666
+	lwz	r6, 56(r3)				# 666
+	stfsx	f0, r6, r5				# 666
 	mfspr	r31, 8				# 667
-	mr	r2, r5				# 667
-	stw	r31, 72(r3)				# 667
-	addi	r3, r3, 76				# 667
-	bl	min_caml_create_float_array				# 667
-	addi	r3, r3, -76				# 667
-	lwz	r31, 72(r3)				# 667
+	stw	r31, 60(r3)				# 667
+	addi	r3, r3, 64				# 667
+	bl	min_caml_read_float				# 667
+	addi	r3, r3, -64				# 667
+	lwz	r31, 60(r3)				# 667
 	mtspr	8, r31				# 667
-	stw	r2, 72(r3)				# 668
-	mfspr	r31, 8				# 668
-	stw	r31, 76(r3)				# 668
-	addi	r3, r3, 80				# 668
-	bl	min_caml_read_float				# 668
-	addi	r3, r3, -80				# 668
-	lwz	r31, 76(r3)				# 668
-	mtspr	8, r31				# 668
-	lwz	r2, 20(r3)				# 668
-	slwi	r5, r2, 2				# 668
-	lwz	r6, 72(r3)				# 668
-	stfsx	f0, r6, r5				# 668
+	lwz	r2, 12(r3)				# 667
+	slwi	r5, r2, 2				# 667
+	lwz	r6, 56(r3)				# 667
+	stfsx	f0, r6, r5				# 667
+	lfs	f0, 24(r3)				# 669
+	lwz	r5, 32(r3)				# 669
 	mfspr	r31, 8				# 669
-	stw	r31, 76(r3)				# 669
-	addi	r3, r3, 80				# 669
-	bl	min_caml_read_float				# 669
-	addi	r3, r3, -80				# 669
-	lwz	r31, 76(r3)				# 669
+	mr	r2, r5				# 669
+	stw	r31, 60(r3)				# 669
+	addi	r3, r3, 64				# 669
+	bl	min_caml_create_float_array				# 669
+	addi	r3, r3, -64				# 669
+	lwz	r31, 60(r3)				# 669
 	mtspr	8, r31				# 669
-	lwz	r2, 16(r3)				# 669
-	slwi	r5, r2, 2				# 669
-	lwz	r6, 72(r3)				# 669
-	stfsx	f0, r6, r5				# 669
+	stw	r2, 60(r3)				# 670
 	mfspr	r31, 8				# 670
-	stw	r31, 76(r3)				# 670
-	addi	r3, r3, 80				# 670
+	stw	r31, 64(r3)				# 670
+	addi	r3, r3, 68				# 670
 	bl	min_caml_read_float				# 670
-	addi	r3, r3, -80				# 670
-	lwz	r31, 76(r3)				# 670
+	addi	r3, r3, -68				# 670
+	lwz	r31, 64(r3)				# 670
 	mtspr	8, r31				# 670
-	lwz	r2, 12(r3)				# 670
+	lwz	r2, 20(r3)				# 670
 	slwi	r5, r2, 2				# 670
-	lwz	r6, 72(r3)				# 670
+	lwz	r6, 60(r3)				# 670
 	stfsx	f0, r6, r5				# 670
-	lfs	f0, 24(r3)				# 672
-	lwz	r5, 32(r3)				# 672
+	mfspr	r31, 8				# 671
+	stw	r31, 64(r3)				# 671
+	addi	r3, r3, 68				# 671
+	bl	min_caml_read_float				# 671
+	addi	r3, r3, -68				# 671
+	lwz	r31, 64(r3)				# 671
+	mtspr	8, r31				# 671
+	lwz	r2, 16(r3)				# 671
+	slwi	r5, r2, 2				# 671
+	lwz	r6, 60(r3)				# 671
+	stfsx	f0, r6, r5				# 671
 	mfspr	r31, 8				# 672
-	mr	r2, r5				# 672
-	stw	r31, 76(r3)				# 672
-	addi	r3, r3, 80				# 672
-	bl	min_caml_create_float_array				# 672
-	addi	r3, r3, -80				# 672
-	lwz	r31, 76(r3)				# 672
+	stw	r31, 64(r3)				# 672
+	addi	r3, r3, 68				# 672
+	bl	min_caml_read_float				# 672
+	addi	r3, r3, -68				# 672
+	lwz	r31, 64(r3)				# 672
 	mtspr	8, r31				# 672
-	lwz	r5, 20(r3)				# 673
-	lwz	r6, 52(r3)				# 673
-	stw	r2, 76(r3)				# 673
-	cmpw	cr7, r6, r5				# 673
-	bne	cr7, beq_else.17611				# 673
-	b	beq_cont.17612				# 673
-beq_else.17611:
-	mfspr	r31, 8				# 675
-	stw	r31, 80(r3)				# 675
-	addi	r3, r3, 84				# 675
-	bl	min_caml_read_float				# 675
-	addi	r3, r3, -84				# 675
-	lwz	r31, 80(r3)				# 675
-	mtspr	8, r31				# 675
-	lis	r31, ha16(l.11629)
-	addi	r31, r31, lo16(l.11629)
-	lfs	f1, 0(r31)				# 542
-	fmul	f0, f0, f1				# 542
-	lwz	r2, 20(r3)				# 675
-	slwi	r5, r2, 2				# 675
-	lwz	r6, 76(r3)				# 675
-	stfsx	f0, r6, r5				# 675
-	stfs	f1, 80(r3)				# 676
+	lwz	r2, 12(r3)				# 672
+	slwi	r5, r2, 2				# 672
+	lwz	r6, 60(r3)				# 672
+	stfsx	f0, r6, r5				# 672
+	mfspr	r31, 8				# 674
+	stw	r31, 64(r3)				# 674
+	addi	r3, r3, 68				# 674
+	bl	min_caml_read_float				# 674
+	addi	r3, r3, -68				# 674
+	lwz	r31, 64(r3)				# 674
+	mtspr	8, r31				# 674
+	lfs	f1, 24(r3)				# 115
+	fcmpu	cr7, f1, f0				# 115
+	bgt	cr7, ble_else.15780				# 115
+	addi	r2, 0, 0
+	b	ble_cont.15781				# 115
+ble_else.15780:
+	addi	r2, 0, 1
+ble_cont.15781:
+	lwz	r5, 12(r3)				# 676
+	stw	r2, 64(r3)				# 676
 	mfspr	r31, 8				# 676
-	stw	r31, 88(r3)				# 676
-	addi	r3, r3, 92				# 676
-	bl	min_caml_read_float				# 676
-	addi	r3, r3, -92				# 676
-	lwz	r31, 88(r3)				# 676
+	mr	r2, r5				# 676
+	fmr	f0, f1				# 676
+	stw	r31, 68(r3)				# 676
+	addi	r3, r3, 72				# 676
+	bl	min_caml_create_float_array				# 676
+	addi	r3, r3, -72				# 676
+	lwz	r31, 68(r3)				# 676
 	mtspr	8, r31				# 676
-	lfs	f1, 80(r3)				# 542
-	fmul	f0, f0, f1				# 542
-	lwz	r2, 16(r3)				# 676
-	slwi	r5, r2, 2				# 676
-	lwz	r6, 76(r3)				# 676
-	stfsx	f0, r6, r5				# 676
+	stw	r2, 68(r3)				# 677
 	mfspr	r31, 8				# 677
-	stw	r31, 88(r3)				# 677
-	addi	r3, r3, 92				# 677
+	stw	r31, 72(r3)				# 677
+	addi	r3, r3, 76				# 677
 	bl	min_caml_read_float				# 677
-	addi	r3, r3, -92				# 677
-	lwz	r31, 88(r3)				# 677
+	addi	r3, r3, -76				# 677
+	lwz	r31, 72(r3)				# 677
 	mtspr	8, r31				# 677
-	lfs	f1, 80(r3)				# 542
-	fmul	f0, f0, f1				# 542
-	lwz	r2, 12(r3)				# 677
+	lwz	r2, 20(r3)				# 677
 	slwi	r5, r2, 2				# 677
-	lwz	r6, 76(r3)				# 677
+	lwz	r6, 68(r3)				# 677
 	stfsx	f0, r6, r5				# 677
-beq_cont.17612:
-	lwz	r2, 12(r3)				# 684
-	lwz	r5, 44(r3)				# 684
-	cmpw	cr7, r5, r2				# 684
-	bne	cr7, beq_else.17613				# 684
-	addi	r6, 0, 1
-	b	beq_cont.17614				# 684
-beq_else.17613:
-	lwz	r6, 64(r3)				# 684
-beq_cont.17614:
-	addi	r7, 0, 4
+	mfspr	r31, 8				# 678
+	stw	r31, 72(r3)				# 678
+	addi	r3, r3, 76				# 678
+	bl	min_caml_read_float				# 678
+	addi	r3, r3, -76				# 678
+	lwz	r31, 72(r3)				# 678
+	mtspr	8, r31				# 678
+	lwz	r2, 16(r3)				# 678
+	slwi	r5, r2, 2				# 678
+	lwz	r6, 68(r3)				# 678
+	stfsx	f0, r6, r5				# 678
+	lfs	f0, 24(r3)				# 680
+	lwz	r5, 32(r3)				# 680
+	mfspr	r31, 8				# 680
+	mr	r2, r5				# 680
+	stw	r31, 72(r3)				# 680
+	addi	r3, r3, 76				# 680
+	bl	min_caml_create_float_array				# 680
+	addi	r3, r3, -76				# 680
+	lwz	r31, 72(r3)				# 680
+	mtspr	8, r31				# 680
+	stw	r2, 72(r3)				# 681
+	mfspr	r31, 8				# 681
+	stw	r31, 76(r3)				# 681
+	addi	r3, r3, 80				# 681
+	bl	min_caml_read_float				# 681
+	addi	r3, r3, -80				# 681
+	lwz	r31, 76(r3)				# 681
+	mtspr	8, r31				# 681
+	lwz	r2, 20(r3)				# 681
+	slwi	r5, r2, 2				# 681
+	lwz	r6, 72(r3)				# 681
+	stfsx	f0, r6, r5				# 681
+	mfspr	r31, 8				# 682
+	stw	r31, 76(r3)				# 682
+	addi	r3, r3, 80				# 682
+	bl	min_caml_read_float				# 682
+	addi	r3, r3, -80				# 682
+	lwz	r31, 76(r3)				# 682
+	mtspr	8, r31				# 682
+	lwz	r2, 16(r3)				# 682
+	slwi	r5, r2, 2				# 682
+	lwz	r6, 72(r3)				# 682
+	stfsx	f0, r6, r5				# 682
+	mfspr	r31, 8				# 683
+	stw	r31, 76(r3)				# 683
+	addi	r3, r3, 80				# 683
+	bl	min_caml_read_float				# 683
+	addi	r3, r3, -80				# 683
+	lwz	r31, 76(r3)				# 683
+	mtspr	8, r31				# 683
+	lwz	r2, 12(r3)				# 683
+	slwi	r5, r2, 2				# 683
+	lwz	r6, 72(r3)				# 683
+	stfsx	f0, r6, r5				# 683
 	lfs	f0, 24(r3)				# 685
-	stw	r6, 88(r3)				# 685
+	lwz	r5, 32(r3)				# 685
 	mfspr	r31, 8				# 685
-	mr	r2, r7				# 685
-	stw	r31, 92(r3)				# 685
-	addi	r3, r3, 96				# 685
+	mr	r2, r5				# 685
+	stw	r31, 76(r3)				# 685
+	addi	r3, r3, 80				# 685
 	bl	min_caml_create_float_array				# 685
-	addi	r3, r3, -96				# 685
-	lwz	r31, 92(r3)				# 685
+	addi	r3, r3, -80				# 685
+	lwz	r31, 76(r3)				# 685
 	mtspr	8, r31				# 685
-	mr	r5, r4				# 688
-	addi	r4, r4, 44				# 688
-	stw	r2, 40(r5)				# 688
-	lwz	r2, 76(r3)				# 688
-	stw	r2, 36(r5)				# 688
-	lwz	r6, 72(r3)				# 688
-	stw	r6, 32(r5)				# 688
-	lwz	r6, 68(r3)				# 688
-	stw	r6, 28(r5)				# 688
-	lwz	r6, 88(r3)				# 688
-	stw	r6, 24(r5)				# 688
-	lwz	r6, 60(r3)				# 688
-	stw	r6, 20(r5)				# 688
-	lwz	r6, 56(r3)				# 688
-	stw	r6, 16(r5)				# 688
-	lwz	r7, 52(r3)				# 688
-	stw	r7, 12(r5)				# 688
-	lwz	r8, 48(r3)				# 688
-	stw	r8, 8(r5)				# 688
-	lwz	r8, 44(r3)				# 688
-	stw	r8, 4(r5)				# 688
-	lwz	r9, 40(r3)				# 688
-	stw	r9, 0(r5)				# 688
-	lwz	r9, 8(r3)				# 696
-	slwi	r9, r9, 2				# 696
-	lwz	r10, 4(r3)				# 696
-	stwx	r5, r10, r9				# 696
-	lwz	r5, 32(r3)				# 698
-	cmpw	cr7, r8, r5				# 698
-	bne	cr7, beq_else.17615				# 698
-	lwz	r5, 20(r3)				# 701
-	slwi	r8, r5, 2				# 701
-	lfsx	f0, r6, r8				# 701
-	stfs	f0, 96(r3)				# 702
-	mfspr	r31, 8				# 702
-	stw	r31, 104(r3)				# 702
-	addi	r3, r3, 108				# 702
-	bl	min_caml_fiszero				# 702
-	addi	r3, r3, -108				# 702
-	lwz	r31, 104(r3)				# 702
-	mtspr	8, r31				# 702
-	lwz	r5, 20(r3)				# 702
-	cmpw	cr7, r2, r5				# 702
-	bne	cr7, beq_else.17618				# 702
-	lfs	f0, 96(r3)				# 112
-	mfspr	r31, 8				# 112
-	stw	r31, 104(r3)				# 112
-	addi	r3, r3, 108				# 112
-	bl	min_caml_fiszero				# 112
-	addi	r3, r3, -108				# 112
-	lwz	r31, 104(r3)				# 112
-	mtspr	8, r31				# 112
-	lwz	r5, 20(r3)				# 112
-	cmpw	cr7, r2, r5				# 112
-	bne	cr7, beq_else.17620				# 112
-	lfs	f0, 96(r3)				# 113
-	mfspr	r31, 8				# 113
-	stw	r31, 104(r3)				# 113
-	addi	r3, r3, 108				# 113
-	bl	min_caml_fispos				# 113
-	addi	r3, r3, -108				# 113
-	lwz	r31, 104(r3)				# 113
-	mtspr	8, r31				# 113
-	lwz	r5, 20(r3)				# 113
-	cmpw	cr7, r2, r5				# 113
-	bne	cr7, beq_else.17622				# 113
-	lis	r31, ha16(l.11650)
-	addi	r31, r31, lo16(l.11650)
-	lfs	f0, 0(r31)				# 114
-	b	beq_cont.17623				# 113
-beq_else.17622:
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 113
-beq_cont.17623:
-	b	beq_cont.17621				# 112
-beq_else.17620:
-	lis	r31, ha16(l.11658)
-	addi	r31, r31, lo16(l.11658)
-	lfs	f0, 0(r31)				# 112
-beq_cont.17621:
-	lfs	f1, 96(r3)				# 702
-	stfs	f0, 104(r3)				# 702
-	mfspr	r31, 8				# 702
-	fmr	f0, f1				# 702
-	stw	r31, 112(r3)				# 702
-	addi	r3, r3, 116				# 702
-	bl	min_caml_fsqr				# 702
-	addi	r3, r3, -116				# 702
-	lwz	r31, 112(r3)				# 702
-	mtspr	8, r31				# 702
-	lfs	f1, 104(r3)				# 702
-	fdiv	f0, f1, f0				# 702
-	b	beq_cont.17619				# 702
-beq_else.17618:
-	lis	r31, ha16(l.11658)
-	addi	r31, r31, lo16(l.11658)
-	lfs	f0, 0(r31)				# 702
-beq_cont.17619:
-	lwz	r2, 20(r3)				# 702
-	slwi	r5, r2, 2				# 702
-	lwz	r6, 56(r3)				# 702
-	stfsx	f0, r6, r5				# 702
-	lwz	r5, 16(r3)				# 703
-	slwi	r7, r5, 2				# 703
-	lfsx	f0, r6, r7				# 703
-	stfs	f0, 112(r3)				# 704
-	mfspr	r31, 8				# 704
-	stw	r31, 120(r3)				# 704
-	addi	r3, r3, 124				# 704
-	bl	min_caml_fiszero				# 704
-	addi	r3, r3, -124				# 704
-	lwz	r31, 120(r3)				# 704
-	mtspr	8, r31				# 704
-	lwz	r5, 20(r3)				# 704
-	cmpw	cr7, r2, r5				# 704
-	bne	cr7, beq_else.17624				# 704
-	lfs	f0, 112(r3)				# 112
-	mfspr	r31, 8				# 112
-	stw	r31, 120(r3)				# 112
-	addi	r3, r3, 124				# 112
-	bl	min_caml_fiszero				# 112
-	addi	r3, r3, -124				# 112
-	lwz	r31, 120(r3)				# 112
-	mtspr	8, r31				# 112
-	lwz	r5, 20(r3)				# 112
-	cmpw	cr7, r2, r5				# 112
-	bne	cr7, beq_else.17626				# 112
-	lfs	f0, 112(r3)				# 113
-	mfspr	r31, 8				# 113
-	stw	r31, 120(r3)				# 113
-	addi	r3, r3, 124				# 113
-	bl	min_caml_fispos				# 113
-	addi	r3, r3, -124				# 113
-	lwz	r31, 120(r3)				# 113
-	mtspr	8, r31				# 113
-	lwz	r5, 20(r3)				# 113
-	cmpw	cr7, r2, r5				# 113
-	bne	cr7, beq_else.17628				# 113
-	lis	r31, ha16(l.11650)
-	addi	r31, r31, lo16(l.11650)
-	lfs	f0, 0(r31)				# 114
-	b	beq_cont.17629				# 113
-beq_else.17628:
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 113
-beq_cont.17629:
-	b	beq_cont.17627				# 112
-beq_else.17626:
-	lis	r31, ha16(l.11658)
-	addi	r31, r31, lo16(l.11658)
-	lfs	f0, 0(r31)				# 112
-beq_cont.17627:
-	lfs	f1, 112(r3)				# 704
-	stfs	f0, 120(r3)				# 704
-	mfspr	r31, 8				# 704
-	fmr	f0, f1				# 704
-	stw	r31, 128(r3)				# 704
-	addi	r3, r3, 132				# 704
-	bl	min_caml_fsqr				# 704
-	addi	r3, r3, -132				# 704
-	lwz	r31, 128(r3)				# 704
-	mtspr	8, r31				# 704
-	lfs	f1, 120(r3)				# 704
-	fdiv	f0, f1, f0				# 704
-	b	beq_cont.17625				# 704
-beq_else.17624:
-	lis	r31, ha16(l.11658)
-	addi	r31, r31, lo16(l.11658)
-	lfs	f0, 0(r31)				# 704
-beq_cont.17625:
-	lwz	r2, 16(r3)				# 704
-	slwi	r2, r2, 2				# 704
-	lwz	r5, 56(r3)				# 704
-	stfsx	f0, r5, r2				# 704
-	lwz	r2, 12(r3)				# 705
-	slwi	r6, r2, 2				# 705
-	lfsx	f0, r5, r6				# 705
-	stfs	f0, 128(r3)				# 706
-	mfspr	r31, 8				# 706
-	stw	r31, 136(r3)				# 706
-	addi	r3, r3, 140				# 706
-	bl	min_caml_fiszero				# 706
-	addi	r3, r3, -140				# 706
-	lwz	r31, 136(r3)				# 706
-	mtspr	8, r31				# 706
-	lwz	r5, 20(r3)				# 706
-	cmpw	cr7, r2, r5				# 706
-	bne	cr7, beq_else.17630				# 706
-	lfs	f0, 128(r3)				# 112
-	mfspr	r31, 8				# 112
-	stw	r31, 136(r3)				# 112
-	addi	r3, r3, 140				# 112
-	bl	min_caml_fiszero				# 112
-	addi	r3, r3, -140				# 112
-	lwz	r31, 136(r3)				# 112
-	mtspr	8, r31				# 112
-	lwz	r5, 20(r3)				# 112
-	cmpw	cr7, r2, r5				# 112
-	bne	cr7, beq_else.17632				# 112
-	lfs	f0, 128(r3)				# 113
-	mfspr	r31, 8				# 113
-	stw	r31, 136(r3)				# 113
-	addi	r3, r3, 140				# 113
-	bl	min_caml_fispos				# 113
-	addi	r3, r3, -140				# 113
-	lwz	r31, 136(r3)				# 113
-	mtspr	8, r31				# 113
-	lwz	r5, 20(r3)				# 113
-	cmpw	cr7, r2, r5				# 113
-	bne	cr7, beq_else.17634				# 113
-	lis	r31, ha16(l.11650)
-	addi	r31, r31, lo16(l.11650)
-	lfs	f0, 0(r31)				# 114
-	b	beq_cont.17635				# 113
-beq_else.17634:
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 113
-beq_cont.17635:
-	b	beq_cont.17633				# 112
-beq_else.17632:
-	lis	r31, ha16(l.11658)
-	addi	r31, r31, lo16(l.11658)
-	lfs	f0, 0(r31)				# 112
-beq_cont.17633:
-	lfs	f1, 128(r3)				# 706
-	stfs	f0, 136(r3)				# 706
-	mfspr	r31, 8				# 706
-	fmr	f0, f1				# 706
-	stw	r31, 144(r3)				# 706
-	addi	r3, r3, 148				# 706
-	bl	min_caml_fsqr				# 706
-	addi	r3, r3, -148				# 706
-	lwz	r31, 144(r3)				# 706
-	mtspr	8, r31				# 706
-	lfs	f1, 136(r3)				# 706
-	fdiv	f0, f1, f0				# 706
-	b	beq_cont.17631				# 706
-beq_else.17630:
-	lis	r31, ha16(l.11658)
-	addi	r31, r31, lo16(l.11658)
-	lfs	f0, 0(r31)				# 706
-beq_cont.17631:
-	lwz	r2, 12(r3)				# 706
-	slwi	r2, r2, 2				# 706
-	lwz	r5, 56(r3)				# 706
-	stfsx	f0, r5, r2				# 706
-	b	beq_cont.17616				# 698
-beq_else.17615:
-	lwz	r5, 12(r3)				# 708
-	cmpw	cr7, r8, r5				# 708
-	bne	cr7, beq_else.17636				# 708
-	lwz	r8, 20(r3)				# 710
-	lwz	r9, 64(r3)				# 710
-	cmpw	cr7, r9, r8				# 710
-	bne	cr7, beq_else.17638				# 710
+	lwz	r5, 20(r3)				# 686
+	lwz	r6, 52(r3)				# 686
+	stw	r2, 76(r3)				# 686
+	cmpw	cr7, r6, r5				# 686
+	bne	cr7, beq_else.15782				# 686
+	b	beq_cont.15783				# 686
+beq_else.15782:
+	mfspr	r31, 8				# 688
+	stw	r31, 80(r3)				# 688
+	addi	r3, r3, 84				# 688
+	bl	min_caml_read_float				# 688
+	addi	r3, r3, -84				# 688
+	lwz	r31, 80(r3)				# 688
+	mtspr	8, r31				# 688
+	lis	r31, ha16(l.11661)
+	addi	r31, r31, lo16(l.11661)
+	lfs	f1, 0(r31)				# 555
+	fmul	f0, f0, f1				# 555
+	lwz	r2, 20(r3)				# 688
+	slwi	r5, r2, 2				# 688
+	lwz	r6, 76(r3)				# 688
+	stfsx	f0, r6, r5				# 688
+	stfs	f1, 80(r3)				# 689
+	mfspr	r31, 8				# 689
+	stw	r31, 88(r3)				# 689
+	addi	r3, r3, 92				# 689
+	bl	min_caml_read_float				# 689
+	addi	r3, r3, -92				# 689
+	lwz	r31, 88(r3)				# 689
+	mtspr	8, r31				# 689
+	lfs	f1, 80(r3)				# 555
+	fmul	f0, f0, f1				# 555
+	lwz	r2, 16(r3)				# 689
+	slwi	r5, r2, 2				# 689
+	lwz	r6, 76(r3)				# 689
+	stfsx	f0, r6, r5				# 689
+	mfspr	r31, 8				# 690
+	stw	r31, 88(r3)				# 690
+	addi	r3, r3, 92				# 690
+	bl	min_caml_read_float				# 690
+	addi	r3, r3, -92				# 690
+	lwz	r31, 88(r3)				# 690
+	mtspr	8, r31				# 690
+	lfs	f1, 80(r3)				# 555
+	fmul	f0, f0, f1				# 555
+	lwz	r2, 12(r3)				# 690
+	slwi	r5, r2, 2				# 690
+	lwz	r6, 76(r3)				# 690
+	stfsx	f0, r6, r5				# 690
+beq_cont.15783:
+	lwz	r2, 12(r3)				# 697
+	lwz	r5, 44(r3)				# 697
+	cmpw	cr7, r5, r2				# 697
+	bne	cr7, beq_else.15784				# 697
+	addi	r6, 0, 1
+	b	beq_cont.15785				# 697
+beq_else.15784:
+	lwz	r6, 64(r3)				# 697
+beq_cont.15785:
+	addi	r7, 0, 4
+	lfs	f0, 24(r3)				# 698
+	stw	r6, 88(r3)				# 698
+	mfspr	r31, 8				# 698
+	mr	r2, r7				# 698
+	stw	r31, 92(r3)				# 698
+	addi	r3, r3, 96				# 698
+	bl	min_caml_create_float_array				# 698
+	addi	r3, r3, -96				# 698
+	lwz	r31, 92(r3)				# 698
+	mtspr	8, r31				# 698
+	mr	r5, r4				# 701
+	addi	r4, r4, 44				# 701
+	stw	r2, 40(r5)				# 701
+	lwz	r2, 76(r3)				# 701
+	stw	r2, 36(r5)				# 701
+	lwz	r6, 72(r3)				# 701
+	stw	r6, 32(r5)				# 701
+	lwz	r6, 68(r3)				# 701
+	stw	r6, 28(r5)				# 701
+	lwz	r6, 88(r3)				# 701
+	stw	r6, 24(r5)				# 701
+	lwz	r6, 60(r3)				# 701
+	stw	r6, 20(r5)				# 701
+	lwz	r6, 56(r3)				# 701
+	stw	r6, 16(r5)				# 701
+	lwz	r7, 52(r3)				# 701
+	stw	r7, 12(r5)				# 701
+	lwz	r8, 48(r3)				# 701
+	stw	r8, 8(r5)				# 701
+	lwz	r8, 44(r3)				# 701
+	stw	r8, 4(r5)				# 701
+	lwz	r9, 40(r3)				# 701
+	stw	r9, 0(r5)				# 701
+	lwz	r9, 8(r3)				# 709
+	slwi	r9, r9, 2				# 709
+	lwz	r10, 4(r3)				# 709
+	stwx	r5, r10, r9				# 709
+	lwz	r5, 32(r3)				# 711
+	cmpw	cr7, r8, r5				# 711
+	bne	cr7, beq_else.15786				# 711
+	lwz	r5, 20(r3)				# 714
+	slwi	r8, r5, 2				# 714
+	lfsx	f0, r6, r8				# 714
+	lfs	f1, 24(r3)				# 111
+	fcmpu	cr7, f0, f1				# 111
+	bne	cr7, beq_else.15788				# 111
+	addi	r8, 0, 1
+	b	beq_cont.15789				# 111
+beq_else.15788:
+	addi	r8, 0, 0
+beq_cont.15789:
+	cmpw	cr7, r8, r5				# 715
+	bne	cr7, beq_else.15790				# 715
+	cmpw	cr7, r8, r5				# 125
+	bne	cr7, beq_else.15792				# 125
+	fcmpu	cr7, f0, f1				# 113
+	bgt	cr7, ble_else.15794				# 113
+	addi	r8, 0, 0
+	b	ble_cont.15795				# 113
+ble_else.15794:
+	addi	r8, 0, 1
+ble_cont.15795:
+	cmpw	cr7, r8, r5				# 126
+	bne	cr7, beq_else.15796				# 126
+	lis	r31, ha16(l.11682)
+	addi	r31, r31, lo16(l.11682)
+	lfs	f2, 0(r31)				# 127
+	b	beq_cont.15797				# 126
+beq_else.15796:
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f2, 0(r31)				# 126
+beq_cont.15797:
+	b	beq_cont.15793				# 125
+beq_else.15792:
+	lis	r31, ha16(l.11690)
+	addi	r31, r31, lo16(l.11690)
+	lfs	f2, 0(r31)				# 125
+beq_cont.15793:
+	fmul	f0, f0, f0				# 103
+	fdiv	f0, f2, f0				# 715
+	b	beq_cont.15791				# 715
+beq_else.15790:
+	lis	r31, ha16(l.11690)
+	addi	r31, r31, lo16(l.11690)
+	lfs	f0, 0(r31)				# 715
+beq_cont.15791:
+	slwi	r8, r5, 2				# 715
+	stfsx	f0, r6, r8				# 715
+	lwz	r8, 16(r3)				# 716
+	slwi	r9, r8, 2				# 716
+	lfsx	f0, r6, r9				# 716
+	fcmpu	cr7, f0, f1				# 111
+	bne	cr7, beq_else.15798				# 111
 	addi	r9, 0, 1
-	b	beq_cont.17639				# 710
-beq_else.17638:
+	b	beq_cont.15799				# 111
+beq_else.15798:
 	addi	r9, 0, 0
-beq_cont.17639:
-	slwi	r10, r8, 2				# 173
-	lfsx	f0, r6, r10				# 173
-	stw	r9, 144(r3)				# 173
-	mfspr	r31, 8				# 173
-	stw	r31, 148(r3)				# 173
-	addi	r3, r3, 152				# 173
-	bl	min_caml_fsqr				# 173
-	addi	r3, r3, -152				# 173
-	lwz	r31, 148(r3)				# 173
-	mtspr	8, r31				# 173
-	lwz	r2, 16(r3)				# 173
-	slwi	r5, r2, 2				# 173
-	lwz	r6, 56(r3)				# 173
-	lfsx	f1, r6, r5				# 173
-	stfs	f0, 152(r3)				# 173
-	mfspr	r31, 8				# 173
-	fmr	f0, f1				# 173
-	stw	r31, 160(r3)				# 173
-	addi	r3, r3, 164				# 173
-	bl	min_caml_fsqr				# 173
-	addi	r3, r3, -164				# 173
-	lwz	r31, 160(r3)				# 173
-	mtspr	8, r31				# 173
-	lfs	f1, 152(r3)				# 173
-	fadd	f0, f1, f0				# 173
-	lwz	r2, 12(r3)				# 173
-	slwi	r5, r2, 2				# 173
-	lwz	r6, 56(r3)				# 173
-	lfsx	f1, r6, r5				# 173
-	stfs	f0, 160(r3)				# 173
-	mfspr	r31, 8				# 173
-	fmr	f0, f1				# 173
-	stw	r31, 168(r3)				# 173
-	addi	r3, r3, 172				# 173
-	bl	min_caml_fsqr				# 173
-	addi	r3, r3, -172				# 173
-	lwz	r31, 168(r3)				# 173
-	mtspr	8, r31				# 173
-	lfs	f1, 160(r3)				# 173
-	fadd	f0, f1, f0				# 173
-	mfspr	r31, 8				# 173
-	stw	r31, 168(r3)				# 173
-	addi	r3, r3, 172				# 173
-	bl	min_caml_sqrt				# 173
-	addi	r3, r3, -172				# 173
-	lwz	r31, 168(r3)				# 173
-	mtspr	8, r31				# 173
-	stfs	f0, 168(r3)				# 174
-	mfspr	r31, 8				# 174
-	stw	r31, 176(r3)				# 174
-	addi	r3, r3, 180				# 174
-	bl	min_caml_fiszero				# 174
-	addi	r3, r3, -180				# 174
-	lwz	r31, 176(r3)				# 174
-	mtspr	8, r31				# 174
-	lwz	r5, 20(r3)				# 174
-	cmpw	cr7, r2, r5				# 174
-	bne	cr7, beq_else.17641				# 174
-	lwz	r2, 144(r3)				# 174
-	cmpw	cr7, r2, r5				# 174
-	bne	cr7, beq_else.17643				# 174
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 174
-	lfs	f1, 168(r3)				# 174
-	fdiv	f0, f0, f1				# 174
-	b	beq_cont.17644				# 174
-beq_else.17643:
-	lis	r31, ha16(l.11650)
-	addi	r31, r31, lo16(l.11650)
-	lfs	f0, 0(r31)				# 174
-	lfs	f1, 168(r3)				# 174
-	fdiv	f0, f0, f1				# 174
-beq_cont.17644:
-	b	beq_cont.17642				# 174
-beq_else.17641:
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 174
-beq_cont.17642:
-	slwi	r2, r5, 2				# 175
-	lwz	r6, 56(r3)				# 175
-	lfsx	f1, r6, r2				# 175
-	fmul	f1, f1, f0				# 175
-	slwi	r2, r5, 2				# 175
-	stfsx	f1, r6, r2				# 175
-	lwz	r2, 16(r3)				# 176
-	slwi	r7, r2, 2				# 176
-	lfsx	f1, r6, r7				# 176
-	fmul	f1, f1, f0				# 176
-	slwi	r2, r2, 2				# 176
-	stfsx	f1, r6, r2				# 176
-	lwz	r2, 12(r3)				# 177
-	slwi	r7, r2, 2				# 177
-	lfsx	f1, r6, r7				# 177
-	fmul	f0, f1, f0				# 177
-	slwi	r2, r2, 2				# 177
-	stfsx	f0, r6, r2				# 177
-	b	beq_cont.17637				# 708
-beq_else.17636:
-beq_cont.17637:
-beq_cont.17616:
-	lwz	r2, 20(r3)				# 714
-	lwz	r5, 52(r3)				# 714
-	cmpw	cr7, r5, r2				# 714
-	bne	cr7, beq_else.17645				# 714
-	b	beq_cont.17646				# 714
-beq_else.17645:
-	lwz	r2, 56(r3)				# 715
-	lwz	r5, 76(r3)				# 715
-	lwz	r30, 0(r3)				# 715
-	mfspr	r31, 8				# 715
-	stw	r31, 176(r3)				# 715
-	addi	r3, r3, 180				# 715
-	lwz	r31, 0(r30)				# 715
-	mtspr	9, r31				# 715
-	bctrl				# 715
-	addi	r3, r3, -180				# 715
-	lwz	r31, 176(r3)				# 715
-	mtspr	8, r31				# 715
-beq_cont.17646:
+beq_cont.15799:
+	cmpw	cr7, r9, r5				# 717
+	bne	cr7, beq_else.15800				# 717
+	cmpw	cr7, r9, r5				# 125
+	bne	cr7, beq_else.15802				# 125
+	fcmpu	cr7, f0, f1				# 113
+	bgt	cr7, ble_else.15804				# 113
+	addi	r9, 0, 0
+	b	ble_cont.15805				# 113
+ble_else.15804:
+	addi	r9, 0, 1
+ble_cont.15805:
+	cmpw	cr7, r9, r5				# 126
+	bne	cr7, beq_else.15806				# 126
+	lis	r31, ha16(l.11682)
+	addi	r31, r31, lo16(l.11682)
+	lfs	f2, 0(r31)				# 127
+	b	beq_cont.15807				# 126
+beq_else.15806:
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f2, 0(r31)				# 126
+beq_cont.15807:
+	b	beq_cont.15803				# 125
+beq_else.15802:
+	lis	r31, ha16(l.11690)
+	addi	r31, r31, lo16(l.11690)
+	lfs	f2, 0(r31)				# 125
+beq_cont.15803:
+	fmul	f0, f0, f0				# 103
+	fdiv	f0, f2, f0				# 717
+	b	beq_cont.15801				# 717
+beq_else.15800:
+	lis	r31, ha16(l.11690)
+	addi	r31, r31, lo16(l.11690)
+	lfs	f0, 0(r31)				# 717
+beq_cont.15801:
+	slwi	r8, r8, 2				# 717
+	stfsx	f0, r6, r8				# 717
+	lwz	r8, 12(r3)				# 718
+	slwi	r9, r8, 2				# 718
+	lfsx	f0, r6, r9				# 718
+	fcmpu	cr7, f0, f1				# 111
+	bne	cr7, beq_else.15808				# 111
+	addi	r9, 0, 1
+	b	beq_cont.15809				# 111
+beq_else.15808:
+	addi	r9, 0, 0
+beq_cont.15809:
+	cmpw	cr7, r9, r5				# 719
+	bne	cr7, beq_else.15810				# 719
+	cmpw	cr7, r9, r5				# 125
+	bne	cr7, beq_else.15812				# 125
+	fcmpu	cr7, f0, f1				# 113
+	bgt	cr7, ble_else.15814				# 113
+	addi	r9, 0, 0
+	b	ble_cont.15815				# 113
+ble_else.15814:
+	addi	r9, 0, 1
+ble_cont.15815:
+	cmpw	cr7, r9, r5				# 126
+	bne	cr7, beq_else.15816				# 126
+	lis	r31, ha16(l.11682)
+	addi	r31, r31, lo16(l.11682)
+	lfs	f1, 0(r31)				# 127
+	b	beq_cont.15817				# 126
+beq_else.15816:
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f1, 0(r31)				# 126
+beq_cont.15817:
+	b	beq_cont.15813				# 125
+beq_else.15812:
+	lis	r31, ha16(l.11690)
+	addi	r31, r31, lo16(l.11690)
+	lfs	f1, 0(r31)				# 125
+beq_cont.15813:
+	fmul	f0, f0, f0				# 103
+	fdiv	f0, f1, f0				# 719
+	b	beq_cont.15811				# 719
+beq_else.15810:
+	lis	r31, ha16(l.11690)
+	addi	r31, r31, lo16(l.11690)
+	lfs	f0, 0(r31)				# 719
+beq_cont.15811:
+	slwi	r8, r8, 2				# 719
+	stfsx	f0, r6, r8				# 719
+	b	beq_cont.15787				# 711
+beq_else.15786:
+	lwz	r5, 12(r3)				# 721
+	cmpw	cr7, r8, r5				# 721
+	bne	cr7, beq_else.15818				# 721
+	lwz	r8, 20(r3)				# 723
+	lwz	r9, 64(r3)				# 723
+	cmpw	cr7, r9, r8				# 723
+	bne	cr7, beq_else.15820				# 723
+	addi	r9, 0, 1
+	b	beq_cont.15821				# 723
+beq_else.15820:
+	addi	r9, 0, 0
+beq_cont.15821:
+	slwi	r10, r8, 2				# 186
+	lfsx	f0, r6, r10				# 186
+	fmul	f0, f0, f0				# 103
+	lwz	r10, 16(r3)				# 186
+	slwi	r11, r10, 2				# 186
+	lfsx	f1, r6, r11				# 186
+	fmul	f1, f1, f1				# 103
+	fadd	f0, f0, f1				# 186
+	slwi	r11, r5, 2				# 186
+	lfsx	f1, r6, r11				# 186
+	fmul	f1, f1, f1				# 103
+	fadd	f0, f0, f1				# 186
+	stw	r9, 92(r3)				# 186
+	mfspr	r31, 8				# 186
+	stw	r31, 96(r3)				# 186
+	addi	r3, r3, 100				# 186
+	bl	min_caml_sqrt				# 186
+	addi	r3, r3, -100				# 186
+	lwz	r31, 96(r3)				# 186
+	mtspr	8, r31				# 186
+	lfs	f1, 24(r3)				# 111
+	fcmpu	cr7, f0, f1				# 111
+	bne	cr7, beq_else.15822				# 111
 	addi	r2, 0, 1
-	blr
-read_object.2600:
-	lwz	r5, 20(r30)				# 725
-	lwz	r6, 16(r30)				# 725
-	lwz	r7, 12(r30)				# 725
-	lwz	r8, 8(r30)				# 725
-	lwz	r9, 4(r30)				# 725
-	cmpw	cr7, r7, r2				# 726
-	bgt	cr7, ble_else.17647				# 726
-	blr
-ble_else.17647:
-	stw	r30, 0(r3)				# 727
-	stw	r9, 4(r3)				# 727
-	stw	r6, 8(r3)				# 727
-	stw	r2, 12(r3)				# 727
-	stw	r8, 16(r3)				# 727
-	mfspr	r31, 8				# 727
-	mr	r30, r5				# 727
-	stw	r31, 20(r3)				# 727
-	addi	r3, r3, 24				# 727
-	lwz	r31, 0(r30)				# 727
-	mtspr	9, r31				# 727
-	bctrl				# 727
-	addi	r3, r3, -24				# 727
-	lwz	r31, 20(r3)				# 727
-	mtspr	8, r31				# 727
-	lwz	r5, 16(r3)				# 727
-	cmpw	cr7, r2, r5				# 727
-	bne	cr7, beq_else.17649				# 727
-	slwi	r2, r5, 2				# 730
-	lwz	r5, 8(r3)				# 730
-	lwz	r6, 12(r3)				# 730
-	stwx	r6, r5, r2				# 730
-	blr
-beq_else.17649:
-	lwz	r2, 4(r3)				# 728
-	lwz	r5, 12(r3)				# 728
-	add	r2, r5, r2				# 728
-	lwz	r30, 0(r3)				# 728
-	lwz	r29, 0(r30)				# 728
-	mtspr	9, r29
+	b	beq_cont.15823				# 111
+beq_else.15822:
+	addi	r2, 0, 0
+beq_cont.15823:
+	lwz	r5, 20(r3)				# 187
+	cmpw	cr7, r2, r5				# 187
+	bne	cr7, beq_else.15824				# 187
+	lwz	r2, 92(r3)				# 187
+	cmpw	cr7, r2, r5				# 187
+	bne	cr7, beq_else.15826				# 187
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f1, 0(r31)				# 187
+	fdiv	f0, f1, f0				# 187
+	b	beq_cont.15827				# 187
+beq_else.15826:
+	lis	r31, ha16(l.11682)
+	addi	r31, r31, lo16(l.11682)
+	lfs	f1, 0(r31)				# 187
+	fdiv	f0, f1, f0				# 187
+beq_cont.15827:
+	b	beq_cont.15825				# 187
+beq_else.15824:
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f0, 0(r31)				# 187
+beq_cont.15825:
+	slwi	r2, r5, 2				# 188
+	lwz	r6, 56(r3)				# 188
+	lfsx	f1, r6, r2				# 188
+	fmul	f1, f1, f0				# 188
+	slwi	r2, r5, 2				# 188
+	stfsx	f1, r6, r2				# 188
+	lwz	r2, 16(r3)				# 189
+	slwi	r7, r2, 2				# 189
+	lfsx	f1, r6, r7				# 189
+	fmul	f1, f1, f0				# 189
+	slwi	r2, r2, 2				# 189
+	stfsx	f1, r6, r2				# 189
+	lwz	r2, 12(r3)				# 190
+	slwi	r7, r2, 2				# 190
+	lfsx	f1, r6, r7				# 190
+	fmul	f0, f1, f0				# 190
+	slwi	r2, r2, 2				# 190
+	stfsx	f0, r6, r2				# 190
+	b	beq_cont.15819				# 721
+beq_else.15818:
+beq_cont.15819:
+beq_cont.15787:
+	lwz	r2, 20(r3)				# 727
+	lwz	r5, 52(r3)				# 727
+	cmpw	cr7, r5, r2				# 727
+	bne	cr7, beq_else.15828				# 727
+	b	beq_cont.15829				# 727
+beq_else.15828:
+	lwz	r5, 76(r3)				# 728
+	lwz	r1, 0(r3)				# 728
+	mfspr	r31, 8				# 728
+	mr	r2, r6				# 728
+	stw	r31, 96(r3)				# 728
+	addi	r3, r3, 100				# 728
+	lwz	r31, 0(r1)				# 728
+	mtspr	9, r31				# 728
 	bctr				# 728
-read_net_item.2604:
-	lwz	r5, 8(r30)				# 741
-	lwz	r6, 4(r30)				# 741
-	stw	r30, 0(r3)				# 742
-	stw	r6, 4(r3)				# 742
-	stw	r2, 8(r3)				# 742
-	stw	r5, 12(r3)				# 742
-	mfspr	r31, 8				# 742
-	stw	r31, 16(r3)				# 742
-	addi	r3, r3, 20				# 742
-	bl	min_caml_read_int				# 742
-	addi	r3, r3, -20				# 742
-	lwz	r31, 16(r3)				# 742
-	mtspr	8, r31				# 742
-	lwz	r5, 12(r3)				# 743
-	cmpw	cr7, r2, r5				# 743
-	bne	cr7, beq_else.17651				# 743
-	lwz	r2, 4(r3)				# 743
-	lwz	r6, 8(r3)				# 743
-	add	r2, r6, r2				# 743
-	b	min_caml_create_array				# 743
-beq_else.17651:
-	lwz	r5, 4(r3)				# 745
-	lwz	r6, 8(r3)				# 745
-	add	r5, r6, r5				# 745
-	lwz	r30, 0(r3)				# 745
-	stw	r2, 16(r3)				# 745
-	mfspr	r31, 8				# 745
-	mr	r2, r5				# 745
-	stw	r31, 20(r3)				# 745
-	addi	r3, r3, 24				# 745
-	lwz	r31, 0(r30)				# 745
-	mtspr	9, r31				# 745
-	bctrl				# 745
-	addi	r3, r3, -24				# 745
-	lwz	r31, 20(r3)				# 745
-	mtspr	8, r31				# 745
-	lwz	r5, 8(r3)				# 746
-	slwi	r5, r5, 2				# 746
-	lwz	r6, 16(r3)				# 746
-	stwx	r6, r2, r5				# 746
+	addi	r3, r3, -100				# 728
+	lwz	r31, 96(r3)				# 728
+	mtspr	8, r31				# 728
+beq_cont.15829:
+	addi	r2, 0, 1
 	blr
-read_or_network.2606:
-	lwz	r5, 16(r30)				# 749
-	lwz	r6, 12(r30)				# 749
-	lwz	r7, 8(r30)				# 749
-	lwz	r8, 4(r30)				# 749
-	stw	r30, 0(r3)				# 750
-	stw	r8, 4(r3)				# 750
-	stw	r2, 8(r3)				# 750
-	stw	r6, 12(r3)				# 750
-	stw	r7, 16(r3)				# 750
-	mfspr	r31, 8				# 750
-	mr	r2, r7				# 750
-	mr	r30, r5				# 750
-	stw	r31, 20(r3)				# 750
-	addi	r3, r3, 24				# 750
-	lwz	r31, 0(r30)				# 750
-	mtspr	9, r31				# 750
-	bctrl				# 750
-	addi	r3, r3, -24				# 750
-	lwz	r31, 20(r3)				# 750
-	mr	r5, r2				# 750
-	mtspr	8, r31				# 750
-	lwz	r2, 16(r3)				# 751
-	slwi	r2, r2, 2				# 751
-	lwzx	r2, r5, r2				# 751
-	lwz	r6, 12(r3)				# 751
-	cmpw	cr7, r2, r6				# 751
-	bne	cr7, beq_else.17652				# 751
-	lwz	r2, 4(r3)				# 752
-	lwz	r6, 8(r3)				# 752
-	add	r2, r6, r2				# 752
-	b	min_caml_create_array				# 752
-beq_else.17652:
-	lwz	r2, 4(r3)				# 754
-	lwz	r6, 8(r3)				# 754
-	add	r2, r6, r2				# 754
-	lwz	r30, 0(r3)				# 754
-	stw	r5, 20(r3)				# 754
-	mfspr	r31, 8				# 754
-	stw	r31, 24(r3)				# 754
-	addi	r3, r3, 28				# 754
-	lwz	r31, 0(r30)				# 754
-	mtspr	9, r31				# 754
-	bctrl				# 754
-	addi	r3, r3, -28				# 754
-	lwz	r31, 24(r3)				# 754
-	mtspr	8, r31				# 754
-	lwz	r5, 8(r3)				# 755
-	slwi	r5, r5, 2				# 755
-	lwz	r6, 20(r3)				# 755
-	stwx	r6, r2, r5				# 755
+read_object.2618:
+	lwz	r5, 20(r1)				# 738
+	lwz	r6, 16(r1)				# 738
+	lwz	r7, 12(r1)				# 738
+	lwz	r8, 8(r1)				# 738
+	lwz	r9, 4(r1)				# 738
+	cmpw	cr7, r7, r2				# 739
+	bgt	cr7, ble_else.15830				# 739
 	blr
-read_and_network.2608:
-	lwz	r5, 20(r30)				# 758
-	lwz	r6, 16(r30)				# 758
-	lwz	r7, 12(r30)				# 758
-	lwz	r8, 8(r30)				# 758
-	lwz	r9, 4(r30)				# 758
-	stw	r30, 0(r3)				# 759
-	stw	r9, 4(r3)				# 759
-	stw	r6, 8(r3)				# 759
-	stw	r2, 12(r3)				# 759
-	stw	r7, 16(r3)				# 759
-	stw	r8, 20(r3)				# 759
-	mfspr	r31, 8				# 759
-	mr	r2, r8				# 759
-	mr	r30, r5				# 759
-	stw	r31, 24(r3)				# 759
-	addi	r3, r3, 28				# 759
-	lwz	r31, 0(r30)				# 759
-	mtspr	9, r31				# 759
-	bctrl				# 759
-	addi	r3, r3, -28				# 759
-	lwz	r31, 24(r3)				# 759
-	mtspr	8, r31				# 759
-	lwz	r5, 20(r3)				# 760
-	slwi	r5, r5, 2				# 760
-	lwzx	r5, r2, r5				# 760
-	lwz	r6, 16(r3)				# 760
-	cmpw	cr7, r5, r6				# 760
-	bne	cr7, beq_else.17653				# 760
+ble_else.15830:
+	stw	r1, 0(r3)				# 740
+	stw	r9, 4(r3)				# 740
+	stw	r6, 8(r3)				# 740
+	stw	r2, 12(r3)				# 740
+	stw	r8, 16(r3)				# 740
+	mfspr	r31, 8				# 740
+	mr	r1, r5				# 740
+	stw	r31, 20(r3)				# 740
+	addi	r3, r3, 24				# 740
+	lwz	r31, 0(r1)				# 740
+	mtspr	9, r31				# 740
+	bctr				# 740
+	addi	r3, r3, -24				# 740
+	lwz	r31, 20(r3)				# 740
+	mtspr	8, r31				# 740
+	lwz	r5, 16(r3)				# 740
+	cmpw	cr7, r2, r5				# 740
+	bne	cr7, beq_else.15832				# 740
+	slwi	r2, r5, 2				# 743
+	lwz	r5, 8(r3)				# 743
+	lwz	r6, 12(r3)				# 743
+	stwx	r6, r5, r2				# 743
 	blr
-beq_else.17653:
-	lwz	r5, 12(r3)				# 762
-	slwi	r6, r5, 2				# 762
-	lwz	r7, 8(r3)				# 762
-	stwx	r2, r7, r6				# 762
-	lwz	r2, 4(r3)				# 763
-	add	r2, r5, r2				# 763
-	lwz	r30, 0(r3)				# 763
-	lwz	r29, 0(r30)				# 763
-	mtspr	9, r29
+beq_else.15832:
+	lwz	r2, 4(r3)				# 741
+	lwz	r5, 12(r3)				# 741
+	add	r2, r5, r2				# 741
+	lwz	r1, 0(r3)				# 741
+	lwz	r30, 0(r1)				# 741
+	mtspr	9, r30
+	bctr				# 741
+read_net_item.2622:
+	lwz	r5, 8(r1)				# 754
+	lwz	r6, 4(r1)				# 754
+	stw	r1, 0(r3)				# 755
+	stw	r6, 4(r3)				# 755
+	stw	r2, 8(r3)				# 755
+	stw	r5, 12(r3)				# 755
+	mfspr	r31, 8				# 755
+	stw	r31, 16(r3)				# 755
+	addi	r3, r3, 20				# 755
+	bl	min_caml_read_int				# 755
+	addi	r3, r3, -20				# 755
+	lwz	r31, 16(r3)				# 755
+	mtspr	8, r31				# 755
+	lwz	r5, 12(r3)				# 756
+	cmpw	cr7, r2, r5				# 756
+	bne	cr7, beq_else.15834				# 756
+	lwz	r2, 4(r3)				# 756
+	lwz	r6, 8(r3)				# 756
+	add	r2, r6, r2				# 756
+	b	min_caml_create_array				# 756
+beq_else.15834:
+	lwz	r5, 4(r3)				# 758
+	lwz	r6, 8(r3)				# 758
+	add	r5, r6, r5				# 758
+	lwz	r1, 0(r3)				# 758
+	stw	r2, 16(r3)				# 758
+	mfspr	r31, 8				# 758
+	mr	r2, r5				# 758
+	stw	r31, 20(r3)				# 758
+	addi	r3, r3, 24				# 758
+	lwz	r31, 0(r1)				# 758
+	mtspr	9, r31				# 758
+	bctr				# 758
+	addi	r3, r3, -24				# 758
+	lwz	r31, 20(r3)				# 758
+	mtspr	8, r31				# 758
+	lwz	r5, 8(r3)				# 759
+	slwi	r5, r5, 2				# 759
+	lwz	r6, 16(r3)				# 759
+	stwx	r6, r2, r5				# 759
+	blr
+read_or_network.2624:
+	lwz	r5, 16(r1)				# 762
+	lwz	r6, 12(r1)				# 762
+	lwz	r7, 8(r1)				# 762
+	lwz	r8, 4(r1)				# 762
+	stw	r1, 0(r3)				# 763
+	stw	r8, 4(r3)				# 763
+	stw	r2, 8(r3)				# 763
+	stw	r6, 12(r3)				# 763
+	stw	r7, 16(r3)				# 763
+	mfspr	r31, 8				# 763
+	mr	r2, r7				# 763
+	mr	r1, r5				# 763
+	stw	r31, 20(r3)				# 763
+	addi	r3, r3, 24				# 763
+	lwz	r31, 0(r1)				# 763
+	mtspr	9, r31				# 763
 	bctr				# 763
-read_parameter.2610:
-	lwz	r2, 60(r30)				# 767
-	lwz	r5, 56(r30)				# 767
-	lwz	r6, 52(r30)				# 767
-	lwz	r7, 48(r30)				# 767
-	lwz	r8, 44(r30)				# 767
-	lwz	r9, 40(r30)				# 767
-	lwz	r10, 36(r30)				# 767
-	lwz	r11, 32(r30)				# 767
-	lwz	r12, 28(r30)				# 767
-	lwz	r13, 24(r30)				# 767
-	lwz	r14, 20(r30)				# 767
-	lwz	r15, 16(r30)				# 767
-	lwz	r16, 12(r30)				# 767
-	lwz	r17, 8(r30)				# 767
-	lfs	f0, 4(r30)				# 767
-	stw	r12, 0(r3)				# 549
-	stw	r9, 4(r3)				# 549
-	stw	r11, 8(r3)				# 549
-	stw	r10, 12(r3)				# 549
-	stw	r14, 16(r3)				# 549
-	stw	r13, 20(r3)				# 549
-	stw	r2, 24(r3)				# 549
-	stw	r6, 28(r3)				# 549
-	stfs	f0, 32(r3)				# 549
-	stw	r7, 40(r3)				# 549
-	stw	r5, 44(r3)				# 549
-	stw	r15, 48(r3)				# 549
-	stw	r17, 52(r3)				# 549
-	stw	r8, 56(r3)				# 549
-	stw	r16, 60(r3)				# 549
-	mfspr	r31, 8				# 549
-	stw	r31, 64(r3)				# 549
-	addi	r3, r3, 68				# 549
-	bl	min_caml_read_float				# 549
-	addi	r3, r3, -68				# 549
-	lwz	r31, 64(r3)				# 549
-	mtspr	8, r31				# 549
-	lwz	r2, 60(r3)				# 549
-	slwi	r5, r2, 2				# 549
-	lwz	r6, 56(r3)				# 549
-	stfsx	f0, r6, r5				# 549
-	mfspr	r31, 8				# 550
-	stw	r31, 64(r3)				# 550
-	addi	r3, r3, 68				# 550
-	bl	min_caml_read_float				# 550
-	addi	r3, r3, -68				# 550
-	lwz	r31, 64(r3)				# 550
-	mtspr	8, r31				# 550
-	lwz	r2, 52(r3)				# 550
-	slwi	r5, r2, 2				# 550
-	lwz	r6, 56(r3)				# 550
-	stfsx	f0, r6, r5				# 550
-	mfspr	r31, 8				# 551
-	stw	r31, 64(r3)				# 551
-	addi	r3, r3, 68				# 551
-	bl	min_caml_read_float				# 551
-	addi	r3, r3, -68				# 551
-	lwz	r31, 64(r3)				# 551
-	mtspr	8, r31				# 551
-	lwz	r2, 48(r3)				# 551
-	slwi	r5, r2, 2				# 551
-	lwz	r6, 56(r3)				# 551
-	stfsx	f0, r6, r5				# 551
-	mfspr	r31, 8				# 553
-	stw	r31, 64(r3)				# 553
-	addi	r3, r3, 68				# 553
-	bl	min_caml_read_float				# 553
-	addi	r3, r3, -68				# 553
-	lwz	r31, 64(r3)				# 553
-	mtspr	8, r31				# 553
-	lis	r31, ha16(l.11629)
-	addi	r31, r31, lo16(l.11629)
-	lfs	f1, 0(r31)				# 542
-	fmul	f0, f0, f1				# 542
-	stfs	f1, 64(r3)				# 554
-	stfs	f0, 72(r3)				# 554
-	mfspr	r31, 8				# 554
-	stw	r31, 80(r3)				# 554
-	addi	r3, r3, 84				# 554
-	bl	min_caml_cos				# 554
-	addi	r3, r3, -84				# 554
-	lwz	r31, 80(r3)				# 554
-	mtspr	8, r31				# 554
-	lfs	f1, 72(r3)				# 555
-	stfs	f0, 80(r3)				# 555
-	mfspr	r31, 8				# 555
-	fmr	f0, f1				# 555
-	stw	r31, 88(r3)				# 555
-	addi	r3, r3, 92				# 555
-	bl	min_caml_sin				# 555
-	addi	r3, r3, -92				# 555
-	lwz	r31, 88(r3)				# 555
-	mtspr	8, r31				# 555
-	stfs	f0, 88(r3)				# 556
-	mfspr	r31, 8				# 556
-	stw	r31, 96(r3)				# 556
-	addi	r3, r3, 100				# 556
-	bl	min_caml_read_float				# 556
-	addi	r3, r3, -100				# 556
-	lwz	r31, 96(r3)				# 556
-	mtspr	8, r31				# 556
-	lfs	f1, 64(r3)				# 542
-	fmul	f0, f0, f1				# 542
-	stfs	f0, 96(r3)				# 557
-	mfspr	r31, 8				# 557
-	stw	r31, 104(r3)				# 557
-	addi	r3, r3, 108				# 557
-	bl	min_caml_cos				# 557
-	addi	r3, r3, -108				# 557
-	lwz	r31, 104(r3)				# 557
-	mtspr	8, r31				# 557
-	lfs	f1, 96(r3)				# 558
-	stfs	f0, 104(r3)				# 558
-	mfspr	r31, 8				# 558
-	fmr	f0, f1				# 558
-	stw	r31, 112(r3)				# 558
-	addi	r3, r3, 116				# 558
-	bl	min_caml_sin				# 558
-	addi	r3, r3, -116				# 558
-	lwz	r31, 112(r3)				# 558
-	mtspr	8, r31				# 558
-	lfs	f1, 80(r3)				# 560
-	fmul	f2, f1, f0				# 560
-	lis	r31, ha16(l.11673)
-	addi	r31, r31, lo16(l.11673)
-	lfs	f3, 0(r31)				# 560
-	fmul	f2, f2, f3				# 560
-	lwz	r2, 60(r3)				# 560
-	slwi	r5, r2, 2				# 560
-	lwz	r6, 44(r3)				# 560
-	stfsx	f2, r6, r5				# 560
-	lis	r31, ha16(l.11675)
-	addi	r31, r31, lo16(l.11675)
-	lfs	f2, 0(r31)				# 561
-	lfs	f4, 88(r3)				# 561
-	fmul	f2, f4, f2				# 561
-	lwz	r5, 52(r3)				# 561
-	slwi	r7, r5, 2				# 561
-	stfsx	f2, r6, r7				# 561
-	lfs	f2, 104(r3)				# 562
-	fmul	f5, f1, f2				# 562
-	fmul	f3, f5, f3				# 562
-	lwz	r7, 48(r3)				# 562
-	slwi	r8, r7, 2				# 562
-	stfsx	f3, r6, r8				# 562
-	slwi	r8, r2, 2				# 564
-	lwz	r9, 40(r3)				# 564
-	stfsx	f2, r9, r8				# 564
-	slwi	r8, r5, 2				# 565
-	lfs	f3, 32(r3)				# 565
-	stfsx	f3, r9, r8				# 565
-	stfs	f0, 112(r3)				# 566
-	mfspr	r31, 8				# 566
-	stw	r31, 120(r3)				# 566
-	addi	r3, r3, 124				# 566
-	bl	min_caml_fneg				# 566
-	addi	r3, r3, -124				# 566
-	lwz	r31, 120(r3)				# 566
-	mtspr	8, r31				# 566
-	lwz	r2, 48(r3)				# 566
-	slwi	r5, r2, 2				# 566
-	lwz	r6, 40(r3)				# 566
-	stfsx	f0, r6, r5				# 566
-	lfs	f0, 88(r3)				# 568
-	mfspr	r31, 8				# 568
-	stw	r31, 120(r3)				# 568
-	addi	r3, r3, 124				# 568
-	bl	min_caml_fneg				# 568
-	addi	r3, r3, -124				# 568
-	lwz	r31, 120(r3)				# 568
-	mtspr	8, r31				# 568
-	lfs	f1, 112(r3)				# 568
-	fmul	f0, f0, f1				# 568
-	lwz	r2, 60(r3)				# 568
-	slwi	r5, r2, 2				# 568
-	lwz	r6, 28(r3)				# 568
-	stfsx	f0, r6, r5				# 568
-	lfs	f0, 80(r3)				# 569
-	mfspr	r31, 8				# 569
-	stw	r31, 120(r3)				# 569
-	addi	r3, r3, 124				# 569
-	bl	min_caml_fneg				# 569
-	addi	r3, r3, -124				# 569
-	lwz	r31, 120(r3)				# 569
-	mtspr	8, r31				# 569
-	lwz	r2, 52(r3)				# 569
-	slwi	r5, r2, 2				# 569
-	lwz	r6, 28(r3)				# 569
-	stfsx	f0, r6, r5				# 569
-	lfs	f0, 88(r3)				# 570
-	mfspr	r31, 8				# 570
-	stw	r31, 120(r3)				# 570
-	addi	r3, r3, 124				# 570
-	bl	min_caml_fneg				# 570
-	addi	r3, r3, -124				# 570
-	lwz	r31, 120(r3)				# 570
-	mtspr	8, r31				# 570
-	lfs	f1, 104(r3)				# 570
-	fmul	f0, f0, f1				# 570
-	lwz	r2, 48(r3)				# 570
-	slwi	r5, r2, 2				# 570
-	lwz	r6, 28(r3)				# 570
-	stfsx	f0, r6, r5				# 570
-	lwz	r5, 60(r3)				# 572
-	slwi	r6, r5, 2				# 572
-	lwz	r7, 56(r3)				# 572
-	lfsx	f0, r7, r6				# 572
-	slwi	r6, r5, 2				# 572
-	lwz	r8, 44(r3)				# 572
-	lfsx	f1, r8, r6				# 572
-	fsub	f0, f0, f1				# 572
-	slwi	r6, r5, 2				# 572
-	lwz	r9, 24(r3)				# 572
-	stfsx	f0, r9, r6				# 572
-	lwz	r6, 52(r3)				# 573
-	slwi	r10, r6, 2				# 573
-	lfsx	f0, r7, r10				# 573
-	slwi	r10, r6, 2				# 573
-	lfsx	f1, r8, r10				# 573
-	fsub	f0, f0, f1				# 573
-	slwi	r10, r6, 2				# 573
-	stfsx	f0, r9, r10				# 573
-	slwi	r10, r2, 2				# 574
-	lfsx	f0, r7, r10				# 574
-	slwi	r7, r2, 2				# 574
-	lfsx	f1, r8, r7				# 574
-	fsub	f0, f0, f1				# 574
-	slwi	r7, r2, 2				# 574
-	stfsx	f0, r9, r7				# 574
-	mfspr	r31, 8				# 581
-	stw	r31, 120(r3)				# 581
-	addi	r3, r3, 124				# 581
-	bl	min_caml_read_int				# 581
-	addi	r3, r3, -124				# 581
-	lwz	r31, 120(r3)				# 581
-	mtspr	8, r31				# 581
-	mfspr	r31, 8				# 584
-	stw	r31, 120(r3)				# 584
-	addi	r3, r3, 124				# 584
-	bl	min_caml_read_float				# 584
-	addi	r3, r3, -124				# 584
-	lwz	r31, 120(r3)				# 584
-	mtspr	8, r31				# 584
-	lfs	f1, 64(r3)				# 542
-	fmul	f0, f0, f1				# 542
-	stfs	f0, 120(r3)				# 585
-	mfspr	r31, 8				# 585
-	stw	r31, 128(r3)				# 585
-	addi	r3, r3, 132				# 585
-	bl	min_caml_sin				# 585
-	addi	r3, r3, -132				# 585
-	lwz	r31, 128(r3)				# 585
-	mtspr	8, r31				# 585
-	mfspr	r31, 8				# 586
-	stw	r31, 128(r3)				# 586
-	addi	r3, r3, 132				# 586
-	bl	min_caml_fneg				# 586
-	addi	r3, r3, -132				# 586
-	lwz	r31, 128(r3)				# 586
-	mtspr	8, r31				# 586
-	lwz	r2, 52(r3)				# 586
-	slwi	r2, r2, 2				# 586
-	lwz	r5, 20(r3)				# 586
-	stfsx	f0, r5, r2				# 586
-	mfspr	r31, 8				# 587
-	stw	r31, 128(r3)				# 587
-	addi	r3, r3, 132				# 587
-	bl	min_caml_read_float				# 587
-	addi	r3, r3, -132				# 587
-	lwz	r31, 128(r3)				# 587
-	mtspr	8, r31				# 587
-	lfs	f1, 64(r3)				# 542
-	fmul	f0, f0, f1				# 542
-	lfs	f1, 120(r3)				# 588
-	stfs	f0, 128(r3)				# 588
-	mfspr	r31, 8				# 588
-	fmr	f0, f1				# 588
-	stw	r31, 136(r3)				# 588
-	addi	r3, r3, 140				# 588
-	bl	min_caml_cos				# 588
-	addi	r3, r3, -140				# 588
-	lwz	r31, 136(r3)				# 588
-	mtspr	8, r31				# 588
-	lfs	f1, 128(r3)				# 589
-	stfs	f0, 136(r3)				# 589
-	mfspr	r31, 8				# 589
-	fmr	f0, f1				# 589
-	stw	r31, 144(r3)				# 589
-	addi	r3, r3, 148				# 589
-	bl	min_caml_sin				# 589
-	addi	r3, r3, -148				# 589
-	lwz	r31, 144(r3)				# 589
-	mtspr	8, r31				# 589
-	lfs	f1, 136(r3)				# 590
-	fmul	f0, f1, f0				# 590
-	lwz	r2, 60(r3)				# 590
-	slwi	r5, r2, 2				# 590
-	lwz	r6, 20(r3)				# 590
-	stfsx	f0, r6, r5				# 590
-	lfs	f0, 128(r3)				# 591
-	mfspr	r31, 8				# 591
-	stw	r31, 144(r3)				# 591
-	addi	r3, r3, 148				# 591
-	bl	min_caml_cos				# 591
-	addi	r3, r3, -148				# 591
-	lwz	r31, 144(r3)				# 591
-	mtspr	8, r31				# 591
-	lfs	f1, 136(r3)				# 592
-	fmul	f0, f1, f0				# 592
-	lwz	r2, 48(r3)				# 592
-	slwi	r2, r2, 2				# 592
-	lwz	r5, 20(r3)				# 592
-	stfsx	f0, r5, r2				# 592
-	mfspr	r31, 8				# 593
-	stw	r31, 144(r3)				# 593
-	addi	r3, r3, 148				# 593
-	bl	min_caml_read_float				# 593
-	addi	r3, r3, -148				# 593
-	lwz	r31, 144(r3)				# 593
-	mtspr	8, r31				# 593
-	lwz	r2, 60(r3)				# 593
-	slwi	r5, r2, 2				# 593
-	lwz	r6, 16(r3)				# 593
-	stfsx	f0, r6, r5				# 593
-	lwz	r30, 12(r3)				# 735
-	mfspr	r31, 8				# 735
-	stw	r31, 144(r3)				# 735
-	addi	r3, r3, 148				# 735
-	lwz	r31, 0(r30)				# 735
-	mtspr	9, r31				# 735
-	bctrl				# 735
-	addi	r3, r3, -148				# 735
-	lwz	r31, 144(r3)				# 735
-	mtspr	8, r31				# 735
-	lwz	r2, 60(r3)				# 772
-	lwz	r30, 8(r3)				# 772
+	addi	r3, r3, -24				# 763
+	lwz	r31, 20(r3)				# 763
+	mr	r5, r2				# 763
+	mtspr	8, r31				# 763
+	lwz	r2, 16(r3)				# 764
+	slwi	r2, r2, 2				# 764
+	lwzx	r2, r5, r2				# 764
+	lwz	r6, 12(r3)				# 764
+	cmpw	cr7, r2, r6				# 764
+	bne	cr7, beq_else.15835				# 764
+	lwz	r2, 4(r3)				# 765
+	lwz	r6, 8(r3)				# 765
+	add	r2, r6, r2				# 765
+	b	min_caml_create_array				# 765
+beq_else.15835:
+	lwz	r2, 4(r3)				# 767
+	lwz	r6, 8(r3)				# 767
+	add	r2, r6, r2				# 767
+	lwz	r1, 0(r3)				# 767
+	stw	r5, 20(r3)				# 767
+	mfspr	r31, 8				# 767
+	stw	r31, 24(r3)				# 767
+	addi	r3, r3, 28				# 767
+	lwz	r31, 0(r1)				# 767
+	mtspr	9, r31				# 767
+	bctr				# 767
+	addi	r3, r3, -28				# 767
+	lwz	r31, 24(r3)				# 767
+	mtspr	8, r31				# 767
+	lwz	r5, 8(r3)				# 768
+	slwi	r5, r5, 2				# 768
+	lwz	r6, 20(r3)				# 768
+	stwx	r6, r2, r5				# 768
+	blr
+read_and_network.2626:
+	lwz	r5, 20(r1)				# 771
+	lwz	r6, 16(r1)				# 771
+	lwz	r7, 12(r1)				# 771
+	lwz	r8, 8(r1)				# 771
+	lwz	r9, 4(r1)				# 771
+	stw	r1, 0(r3)				# 772
+	stw	r9, 4(r3)				# 772
+	stw	r6, 8(r3)				# 772
+	stw	r2, 12(r3)				# 772
+	stw	r7, 16(r3)				# 772
+	stw	r8, 20(r3)				# 772
 	mfspr	r31, 8				# 772
-	stw	r31, 144(r3)				# 772
-	addi	r3, r3, 148				# 772
-	lwz	r31, 0(r30)				# 772
+	mr	r2, r8				# 772
+	mr	r1, r5				# 772
+	stw	r31, 24(r3)				# 772
+	addi	r3, r3, 28				# 772
+	lwz	r31, 0(r1)				# 772
 	mtspr	9, r31				# 772
-	bctrl				# 772
-	addi	r3, r3, -148				# 772
-	lwz	r31, 144(r3)				# 772
+	bctr				# 772
+	addi	r3, r3, -28				# 772
+	lwz	r31, 24(r3)				# 772
 	mtspr	8, r31				# 772
-	lwz	r2, 60(r3)				# 773
-	lwz	r30, 4(r3)				# 773
-	mfspr	r31, 8				# 773
-	stw	r31, 144(r3)				# 773
-	addi	r3, r3, 148				# 773
-	lwz	r31, 0(r30)				# 773
-	mtspr	9, r31				# 773
-	bctrl				# 773
-	addi	r3, r3, -148				# 773
-	lwz	r31, 144(r3)				# 773
-	mtspr	8, r31				# 773
-	lwz	r5, 60(r3)				# 773
+	lwz	r5, 20(r3)				# 773
 	slwi	r5, r5, 2				# 773
-	lwz	r6, 0(r3)				# 773
-	stwx	r2, r6, r5				# 773
+	lwzx	r5, r2, r5				# 773
+	lwz	r6, 16(r3)				# 773
+	cmpw	cr7, r5, r6				# 773
+	bne	cr7, beq_else.15836				# 773
 	blr
-solver_rect.2621:
-	lwz	r6, 16(r30)				# 798
-	lwz	r7, 12(r30)				# 798
-	lwz	r8, 8(r30)				# 798
-	lwz	r9, 4(r30)				# 798
-	slwi	r10, r8, 2				# 784
-	lfsx	f3, r5, r10				# 784
-	stw	r6, 0(r3)				# 784
-	stfs	f2, 8(r3)				# 784
-	stw	r7, 16(r3)				# 784
-	stfs	f1, 24(r3)				# 784
-	stw	r9, 32(r3)				# 784
-	stfs	f0, 40(r3)				# 784
-	stw	r5, 48(r3)				# 784
-	stw	r2, 52(r3)				# 784
-	stw	r8, 56(r3)				# 784
-	mfspr	r31, 8				# 784
-	fmr	f0, f3				# 784
-	stw	r31, 60(r3)				# 784
-	addi	r3, r3, 64				# 784
-	bl	min_caml_fiszero				# 784
-	addi	r3, r3, -64				# 784
-	lwz	r31, 60(r3)				# 784
-	mtspr	8, r31				# 784
-	lwz	r5, 56(r3)				# 784
-	cmpw	cr7, r2, r5				# 784
-	bne	cr7, beq_else.17659				# 784
-	lwz	r2, 52(r3)				# 307
-	lwz	r6, 16(r2)				# 307
-	lwz	r7, 24(r2)				# 259
-	slwi	r8, r5, 2				# 786
-	lwz	r9, 48(r3)				# 786
-	lfsx	f0, r9, r8				# 786
-	stw	r6, 60(r3)				# 786
-	stw	r7, 64(r3)				# 786
+beq_else.15836:
+	lwz	r5, 12(r3)				# 775
+	slwi	r6, r5, 2				# 775
+	lwz	r7, 8(r3)				# 775
+	stwx	r2, r7, r6				# 775
+	lwz	r2, 4(r3)				# 776
+	add	r2, r5, r2				# 776
+	lwz	r1, 0(r3)				# 776
+	lwz	r30, 0(r1)				# 776
+	mtspr	9, r30
+	bctr				# 776
+read_parameter.2628:
+	lwz	r2, 60(r1)				# 780
+	lwz	r5, 56(r1)				# 780
+	lwz	r6, 52(r1)				# 780
+	lwz	r7, 48(r1)				# 780
+	lwz	r8, 44(r1)				# 780
+	lwz	r9, 40(r1)				# 780
+	lwz	r10, 36(r1)				# 780
+	lwz	r11, 32(r1)				# 780
+	lwz	r12, 28(r1)				# 780
+	lwz	r13, 24(r1)				# 780
+	lwz	r14, 20(r1)				# 780
+	lwz	r15, 16(r1)				# 780
+	lwz	r16, 12(r1)				# 780
+	lwz	r17, 8(r1)				# 780
+	lfs	f0, 4(r1)				# 780
+	stw	r12, 0(r3)				# 562
+	stw	r9, 4(r3)				# 562
+	stw	r11, 8(r3)				# 562
+	stw	r10, 12(r3)				# 562
+	stw	r14, 16(r3)				# 562
+	stw	r13, 20(r3)				# 562
+	stw	r2, 24(r3)				# 562
+	stw	r6, 28(r3)				# 562
+	stfs	f0, 32(r3)				# 562
+	stw	r7, 40(r3)				# 562
+	stw	r5, 44(r3)				# 562
+	stw	r15, 48(r3)				# 562
+	stw	r17, 52(r3)				# 562
+	stw	r8, 56(r3)				# 562
+	stw	r16, 60(r3)				# 562
+	mfspr	r31, 8				# 562
+	stw	r31, 64(r3)				# 562
+	addi	r3, r3, 68				# 562
+	bl	min_caml_read_float				# 562
+	addi	r3, r3, -68				# 562
+	lwz	r31, 64(r3)				# 562
+	mtspr	8, r31				# 562
+	lwz	r2, 60(r3)				# 562
+	slwi	r5, r2, 2				# 562
+	lwz	r6, 56(r3)				# 562
+	stfsx	f0, r6, r5				# 562
+	mfspr	r31, 8				# 563
+	stw	r31, 64(r3)				# 563
+	addi	r3, r3, 68				# 563
+	bl	min_caml_read_float				# 563
+	addi	r3, r3, -68				# 563
+	lwz	r31, 64(r3)				# 563
+	mtspr	8, r31				# 563
+	lwz	r2, 52(r3)				# 563
+	slwi	r5, r2, 2				# 563
+	lwz	r6, 56(r3)				# 563
+	stfsx	f0, r6, r5				# 563
+	mfspr	r31, 8				# 564
+	stw	r31, 64(r3)				# 564
+	addi	r3, r3, 68				# 564
+	bl	min_caml_read_float				# 564
+	addi	r3, r3, -68				# 564
+	lwz	r31, 64(r3)				# 564
+	mtspr	8, r31				# 564
+	lwz	r2, 48(r3)				# 564
+	slwi	r5, r2, 2				# 564
+	lwz	r6, 56(r3)				# 564
+	stfsx	f0, r6, r5				# 564
+	mfspr	r31, 8				# 566
+	stw	r31, 64(r3)				# 566
+	addi	r3, r3, 68				# 566
+	bl	min_caml_read_float				# 566
+	addi	r3, r3, -68				# 566
+	lwz	r31, 64(r3)				# 566
+	mtspr	8, r31				# 566
+	lis	r31, ha16(l.11661)
+	addi	r31, r31, lo16(l.11661)
+	lfs	f1, 0(r31)				# 555
+	fmul	f0, f0, f1				# 555
+	stfs	f1, 64(r3)				# 567
+	stfs	f0, 72(r3)				# 567
+	mfspr	r31, 8				# 567
+	stw	r31, 80(r3)				# 567
+	addi	r3, r3, 84				# 567
+	bl	min_caml_cos				# 567
+	addi	r3, r3, -84				# 567
+	lwz	r31, 80(r3)				# 567
+	mtspr	8, r31				# 567
+	lfs	f1, 72(r3)				# 568
+	stfs	f0, 80(r3)				# 568
+	mfspr	r31, 8				# 568
+	fmr	f0, f1				# 568
+	stw	r31, 88(r3)				# 568
+	addi	r3, r3, 92				# 568
+	bl	min_caml_sin				# 568
+	addi	r3, r3, -92				# 568
+	lwz	r31, 88(r3)				# 568
+	mtspr	8, r31				# 568
+	stfs	f0, 88(r3)				# 569
+	mfspr	r31, 8				# 569
+	stw	r31, 96(r3)				# 569
+	addi	r3, r3, 100				# 569
+	bl	min_caml_read_float				# 569
+	addi	r3, r3, -100				# 569
+	lwz	r31, 96(r3)				# 569
+	mtspr	8, r31				# 569
+	lfs	f1, 64(r3)				# 555
+	fmul	f0, f0, f1				# 555
+	stfs	f0, 96(r3)				# 570
+	mfspr	r31, 8				# 570
+	stw	r31, 104(r3)				# 570
+	addi	r3, r3, 108				# 570
+	bl	min_caml_cos				# 570
+	addi	r3, r3, -108				# 570
+	lwz	r31, 104(r3)				# 570
+	mtspr	8, r31				# 570
+	lfs	f1, 96(r3)				# 571
+	stfs	f0, 104(r3)				# 571
+	mfspr	r31, 8				# 571
+	fmr	f0, f1				# 571
+	stw	r31, 112(r3)				# 571
+	addi	r3, r3, 116				# 571
+	bl	min_caml_sin				# 571
+	addi	r3, r3, -116				# 571
+	lwz	r31, 112(r3)				# 571
+	mtspr	8, r31				# 571
+	lfs	f1, 80(r3)				# 573
+	fmul	f2, f1, f0				# 573
+	lis	r31, ha16(l.11705)
+	addi	r31, r31, lo16(l.11705)
+	lfs	f3, 0(r31)				# 573
+	fmul	f2, f2, f3				# 573
+	lwz	r2, 60(r3)				# 573
+	slwi	r5, r2, 2				# 573
+	lwz	r6, 44(r3)				# 573
+	stfsx	f2, r6, r5				# 573
+	lis	r31, ha16(l.11707)
+	addi	r31, r31, lo16(l.11707)
+	lfs	f2, 0(r31)				# 574
+	lfs	f4, 88(r3)				# 574
+	fmul	f2, f4, f2				# 574
+	lwz	r5, 52(r3)				# 574
+	slwi	r7, r5, 2				# 574
+	stfsx	f2, r6, r7				# 574
+	lfs	f2, 104(r3)				# 575
+	fmul	f5, f1, f2				# 575
+	fmul	f3, f5, f3				# 575
+	lwz	r7, 48(r3)				# 575
+	slwi	r8, r7, 2				# 575
+	stfsx	f3, r6, r8				# 575
+	slwi	r8, r2, 2				# 577
+	lwz	r9, 40(r3)				# 577
+	stfsx	f2, r9, r8				# 577
+	slwi	r8, r5, 2				# 578
+	lfs	f3, 32(r3)				# 578
+	stfsx	f3, r9, r8				# 578
+	fneg	f3, f0				# 107
+	slwi	r8, r7, 2				# 579
+	stfsx	f3, r9, r8				# 579
+	fneg	f3, f4				# 107
+	fmul	f0, f3, f0				# 581
+	slwi	r8, r2, 2				# 581
+	lwz	r9, 28(r3)				# 581
+	stfsx	f0, r9, r8				# 581
+	fneg	f0, f1				# 107
+	slwi	r8, r5, 2				# 582
+	stfsx	f0, r9, r8				# 582
+	fmul	f0, f3, f2				# 583
+	slwi	r8, r7, 2				# 583
+	stfsx	f0, r9, r8				# 583
+	slwi	r8, r2, 2				# 585
+	lwz	r9, 56(r3)				# 585
+	lfsx	f0, r9, r8				# 585
+	slwi	r8, r2, 2				# 585
+	lfsx	f1, r6, r8				# 585
+	fsub	f0, f0, f1				# 585
+	slwi	r8, r2, 2				# 585
+	lwz	r10, 24(r3)				# 585
+	stfsx	f0, r10, r8				# 585
+	slwi	r8, r5, 2				# 586
+	lfsx	f0, r9, r8				# 586
+	slwi	r8, r5, 2				# 586
+	lfsx	f1, r6, r8				# 586
+	fsub	f0, f0, f1				# 586
+	slwi	r8, r5, 2				# 586
+	stfsx	f0, r10, r8				# 586
+	slwi	r8, r7, 2				# 587
+	lfsx	f0, r9, r8				# 587
+	slwi	r8, r7, 2				# 587
+	lfsx	f1, r6, r8				# 587
+	fsub	f0, f0, f1				# 587
+	slwi	r6, r7, 2				# 587
+	stfsx	f0, r10, r6				# 587
+	mfspr	r31, 8				# 594
+	stw	r31, 112(r3)				# 594
+	addi	r3, r3, 116				# 594
+	bl	min_caml_read_int				# 594
+	addi	r3, r3, -116				# 594
+	lwz	r31, 112(r3)				# 594
+	mtspr	8, r31				# 594
+	mfspr	r31, 8				# 597
+	stw	r31, 112(r3)				# 597
+	addi	r3, r3, 116				# 597
+	bl	min_caml_read_float				# 597
+	addi	r3, r3, -116				# 597
+	lwz	r31, 112(r3)				# 597
+	mtspr	8, r31				# 597
+	lfs	f1, 64(r3)				# 555
+	fmul	f0, f0, f1				# 555
+	stfs	f0, 112(r3)				# 598
+	mfspr	r31, 8				# 598
+	stw	r31, 120(r3)				# 598
+	addi	r3, r3, 124				# 598
+	bl	min_caml_sin				# 598
+	addi	r3, r3, -124				# 598
+	lwz	r31, 120(r3)				# 598
+	mtspr	8, r31				# 598
+	fneg	f0, f0				# 107
+	lwz	r2, 52(r3)				# 599
+	slwi	r2, r2, 2				# 599
+	lwz	r5, 20(r3)				# 599
+	stfsx	f0, r5, r2				# 599
+	mfspr	r31, 8				# 600
+	stw	r31, 120(r3)				# 600
+	addi	r3, r3, 124				# 600
+	bl	min_caml_read_float				# 600
+	addi	r3, r3, -124				# 600
+	lwz	r31, 120(r3)				# 600
+	mtspr	8, r31				# 600
+	lfs	f1, 64(r3)				# 555
+	fmul	f0, f0, f1				# 555
+	lfs	f1, 112(r3)				# 601
+	stfs	f0, 120(r3)				# 601
+	mfspr	r31, 8				# 601
+	fmr	f0, f1				# 601
+	stw	r31, 128(r3)				# 601
+	addi	r3, r3, 132				# 601
+	bl	min_caml_cos				# 601
+	addi	r3, r3, -132				# 601
+	lwz	r31, 128(r3)				# 601
+	mtspr	8, r31				# 601
+	lfs	f1, 120(r3)				# 602
+	stfs	f0, 128(r3)				# 602
+	mfspr	r31, 8				# 602
+	fmr	f0, f1				# 602
+	stw	r31, 136(r3)				# 602
+	addi	r3, r3, 140				# 602
+	bl	min_caml_sin				# 602
+	addi	r3, r3, -140				# 602
+	lwz	r31, 136(r3)				# 602
+	mtspr	8, r31				# 602
+	lfs	f1, 128(r3)				# 603
+	fmul	f0, f1, f0				# 603
+	lwz	r2, 60(r3)				# 603
+	slwi	r5, r2, 2				# 603
+	lwz	r6, 20(r3)				# 603
+	stfsx	f0, r6, r5				# 603
+	lfs	f0, 120(r3)				# 604
+	mfspr	r31, 8				# 604
+	stw	r31, 136(r3)				# 604
+	addi	r3, r3, 140				# 604
+	bl	min_caml_cos				# 604
+	addi	r3, r3, -140				# 604
+	lwz	r31, 136(r3)				# 604
+	mtspr	8, r31				# 604
+	lfs	f1, 128(r3)				# 605
+	fmul	f0, f1, f0				# 605
+	lwz	r2, 48(r3)				# 605
+	slwi	r2, r2, 2				# 605
+	lwz	r5, 20(r3)				# 605
+	stfsx	f0, r5, r2				# 605
+	mfspr	r31, 8				# 606
+	stw	r31, 136(r3)				# 606
+	addi	r3, r3, 140				# 606
+	bl	min_caml_read_float				# 606
+	addi	r3, r3, -140				# 606
+	lwz	r31, 136(r3)				# 606
+	mtspr	8, r31				# 606
+	lwz	r2, 60(r3)				# 606
+	slwi	r5, r2, 2				# 606
+	lwz	r6, 16(r3)				# 606
+	stfsx	f0, r6, r5				# 606
+	lwz	r1, 12(r3)				# 748
+	mfspr	r31, 8				# 748
+	stw	r31, 136(r3)				# 748
+	addi	r3, r3, 140				# 748
+	lwz	r31, 0(r1)				# 748
+	mtspr	9, r31				# 748
+	bctr				# 748
+	addi	r3, r3, -140				# 748
+	lwz	r31, 136(r3)				# 748
+	mtspr	8, r31				# 748
+	lwz	r2, 60(r3)				# 785
+	lwz	r1, 8(r3)				# 785
+	mfspr	r31, 8				# 785
+	stw	r31, 136(r3)				# 785
+	addi	r3, r3, 140				# 785
+	lwz	r31, 0(r1)				# 785
+	mtspr	9, r31				# 785
+	bctr				# 785
+	addi	r3, r3, -140				# 785
+	lwz	r31, 136(r3)				# 785
+	mtspr	8, r31				# 785
+	lwz	r2, 60(r3)				# 786
+	lwz	r1, 4(r3)				# 786
 	mfspr	r31, 8				# 786
-	stw	r31, 68(r3)				# 786
-	addi	r3, r3, 72				# 786
-	bl	min_caml_fisneg				# 786
-	addi	r3, r3, -72				# 786
-	lwz	r31, 68(r3)				# 786
+	stw	r31, 136(r3)				# 786
+	addi	r3, r3, 140				# 786
+	lwz	r31, 0(r1)				# 786
+	mtspr	9, r31				# 786
+	bctr				# 786
+	addi	r3, r3, -140				# 786
+	lwz	r31, 136(r3)				# 786
 	mtspr	8, r31				# 786
-	lwz	r5, 56(r3)				# 106
-	lwz	r6, 64(r3)				# 106
-	cmpw	cr7, r6, r5				# 106
-	bne	cr7, beq_else.17661				# 106
-	b	beq_cont.17662				# 106
-beq_else.17661:
-	cmpw	cr7, r2, r5				# 106
-	bne	cr7, beq_else.17663				# 106
-	addi	r2, 0, 1
-	b	beq_cont.17664				# 106
-beq_else.17663:
-	addi	r2, 0, 0
-beq_cont.17664:
-beq_cont.17662:
-	slwi	r6, r5, 2				# 786
-	lwz	r7, 60(r3)				# 786
-	lfsx	f0, r7, r6				# 786
-	cmpw	cr7, r2, r5				# 119
-	bne	cr7, beq_else.17665				# 119
-	mfspr	r31, 8				# 119
-	stw	r31, 68(r3)				# 119
-	addi	r3, r3, 72				# 119
-	bl	min_caml_fneg				# 119
-	addi	r3, r3, -72				# 119
-	lwz	r31, 68(r3)				# 119
-	mtspr	8, r31				# 119
-	b	beq_cont.17666				# 119
-beq_else.17665:
-beq_cont.17666:
-	lfs	f1, 40(r3)				# 788
-	fsub	f0, f0, f1				# 788
-	lwz	r2, 56(r3)				# 788
-	slwi	r5, r2, 2				# 788
-	lwz	r6, 48(r3)				# 788
-	lfsx	f2, r6, r5				# 788
-	fdiv	f0, f0, f2				# 788
-	lwz	r5, 32(r3)				# 789
-	slwi	r7, r5, 2				# 789
-	lfsx	f2, r6, r7				# 789
-	fmul	f2, f0, f2				# 789
-	lfs	f3, 24(r3)				# 789
-	fadd	f2, f2, f3				# 789
-	stfs	f0, 72(r3)				# 789
-	mfspr	r31, 8				# 789
-	fmr	f0, f2				# 789
-	stw	r31, 80(r3)				# 789
-	addi	r3, r3, 84				# 789
-	bl	min_caml_fabs				# 789
-	addi	r3, r3, -84				# 789
-	lwz	r31, 80(r3)				# 789
-	mtspr	8, r31				# 789
-	lwz	r2, 32(r3)				# 789
-	slwi	r5, r2, 2				# 789
-	lwz	r6, 60(r3)				# 789
-	lfsx	f1, r6, r5				# 789
-	mfspr	r31, 8				# 789
-	stw	r31, 80(r3)				# 789
-	addi	r3, r3, 84				# 789
-	bl	min_caml_fless				# 789
-	addi	r3, r3, -84				# 789
-	lwz	r31, 80(r3)				# 789
-	mtspr	8, r31				# 789
-	lwz	r5, 56(r3)				# 789
-	cmpw	cr7, r2, r5				# 789
-	bne	cr7, beq_else.17668				# 789
-	addi	r2, 0, 0
-	b	beq_cont.17669				# 789
-beq_else.17668:
-	lwz	r2, 16(r3)				# 790
-	slwi	r6, r2, 2				# 790
-	lwz	r7, 48(r3)				# 790
-	lfsx	f0, r7, r6				# 790
-	lfs	f1, 72(r3)				# 790
-	fmul	f0, f1, f0				# 790
-	lfs	f2, 8(r3)				# 790
-	fadd	f0, f0, f2				# 790
-	mfspr	r31, 8				# 790
-	stw	r31, 80(r3)				# 790
-	addi	r3, r3, 84				# 790
-	bl	min_caml_fabs				# 790
-	addi	r3, r3, -84				# 790
-	lwz	r31, 80(r3)				# 790
-	mtspr	8, r31				# 790
-	lwz	r2, 16(r3)				# 790
-	slwi	r5, r2, 2				# 790
-	lwz	r6, 60(r3)				# 790
-	lfsx	f1, r6, r5				# 790
-	mfspr	r31, 8				# 790
-	stw	r31, 80(r3)				# 790
-	addi	r3, r3, 84				# 790
-	bl	min_caml_fless				# 790
-	addi	r3, r3, -84				# 790
-	lwz	r31, 80(r3)				# 790
-	mtspr	8, r31				# 790
-	lwz	r5, 56(r3)				# 790
-	cmpw	cr7, r2, r5				# 790
-	bne	cr7, beq_else.17670				# 790
-	addi	r2, 0, 0
-	b	beq_cont.17671				# 790
-beq_else.17670:
-	slwi	r2, r5, 2				# 791
-	lwz	r6, 0(r3)				# 791
-	lfs	f0, 72(r3)				# 791
-	stfsx	f0, r6, r2				# 791
-	addi	r2, 0, 1
-beq_cont.17671:
-beq_cont.17669:
-	b	beq_cont.17660				# 784
-beq_else.17659:
-	addi	r2, 0, 0
-beq_cont.17660:
-	cmpw	cr7, r2, r5				# 799
-	bne	cr7, beq_else.17672				# 799
-	lwz	r2, 32(r3)				# 784
-	slwi	r6, r2, 2				# 784
-	lwz	r7, 48(r3)				# 784
-	lfsx	f0, r7, r6				# 784
-	mfspr	r31, 8				# 784
-	stw	r31, 80(r3)				# 784
-	addi	r3, r3, 84				# 784
-	bl	min_caml_fiszero				# 784
-	addi	r3, r3, -84				# 784
-	lwz	r31, 80(r3)				# 784
-	mtspr	8, r31				# 784
-	lwz	r5, 56(r3)				# 784
-	cmpw	cr7, r2, r5				# 784
-	bne	cr7, beq_else.17673				# 784
-	lwz	r2, 52(r3)				# 307
-	lwz	r6, 16(r2)				# 307
-	lwz	r7, 24(r2)				# 259
-	lwz	r8, 32(r3)				# 786
-	slwi	r9, r8, 2				# 786
-	lwz	r10, 48(r3)				# 786
-	lfsx	f0, r10, r9				# 786
-	stw	r6, 80(r3)				# 786
-	stw	r7, 84(r3)				# 786
-	mfspr	r31, 8				# 786
-	stw	r31, 88(r3)				# 786
-	addi	r3, r3, 92				# 786
-	bl	min_caml_fisneg				# 786
-	addi	r3, r3, -92				# 786
-	lwz	r31, 88(r3)				# 786
-	mtspr	8, r31				# 786
-	lwz	r5, 56(r3)				# 106
-	lwz	r6, 84(r3)				# 106
-	cmpw	cr7, r6, r5				# 106
-	bne	cr7, beq_else.17675				# 106
-	b	beq_cont.17676				# 106
-beq_else.17675:
-	cmpw	cr7, r2, r5				# 106
-	bne	cr7, beq_else.17677				# 106
-	addi	r2, 0, 1
-	b	beq_cont.17678				# 106
-beq_else.17677:
-	addi	r2, 0, 0
-beq_cont.17678:
-beq_cont.17676:
-	lwz	r6, 32(r3)				# 786
-	slwi	r7, r6, 2				# 786
-	lwz	r8, 80(r3)				# 786
-	lfsx	f0, r8, r7				# 786
-	cmpw	cr7, r2, r5				# 119
-	bne	cr7, beq_else.17679				# 119
-	mfspr	r31, 8				# 119
-	stw	r31, 88(r3)				# 119
-	addi	r3, r3, 92				# 119
-	bl	min_caml_fneg				# 119
-	addi	r3, r3, -92				# 119
-	lwz	r31, 88(r3)				# 119
-	mtspr	8, r31				# 119
-	b	beq_cont.17680				# 119
-beq_else.17679:
-beq_cont.17680:
-	lfs	f1, 24(r3)				# 788
-	fsub	f0, f0, f1				# 788
-	lwz	r2, 32(r3)				# 788
-	slwi	r5, r2, 2				# 788
-	lwz	r6, 48(r3)				# 788
-	lfsx	f2, r6, r5				# 788
-	fdiv	f0, f0, f2				# 788
-	lwz	r5, 16(r3)				# 789
-	slwi	r7, r5, 2				# 789
-	lfsx	f2, r6, r7				# 789
-	fmul	f2, f0, f2				# 789
-	lfs	f3, 8(r3)				# 789
-	fadd	f2, f2, f3				# 789
-	stfs	f0, 88(r3)				# 789
-	mfspr	r31, 8				# 789
-	fmr	f0, f2				# 789
-	stw	r31, 96(r3)				# 789
-	addi	r3, r3, 100				# 789
-	bl	min_caml_fabs				# 789
-	addi	r3, r3, -100				# 789
-	lwz	r31, 96(r3)				# 789
-	mtspr	8, r31				# 789
-	lwz	r2, 16(r3)				# 789
-	slwi	r5, r2, 2				# 789
-	lwz	r6, 80(r3)				# 789
-	lfsx	f1, r6, r5				# 789
-	mfspr	r31, 8				# 789
-	stw	r31, 96(r3)				# 789
-	addi	r3, r3, 100				# 789
-	bl	min_caml_fless				# 789
-	addi	r3, r3, -100				# 789
-	lwz	r31, 96(r3)				# 789
-	mtspr	8, r31				# 789
-	lwz	r5, 56(r3)				# 789
-	cmpw	cr7, r2, r5				# 789
-	bne	cr7, beq_else.17681				# 789
-	addi	r2, 0, 0
-	b	beq_cont.17682				# 789
-beq_else.17681:
-	slwi	r2, r5, 2				# 790
-	lwz	r6, 48(r3)				# 790
-	lfsx	f0, r6, r2				# 790
-	lfs	f1, 88(r3)				# 790
-	fmul	f0, f1, f0				# 790
-	lfs	f2, 40(r3)				# 790
-	fadd	f0, f0, f2				# 790
-	mfspr	r31, 8				# 790
-	stw	r31, 96(r3)				# 790
-	addi	r3, r3, 100				# 790
-	bl	min_caml_fabs				# 790
-	addi	r3, r3, -100				# 790
-	lwz	r31, 96(r3)				# 790
-	mtspr	8, r31				# 790
-	lwz	r2, 56(r3)				# 790
-	slwi	r5, r2, 2				# 790
-	lwz	r6, 80(r3)				# 790
-	lfsx	f1, r6, r5				# 790
-	mfspr	r31, 8				# 790
-	stw	r31, 96(r3)				# 790
-	addi	r3, r3, 100				# 790
-	bl	min_caml_fless				# 790
-	addi	r3, r3, -100				# 790
-	lwz	r31, 96(r3)				# 790
-	mtspr	8, r31				# 790
-	lwz	r5, 56(r3)				# 790
-	cmpw	cr7, r2, r5				# 790
-	bne	cr7, beq_else.17683				# 790
-	addi	r2, 0, 0
-	b	beq_cont.17684				# 790
-beq_else.17683:
-	slwi	r2, r5, 2				# 791
-	lwz	r6, 0(r3)				# 791
-	lfs	f0, 88(r3)				# 791
-	stfsx	f0, r6, r2				# 791
-	addi	r2, 0, 1
-beq_cont.17684:
-beq_cont.17682:
-	b	beq_cont.17674				# 784
-beq_else.17673:
-	addi	r2, 0, 0
-beq_cont.17674:
-	cmpw	cr7, r2, r5				# 800
-	bne	cr7, beq_else.17685				# 800
-	lwz	r2, 16(r3)				# 784
-	slwi	r6, r2, 2				# 784
-	lwz	r7, 48(r3)				# 784
-	lfsx	f0, r7, r6				# 784
-	mfspr	r31, 8				# 784
-	stw	r31, 96(r3)				# 784
-	addi	r3, r3, 100				# 784
-	bl	min_caml_fiszero				# 784
-	addi	r3, r3, -100				# 784
-	lwz	r31, 96(r3)				# 784
-	mtspr	8, r31				# 784
-	lwz	r5, 56(r3)				# 784
-	cmpw	cr7, r2, r5				# 784
-	bne	cr7, beq_else.17686				# 784
-	lwz	r2, 52(r3)				# 307
-	lwz	r6, 16(r2)				# 307
-	lwz	r2, 24(r2)				# 259
-	lwz	r7, 16(r3)				# 786
-	slwi	r8, r7, 2				# 786
-	lwz	r9, 48(r3)				# 786
-	lfsx	f0, r9, r8				# 786
-	stw	r6, 96(r3)				# 786
-	stw	r2, 100(r3)				# 786
-	mfspr	r31, 8				# 786
-	stw	r31, 104(r3)				# 786
-	addi	r3, r3, 108				# 786
-	bl	min_caml_fisneg				# 786
-	addi	r3, r3, -108				# 786
-	lwz	r31, 104(r3)				# 786
-	mtspr	8, r31				# 786
-	lwz	r5, 56(r3)				# 106
-	lwz	r6, 100(r3)				# 106
-	cmpw	cr7, r6, r5				# 106
-	bne	cr7, beq_else.17688				# 106
-	b	beq_cont.17689				# 106
-beq_else.17688:
-	cmpw	cr7, r2, r5				# 106
-	bne	cr7, beq_else.17690				# 106
-	addi	r2, 0, 1
-	b	beq_cont.17691				# 106
-beq_else.17690:
-	addi	r2, 0, 0
-beq_cont.17691:
-beq_cont.17689:
-	lwz	r6, 16(r3)				# 786
-	slwi	r7, r6, 2				# 786
-	lwz	r8, 96(r3)				# 786
-	lfsx	f0, r8, r7				# 786
-	cmpw	cr7, r2, r5				# 119
-	bne	cr7, beq_else.17692				# 119
-	mfspr	r31, 8				# 119
-	stw	r31, 104(r3)				# 119
-	addi	r3, r3, 108				# 119
-	bl	min_caml_fneg				# 119
-	addi	r3, r3, -108				# 119
-	lwz	r31, 104(r3)				# 119
-	mtspr	8, r31				# 119
-	b	beq_cont.17693				# 119
-beq_else.17692:
-beq_cont.17693:
-	lfs	f1, 8(r3)				# 788
-	fsub	f0, f0, f1				# 788
-	lwz	r2, 16(r3)				# 788
-	slwi	r2, r2, 2				# 788
-	lwz	r5, 48(r3)				# 788
-	lfsx	f1, r5, r2				# 788
-	fdiv	f0, f0, f1				# 788
-	lwz	r2, 56(r3)				# 789
-	slwi	r6, r2, 2				# 789
-	lfsx	f1, r5, r6				# 789
-	fmul	f1, f0, f1				# 789
-	lfs	f2, 40(r3)				# 789
-	fadd	f1, f1, f2				# 789
-	stfs	f0, 104(r3)				# 789
-	mfspr	r31, 8				# 789
-	fmr	f0, f1				# 789
-	stw	r31, 112(r3)				# 789
-	addi	r3, r3, 116				# 789
-	bl	min_caml_fabs				# 789
-	addi	r3, r3, -116				# 789
-	lwz	r31, 112(r3)				# 789
-	mtspr	8, r31				# 789
-	lwz	r2, 56(r3)				# 789
-	slwi	r5, r2, 2				# 789
-	lwz	r6, 96(r3)				# 789
-	lfsx	f1, r6, r5				# 789
-	mfspr	r31, 8				# 789
-	stw	r31, 112(r3)				# 789
-	addi	r3, r3, 116				# 789
-	bl	min_caml_fless				# 789
-	addi	r3, r3, -116				# 789
-	lwz	r31, 112(r3)				# 789
-	mtspr	8, r31				# 789
-	lwz	r5, 56(r3)				# 789
-	cmpw	cr7, r2, r5				# 789
-	bne	cr7, beq_else.17694				# 789
-	addi	r2, 0, 0
-	b	beq_cont.17695				# 789
-beq_else.17694:
-	lwz	r2, 32(r3)				# 790
-	slwi	r6, r2, 2				# 790
-	lwz	r7, 48(r3)				# 790
-	lfsx	f0, r7, r6				# 790
-	lfs	f1, 104(r3)				# 790
-	fmul	f0, f1, f0				# 790
-	lfs	f2, 24(r3)				# 790
-	fadd	f0, f0, f2				# 790
-	mfspr	r31, 8				# 790
-	stw	r31, 112(r3)				# 790
-	addi	r3, r3, 116				# 790
-	bl	min_caml_fabs				# 790
-	addi	r3, r3, -116				# 790
-	lwz	r31, 112(r3)				# 790
-	mtspr	8, r31				# 790
-	lwz	r2, 32(r3)				# 790
-	slwi	r2, r2, 2				# 790
-	lwz	r5, 96(r3)				# 790
-	lfsx	f1, r5, r2				# 790
-	mfspr	r31, 8				# 790
-	stw	r31, 112(r3)				# 790
-	addi	r3, r3, 116				# 790
-	bl	min_caml_fless				# 790
-	addi	r3, r3, -116				# 790
-	lwz	r31, 112(r3)				# 790
-	mtspr	8, r31				# 790
-	lwz	r5, 56(r3)				# 790
-	cmpw	cr7, r2, r5				# 790
-	bne	cr7, beq_else.17696				# 790
-	addi	r2, 0, 0
-	b	beq_cont.17697				# 790
-beq_else.17696:
-	slwi	r2, r5, 2				# 791
-	lwz	r6, 0(r3)				# 791
-	lfs	f0, 104(r3)				# 791
-	stfsx	f0, r6, r2				# 791
-	addi	r2, 0, 1
-beq_cont.17697:
-beq_cont.17695:
-	b	beq_cont.17687				# 784
-beq_else.17686:
-	addi	r2, 0, 0
-beq_cont.17687:
-	cmpw	cr7, r2, r5				# 801
-	bne	cr7, beq_else.17698				# 801
-	addi	r2, 0, 0
+	lwz	r5, 60(r3)				# 786
+	slwi	r5, r5, 2				# 786
+	lwz	r6, 0(r3)				# 786
+	stwx	r2, r6, r5				# 786
 	blr
-beq_else.17698:
-	addi	r2, 0, 3
-	blr
-beq_else.17685:
-	addi	r2, 0, 2
-	blr
-beq_else.17672:
+solver_rect.2639:
+	lwz	r6, 20(r1)				# 811
+	lwz	r7, 16(r1)				# 811
+	lwz	r8, 12(r1)				# 811
+	lwz	r9, 8(r1)				# 811
+	lfs	f3, 4(r1)				# 811
+	slwi	r10, r8, 2				# 797
+	lfsx	f4, r5, r10				# 797
+	fcmpu	cr7, f4, f3				# 111
+	bne	cr7, beq_else.15839				# 111
+	addi	r10, 0, 1
+	b	beq_cont.15840				# 111
+beq_else.15839:
+	addi	r10, 0, 0
+beq_cont.15840:
+	stw	r6, 0(r3)				# 797
+	stfs	f0, 8(r3)				# 797
+	stfs	f2, 16(r3)				# 797
+	stw	r7, 24(r3)				# 797
+	stfs	f1, 32(r3)				# 797
+	stw	r2, 40(r3)				# 797
+	stfs	f3, 48(r3)				# 797
+	stw	r5, 56(r3)				# 797
+	stw	r9, 60(r3)				# 797
+	stw	r8, 64(r3)				# 797
+	cmpw	cr7, r10, r8				# 797
+	bne	cr7, beq_else.15844				# 797
+	lwz	r10, 16(r2)				# 320
+	lwz	r11, 24(r2)				# 272
+	slwi	r12, r8, 2				# 799
+	lfsx	f4, r5, r12				# 799
+	fcmpu	cr7, f3, f4				# 115
+	bgt	cr7, ble_else.15846				# 115
+	addi	r12, 0, 0
+	b	ble_cont.15847				# 115
+ble_else.15846:
+	addi	r12, 0, 1
+ble_cont.15847:
+	cmpw	cr7, r11, r8				# 119
+	bne	cr7, beq_else.15848				# 119
+	mr	r11, r12				# 119
+	b	beq_cont.15849				# 119
+beq_else.15848:
+	cmpw	cr7, r12, r8				# 119
+	bne	cr7, beq_else.15850				# 119
+	addi	r11, 0, 1
+	b	beq_cont.15851				# 119
+beq_else.15850:
+	addi	r11, 0, 0
+beq_cont.15851:
+beq_cont.15849:
+	slwi	r12, r8, 2				# 799
+	lfsx	f4, r10, r12				# 799
+	cmpw	cr7, r11, r8				# 132
+	bne	cr7, beq_else.15852				# 132
+	fneg	f4, f4				# 107
+	b	beq_cont.15853				# 132
+beq_else.15852:
+beq_cont.15853:
+	fsub	f4, f4, f0				# 801
+	slwi	r11, r8, 2				# 801
+	lfsx	f5, r5, r11				# 801
+	fdiv	f4, f4, f5				# 801
+	slwi	r11, r9, 2				# 802
+	lfsx	f5, r5, r11				# 802
+	fmul	f5, f4, f5				# 802
+	fadd	f5, f5, f1				# 802
+	stfs	f4, 72(r3)				# 802
+	stw	r10, 80(r3)				# 802
+	mfspr	r31, 8				# 802
+	fmr	f0, f5				# 802
+	stw	r31, 84(r3)				# 802
+	addi	r3, r3, 88				# 802
+	bl	min_caml_fabs				# 802
+	addi	r3, r3, -88				# 802
+	lwz	r31, 84(r3)				# 802
+	mtspr	8, r31				# 802
+	lwz	r2, 60(r3)				# 802
+	slwi	r5, r2, 2				# 802
+	lwz	r6, 80(r3)				# 802
+	lfsx	f1, r6, r5				# 802
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.15855				# 109
+	addi	r5, 0, 0
+	b	ble_cont.15856				# 109
+ble_else.15855:
+	addi	r5, 0, 1
+ble_cont.15856:
+	lwz	r7, 64(r3)				# 802
+	cmpw	cr7, r5, r7				# 802
+	bne	cr7, beq_else.15857				# 802
+	addi	r2, 0, 0
+	b	beq_cont.15858				# 802
+beq_else.15857:
+	lwz	r5, 24(r3)				# 803
+	slwi	r8, r5, 2				# 803
+	lwz	r9, 56(r3)				# 803
+	lfsx	f0, r9, r8				# 803
+	lfs	f1, 72(r3)				# 803
+	fmul	f0, f1, f0				# 803
+	lfs	f2, 16(r3)				# 803
+	fadd	f0, f0, f2				# 803
+	mfspr	r31, 8				# 803
+	stw	r31, 84(r3)				# 803
+	addi	r3, r3, 88				# 803
+	bl	min_caml_fabs				# 803
+	addi	r3, r3, -88				# 803
+	lwz	r31, 84(r3)				# 803
+	mtspr	8, r31				# 803
+	lwz	r2, 24(r3)				# 803
+	slwi	r5, r2, 2				# 803
+	lwz	r6, 80(r3)				# 803
+	lfsx	f1, r6, r5				# 803
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.15859				# 109
+	addi	r5, 0, 0
+	b	ble_cont.15860				# 109
+ble_else.15859:
+	addi	r5, 0, 1
+ble_cont.15860:
+	lwz	r6, 64(r3)				# 803
+	cmpw	cr7, r5, r6				# 803
+	bne	cr7, beq_else.15861				# 803
+	addi	r2, 0, 0
+	b	beq_cont.15862				# 803
+beq_else.15861:
+	slwi	r5, r6, 2				# 804
+	lwz	r7, 0(r3)				# 804
+	lfs	f0, 72(r3)				# 804
+	stfsx	f0, r7, r5				# 804
 	addi	r2, 0, 1
-	blr
-solver_second.2646:
-	lwz	r6, 20(r30)				# 855
-	lwz	r7, 16(r30)				# 855
-	lwz	r8, 12(r30)				# 855
-	lwz	r9, 8(r30)				# 855
-	lwz	r10, 4(r30)				# 855
-	slwi	r11, r9, 2				# 859
-	lfsx	f3, r5, r11				# 859
-	slwi	r11, r10, 2				# 859
-	lfsx	f4, r5, r11				# 859
-	slwi	r11, r7, 2				# 859
-	lfsx	f5, r5, r11				# 859
-	stw	r6, 0(r3)				# 823
-	stw	r8, 4(r3)				# 823
-	stfs	f2, 8(r3)				# 823
-	stfs	f1, 16(r3)				# 823
-	stfs	f0, 24(r3)				# 823
-	stw	r5, 32(r3)				# 823
-	stfs	f3, 40(r3)				# 823
-	stw	r7, 48(r3)				# 823
-	stfs	f5, 56(r3)				# 823
-	stw	r10, 64(r3)				# 823
-	stfs	f4, 72(r3)				# 823
-	stw	r9, 80(r3)				# 823
-	stw	r2, 84(r3)				# 823
-	mfspr	r31, 8				# 823
-	fmr	f0, f3				# 823
-	stw	r31, 88(r3)				# 823
-	addi	r3, r3, 92				# 823
-	bl	min_caml_fsqr				# 823
-	addi	r3, r3, -92				# 823
-	lwz	r31, 88(r3)				# 823
-	mtspr	8, r31				# 823
-	lwz	r2, 84(r3)				# 277
-	lwz	r5, 16(r2)				# 277
-	lwz	r6, 80(r3)				# 282
-	slwi	r7, r6, 2				# 282
-	lfsx	f1, r5, r7				# 282
-	fmul	f0, f0, f1				# 823
-	lfs	f1, 72(r3)				# 823
-	stfs	f0, 88(r3)				# 823
-	mfspr	r31, 8				# 823
-	fmr	f0, f1				# 823
-	stw	r31, 96(r3)				# 823
-	addi	r3, r3, 100				# 823
-	bl	min_caml_fsqr				# 823
-	addi	r3, r3, -100				# 823
-	lwz	r31, 96(r3)				# 823
-	mtspr	8, r31				# 823
-	lwz	r2, 84(r3)				# 287
-	lwz	r5, 16(r2)				# 287
-	lwz	r6, 64(r3)				# 292
-	slwi	r7, r6, 2				# 292
-	lfsx	f1, r5, r7				# 292
-	fmul	f0, f0, f1				# 823
-	lfs	f1, 88(r3)				# 823
-	fadd	f0, f1, f0				# 823
-	lfs	f1, 56(r3)				# 823
-	stfs	f0, 96(r3)				# 823
-	mfspr	r31, 8				# 823
-	fmr	f0, f1				# 823
-	stw	r31, 104(r3)				# 823
-	addi	r3, r3, 108				# 823
-	bl	min_caml_fsqr				# 823
-	addi	r3, r3, -108				# 823
-	lwz	r31, 104(r3)				# 823
-	mtspr	8, r31				# 823
-	lwz	r2, 84(r3)				# 297
-	lwz	r5, 16(r2)				# 297
-	lwz	r6, 48(r3)				# 302
-	slwi	r7, r6, 2				# 302
-	lfsx	f1, r5, r7				# 302
-	fmul	f0, f0, f1				# 823
-	lfs	f1, 96(r3)				# 823
-	fadd	f0, f1, f0				# 823
-	lwz	r5, 12(r2)				# 268
-	lwz	r7, 80(r3)				# 825
-	cmpw	cr7, r5, r7				# 825
-	bne	cr7, beq_else.17702				# 825
-	b	beq_cont.17703				# 825
-beq_else.17702:
-	lfs	f1, 56(r3)				# 829
-	lfs	f2, 72(r3)				# 829
-	fmul	f3, f2, f1				# 829
-	lwz	r5, 36(r2)				# 397
-	slwi	r8, r7, 2				# 402
-	lfsx	f4, r5, r8				# 402
-	fmul	f3, f3, f4				# 829
-	fadd	f0, f0, f3				# 828
-	lfs	f3, 40(r3)				# 830
-	fmul	f1, f1, f3				# 830
-	lwz	r5, 36(r2)				# 407
-	lwz	r8, 64(r3)				# 412
-	slwi	r9, r8, 2				# 412
-	lfsx	f4, r5, r9				# 412
-	fmul	f1, f1, f4				# 830
-	fadd	f0, f0, f1				# 828
-	fmul	f1, f3, f2				# 831
-	lwz	r5, 36(r2)				# 417
-	slwi	r9, r6, 2				# 422
-	lfsx	f2, r5, r9				# 422
-	fmul	f1, f1, f2				# 831
-	fadd	f0, f0, f1				# 828
-beq_cont.17703:
-	stfs	f0, 104(r3)				# 861
-	mfspr	r31, 8				# 861
-	stw	r31, 112(r3)				# 861
-	addi	r3, r3, 116				# 861
-	bl	min_caml_fiszero				# 861
-	addi	r3, r3, -116				# 861
-	lwz	r31, 112(r3)				# 861
-	mtspr	8, r31				# 861
-	lwz	r5, 80(r3)				# 861
-	cmpw	cr7, r2, r5				# 861
-	bne	cr7, beq_else.17704				# 861
-	slwi	r2, r5, 2				# 866
-	lwz	r6, 32(r3)				# 866
-	lfsx	f0, r6, r2				# 866
-	lwz	r2, 64(r3)				# 866
-	slwi	r7, r2, 2				# 866
-	lfsx	f1, r6, r7				# 866
-	lwz	r7, 48(r3)				# 866
-	slwi	r8, r7, 2				# 866
-	lfsx	f2, r6, r8				# 866
-	lfs	f3, 24(r3)				# 838
-	fmul	f4, f0, f3				# 838
-	lwz	r6, 84(r3)				# 277
-	lwz	r8, 16(r6)				# 277
-	slwi	r9, r5, 2				# 282
-	lfsx	f5, r8, r9				# 282
-	fmul	f4, f4, f5				# 838
-	lfs	f5, 16(r3)				# 839
-	fmul	f6, f1, f5				# 839
-	lwz	r8, 16(r6)				# 287
-	slwi	r9, r2, 2				# 292
-	lfsx	f7, r8, r9				# 292
-	fmul	f6, f6, f7				# 839
-	fadd	f4, f4, f6				# 838
-	lfs	f6, 8(r3)				# 840
-	fmul	f7, f2, f6				# 840
-	lwz	r8, 16(r6)				# 297
-	slwi	r9, r7, 2				# 302
-	lfsx	f8, r8, r9				# 302
-	fmul	f7, f7, f8				# 840
-	fadd	f4, f4, f7				# 838
-	lwz	r8, 12(r6)				# 268
-	cmpw	cr7, r8, r5				# 842
-	bne	cr7, beq_else.17705				# 842
-	fmr	f0, f4				# 843
-	b	beq_cont.17706				# 842
-beq_else.17705:
-	fmul	f7, f2, f5				# 846
-	fmul	f8, f1, f6				# 846
-	fadd	f7, f7, f8				# 846
-	lwz	r8, 36(r6)				# 397
-	slwi	r9, r5, 2				# 402
-	lfsx	f8, r8, r9				# 402
-	fmul	f7, f7, f8				# 846
-	fmul	f8, f0, f6				# 847
-	fmul	f2, f2, f3				# 847
-	fadd	f2, f8, f2				# 847
-	lwz	r8, 36(r6)				# 407
-	slwi	r9, r2, 2				# 412
-	lfsx	f8, r8, r9				# 412
-	fmul	f2, f2, f8				# 847
-	fadd	f2, f7, f2				# 846
-	fmul	f0, f0, f5				# 848
-	fmul	f1, f1, f3				# 848
-	fadd	f0, f0, f1				# 848
-	lwz	r8, 36(r6)				# 417
-	slwi	r9, r7, 2				# 422
-	lfsx	f1, r8, r9				# 422
-	fmul	f0, f0, f1				# 848
-	fadd	f0, f2, f0				# 846
-	stfs	f4, 112(r3)				# 845
-	mfspr	r31, 8				# 845
-	stw	r31, 120(r3)				# 845
-	addi	r3, r3, 124				# 845
-	bl	min_caml_fhalf				# 845
-	addi	r3, r3, -124				# 845
-	lwz	r31, 120(r3)				# 845
-	mtspr	8, r31				# 845
-	lfs	f1, 112(r3)				# 845
-	fadd	f0, f1, f0				# 845
-beq_cont.17706:
-	lfs	f1, 24(r3)				# 823
-	stfs	f0, 120(r3)				# 823
-	mfspr	r31, 8				# 823
-	fmr	f0, f1				# 823
-	stw	r31, 128(r3)				# 823
-	addi	r3, r3, 132				# 823
-	bl	min_caml_fsqr				# 823
-	addi	r3, r3, -132				# 823
-	lwz	r31, 128(r3)				# 823
-	mtspr	8, r31				# 823
-	lwz	r2, 84(r3)				# 277
-	lwz	r5, 16(r2)				# 277
-	lwz	r6, 80(r3)				# 282
-	slwi	r7, r6, 2				# 282
-	lfsx	f1, r5, r7				# 282
-	fmul	f0, f0, f1				# 823
-	lfs	f1, 16(r3)				# 823
-	stfs	f0, 128(r3)				# 823
-	mfspr	r31, 8				# 823
-	fmr	f0, f1				# 823
-	stw	r31, 136(r3)				# 823
-	addi	r3, r3, 140				# 823
-	bl	min_caml_fsqr				# 823
-	addi	r3, r3, -140				# 823
-	lwz	r31, 136(r3)				# 823
-	mtspr	8, r31				# 823
-	lwz	r2, 84(r3)				# 287
-	lwz	r5, 16(r2)				# 287
-	lwz	r6, 64(r3)				# 292
-	slwi	r7, r6, 2				# 292
-	lfsx	f1, r5, r7				# 292
-	fmul	f0, f0, f1				# 823
-	lfs	f1, 128(r3)				# 823
-	fadd	f0, f1, f0				# 823
-	lfs	f1, 8(r3)				# 823
-	stfs	f0, 136(r3)				# 823
-	mfspr	r31, 8				# 823
-	fmr	f0, f1				# 823
-	stw	r31, 144(r3)				# 823
-	addi	r3, r3, 148				# 823
-	bl	min_caml_fsqr				# 823
-	addi	r3, r3, -148				# 823
-	lwz	r31, 144(r3)				# 823
-	mtspr	8, r31				# 823
-	lwz	r2, 84(r3)				# 297
-	lwz	r5, 16(r2)				# 297
-	lwz	r6, 48(r3)				# 302
-	slwi	r7, r6, 2				# 302
-	lfsx	f1, r5, r7				# 302
-	fmul	f0, f0, f1				# 823
-	lfs	f1, 136(r3)				# 823
-	fadd	f0, f1, f0				# 823
-	lwz	r5, 12(r2)				# 268
-	lwz	r7, 80(r3)				# 825
-	cmpw	cr7, r5, r7				# 825
-	bne	cr7, beq_else.17707				# 825
-	b	beq_cont.17708				# 825
-beq_else.17707:
-	lfs	f1, 8(r3)				# 829
-	lfs	f2, 16(r3)				# 829
-	fmul	f3, f2, f1				# 829
-	lwz	r5, 36(r2)				# 397
-	slwi	r8, r7, 2				# 402
-	lfsx	f4, r5, r8				# 402
-	fmul	f3, f3, f4				# 829
-	fadd	f0, f0, f3				# 828
-	lfs	f3, 24(r3)				# 830
-	fmul	f1, f1, f3				# 830
-	lwz	r5, 36(r2)				# 407
-	lwz	r8, 64(r3)				# 412
-	slwi	r8, r8, 2				# 412
-	lfsx	f4, r5, r8				# 412
-	fmul	f1, f1, f4				# 830
-	fadd	f0, f0, f1				# 828
-	fmul	f1, f3, f2				# 831
-	lwz	r5, 36(r2)				# 417
-	slwi	r6, r6, 2				# 422
-	lfsx	f2, r5, r6				# 422
-	fmul	f1, f1, f2				# 831
-	fadd	f0, f0, f1				# 828
-beq_cont.17708:
-	lwz	r5, 4(r2)				# 239
-	lwz	r6, 4(r3)				# 869
-	cmpw	cr7, r5, r6				# 869
-	bne	cr7, beq_else.17709				# 869
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f1, 0(r31)				# 869
-	fsub	f0, f0, f1				# 869
-	b	beq_cont.17710				# 869
-beq_else.17709:
-beq_cont.17710:
-	lfs	f1, 120(r3)				# 871
-	stfs	f0, 144(r3)				# 871
-	mfspr	r31, 8				# 871
-	fmr	f0, f1				# 871
-	stw	r31, 152(r3)				# 871
-	addi	r3, r3, 156				# 871
-	bl	min_caml_fsqr				# 871
-	addi	r3, r3, -156				# 871
-	lwz	r31, 152(r3)				# 871
-	mtspr	8, r31				# 871
-	lfs	f1, 144(r3)				# 871
-	lfs	f2, 104(r3)				# 871
-	fmul	f1, f2, f1				# 871
-	fsub	f0, f0, f1				# 871
-	stfs	f0, 152(r3)				# 873
-	mfspr	r31, 8				# 873
-	stw	r31, 160(r3)				# 873
-	addi	r3, r3, 164				# 873
-	bl	min_caml_fispos				# 873
-	addi	r3, r3, -164				# 873
-	lwz	r31, 160(r3)				# 873
-	mtspr	8, r31				# 873
-	lwz	r5, 80(r3)				# 873
-	cmpw	cr7, r2, r5				# 873
-	bne	cr7, beq_else.17711				# 873
+beq_cont.15862:
+beq_cont.15858:
+	b	beq_cont.15845				# 797
+beq_else.15844:
 	addi	r2, 0, 0
-	blr
-beq_else.17711:
-	lfs	f0, 152(r3)				# 874
-	mfspr	r31, 8				# 874
-	stw	r31, 160(r3)				# 874
-	addi	r3, r3, 164				# 874
-	bl	min_caml_sqrt				# 874
-	addi	r3, r3, -164				# 874
-	lwz	r31, 160(r3)				# 874
-	mtspr	8, r31				# 874
-	lwz	r2, 84(r3)				# 259
-	lwz	r2, 24(r2)				# 259
-	lwz	r5, 80(r3)				# 875
-	cmpw	cr7, r2, r5				# 875
-	bne	cr7, beq_else.17712				# 875
-	mfspr	r31, 8				# 875
-	stw	r31, 160(r3)				# 875
-	addi	r3, r3, 164				# 875
-	bl	min_caml_fneg				# 875
-	addi	r3, r3, -164				# 875
-	lwz	r31, 160(r3)				# 875
-	mtspr	8, r31				# 875
-	b	beq_cont.17713				# 875
-beq_else.17712:
-beq_cont.17713:
-	lfs	f1, 120(r3)				# 876
-	fsub	f0, f0, f1				# 876
-	lfs	f1, 104(r3)				# 876
-	fdiv	f0, f0, f1				# 876
-	lwz	r2, 80(r3)				# 876
-	slwi	r2, r2, 2				# 876
-	lwz	r5, 0(r3)				# 876
-	stfsx	f0, r5, r2				# 876
-	addi	r2, 0, 1
-	blr
-beq_else.17704:
-	addi	r2, 0, 0
-	blr
-solver_rect_fast.2656:
-	lwz	r7, 24(r30)				# 901
-	lwz	r8, 20(r30)				# 901
-	lwz	r9, 16(r30)				# 901
-	lwz	r10, 12(r30)				# 901
-	lwz	r11, 8(r30)				# 901
-	lwz	r12, 4(r30)				# 901
-	slwi	r13, r11, 2				# 902
-	lfsx	f3, r6, r13				# 902
-	fsub	f3, f3, f0				# 902
-	slwi	r13, r12, 2				# 902
-	lfsx	f4, r6, r13				# 902
-	fmul	f3, f3, f4				# 902
-	slwi	r13, r12, 2				# 904
-	lfsx	f4, r5, r13				# 904
-	fmul	f4, f3, f4				# 904
-	fadd	f4, f4, f1				# 904
-	stw	r7, 0(r3)				# 904
-	stw	r8, 4(r3)				# 904
-	stfs	f0, 8(r3)				# 904
-	stw	r10, 16(r3)				# 904
-	stfs	f1, 24(r3)				# 904
-	stw	r6, 32(r3)				# 904
-	stfs	f2, 40(r3)				# 904
-	stfs	f3, 48(r3)				# 904
-	stw	r5, 56(r3)				# 904
-	stw	r9, 60(r3)				# 904
-	stw	r11, 64(r3)				# 904
-	stw	r12, 68(r3)				# 904
-	stw	r2, 72(r3)				# 904
-	mfspr	r31, 8				# 904
-	fmr	f0, f4				# 904
-	stw	r31, 76(r3)				# 904
-	addi	r3, r3, 80				# 904
-	bl	min_caml_fabs				# 904
-	addi	r3, r3, -80				# 904
-	lwz	r31, 76(r3)				# 904
-	mtspr	8, r31				# 904
-	lwz	r2, 72(r3)				# 287
-	lwz	r5, 16(r2)				# 287
-	lwz	r6, 68(r3)				# 292
-	slwi	r7, r6, 2				# 292
-	lfsx	f1, r5, r7				# 292
-	mfspr	r31, 8				# 904
-	stw	r31, 76(r3)				# 904
-	addi	r3, r3, 80				# 904
-	bl	min_caml_fless				# 904
-	addi	r3, r3, -80				# 904
-	lwz	r31, 76(r3)				# 904
-	mtspr	8, r31				# 904
-	lwz	r5, 64(r3)				# 904
-	cmpw	cr7, r2, r5				# 904
-	bne	cr7, beq_else.17716				# 904
-	addi	r2, 0, 0
-	b	beq_cont.17717				# 904
-beq_else.17716:
-	lwz	r2, 60(r3)				# 905
-	slwi	r6, r2, 2				# 905
-	lwz	r7, 56(r3)				# 905
-	lfsx	f0, r7, r6				# 905
-	lfs	f1, 48(r3)				# 905
-	fmul	f0, f1, f0				# 905
-	lfs	f2, 40(r3)				# 905
-	fadd	f0, f0, f2				# 905
-	mfspr	r31, 8				# 905
-	stw	r31, 76(r3)				# 905
-	addi	r3, r3, 80				# 905
-	bl	min_caml_fabs				# 905
-	addi	r3, r3, -80				# 905
-	lwz	r31, 76(r3)				# 905
-	mtspr	8, r31				# 905
-	lwz	r2, 72(r3)				# 297
-	lwz	r5, 16(r2)				# 297
-	lwz	r6, 60(r3)				# 302
-	slwi	r7, r6, 2				# 302
-	lfsx	f1, r5, r7				# 302
-	mfspr	r31, 8				# 905
-	stw	r31, 76(r3)				# 905
-	addi	r3, r3, 80				# 905
-	bl	min_caml_fless				# 905
-	addi	r3, r3, -80				# 905
-	lwz	r31, 76(r3)				# 905
-	mtspr	8, r31				# 905
-	lwz	r5, 64(r3)				# 905
-	cmpw	cr7, r2, r5				# 905
-	bne	cr7, beq_else.17718				# 905
-	addi	r2, 0, 0
-	b	beq_cont.17719				# 905
-beq_else.17718:
-	lwz	r2, 68(r3)				# 906
-	slwi	r6, r2, 2				# 906
-	lwz	r7, 32(r3)				# 906
-	lfsx	f0, r7, r6				# 906
-	mfspr	r31, 8				# 906
-	stw	r31, 76(r3)				# 906
-	addi	r3, r3, 80				# 906
-	bl	min_caml_fiszero				# 906
-	addi	r3, r3, -80				# 906
-	lwz	r31, 76(r3)				# 906
-	mtspr	8, r31				# 906
-	lwz	r5, 64(r3)				# 906
-	cmpw	cr7, r2, r5				# 906
-	bne	cr7, beq_else.17720				# 906
-	addi	r2, 0, 1
-	b	beq_cont.17721				# 906
-beq_else.17720:
-	addi	r2, 0, 0
-beq_cont.17721:
-beq_cont.17719:
-beq_cont.17717:
-	cmpw	cr7, r2, r5				# 903
-	bne	cr7, beq_else.17722				# 903
-	lwz	r2, 60(r3)				# 911
-	slwi	r6, r2, 2				# 911
-	lwz	r7, 32(r3)				# 911
-	lfsx	f0, r7, r6				# 911
-	lfs	f1, 24(r3)				# 911
-	fsub	f0, f0, f1				# 911
-	lwz	r6, 16(r3)				# 911
-	slwi	r8, r6, 2				# 911
-	lfsx	f2, r7, r8				# 911
-	fmul	f0, f0, f2				# 911
-	slwi	r8, r5, 2				# 913
-	lwz	r9, 56(r3)				# 913
-	lfsx	f2, r9, r8				# 913
-	fmul	f2, f0, f2				# 913
-	lfs	f3, 8(r3)				# 913
-	fadd	f2, f2, f3				# 913
-	stfs	f0, 80(r3)				# 913
-	mfspr	r31, 8				# 913
-	fmr	f0, f2				# 913
-	stw	r31, 88(r3)				# 913
-	addi	r3, r3, 92				# 913
-	bl	min_caml_fabs				# 913
-	addi	r3, r3, -92				# 913
-	lwz	r31, 88(r3)				# 913
-	mtspr	8, r31				# 913
-	lwz	r2, 72(r3)				# 277
-	lwz	r5, 16(r2)				# 277
-	lwz	r6, 64(r3)				# 282
-	slwi	r7, r6, 2				# 282
-	lfsx	f1, r5, r7				# 282
-	mfspr	r31, 8				# 913
-	stw	r31, 88(r3)				# 913
-	addi	r3, r3, 92				# 913
-	bl	min_caml_fless				# 913
-	addi	r3, r3, -92				# 913
-	lwz	r31, 88(r3)				# 913
-	mtspr	8, r31				# 913
-	lwz	r5, 64(r3)				# 913
-	cmpw	cr7, r2, r5				# 913
-	bne	cr7, beq_else.17724				# 913
-	addi	r2, 0, 0
-	b	beq_cont.17725				# 913
-beq_else.17724:
-	lwz	r2, 60(r3)				# 914
-	slwi	r6, r2, 2				# 914
-	lwz	r7, 56(r3)				# 914
-	lfsx	f0, r7, r6				# 914
-	lfs	f1, 80(r3)				# 914
-	fmul	f0, f1, f0				# 914
-	lfs	f2, 40(r3)				# 914
-	fadd	f0, f0, f2				# 914
-	mfspr	r31, 8				# 914
-	stw	r31, 88(r3)				# 914
-	addi	r3, r3, 92				# 914
-	bl	min_caml_fabs				# 914
-	addi	r3, r3, -92				# 914
-	lwz	r31, 88(r3)				# 914
-	mtspr	8, r31				# 914
-	lwz	r2, 72(r3)				# 297
-	lwz	r5, 16(r2)				# 297
-	lwz	r6, 60(r3)				# 302
-	slwi	r6, r6, 2				# 302
-	lfsx	f1, r5, r6				# 302
-	mfspr	r31, 8				# 914
-	stw	r31, 88(r3)				# 914
-	addi	r3, r3, 92				# 914
-	bl	min_caml_fless				# 914
-	addi	r3, r3, -92				# 914
-	lwz	r31, 88(r3)				# 914
-	mtspr	8, r31				# 914
-	lwz	r5, 64(r3)				# 914
-	cmpw	cr7, r2, r5				# 914
-	bne	cr7, beq_else.17726				# 914
-	addi	r2, 0, 0
-	b	beq_cont.17727				# 914
-beq_else.17726:
-	lwz	r2, 16(r3)				# 915
-	slwi	r2, r2, 2				# 915
-	lwz	r6, 32(r3)				# 915
-	lfsx	f0, r6, r2				# 915
-	mfspr	r31, 8				# 915
-	stw	r31, 88(r3)				# 915
-	addi	r3, r3, 92				# 915
-	bl	min_caml_fiszero				# 915
-	addi	r3, r3, -92				# 915
-	lwz	r31, 88(r3)				# 915
-	mtspr	8, r31				# 915
-	lwz	r5, 64(r3)				# 915
-	cmpw	cr7, r2, r5				# 915
-	bne	cr7, beq_else.17728				# 915
-	addi	r2, 0, 1
-	b	beq_cont.17729				# 915
-beq_else.17728:
-	addi	r2, 0, 0
-beq_cont.17729:
-beq_cont.17727:
-beq_cont.17725:
-	cmpw	cr7, r2, r5				# 912
-	bne	cr7, beq_else.17730				# 912
-	lwz	r2, 32(r3)				# 920
-	lfs	f0, 16(r2)				# 920
-	lfs	f1, 40(r3)				# 920
-	fsub	f0, f0, f1				# 920
-	lwz	r6, 4(r3)				# 920
-	slwi	r7, r6, 2				# 920
-	lfsx	f1, r2, r7				# 920
-	fmul	f0, f0, f1				# 920
-	slwi	r7, r5, 2				# 922
-	lwz	r8, 56(r3)				# 922
-	lfsx	f1, r8, r7				# 922
-	fmul	f1, f0, f1				# 922
-	lfs	f2, 8(r3)				# 922
-	fadd	f1, f1, f2				# 922
-	stfs	f0, 88(r3)				# 922
-	mfspr	r31, 8				# 922
-	fmr	f0, f1				# 922
-	stw	r31, 96(r3)				# 922
-	addi	r3, r3, 100				# 922
-	bl	min_caml_fabs				# 922
-	addi	r3, r3, -100				# 922
-	lwz	r31, 96(r3)				# 922
-	mtspr	8, r31				# 922
-	lwz	r2, 72(r3)				# 277
-	lwz	r5, 16(r2)				# 277
-	lwz	r6, 64(r3)				# 282
-	slwi	r7, r6, 2				# 282
-	lfsx	f1, r5, r7				# 282
-	mfspr	r31, 8				# 922
-	stw	r31, 96(r3)				# 922
-	addi	r3, r3, 100				# 922
-	bl	min_caml_fless				# 922
-	addi	r3, r3, -100				# 922
-	lwz	r31, 96(r3)				# 922
-	mtspr	8, r31				# 922
-	lwz	r5, 64(r3)				# 922
-	cmpw	cr7, r2, r5				# 922
-	bne	cr7, beq_else.17731				# 922
-	addi	r2, 0, 0
-	b	beq_cont.17732				# 922
-beq_else.17731:
-	lwz	r2, 68(r3)				# 923
-	slwi	r6, r2, 2				# 923
-	lwz	r7, 56(r3)				# 923
-	lfsx	f0, r7, r6				# 923
-	lfs	f1, 88(r3)				# 923
-	fmul	f0, f1, f0				# 923
-	lfs	f2, 24(r3)				# 923
-	fadd	f0, f0, f2				# 923
-	mfspr	r31, 8				# 923
-	stw	r31, 96(r3)				# 923
-	addi	r3, r3, 100				# 923
-	bl	min_caml_fabs				# 923
-	addi	r3, r3, -100				# 923
-	lwz	r31, 96(r3)				# 923
-	mtspr	8, r31				# 923
-	lwz	r2, 72(r3)				# 287
-	lwz	r2, 16(r2)				# 287
-	lwz	r5, 68(r3)				# 292
-	slwi	r5, r5, 2				# 292
-	lfsx	f1, r2, r5				# 292
-	mfspr	r31, 8				# 923
-	stw	r31, 96(r3)				# 923
-	addi	r3, r3, 100				# 923
-	bl	min_caml_fless				# 923
-	addi	r3, r3, -100				# 923
-	lwz	r31, 96(r3)				# 923
-	mtspr	8, r31				# 923
-	lwz	r5, 64(r3)				# 923
-	cmpw	cr7, r2, r5				# 923
-	bne	cr7, beq_else.17733				# 923
-	addi	r2, 0, 0
-	b	beq_cont.17734				# 923
-beq_else.17733:
-	lwz	r2, 4(r3)				# 924
-	slwi	r2, r2, 2				# 924
-	lwz	r6, 32(r3)				# 924
-	lfsx	f0, r6, r2				# 924
-	mfspr	r31, 8				# 924
-	stw	r31, 96(r3)				# 924
-	addi	r3, r3, 100				# 924
-	bl	min_caml_fiszero				# 924
-	addi	r3, r3, -100				# 924
-	lwz	r31, 96(r3)				# 924
-	mtspr	8, r31				# 924
-	lwz	r5, 64(r3)				# 924
-	cmpw	cr7, r2, r5				# 924
-	bne	cr7, beq_else.17735				# 924
-	addi	r2, 0, 1
-	b	beq_cont.17736				# 924
-beq_else.17735:
-	addi	r2, 0, 0
-beq_cont.17736:
-beq_cont.17734:
-beq_cont.17732:
-	cmpw	cr7, r2, r5				# 921
-	bne	cr7, beq_else.17737				# 921
-	addi	r2, 0, 0
-	blr
-beq_else.17737:
-	slwi	r2, r5, 2				# 928
-	lwz	r5, 0(r3)				# 928
-	lfs	f0, 88(r3)				# 928
-	stfsx	f0, r5, r2				# 928
-	addi	r2, 0, 3
-	blr
-beq_else.17730:
-	slwi	r2, r5, 2				# 919
-	lwz	r5, 0(r3)				# 919
-	lfs	f0, 80(r3)				# 919
-	stfsx	f0, r5, r2				# 919
-	addi	r2, 0, 2
-	blr
-beq_else.17722:
-	slwi	r2, r5, 2				# 910
-	lwz	r5, 0(r3)				# 910
-	lfs	f0, 48(r3)				# 910
-	stfsx	f0, r5, r2				# 910
-	addi	r2, 0, 1
-	blr
-solver_second_fast.2669:
-	lwz	r6, 20(r30)				# 943
-	lwz	r7, 16(r30)				# 943
-	lwz	r8, 12(r30)				# 943
-	lwz	r9, 8(r30)				# 943
-	lwz	r10, 4(r30)				# 943
-	slwi	r11, r9, 2				# 945
-	lfsx	f3, r5, r11				# 945
-	stw	r6, 0(r3)				# 946
-	stfs	f3, 8(r3)				# 946
-	stw	r2, 16(r3)				# 946
-	stfs	f2, 24(r3)				# 946
-	stw	r8, 32(r3)				# 946
-	stfs	f1, 40(r3)				# 946
-	stw	r7, 48(r3)				# 946
-	stfs	f0, 56(r3)				# 946
-	stw	r5, 64(r3)				# 946
-	stw	r10, 68(r3)				# 946
-	stw	r9, 72(r3)				# 946
-	mfspr	r31, 8				# 946
-	fmr	f0, f3				# 946
-	stw	r31, 76(r3)				# 946
-	addi	r3, r3, 80				# 946
-	bl	min_caml_fiszero				# 946
-	addi	r3, r3, -80				# 946
-	lwz	r31, 76(r3)				# 946
-	mtspr	8, r31				# 946
-	lwz	r5, 72(r3)				# 946
-	cmpw	cr7, r2, r5				# 946
-	bne	cr7, beq_else.17742				# 946
-	lwz	r2, 68(r3)				# 949
-	slwi	r6, r2, 2				# 949
-	lwz	r7, 64(r3)				# 949
-	lfsx	f0, r7, r6				# 949
-	lfs	f1, 56(r3)				# 949
-	fmul	f0, f0, f1				# 949
-	lwz	r6, 48(r3)				# 949
-	slwi	r8, r6, 2				# 949
-	lfsx	f2, r7, r8				# 949
-	lfs	f3, 40(r3)				# 949
-	fmul	f2, f2, f3				# 949
-	fadd	f0, f0, f2				# 949
-	lwz	r8, 32(r3)				# 949
-	slwi	r9, r8, 2				# 949
-	lfsx	f2, r7, r9				# 949
-	lfs	f4, 24(r3)				# 949
-	fmul	f2, f2, f4				# 949
-	fadd	f0, f0, f2				# 949
-	stfs	f0, 80(r3)				# 823
-	mfspr	r31, 8				# 823
-	fmr	f0, f1				# 823
-	stw	r31, 88(r3)				# 823
-	addi	r3, r3, 92				# 823
-	bl	min_caml_fsqr				# 823
-	addi	r3, r3, -92				# 823
-	lwz	r31, 88(r3)				# 823
-	mtspr	8, r31				# 823
-	lwz	r2, 16(r3)				# 277
-	lwz	r5, 16(r2)				# 277
-	lwz	r6, 72(r3)				# 282
-	slwi	r7, r6, 2				# 282
-	lfsx	f1, r5, r7				# 282
-	fmul	f0, f0, f1				# 823
-	lfs	f1, 40(r3)				# 823
-	stfs	f0, 88(r3)				# 823
-	mfspr	r31, 8				# 823
-	fmr	f0, f1				# 823
-	stw	r31, 96(r3)				# 823
-	addi	r3, r3, 100				# 823
-	bl	min_caml_fsqr				# 823
-	addi	r3, r3, -100				# 823
-	lwz	r31, 96(r3)				# 823
-	mtspr	8, r31				# 823
-	lwz	r2, 16(r3)				# 287
-	lwz	r5, 16(r2)				# 287
-	lwz	r6, 68(r3)				# 292
-	slwi	r7, r6, 2				# 292
-	lfsx	f1, r5, r7				# 292
-	fmul	f0, f0, f1				# 823
-	lfs	f1, 88(r3)				# 823
-	fadd	f0, f1, f0				# 823
-	lfs	f1, 24(r3)				# 823
-	stfs	f0, 96(r3)				# 823
-	mfspr	r31, 8				# 823
-	fmr	f0, f1				# 823
-	stw	r31, 104(r3)				# 823
-	addi	r3, r3, 108				# 823
-	bl	min_caml_fsqr				# 823
-	addi	r3, r3, -108				# 823
-	lwz	r31, 104(r3)				# 823
-	mtspr	8, r31				# 823
-	lwz	r2, 16(r3)				# 297
-	lwz	r5, 16(r2)				# 297
-	lwz	r6, 48(r3)				# 302
-	slwi	r7, r6, 2				# 302
-	lfsx	f1, r5, r7				# 302
-	fmul	f0, f0, f1				# 823
-	lfs	f1, 96(r3)				# 823
-	fadd	f0, f1, f0				# 823
-	lwz	r5, 12(r2)				# 268
-	lwz	r7, 72(r3)				# 825
-	cmpw	cr7, r5, r7				# 825
-	bne	cr7, beq_else.17744				# 825
-	b	beq_cont.17745				# 825
-beq_else.17744:
-	lfs	f1, 24(r3)				# 829
-	lfs	f2, 40(r3)				# 829
-	fmul	f3, f2, f1				# 829
-	lwz	r5, 36(r2)				# 397
-	slwi	r8, r7, 2				# 402
-	lfsx	f4, r5, r8				# 402
-	fmul	f3, f3, f4				# 829
-	fadd	f0, f0, f3				# 828
-	lfs	f3, 56(r3)				# 830
-	fmul	f1, f1, f3				# 830
-	lwz	r5, 36(r2)				# 407
-	lwz	r8, 68(r3)				# 412
-	slwi	r8, r8, 2				# 412
-	lfsx	f4, r5, r8				# 412
-	fmul	f1, f1, f4				# 830
-	fadd	f0, f0, f1				# 828
-	fmul	f1, f3, f2				# 831
-	lwz	r5, 36(r2)				# 417
-	slwi	r6, r6, 2				# 422
-	lfsx	f2, r5, r6				# 422
-	fmul	f1, f1, f2				# 831
-	fadd	f0, f0, f1				# 828
-beq_cont.17745:
-	lwz	r5, 4(r2)				# 239
-	lwz	r6, 32(r3)				# 951
-	cmpw	cr7, r5, r6				# 951
-	bne	cr7, beq_else.17746				# 951
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f1, 0(r31)				# 951
-	fsub	f0, f0, f1				# 951
-	b	beq_cont.17747				# 951
-beq_else.17746:
-beq_cont.17747:
-	lfs	f1, 80(r3)				# 952
-	stfs	f0, 104(r3)				# 952
-	mfspr	r31, 8				# 952
-	fmr	f0, f1				# 952
-	stw	r31, 112(r3)				# 952
-	addi	r3, r3, 116				# 952
-	bl	min_caml_fsqr				# 952
-	addi	r3, r3, -116				# 952
-	lwz	r31, 112(r3)				# 952
-	mtspr	8, r31				# 952
-	lfs	f1, 104(r3)				# 952
-	lfs	f2, 8(r3)				# 952
-	fmul	f1, f2, f1				# 952
-	fsub	f0, f0, f1				# 952
-	stfs	f0, 112(r3)				# 953
-	mfspr	r31, 8				# 953
-	stw	r31, 120(r3)				# 953
-	addi	r3, r3, 124				# 953
-	bl	min_caml_fispos				# 953
-	addi	r3, r3, -124				# 953
-	lwz	r31, 120(r3)				# 953
-	mtspr	8, r31				# 953
-	lwz	r5, 72(r3)				# 953
-	cmpw	cr7, r2, r5				# 953
-	bne	cr7, beq_else.17748				# 953
-	addi	r2, 0, 0
-	blr
-beq_else.17748:
-	lwz	r2, 16(r3)				# 259
-	lwz	r2, 24(r2)				# 259
-	cmpw	cr7, r2, r5				# 954
-	bne	cr7, beq_else.17749				# 954
-	lfs	f0, 112(r3)				# 957
-	mfspr	r31, 8				# 957
-	stw	r31, 120(r3)				# 957
-	addi	r3, r3, 124				# 957
-	bl	min_caml_sqrt				# 957
-	addi	r3, r3, -124				# 957
-	lwz	r31, 120(r3)				# 957
-	mtspr	8, r31				# 957
-	lfs	f1, 80(r3)				# 957
-	fsub	f0, f1, f0				# 957
-	lwz	r2, 64(r3)				# 957
-	lfs	f1, 16(r2)				# 957
-	fmul	f0, f0, f1				# 957
-	lwz	r2, 72(r3)				# 957
-	slwi	r2, r2, 2				# 957
-	lwz	r5, 0(r3)				# 957
-	stfsx	f0, r5, r2				# 957
-	b	beq_cont.17750				# 954
-beq_else.17749:
-	lfs	f0, 112(r3)				# 955
-	mfspr	r31, 8				# 955
-	stw	r31, 120(r3)				# 955
-	addi	r3, r3, 124				# 955
-	bl	min_caml_sqrt				# 955
-	addi	r3, r3, -124				# 955
-	lwz	r31, 120(r3)				# 955
-	mtspr	8, r31				# 955
-	lfs	f1, 80(r3)				# 955
-	fadd	f0, f1, f0				# 955
-	lwz	r2, 64(r3)				# 955
-	lfs	f1, 16(r2)				# 955
-	fmul	f0, f0, f1				# 955
-	lwz	r2, 72(r3)				# 955
-	slwi	r2, r2, 2				# 955
-	lwz	r5, 0(r3)				# 955
-	stfsx	f0, r5, r2				# 955
-beq_cont.17750:
-	addi	r2, 0, 1
-	blr
-beq_else.17742:
-	addi	r2, 0, 0
-	blr
-setup_second_table.2702:
-	lwz	r6, 24(r30)				# 1076
-	lwz	r7, 20(r30)				# 1076
-	lwz	r8, 16(r30)				# 1076
-	lwz	r9, 12(r30)				# 1076
-	lwz	r10, 8(r30)				# 1076
-	lfs	f0, 4(r30)				# 1076
-	stw	r8, 0(r3)				# 1077
-	stw	r5, 4(r3)				# 1077
-	stw	r7, 8(r3)				# 1077
-	stw	r10, 12(r3)				# 1077
-	stw	r2, 16(r3)				# 1077
-	stw	r9, 20(r3)				# 1077
-	mfspr	r31, 8				# 1077
-	mr	r2, r6				# 1077
-	stw	r31, 24(r3)				# 1077
-	addi	r3, r3, 28				# 1077
-	bl	min_caml_create_float_array				# 1077
-	addi	r3, r3, -28				# 1077
-	lwz	r31, 24(r3)				# 1077
-	mtspr	8, r31				# 1077
-	lwz	r5, 20(r3)				# 1079
-	slwi	r6, r5, 2				# 1079
-	lwz	r7, 16(r3)				# 1079
-	lfsx	f0, r7, r6				# 1079
-	lwz	r6, 12(r3)				# 1079
-	slwi	r8, r6, 2				# 1079
-	lfsx	f1, r7, r8				# 1079
-	lwz	r8, 8(r3)				# 1079
-	slwi	r9, r8, 2				# 1079
-	lfsx	f2, r7, r9				# 1079
-	stw	r2, 24(r3)				# 823
-	stfs	f0, 32(r3)				# 823
-	stfs	f2, 40(r3)				# 823
-	stfs	f1, 48(r3)				# 823
-	mfspr	r31, 8				# 823
-	stw	r31, 56(r3)				# 823
-	addi	r3, r3, 60				# 823
-	bl	min_caml_fsqr				# 823
-	addi	r3, r3, -60				# 823
-	lwz	r31, 56(r3)				# 823
-	mtspr	8, r31				# 823
-	lwz	r2, 4(r3)				# 277
-	lwz	r5, 16(r2)				# 277
-	lwz	r6, 20(r3)				# 282
-	slwi	r7, r6, 2				# 282
-	lfsx	f1, r5, r7				# 282
-	fmul	f0, f0, f1				# 823
-	lfs	f1, 48(r3)				# 823
-	stfs	f0, 56(r3)				# 823
-	mfspr	r31, 8				# 823
-	fmr	f0, f1				# 823
-	stw	r31, 64(r3)				# 823
-	addi	r3, r3, 68				# 823
-	bl	min_caml_fsqr				# 823
-	addi	r3, r3, -68				# 823
-	lwz	r31, 64(r3)				# 823
-	mtspr	8, r31				# 823
-	lwz	r2, 4(r3)				# 287
-	lwz	r5, 16(r2)				# 287
-	lwz	r6, 12(r3)				# 292
-	slwi	r7, r6, 2				# 292
-	lfsx	f1, r5, r7				# 292
-	fmul	f0, f0, f1				# 823
-	lfs	f1, 56(r3)				# 823
-	fadd	f0, f1, f0				# 823
-	lfs	f1, 40(r3)				# 823
-	stfs	f0, 64(r3)				# 823
-	mfspr	r31, 8				# 823
-	fmr	f0, f1				# 823
-	stw	r31, 72(r3)				# 823
-	addi	r3, r3, 76				# 823
-	bl	min_caml_fsqr				# 823
-	addi	r3, r3, -76				# 823
-	lwz	r31, 72(r3)				# 823
-	mtspr	8, r31				# 823
-	lwz	r2, 4(r3)				# 297
-	lwz	r5, 16(r2)				# 297
-	lwz	r6, 8(r3)				# 302
-	slwi	r7, r6, 2				# 302
-	lfsx	f1, r5, r7				# 302
-	fmul	f0, f0, f1				# 823
-	lfs	f1, 64(r3)				# 823
-	fadd	f0, f1, f0				# 823
-	lwz	r5, 12(r2)				# 268
-	lwz	r7, 20(r3)				# 825
-	cmpw	cr7, r5, r7				# 825
-	bne	cr7, beq_else.17752				# 825
-	b	beq_cont.17753				# 825
-beq_else.17752:
-	lfs	f1, 40(r3)				# 829
-	lfs	f2, 48(r3)				# 829
-	fmul	f3, f2, f1				# 829
-	lwz	r5, 36(r2)				# 397
-	slwi	r8, r7, 2				# 402
-	lfsx	f4, r5, r8				# 402
-	fmul	f3, f3, f4				# 829
-	fadd	f0, f0, f3				# 828
-	lfs	f3, 32(r3)				# 830
-	fmul	f1, f1, f3				# 830
-	lwz	r5, 36(r2)				# 407
-	lwz	r8, 12(r3)				# 412
-	slwi	r9, r8, 2				# 412
-	lfsx	f4, r5, r9				# 412
-	fmul	f1, f1, f4				# 830
-	fadd	f0, f0, f1				# 828
-	fmul	f1, f3, f2				# 831
-	lwz	r5, 36(r2)				# 417
-	slwi	r9, r6, 2				# 422
-	lfsx	f2, r5, r9				# 422
-	fmul	f1, f1, f2				# 831
-	fadd	f0, f0, f1				# 828
-beq_cont.17753:
-	slwi	r5, r7, 2				# 1080
-	lwz	r8, 16(r3)				# 1080
-	lfsx	f1, r8, r5				# 1080
-	lwz	r5, 16(r2)				# 277
-	slwi	r9, r7, 2				# 282
-	lfsx	f2, r5, r9				# 282
-	fmul	f1, f1, f2				# 1080
-	stfs	f0, 72(r3)				# 1080
-	mfspr	r31, 8				# 1080
-	fmr	f0, f1				# 1080
-	stw	r31, 80(r3)				# 1080
-	addi	r3, r3, 84				# 1080
-	bl	min_caml_fneg				# 1080
-	addi	r3, r3, -84				# 1080
-	lwz	r31, 80(r3)				# 1080
-	mtspr	8, r31				# 1080
-	lwz	r2, 12(r3)				# 1081
-	slwi	r5, r2, 2				# 1081
-	lwz	r6, 16(r3)				# 1081
-	lfsx	f1, r6, r5				# 1081
-	lwz	r5, 4(r3)				# 287
-	lwz	r7, 16(r5)				# 287
-	slwi	r8, r2, 2				# 292
-	lfsx	f2, r7, r8				# 292
-	fmul	f1, f1, f2				# 1081
-	stfs	f0, 80(r3)				# 1081
-	mfspr	r31, 8				# 1081
-	fmr	f0, f1				# 1081
-	stw	r31, 88(r3)				# 1081
-	addi	r3, r3, 92				# 1081
-	bl	min_caml_fneg				# 1081
-	addi	r3, r3, -92				# 1081
-	lwz	r31, 88(r3)				# 1081
-	mtspr	8, r31				# 1081
-	lwz	r2, 8(r3)				# 1082
-	slwi	r5, r2, 2				# 1082
-	lwz	r6, 16(r3)				# 1082
-	lfsx	f1, r6, r5				# 1082
-	lwz	r5, 4(r3)				# 297
-	lwz	r7, 16(r5)				# 297
-	slwi	r8, r2, 2				# 302
-	lfsx	f2, r7, r8				# 302
-	fmul	f1, f1, f2				# 1082
-	stfs	f0, 88(r3)				# 1082
-	mfspr	r31, 8				# 1082
-	fmr	f0, f1				# 1082
-	stw	r31, 96(r3)				# 1082
-	addi	r3, r3, 100				# 1082
-	bl	min_caml_fneg				# 1082
-	addi	r3, r3, -100				# 1082
-	lwz	r31, 96(r3)				# 1082
-	mtspr	8, r31				# 1082
-	lwz	r2, 20(r3)				# 1084
-	slwi	r5, r2, 2				# 1084
-	lwz	r6, 24(r3)				# 1084
-	lfs	f1, 72(r3)				# 1084
-	stfsx	f1, r6, r5				# 1084
-	lwz	r5, 4(r3)				# 268
-	lwz	r7, 12(r5)				# 268
-	cmpw	cr7, r7, r2				# 1087
-	bne	cr7, beq_else.17754				# 1087
-	lwz	r5, 12(r3)				# 1092
-	slwi	r5, r5, 2				# 1092
-	lfs	f2, 80(r3)				# 1092
-	stfsx	f2, r6, r5				# 1092
-	lwz	r5, 8(r3)				# 1093
-	slwi	r5, r5, 2				# 1093
-	lfs	f2, 88(r3)				# 1093
-	stfsx	f2, r6, r5				# 1093
-	lwz	r5, 0(r3)				# 1094
-	slwi	r5, r5, 2				# 1094
-	stfsx	f0, r6, r5				# 1094
-	b	beq_cont.17755				# 1087
-beq_else.17754:
-	lwz	r7, 8(r3)				# 1088
-	slwi	r8, r7, 2				# 1088
-	lwz	r9, 16(r3)				# 1088
-	lfsx	f2, r9, r8				# 1088
-	lwz	r8, 36(r5)				# 407
-	lwz	r10, 12(r3)				# 412
-	slwi	r11, r10, 2				# 412
-	lfsx	f3, r8, r11				# 412
-	fmul	f2, f2, f3				# 1088
-	slwi	r8, r10, 2				# 1088
-	lfsx	f3, r9, r8				# 1088
-	lwz	r8, 36(r5)				# 417
-	slwi	r11, r7, 2				# 422
-	lfsx	f4, r8, r11				# 422
-	fmul	f3, f3, f4				# 1088
-	fadd	f2, f2, f3				# 1088
-	stfs	f0, 96(r3)				# 1088
-	mfspr	r31, 8				# 1088
-	fmr	f0, f2				# 1088
-	stw	r31, 104(r3)				# 1088
-	addi	r3, r3, 108				# 1088
-	bl	min_caml_fhalf				# 1088
-	addi	r3, r3, -108				# 1088
-	lwz	r31, 104(r3)				# 1088
-	mtspr	8, r31				# 1088
-	lfs	f1, 80(r3)				# 1088
-	fsub	f0, f1, f0				# 1088
-	lwz	r2, 12(r3)				# 1088
-	slwi	r5, r2, 2				# 1088
-	lwz	r6, 24(r3)				# 1088
-	stfsx	f0, r6, r5				# 1088
-	lwz	r5, 8(r3)				# 1089
-	slwi	r7, r5, 2				# 1089
-	lwz	r8, 16(r3)				# 1089
-	lfsx	f0, r8, r7				# 1089
-	lwz	r7, 4(r3)				# 397
-	lwz	r9, 36(r7)				# 397
-	lwz	r10, 20(r3)				# 402
-	slwi	r11, r10, 2				# 402
-	lfsx	f1, r9, r11				# 402
-	fmul	f0, f0, f1				# 1089
-	slwi	r9, r10, 2				# 1089
-	lfsx	f1, r8, r9				# 1089
-	lwz	r9, 36(r7)				# 417
-	slwi	r11, r5, 2				# 422
-	lfsx	f2, r9, r11				# 422
-	fmul	f1, f1, f2				# 1089
-	fadd	f0, f0, f1				# 1089
-	mfspr	r31, 8				# 1089
-	stw	r31, 104(r3)				# 1089
-	addi	r3, r3, 108				# 1089
-	bl	min_caml_fhalf				# 1089
-	addi	r3, r3, -108				# 1089
-	lwz	r31, 104(r3)				# 1089
-	mtspr	8, r31				# 1089
-	lfs	f1, 88(r3)				# 1089
-	fsub	f0, f1, f0				# 1089
-	lwz	r2, 8(r3)				# 1089
-	slwi	r2, r2, 2				# 1089
-	lwz	r5, 24(r3)				# 1089
-	stfsx	f0, r5, r2				# 1089
-	lwz	r2, 12(r3)				# 1090
-	slwi	r6, r2, 2				# 1090
-	lwz	r7, 16(r3)				# 1090
-	lfsx	f0, r7, r6				# 1090
-	lwz	r6, 4(r3)				# 397
-	lwz	r8, 36(r6)				# 397
-	lwz	r9, 20(r3)				# 402
-	slwi	r10, r9, 2				# 402
-	lfsx	f1, r8, r10				# 402
-	fmul	f0, f0, f1				# 1090
-	slwi	r8, r9, 2				# 1090
-	lfsx	f1, r7, r8				# 1090
-	lwz	r6, 36(r6)				# 407
-	slwi	r2, r2, 2				# 412
-	lfsx	f2, r6, r2				# 412
-	fmul	f1, f1, f2				# 1090
-	fadd	f0, f0, f1				# 1090
-	mfspr	r31, 8				# 1090
-	stw	r31, 104(r3)				# 1090
-	addi	r3, r3, 108				# 1090
-	bl	min_caml_fhalf				# 1090
-	addi	r3, r3, -108				# 1090
-	lwz	r31, 104(r3)				# 1090
-	mtspr	8, r31				# 1090
-	lfs	f1, 96(r3)				# 1090
-	fsub	f0, f1, f0				# 1090
-	lwz	r2, 0(r3)				# 1090
-	slwi	r2, r2, 2				# 1090
-	lwz	r5, 24(r3)				# 1090
-	stfsx	f0, r5, r2				# 1090
-beq_cont.17755:
-	lfs	f0, 72(r3)				# 1096
-	mfspr	r31, 8				# 1096
-	stw	r31, 104(r3)				# 1096
-	addi	r3, r3, 108				# 1096
-	bl	min_caml_fiszero				# 1096
-	addi	r3, r3, -108				# 1096
-	lwz	r31, 104(r3)				# 1096
-	mtspr	8, r31				# 1096
-	lwz	r5, 20(r3)				# 1096
-	cmpw	cr7, r2, r5				# 1096
-	bne	cr7, beq_else.17756				# 1096
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 1097
-	lfs	f1, 72(r3)				# 1097
-	fdiv	f0, f0, f1				# 1097
-	lwz	r2, 24(r3)				# 1097
-	stfs	f0, 16(r2)				# 1097
-	b	beq_cont.17757				# 1096
-beq_else.17756:
-beq_cont.17757:
-	lwz	r2, 24(r3)				# 1099
-	blr
-iter_setup_dirvec_constants.2705:
-	lwz	r6, 32(r30)				# 1104
-	lwz	r7, 28(r30)				# 1104
-	lwz	r8, 24(r30)				# 1104
-	lwz	r9, 20(r30)				# 1104
-	lwz	r10, 16(r30)				# 1104
-	lwz	r11, 12(r30)				# 1104
-	lwz	r12, 8(r30)				# 1104
-	lfs	f0, 4(r30)				# 1104
-	cmpw	cr7, r11, r5				# 1105
-	bgt	cr7, ble_else.17758				# 1105
-	slwi	r13, r5, 2				# 1106
-	lwzx	r7, r7, r13				# 1106
-	lwz	r13, 4(r2)				# 514
-	lwz	r14, 0(r2)				# 508
-	lwz	r15, 4(r7)				# 239
-	stw	r2, 0(r3)				# 1110
-	stw	r30, 4(r3)				# 1110
-	stw	r12, 8(r3)				# 1110
-	stw	r5, 12(r3)				# 1110
-	cmpw	cr7, r15, r12				# 1110
-	bne	cr7, beq_else.17759				# 1110
-	addi	r6, 0, 6
-	stw	r13, 16(r3)				# 1031
-	stw	r8, 20(r3)				# 1031
-	stw	r10, 24(r3)				# 1031
-	stw	r9, 28(r3)				# 1031
-	stfs	f0, 32(r3)				# 1031
-	stw	r7, 40(r3)				# 1031
-	stw	r14, 44(r3)				# 1031
-	stw	r11, 48(r3)				# 1031
-	mfspr	r31, 8				# 1031
-	mr	r2, r6				# 1031
-	stw	r31, 52(r3)				# 1031
-	addi	r3, r3, 56				# 1031
-	bl	min_caml_create_float_array				# 1031
-	addi	r3, r3, -56				# 1031
-	lwz	r31, 52(r3)				# 1031
-	mtspr	8, r31				# 1031
-	lwz	r5, 48(r3)				# 1033
-	slwi	r6, r5, 2				# 1033
-	lwz	r7, 44(r3)				# 1033
-	lfsx	f0, r7, r6				# 1033
-	stw	r2, 52(r3)				# 1033
-	mfspr	r31, 8				# 1033
-	stw	r31, 56(r3)				# 1033
-	addi	r3, r3, 60				# 1033
-	bl	min_caml_fiszero				# 1033
-	addi	r3, r3, -60				# 1033
-	lwz	r31, 56(r3)				# 1033
-	mtspr	8, r31				# 1033
-	lwz	r5, 48(r3)				# 1033
-	cmpw	cr7, r2, r5				# 1033
-	bne	cr7, beq_else.17761				# 1033
-	lwz	r2, 40(r3)				# 259
-	lwz	r6, 24(r2)				# 259
-	slwi	r7, r5, 2				# 1037
-	lwz	r8, 44(r3)				# 1037
-	lfsx	f0, r8, r7				# 1037
-	stw	r6, 56(r3)				# 1037
-	mfspr	r31, 8				# 1037
-	stw	r31, 60(r3)				# 1037
-	addi	r3, r3, 64				# 1037
-	bl	min_caml_fisneg				# 1037
-	addi	r3, r3, -64				# 1037
-	lwz	r31, 60(r3)				# 1037
-	mtspr	8, r31				# 1037
-	lwz	r5, 48(r3)				# 106
-	lwz	r6, 56(r3)				# 106
-	cmpw	cr7, r6, r5				# 106
-	bne	cr7, beq_else.17763				# 106
-	b	beq_cont.17764				# 106
-beq_else.17763:
-	cmpw	cr7, r2, r5				# 106
-	bne	cr7, beq_else.17765				# 106
-	addi	r2, 0, 1
-	b	beq_cont.17766				# 106
-beq_else.17765:
-	addi	r2, 0, 0
-beq_cont.17766:
-beq_cont.17764:
-	lwz	r6, 40(r3)				# 277
-	lwz	r7, 16(r6)				# 277
-	slwi	r8, r5, 2				# 282
-	lfsx	f0, r7, r8				# 282
-	cmpw	cr7, r2, r5				# 119
-	bne	cr7, beq_else.17767				# 119
-	mfspr	r31, 8				# 119
-	stw	r31, 60(r3)				# 119
-	addi	r3, r3, 64				# 119
-	bl	min_caml_fneg				# 119
-	addi	r3, r3, -64				# 119
-	lwz	r31, 60(r3)				# 119
-	mtspr	8, r31				# 119
-	b	beq_cont.17768				# 119
-beq_else.17767:
-beq_cont.17768:
-	lwz	r2, 48(r3)				# 1037
-	slwi	r5, r2, 2				# 1037
-	lwz	r6, 52(r3)				# 1037
-	stfsx	f0, r6, r5				# 1037
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 1039
-	slwi	r5, r2, 2				# 1039
-	lwz	r7, 44(r3)				# 1039
-	lfsx	f1, r7, r5				# 1039
-	fdiv	f0, f0, f1				# 1039
-	lwz	r5, 8(r3)				# 1039
-	slwi	r8, r5, 2				# 1039
-	stfsx	f0, r6, r8				# 1039
-	b	beq_cont.17762				# 1033
-beq_else.17761:
-	lwz	r2, 8(r3)				# 1034
-	slwi	r6, r2, 2				# 1034
-	lwz	r7, 52(r3)				# 1034
-	lfs	f0, 32(r3)				# 1034
-	stfsx	f0, r7, r6				# 1034
-beq_cont.17762:
-	lwz	r2, 8(r3)				# 1041
-	slwi	r5, r2, 2				# 1041
-	lwz	r6, 44(r3)				# 1041
-	lfsx	f0, r6, r5				# 1041
-	mfspr	r31, 8				# 1041
-	stw	r31, 60(r3)				# 1041
-	addi	r3, r3, 64				# 1041
-	bl	min_caml_fiszero				# 1041
-	addi	r3, r3, -64				# 1041
-	lwz	r31, 60(r3)				# 1041
-	mtspr	8, r31				# 1041
-	lwz	r5, 48(r3)				# 1041
-	cmpw	cr7, r2, r5				# 1041
-	bne	cr7, beq_else.17769				# 1041
-	lwz	r2, 40(r3)				# 259
-	lwz	r6, 24(r2)				# 259
-	lwz	r7, 8(r3)				# 1044
-	slwi	r8, r7, 2				# 1044
-	lwz	r9, 44(r3)				# 1044
-	lfsx	f0, r9, r8				# 1044
-	stw	r6, 60(r3)				# 1044
-	mfspr	r31, 8				# 1044
-	stw	r31, 64(r3)				# 1044
-	addi	r3, r3, 68				# 1044
-	bl	min_caml_fisneg				# 1044
-	addi	r3, r3, -68				# 1044
-	lwz	r31, 64(r3)				# 1044
-	mtspr	8, r31				# 1044
-	lwz	r5, 48(r3)				# 106
-	lwz	r6, 60(r3)				# 106
-	cmpw	cr7, r6, r5				# 106
-	bne	cr7, beq_else.17771				# 106
-	b	beq_cont.17772				# 106
-beq_else.17771:
-	cmpw	cr7, r2, r5				# 106
-	bne	cr7, beq_else.17773				# 106
-	addi	r2, 0, 1
-	b	beq_cont.17774				# 106
-beq_else.17773:
-	addi	r2, 0, 0
-beq_cont.17774:
-beq_cont.17772:
-	lwz	r6, 40(r3)				# 287
-	lwz	r7, 16(r6)				# 287
-	lwz	r8, 8(r3)				# 292
-	slwi	r9, r8, 2				# 292
-	lfsx	f0, r7, r9				# 292
-	cmpw	cr7, r2, r5				# 119
-	bne	cr7, beq_else.17775				# 119
-	mfspr	r31, 8				# 119
-	stw	r31, 64(r3)				# 119
-	addi	r3, r3, 68				# 119
-	bl	min_caml_fneg				# 119
-	addi	r3, r3, -68				# 119
-	lwz	r31, 64(r3)				# 119
-	mtspr	8, r31				# 119
-	b	beq_cont.17776				# 119
-beq_else.17775:
-beq_cont.17776:
-	lwz	r2, 28(r3)				# 1044
-	slwi	r5, r2, 2				# 1044
-	lwz	r6, 52(r3)				# 1044
-	stfsx	f0, r6, r5				# 1044
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 1045
-	lwz	r5, 8(r3)				# 1045
-	slwi	r7, r5, 2				# 1045
-	lwz	r8, 44(r3)				# 1045
-	lfsx	f1, r8, r7				# 1045
-	fdiv	f0, f0, f1				# 1045
-	lwz	r7, 24(r3)				# 1045
-	slwi	r7, r7, 2				# 1045
-	stfsx	f0, r6, r7				# 1045
-	b	beq_cont.17770				# 1041
-beq_else.17769:
-	lwz	r2, 24(r3)				# 1042
-	slwi	r2, r2, 2				# 1042
-	lwz	r6, 52(r3)				# 1042
-	lfs	f0, 32(r3)				# 1042
-	stfsx	f0, r6, r2				# 1042
-beq_cont.17770:
-	lwz	r2, 28(r3)				# 1047
-	slwi	r5, r2, 2				# 1047
-	lwz	r7, 44(r3)				# 1047
-	lfsx	f0, r7, r5				# 1047
-	mfspr	r31, 8				# 1047
-	stw	r31, 64(r3)				# 1047
-	addi	r3, r3, 68				# 1047
-	bl	min_caml_fiszero				# 1047
-	addi	r3, r3, -68				# 1047
-	lwz	r31, 64(r3)				# 1047
-	mtspr	8, r31				# 1047
-	lwz	r5, 48(r3)				# 1047
-	cmpw	cr7, r2, r5				# 1047
-	bne	cr7, beq_else.17777				# 1047
-	lwz	r2, 40(r3)				# 259
-	lwz	r6, 24(r2)				# 259
-	lwz	r7, 28(r3)				# 1050
-	slwi	r8, r7, 2				# 1050
-	lwz	r9, 44(r3)				# 1050
-	lfsx	f0, r9, r8				# 1050
-	stw	r6, 64(r3)				# 1050
-	mfspr	r31, 8				# 1050
-	stw	r31, 68(r3)				# 1050
-	addi	r3, r3, 72				# 1050
-	bl	min_caml_fisneg				# 1050
-	addi	r3, r3, -72				# 1050
-	lwz	r31, 68(r3)				# 1050
-	mtspr	8, r31				# 1050
-	lwz	r5, 48(r3)				# 106
-	lwz	r6, 64(r3)				# 106
-	cmpw	cr7, r6, r5				# 106
-	bne	cr7, beq_else.17779				# 106
-	b	beq_cont.17780				# 106
-beq_else.17779:
-	cmpw	cr7, r2, r5				# 106
-	bne	cr7, beq_else.17781				# 106
-	addi	r2, 0, 1
-	b	beq_cont.17782				# 106
-beq_else.17781:
-	addi	r2, 0, 0
-beq_cont.17782:
-beq_cont.17780:
-	lwz	r6, 40(r3)				# 297
-	lwz	r6, 16(r6)				# 297
-	lwz	r7, 28(r3)				# 302
-	slwi	r8, r7, 2				# 302
-	lfsx	f0, r6, r8				# 302
-	cmpw	cr7, r2, r5				# 119
-	bne	cr7, beq_else.17783				# 119
-	mfspr	r31, 8				# 119
-	stw	r31, 68(r3)				# 119
-	addi	r3, r3, 72				# 119
-	bl	min_caml_fneg				# 119
-	addi	r3, r3, -72				# 119
-	lwz	r31, 68(r3)				# 119
-	mtspr	8, r31				# 119
-	b	beq_cont.17784				# 119
-beq_else.17783:
-beq_cont.17784:
-	lwz	r2, 52(r3)				# 1050
-	stfs	f0, 16(r2)				# 1050
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 1051
-	lwz	r5, 28(r3)				# 1051
-	slwi	r5, r5, 2				# 1051
-	lwz	r6, 44(r3)				# 1051
-	lfsx	f1, r6, r5				# 1051
-	fdiv	f0, f0, f1				# 1051
-	lwz	r5, 20(r3)				# 1051
-	slwi	r5, r5, 2				# 1051
-	stfsx	f0, r2, r5				# 1051
-	b	beq_cont.17778				# 1047
-beq_else.17777:
-	lwz	r2, 20(r3)				# 1048
-	slwi	r2, r2, 2				# 1048
-	lwz	r5, 52(r3)				# 1048
-	lfs	f0, 32(r3)				# 1048
-	stfsx	f0, r5, r2				# 1048
-beq_cont.17778:
-	lwz	r2, 12(r3)				# 1111
-	slwi	r5, r2, 2				# 1111
-	lwz	r6, 16(r3)				# 1111
-	lwz	r7, 52(r3)				# 1111
-	stwx	r7, r6, r5				# 1111
-	b	beq_cont.17760				# 1110
-beq_else.17759:
-	cmpw	cr7, r15, r9				# 1112
-	bne	cr7, beq_else.17785				# 1112
-	addi	r6, 0, 4
-	stw	r13, 16(r3)				# 1058
-	stw	r10, 24(r3)				# 1058
-	stfs	f0, 32(r3)				# 1058
-	stw	r9, 28(r3)				# 1058
-	stw	r7, 40(r3)				# 1058
-	stw	r14, 44(r3)				# 1058
-	stw	r11, 48(r3)				# 1058
-	mfspr	r31, 8				# 1058
-	mr	r2, r6				# 1058
-	stw	r31, 68(r3)				# 1058
-	addi	r3, r3, 72				# 1058
-	bl	min_caml_create_float_array				# 1058
-	addi	r3, r3, -72				# 1058
-	lwz	r31, 68(r3)				# 1058
-	mtspr	8, r31				# 1058
-	lwz	r5, 48(r3)				# 1060
-	slwi	r6, r5, 2				# 1060
-	lwz	r7, 44(r3)				# 1060
-	lfsx	f0, r7, r6				# 1060
-	lwz	r6, 40(r3)				# 277
-	lwz	r8, 16(r6)				# 277
-	slwi	r9, r5, 2				# 282
-	lfsx	f1, r8, r9				# 282
-	fmul	f0, f0, f1				# 1060
-	lwz	r8, 8(r3)				# 1060
-	slwi	r9, r8, 2				# 1060
-	lfsx	f1, r7, r9				# 1060
-	lwz	r9, 16(r6)				# 287
-	slwi	r10, r8, 2				# 292
-	lfsx	f2, r9, r10				# 292
-	fmul	f1, f1, f2				# 1060
-	fadd	f0, f0, f1				# 1060
-	lwz	r9, 28(r3)				# 1060
-	slwi	r10, r9, 2				# 1060
-	lfsx	f1, r7, r10				# 1060
-	lwz	r7, 16(r6)				# 297
-	slwi	r10, r9, 2				# 302
-	lfsx	f2, r7, r10				# 302
-	fmul	f1, f1, f2				# 1060
-	fadd	f0, f0, f1				# 1060
-	stfs	f0, 72(r3)				# 1062
-	stw	r2, 80(r3)				# 1062
-	mfspr	r31, 8				# 1062
-	stw	r31, 84(r3)				# 1062
-	addi	r3, r3, 88				# 1062
-	bl	min_caml_fispos				# 1062
-	addi	r3, r3, -88				# 1062
-	lwz	r31, 84(r3)				# 1062
-	mtspr	8, r31				# 1062
-	lwz	r5, 48(r3)				# 1062
-	cmpw	cr7, r2, r5				# 1062
-	bne	cr7, beq_else.17788				# 1062
-	slwi	r2, r5, 2				# 1070
-	lwz	r5, 80(r3)				# 1070
-	lfs	f0, 32(r3)				# 1070
-	stfsx	f0, r5, r2				# 1070
-	b	beq_cont.17789				# 1062
-beq_else.17788:
-	lis	r31, ha16(l.11650)
-	addi	r31, r31, lo16(l.11650)
-	lfs	f0, 0(r31)				# 1064
-	lfs	f1, 72(r3)				# 1064
-	fdiv	f0, f0, f1				# 1064
-	slwi	r2, r5, 2				# 1064
-	lwz	r6, 80(r3)				# 1064
-	stfsx	f0, r6, r2				# 1064
-	lwz	r2, 40(r3)				# 277
-	lwz	r7, 16(r2)				# 277
-	slwi	r5, r5, 2				# 282
-	lfsx	f0, r7, r5				# 282
-	fdiv	f0, f0, f1				# 1066
-	mfspr	r31, 8				# 1066
-	stw	r31, 84(r3)				# 1066
-	addi	r3, r3, 88				# 1066
-	bl	min_caml_fneg				# 1066
-	addi	r3, r3, -88				# 1066
-	lwz	r31, 84(r3)				# 1066
-	mtspr	8, r31				# 1066
-	lwz	r2, 8(r3)				# 1066
-	slwi	r5, r2, 2				# 1066
-	lwz	r6, 80(r3)				# 1066
-	stfsx	f0, r6, r5				# 1066
-	lwz	r5, 40(r3)				# 287
-	lwz	r7, 16(r5)				# 287
-	slwi	r8, r2, 2				# 292
-	lfsx	f0, r7, r8				# 292
-	lfs	f1, 72(r3)				# 1067
-	fdiv	f0, f0, f1				# 1067
-	mfspr	r31, 8				# 1067
-	stw	r31, 84(r3)				# 1067
-	addi	r3, r3, 88				# 1067
-	bl	min_caml_fneg				# 1067
-	addi	r3, r3, -88				# 1067
-	lwz	r31, 84(r3)				# 1067
-	mtspr	8, r31				# 1067
-	lwz	r2, 28(r3)				# 1067
-	slwi	r5, r2, 2				# 1067
-	lwz	r6, 80(r3)				# 1067
-	stfsx	f0, r6, r5				# 1067
-	lwz	r5, 40(r3)				# 297
-	lwz	r5, 16(r5)				# 297
-	slwi	r2, r2, 2				# 302
-	lfsx	f0, r5, r2				# 302
-	lfs	f1, 72(r3)				# 1068
-	fdiv	f0, f0, f1				# 1068
-	mfspr	r31, 8				# 1068
-	stw	r31, 84(r3)				# 1068
-	addi	r3, r3, 88				# 1068
-	bl	min_caml_fneg				# 1068
-	addi	r3, r3, -88				# 1068
-	lwz	r31, 84(r3)				# 1068
-	mtspr	8, r31				# 1068
-	lwz	r2, 24(r3)				# 1068
-	slwi	r2, r2, 2				# 1068
-	lwz	r5, 80(r3)				# 1068
-	stfsx	f0, r5, r2				# 1068
-beq_cont.17789:
-	lwz	r2, 12(r3)				# 1113
-	slwi	r6, r2, 2				# 1113
-	lwz	r7, 16(r3)				# 1113
-	stwx	r5, r7, r6				# 1113
-	b	beq_cont.17786				# 1112
-beq_else.17785:
-	stw	r13, 16(r3)				# 1115
-	mfspr	r31, 8				# 1115
-	mr	r5, r7				# 1115
-	mr	r2, r14				# 1115
-	mr	r30, r6				# 1115
-	stw	r31, 84(r3)				# 1115
-	addi	r3, r3, 88				# 1115
-	lwz	r31, 0(r30)				# 1115
-	mtspr	9, r31				# 1115
-	bctrl				# 1115
-	addi	r3, r3, -88				# 1115
-	lwz	r31, 84(r3)				# 1115
-	mtspr	8, r31				# 1115
-	lwz	r5, 12(r3)				# 1115
-	slwi	r6, r5, 2				# 1115
-	lwz	r7, 16(r3)				# 1115
-	stwx	r2, r7, r6				# 1115
-beq_cont.17786:
-beq_cont.17760:
-	lwz	r2, 8(r3)				# 1117
-	lwz	r5, 12(r3)				# 1117
-	sub	r5, r5, r2				# 1117
-	lwz	r2, 0(r3)				# 1117
-	lwz	r30, 4(r3)				# 1117
-	lwz	r29, 0(r30)				# 1117
-	mtspr	9, r29
-	bctr				# 1117
-ble_else.17758:
-	blr
-setup_startp_constants.2710:
-	lwz	r6, 20(r30)				# 1127
-	lwz	r7, 16(r30)				# 1127
-	lwz	r8, 12(r30)				# 1127
-	lwz	r9, 8(r30)				# 1127
-	lwz	r10, 4(r30)				# 1127
-	cmpw	cr7, r9, r5				# 1128
-	bgt	cr7, ble_else.17791				# 1128
-	slwi	r11, r5, 2				# 1129
-	lwzx	r6, r6, r11				# 1129
-	lwz	r11, 40(r6)				# 428
-	lwz	r12, 4(r6)				# 239
-	slwi	r13, r9, 2				# 1132
-	lfsx	f0, r2, r13				# 1132
-	lwz	r13, 20(r6)				# 317
-	slwi	r14, r9, 2				# 322
-	lfsx	f1, r13, r14				# 322
-	fsub	f0, f0, f1				# 1132
-	slwi	r13, r9, 2				# 1132
-	stfsx	f0, r11, r13				# 1132
-	slwi	r13, r10, 2				# 1133
-	lfsx	f0, r2, r13				# 1133
-	lwz	r13, 20(r6)				# 327
-	slwi	r14, r10, 2				# 332
-	lfsx	f1, r13, r14				# 332
-	fsub	f0, f0, f1				# 1133
-	slwi	r13, r10, 2				# 1133
-	stfsx	f0, r11, r13				# 1133
-	slwi	r13, r7, 2				# 1134
-	lfsx	f0, r2, r13				# 1134
-	lwz	r13, 20(r6)				# 337
-	slwi	r14, r7, 2				# 342
-	lfsx	f1, r13, r14				# 342
-	fsub	f0, f0, f1				# 1134
-	slwi	r13, r7, 2				# 1134
-	stfsx	f0, r11, r13				# 1134
-	stw	r2, 0(r3)				# 1135
-	stw	r30, 4(r3)				# 1135
-	stw	r10, 8(r3)				# 1135
-	stw	r5, 12(r3)				# 1135
-	cmpw	cr7, r12, r7				# 1135
-	bne	cr7, beq_else.17792				# 1135
-	lwz	r6, 16(r6)				# 307
-	slwi	r12, r9, 2				# 1137
-	lfsx	f0, r11, r12				# 1137
-	slwi	r12, r10, 2				# 1137
-	lfsx	f1, r11, r12				# 1137
-	slwi	r12, r7, 2				# 1137
-	lfsx	f2, r11, r12				# 1137
-	slwi	r9, r9, 2				# 187
-	lfsx	f3, r6, r9				# 187
-	fmul	f0, f3, f0				# 187
-	slwi	r9, r10, 2				# 187
-	lfsx	f3, r6, r9				# 187
-	fmul	f1, f3, f1				# 187
-	fadd	f0, f0, f1				# 187
-	slwi	r7, r7, 2				# 187
-	lfsx	f1, r6, r7				# 187
-	fmul	f1, f1, f2				# 187
-	fadd	f0, f0, f1				# 187
-	slwi	r6, r8, 2				# 1136
-	stfsx	f0, r11, r6				# 1136
-	b	beq_cont.17793				# 1135
-beq_else.17792:
-	cmpw	cr7, r12, r7				# 1138
-	bgt	cr7, ble_else.17794				# 1138
-	b	ble_cont.17795				# 1138
-ble_else.17794:
-	slwi	r13, r9, 2				# 1139
-	lfsx	f0, r11, r13				# 1139
-	slwi	r13, r10, 2				# 1139
-	lfsx	f1, r11, r13				# 1139
-	slwi	r13, r7, 2				# 1139
-	lfsx	f2, r11, r13				# 1139
-	stw	r11, 16(r3)				# 823
-	stw	r8, 20(r3)				# 823
-	stw	r12, 24(r3)				# 823
-	stfs	f0, 32(r3)				# 823
-	stw	r7, 40(r3)				# 823
-	stfs	f2, 48(r3)				# 823
-	stfs	f1, 56(r3)				# 823
-	stw	r9, 64(r3)				# 823
-	stw	r6, 68(r3)				# 823
-	mfspr	r31, 8				# 823
-	stw	r31, 72(r3)				# 823
-	addi	r3, r3, 76				# 823
-	bl	min_caml_fsqr				# 823
-	addi	r3, r3, -76				# 823
-	lwz	r31, 72(r3)				# 823
-	mtspr	8, r31				# 823
-	lwz	r2, 68(r3)				# 277
-	lwz	r5, 16(r2)				# 277
-	lwz	r6, 64(r3)				# 282
-	slwi	r7, r6, 2				# 282
-	lfsx	f1, r5, r7				# 282
-	fmul	f0, f0, f1				# 823
-	lfs	f1, 56(r3)				# 823
-	stfs	f0, 72(r3)				# 823
-	mfspr	r31, 8				# 823
-	fmr	f0, f1				# 823
-	stw	r31, 80(r3)				# 823
-	addi	r3, r3, 84				# 823
-	bl	min_caml_fsqr				# 823
-	addi	r3, r3, -84				# 823
-	lwz	r31, 80(r3)				# 823
-	mtspr	8, r31				# 823
-	lwz	r2, 68(r3)				# 287
-	lwz	r5, 16(r2)				# 287
-	lwz	r6, 8(r3)				# 292
-	slwi	r7, r6, 2				# 292
-	lfsx	f1, r5, r7				# 292
-	fmul	f0, f0, f1				# 823
-	lfs	f1, 72(r3)				# 823
-	fadd	f0, f1, f0				# 823
-	lfs	f1, 48(r3)				# 823
-	stfs	f0, 80(r3)				# 823
-	mfspr	r31, 8				# 823
-	fmr	f0, f1				# 823
-	stw	r31, 88(r3)				# 823
-	addi	r3, r3, 92				# 823
-	bl	min_caml_fsqr				# 823
-	addi	r3, r3, -92				# 823
-	lwz	r31, 88(r3)				# 823
-	mtspr	8, r31				# 823
-	lwz	r2, 68(r3)				# 297
-	lwz	r5, 16(r2)				# 297
-	lwz	r6, 40(r3)				# 302
-	slwi	r7, r6, 2				# 302
-	lfsx	f1, r5, r7				# 302
-	fmul	f0, f0, f1				# 823
-	lfs	f1, 80(r3)				# 823
-	fadd	f0, f1, f0				# 823
-	lwz	r5, 12(r2)				# 268
-	lwz	r7, 64(r3)				# 825
-	cmpw	cr7, r5, r7				# 825
-	bne	cr7, beq_else.17798				# 825
-	b	beq_cont.17799				# 825
-beq_else.17798:
-	lfs	f1, 48(r3)				# 829
-	lfs	f2, 56(r3)				# 829
-	fmul	f3, f2, f1				# 829
-	lwz	r5, 36(r2)				# 397
-	slwi	r7, r7, 2				# 402
-	lfsx	f4, r5, r7				# 402
-	fmul	f3, f3, f4				# 829
-	fadd	f0, f0, f3				# 828
-	lfs	f3, 32(r3)				# 830
-	fmul	f1, f1, f3				# 830
-	lwz	r5, 36(r2)				# 407
-	lwz	r7, 8(r3)				# 412
-	slwi	r8, r7, 2				# 412
-	lfsx	f4, r5, r8				# 412
-	fmul	f1, f1, f4				# 830
-	fadd	f0, f0, f1				# 828
-	fmul	f1, f3, f2				# 831
-	lwz	r2, 36(r2)				# 417
-	slwi	r5, r6, 2				# 422
-	lfsx	f2, r2, r5				# 422
-	fmul	f1, f1, f2				# 831
-	fadd	f0, f0, f1				# 828
-beq_cont.17799:
-	lwz	r2, 20(r3)				# 1140
-	lwz	r5, 24(r3)				# 1140
-	cmpw	cr7, r5, r2				# 1140
-	bne	cr7, beq_else.17800				# 1140
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f1, 0(r31)				# 1140
-	fsub	f0, f0, f1				# 1140
-	b	beq_cont.17801				# 1140
-beq_else.17800:
-beq_cont.17801:
-	slwi	r2, r2, 2				# 1140
-	lwz	r5, 16(r3)				# 1140
-	stfsx	f0, r5, r2				# 1140
-ble_cont.17795:
-beq_cont.17793:
-	lwz	r2, 8(r3)				# 1142
-	lwz	r5, 12(r3)				# 1142
-	sub	r5, r5, r2				# 1142
-	lwz	r2, 0(r3)				# 1142
-	lwz	r30, 4(r3)				# 1142
-	lwz	r29, 0(r30)				# 1142
-	mtspr	9, r29
-	bctr				# 1142
-ble_else.17791:
-	blr
-check_all_inside.2735:
-	lwz	r6, 24(r30)				# 1194
-	lwz	r7, 20(r30)				# 1194
-	lwz	r8, 16(r30)				# 1194
-	lwz	r9, 12(r30)				# 1194
-	lwz	r10, 8(r30)				# 1194
-	lwz	r11, 4(r30)				# 1194
-	slwi	r12, r2, 2				# 1195
-	lwzx	r12, r5, r12				# 1195
-	cmpw	cr7, r12, r8				# 1196
-	bne	cr7, beq_else.17803				# 1196
-	addi	r2, 0, 1
-	blr
-beq_else.17803:
-	slwi	r8, r12, 2				# 1199
-	lwzx	r6, r6, r8				# 1199
-	lwz	r8, 20(r6)				# 317
-	slwi	r12, r10, 2				# 322
-	lfsx	f3, r8, r12				# 322
-	fsub	f3, f0, f3				# 1181
-	lwz	r8, 20(r6)				# 327
-	slwi	r12, r11, 2				# 332
-	lfsx	f4, r8, r12				# 332
-	fsub	f4, f1, f4				# 1182
-	lwz	r8, 20(r6)				# 337
-	slwi	r12, r7, 2				# 342
-	lfsx	f5, r8, r12				# 342
-	fsub	f5, f2, f5				# 1183
-	lwz	r8, 4(r6)				# 239
-	stfs	f2, 0(r3)				# 1185
-	stfs	f1, 8(r3)				# 1185
-	stfs	f0, 16(r3)				# 1185
-	stw	r5, 24(r3)				# 1185
-	stw	r30, 28(r3)				# 1185
-	stw	r11, 32(r3)				# 1185
-	stw	r2, 36(r3)				# 1185
-	cmpw	cr7, r8, r11				# 1185
-	bne	cr7, beq_else.17804				# 1185
-	stw	r7, 40(r3)				# 1158
-	stfs	f5, 48(r3)				# 1158
-	stfs	f4, 56(r3)				# 1158
-	stw	r10, 64(r3)				# 1158
-	stw	r6, 68(r3)				# 1158
-	mfspr	r31, 8				# 1158
-	fmr	f0, f3				# 1158
-	stw	r31, 72(r3)				# 1158
-	addi	r3, r3, 76				# 1158
-	bl	min_caml_fabs				# 1158
-	addi	r3, r3, -76				# 1158
-	lwz	r31, 72(r3)				# 1158
-	mtspr	8, r31				# 1158
-	lwz	r2, 68(r3)				# 277
-	lwz	r5, 16(r2)				# 277
-	lwz	r6, 64(r3)				# 282
-	slwi	r7, r6, 2				# 282
-	lfsx	f1, r5, r7				# 282
-	mfspr	r31, 8				# 1158
-	stw	r31, 72(r3)				# 1158
-	addi	r3, r3, 76				# 1158
-	bl	min_caml_fless				# 1158
-	addi	r3, r3, -76				# 1158
-	lwz	r31, 72(r3)				# 1158
-	mtspr	8, r31				# 1158
-	lwz	r5, 64(r3)				# 1158
-	cmpw	cr7, r2, r5				# 1158
-	bne	cr7, beq_else.17807				# 1158
-	addi	r2, 0, 0
-	b	beq_cont.17808				# 1158
-beq_else.17807:
-	lfs	f0, 56(r3)				# 1159
-	mfspr	r31, 8				# 1159
-	stw	r31, 72(r3)				# 1159
-	addi	r3, r3, 76				# 1159
-	bl	min_caml_fabs				# 1159
-	addi	r3, r3, -76				# 1159
-	lwz	r31, 72(r3)				# 1159
-	mtspr	8, r31				# 1159
-	lwz	r2, 68(r3)				# 287
-	lwz	r5, 16(r2)				# 287
-	lwz	r6, 32(r3)				# 292
-	slwi	r7, r6, 2				# 292
-	lfsx	f1, r5, r7				# 292
-	mfspr	r31, 8				# 1159
-	stw	r31, 72(r3)				# 1159
-	addi	r3, r3, 76				# 1159
-	bl	min_caml_fless				# 1159
-	addi	r3, r3, -76				# 1159
-	lwz	r31, 72(r3)				# 1159
-	mtspr	8, r31				# 1159
-	lwz	r5, 64(r3)				# 1159
-	cmpw	cr7, r2, r5				# 1159
-	bne	cr7, beq_else.17809				# 1159
-	addi	r2, 0, 0
-	b	beq_cont.17810				# 1159
-beq_else.17809:
-	lfs	f0, 48(r3)				# 1160
-	mfspr	r31, 8				# 1160
-	stw	r31, 72(r3)				# 1160
-	addi	r3, r3, 76				# 1160
-	bl	min_caml_fabs				# 1160
-	addi	r3, r3, -76				# 1160
-	lwz	r31, 72(r3)				# 1160
-	mtspr	8, r31				# 1160
-	lwz	r2, 68(r3)				# 297
-	lwz	r5, 16(r2)				# 297
-	lwz	r6, 40(r3)				# 302
-	slwi	r6, r6, 2				# 302
-	lfsx	f1, r5, r6				# 302
-	mfspr	r31, 8				# 1160
-	stw	r31, 72(r3)				# 1160
-	addi	r3, r3, 76				# 1160
-	bl	min_caml_fless				# 1160
-	addi	r3, r3, -76				# 1160
-	lwz	r31, 72(r3)				# 1160
-	mtspr	8, r31				# 1160
-beq_cont.17810:
-beq_cont.17808:
-	lwz	r5, 64(r3)				# 1157
-	cmpw	cr7, r2, r5				# 1157
-	bne	cr7, beq_else.17811				# 1157
-	lwz	r2, 68(r3)				# 259
-	lwz	r2, 24(r2)				# 259
-	cmpw	cr7, r2, r5				# 1163
-	bne	cr7, beq_else.17813				# 1163
-	addi	r2, 0, 1
-	b	beq_cont.17814				# 1163
-beq_else.17813:
-	addi	r2, 0, 0
-beq_cont.17814:
-	b	beq_cont.17812				# 1157
-beq_else.17811:
-	lwz	r2, 68(r3)				# 259
-	lwz	r2, 24(r2)				# 259
-beq_cont.17812:
-	b	beq_cont.17805				# 1185
-beq_else.17804:
-	cmpw	cr7, r8, r7				# 1187
-	bne	cr7, beq_else.17815				# 1187
-	lwz	r8, 16(r6)				# 307
-	slwi	r9, r10, 2				# 187
-	lfsx	f6, r8, r9				# 187
-	fmul	f3, f6, f3				# 187
-	slwi	r9, r11, 2				# 187
-	lfsx	f6, r8, r9				# 187
-	fmul	f4, f6, f4				# 187
-	fadd	f3, f3, f4				# 187
-	slwi	r7, r7, 2				# 187
-	lfsx	f4, r8, r7				# 187
-	fmul	f4, f4, f5				# 187
-	fadd	f3, f3, f4				# 187
-	lwz	r6, 24(r6)				# 259
-	stw	r10, 64(r3)				# 1169
-	stw	r6, 72(r3)				# 1169
-	mfspr	r31, 8				# 1169
-	fmr	f0, f3				# 1169
-	stw	r31, 76(r3)				# 1169
-	addi	r3, r3, 80				# 1169
-	bl	min_caml_fisneg				# 1169
-	addi	r3, r3, -80				# 1169
-	lwz	r31, 76(r3)				# 1169
-	mtspr	8, r31				# 1169
-	lwz	r5, 64(r3)				# 106
-	lwz	r6, 72(r3)				# 106
-	cmpw	cr7, r6, r5				# 106
-	bne	cr7, beq_else.17817				# 106
-	b	beq_cont.17818				# 106
-beq_else.17817:
-	cmpw	cr7, r2, r5				# 106
-	bne	cr7, beq_else.17819				# 106
-	addi	r2, 0, 1
-	b	beq_cont.17820				# 106
-beq_else.17819:
-	addi	r2, 0, 0
-beq_cont.17820:
-beq_cont.17818:
-	cmpw	cr7, r2, r5				# 1169
-	bne	cr7, beq_else.17821				# 1169
-	addi	r2, 0, 1
-	b	beq_cont.17822				# 1169
-beq_else.17821:
-	addi	r2, 0, 0
-beq_cont.17822:
-	b	beq_cont.17816				# 1187
-beq_else.17815:
-	stw	r9, 76(r3)				# 823
-	stfs	f3, 80(r3)				# 823
-	stw	r7, 40(r3)				# 823
-	stfs	f5, 48(r3)				# 823
-	stfs	f4, 56(r3)				# 823
-	stw	r10, 64(r3)				# 823
-	stw	r6, 68(r3)				# 823
-	mfspr	r31, 8				# 823
-	fmr	f0, f3				# 823
-	stw	r31, 88(r3)				# 823
-	addi	r3, r3, 92				# 823
-	bl	min_caml_fsqr				# 823
-	addi	r3, r3, -92				# 823
-	lwz	r31, 88(r3)				# 823
-	mtspr	8, r31				# 823
-	lwz	r2, 68(r3)				# 277
-	lwz	r5, 16(r2)				# 277
-	lwz	r6, 64(r3)				# 282
-	slwi	r7, r6, 2				# 282
-	lfsx	f1, r5, r7				# 282
-	fmul	f0, f0, f1				# 823
-	lfs	f1, 56(r3)				# 823
-	stfs	f0, 88(r3)				# 823
-	mfspr	r31, 8				# 823
-	fmr	f0, f1				# 823
-	stw	r31, 96(r3)				# 823
-	addi	r3, r3, 100				# 823
-	bl	min_caml_fsqr				# 823
-	addi	r3, r3, -100				# 823
-	lwz	r31, 96(r3)				# 823
-	mtspr	8, r31				# 823
-	lwz	r2, 68(r3)				# 287
-	lwz	r5, 16(r2)				# 287
-	lwz	r6, 32(r3)				# 292
-	slwi	r7, r6, 2				# 292
-	lfsx	f1, r5, r7				# 292
-	fmul	f0, f0, f1				# 823
-	lfs	f1, 88(r3)				# 823
-	fadd	f0, f1, f0				# 823
-	lfs	f1, 48(r3)				# 823
-	stfs	f0, 96(r3)				# 823
-	mfspr	r31, 8				# 823
-	fmr	f0, f1				# 823
-	stw	r31, 104(r3)				# 823
-	addi	r3, r3, 108				# 823
-	bl	min_caml_fsqr				# 823
-	addi	r3, r3, -108				# 823
-	lwz	r31, 104(r3)				# 823
-	mtspr	8, r31				# 823
-	lwz	r2, 68(r3)				# 297
-	lwz	r5, 16(r2)				# 297
-	lwz	r6, 40(r3)				# 302
-	slwi	r7, r6, 2				# 302
-	lfsx	f1, r5, r7				# 302
-	fmul	f0, f0, f1				# 823
-	lfs	f1, 96(r3)				# 823
-	fadd	f0, f1, f0				# 823
-	lwz	r5, 12(r2)				# 268
-	lwz	r7, 64(r3)				# 825
-	cmpw	cr7, r5, r7				# 825
-	bne	cr7, beq_else.17823				# 825
-	b	beq_cont.17824				# 825
-beq_else.17823:
-	lfs	f1, 48(r3)				# 829
-	lfs	f2, 56(r3)				# 829
-	fmul	f3, f2, f1				# 829
-	lwz	r5, 36(r2)				# 397
-	slwi	r8, r7, 2				# 402
-	lfsx	f4, r5, r8				# 402
-	fmul	f3, f3, f4				# 829
-	fadd	f0, f0, f3				# 828
-	lfs	f3, 80(r3)				# 830
-	fmul	f1, f1, f3				# 830
-	lwz	r5, 36(r2)				# 407
-	lwz	r8, 32(r3)				# 412
-	slwi	r9, r8, 2				# 412
-	lfsx	f4, r5, r9				# 412
-	fmul	f1, f1, f4				# 830
-	fadd	f0, f0, f1				# 828
-	fmul	f1, f3, f2				# 831
-	lwz	r5, 36(r2)				# 417
-	slwi	r6, r6, 2				# 422
-	lfsx	f2, r5, r6				# 422
-	fmul	f1, f1, f2				# 831
-	fadd	f0, f0, f1				# 828
-beq_cont.17824:
-	lwz	r5, 4(r2)				# 239
-	lwz	r6, 76(r3)				# 1175
-	cmpw	cr7, r5, r6				# 1175
-	bne	cr7, beq_else.17825				# 1175
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f1, 0(r31)				# 1175
-	fsub	f0, f0, f1				# 1175
-	b	beq_cont.17826				# 1175
-beq_else.17825:
-beq_cont.17826:
-	lwz	r2, 24(r2)				# 259
-	stw	r2, 104(r3)				# 1176
-	mfspr	r31, 8				# 1176
-	stw	r31, 108(r3)				# 1176
-	addi	r3, r3, 112				# 1176
-	bl	min_caml_fisneg				# 1176
-	addi	r3, r3, -112				# 1176
-	lwz	r31, 108(r3)				# 1176
-	mtspr	8, r31				# 1176
-	lwz	r5, 64(r3)				# 106
-	lwz	r6, 104(r3)				# 106
-	cmpw	cr7, r6, r5				# 106
-	bne	cr7, beq_else.17827				# 106
-	b	beq_cont.17828				# 106
-beq_else.17827:
-	cmpw	cr7, r2, r5				# 106
-	bne	cr7, beq_else.17829				# 106
-	addi	r2, 0, 1
-	b	beq_cont.17830				# 106
-beq_else.17829:
-	addi	r2, 0, 0
-beq_cont.17830:
-beq_cont.17828:
-	cmpw	cr7, r2, r5				# 1176
-	bne	cr7, beq_else.17831				# 1176
-	addi	r2, 0, 1
-	b	beq_cont.17832				# 1176
-beq_else.17831:
-	addi	r2, 0, 0
-beq_cont.17832:
-beq_cont.17816:
-beq_cont.17805:
-	cmpw	cr7, r2, r5				# 1199
-	bne	cr7, beq_else.17833				# 1199
-	lwz	r2, 32(r3)				# 1202
-	lwz	r5, 36(r3)				# 1202
-	add	r2, r5, r2				# 1202
-	lfs	f0, 16(r3)				# 1202
-	lfs	f1, 8(r3)				# 1202
-	lfs	f2, 0(r3)				# 1202
-	lwz	r5, 24(r3)				# 1202
-	lwz	r30, 28(r3)				# 1202
-	lwz	r29, 0(r30)				# 1202
-	mtspr	9, r29
-	bctr				# 1202
-beq_else.17833:
-	addi	r2, 0, 0
-	blr
-shadow_check_and_group.2741:
-	lwz	r6, 56(r30)				# 1212
-	lwz	r7, 52(r30)				# 1212
-	lwz	r8, 48(r30)				# 1212
-	lwz	r9, 44(r30)				# 1212
-	lwz	r10, 40(r30)				# 1212
-	lwz	r11, 36(r30)				# 1212
-	lwz	r12, 32(r30)				# 1212
-	lwz	r13, 28(r30)				# 1212
-	lwz	r14, 24(r30)				# 1212
-	lwz	r15, 20(r30)				# 1212
-	lwz	r16, 16(r30)				# 1212
-	lwz	r17, 12(r30)				# 1212
-	lwz	r18, 8(r30)				# 1212
-	lwz	r19, 4(r30)				# 1212
-	slwi	r20, r2, 2				# 1213
-	lwzx	r20, r5, r20				# 1213
-	cmpw	cr7, r20, r16				# 1213
-	bne	cr7, beq_else.17834				# 1213
-	addi	r2, 0, 0
-	blr
-beq_else.17834:
-	slwi	r16, r2, 2				# 1216
-	lwzx	r16, r5, r16				# 1216
-	slwi	r20, r16, 2				# 964
-	lwzx	r20, r10, r20				# 964
-	slwi	r21, r18, 2				# 965
-	lfsx	f0, r12, r21				# 965
-	lwz	r21, 20(r20)				# 317
-	slwi	r22, r18, 2				# 322
-	lfsx	f1, r21, r22				# 322
-	fsub	f0, f0, f1				# 965
-	slwi	r21, r19, 2				# 966
-	lfsx	f1, r12, r21				# 966
-	lwz	r21, 20(r20)				# 327
-	slwi	r22, r19, 2				# 332
-	lfsx	f2, r21, r22				# 332
-	fsub	f1, f1, f2				# 966
-	slwi	r21, r15, 2				# 967
-	lfsx	f2, r12, r21				# 967
-	lwz	r21, 20(r20)				# 337
-	slwi	r22, r15, 2				# 342
-	lfsx	f3, r21, r22				# 342
-	fsub	f2, f2, f3				# 967
-	slwi	r21, r16, 2				# 969
-	lwzx	r13, r13, r21				# 969
-	lwz	r21, 4(r20)				# 239
-	stw	r14, 0(r3)				# 971
-	stw	r15, 4(r3)				# 971
-	stw	r12, 8(r3)				# 971
-	stw	r11, 12(r3)				# 971
-	stw	r5, 16(r3)				# 971
-	stw	r30, 20(r3)				# 971
-	stw	r19, 24(r3)				# 971
-	stw	r2, 28(r3)				# 971
-	stw	r10, 32(r3)				# 971
-	stw	r16, 36(r3)				# 971
-	stw	r9, 40(r3)				# 971
-	stw	r18, 44(r3)				# 971
-	cmpw	cr7, r21, r19				# 971
-	bne	cr7, beq_else.17835				# 971
-	mfspr	r31, 8				# 972
-	mr	r5, r6				# 972
-	mr	r2, r20				# 972
-	mr	r30, r8				# 972
-	mr	r6, r13				# 972
-	stw	r31, 48(r3)				# 972
-	addi	r3, r3, 52				# 972
-	lwz	r31, 0(r30)				# 972
-	mtspr	9, r31				# 972
-	bctrl				# 972
-	addi	r3, r3, -52				# 972
-	lwz	r31, 48(r3)				# 972
-	mtspr	8, r31				# 972
-	b	beq_cont.17836				# 971
-beq_else.17835:
-	cmpw	cr7, r21, r15				# 973
-	bne	cr7, beq_else.17837				# 973
-	slwi	r6, r18, 2				# 935
-	lfsx	f3, r13, r6				# 935
-	stfs	f2, 48(r3)				# 935
-	stw	r17, 56(r3)				# 935
-	stfs	f1, 64(r3)				# 935
-	stfs	f0, 72(r3)				# 935
-	stw	r13, 80(r3)				# 935
-	mfspr	r31, 8				# 935
-	fmr	f0, f3				# 935
-	stw	r31, 84(r3)				# 935
-	addi	r3, r3, 88				# 935
-	bl	min_caml_fisneg				# 935
-	addi	r3, r3, -88				# 935
-	lwz	r31, 84(r3)				# 935
-	mtspr	8, r31				# 935
-	lwz	r5, 44(r3)				# 935
-	cmpw	cr7, r2, r5				# 935
-	bne	cr7, beq_else.17840				# 935
-	addi	r2, 0, 0
-	b	beq_cont.17841				# 935
-beq_else.17840:
-	lwz	r2, 24(r3)				# 937
-	slwi	r6, r2, 2				# 937
-	lwz	r7, 80(r3)				# 937
-	lfsx	f0, r7, r6				# 937
-	lfs	f1, 72(r3)				# 937
-	fmul	f0, f0, f1				# 937
-	lwz	r6, 4(r3)				# 937
-	slwi	r8, r6, 2				# 937
-	lfsx	f1, r7, r8				# 937
-	lfs	f2, 64(r3)				# 937
-	fmul	f1, f1, f2				# 937
-	fadd	f0, f0, f1				# 937
-	lwz	r8, 56(r3)				# 937
-	slwi	r8, r8, 2				# 937
-	lfsx	f1, r7, r8				# 937
-	lfs	f2, 48(r3)				# 937
-	fmul	f1, f1, f2				# 937
-	fadd	f0, f0, f1				# 937
-	slwi	r7, r5, 2				# 936
-	lwz	r8, 40(r3)				# 936
-	stfsx	f0, r8, r7				# 936
-	addi	r2, 0, 1
-beq_cont.17841:
-	b	beq_cont.17838				# 973
-beq_else.17837:
-	mfspr	r31, 8				# 976
-	mr	r5, r13				# 976
-	mr	r2, r20				# 976
-	mr	r30, r7				# 976
-	stw	r31, 84(r3)				# 976
-	addi	r3, r3, 88				# 976
-	lwz	r31, 0(r30)				# 976
-	mtspr	9, r31				# 976
-	bctrl				# 976
-	addi	r3, r3, -88				# 976
-	lwz	r31, 84(r3)				# 976
-	mtspr	8, r31				# 976
-beq_cont.17838:
-beq_cont.17836:
-	lwz	r5, 44(r3)				# 1218
-	slwi	r6, r5, 2				# 1218
-	lwz	r7, 40(r3)				# 1218
-	lfsx	f0, r7, r6				# 1218
-	stfs	f0, 88(r3)				# 1219
-	cmpw	cr7, r2, r5				# 1219
-	bne	cr7, beq_else.17843				# 1219
-	addi	r2, 0, 0
-	b	beq_cont.17844				# 1219
-beq_else.17843:
-	lis	r31, ha16(l.11922)
-	addi	r31, r31, lo16(l.11922)
-	lfs	f1, 0(r31)				# 1219
-	mfspr	r31, 8				# 1219
-	stw	r31, 96(r3)				# 1219
-	addi	r3, r3, 100				# 1219
-	bl	min_caml_fless				# 1219
-	addi	r3, r3, -100				# 1219
-	lwz	r31, 96(r3)				# 1219
-	mtspr	8, r31				# 1219
-beq_cont.17844:
-	lwz	r5, 44(r3)				# 1219
-	cmpw	cr7, r2, r5				# 1219
-	bne	cr7, beq_else.17845				# 1219
-	lwz	r2, 36(r3)				# 1235
-	slwi	r2, r2, 2				# 1235
-	lwz	r6, 32(r3)				# 1235
-	lwzx	r2, r6, r2				# 1235
-	lwz	r2, 24(r2)				# 259
-	cmpw	cr7, r2, r5				# 1235
-	bne	cr7, beq_else.17846				# 1235
-	addi	r2, 0, 0
-	blr
-beq_else.17846:
-	lwz	r2, 24(r3)				# 1236
-	lwz	r5, 28(r3)				# 1236
-	add	r2, r5, r2				# 1236
-	lwz	r5, 16(r3)				# 1236
-	lwz	r30, 20(r3)				# 1236
-	lwz	r29, 0(r30)				# 1236
-	mtspr	9, r29
-	bctr				# 1236
-beq_else.17845:
-	lis	r31, ha16(l.11923)
-	addi	r31, r31, lo16(l.11923)
-	lfs	f0, 0(r31)				# 1222
-	lfs	f1, 88(r3)				# 1222
-	fadd	f0, f1, f0				# 1222
-	slwi	r2, r5, 2				# 1223
-	lwz	r6, 12(r3)				# 1223
-	lfsx	f1, r6, r2				# 1223
-	fmul	f1, f1, f0				# 1223
-	slwi	r2, r5, 2				# 1223
-	lwz	r7, 8(r3)				# 1223
-	lfsx	f2, r7, r2				# 1223
-	fadd	f1, f1, f2				# 1223
-	lwz	r2, 24(r3)				# 1224
-	slwi	r8, r2, 2				# 1224
-	lfsx	f2, r6, r8				# 1224
-	fmul	f2, f2, f0				# 1224
-	slwi	r8, r2, 2				# 1224
-	lfsx	f3, r7, r8				# 1224
-	fadd	f2, f2, f3				# 1224
-	lwz	r8, 4(r3)				# 1225
-	slwi	r9, r8, 2				# 1225
-	lfsx	f3, r6, r9				# 1225
-	fmul	f0, f3, f0				# 1225
-	slwi	r6, r8, 2				# 1225
-	lfsx	f3, r7, r6				# 1225
-	fadd	f0, f0, f3				# 1225
-	lwz	r6, 16(r3)				# 1226
-	lwz	r30, 0(r3)				# 1226
-	mfspr	r31, 8				# 1226
-	mr	r2, r5				# 1226
-	mr	r5, r6				# 1226
-	fmr	f31, f2				# 1226
-	fmr	f2, f0				# 1226
-	fmr	f0, f1				# 1226
-	fmr	f1, f31				# 1226
-	stw	r31, 96(r3)				# 1226
-	addi	r3, r3, 100				# 1226
-	lwz	r31, 0(r30)				# 1226
-	mtspr	9, r31				# 1226
-	bctrl				# 1226
-	addi	r3, r3, -100				# 1226
-	lwz	r31, 96(r3)				# 1226
-	mtspr	8, r31				# 1226
-	lwz	r5, 44(r3)				# 1226
-	cmpw	cr7, r2, r5				# 1226
-	bne	cr7, beq_else.17847				# 1226
-	lwz	r2, 24(r3)				# 1229
-	lwz	r5, 28(r3)				# 1229
-	add	r2, r5, r2				# 1229
-	lwz	r5, 16(r3)				# 1229
-	lwz	r30, 20(r3)				# 1229
-	lwz	r29, 0(r30)				# 1229
-	mtspr	9, r29
-	bctr				# 1229
-beq_else.17847:
-	addi	r2, 0, 1
-	blr
-shadow_check_one_or_group.2744:
-	lwz	r6, 20(r30)				# 1242
-	lwz	r7, 16(r30)				# 1242
-	lwz	r8, 12(r30)				# 1242
-	lwz	r9, 8(r30)				# 1242
-	lwz	r10, 4(r30)				# 1242
-	slwi	r11, r2, 2				# 1243
-	lwzx	r11, r5, r11				# 1243
-	cmpw	cr7, r11, r8				# 1244
-	bne	cr7, beq_else.17848				# 1244
-	addi	r2, 0, 0
-	blr
-beq_else.17848:
-	slwi	r8, r11, 2				# 1247
-	lwzx	r7, r7, r8				# 1247
-	stw	r5, 0(r3)				# 1248
-	stw	r30, 4(r3)				# 1248
-	stw	r10, 8(r3)				# 1248
-	stw	r2, 12(r3)				# 1248
-	stw	r9, 16(r3)				# 1248
-	mfspr	r31, 8				# 1248
-	mr	r5, r7				# 1248
-	mr	r2, r9				# 1248
-	mr	r30, r6				# 1248
-	stw	r31, 20(r3)				# 1248
-	addi	r3, r3, 24				# 1248
-	lwz	r31, 0(r30)				# 1248
-	mtspr	9, r31				# 1248
-	bctrl				# 1248
-	addi	r3, r3, -24				# 1248
-	lwz	r31, 20(r3)				# 1248
-	mtspr	8, r31				# 1248
-	lwz	r5, 16(r3)				# 1249
-	cmpw	cr7, r2, r5				# 1249
-	bne	cr7, beq_else.17849				# 1249
-	lwz	r2, 8(r3)				# 1252
-	lwz	r5, 12(r3)				# 1252
-	add	r2, r5, r2				# 1252
-	lwz	r5, 0(r3)				# 1252
-	lwz	r30, 4(r3)				# 1252
-	lwz	r29, 0(r30)				# 1252
-	mtspr	9, r29
-	bctr				# 1252
-beq_else.17849:
-	addi	r2, 0, 1
-	blr
-shadow_check_one_or_matrix.2747:
-	lwz	r6, 52(r30)				# 1257
-	lwz	r7, 48(r30)				# 1257
-	lwz	r8, 44(r30)				# 1257
-	lwz	r9, 40(r30)				# 1257
-	lwz	r10, 36(r30)				# 1257
-	lwz	r11, 32(r30)				# 1257
-	lwz	r12, 28(r30)				# 1257
-	lwz	r13, 24(r30)				# 1257
-	lwz	r14, 20(r30)				# 1257
-	lwz	r15, 16(r30)				# 1257
-	lwz	r16, 12(r30)				# 1257
-	lwz	r17, 8(r30)				# 1257
-	lwz	r18, 4(r30)				# 1257
-	slwi	r19, r2, 2				# 1258
-	lwzx	r19, r5, r19				# 1258
-	slwi	r20, r17, 2				# 1259
-	lwzx	r20, r19, r20				# 1259
-	cmpw	cr7, r20, r15				# 1260
-	bne	cr7, beq_else.17850				# 1260
-	addi	r2, 0, 0
-	blr
-beq_else.17850:
-	stw	r19, 0(r3)				# 1264
-	stw	r10, 4(r3)				# 1264
-	stw	r5, 8(r3)				# 1264
-	stw	r30, 12(r3)				# 1264
-	stw	r18, 16(r3)				# 1264
-	stw	r2, 20(r3)				# 1264
-	stw	r17, 24(r3)				# 1264
-	cmpwi	cr7, r20, 99				# 1264
-	bne	cr7, beq_else.17851				# 1264
-	addi	r2, 0, 1
-	b	beq_cont.17852				# 1264
-beq_else.17851:
-	slwi	r15, r20, 2				# 964
-	lwzx	r11, r11, r15				# 964
-	slwi	r15, r17, 2				# 965
-	lfsx	f0, r12, r15				# 965
-	lwz	r15, 20(r11)				# 317
-	slwi	r21, r17, 2				# 322
-	lfsx	f1, r15, r21				# 322
-	fsub	f0, f0, f1				# 965
-	slwi	r15, r18, 2				# 966
-	lfsx	f1, r12, r15				# 966
-	lwz	r15, 20(r11)				# 327
-	slwi	r21, r18, 2				# 332
-	lfsx	f2, r15, r21				# 332
-	fsub	f1, f1, f2				# 966
-	slwi	r15, r14, 2				# 967
-	lfsx	f2, r12, r15				# 967
-	lwz	r12, 20(r11)				# 337
-	slwi	r15, r14, 2				# 342
-	lfsx	f3, r12, r15				# 342
-	fsub	f2, f2, f3				# 967
-	slwi	r12, r20, 2				# 969
-	lwzx	r12, r13, r12				# 969
-	lwz	r13, 4(r11)				# 239
-	stw	r9, 28(r3)				# 971
-	cmpw	cr7, r13, r18				# 971
-	bne	cr7, beq_else.17853				# 971
-	mfspr	r31, 8				# 972
-	mr	r5, r6				# 972
-	mr	r2, r11				# 972
-	mr	r30, r8				# 972
-	mr	r6, r12				# 972
-	stw	r31, 32(r3)				# 972
-	addi	r3, r3, 36				# 972
-	lwz	r31, 0(r30)				# 972
-	mtspr	9, r31				# 972
-	bctrl				# 972
-	addi	r3, r3, -36				# 972
-	lwz	r31, 32(r3)				# 972
-	mtspr	8, r31				# 972
-	b	beq_cont.17854				# 971
-beq_else.17853:
-	cmpw	cr7, r13, r14				# 973
-	bne	cr7, beq_else.17855				# 973
-	slwi	r6, r17, 2				# 935
-	lfsx	f3, r12, r6				# 935
-	stfs	f2, 32(r3)				# 935
-	stw	r16, 40(r3)				# 935
-	stfs	f1, 48(r3)				# 935
-	stw	r14, 56(r3)				# 935
-	stfs	f0, 64(r3)				# 935
-	stw	r12, 72(r3)				# 935
-	mfspr	r31, 8				# 935
-	fmr	f0, f3				# 935
-	stw	r31, 76(r3)				# 935
-	addi	r3, r3, 80				# 935
-	bl	min_caml_fisneg				# 935
-	addi	r3, r3, -80				# 935
-	lwz	r31, 76(r3)				# 935
-	mtspr	8, r31				# 935
-	lwz	r5, 24(r3)				# 935
-	cmpw	cr7, r2, r5				# 935
-	bne	cr7, beq_else.17859				# 935
-	addi	r2, 0, 0
-	b	beq_cont.17860				# 935
-beq_else.17859:
-	lwz	r2, 16(r3)				# 937
-	slwi	r6, r2, 2				# 937
-	lwz	r7, 72(r3)				# 937
-	lfsx	f0, r7, r6				# 937
-	lfs	f1, 64(r3)				# 937
-	fmul	f0, f0, f1				# 937
-	lwz	r6, 56(r3)				# 937
-	slwi	r6, r6, 2				# 937
-	lfsx	f1, r7, r6				# 937
-	lfs	f2, 48(r3)				# 937
-	fmul	f1, f1, f2				# 937
-	fadd	f0, f0, f1				# 937
-	lwz	r6, 40(r3)				# 937
-	slwi	r6, r6, 2				# 937
-	lfsx	f1, r7, r6				# 937
-	lfs	f2, 32(r3)				# 937
-	fmul	f1, f1, f2				# 937
-	fadd	f0, f0, f1				# 937
-	slwi	r6, r5, 2				# 936
-	lwz	r7, 28(r3)				# 936
-	stfsx	f0, r7, r6				# 936
-	addi	r2, 0, 1
-beq_cont.17860:
-	b	beq_cont.17856				# 973
-beq_else.17855:
-	mfspr	r31, 8				# 976
-	mr	r5, r12				# 976
-	mr	r2, r11				# 976
-	mr	r30, r7				# 976
-	stw	r31, 76(r3)				# 976
-	addi	r3, r3, 80				# 976
-	lwz	r31, 0(r30)				# 976
-	mtspr	9, r31				# 976
-	bctrl				# 976
-	addi	r3, r3, -80				# 976
-	lwz	r31, 76(r3)				# 976
-	mtspr	8, r31				# 976
-beq_cont.17856:
-beq_cont.17854:
-	lwz	r5, 24(r3)				# 1270
-	cmpw	cr7, r2, r5				# 1270
-	bne	cr7, beq_else.17861				# 1270
-	addi	r2, 0, 0
-	b	beq_cont.17862				# 1270
-beq_else.17861:
-	slwi	r2, r5, 2				# 1271
-	lwz	r6, 28(r3)				# 1271
-	lfsx	f0, r6, r2				# 1271
-	lis	r31, ha16(l.11949)
-	addi	r31, r31, lo16(l.11949)
-	lfs	f1, 0(r31)				# 1271
-	mfspr	r31, 8				# 1271
-	stw	r31, 76(r3)				# 1271
-	addi	r3, r3, 80				# 1271
-	bl	min_caml_fless				# 1271
-	addi	r3, r3, -80				# 1271
-	lwz	r31, 76(r3)				# 1271
-	mtspr	8, r31				# 1271
-	lwz	r5, 24(r3)				# 1271
-	cmpw	cr7, r2, r5				# 1271
-	bne	cr7, beq_else.17863				# 1271
-	addi	r2, 0, 0
-	b	beq_cont.17864				# 1271
-beq_else.17863:
-	lwz	r2, 16(r3)				# 1272
-	lwz	r6, 0(r3)				# 1272
-	lwz	r30, 4(r3)				# 1272
-	mfspr	r31, 8				# 1272
-	mr	r5, r6				# 1272
-	stw	r31, 76(r3)				# 1272
-	addi	r3, r3, 80				# 1272
-	lwz	r31, 0(r30)				# 1272
-	mtspr	9, r31				# 1272
-	bctrl				# 1272
-	addi	r3, r3, -80				# 1272
-	lwz	r31, 76(r3)				# 1272
-	mtspr	8, r31				# 1272
-	lwz	r5, 24(r3)				# 1272
-	cmpw	cr7, r2, r5				# 1272
-	bne	cr7, beq_else.17865				# 1272
-	addi	r2, 0, 0
-	b	beq_cont.17866				# 1272
-beq_else.17865:
-	addi	r2, 0, 1
-beq_cont.17866:
-beq_cont.17864:
-beq_cont.17862:
-beq_cont.17852:
-	lwz	r5, 24(r3)				# 1263
-	cmpw	cr7, r2, r5				# 1263
-	bne	cr7, beq_else.17867				# 1263
-	lwz	r2, 16(r3)				# 1283
-	lwz	r5, 20(r3)				# 1283
-	add	r2, r5, r2				# 1283
-	lwz	r5, 8(r3)				# 1283
-	lwz	r30, 12(r3)				# 1283
-	lwz	r29, 0(r30)				# 1283
-	mtspr	9, r29
-	bctr				# 1283
-beq_else.17867:
-	lwz	r2, 16(r3)				# 1278
-	lwz	r6, 0(r3)				# 1278
-	lwz	r30, 4(r3)				# 1278
-	mfspr	r31, 8				# 1278
-	mr	r5, r6				# 1278
-	stw	r31, 76(r3)				# 1278
-	addi	r3, r3, 80				# 1278
-	lwz	r31, 0(r30)				# 1278
-	mtspr	9, r31				# 1278
-	bctrl				# 1278
-	addi	r3, r3, -80				# 1278
-	lwz	r31, 76(r3)				# 1278
-	mtspr	8, r31				# 1278
-	lwz	r5, 24(r3)				# 1278
-	cmpw	cr7, r2, r5				# 1278
-	bne	cr7, beq_else.17868				# 1278
-	lwz	r2, 16(r3)				# 1281
-	lwz	r5, 20(r3)				# 1281
-	add	r2, r5, r2				# 1281
-	lwz	r5, 8(r3)				# 1281
-	lwz	r30, 12(r3)				# 1281
-	lwz	r29, 0(r30)				# 1281
-	mtspr	9, r29
-	bctr				# 1281
-beq_else.17868:
-	addi	r2, 0, 1
-	blr
-solve_each_element.2750:
-	lwz	r7, 60(r30)				# 1291
-	lwz	r8, 56(r30)				# 1291
-	lwz	r9, 52(r30)				# 1291
-	lwz	r10, 48(r30)				# 1291
-	lwz	r11, 44(r30)				# 1291
-	lwz	r12, 40(r30)				# 1291
-	lwz	r13, 36(r30)				# 1291
-	lwz	r14, 32(r30)				# 1291
-	lwz	r15, 28(r30)				# 1291
-	lwz	r16, 24(r30)				# 1291
-	lwz	r17, 20(r30)				# 1291
-	lwz	r18, 16(r30)				# 1291
-	lwz	r19, 12(r30)				# 1291
-	lwz	r20, 8(r30)				# 1291
-	lfs	f0, 4(r30)				# 1291
-	slwi	r21, r2, 2				# 1292
-	lwzx	r21, r5, r21				# 1292
-	cmpw	cr7, r21, r18				# 1293
-	bne	cr7, beq_else.17869				# 1293
-	blr
-beq_else.17869:
-	slwi	r18, r21, 2				# 885
-	lwzx	r18, r12, r18				# 885
-	slwi	r22, r19, 2				# 887
-	lfsx	f1, r8, r22				# 887
-	lwz	r22, 20(r18)				# 317
-	slwi	r23, r19, 2				# 322
-	lfsx	f2, r22, r23				# 322
-	fsub	f1, f1, f2				# 887
-	slwi	r22, r20, 2				# 888
-	lfsx	f2, r8, r22				# 888
-	lwz	r22, 20(r18)				# 327
-	slwi	r23, r20, 2				# 332
-	lfsx	f3, r22, r23				# 332
-	fsub	f2, f2, f3				# 888
-	slwi	r22, r17, 2				# 889
-	lfsx	f3, r8, r22				# 889
-	lwz	r22, 20(r18)				# 337
-	slwi	r23, r17, 2				# 342
-	lfsx	f4, r22, r23				# 342
-	fsub	f3, f3, f4				# 889
-	lwz	r22, 4(r18)				# 239
-	stw	r13, 0(r3)				# 892
-	stw	r15, 4(r3)				# 892
-	stw	r14, 8(r3)				# 892
-	stw	r16, 12(r3)				# 892
-	stw	r17, 16(r3)				# 892
-	stw	r8, 20(r3)				# 892
-	stw	r7, 24(r3)				# 892
-	stfs	f0, 32(r3)				# 892
-	stw	r11, 40(r3)				# 892
-	stw	r6, 44(r3)				# 892
-	stw	r5, 48(r3)				# 892
-	stw	r30, 52(r3)				# 892
-	stw	r20, 56(r3)				# 892
-	stw	r2, 60(r3)				# 892
-	stw	r12, 64(r3)				# 892
-	stw	r21, 68(r3)				# 892
-	stw	r19, 72(r3)				# 892
-	cmpw	cr7, r22, r20				# 892
-	bne	cr7, beq_else.17872				# 892
-	mfspr	r31, 8				# 892
-	mr	r5, r6				# 892
-	mr	r2, r18				# 892
-	mr	r30, r10				# 892
-	fmr	f0, f1				# 892
-	fmr	f1, f2				# 892
-	fmr	f2, f3				# 892
-	stw	r31, 76(r3)				# 892
-	addi	r3, r3, 80				# 892
-	lwz	r31, 0(r30)				# 892
-	mtspr	9, r31				# 892
-	bctrl				# 892
-	addi	r3, r3, -80				# 892
-	lwz	r31, 76(r3)				# 892
-	mtspr	8, r31				# 892
-	b	beq_cont.17873				# 892
-beq_else.17872:
-	cmpw	cr7, r22, r17				# 893
-	bne	cr7, beq_else.17874				# 893
-	lwz	r9, 16(r18)				# 307
-	slwi	r10, r19, 2				# 182
-	lfsx	f4, r6, r10				# 182
-	slwi	r10, r19, 2				# 182
-	lfsx	f5, r9, r10				# 182
-	fmul	f4, f4, f5				# 182
-	slwi	r10, r20, 2				# 182
-	lfsx	f5, r6, r10				# 182
-	slwi	r10, r20, 2				# 182
-	lfsx	f6, r9, r10				# 182
-	fmul	f5, f5, f6				# 182
-	fadd	f4, f4, f5				# 182
-	slwi	r10, r17, 2				# 182
-	lfsx	f5, r6, r10				# 182
-	slwi	r10, r17, 2				# 182
-	lfsx	f6, r9, r10				# 182
-	fmul	f5, f5, f6				# 182
-	fadd	f4, f4, f5				# 182
-	stfs	f4, 80(r3)				# 812
-	stfs	f3, 88(r3)				# 812
-	stfs	f2, 96(r3)				# 812
-	stfs	f1, 104(r3)				# 812
-	stw	r9, 112(r3)				# 812
-	mfspr	r31, 8				# 812
-	fmr	f0, f4				# 812
-	stw	r31, 116(r3)				# 812
-	addi	r3, r3, 120				# 812
-	bl	min_caml_fispos				# 812
-	addi	r3, r3, -120				# 812
-	lwz	r31, 116(r3)				# 812
-	mtspr	8, r31				# 812
-	lwz	r5, 72(r3)				# 812
+beq_cont.15845:
+	lwz	r5, 64(r3)				# 812
 	cmpw	cr7, r2, r5				# 812
-	bne	cr7, beq_else.17877				# 812
+	bne	cr7, beq_else.15863				# 812
+	lwz	r2, 60(r3)				# 797
+	slwi	r6, r2, 2				# 797
+	lwz	r7, 56(r3)				# 797
+	lfsx	f0, r7, r6				# 797
+	lfs	f1, 48(r3)				# 111
+	fcmpu	cr7, f0, f1				# 111
+	bne	cr7, beq_else.15864				# 111
+	addi	r6, 0, 1
+	b	beq_cont.15865				# 111
+beq_else.15864:
+	addi	r6, 0, 0
+beq_cont.15865:
+	cmpw	cr7, r6, r5				# 797
+	bne	cr7, beq_else.15866				# 797
+	lwz	r6, 40(r3)				# 320
+	lwz	r8, 16(r6)				# 320
+	lwz	r9, 24(r6)				# 272
+	slwi	r10, r2, 2				# 799
+	lfsx	f0, r7, r10				# 799
+	fcmpu	cr7, f1, f0				# 115
+	bgt	cr7, ble_else.15868				# 115
+	addi	r10, 0, 0
+	b	ble_cont.15869				# 115
+ble_else.15868:
+	addi	r10, 0, 1
+ble_cont.15869:
+	cmpw	cr7, r9, r5				# 119
+	bne	cr7, beq_else.15870				# 119
+	mr	r9, r10				# 119
+	b	beq_cont.15871				# 119
+beq_else.15870:
+	cmpw	cr7, r10, r5				# 119
+	bne	cr7, beq_else.15872				# 119
+	addi	r9, 0, 1
+	b	beq_cont.15873				# 119
+beq_else.15872:
+	addi	r9, 0, 0
+beq_cont.15873:
+beq_cont.15871:
+	slwi	r10, r2, 2				# 799
+	lfsx	f0, r8, r10				# 799
+	cmpw	cr7, r9, r5				# 132
+	bne	cr7, beq_else.15874				# 132
+	fneg	f0, f0				# 107
+	b	beq_cont.15875				# 132
+beq_else.15874:
+beq_cont.15875:
+	lfs	f2, 32(r3)				# 801
+	fsub	f0, f0, f2				# 801
+	slwi	r9, r2, 2				# 801
+	lfsx	f3, r7, r9				# 801
+	fdiv	f0, f0, f3				# 801
+	lwz	r9, 24(r3)				# 802
+	slwi	r10, r9, 2				# 802
+	lfsx	f3, r7, r10				# 802
+	fmul	f3, f0, f3				# 802
+	lfs	f4, 16(r3)				# 802
+	fadd	f3, f3, f4				# 802
+	stfs	f0, 88(r3)				# 802
+	stw	r8, 96(r3)				# 802
+	mfspr	r31, 8				# 802
+	fmr	f0, f3				# 802
+	stw	r31, 100(r3)				# 802
+	addi	r3, r3, 104				# 802
+	bl	min_caml_fabs				# 802
+	addi	r3, r3, -104				# 802
+	lwz	r31, 100(r3)				# 802
+	mtspr	8, r31				# 802
+	lwz	r2, 24(r3)				# 802
+	slwi	r5, r2, 2				# 802
+	lwz	r6, 96(r3)				# 802
+	lfsx	f1, r6, r5				# 802
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.15877				# 109
+	addi	r5, 0, 0
+	b	ble_cont.15878				# 109
+ble_else.15877:
+	addi	r5, 0, 1
+ble_cont.15878:
+	lwz	r7, 64(r3)				# 802
+	cmpw	cr7, r5, r7				# 802
+	bne	cr7, beq_else.15879				# 802
 	addi	r2, 0, 0
-	b	beq_cont.17878				# 812
-beq_else.17877:
-	slwi	r2, r5, 2				# 187
-	lwz	r6, 112(r3)				# 187
-	lfsx	f0, r6, r2				# 187
-	lfs	f1, 104(r3)				# 187
-	fmul	f0, f0, f1				# 187
-	lwz	r2, 56(r3)				# 187
-	slwi	r7, r2, 2				# 187
-	lfsx	f1, r6, r7				# 187
-	lfs	f2, 96(r3)				# 187
-	fmul	f1, f1, f2				# 187
-	fadd	f0, f0, f1				# 187
-	lwz	r7, 16(r3)				# 187
-	slwi	r8, r7, 2				# 187
-	lfsx	f1, r6, r8				# 187
-	lfs	f2, 88(r3)				# 187
-	fmul	f1, f1, f2				# 187
-	fadd	f0, f0, f1				# 187
-	mfspr	r31, 8				# 813
-	stw	r31, 116(r3)				# 813
-	addi	r3, r3, 120				# 813
-	bl	min_caml_fneg				# 813
-	addi	r3, r3, -120				# 813
-	lwz	r31, 116(r3)				# 813
-	mtspr	8, r31				# 813
-	lfs	f1, 80(r3)				# 813
-	fdiv	f0, f0, f1				# 813
-	lwz	r2, 72(r3)				# 813
-	slwi	r5, r2, 2				# 813
-	lwz	r6, 40(r3)				# 813
-	stfsx	f0, r6, r5				# 813
+	b	beq_cont.15880				# 802
+beq_else.15879:
+	slwi	r5, r7, 2				# 803
+	lwz	r8, 56(r3)				# 803
+	lfsx	f0, r8, r5				# 803
+	lfs	f1, 88(r3)				# 803
+	fmul	f0, f1, f0				# 803
+	lfs	f2, 8(r3)				# 803
+	fadd	f0, f0, f2				# 803
+	mfspr	r31, 8				# 803
+	stw	r31, 100(r3)				# 803
+	addi	r3, r3, 104				# 803
+	bl	min_caml_fabs				# 803
+	addi	r3, r3, -104				# 803
+	lwz	r31, 100(r3)				# 803
+	mtspr	8, r31				# 803
+	lwz	r2, 64(r3)				# 803
+	slwi	r5, r2, 2				# 803
+	lwz	r6, 96(r3)				# 803
+	lfsx	f1, r6, r5				# 803
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.15881				# 109
+	addi	r5, 0, 0
+	b	ble_cont.15882				# 109
+ble_else.15881:
+	addi	r5, 0, 1
+ble_cont.15882:
+	cmpw	cr7, r5, r2				# 803
+	bne	cr7, beq_else.15883				# 803
+	addi	r2, 0, 0
+	b	beq_cont.15884				# 803
+beq_else.15883:
+	slwi	r5, r2, 2				# 804
+	lwz	r6, 0(r3)				# 804
+	lfs	f0, 88(r3)				# 804
+	stfsx	f0, r6, r5				# 804
 	addi	r2, 0, 1
-beq_cont.17878:
-	b	beq_cont.17875				# 893
-beq_else.17874:
-	mfspr	r31, 8				# 894
-	mr	r5, r6				# 894
-	mr	r2, r18				# 894
-	mr	r30, r9				# 894
-	fmr	f0, f1				# 894
-	fmr	f1, f2				# 894
-	fmr	f2, f3				# 894
-	stw	r31, 116(r3)				# 894
-	addi	r3, r3, 120				# 894
-	lwz	r31, 0(r30)				# 894
-	mtspr	9, r31				# 894
-	bctrl				# 894
-	addi	r3, r3, -120				# 894
-	lwz	r31, 116(r3)				# 894
-	mtspr	8, r31				# 894
-beq_cont.17875:
-beq_cont.17873:
-	lwz	r5, 72(r3)				# 1296
-	cmpw	cr7, r2, r5				# 1296
-	bne	cr7, beq_else.17879				# 1296
-	lwz	r2, 68(r3)				# 1324
-	slwi	r2, r2, 2				# 1324
-	lwz	r6, 64(r3)				# 1324
-	lwzx	r2, r6, r2				# 1324
-	lwz	r2, 24(r2)				# 259
-	cmpw	cr7, r2, r5				# 1324
-	bne	cr7, beq_else.17880				# 1324
+beq_cont.15884:
+beq_cont.15880:
+	b	beq_cont.15867				# 797
+beq_else.15866:
+	addi	r2, 0, 0
+beq_cont.15867:
+	lwz	r5, 64(r3)				# 813
+	cmpw	cr7, r2, r5				# 813
+	bne	cr7, beq_else.15885				# 813
+	lwz	r2, 24(r3)				# 797
+	slwi	r6, r2, 2				# 797
+	lwz	r7, 56(r3)				# 797
+	lfsx	f0, r7, r6				# 797
+	lfs	f1, 48(r3)				# 111
+	fcmpu	cr7, f0, f1				# 111
+	bne	cr7, beq_else.15886				# 111
+	addi	r6, 0, 1
+	b	beq_cont.15887				# 111
+beq_else.15886:
+	addi	r6, 0, 0
+beq_cont.15887:
+	cmpw	cr7, r6, r5				# 797
+	bne	cr7, beq_else.15888				# 797
+	lwz	r6, 40(r3)				# 320
+	lwz	r8, 16(r6)				# 320
+	lwz	r6, 24(r6)				# 272
+	slwi	r9, r2, 2				# 799
+	lfsx	f0, r7, r9				# 799
+	fcmpu	cr7, f1, f0				# 115
+	bgt	cr7, ble_else.15890				# 115
+	addi	r9, 0, 0
+	b	ble_cont.15891				# 115
+ble_else.15890:
+	addi	r9, 0, 1
+ble_cont.15891:
+	cmpw	cr7, r6, r5				# 119
+	bne	cr7, beq_else.15892				# 119
+	mr	r6, r9				# 119
+	b	beq_cont.15893				# 119
+beq_else.15892:
+	cmpw	cr7, r9, r5				# 119
+	bne	cr7, beq_else.15894				# 119
+	addi	r6, 0, 1
+	b	beq_cont.15895				# 119
+beq_else.15894:
+	addi	r6, 0, 0
+beq_cont.15895:
+beq_cont.15893:
+	slwi	r9, r2, 2				# 799
+	lfsx	f0, r8, r9				# 799
+	cmpw	cr7, r6, r5				# 132
+	bne	cr7, beq_else.15896				# 132
+	fneg	f0, f0				# 107
+	b	beq_cont.15897				# 132
+beq_else.15896:
+beq_cont.15897:
+	lfs	f1, 16(r3)				# 801
+	fsub	f0, f0, f1				# 801
+	slwi	r2, r2, 2				# 801
+	lfsx	f1, r7, r2				# 801
+	fdiv	f0, f0, f1				# 801
+	slwi	r2, r5, 2				# 802
+	lfsx	f1, r7, r2				# 802
+	fmul	f1, f0, f1				# 802
+	lfs	f2, 8(r3)				# 802
+	fadd	f1, f1, f2				# 802
+	stfs	f0, 104(r3)				# 802
+	stw	r8, 112(r3)				# 802
+	mfspr	r31, 8				# 802
+	fmr	f0, f1				# 802
+	stw	r31, 116(r3)				# 802
+	addi	r3, r3, 120				# 802
+	bl	min_caml_fabs				# 802
+	addi	r3, r3, -120				# 802
+	lwz	r31, 116(r3)				# 802
+	mtspr	8, r31				# 802
+	lwz	r2, 64(r3)				# 802
+	slwi	r5, r2, 2				# 802
+	lwz	r6, 112(r3)				# 802
+	lfsx	f1, r6, r5				# 802
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.15899				# 109
+	addi	r5, 0, 0
+	b	ble_cont.15900				# 109
+ble_else.15899:
+	addi	r5, 0, 1
+ble_cont.15900:
+	cmpw	cr7, r5, r2				# 802
+	bne	cr7, beq_else.15901				# 802
+	addi	r2, 0, 0
+	b	beq_cont.15902				# 802
+beq_else.15901:
+	lwz	r5, 60(r3)				# 803
+	slwi	r7, r5, 2				# 803
+	lwz	r8, 56(r3)				# 803
+	lfsx	f0, r8, r7				# 803
+	lfs	f1, 104(r3)				# 803
+	fmul	f0, f1, f0				# 803
+	lfs	f2, 32(r3)				# 803
+	fadd	f0, f0, f2				# 803
+	mfspr	r31, 8				# 803
+	stw	r31, 116(r3)				# 803
+	addi	r3, r3, 120				# 803
+	bl	min_caml_fabs				# 803
+	addi	r3, r3, -120				# 803
+	lwz	r31, 116(r3)				# 803
+	mtspr	8, r31				# 803
+	lwz	r2, 60(r3)				# 803
+	slwi	r2, r2, 2				# 803
+	lwz	r5, 112(r3)				# 803
+	lfsx	f1, r5, r2				# 803
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.15903				# 109
+	addi	r2, 0, 0
+	b	ble_cont.15904				# 109
+ble_else.15903:
+	addi	r2, 0, 1
+ble_cont.15904:
+	lwz	r5, 64(r3)				# 803
+	cmpw	cr7, r2, r5				# 803
+	bne	cr7, beq_else.15905				# 803
+	addi	r2, 0, 0
+	b	beq_cont.15906				# 803
+beq_else.15905:
+	slwi	r2, r5, 2				# 804
+	lwz	r6, 0(r3)				# 804
+	lfs	f0, 104(r3)				# 804
+	stfsx	f0, r6, r2				# 804
+	addi	r2, 0, 1
+beq_cont.15906:
+beq_cont.15902:
+	b	beq_cont.15889				# 797
+beq_else.15888:
+	addi	r2, 0, 0
+beq_cont.15889:
+	lwz	r5, 64(r3)				# 814
+	cmpw	cr7, r2, r5				# 814
+	bne	cr7, beq_else.15907				# 814
+	addi	r2, 0, 0
 	blr
-beq_else.17880:
-	lwz	r2, 56(r3)				# 1325
-	lwz	r5, 60(r3)				# 1325
-	add	r2, r5, r2				# 1325
-	lwz	r5, 48(r3)				# 1325
-	lwz	r6, 44(r3)				# 1325
-	lwz	r30, 52(r3)				# 1325
-	lwz	r29, 0(r30)				# 1325
-	mtspr	9, r29
-	bctr				# 1325
-beq_else.17879:
-	slwi	r6, r5, 2				# 1300
-	lwz	r7, 40(r3)				# 1300
-	lfsx	f1, r7, r6				# 1300
-	lfs	f0, 32(r3)				# 1302
-	stw	r2, 116(r3)				# 1302
-	stfs	f1, 120(r3)				# 1302
-	mfspr	r31, 8				# 1302
-	stw	r31, 128(r3)				# 1302
-	addi	r3, r3, 132				# 1302
-	bl	min_caml_fless				# 1302
-	addi	r3, r3, -132				# 1302
-	lwz	r31, 128(r3)				# 1302
-	mtspr	8, r31				# 1302
-	lwz	r5, 72(r3)				# 1302
-	cmpw	cr7, r2, r5				# 1302
-	bne	cr7, beq_else.17882				# 1302
-	b	beq_cont.17883				# 1302
-beq_else.17882:
-	slwi	r2, r5, 2				# 1303
-	lwz	r6, 24(r3)				# 1303
-	lfsx	f1, r6, r2				# 1303
-	lfs	f0, 120(r3)				# 1303
-	mfspr	r31, 8				# 1303
-	stw	r31, 128(r3)				# 1303
-	addi	r3, r3, 132				# 1303
-	bl	min_caml_fless				# 1303
-	addi	r3, r3, -132				# 1303
-	lwz	r31, 128(r3)				# 1303
-	mtspr	8, r31				# 1303
-	lwz	r5, 72(r3)				# 1303
-	cmpw	cr7, r2, r5				# 1303
-	bne	cr7, beq_else.17884				# 1303
-	b	beq_cont.17885				# 1303
-beq_else.17884:
-	lis	r31, ha16(l.11923)
-	addi	r31, r31, lo16(l.11923)
-	lfs	f0, 0(r31)				# 1305
-	lfs	f1, 120(r3)				# 1305
-	fadd	f0, f1, f0				# 1305
-	slwi	r2, r5, 2				# 1306
-	lwz	r6, 44(r3)				# 1306
-	lfsx	f1, r6, r2				# 1306
-	fmul	f1, f1, f0				# 1306
-	slwi	r2, r5, 2				# 1306
-	lwz	r7, 20(r3)				# 1306
-	lfsx	f2, r7, r2				# 1306
-	fadd	f1, f1, f2				# 1306
-	lwz	r2, 56(r3)				# 1307
-	slwi	r8, r2, 2				# 1307
-	lfsx	f2, r6, r8				# 1307
-	fmul	f2, f2, f0				# 1307
-	slwi	r8, r2, 2				# 1307
-	lfsx	f3, r7, r8				# 1307
-	fadd	f2, f2, f3				# 1307
-	lwz	r8, 16(r3)				# 1308
-	slwi	r9, r8, 2				# 1308
-	lfsx	f3, r6, r9				# 1308
-	fmul	f3, f3, f0				# 1308
-	slwi	r9, r8, 2				# 1308
-	lfsx	f4, r7, r9				# 1308
-	fadd	f3, f3, f4				# 1308
-	lwz	r7, 48(r3)				# 1309
-	lwz	r30, 12(r3)				# 1309
-	stfs	f3, 128(r3)				# 1309
-	stfs	f2, 136(r3)				# 1309
-	stfs	f1, 144(r3)				# 1309
-	stfs	f0, 152(r3)				# 1309
-	mfspr	r31, 8				# 1309
-	mr	r2, r5				# 1309
-	mr	r5, r7				# 1309
-	fmr	f0, f1				# 1309
-	fmr	f1, f2				# 1309
-	fmr	f2, f3				# 1309
-	stw	r31, 160(r3)				# 1309
-	addi	r3, r3, 164				# 1309
-	lwz	r31, 0(r30)				# 1309
-	mtspr	9, r31				# 1309
-	bctrl				# 1309
-	addi	r3, r3, -164				# 1309
-	lwz	r31, 160(r3)				# 1309
-	mtspr	8, r31				# 1309
+beq_else.15907:
+	addi	r2, 0, 3
+	blr
+beq_else.15885:
+	addi	r2, 0, 2
+	blr
+beq_else.15863:
+	addi	r2, 0, 1
+	blr
+solver_second.2664:
+	lwz	r6, 24(r1)				# 868
+	lwz	r7, 20(r1)				# 868
+	lwz	r8, 16(r1)				# 868
+	lwz	r9, 12(r1)				# 868
+	lwz	r10, 8(r1)				# 868
+	lfs	f3, 4(r1)				# 868
+	slwi	r11, r9, 2				# 872
+	lfsx	f4, r5, r11				# 872
+	slwi	r11, r10, 2				# 872
+	lfsx	f5, r5, r11				# 872
+	slwi	r11, r7, 2				# 872
+	lfsx	f6, r5, r11				# 872
+	fmul	f7, f4, f4				# 103
+	lwz	r11, 16(r2)				# 290
+	slwi	r12, r9, 2				# 295
+	lfsx	f8, r11, r12				# 295
+	fmul	f7, f7, f8				# 836
+	fmul	f8, f5, f5				# 103
+	lwz	r11, 16(r2)				# 300
+	slwi	r12, r10, 2				# 305
+	lfsx	f9, r11, r12				# 305
+	fmul	f8, f8, f9				# 836
+	fadd	f7, f7, f8				# 836
+	fmul	f8, f6, f6				# 103
+	lwz	r11, 16(r2)				# 310
+	slwi	r12, r7, 2				# 315
+	lfsx	f9, r11, r12				# 315
+	fmul	f8, f8, f9				# 836
+	fadd	f7, f7, f8				# 836
+	lwz	r11, 12(r2)				# 281
+	cmpw	cr7, r11, r9				# 838
+	bne	cr7, beq_else.15908				# 838
+	fmr	f4, f7				# 839
+	b	beq_cont.15909				# 838
+beq_else.15908:
+	fmul	f8, f5, f6				# 842
+	lwz	r11, 36(r2)				# 410
+	slwi	r12, r9, 2				# 415
+	lfsx	f9, r11, r12				# 415
+	fmul	f8, f8, f9				# 842
+	fadd	f7, f7, f8				# 841
+	fmul	f6, f6, f4				# 843
+	lwz	r11, 36(r2)				# 420
+	slwi	r12, r10, 2				# 425
+	lfsx	f8, r11, r12				# 425
+	fmul	f6, f6, f8				# 843
+	fadd	f6, f7, f6				# 841
+	fmul	f4, f4, f5				# 844
+	lwz	r11, 36(r2)				# 430
+	slwi	r12, r7, 2				# 435
+	lfsx	f5, r11, r12				# 435
+	fmul	f4, f4, f5				# 844
+	fadd	f4, f6, f4				# 841
+beq_cont.15909:
+	fcmpu	cr7, f4, f3				# 111
+	bne	cr7, beq_else.15910				# 111
+	addi	r11, 0, 1
+	b	beq_cont.15911				# 111
+beq_else.15910:
+	addi	r11, 0, 0
+beq_cont.15911:
+	cmpw	cr7, r11, r9				# 874
+	bne	cr7, beq_else.15912				# 874
+	slwi	r11, r9, 2				# 879
+	lfsx	f5, r5, r11				# 879
+	slwi	r11, r10, 2				# 879
+	lfsx	f6, r5, r11				# 879
+	slwi	r11, r7, 2				# 879
+	lfsx	f7, r5, r11				# 879
+	fmul	f8, f5, f0				# 851
+	lwz	r5, 16(r2)				# 290
+	slwi	r11, r9, 2				# 295
+	lfsx	f9, r5, r11				# 295
+	fmul	f8, f8, f9				# 851
+	fmul	f9, f6, f1				# 852
+	lwz	r5, 16(r2)				# 300
+	slwi	r11, r10, 2				# 305
+	lfsx	f10, r5, r11				# 305
+	fmul	f9, f9, f10				# 852
+	fadd	f8, f8, f9				# 851
+	fmul	f9, f7, f2				# 853
+	lwz	r5, 16(r2)				# 310
+	slwi	r11, r7, 2				# 315
+	lfsx	f10, r5, r11				# 315
+	fmul	f9, f9, f10				# 853
+	fadd	f8, f8, f9				# 851
+	lwz	r5, 12(r2)				# 281
+	cmpw	cr7, r5, r9				# 855
+	bne	cr7, beq_else.15913				# 855
+	fmr	f5, f8				# 856
+	b	beq_cont.15914				# 855
+beq_else.15913:
+	fmul	f9, f7, f1				# 859
+	fmul	f10, f6, f2				# 859
+	fadd	f9, f9, f10				# 859
+	lwz	r5, 36(r2)				# 410
+	slwi	r11, r9, 2				# 415
+	lfsx	f10, r5, r11				# 415
+	fmul	f9, f9, f10				# 859
+	fmul	f10, f5, f2				# 860
+	fmul	f7, f7, f0				# 860
+	fadd	f7, f10, f7				# 860
+	lwz	r5, 36(r2)				# 420
+	slwi	r11, r10, 2				# 425
+	lfsx	f10, r5, r11				# 425
+	fmul	f7, f7, f10				# 860
+	fadd	f7, f9, f7				# 859
+	fmul	f5, f5, f1				# 861
+	fmul	f6, f6, f0				# 861
+	fadd	f5, f5, f6				# 861
+	lwz	r5, 36(r2)				# 430
+	slwi	r11, r7, 2				# 435
+	lfsx	f6, r5, r11				# 435
+	fmul	f5, f5, f6				# 861
+	fadd	f5, f7, f5				# 859
+	lis	r31, ha16(l.11646)
+	addi	r31, r31, lo16(l.11646)
+	lfs	f6, 0(r31)				# 105
+	fdiv	f5, f5, f6				# 105
+	fadd	f5, f8, f5				# 858
+beq_cont.15914:
+	fmul	f6, f0, f0				# 103
+	lwz	r5, 16(r2)				# 290
+	slwi	r11, r9, 2				# 295
+	lfsx	f7, r5, r11				# 295
+	fmul	f6, f6, f7				# 836
+	fmul	f7, f1, f1				# 103
+	lwz	r5, 16(r2)				# 300
+	slwi	r11, r10, 2				# 305
+	lfsx	f8, r5, r11				# 305
+	fmul	f7, f7, f8				# 836
+	fadd	f6, f6, f7				# 836
+	fmul	f7, f2, f2				# 103
+	lwz	r5, 16(r2)				# 310
+	slwi	r11, r7, 2				# 315
+	lfsx	f8, r5, r11				# 315
+	fmul	f7, f7, f8				# 836
+	fadd	f6, f6, f7				# 836
+	lwz	r5, 12(r2)				# 281
+	cmpw	cr7, r5, r9				# 838
+	bne	cr7, beq_else.15915				# 838
+	fmr	f0, f6				# 839
+	b	beq_cont.15916				# 838
+beq_else.15915:
+	fmul	f7, f1, f2				# 842
+	lwz	r5, 36(r2)				# 410
+	slwi	r11, r9, 2				# 415
+	lfsx	f8, r5, r11				# 415
+	fmul	f7, f7, f8				# 842
+	fadd	f6, f6, f7				# 841
+	fmul	f2, f2, f0				# 843
+	lwz	r5, 36(r2)				# 420
+	slwi	r10, r10, 2				# 425
+	lfsx	f7, r5, r10				# 425
+	fmul	f2, f2, f7				# 843
+	fadd	f2, f6, f2				# 841
+	fmul	f0, f0, f1				# 844
+	lwz	r5, 36(r2)				# 430
+	slwi	r7, r7, 2				# 435
+	lfsx	f1, r5, r7				# 435
+	fmul	f0, f0, f1				# 844
+	fadd	f0, f2, f0				# 841
+beq_cont.15916:
+	lwz	r5, 4(r2)				# 252
+	cmpw	cr7, r5, r8				# 882
+	bne	cr7, beq_else.15917				# 882
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f1, 0(r31)				# 882
+	fsub	f0, f0, f1				# 882
+	b	beq_cont.15918				# 882
+beq_else.15917:
+beq_cont.15918:
+	fmul	f1, f5, f5				# 103
+	fmul	f0, f4, f0				# 884
+	fsub	f0, f1, f0				# 884
+	fcmpu	cr7, f0, f3				# 113
+	bgt	cr7, ble_else.15919				# 113
+	addi	r5, 0, 0
+	b	ble_cont.15920				# 113
+ble_else.15919:
+	addi	r5, 0, 1
+ble_cont.15920:
+	cmpw	cr7, r5, r9				# 886
+	bne	cr7, beq_else.15921				# 886
+	addi	r2, 0, 0
+	blr
+beq_else.15921:
+	stw	r6, 0(r3)				# 887
+	stfs	f4, 8(r3)				# 887
+	stfs	f5, 16(r3)				# 887
+	stw	r9, 24(r3)				# 887
+	stw	r2, 28(r3)				# 887
+	mfspr	r31, 8				# 887
+	stw	r31, 32(r3)				# 887
+	addi	r3, r3, 36				# 887
+	bl	min_caml_sqrt				# 887
+	addi	r3, r3, -36				# 887
+	lwz	r31, 32(r3)				# 887
+	mtspr	8, r31				# 887
+	lwz	r2, 28(r3)				# 272
+	lwz	r2, 24(r2)				# 272
+	lwz	r5, 24(r3)				# 888
+	cmpw	cr7, r2, r5				# 888
+	bne	cr7, beq_else.15923				# 888
+	fneg	f0, f0				# 107
+	b	beq_cont.15924				# 888
+beq_else.15923:
+beq_cont.15924:
+	lfs	f1, 16(r3)				# 889
+	fsub	f0, f0, f1				# 889
+	lfs	f1, 8(r3)				# 889
+	fdiv	f0, f0, f1				# 889
+	slwi	r2, r5, 2				# 889
+	lwz	r5, 0(r3)				# 889
+	stfsx	f0, r5, r2				# 889
+	addi	r2, 0, 1
+	blr
+beq_else.15912:
+	addi	r2, 0, 0
+	blr
+solver_rect_fast.2674:
+	lwz	r7, 28(r1)				# 914
+	lwz	r8, 24(r1)				# 914
+	lwz	r9, 20(r1)				# 914
+	lwz	r10, 16(r1)				# 914
+	lwz	r11, 12(r1)				# 914
+	lwz	r12, 8(r1)				# 914
+	lfs	f3, 4(r1)				# 914
+	slwi	r13, r11, 2				# 915
+	lfsx	f4, r6, r13				# 915
+	fsub	f4, f4, f0				# 915
+	slwi	r13, r12, 2				# 915
+	lfsx	f5, r6, r13				# 915
+	fmul	f4, f4, f5				# 915
+	slwi	r13, r12, 2				# 917
+	lfsx	f5, r5, r13				# 917
+	fmul	f5, f4, f5				# 917
+	fadd	f5, f5, f1				# 917
+	stw	r7, 0(r3)				# 917
+	stw	r8, 4(r3)				# 917
+	stfs	f0, 8(r3)				# 917
+	stw	r10, 16(r3)				# 917
+	stfs	f1, 24(r3)				# 917
+	stfs	f3, 32(r3)				# 917
+	stw	r6, 40(r3)				# 917
+	stfs	f2, 48(r3)				# 917
+	stfs	f4, 56(r3)				# 917
+	stw	r5, 64(r3)				# 917
+	stw	r9, 68(r3)				# 917
+	stw	r11, 72(r3)				# 917
+	stw	r12, 76(r3)				# 917
+	stw	r2, 80(r3)				# 917
+	mfspr	r31, 8				# 917
+	fmr	f0, f5				# 917
+	stw	r31, 84(r3)				# 917
+	addi	r3, r3, 88				# 917
+	bl	min_caml_fabs				# 917
+	addi	r3, r3, -88				# 917
+	lwz	r31, 84(r3)				# 917
+	mtspr	8, r31				# 917
+	lwz	r2, 80(r3)				# 300
+	lwz	r5, 16(r2)				# 300
+	lwz	r6, 76(r3)				# 305
+	slwi	r7, r6, 2				# 305
+	lfsx	f1, r5, r7				# 305
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.15927				# 109
+	addi	r5, 0, 0
+	b	ble_cont.15928				# 109
+ble_else.15927:
+	addi	r5, 0, 1
+ble_cont.15928:
+	lwz	r7, 72(r3)				# 917
+	cmpw	cr7, r5, r7				# 917
+	bne	cr7, beq_else.15929				# 917
+	addi	r5, 0, 0
+	b	beq_cont.15930				# 917
+beq_else.15929:
+	lwz	r5, 68(r3)				# 918
+	slwi	r8, r5, 2				# 918
+	lwz	r9, 64(r3)				# 918
+	lfsx	f0, r9, r8				# 918
+	lfs	f1, 56(r3)				# 918
+	fmul	f0, f1, f0				# 918
+	lfs	f2, 48(r3)				# 918
+	fadd	f0, f0, f2				# 918
+	mfspr	r31, 8				# 918
+	stw	r31, 84(r3)				# 918
+	addi	r3, r3, 88				# 918
+	bl	min_caml_fabs				# 918
+	addi	r3, r3, -88				# 918
+	lwz	r31, 84(r3)				# 918
+	mtspr	8, r31				# 918
+	lwz	r2, 80(r3)				# 310
+	lwz	r5, 16(r2)				# 310
+	lwz	r6, 68(r3)				# 315
+	slwi	r7, r6, 2				# 315
+	lfsx	f1, r5, r7				# 315
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.15931				# 109
+	addi	r5, 0, 0
+	b	ble_cont.15932				# 109
+ble_else.15931:
+	addi	r5, 0, 1
+ble_cont.15932:
+	lwz	r7, 72(r3)				# 918
+	cmpw	cr7, r5, r7				# 918
+	bne	cr7, beq_else.15933				# 918
+	addi	r5, 0, 0
+	b	beq_cont.15934				# 918
+beq_else.15933:
+	lwz	r5, 76(r3)				# 919
+	slwi	r8, r5, 2				# 919
+	lwz	r9, 40(r3)				# 919
+	lfsx	f0, r9, r8				# 919
+	lfs	f1, 32(r3)				# 111
+	fcmpu	cr7, f0, f1				# 111
+	bne	cr7, beq_else.15935				# 111
+	addi	r8, 0, 1
+	b	beq_cont.15936				# 111
+beq_else.15935:
+	addi	r8, 0, 0
+beq_cont.15936:
+	cmpw	cr7, r8, r7				# 919
+	bne	cr7, beq_else.15937				# 919
+	addi	r5, 0, 1
+	b	beq_cont.15938				# 919
+beq_else.15937:
+	addi	r5, 0, 0
+beq_cont.15938:
+beq_cont.15934:
+beq_cont.15930:
+	cmpw	cr7, r5, r7				# 916
+	bne	cr7, beq_else.15939				# 916
+	lwz	r5, 68(r3)				# 924
+	slwi	r6, r5, 2				# 924
+	lwz	r8, 40(r3)				# 924
+	lfsx	f0, r8, r6				# 924
+	lfs	f1, 24(r3)				# 924
+	fsub	f0, f0, f1				# 924
+	lwz	r6, 16(r3)				# 924
+	slwi	r9, r6, 2				# 924
+	lfsx	f2, r8, r9				# 924
+	fmul	f0, f0, f2				# 924
+	slwi	r9, r7, 2				# 926
+	lwz	r10, 64(r3)				# 926
+	lfsx	f2, r10, r9				# 926
+	fmul	f2, f0, f2				# 926
+	lfs	f3, 8(r3)				# 926
+	fadd	f2, f2, f3				# 926
+	stfs	f0, 88(r3)				# 926
+	mfspr	r31, 8				# 926
+	fmr	f0, f2				# 926
+	stw	r31, 96(r3)				# 926
+	addi	r3, r3, 100				# 926
+	bl	min_caml_fabs				# 926
+	addi	r3, r3, -100				# 926
+	lwz	r31, 96(r3)				# 926
+	mtspr	8, r31				# 926
+	lwz	r2, 80(r3)				# 290
+	lwz	r5, 16(r2)				# 290
+	lwz	r6, 72(r3)				# 295
+	slwi	r7, r6, 2				# 295
+	lfsx	f1, r5, r7				# 295
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.15941				# 109
+	addi	r5, 0, 0
+	b	ble_cont.15942				# 109
+ble_else.15941:
+	addi	r5, 0, 1
+ble_cont.15942:
+	cmpw	cr7, r5, r6				# 926
+	bne	cr7, beq_else.15943				# 926
+	addi	r5, 0, 0
+	b	beq_cont.15944				# 926
+beq_else.15943:
+	lwz	r5, 68(r3)				# 927
+	slwi	r7, r5, 2				# 927
+	lwz	r8, 64(r3)				# 927
+	lfsx	f0, r8, r7				# 927
+	lfs	f1, 88(r3)				# 927
+	fmul	f0, f1, f0				# 927
+	lfs	f2, 48(r3)				# 927
+	fadd	f0, f0, f2				# 927
+	mfspr	r31, 8				# 927
+	stw	r31, 96(r3)				# 927
+	addi	r3, r3, 100				# 927
+	bl	min_caml_fabs				# 927
+	addi	r3, r3, -100				# 927
+	lwz	r31, 96(r3)				# 927
+	mtspr	8, r31				# 927
+	lwz	r2, 80(r3)				# 310
+	lwz	r5, 16(r2)				# 310
+	lwz	r6, 68(r3)				# 315
+	slwi	r6, r6, 2				# 315
+	lfsx	f1, r5, r6				# 315
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.15945				# 109
+	addi	r5, 0, 0
+	b	ble_cont.15946				# 109
+ble_else.15945:
+	addi	r5, 0, 1
+ble_cont.15946:
+	lwz	r6, 72(r3)				# 927
+	cmpw	cr7, r5, r6				# 927
+	bne	cr7, beq_else.15947				# 927
+	addi	r5, 0, 0
+	b	beq_cont.15948				# 927
+beq_else.15947:
+	lwz	r5, 16(r3)				# 928
+	slwi	r5, r5, 2				# 928
+	lwz	r7, 40(r3)				# 928
+	lfsx	f0, r7, r5				# 928
+	lfs	f1, 32(r3)				# 111
+	fcmpu	cr7, f0, f1				# 111
+	bne	cr7, beq_else.15949				# 111
+	addi	r5, 0, 1
+	b	beq_cont.15950				# 111
+beq_else.15949:
+	addi	r5, 0, 0
+beq_cont.15950:
+	cmpw	cr7, r5, r6				# 928
+	bne	cr7, beq_else.15951				# 928
+	addi	r5, 0, 1
+	b	beq_cont.15952				# 928
+beq_else.15951:
+	addi	r5, 0, 0
+beq_cont.15952:
+beq_cont.15948:
+beq_cont.15944:
+	cmpw	cr7, r5, r6				# 925
+	bne	cr7, beq_else.15953				# 925
+	lwz	r5, 40(r3)				# 933
+	lfs	f0, 16(r5)				# 933
+	lfs	f1, 48(r3)				# 933
+	fsub	f0, f0, f1				# 933
+	lwz	r7, 4(r3)				# 933
+	slwi	r8, r7, 2				# 933
+	lfsx	f1, r5, r8				# 933
+	fmul	f0, f0, f1				# 933
+	slwi	r8, r6, 2				# 935
+	lwz	r9, 64(r3)				# 935
+	lfsx	f1, r9, r8				# 935
+	fmul	f1, f0, f1				# 935
+	lfs	f2, 8(r3)				# 935
+	fadd	f1, f1, f2				# 935
+	stfs	f0, 96(r3)				# 935
+	mfspr	r31, 8				# 935
+	fmr	f0, f1				# 935
+	stw	r31, 104(r3)				# 935
+	addi	r3, r3, 108				# 935
+	bl	min_caml_fabs				# 935
+	addi	r3, r3, -108				# 935
+	lwz	r31, 104(r3)				# 935
+	mtspr	8, r31				# 935
+	lwz	r2, 80(r3)				# 290
+	lwz	r5, 16(r2)				# 290
+	lwz	r6, 72(r3)				# 295
+	slwi	r7, r6, 2				# 295
+	lfsx	f1, r5, r7				# 295
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.15954				# 109
+	addi	r5, 0, 0
+	b	ble_cont.15955				# 109
+ble_else.15954:
+	addi	r5, 0, 1
+ble_cont.15955:
+	cmpw	cr7, r5, r6				# 935
+	bne	cr7, beq_else.15956				# 935
+	addi	r2, 0, 0
+	b	beq_cont.15957				# 935
+beq_else.15956:
+	lwz	r5, 76(r3)				# 936
+	slwi	r7, r5, 2				# 936
+	lwz	r8, 64(r3)				# 936
+	lfsx	f0, r8, r7				# 936
+	lfs	f1, 96(r3)				# 936
+	fmul	f0, f1, f0				# 936
+	lfs	f2, 24(r3)				# 936
+	fadd	f0, f0, f2				# 936
+	mfspr	r31, 8				# 936
+	stw	r31, 104(r3)				# 936
+	addi	r3, r3, 108				# 936
+	bl	min_caml_fabs				# 936
+	addi	r3, r3, -108				# 936
+	lwz	r31, 104(r3)				# 936
+	mtspr	8, r31				# 936
+	lwz	r2, 80(r3)				# 300
+	lwz	r2, 16(r2)				# 300
+	lwz	r5, 76(r3)				# 305
+	slwi	r5, r5, 2				# 305
+	lfsx	f1, r2, r5				# 305
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.15958				# 109
+	addi	r2, 0, 0
+	b	ble_cont.15959				# 109
+ble_else.15958:
+	addi	r2, 0, 1
+ble_cont.15959:
+	lwz	r5, 72(r3)				# 936
+	cmpw	cr7, r2, r5				# 936
+	bne	cr7, beq_else.15960				# 936
+	addi	r2, 0, 0
+	b	beq_cont.15961				# 936
+beq_else.15960:
+	lwz	r2, 4(r3)				# 937
+	slwi	r2, r2, 2				# 937
+	lwz	r6, 40(r3)				# 937
+	lfsx	f0, r6, r2				# 937
+	lfs	f1, 32(r3)				# 111
+	fcmpu	cr7, f0, f1				# 111
+	bne	cr7, beq_else.15962				# 111
+	addi	r2, 0, 1
+	b	beq_cont.15963				# 111
+beq_else.15962:
+	addi	r2, 0, 0
+beq_cont.15963:
+	cmpw	cr7, r2, r5				# 937
+	bne	cr7, beq_else.15964				# 937
+	addi	r2, 0, 1
+	b	beq_cont.15965				# 937
+beq_else.15964:
+	addi	r2, 0, 0
+beq_cont.15965:
+beq_cont.15961:
+beq_cont.15957:
+	lwz	r5, 72(r3)				# 934
+	cmpw	cr7, r2, r5				# 934
+	bne	cr7, beq_else.15966				# 934
+	addi	r2, 0, 0
+	blr
+beq_else.15966:
+	slwi	r2, r5, 2				# 941
+	lwz	r5, 0(r3)				# 941
+	lfs	f0, 96(r3)				# 941
+	stfsx	f0, r5, r2				# 941
+	addi	r2, 0, 3
+	blr
+beq_else.15953:
+	slwi	r2, r6, 2				# 932
+	lwz	r5, 0(r3)				# 932
+	lfs	f0, 88(r3)				# 932
+	stfsx	f0, r5, r2				# 932
+	addi	r2, 0, 2
+	blr
+beq_else.15939:
+	slwi	r2, r7, 2				# 923
+	lwz	r5, 0(r3)				# 923
+	lfs	f0, 56(r3)				# 923
+	stfsx	f0, r5, r2				# 923
+	addi	r2, 0, 1
+	blr
+solver_second_fast.2687:
+	lwz	r6, 24(r1)				# 956
+	lwz	r7, 20(r1)				# 956
+	lwz	r8, 16(r1)				# 956
+	lwz	r9, 12(r1)				# 956
+	lwz	r10, 8(r1)				# 956
+	lfs	f3, 4(r1)				# 956
+	slwi	r11, r9, 2				# 958
+	lfsx	f4, r5, r11				# 958
+	fcmpu	cr7, f4, f3				# 111
+	bne	cr7, beq_else.15967				# 111
+	addi	r11, 0, 1
+	b	beq_cont.15968				# 111
+beq_else.15967:
+	addi	r11, 0, 0
+beq_cont.15968:
+	cmpw	cr7, r11, r9				# 959
+	bne	cr7, beq_else.15969				# 959
+	slwi	r11, r10, 2				# 962
+	lfsx	f5, r5, r11				# 962
+	fmul	f5, f5, f0				# 962
+	slwi	r11, r7, 2				# 962
+	lfsx	f6, r5, r11				# 962
+	fmul	f6, f6, f1				# 962
+	fadd	f5, f5, f6				# 962
+	slwi	r11, r8, 2				# 962
+	lfsx	f6, r5, r11				# 962
+	fmul	f6, f6, f2				# 962
+	fadd	f5, f5, f6				# 962
+	fmul	f6, f0, f0				# 103
+	lwz	r11, 16(r2)				# 290
+	slwi	r12, r9, 2				# 295
+	lfsx	f7, r11, r12				# 295
+	fmul	f6, f6, f7				# 836
+	fmul	f7, f1, f1				# 103
+	lwz	r11, 16(r2)				# 300
+	slwi	r12, r10, 2				# 305
+	lfsx	f8, r11, r12				# 305
+	fmul	f7, f7, f8				# 836
+	fadd	f6, f6, f7				# 836
+	fmul	f7, f2, f2				# 103
+	lwz	r11, 16(r2)				# 310
+	slwi	r12, r7, 2				# 315
+	lfsx	f8, r11, r12				# 315
+	fmul	f7, f7, f8				# 836
+	fadd	f6, f6, f7				# 836
+	lwz	r11, 12(r2)				# 281
+	cmpw	cr7, r11, r9				# 838
+	bne	cr7, beq_else.15970				# 838
+	fmr	f0, f6				# 839
+	b	beq_cont.15971				# 838
+beq_else.15970:
+	fmul	f7, f1, f2				# 842
+	lwz	r11, 36(r2)				# 410
+	slwi	r12, r9, 2				# 415
+	lfsx	f8, r11, r12				# 415
+	fmul	f7, f7, f8				# 842
+	fadd	f6, f6, f7				# 841
+	fmul	f2, f2, f0				# 843
+	lwz	r11, 36(r2)				# 420
+	slwi	r10, r10, 2				# 425
+	lfsx	f7, r11, r10				# 425
+	fmul	f2, f2, f7				# 843
+	fadd	f2, f6, f2				# 841
+	fmul	f0, f0, f1				# 844
+	lwz	r10, 36(r2)				# 430
+	slwi	r7, r7, 2				# 435
+	lfsx	f1, r10, r7				# 435
+	fmul	f0, f0, f1				# 844
+	fadd	f0, f2, f0				# 841
+beq_cont.15971:
+	lwz	r7, 4(r2)				# 252
+	cmpw	cr7, r7, r8				# 964
+	bne	cr7, beq_else.15972				# 964
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f1, 0(r31)				# 964
+	fsub	f0, f0, f1				# 964
+	b	beq_cont.15973				# 964
+beq_else.15972:
+beq_cont.15973:
+	fmul	f1, f5, f5				# 103
+	fmul	f0, f4, f0				# 965
+	fsub	f0, f1, f0				# 965
+	fcmpu	cr7, f0, f3				# 113
+	bgt	cr7, ble_else.15974				# 113
+	addi	r7, 0, 0
+	b	ble_cont.15975				# 113
+ble_else.15974:
+	addi	r7, 0, 1
+ble_cont.15975:
+	cmpw	cr7, r7, r9				# 966
+	bne	cr7, beq_else.15976				# 966
+	addi	r2, 0, 0
+	blr
+beq_else.15976:
+	lwz	r2, 24(r2)				# 272
+	cmpw	cr7, r2, r9				# 967
+	bne	cr7, beq_else.15977				# 967
+	stw	r6, 0(r3)				# 970
+	stw	r9, 4(r3)				# 970
+	stw	r5, 8(r3)				# 970
+	stfs	f5, 16(r3)				# 970
+	mfspr	r31, 8				# 970
+	stw	r31, 24(r3)				# 970
+	addi	r3, r3, 28				# 970
+	bl	min_caml_sqrt				# 970
+	addi	r3, r3, -28				# 970
+	lwz	r31, 24(r3)				# 970
+	mtspr	8, r31				# 970
+	lfs	f1, 16(r3)				# 970
+	fsub	f0, f1, f0				# 970
+	lwz	r2, 8(r3)				# 970
+	lfs	f1, 16(r2)				# 970
+	fmul	f0, f0, f1				# 970
+	lwz	r2, 4(r3)				# 970
+	slwi	r2, r2, 2				# 970
+	lwz	r5, 0(r3)				# 970
+	stfsx	f0, r5, r2				# 970
+	b	beq_cont.15978				# 967
+beq_else.15977:
+	stw	r6, 0(r3)				# 968
+	stw	r9, 4(r3)				# 968
+	stw	r5, 8(r3)				# 968
+	stfs	f5, 16(r3)				# 968
+	mfspr	r31, 8				# 968
+	stw	r31, 24(r3)				# 968
+	addi	r3, r3, 28				# 968
+	bl	min_caml_sqrt				# 968
+	addi	r3, r3, -28				# 968
+	lwz	r31, 24(r3)				# 968
+	mtspr	8, r31				# 968
+	lfs	f1, 16(r3)				# 968
+	fadd	f0, f1, f0				# 968
+	lwz	r2, 8(r3)				# 968
+	lfs	f1, 16(r2)				# 968
+	fmul	f0, f0, f1				# 968
+	lwz	r2, 4(r3)				# 968
+	slwi	r2, r2, 2				# 968
+	lwz	r5, 0(r3)				# 968
+	stfsx	f0, r5, r2				# 968
+beq_cont.15978:
+	addi	r2, 0, 1
+	blr
+beq_else.15969:
+	addi	r2, 0, 0
+	blr
+setup_second_table.2720:
+	lwz	r6, 24(r1)				# 1089
+	lwz	r7, 20(r1)				# 1089
+	lwz	r8, 16(r1)				# 1089
+	lwz	r9, 12(r1)				# 1089
+	lwz	r10, 8(r1)				# 1089
+	lfs	f0, 4(r1)				# 1089
+	stfs	f0, 0(r3)				# 1090
+	stw	r8, 8(r3)				# 1090
+	stw	r5, 12(r3)				# 1090
+	stw	r7, 16(r3)				# 1090
+	stw	r10, 20(r3)				# 1090
+	stw	r2, 24(r3)				# 1090
+	stw	r9, 28(r3)				# 1090
+	mfspr	r31, 8				# 1090
+	mr	r2, r6				# 1090
+	stw	r31, 32(r3)				# 1090
+	addi	r3, r3, 36				# 1090
+	bl	min_caml_create_float_array				# 1090
+	addi	r3, r3, -36				# 1090
+	lwz	r31, 32(r3)				# 1090
+	mtspr	8, r31				# 1090
+	lwz	r5, 28(r3)				# 1092
+	slwi	r6, r5, 2				# 1092
+	lwz	r7, 24(r3)				# 1092
+	lfsx	f0, r7, r6				# 1092
+	lwz	r6, 20(r3)				# 1092
+	slwi	r8, r6, 2				# 1092
+	lfsx	f1, r7, r8				# 1092
+	lwz	r8, 16(r3)				# 1092
+	slwi	r9, r8, 2				# 1092
+	lfsx	f2, r7, r9				# 1092
+	fmul	f3, f0, f0				# 103
+	lwz	r9, 12(r3)				# 290
+	lwz	r10, 16(r9)				# 290
+	slwi	r11, r5, 2				# 295
+	lfsx	f4, r10, r11				# 295
+	fmul	f3, f3, f4				# 836
+	fmul	f4, f1, f1				# 103
+	lwz	r10, 16(r9)				# 300
+	slwi	r11, r6, 2				# 305
+	lfsx	f5, r10, r11				# 305
+	fmul	f4, f4, f5				# 836
+	fadd	f3, f3, f4				# 836
+	fmul	f4, f2, f2				# 103
+	lwz	r10, 16(r9)				# 310
+	slwi	r11, r8, 2				# 315
+	lfsx	f5, r10, r11				# 315
+	fmul	f4, f4, f5				# 836
+	fadd	f3, f3, f4				# 836
+	lwz	r10, 12(r9)				# 281
+	cmpw	cr7, r10, r5				# 838
+	bne	cr7, beq_else.15980				# 838
+	fmr	f0, f3				# 839
+	b	beq_cont.15981				# 838
+beq_else.15980:
+	fmul	f4, f1, f2				# 842
+	lwz	r10, 36(r9)				# 410
+	slwi	r11, r5, 2				# 415
+	lfsx	f5, r10, r11				# 415
+	fmul	f4, f4, f5				# 842
+	fadd	f3, f3, f4				# 841
+	fmul	f2, f2, f0				# 843
+	lwz	r10, 36(r9)				# 420
+	slwi	r11, r6, 2				# 425
+	lfsx	f4, r10, r11				# 425
+	fmul	f2, f2, f4				# 843
+	fadd	f2, f3, f2				# 841
+	fmul	f0, f0, f1				# 844
+	lwz	r10, 36(r9)				# 430
+	slwi	r11, r8, 2				# 435
+	lfsx	f1, r10, r11				# 435
+	fmul	f0, f0, f1				# 844
+	fadd	f0, f2, f0				# 841
+beq_cont.15981:
+	slwi	r10, r5, 2				# 1093
+	lfsx	f1, r7, r10				# 1093
+	lwz	r10, 16(r9)				# 290
+	slwi	r11, r5, 2				# 295
+	lfsx	f2, r10, r11				# 295
+	fmul	f1, f1, f2				# 1093
+	fneg	f1, f1				# 107
+	slwi	r10, r6, 2				# 1094
+	lfsx	f2, r7, r10				# 1094
+	lwz	r10, 16(r9)				# 300
+	slwi	r11, r6, 2				# 305
+	lfsx	f3, r10, r11				# 305
+	fmul	f2, f2, f3				# 1094
+	fneg	f2, f2				# 107
+	slwi	r10, r8, 2				# 1095
+	lfsx	f3, r7, r10				# 1095
+	lwz	r10, 16(r9)				# 310
+	slwi	r11, r8, 2				# 315
+	lfsx	f4, r10, r11				# 315
+	fmul	f3, f3, f4				# 1095
+	fneg	f3, f3				# 107
+	slwi	r10, r5, 2				# 1097
+	stfsx	f0, r2, r10				# 1097
+	lwz	r10, 12(r9)				# 281
+	cmpw	cr7, r10, r5				# 1100
+	bne	cr7, beq_else.15982				# 1100
+	slwi	r6, r6, 2				# 1105
+	stfsx	f1, r2, r6				# 1105
+	slwi	r6, r8, 2				# 1106
+	stfsx	f2, r2, r6				# 1106
+	lwz	r6, 8(r3)				# 1107
+	slwi	r6, r6, 2				# 1107
+	stfsx	f3, r2, r6				# 1107
+	b	beq_cont.15983				# 1100
+beq_else.15982:
+	slwi	r10, r8, 2				# 1101
+	lfsx	f4, r7, r10				# 1101
+	lwz	r10, 36(r9)				# 420
+	slwi	r11, r6, 2				# 425
+	lfsx	f5, r10, r11				# 425
+	fmul	f4, f4, f5				# 1101
+	slwi	r10, r6, 2				# 1101
+	lfsx	f5, r7, r10				# 1101
+	lwz	r10, 36(r9)				# 430
+	slwi	r11, r8, 2				# 435
+	lfsx	f6, r10, r11				# 435
+	fmul	f5, f5, f6				# 1101
+	fadd	f4, f4, f5				# 1101
+	lis	r31, ha16(l.11646)
+	addi	r31, r31, lo16(l.11646)
+	lfs	f5, 0(r31)				# 105
+	fdiv	f4, f4, f5				# 105
+	fsub	f1, f1, f4				# 1101
+	slwi	r10, r6, 2				# 1101
+	stfsx	f1, r2, r10				# 1101
+	slwi	r10, r8, 2				# 1102
+	lfsx	f1, r7, r10				# 1102
+	lwz	r10, 36(r9)				# 410
+	slwi	r11, r5, 2				# 415
+	lfsx	f4, r10, r11				# 415
+	fmul	f1, f1, f4				# 1102
+	slwi	r10, r5, 2				# 1102
+	lfsx	f4, r7, r10				# 1102
+	lwz	r10, 36(r9)				# 430
+	slwi	r11, r8, 2				# 435
+	lfsx	f6, r10, r11				# 435
+	fmul	f4, f4, f6				# 1102
+	fadd	f1, f1, f4				# 1102
+	fdiv	f1, f1, f5				# 105
+	fsub	f1, f2, f1				# 1102
+	slwi	r8, r8, 2				# 1102
+	stfsx	f1, r2, r8				# 1102
+	slwi	r8, r6, 2				# 1103
+	lfsx	f1, r7, r8				# 1103
+	lwz	r8, 36(r9)				# 410
+	slwi	r10, r5, 2				# 415
+	lfsx	f2, r8, r10				# 415
+	fmul	f1, f1, f2				# 1103
+	slwi	r8, r5, 2				# 1103
+	lfsx	f2, r7, r8				# 1103
+	lwz	r7, 36(r9)				# 420
+	slwi	r6, r6, 2				# 425
+	lfsx	f4, r7, r6				# 425
+	fmul	f2, f2, f4				# 1103
+	fadd	f1, f1, f2				# 1103
+	fdiv	f1, f1, f5				# 105
+	fsub	f1, f3, f1				# 1103
+	lwz	r6, 8(r3)				# 1103
+	slwi	r6, r6, 2				# 1103
+	stfsx	f1, r2, r6				# 1103
+beq_cont.15983:
+	lfs	f1, 0(r3)				# 111
+	fcmpu	cr7, f0, f1				# 111
+	bne	cr7, beq_else.15984				# 111
+	addi	r6, 0, 1
+	b	beq_cont.15985				# 111
+beq_else.15984:
+	addi	r6, 0, 0
+beq_cont.15985:
+	cmpw	cr7, r6, r5				# 1109
+	bne	cr7, beq_else.15986				# 1109
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f1, 0(r31)				# 1110
+	fdiv	f0, f1, f0				# 1110
+	stfs	f0, 16(r2)				# 1110
+	b	beq_cont.15987				# 1109
+beq_else.15986:
+beq_cont.15987:
+	blr
+iter_setup_dirvec_constants.2723:
+	lwz	r6, 32(r1)				# 1117
+	lwz	r7, 28(r1)				# 1117
+	lwz	r8, 24(r1)				# 1117
+	lwz	r9, 20(r1)				# 1117
+	lwz	r10, 16(r1)				# 1117
+	lwz	r11, 12(r1)				# 1117
+	lwz	r12, 8(r1)				# 1117
+	lfs	f0, 4(r1)				# 1117
+	cmpw	cr7, r11, r5				# 1118
+	bgt	cr7, ble_else.15988				# 1118
+	slwi	r13, r5, 2				# 1119
+	lwzx	r7, r7, r13				# 1119
+	lwz	r13, 4(r2)				# 527
+	lwz	r14, 0(r2)				# 521
+	lwz	r15, 4(r7)				# 252
+	stw	r2, 0(r3)				# 1123
+	stw	r1, 4(r3)				# 1123
+	stw	r12, 8(r3)				# 1123
+	cmpw	cr7, r15, r12				# 1123
+	bne	cr7, beq_else.15989				# 1123
+	addi	r6, 0, 6
+	stw	r13, 12(r3)				# 1044
+	stw	r5, 16(r3)				# 1044
+	stw	r8, 20(r3)				# 1044
+	stw	r10, 24(r3)				# 1044
+	stw	r9, 28(r3)				# 1044
+	stw	r7, 32(r3)				# 1044
+	stfs	f0, 40(r3)				# 1044
+	stw	r14, 48(r3)				# 1044
+	stw	r11, 52(r3)				# 1044
+	mfspr	r31, 8				# 1044
+	mr	r2, r6				# 1044
+	stw	r31, 56(r3)				# 1044
+	addi	r3, r3, 60				# 1044
+	bl	min_caml_create_float_array				# 1044
+	addi	r3, r3, -60				# 1044
+	lwz	r31, 56(r3)				# 1044
+	mtspr	8, r31				# 1044
+	lwz	r5, 52(r3)				# 1046
+	slwi	r6, r5, 2				# 1046
+	lwz	r7, 48(r3)				# 1046
+	lfsx	f0, r7, r6				# 1046
+	lfs	f1, 40(r3)				# 111
+	fcmpu	cr7, f0, f1				# 111
+	bne	cr7, beq_else.15992				# 111
+	addi	r6, 0, 1
+	b	beq_cont.15993				# 111
+beq_else.15992:
+	addi	r6, 0, 0
+beq_cont.15993:
+	cmpw	cr7, r6, r5				# 1046
+	bne	cr7, beq_else.15994				# 1046
+	lwz	r6, 32(r3)				# 272
+	lwz	r8, 24(r6)				# 272
+	slwi	r9, r5, 2				# 1050
+	lfsx	f0, r7, r9				# 1050
+	fcmpu	cr7, f1, f0				# 115
+	bgt	cr7, ble_else.15996				# 115
+	addi	r9, 0, 0
+	b	ble_cont.15997				# 115
+ble_else.15996:
+	addi	r9, 0, 1
+ble_cont.15997:
+	cmpw	cr7, r8, r5				# 119
+	bne	cr7, beq_else.15998				# 119
+	mr	r8, r9				# 119
+	b	beq_cont.15999				# 119
+beq_else.15998:
+	cmpw	cr7, r9, r5				# 119
+	bne	cr7, beq_else.16000				# 119
+	addi	r8, 0, 1
+	b	beq_cont.16001				# 119
+beq_else.16000:
+	addi	r8, 0, 0
+beq_cont.16001:
+beq_cont.15999:
+	lwz	r9, 16(r6)				# 290
+	slwi	r10, r5, 2				# 295
+	lfsx	f0, r9, r10				# 295
+	cmpw	cr7, r8, r5				# 132
+	bne	cr7, beq_else.16002				# 132
+	fneg	f0, f0				# 107
+	b	beq_cont.16003				# 132
+beq_else.16002:
+beq_cont.16003:
+	slwi	r8, r5, 2				# 1050
+	stfsx	f0, r2, r8				# 1050
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f0, 0(r31)				# 1052
+	slwi	r8, r5, 2				# 1052
+	lfsx	f2, r7, r8				# 1052
+	fdiv	f0, f0, f2				# 1052
+	lwz	r8, 8(r3)				# 1052
+	slwi	r9, r8, 2				# 1052
+	stfsx	f0, r2, r9				# 1052
+	b	beq_cont.15995				# 1046
+beq_else.15994:
+	lwz	r6, 8(r3)				# 1047
+	slwi	r8, r6, 2				# 1047
+	stfsx	f1, r2, r8				# 1047
+beq_cont.15995:
+	lwz	r6, 8(r3)				# 1054
+	slwi	r8, r6, 2				# 1054
+	lfsx	f0, r7, r8				# 1054
+	fcmpu	cr7, f0, f1				# 111
+	bne	cr7, beq_else.16004				# 111
+	addi	r8, 0, 1
+	b	beq_cont.16005				# 111
+beq_else.16004:
+	addi	r8, 0, 0
+beq_cont.16005:
+	cmpw	cr7, r8, r5				# 1054
+	bne	cr7, beq_else.16006				# 1054
+	lwz	r8, 32(r3)				# 272
+	lwz	r9, 24(r8)				# 272
+	slwi	r10, r6, 2				# 1057
+	lfsx	f0, r7, r10				# 1057
+	fcmpu	cr7, f1, f0				# 115
+	bgt	cr7, ble_else.16008				# 115
+	addi	r10, 0, 0
+	b	ble_cont.16009				# 115
+ble_else.16008:
+	addi	r10, 0, 1
+ble_cont.16009:
+	cmpw	cr7, r9, r5				# 119
+	bne	cr7, beq_else.16010				# 119
+	mr	r9, r10				# 119
+	b	beq_cont.16011				# 119
+beq_else.16010:
+	cmpw	cr7, r10, r5				# 119
+	bne	cr7, beq_else.16012				# 119
+	addi	r9, 0, 1
+	b	beq_cont.16013				# 119
+beq_else.16012:
+	addi	r9, 0, 0
+beq_cont.16013:
+beq_cont.16011:
+	lwz	r10, 16(r8)				# 300
+	slwi	r11, r6, 2				# 305
+	lfsx	f0, r10, r11				# 305
+	cmpw	cr7, r9, r5				# 132
+	bne	cr7, beq_else.16014				# 132
+	fneg	f0, f0				# 107
+	b	beq_cont.16015				# 132
+beq_else.16014:
+beq_cont.16015:
+	lwz	r9, 28(r3)				# 1057
+	slwi	r10, r9, 2				# 1057
+	stfsx	f0, r2, r10				# 1057
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f0, 0(r31)				# 1058
+	slwi	r10, r6, 2				# 1058
+	lfsx	f2, r7, r10				# 1058
+	fdiv	f0, f0, f2				# 1058
+	lwz	r10, 24(r3)				# 1058
+	slwi	r10, r10, 2				# 1058
+	stfsx	f0, r2, r10				# 1058
+	b	beq_cont.16007				# 1054
+beq_else.16006:
+	lwz	r8, 24(r3)				# 1055
+	slwi	r8, r8, 2				# 1055
+	stfsx	f1, r2, r8				# 1055
+beq_cont.16007:
+	lwz	r8, 28(r3)				# 1060
+	slwi	r9, r8, 2				# 1060
+	lfsx	f0, r7, r9				# 1060
+	fcmpu	cr7, f0, f1				# 111
+	bne	cr7, beq_else.16016				# 111
+	addi	r9, 0, 1
+	b	beq_cont.16017				# 111
+beq_else.16016:
+	addi	r9, 0, 0
+beq_cont.16017:
+	cmpw	cr7, r9, r5				# 1060
+	bne	cr7, beq_else.16018				# 1060
+	lwz	r9, 32(r3)				# 272
+	lwz	r10, 24(r9)				# 272
+	slwi	r11, r8, 2				# 1063
+	lfsx	f0, r7, r11				# 1063
+	fcmpu	cr7, f1, f0				# 115
+	bgt	cr7, ble_else.16020				# 115
+	addi	r11, 0, 0
+	b	ble_cont.16021				# 115
+ble_else.16020:
+	addi	r11, 0, 1
+ble_cont.16021:
+	cmpw	cr7, r10, r5				# 119
+	bne	cr7, beq_else.16022				# 119
+	mr	r10, r11				# 119
+	b	beq_cont.16023				# 119
+beq_else.16022:
+	cmpw	cr7, r11, r5				# 119
+	bne	cr7, beq_else.16024				# 119
+	addi	r10, 0, 1
+	b	beq_cont.16025				# 119
+beq_else.16024:
+	addi	r10, 0, 0
+beq_cont.16025:
+beq_cont.16023:
+	lwz	r9, 16(r9)				# 310
+	slwi	r11, r8, 2				# 315
+	lfsx	f0, r9, r11				# 315
+	cmpw	cr7, r10, r5				# 132
+	bne	cr7, beq_else.16026				# 132
+	fneg	f0, f0				# 107
+	b	beq_cont.16027				# 132
+beq_else.16026:
+beq_cont.16027:
+	stfs	f0, 16(r2)				# 1063
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f0, 0(r31)				# 1064
+	slwi	r5, r8, 2				# 1064
+	lfsx	f1, r7, r5				# 1064
+	fdiv	f0, f0, f1				# 1064
+	lwz	r5, 20(r3)				# 1064
+	slwi	r5, r5, 2				# 1064
+	stfsx	f0, r2, r5				# 1064
+	b	beq_cont.16019				# 1060
+beq_else.16018:
+	lwz	r5, 20(r3)				# 1061
+	slwi	r5, r5, 2				# 1061
+	stfsx	f1, r2, r5				# 1061
+beq_cont.16019:
+	lwz	r5, 16(r3)				# 1124
+	slwi	r7, r5, 2				# 1124
+	lwz	r8, 12(r3)				# 1124
+	stwx	r2, r8, r7				# 1124
+	b	beq_cont.15990				# 1123
+beq_else.15989:
+	cmpw	cr7, r15, r9				# 1125
+	bne	cr7, beq_else.16028				# 1125
+	addi	r6, 0, 4
+	stw	r13, 12(r3)				# 1071
+	stw	r5, 16(r3)				# 1071
+	stw	r10, 24(r3)				# 1071
+	stfs	f0, 40(r3)				# 1071
+	stw	r9, 28(r3)				# 1071
+	stw	r7, 32(r3)				# 1071
+	stw	r14, 48(r3)				# 1071
+	stw	r11, 52(r3)				# 1071
+	mfspr	r31, 8				# 1071
+	mr	r2, r6				# 1071
+	stw	r31, 56(r3)				# 1071
+	addi	r3, r3, 60				# 1071
+	bl	min_caml_create_float_array				# 1071
+	addi	r3, r3, -60				# 1071
+	lwz	r31, 56(r3)				# 1071
+	mtspr	8, r31				# 1071
+	lwz	r5, 52(r3)				# 1073
+	slwi	r6, r5, 2				# 1073
+	lwz	r7, 48(r3)				# 1073
+	lfsx	f0, r7, r6				# 1073
+	lwz	r6, 32(r3)				# 290
+	lwz	r8, 16(r6)				# 290
+	slwi	r9, r5, 2				# 295
+	lfsx	f1, r8, r9				# 295
+	fmul	f0, f0, f1				# 1073
+	lwz	r8, 8(r3)				# 1073
+	slwi	r9, r8, 2				# 1073
+	lfsx	f1, r7, r9				# 1073
+	lwz	r9, 16(r6)				# 300
+	slwi	r10, r8, 2				# 305
+	lfsx	f2, r9, r10				# 305
+	fmul	f1, f1, f2				# 1073
+	fadd	f0, f0, f1				# 1073
+	lwz	r9, 28(r3)				# 1073
+	slwi	r10, r9, 2				# 1073
+	lfsx	f1, r7, r10				# 1073
+	lwz	r7, 16(r6)				# 310
+	slwi	r10, r9, 2				# 315
+	lfsx	f2, r7, r10				# 315
+	fmul	f1, f1, f2				# 1073
+	fadd	f0, f0, f1				# 1073
+	lfs	f1, 40(r3)				# 113
+	fcmpu	cr7, f0, f1				# 113
+	bgt	cr7, ble_else.16030				# 113
+	addi	r7, 0, 0
+	b	ble_cont.16031				# 113
+ble_else.16030:
+	addi	r7, 0, 1
+ble_cont.16031:
+	cmpw	cr7, r7, r5				# 1075
+	bne	cr7, beq_else.16032				# 1075
+	slwi	r5, r5, 2				# 1083
+	stfsx	f1, r2, r5				# 1083
+	b	beq_cont.16033				# 1075
+beq_else.16032:
+	lis	r31, ha16(l.11682)
+	addi	r31, r31, lo16(l.11682)
+	lfs	f1, 0(r31)				# 1077
+	fdiv	f1, f1, f0				# 1077
+	slwi	r7, r5, 2				# 1077
+	stfsx	f1, r2, r7				# 1077
+	lwz	r7, 16(r6)				# 290
+	slwi	r5, r5, 2				# 295
+	lfsx	f1, r7, r5				# 295
+	fdiv	f1, f1, f0				# 1079
+	fneg	f1, f1				# 107
+	slwi	r5, r8, 2				# 1079
+	stfsx	f1, r2, r5				# 1079
+	lwz	r5, 16(r6)				# 300
+	slwi	r7, r8, 2				# 305
+	lfsx	f1, r5, r7				# 305
+	fdiv	f1, f1, f0				# 1080
+	fneg	f1, f1				# 107
+	slwi	r5, r9, 2				# 1080
+	stfsx	f1, r2, r5				# 1080
+	lwz	r5, 16(r6)				# 310
+	slwi	r6, r9, 2				# 315
+	lfsx	f1, r5, r6				# 315
+	fdiv	f0, f1, f0				# 1081
+	fneg	f0, f0				# 107
+	lwz	r5, 24(r3)				# 1081
+	slwi	r5, r5, 2				# 1081
+	stfsx	f0, r2, r5				# 1081
+beq_cont.16033:
+	lwz	r5, 16(r3)				# 1126
+	slwi	r6, r5, 2				# 1126
+	lwz	r7, 12(r3)				# 1126
+	stwx	r2, r7, r6				# 1126
+	b	beq_cont.16029				# 1125
+beq_else.16028:
+	stw	r13, 12(r3)				# 1128
+	stw	r5, 16(r3)				# 1128
+	mfspr	r31, 8				# 1128
+	mr	r5, r7				# 1128
+	mr	r2, r14				# 1128
+	mr	r1, r6				# 1128
+	stw	r31, 56(r3)				# 1128
+	addi	r3, r3, 60				# 1128
+	lwz	r31, 0(r1)				# 1128
+	mtspr	9, r31				# 1128
+	bctr				# 1128
+	addi	r3, r3, -60				# 1128
+	lwz	r31, 56(r3)				# 1128
+	mtspr	8, r31				# 1128
+	lwz	r5, 16(r3)				# 1128
+	slwi	r6, r5, 2				# 1128
+	lwz	r7, 12(r3)				# 1128
+	stwx	r2, r7, r6				# 1128
+beq_cont.16029:
+beq_cont.15990:
+	lwz	r2, 8(r3)				# 1130
+	sub	r5, r5, r2				# 1130
+	lwz	r2, 0(r3)				# 1130
+	lwz	r1, 4(r3)				# 1130
+	lwz	r30, 0(r1)				# 1130
+	mtspr	9, r30
+	bctr				# 1130
+ble_else.15988:
+	blr
+setup_startp_constants.2728:
+	lwz	r6, 20(r1)				# 1140
+	lwz	r7, 16(r1)				# 1140
+	lwz	r8, 12(r1)				# 1140
+	lwz	r9, 8(r1)				# 1140
+	lwz	r10, 4(r1)				# 1140
+	cmpw	cr7, r9, r5				# 1141
+	bgt	cr7, ble_else.16035				# 1141
+	slwi	r11, r5, 2				# 1142
+	lwzx	r6, r6, r11				# 1142
+	lwz	r11, 40(r6)				# 441
+	lwz	r12, 4(r6)				# 252
+	slwi	r13, r9, 2				# 1145
+	lfsx	f0, r2, r13				# 1145
+	lwz	r13, 20(r6)				# 330
+	slwi	r14, r9, 2				# 335
+	lfsx	f1, r13, r14				# 335
+	fsub	f0, f0, f1				# 1145
+	slwi	r13, r9, 2				# 1145
+	stfsx	f0, r11, r13				# 1145
+	slwi	r13, r10, 2				# 1146
+	lfsx	f0, r2, r13				# 1146
+	lwz	r13, 20(r6)				# 340
+	slwi	r14, r10, 2				# 345
+	lfsx	f1, r13, r14				# 345
+	fsub	f0, f0, f1				# 1146
+	slwi	r13, r10, 2				# 1146
+	stfsx	f0, r11, r13				# 1146
+	slwi	r13, r7, 2				# 1147
+	lfsx	f0, r2, r13				# 1147
+	lwz	r13, 20(r6)				# 350
+	slwi	r14, r7, 2				# 355
+	lfsx	f1, r13, r14				# 355
+	fsub	f0, f0, f1				# 1147
+	slwi	r13, r7, 2				# 1147
+	stfsx	f0, r11, r13				# 1147
+	cmpw	cr7, r12, r7				# 1148
+	bne	cr7, beq_else.16036				# 1148
+	lwz	r6, 16(r6)				# 320
+	slwi	r12, r9, 2				# 1150
+	lfsx	f0, r11, r12				# 1150
+	slwi	r12, r10, 2				# 1150
+	lfsx	f1, r11, r12				# 1150
+	slwi	r12, r7, 2				# 1150
+	lfsx	f2, r11, r12				# 1150
+	slwi	r9, r9, 2				# 200
+	lfsx	f3, r6, r9				# 200
+	fmul	f0, f3, f0				# 200
+	slwi	r9, r10, 2				# 200
+	lfsx	f3, r6, r9				# 200
+	fmul	f1, f3, f1				# 200
+	fadd	f0, f0, f1				# 200
+	slwi	r7, r7, 2				# 200
+	lfsx	f1, r6, r7				# 200
+	fmul	f1, f1, f2				# 200
+	fadd	f0, f0, f1				# 200
+	slwi	r6, r8, 2				# 1149
+	stfsx	f0, r11, r6				# 1149
+	b	beq_cont.16037				# 1148
+beq_else.16036:
+	cmpw	cr7, r12, r7				# 1151
+	bgt	cr7, ble_else.16038				# 1151
+	b	ble_cont.16039				# 1151
+ble_else.16038:
+	slwi	r13, r9, 2				# 1152
+	lfsx	f0, r11, r13				# 1152
+	slwi	r13, r10, 2				# 1152
+	lfsx	f1, r11, r13				# 1152
+	slwi	r13, r7, 2				# 1152
+	lfsx	f2, r11, r13				# 1152
+	fmul	f3, f0, f0				# 103
+	lwz	r13, 16(r6)				# 290
+	slwi	r14, r9, 2				# 295
+	lfsx	f4, r13, r14				# 295
+	fmul	f3, f3, f4				# 836
+	fmul	f4, f1, f1				# 103
+	lwz	r13, 16(r6)				# 300
+	slwi	r14, r10, 2				# 305
+	lfsx	f5, r13, r14				# 305
+	fmul	f4, f4, f5				# 836
+	fadd	f3, f3, f4				# 836
+	fmul	f4, f2, f2				# 103
+	lwz	r13, 16(r6)				# 310
+	slwi	r14, r7, 2				# 315
+	lfsx	f5, r13, r14				# 315
+	fmul	f4, f4, f5				# 836
+	fadd	f3, f3, f4				# 836
+	lwz	r13, 12(r6)				# 281
+	cmpw	cr7, r13, r9				# 838
+	bne	cr7, beq_else.16040				# 838
+	fmr	f0, f3				# 839
+	b	beq_cont.16041				# 838
+beq_else.16040:
+	fmul	f4, f1, f2				# 842
+	lwz	r13, 36(r6)				# 410
+	slwi	r9, r9, 2				# 415
+	lfsx	f5, r13, r9				# 415
+	fmul	f4, f4, f5				# 842
+	fadd	f3, f3, f4				# 841
+	fmul	f2, f2, f0				# 843
+	lwz	r9, 36(r6)				# 420
+	slwi	r13, r10, 2				# 425
+	lfsx	f4, r9, r13				# 425
+	fmul	f2, f2, f4				# 843
+	fadd	f2, f3, f2				# 841
+	fmul	f0, f0, f1				# 844
+	lwz	r6, 36(r6)				# 430
+	slwi	r7, r7, 2				# 435
+	lfsx	f1, r6, r7				# 435
+	fmul	f0, f0, f1				# 844
+	fadd	f0, f2, f0				# 841
+beq_cont.16041:
+	cmpw	cr7, r12, r8				# 1153
+	bne	cr7, beq_else.16042				# 1153
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f1, 0(r31)				# 1153
+	fsub	f0, f0, f1				# 1153
+	b	beq_cont.16043				# 1153
+beq_else.16042:
+beq_cont.16043:
+	slwi	r6, r8, 2				# 1153
+	stfsx	f0, r11, r6				# 1153
+ble_cont.16039:
+beq_cont.16037:
+	sub	r5, r5, r10				# 1155
+	lwz	r30, 0(r1)				# 1155
+	mtspr	9, r30
+	bctr				# 1155
+ble_else.16035:
+	blr
+check_all_inside.2753:
+	lwz	r6, 28(r1)				# 1207
+	lwz	r7, 24(r1)				# 1207
+	lwz	r8, 20(r1)				# 1207
+	lwz	r9, 16(r1)				# 1207
+	lwz	r10, 12(r1)				# 1207
+	lwz	r11, 8(r1)				# 1207
+	lfs	f3, 4(r1)				# 1207
+	slwi	r12, r2, 2				# 1208
+	lwzx	r12, r5, r12				# 1208
+	cmpw	cr7, r12, r8				# 1209
+	bne	cr7, beq_else.16045				# 1209
+	addi	r2, 0, 1
+	blr
+beq_else.16045:
+	slwi	r8, r12, 2				# 1212
+	lwzx	r6, r6, r8				# 1212
+	lwz	r8, 20(r6)				# 330
+	slwi	r12, r10, 2				# 335
+	lfsx	f4, r8, r12				# 335
+	fsub	f4, f0, f4				# 1194
+	lwz	r8, 20(r6)				# 340
+	slwi	r12, r11, 2				# 345
+	lfsx	f5, r8, r12				# 345
+	fsub	f5, f1, f5				# 1195
+	lwz	r8, 20(r6)				# 350
+	slwi	r12, r7, 2				# 355
+	lfsx	f6, r8, r12				# 355
+	fsub	f6, f2, f6				# 1196
+	lwz	r8, 4(r6)				# 252
+	stfs	f2, 0(r3)				# 1198
+	stfs	f1, 8(r3)				# 1198
+	stfs	f0, 16(r3)				# 1198
+	stw	r5, 24(r3)				# 1198
+	stw	r1, 28(r3)				# 1198
+	stw	r11, 32(r3)				# 1198
+	stw	r2, 36(r3)				# 1198
+	stw	r10, 40(r3)				# 1198
+	cmpw	cr7, r8, r11				# 1198
+	bne	cr7, beq_else.16046				# 1198
+	stw	r7, 44(r3)				# 1171
+	stfs	f6, 48(r3)				# 1171
+	stfs	f5, 56(r3)				# 1171
+	stw	r6, 64(r3)				# 1171
+	mfspr	r31, 8				# 1171
+	fmr	f0, f4				# 1171
+	stw	r31, 68(r3)				# 1171
+	addi	r3, r3, 72				# 1171
+	bl	min_caml_fabs				# 1171
+	addi	r3, r3, -72				# 1171
+	lwz	r31, 68(r3)				# 1171
+	mtspr	8, r31				# 1171
+	lwz	r2, 64(r3)				# 290
+	lwz	r5, 16(r2)				# 290
+	lwz	r6, 40(r3)				# 295
+	slwi	r7, r6, 2				# 295
+	lfsx	f1, r5, r7				# 295
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.16048				# 109
+	addi	r5, 0, 0
+	b	ble_cont.16049				# 109
+ble_else.16048:
+	addi	r5, 0, 1
+ble_cont.16049:
+	cmpw	cr7, r5, r6				# 1171
+	bne	cr7, beq_else.16050				# 1171
+	addi	r5, 0, 0
+	b	beq_cont.16051				# 1171
+beq_else.16050:
+	lfs	f0, 56(r3)				# 1172
+	mfspr	r31, 8				# 1172
+	stw	r31, 68(r3)				# 1172
+	addi	r3, r3, 72				# 1172
+	bl	min_caml_fabs				# 1172
+	addi	r3, r3, -72				# 1172
+	lwz	r31, 68(r3)				# 1172
+	mtspr	8, r31				# 1172
+	lwz	r2, 64(r3)				# 300
+	lwz	r5, 16(r2)				# 300
+	lwz	r6, 32(r3)				# 305
+	slwi	r7, r6, 2				# 305
+	lfsx	f1, r5, r7				# 305
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.16052				# 109
+	addi	r5, 0, 0
+	b	ble_cont.16053				# 109
+ble_else.16052:
+	addi	r5, 0, 1
+ble_cont.16053:
+	lwz	r7, 40(r3)				# 1172
+	cmpw	cr7, r5, r7				# 1172
+	bne	cr7, beq_else.16054				# 1172
+	addi	r5, 0, 0
+	b	beq_cont.16055				# 1172
+beq_else.16054:
+	lfs	f0, 48(r3)				# 1173
+	mfspr	r31, 8				# 1173
+	stw	r31, 68(r3)				# 1173
+	addi	r3, r3, 72				# 1173
+	bl	min_caml_fabs				# 1173
+	addi	r3, r3, -72				# 1173
+	lwz	r31, 68(r3)				# 1173
+	mtspr	8, r31				# 1173
+	lwz	r2, 64(r3)				# 310
+	lwz	r5, 16(r2)				# 310
+	lwz	r6, 44(r3)				# 315
+	slwi	r6, r6, 2				# 315
+	lfsx	f1, r5, r6				# 315
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.16056				# 109
+	addi	r5, 0, 0
+	b	ble_cont.16057				# 109
+ble_else.16056:
+	addi	r5, 0, 1
+ble_cont.16057:
+beq_cont.16055:
+beq_cont.16051:
+	lwz	r6, 40(r3)				# 1170
+	cmpw	cr7, r5, r6				# 1170
+	bne	cr7, beq_else.16058				# 1170
+	lwz	r2, 24(r2)				# 272
+	cmpw	cr7, r2, r6				# 1176
+	bne	cr7, beq_else.16060				# 1176
+	addi	r2, 0, 1
+	b	beq_cont.16061				# 1176
+beq_else.16060:
+	addi	r2, 0, 0
+beq_cont.16061:
+	b	beq_cont.16059				# 1170
+beq_else.16058:
+	lwz	r2, 24(r2)				# 272
+beq_cont.16059:
+	b	beq_cont.16047				# 1198
+beq_else.16046:
+	cmpw	cr7, r8, r7				# 1200
+	bne	cr7, beq_else.16062				# 1200
+	lwz	r8, 16(r6)				# 320
+	slwi	r9, r10, 2				# 200
+	lfsx	f7, r8, r9				# 200
+	fmul	f4, f7, f4				# 200
+	slwi	r9, r11, 2				# 200
+	lfsx	f7, r8, r9				# 200
+	fmul	f5, f7, f5				# 200
+	fadd	f4, f4, f5				# 200
+	slwi	r7, r7, 2				# 200
+	lfsx	f5, r8, r7				# 200
+	fmul	f5, f5, f6				# 200
+	fadd	f4, f4, f5				# 200
+	lwz	r6, 24(r6)				# 272
+	fcmpu	cr7, f3, f4				# 115
+	bgt	cr7, ble_else.16064				# 115
+	addi	r7, 0, 0
+	b	ble_cont.16065				# 115
+ble_else.16064:
+	addi	r7, 0, 1
+ble_cont.16065:
+	cmpw	cr7, r6, r10				# 119
+	bne	cr7, beq_else.16066				# 119
+	mr	r6, r7				# 119
+	b	beq_cont.16067				# 119
+beq_else.16066:
+	cmpw	cr7, r7, r10				# 119
+	bne	cr7, beq_else.16068				# 119
+	addi	r6, 0, 1
+	b	beq_cont.16069				# 119
+beq_else.16068:
+	addi	r6, 0, 0
+beq_cont.16069:
+beq_cont.16067:
+	cmpw	cr7, r6, r10				# 1182
+	bne	cr7, beq_else.16070				# 1182
+	addi	r2, 0, 1
+	b	beq_cont.16071				# 1182
+beq_else.16070:
+	addi	r2, 0, 0
+beq_cont.16071:
+	b	beq_cont.16063				# 1200
+beq_else.16062:
+	fmul	f7, f4, f4				# 103
+	lwz	r8, 16(r6)				# 290
+	slwi	r12, r10, 2				# 295
+	lfsx	f8, r8, r12				# 295
+	fmul	f7, f7, f8				# 836
+	fmul	f8, f5, f5				# 103
+	lwz	r8, 16(r6)				# 300
+	slwi	r12, r11, 2				# 305
+	lfsx	f9, r8, r12				# 305
+	fmul	f8, f8, f9				# 836
+	fadd	f7, f7, f8				# 836
+	fmul	f8, f6, f6				# 103
+	lwz	r8, 16(r6)				# 310
+	slwi	r12, r7, 2				# 315
+	lfsx	f9, r8, r12				# 315
+	fmul	f8, f8, f9				# 836
+	fadd	f7, f7, f8				# 836
+	lwz	r8, 12(r6)				# 281
+	cmpw	cr7, r8, r10				# 838
+	bne	cr7, beq_else.16072				# 838
+	fmr	f4, f7				# 839
+	b	beq_cont.16073				# 838
+beq_else.16072:
+	fmul	f8, f5, f6				# 842
+	lwz	r8, 36(r6)				# 410
+	slwi	r12, r10, 2				# 415
+	lfsx	f9, r8, r12				# 415
+	fmul	f8, f8, f9				# 842
+	fadd	f7, f7, f8				# 841
+	fmul	f6, f6, f4				# 843
+	lwz	r8, 36(r6)				# 420
+	slwi	r12, r11, 2				# 425
+	lfsx	f8, r8, r12				# 425
+	fmul	f6, f6, f8				# 843
+	fadd	f6, f7, f6				# 841
+	fmul	f4, f4, f5				# 844
+	lwz	r8, 36(r6)				# 430
+	slwi	r7, r7, 2				# 435
+	lfsx	f5, r8, r7				# 435
+	fmul	f4, f4, f5				# 844
+	fadd	f4, f6, f4				# 841
+beq_cont.16073:
+	lwz	r7, 4(r6)				# 252
+	cmpw	cr7, r7, r9				# 1188
+	bne	cr7, beq_else.16074				# 1188
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f5, 0(r31)				# 1188
+	fsub	f4, f4, f5				# 1188
+	b	beq_cont.16075				# 1188
+beq_else.16074:
+beq_cont.16075:
+	lwz	r6, 24(r6)				# 272
+	fcmpu	cr7, f3, f4				# 115
+	bgt	cr7, ble_else.16076				# 115
+	addi	r7, 0, 0
+	b	ble_cont.16077				# 115
+ble_else.16076:
+	addi	r7, 0, 1
+ble_cont.16077:
+	cmpw	cr7, r6, r10				# 119
+	bne	cr7, beq_else.16078				# 119
+	mr	r6, r7				# 119
+	b	beq_cont.16079				# 119
+beq_else.16078:
+	cmpw	cr7, r7, r10				# 119
+	bne	cr7, beq_else.16080				# 119
+	addi	r6, 0, 1
+	b	beq_cont.16081				# 119
+beq_else.16080:
+	addi	r6, 0, 0
+beq_cont.16081:
+beq_cont.16079:
+	cmpw	cr7, r6, r10				# 1189
+	bne	cr7, beq_else.16082				# 1189
+	addi	r2, 0, 1
+	b	beq_cont.16083				# 1189
+beq_else.16082:
+	addi	r2, 0, 0
+beq_cont.16083:
+beq_cont.16063:
+beq_cont.16047:
+	lwz	r5, 40(r3)				# 1212
+	cmpw	cr7, r2, r5				# 1212
+	bne	cr7, beq_else.16084				# 1212
+	lwz	r2, 32(r3)				# 1215
+	lwz	r5, 36(r3)				# 1215
+	add	r2, r5, r2				# 1215
+	lfs	f0, 16(r3)				# 1215
+	lfs	f1, 8(r3)				# 1215
+	lfs	f2, 0(r3)				# 1215
+	lwz	r5, 24(r3)				# 1215
+	lwz	r1, 28(r3)				# 1215
+	lwz	r30, 0(r1)				# 1215
+	mtspr	9, r30
+	bctr				# 1215
+beq_else.16084:
+	addi	r2, 0, 0
+	blr
+shadow_check_and_group.2759:
+	lwz	r6, 60(r1)				# 1225
+	lwz	r7, 56(r1)				# 1225
+	lwz	r8, 52(r1)				# 1225
+	lwz	r9, 48(r1)				# 1225
+	lwz	r10, 44(r1)				# 1225
+	lwz	r11, 40(r1)				# 1225
+	lwz	r12, 36(r1)				# 1225
+	lwz	r13, 32(r1)				# 1225
+	lwz	r14, 28(r1)				# 1225
+	lwz	r15, 24(r1)				# 1225
+	lwz	r16, 20(r1)				# 1225
+	lwz	r17, 16(r1)				# 1225
+	lwz	r18, 12(r1)				# 1225
+	lwz	r19, 8(r1)				# 1225
+	lfs	f0, 4(r1)				# 1225
+	slwi	r20, r2, 2				# 1226
+	lwzx	r20, r5, r20				# 1226
+	cmpw	cr7, r20, r16				# 1226
+	bne	cr7, beq_else.16085				# 1226
+	addi	r2, 0, 0
+	blr
+beq_else.16085:
+	slwi	r16, r2, 2				# 1229
+	lwzx	r16, r5, r16				# 1229
+	slwi	r20, r16, 2				# 977
+	lwzx	r20, r10, r20				# 977
+	slwi	r21, r18, 2				# 978
+	lfsx	f1, r12, r21				# 978
+	lwz	r21, 20(r20)				# 330
+	slwi	r22, r18, 2				# 335
+	lfsx	f2, r21, r22				# 335
+	fsub	f1, f1, f2				# 978
+	slwi	r21, r19, 2				# 979
+	lfsx	f2, r12, r21				# 979
+	lwz	r21, 20(r20)				# 340
+	slwi	r22, r19, 2				# 345
+	lfsx	f3, r21, r22				# 345
+	fsub	f2, f2, f3				# 979
+	slwi	r21, r15, 2				# 980
+	lfsx	f3, r12, r21				# 980
+	lwz	r21, 20(r20)				# 350
+	slwi	r22, r15, 2				# 355
+	lfsx	f4, r21, r22				# 355
+	fsub	f3, f3, f4				# 980
+	slwi	r21, r16, 2				# 982
+	lwzx	r13, r13, r21				# 982
+	lwz	r21, 4(r20)				# 252
+	stw	r14, 0(r3)				# 984
+	stw	r15, 4(r3)				# 984
+	stw	r12, 8(r3)				# 984
+	stw	r11, 12(r3)				# 984
+	stw	r5, 16(r3)				# 984
+	stw	r1, 20(r3)				# 984
+	stw	r19, 24(r3)				# 984
+	stw	r2, 28(r3)				# 984
+	stw	r10, 32(r3)				# 984
+	stw	r16, 36(r3)				# 984
+	stw	r9, 40(r3)				# 984
+	stw	r18, 44(r3)				# 984
+	cmpw	cr7, r21, r19				# 984
+	bne	cr7, beq_else.16086				# 984
+	mfspr	r31, 8				# 985
+	mr	r5, r6				# 985
+	mr	r2, r20				# 985
+	mr	r1, r8				# 985
+	mr	r6, r13				# 985
+	fmr	f0, f1				# 985
+	fmr	f1, f2				# 985
+	fmr	f2, f3				# 985
+	stw	r31, 48(r3)				# 985
+	addi	r3, r3, 52				# 985
+	lwz	r31, 0(r1)				# 985
+	mtspr	9, r31				# 985
+	bctr				# 985
+	addi	r3, r3, -52				# 985
+	lwz	r31, 48(r3)				# 985
+	mtspr	8, r31				# 985
+	b	beq_cont.16087				# 984
+beq_else.16086:
+	cmpw	cr7, r21, r15				# 986
+	bne	cr7, beq_else.16088				# 986
+	slwi	r6, r18, 2				# 948
+	lfsx	f4, r13, r6				# 948
+	fcmpu	cr7, f0, f4				# 115
+	bgt	cr7, ble_else.16090				# 115
+	addi	r6, 0, 0
+	b	ble_cont.16091				# 115
+ble_else.16090:
+	addi	r6, 0, 1
+ble_cont.16091:
+	cmpw	cr7, r6, r18				# 948
+	bne	cr7, beq_else.16092				# 948
+	addi	r2, 0, 0
+	b	beq_cont.16093				# 948
+beq_else.16092:
+	slwi	r6, r19, 2				# 950
+	lfsx	f0, r13, r6				# 950
+	fmul	f0, f0, f1				# 950
+	slwi	r6, r15, 2				# 950
+	lfsx	f1, r13, r6				# 950
+	fmul	f1, f1, f2				# 950
+	fadd	f0, f0, f1				# 950
+	slwi	r6, r17, 2				# 950
+	lfsx	f1, r13, r6				# 950
+	fmul	f1, f1, f3				# 950
+	fadd	f0, f0, f1				# 950
+	slwi	r6, r18, 2				# 949
+	stfsx	f0, r9, r6				# 949
+	addi	r2, 0, 1
+beq_cont.16093:
+	b	beq_cont.16089				# 986
+beq_else.16088:
+	mfspr	r31, 8				# 989
+	mr	r5, r13				# 989
+	mr	r2, r20				# 989
+	mr	r1, r7				# 989
+	fmr	f0, f1				# 989
+	fmr	f1, f2				# 989
+	fmr	f2, f3				# 989
+	stw	r31, 48(r3)				# 989
+	addi	r3, r3, 52				# 989
+	lwz	r31, 0(r1)				# 989
+	mtspr	9, r31				# 989
+	bctr				# 989
+	addi	r3, r3, -52				# 989
+	lwz	r31, 48(r3)				# 989
+	mtspr	8, r31				# 989
+beq_cont.16089:
+beq_cont.16087:
+	lwz	r5, 44(r3)				# 1231
+	slwi	r6, r5, 2				# 1231
+	lwz	r7, 40(r3)				# 1231
+	lfsx	f0, r7, r6				# 1231
+	cmpw	cr7, r2, r5				# 1232
+	bne	cr7, beq_else.16094				# 1232
+	addi	r2, 0, 0
+	b	beq_cont.16095				# 1232
+beq_else.16094:
+	lis	r31, ha16(l.11954)
+	addi	r31, r31, lo16(l.11954)
+	lfs	f1, 0(r31)				# 1232
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.16096				# 109
+	addi	r2, 0, 0
+	b	ble_cont.16097				# 109
+ble_else.16096:
+	addi	r2, 0, 1
+ble_cont.16097:
+beq_cont.16095:
+	cmpw	cr7, r2, r5				# 1232
+	bne	cr7, beq_else.16098				# 1232
+	lwz	r2, 36(r3)				# 1248
+	slwi	r2, r2, 2				# 1248
+	lwz	r6, 32(r3)				# 1248
+	lwzx	r2, r6, r2				# 1248
+	lwz	r2, 24(r2)				# 272
+	cmpw	cr7, r2, r5				# 1248
+	bne	cr7, beq_else.16099				# 1248
+	addi	r2, 0, 0
+	blr
+beq_else.16099:
+	lwz	r2, 24(r3)				# 1249
+	lwz	r5, 28(r3)				# 1249
+	add	r2, r5, r2				# 1249
+	lwz	r5, 16(r3)				# 1249
+	lwz	r1, 20(r3)				# 1249
+	lwz	r30, 0(r1)				# 1249
+	mtspr	9, r30
+	bctr				# 1249
+beq_else.16098:
+	lis	r31, ha16(l.11955)
+	addi	r31, r31, lo16(l.11955)
+	lfs	f1, 0(r31)				# 1235
+	fadd	f0, f0, f1				# 1235
+	slwi	r2, r5, 2				# 1236
+	lwz	r6, 12(r3)				# 1236
+	lfsx	f1, r6, r2				# 1236
+	fmul	f1, f1, f0				# 1236
+	slwi	r2, r5, 2				# 1236
+	lwz	r7, 8(r3)				# 1236
+	lfsx	f2, r7, r2				# 1236
+	fadd	f1, f1, f2				# 1236
+	lwz	r2, 24(r3)				# 1237
+	slwi	r8, r2, 2				# 1237
+	lfsx	f2, r6, r8				# 1237
+	fmul	f2, f2, f0				# 1237
+	slwi	r8, r2, 2				# 1237
+	lfsx	f3, r7, r8				# 1237
+	fadd	f2, f2, f3				# 1237
+	lwz	r8, 4(r3)				# 1238
+	slwi	r9, r8, 2				# 1238
+	lfsx	f3, r6, r9				# 1238
+	fmul	f0, f3, f0				# 1238
+	slwi	r6, r8, 2				# 1238
+	lfsx	f3, r7, r6				# 1238
+	fadd	f0, f0, f3				# 1238
+	lwz	r6, 16(r3)				# 1239
+	lwz	r1, 0(r3)				# 1239
+	mfspr	r31, 8				# 1239
+	mr	r2, r5				# 1239
+	mr	r5, r6				# 1239
+	fmr	f31, f2				# 1239
+	fmr	f2, f0				# 1239
+	fmr	f0, f1				# 1239
+	fmr	f1, f31				# 1239
+	stw	r31, 48(r3)				# 1239
+	addi	r3, r3, 52				# 1239
+	lwz	r31, 0(r1)				# 1239
+	mtspr	9, r31				# 1239
+	bctr				# 1239
+	addi	r3, r3, -52				# 1239
+	lwz	r31, 48(r3)				# 1239
+	mtspr	8, r31				# 1239
+	lwz	r5, 44(r3)				# 1239
+	cmpw	cr7, r2, r5				# 1239
+	bne	cr7, beq_else.16100				# 1239
+	lwz	r2, 24(r3)				# 1242
+	lwz	r5, 28(r3)				# 1242
+	add	r2, r5, r2				# 1242
+	lwz	r5, 16(r3)				# 1242
+	lwz	r1, 20(r3)				# 1242
+	lwz	r30, 0(r1)				# 1242
+	mtspr	9, r30
+	bctr				# 1242
+beq_else.16100:
+	addi	r2, 0, 1
+	blr
+shadow_check_one_or_group.2762:
+	lwz	r6, 20(r1)				# 1255
+	lwz	r7, 16(r1)				# 1255
+	lwz	r8, 12(r1)				# 1255
+	lwz	r9, 8(r1)				# 1255
+	lwz	r10, 4(r1)				# 1255
+	slwi	r11, r2, 2				# 1256
+	lwzx	r11, r5, r11				# 1256
+	cmpw	cr7, r11, r8				# 1257
+	bne	cr7, beq_else.16101				# 1257
+	addi	r2, 0, 0
+	blr
+beq_else.16101:
+	slwi	r8, r11, 2				# 1260
+	lwzx	r7, r7, r8				# 1260
+	stw	r5, 0(r3)				# 1261
+	stw	r1, 4(r3)				# 1261
+	stw	r10, 8(r3)				# 1261
+	stw	r2, 12(r3)				# 1261
+	stw	r9, 16(r3)				# 1261
+	mfspr	r31, 8				# 1261
+	mr	r5, r7				# 1261
+	mr	r2, r9				# 1261
+	mr	r1, r6				# 1261
+	stw	r31, 20(r3)				# 1261
+	addi	r3, r3, 24				# 1261
+	lwz	r31, 0(r1)				# 1261
+	mtspr	9, r31				# 1261
+	bctr				# 1261
+	addi	r3, r3, -24				# 1261
+	lwz	r31, 20(r3)				# 1261
+	mtspr	8, r31				# 1261
+	lwz	r5, 16(r3)				# 1262
+	cmpw	cr7, r2, r5				# 1262
+	bne	cr7, beq_else.16102				# 1262
+	lwz	r2, 8(r3)				# 1265
+	lwz	r5, 12(r3)				# 1265
+	add	r2, r5, r2				# 1265
+	lwz	r5, 0(r3)				# 1265
+	lwz	r1, 4(r3)				# 1265
+	lwz	r30, 0(r1)				# 1265
+	mtspr	9, r30
+	bctr				# 1265
+beq_else.16102:
+	addi	r2, 0, 1
+	blr
+shadow_check_one_or_matrix.2765:
+	lwz	r6, 56(r1)				# 1270
+	lwz	r7, 52(r1)				# 1270
+	lwz	r8, 48(r1)				# 1270
+	lwz	r9, 44(r1)				# 1270
+	lwz	r10, 40(r1)				# 1270
+	lwz	r11, 36(r1)				# 1270
+	lwz	r12, 32(r1)				# 1270
+	lwz	r13, 28(r1)				# 1270
+	lwz	r14, 24(r1)				# 1270
+	lwz	r15, 20(r1)				# 1270
+	lwz	r16, 16(r1)				# 1270
+	lwz	r17, 12(r1)				# 1270
+	lwz	r18, 8(r1)				# 1270
+	lfs	f0, 4(r1)				# 1270
+	slwi	r19, r2, 2				# 1271
+	lwzx	r19, r5, r19				# 1271
+	slwi	r20, r17, 2				# 1272
+	lwzx	r20, r19, r20				# 1272
+	cmpw	cr7, r20, r15				# 1273
+	bne	cr7, beq_else.16103				# 1273
+	addi	r2, 0, 0
+	blr
+beq_else.16103:
+	stw	r19, 0(r3)				# 1277
+	stw	r10, 4(r3)				# 1277
+	stw	r5, 8(r3)				# 1277
+	stw	r1, 12(r3)				# 1277
+	stw	r18, 16(r3)				# 1277
+	stw	r2, 20(r3)				# 1277
+	stw	r17, 24(r3)				# 1277
+	cmpwi	cr7, r20, 99				# 1277
+	bne	cr7, beq_else.16104				# 1277
+	addi	r2, 0, 1
+	b	beq_cont.16105				# 1277
+beq_else.16104:
+	slwi	r15, r20, 2				# 977
+	lwzx	r11, r11, r15				# 977
+	slwi	r15, r17, 2				# 978
+	lfsx	f1, r12, r15				# 978
+	lwz	r15, 20(r11)				# 330
+	slwi	r21, r17, 2				# 335
+	lfsx	f2, r15, r21				# 335
+	fsub	f1, f1, f2				# 978
+	slwi	r15, r18, 2				# 979
+	lfsx	f2, r12, r15				# 979
+	lwz	r15, 20(r11)				# 340
+	slwi	r21, r18, 2				# 345
+	lfsx	f3, r15, r21				# 345
+	fsub	f2, f2, f3				# 979
+	slwi	r15, r14, 2				# 980
+	lfsx	f3, r12, r15				# 980
+	lwz	r12, 20(r11)				# 350
+	slwi	r15, r14, 2				# 355
+	lfsx	f4, r12, r15				# 355
+	fsub	f3, f3, f4				# 980
+	slwi	r12, r20, 2				# 982
+	lwzx	r12, r13, r12				# 982
+	lwz	r13, 4(r11)				# 252
+	stw	r9, 28(r3)				# 984
+	cmpw	cr7, r13, r18				# 984
+	bne	cr7, beq_else.16106				# 984
+	mfspr	r31, 8				# 985
+	mr	r5, r6				# 985
+	mr	r2, r11				# 985
+	mr	r1, r8				# 985
+	mr	r6, r12				# 985
+	fmr	f0, f1				# 985
+	fmr	f1, f2				# 985
+	fmr	f2, f3				# 985
+	stw	r31, 32(r3)				# 985
+	addi	r3, r3, 36				# 985
+	lwz	r31, 0(r1)				# 985
+	mtspr	9, r31				# 985
+	bctr				# 985
+	addi	r3, r3, -36				# 985
+	lwz	r31, 32(r3)				# 985
+	mtspr	8, r31				# 985
+	b	beq_cont.16107				# 984
+beq_else.16106:
+	cmpw	cr7, r13, r14				# 986
+	bne	cr7, beq_else.16108				# 986
+	slwi	r6, r17, 2				# 948
+	lfsx	f4, r12, r6				# 948
+	fcmpu	cr7, f0, f4				# 115
+	bgt	cr7, ble_else.16110				# 115
+	addi	r6, 0, 0
+	b	ble_cont.16111				# 115
+ble_else.16110:
+	addi	r6, 0, 1
+ble_cont.16111:
+	cmpw	cr7, r6, r17				# 948
+	bne	cr7, beq_else.16112				# 948
+	addi	r2, 0, 0
+	b	beq_cont.16113				# 948
+beq_else.16112:
+	slwi	r6, r18, 2				# 950
+	lfsx	f0, r12, r6				# 950
+	fmul	f0, f0, f1				# 950
+	slwi	r6, r14, 2				# 950
+	lfsx	f1, r12, r6				# 950
+	fmul	f1, f1, f2				# 950
+	fadd	f0, f0, f1				# 950
+	slwi	r6, r16, 2				# 950
+	lfsx	f1, r12, r6				# 950
+	fmul	f1, f1, f3				# 950
+	fadd	f0, f0, f1				# 950
+	slwi	r6, r17, 2				# 949
+	stfsx	f0, r9, r6				# 949
+	addi	r2, 0, 1
+beq_cont.16113:
+	b	beq_cont.16109				# 986
+beq_else.16108:
+	mfspr	r31, 8				# 989
+	mr	r5, r12				# 989
+	mr	r2, r11				# 989
+	mr	r1, r7				# 989
+	fmr	f0, f1				# 989
+	fmr	f1, f2				# 989
+	fmr	f2, f3				# 989
+	stw	r31, 32(r3)				# 989
+	addi	r3, r3, 36				# 989
+	lwz	r31, 0(r1)				# 989
+	mtspr	9, r31				# 989
+	bctr				# 989
+	addi	r3, r3, -36				# 989
+	lwz	r31, 32(r3)				# 989
+	mtspr	8, r31				# 989
+beq_cont.16109:
+beq_cont.16107:
+	lwz	r5, 24(r3)				# 1283
+	cmpw	cr7, r2, r5				# 1283
+	bne	cr7, beq_else.16114				# 1283
+	addi	r2, 0, 0
+	b	beq_cont.16115				# 1283
+beq_else.16114:
+	slwi	r2, r5, 2				# 1284
+	lwz	r6, 28(r3)				# 1284
+	lfsx	f0, r6, r2				# 1284
+	lis	r31, ha16(l.11981)
+	addi	r31, r31, lo16(l.11981)
+	lfs	f1, 0(r31)				# 1284
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.16116				# 109
+	addi	r2, 0, 0
+	b	ble_cont.16117				# 109
+ble_else.16116:
+	addi	r2, 0, 1
+ble_cont.16117:
+	cmpw	cr7, r2, r5				# 1284
+	bne	cr7, beq_else.16118				# 1284
+	addi	r2, 0, 0
+	b	beq_cont.16119				# 1284
+beq_else.16118:
+	lwz	r2, 16(r3)				# 1285
+	lwz	r6, 0(r3)				# 1285
+	lwz	r1, 4(r3)				# 1285
+	mfspr	r31, 8				# 1285
+	mr	r5, r6				# 1285
+	stw	r31, 32(r3)				# 1285
+	addi	r3, r3, 36				# 1285
+	lwz	r31, 0(r1)				# 1285
+	mtspr	9, r31				# 1285
+	bctr				# 1285
+	addi	r3, r3, -36				# 1285
+	lwz	r31, 32(r3)				# 1285
+	mtspr	8, r31				# 1285
+	lwz	r5, 24(r3)				# 1285
+	cmpw	cr7, r2, r5				# 1285
+	bne	cr7, beq_else.16120				# 1285
+	addi	r2, 0, 0
+	b	beq_cont.16121				# 1285
+beq_else.16120:
+	addi	r2, 0, 1
+beq_cont.16121:
+beq_cont.16119:
+beq_cont.16115:
+beq_cont.16105:
+	lwz	r5, 24(r3)				# 1276
+	cmpw	cr7, r2, r5				# 1276
+	bne	cr7, beq_else.16122				# 1276
+	lwz	r2, 16(r3)				# 1296
+	lwz	r5, 20(r3)				# 1296
+	add	r2, r5, r2				# 1296
+	lwz	r5, 8(r3)				# 1296
+	lwz	r1, 12(r3)				# 1296
+	lwz	r30, 0(r1)				# 1296
+	mtspr	9, r30
+	bctr				# 1296
+beq_else.16122:
+	lwz	r2, 16(r3)				# 1291
+	lwz	r6, 0(r3)				# 1291
+	lwz	r1, 4(r3)				# 1291
+	mfspr	r31, 8				# 1291
+	mr	r5, r6				# 1291
+	stw	r31, 32(r3)				# 1291
+	addi	r3, r3, 36				# 1291
+	lwz	r31, 0(r1)				# 1291
+	mtspr	9, r31				# 1291
+	bctr				# 1291
+	addi	r3, r3, -36				# 1291
+	lwz	r31, 32(r3)				# 1291
+	mtspr	8, r31				# 1291
+	lwz	r5, 24(r3)				# 1291
+	cmpw	cr7, r2, r5				# 1291
+	bne	cr7, beq_else.16123				# 1291
+	lwz	r2, 16(r3)				# 1294
+	lwz	r5, 20(r3)				# 1294
+	add	r2, r5, r2				# 1294
+	lwz	r5, 8(r3)				# 1294
+	lwz	r1, 12(r3)				# 1294
+	lwz	r30, 0(r1)				# 1294
+	mtspr	9, r30
+	bctr				# 1294
+beq_else.16123:
+	addi	r2, 0, 1
+	blr
+solve_each_element.2768:
+	lwz	r7, 60(r1)				# 1304
+	lwz	r8, 56(r1)				# 1304
+	lwz	r9, 52(r1)				# 1304
+	lwz	r10, 48(r1)				# 1304
+	lwz	r11, 44(r1)				# 1304
+	lwz	r12, 40(r1)				# 1304
+	lwz	r13, 36(r1)				# 1304
+	lwz	r14, 32(r1)				# 1304
+	lwz	r15, 28(r1)				# 1304
+	lwz	r16, 24(r1)				# 1304
+	lwz	r17, 20(r1)				# 1304
+	lwz	r18, 16(r1)				# 1304
+	lwz	r19, 12(r1)				# 1304
+	lwz	r20, 8(r1)				# 1304
+	lfs	f0, 4(r1)				# 1304
+	slwi	r21, r2, 2				# 1305
+	lwzx	r21, r5, r21				# 1305
+	cmpw	cr7, r21, r18				# 1306
+	bne	cr7, beq_else.16124				# 1306
+	blr
+beq_else.16124:
+	slwi	r18, r21, 2				# 898
+	lwzx	r18, r12, r18				# 898
+	slwi	r22, r19, 2				# 900
+	lfsx	f1, r8, r22				# 900
+	lwz	r22, 20(r18)				# 330
+	slwi	r23, r19, 2				# 335
+	lfsx	f2, r22, r23				# 335
+	fsub	f1, f1, f2				# 900
+	slwi	r22, r20, 2				# 901
+	lfsx	f2, r8, r22				# 901
+	lwz	r22, 20(r18)				# 340
+	slwi	r23, r20, 2				# 345
+	lfsx	f3, r22, r23				# 345
+	fsub	f2, f2, f3				# 901
+	slwi	r22, r17, 2				# 902
+	lfsx	f3, r8, r22				# 902
+	lwz	r22, 20(r18)				# 350
+	slwi	r23, r17, 2				# 355
+	lfsx	f4, r22, r23				# 355
+	fsub	f3, f3, f4				# 902
+	lwz	r22, 4(r18)				# 252
+	stw	r13, 0(r3)				# 905
+	stw	r15, 4(r3)				# 905
+	stw	r14, 8(r3)				# 905
+	stw	r16, 12(r3)				# 905
+	stw	r17, 16(r3)				# 905
+	stw	r8, 20(r3)				# 905
+	stw	r7, 24(r3)				# 905
+	stfs	f0, 32(r3)				# 905
+	stw	r11, 40(r3)				# 905
+	stw	r6, 44(r3)				# 905
+	stw	r5, 48(r3)				# 905
+	stw	r1, 52(r3)				# 905
+	stw	r20, 56(r3)				# 905
+	stw	r2, 60(r3)				# 905
+	stw	r12, 64(r3)				# 905
+	stw	r21, 68(r3)				# 905
+	stw	r19, 72(r3)				# 905
+	cmpw	cr7, r22, r20				# 905
+	bne	cr7, beq_else.16127				# 905
+	mfspr	r31, 8				# 905
+	mr	r5, r6				# 905
+	mr	r2, r18				# 905
+	mr	r1, r10				# 905
+	fmr	f0, f1				# 905
+	fmr	f1, f2				# 905
+	fmr	f2, f3				# 905
+	stw	r31, 76(r3)				# 905
+	addi	r3, r3, 80				# 905
+	lwz	r31, 0(r1)				# 905
+	mtspr	9, r31				# 905
+	bctr				# 905
+	addi	r3, r3, -80				# 905
+	lwz	r31, 76(r3)				# 905
+	mtspr	8, r31				# 905
+	b	beq_cont.16128				# 905
+beq_else.16127:
+	cmpw	cr7, r22, r17				# 906
+	bne	cr7, beq_else.16129				# 906
+	lwz	r9, 16(r18)				# 320
+	slwi	r10, r19, 2				# 195
+	lfsx	f4, r6, r10				# 195
+	slwi	r10, r19, 2				# 195
+	lfsx	f5, r9, r10				# 195
+	fmul	f4, f4, f5				# 195
+	slwi	r10, r20, 2				# 195
+	lfsx	f5, r6, r10				# 195
+	slwi	r10, r20, 2				# 195
+	lfsx	f6, r9, r10				# 195
+	fmul	f5, f5, f6				# 195
+	fadd	f4, f4, f5				# 195
+	slwi	r10, r17, 2				# 195
+	lfsx	f5, r6, r10				# 195
+	slwi	r10, r17, 2				# 195
+	lfsx	f6, r9, r10				# 195
+	fmul	f5, f5, f6				# 195
+	fadd	f4, f4, f5				# 195
+	fcmpu	cr7, f4, f0				# 113
+	bgt	cr7, ble_else.16131				# 113
+	addi	r10, 0, 0
+	b	ble_cont.16132				# 113
+ble_else.16131:
+	addi	r10, 0, 1
+ble_cont.16132:
+	cmpw	cr7, r10, r19				# 825
+	bne	cr7, beq_else.16133				# 825
+	addi	r2, 0, 0
+	b	beq_cont.16134				# 825
+beq_else.16133:
+	slwi	r10, r19, 2				# 200
+	lfsx	f5, r9, r10				# 200
+	fmul	f1, f5, f1				# 200
+	slwi	r10, r20, 2				# 200
+	lfsx	f5, r9, r10				# 200
+	fmul	f2, f5, f2				# 200
+	fadd	f1, f1, f2				# 200
+	slwi	r10, r17, 2				# 200
+	lfsx	f2, r9, r10				# 200
+	fmul	f2, f2, f3				# 200
+	fadd	f1, f1, f2				# 200
+	fneg	f1, f1				# 107
+	fdiv	f1, f1, f4				# 826
+	slwi	r9, r19, 2				# 826
+	stfsx	f1, r11, r9				# 826
+	addi	r2, 0, 1
+beq_cont.16134:
+	b	beq_cont.16130				# 906
+beq_else.16129:
+	mfspr	r31, 8				# 907
+	mr	r5, r6				# 907
+	mr	r2, r18				# 907
+	mr	r1, r9				# 907
+	fmr	f0, f1				# 907
+	fmr	f1, f2				# 907
+	fmr	f2, f3				# 907
+	stw	r31, 76(r3)				# 907
+	addi	r3, r3, 80				# 907
+	lwz	r31, 0(r1)				# 907
+	mtspr	9, r31				# 907
+	bctr				# 907
+	addi	r3, r3, -80				# 907
+	lwz	r31, 76(r3)				# 907
+	mtspr	8, r31				# 907
+beq_cont.16130:
+beq_cont.16128:
 	lwz	r5, 72(r3)				# 1309
 	cmpw	cr7, r2, r5				# 1309
-	bne	cr7, beq_else.17886				# 1309
-	b	beq_cont.17887				# 1309
-beq_else.17886:
-	slwi	r2, r5, 2				# 1311
-	lwz	r6, 24(r3)				# 1311
-	lfs	f0, 152(r3)				# 1311
-	stfsx	f0, r6, r2				# 1311
-	slwi	r2, r5, 2				# 134
-	lwz	r6, 8(r3)				# 134
-	lfs	f0, 144(r3)				# 134
-	stfsx	f0, r6, r2				# 134
-	lwz	r2, 56(r3)				# 135
-	slwi	r7, r2, 2				# 135
-	lfs	f0, 136(r3)				# 135
-	stfsx	f0, r6, r7				# 135
-	lwz	r7, 16(r3)				# 136
-	slwi	r7, r7, 2				# 136
-	lfs	f0, 128(r3)				# 136
-	stfsx	f0, r6, r7				# 136
+	bne	cr7, beq_else.16135				# 1309
+	lwz	r2, 68(r3)				# 1337
+	slwi	r2, r2, 2				# 1337
+	lwz	r6, 64(r3)				# 1337
+	lwzx	r2, r6, r2				# 1337
+	lwz	r2, 24(r2)				# 272
+	cmpw	cr7, r2, r5				# 1337
+	bne	cr7, beq_else.16136				# 1337
+	blr
+beq_else.16136:
+	lwz	r2, 56(r3)				# 1338
+	lwz	r5, 60(r3)				# 1338
+	add	r2, r5, r2				# 1338
+	lwz	r5, 48(r3)				# 1338
+	lwz	r6, 44(r3)				# 1338
+	lwz	r1, 52(r3)				# 1338
+	lwz	r30, 0(r1)				# 1338
+	mtspr	9, r30
+	bctr				# 1338
+beq_else.16135:
 	slwi	r6, r5, 2				# 1313
-	lwz	r7, 4(r3)				# 1313
-	lwz	r8, 68(r3)				# 1313
-	stwx	r8, r7, r6				# 1313
-	slwi	r5, r5, 2				# 1314
-	lwz	r6, 0(r3)				# 1314
-	lwz	r7, 116(r3)				# 1314
-	stwx	r7, r6, r5				# 1314
-beq_cont.17887:
-beq_cont.17885:
-beq_cont.17883:
-	lwz	r2, 56(r3)				# 1320
-	lwz	r5, 60(r3)				# 1320
-	add	r2, r5, r2				# 1320
-	lwz	r5, 48(r3)				# 1320
-	lwz	r6, 44(r3)				# 1320
-	lwz	r30, 52(r3)				# 1320
-	lwz	r29, 0(r30)				# 1320
-	mtspr	9, r29
-	bctr				# 1320
-solve_one_or_network.2754:
-	lwz	r7, 20(r30)				# 1332
-	lwz	r8, 16(r30)				# 1332
-	lwz	r9, 12(r30)				# 1332
-	lwz	r10, 8(r30)				# 1332
-	lwz	r11, 4(r30)				# 1332
-	slwi	r12, r2, 2				# 1333
-	lwzx	r12, r5, r12				# 1333
-	cmpw	cr7, r12, r9				# 1334
-	bne	cr7, beq_else.17888				# 1334
+	lwz	r7, 40(r3)				# 1313
+	lfsx	f0, r7, r6				# 1313
+	lfs	f1, 32(r3)				# 109
+	fcmpu	cr7, f0, f1				# 109
+	bgt	cr7, ble_else.16138				# 109
+	addi	r6, 0, 0
+	b	ble_cont.16139				# 109
+ble_else.16138:
+	addi	r6, 0, 1
+ble_cont.16139:
+	cmpw	cr7, r6, r5				# 1315
+	bne	cr7, beq_else.16140				# 1315
+	b	beq_cont.16141				# 1315
+beq_else.16140:
+	slwi	r6, r5, 2				# 1316
+	lwz	r7, 24(r3)				# 1316
+	lfsx	f1, r7, r6				# 1316
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.16142				# 109
+	addi	r6, 0, 0
+	b	ble_cont.16143				# 109
+ble_else.16142:
+	addi	r6, 0, 1
+ble_cont.16143:
+	cmpw	cr7, r6, r5				# 1316
+	bne	cr7, beq_else.16144				# 1316
+	b	beq_cont.16145				# 1316
+beq_else.16144:
+	lis	r31, ha16(l.11955)
+	addi	r31, r31, lo16(l.11955)
+	lfs	f1, 0(r31)				# 1318
+	fadd	f0, f0, f1				# 1318
+	slwi	r6, r5, 2				# 1319
+	lwz	r8, 44(r3)				# 1319
+	lfsx	f1, r8, r6				# 1319
+	fmul	f1, f1, f0				# 1319
+	slwi	r6, r5, 2				# 1319
+	lwz	r9, 20(r3)				# 1319
+	lfsx	f2, r9, r6				# 1319
+	fadd	f1, f1, f2				# 1319
+	lwz	r6, 56(r3)				# 1320
+	slwi	r10, r6, 2				# 1320
+	lfsx	f2, r8, r10				# 1320
+	fmul	f2, f2, f0				# 1320
+	slwi	r10, r6, 2				# 1320
+	lfsx	f3, r9, r10				# 1320
+	fadd	f2, f2, f3				# 1320
+	lwz	r10, 16(r3)				# 1321
+	slwi	r11, r10, 2				# 1321
+	lfsx	f3, r8, r11				# 1321
+	fmul	f3, f3, f0				# 1321
+	slwi	r11, r10, 2				# 1321
+	lfsx	f4, r9, r11				# 1321
+	fadd	f3, f3, f4				# 1321
+	lwz	r9, 48(r3)				# 1322
+	lwz	r1, 12(r3)				# 1322
+	stw	r2, 76(r3)				# 1322
+	stfs	f3, 80(r3)				# 1322
+	stfs	f2, 88(r3)				# 1322
+	stfs	f1, 96(r3)				# 1322
+	stfs	f0, 104(r3)				# 1322
+	mfspr	r31, 8				# 1322
+	mr	r2, r5				# 1322
+	mr	r5, r9				# 1322
+	fmr	f0, f1				# 1322
+	fmr	f1, f2				# 1322
+	fmr	f2, f3				# 1322
+	stw	r31, 112(r3)				# 1322
+	addi	r3, r3, 116				# 1322
+	lwz	r31, 0(r1)				# 1322
+	mtspr	9, r31				# 1322
+	bctr				# 1322
+	addi	r3, r3, -116				# 1322
+	lwz	r31, 112(r3)				# 1322
+	mtspr	8, r31				# 1322
+	lwz	r5, 72(r3)				# 1322
+	cmpw	cr7, r2, r5				# 1322
+	bne	cr7, beq_else.16146				# 1322
+	b	beq_cont.16147				# 1322
+beq_else.16146:
+	slwi	r2, r5, 2				# 1324
+	lwz	r6, 24(r3)				# 1324
+	lfs	f0, 104(r3)				# 1324
+	stfsx	f0, r6, r2				# 1324
+	slwi	r2, r5, 2				# 147
+	lwz	r6, 8(r3)				# 147
+	lfs	f0, 96(r3)				# 147
+	stfsx	f0, r6, r2				# 147
+	lwz	r2, 56(r3)				# 148
+	slwi	r7, r2, 2				# 148
+	lfs	f0, 88(r3)				# 148
+	stfsx	f0, r6, r7				# 148
+	lwz	r7, 16(r3)				# 149
+	slwi	r7, r7, 2				# 149
+	lfs	f0, 80(r3)				# 149
+	stfsx	f0, r6, r7				# 149
+	slwi	r6, r5, 2				# 1326
+	lwz	r7, 4(r3)				# 1326
+	lwz	r8, 68(r3)				# 1326
+	stwx	r8, r7, r6				# 1326
+	slwi	r5, r5, 2				# 1327
+	lwz	r6, 0(r3)				# 1327
+	lwz	r7, 76(r3)				# 1327
+	stwx	r7, r6, r5				# 1327
+beq_cont.16147:
+beq_cont.16145:
+beq_cont.16141:
+	lwz	r2, 56(r3)				# 1333
+	lwz	r5, 60(r3)				# 1333
+	add	r2, r5, r2				# 1333
+	lwz	r5, 48(r3)				# 1333
+	lwz	r6, 44(r3)				# 1333
+	lwz	r1, 52(r3)				# 1333
+	lwz	r30, 0(r1)				# 1333
+	mtspr	9, r30
+	bctr				# 1333
+solve_one_or_network.2772:
+	lwz	r7, 20(r1)				# 1345
+	lwz	r8, 16(r1)				# 1345
+	lwz	r9, 12(r1)				# 1345
+	lwz	r10, 8(r1)				# 1345
+	lwz	r11, 4(r1)				# 1345
+	slwi	r12, r2, 2				# 1346
+	lwzx	r12, r5, r12				# 1346
+	cmpw	cr7, r12, r9				# 1347
+	bne	cr7, beq_else.16148				# 1347
 	blr
-beq_else.17888:
-	slwi	r9, r12, 2				# 1335
-	lwzx	r8, r8, r9				# 1335
-	stw	r6, 0(r3)				# 1336
-	stw	r5, 4(r3)				# 1336
-	stw	r30, 8(r3)				# 1336
-	stw	r11, 12(r3)				# 1336
-	stw	r2, 16(r3)				# 1336
-	mfspr	r31, 8				# 1336
-	mr	r5, r8				# 1336
-	mr	r2, r10				# 1336
-	mr	r30, r7				# 1336
-	stw	r31, 20(r3)				# 1336
-	addi	r3, r3, 24				# 1336
-	lwz	r31, 0(r30)				# 1336
-	mtspr	9, r31				# 1336
-	bctrl				# 1336
-	addi	r3, r3, -24				# 1336
-	lwz	r31, 20(r3)				# 1336
-	mtspr	8, r31				# 1336
-	lwz	r2, 12(r3)				# 1337
-	lwz	r5, 16(r3)				# 1337
-	add	r2, r5, r2				# 1337
-	lwz	r5, 4(r3)				# 1337
-	lwz	r6, 0(r3)				# 1337
-	lwz	r30, 8(r3)				# 1337
-	lwz	r29, 0(r30)				# 1337
-	mtspr	9, r29
-	bctr				# 1337
-trace_or_matrix.2758:
-	lwz	r7, 44(r30)				# 1342
-	lwz	r8, 40(r30)				# 1342
-	lwz	r9, 36(r30)				# 1342
-	lwz	r10, 32(r30)				# 1342
-	lwz	r11, 28(r30)				# 1342
-	lwz	r12, 24(r30)				# 1342
-	lwz	r13, 20(r30)				# 1342
-	lwz	r14, 16(r30)				# 1342
-	lwz	r15, 12(r30)				# 1342
-	lwz	r16, 8(r30)				# 1342
-	lwz	r17, 4(r30)				# 1342
-	slwi	r18, r2, 2				# 1343
-	lwzx	r18, r5, r18				# 1343
-	slwi	r19, r16, 2				# 1344
-	lwzx	r19, r18, r19				# 1344
-	cmpw	cr7, r19, r15				# 1345
-	bne	cr7, beq_else.17890				# 1345
-	blr
-beq_else.17890:
-	stw	r6, 0(r3)				# 1348
-	stw	r5, 4(r3)				# 1348
-	stw	r30, 8(r3)				# 1348
-	stw	r17, 12(r3)				# 1348
-	stw	r2, 16(r3)				# 1348
-	cmpwi	cr7, r19, 99				# 1348
-	bne	cr7, beq_else.17892				# 1348
+beq_else.16148:
+	slwi	r9, r12, 2				# 1348
+	lwzx	r8, r8, r9				# 1348
+	stw	r6, 0(r3)				# 1349
+	stw	r5, 4(r3)				# 1349
+	stw	r1, 8(r3)				# 1349
+	stw	r11, 12(r3)				# 1349
+	stw	r2, 16(r3)				# 1349
 	mfspr	r31, 8				# 1349
-	mr	r5, r18				# 1349
-	mr	r2, r17				# 1349
-	mr	r30, r12				# 1349
+	mr	r5, r8				# 1349
+	mr	r2, r10				# 1349
+	mr	r1, r7				# 1349
 	stw	r31, 20(r3)				# 1349
 	addi	r3, r3, 24				# 1349
-	lwz	r31, 0(r30)				# 1349
+	lwz	r31, 0(r1)				# 1349
 	mtspr	9, r31				# 1349
-	bctrl				# 1349
+	bctr				# 1349
 	addi	r3, r3, -24				# 1349
 	lwz	r31, 20(r3)				# 1349
 	mtspr	8, r31				# 1349
-	b	beq_cont.17893				# 1348
-beq_else.17892:
-	slwi	r15, r19, 2				# 885
-	lwzx	r13, r13, r15				# 885
-	slwi	r15, r16, 2				# 887
-	lfsx	f0, r8, r15				# 887
-	lwz	r15, 20(r13)				# 317
-	slwi	r19, r16, 2				# 322
-	lfsx	f1, r15, r19				# 322
-	fsub	f0, f0, f1				# 887
-	slwi	r15, r17, 2				# 888
-	lfsx	f1, r8, r15				# 888
-	lwz	r15, 20(r13)				# 327
-	slwi	r19, r17, 2				# 332
-	lfsx	f2, r15, r19				# 332
-	fsub	f1, f1, f2				# 888
-	slwi	r15, r14, 2				# 889
-	lfsx	f2, r8, r15				# 889
-	lwz	r8, 20(r13)				# 337
-	slwi	r15, r14, 2				# 342
-	lfsx	f3, r8, r15				# 342
-	fsub	f2, f2, f3				# 889
-	lwz	r8, 4(r13)				# 239
-	stw	r18, 20(r3)				# 892
-	stw	r12, 24(r3)				# 892
-	stw	r7, 28(r3)				# 892
-	stw	r11, 32(r3)				# 892
-	stw	r16, 36(r3)				# 892
-	cmpw	cr7, r8, r17				# 892
-	bne	cr7, beq_else.17894				# 892
-	mfspr	r31, 8				# 892
-	mr	r5, r6				# 892
-	mr	r2, r13				# 892
-	mr	r30, r10				# 892
-	stw	r31, 40(r3)				# 892
-	addi	r3, r3, 44				# 892
-	lwz	r31, 0(r30)				# 892
-	mtspr	9, r31				# 892
-	bctrl				# 892
-	addi	r3, r3, -44				# 892
-	lwz	r31, 40(r3)				# 892
-	mtspr	8, r31				# 892
-	b	beq_cont.17895				# 892
-beq_else.17894:
-	cmpw	cr7, r8, r14				# 893
-	bne	cr7, beq_else.17896				# 893
-	lwz	r8, 16(r13)				# 307
-	slwi	r9, r16, 2				# 182
-	lfsx	f3, r6, r9				# 182
-	slwi	r9, r16, 2				# 182
-	lfsx	f4, r8, r9				# 182
-	fmul	f3, f3, f4				# 182
-	slwi	r9, r17, 2				# 182
-	lfsx	f4, r6, r9				# 182
-	slwi	r9, r17, 2				# 182
-	lfsx	f5, r8, r9				# 182
-	fmul	f4, f4, f5				# 182
-	fadd	f3, f3, f4				# 182
-	slwi	r9, r14, 2				# 182
-	lfsx	f4, r6, r9				# 182
-	slwi	r9, r14, 2				# 182
-	lfsx	f5, r8, r9				# 182
-	fmul	f4, f4, f5				# 182
-	fadd	f3, f3, f4				# 182
-	stfs	f3, 40(r3)				# 812
-	stfs	f2, 48(r3)				# 812
-	stw	r14, 56(r3)				# 812
-	stfs	f1, 64(r3)				# 812
-	stfs	f0, 72(r3)				# 812
-	stw	r8, 80(r3)				# 812
-	mfspr	r31, 8				# 812
-	fmr	f0, f3				# 812
-	stw	r31, 84(r3)				# 812
-	addi	r3, r3, 88				# 812
-	bl	min_caml_fispos				# 812
-	addi	r3, r3, -88				# 812
-	lwz	r31, 84(r3)				# 812
-	mtspr	8, r31				# 812
-	lwz	r5, 36(r3)				# 812
-	cmpw	cr7, r2, r5				# 812
-	bne	cr7, beq_else.17899				# 812
-	addi	r2, 0, 0
-	b	beq_cont.17900				# 812
-beq_else.17899:
-	slwi	r2, r5, 2				# 187
-	lwz	r6, 80(r3)				# 187
-	lfsx	f0, r6, r2				# 187
-	lfs	f1, 72(r3)				# 187
-	fmul	f0, f0, f1				# 187
-	lwz	r2, 12(r3)				# 187
-	slwi	r7, r2, 2				# 187
-	lfsx	f1, r6, r7				# 187
-	lfs	f2, 64(r3)				# 187
-	fmul	f1, f1, f2				# 187
-	fadd	f0, f0, f1				# 187
-	lwz	r7, 56(r3)				# 187
-	slwi	r7, r7, 2				# 187
-	lfsx	f1, r6, r7				# 187
-	lfs	f2, 48(r3)				# 187
-	fmul	f1, f1, f2				# 187
-	fadd	f0, f0, f1				# 187
-	mfspr	r31, 8				# 813
-	stw	r31, 84(r3)				# 813
-	addi	r3, r3, 88				# 813
-	bl	min_caml_fneg				# 813
-	addi	r3, r3, -88				# 813
-	lwz	r31, 84(r3)				# 813
-	mtspr	8, r31				# 813
-	lfs	f1, 40(r3)				# 813
-	fdiv	f0, f0, f1				# 813
-	lwz	r2, 36(r3)				# 813
-	slwi	r5, r2, 2				# 813
-	lwz	r6, 32(r3)				# 813
-	stfsx	f0, r6, r5				# 813
-	addi	r2, 0, 1
-beq_cont.17900:
-	b	beq_cont.17897				# 893
-beq_else.17896:
-	mfspr	r31, 8				# 894
-	mr	r5, r6				# 894
-	mr	r2, r13				# 894
-	mr	r30, r9				# 894
-	stw	r31, 84(r3)				# 894
-	addi	r3, r3, 88				# 894
-	lwz	r31, 0(r30)				# 894
-	mtspr	9, r31				# 894
-	bctrl				# 894
-	addi	r3, r3, -88				# 894
-	lwz	r31, 84(r3)				# 894
-	mtspr	8, r31				# 894
-beq_cont.17897:
-beq_cont.17895:
-	lwz	r5, 36(r3)				# 1354
-	cmpw	cr7, r2, r5				# 1354
-	bne	cr7, beq_else.17901				# 1354
-	b	beq_cont.17902				# 1354
-beq_else.17901:
-	slwi	r2, r5, 2				# 1355
-	lwz	r6, 32(r3)				# 1355
-	lfsx	f0, r6, r2				# 1355
-	slwi	r2, r5, 2				# 1356
-	lwz	r6, 28(r3)				# 1356
-	lfsx	f1, r6, r2				# 1356
-	mfspr	r31, 8				# 1356
-	stw	r31, 84(r3)				# 1356
-	addi	r3, r3, 88				# 1356
-	bl	min_caml_fless				# 1356
-	addi	r3, r3, -88				# 1356
-	lwz	r31, 84(r3)				# 1356
-	mtspr	8, r31				# 1356
-	lwz	r5, 36(r3)				# 1356
-	cmpw	cr7, r2, r5				# 1356
-	bne	cr7, beq_else.17903				# 1356
-	b	beq_cont.17904				# 1356
-beq_else.17903:
-	lwz	r2, 12(r3)				# 1357
-	lwz	r5, 20(r3)				# 1357
-	lwz	r6, 0(r3)				# 1357
-	lwz	r30, 24(r3)				# 1357
-	mfspr	r31, 8				# 1357
-	stw	r31, 84(r3)				# 1357
-	addi	r3, r3, 88				# 1357
-	lwz	r31, 0(r30)				# 1357
-	mtspr	9, r31				# 1357
-	bctrl				# 1357
-	addi	r3, r3, -88				# 1357
-	lwz	r31, 84(r3)				# 1357
-	mtspr	8, r31				# 1357
-beq_cont.17904:
-beq_cont.17902:
-beq_cont.17893:
-	lwz	r2, 12(r3)				# 1361
-	lwz	r5, 16(r3)				# 1361
-	add	r2, r5, r2				# 1361
-	lwz	r5, 4(r3)				# 1361
-	lwz	r6, 0(r3)				# 1361
-	lwz	r30, 8(r3)				# 1361
-	lwz	r29, 0(r30)				# 1361
-	mtspr	9, r29
-	bctr				# 1361
-solve_each_element_fast.2764:
-	lwz	r7, 60(r30)				# 1382
-	lwz	r8, 56(r30)				# 1382
-	lwz	r9, 52(r30)				# 1382
-	lwz	r10, 48(r30)				# 1382
-	lwz	r11, 44(r30)				# 1382
-	lwz	r12, 40(r30)				# 1382
-	lwz	r13, 36(r30)				# 1382
-	lwz	r14, 32(r30)				# 1382
-	lwz	r15, 28(r30)				# 1382
-	lwz	r16, 24(r30)				# 1382
-	lwz	r17, 20(r30)				# 1382
-	lwz	r18, 16(r30)				# 1382
-	lwz	r19, 12(r30)				# 1382
-	lwz	r20, 8(r30)				# 1382
-	lfs	f0, 4(r30)				# 1382
-	lwz	r21, 0(r6)				# 508
-	slwi	r22, r2, 2				# 1384
-	lwzx	r22, r5, r22				# 1384
-	cmpw	cr7, r22, r17				# 1385
-	bne	cr7, beq_else.17905				# 1385
+	lwz	r2, 12(r3)				# 1350
+	lwz	r5, 16(r3)				# 1350
+	add	r2, r5, r2				# 1350
+	lwz	r5, 4(r3)				# 1350
+	lwz	r6, 0(r3)				# 1350
+	lwz	r1, 8(r3)				# 1350
+	lwz	r30, 0(r1)				# 1350
+	mtspr	9, r30
+	bctr				# 1350
+trace_or_matrix.2776:
+	lwz	r7, 48(r1)				# 1355
+	lwz	r8, 44(r1)				# 1355
+	lwz	r9, 40(r1)				# 1355
+	lwz	r10, 36(r1)				# 1355
+	lwz	r11, 32(r1)				# 1355
+	lwz	r12, 28(r1)				# 1355
+	lwz	r13, 24(r1)				# 1355
+	lwz	r14, 20(r1)				# 1355
+	lwz	r15, 16(r1)				# 1355
+	lwz	r16, 12(r1)				# 1355
+	lwz	r17, 8(r1)				# 1355
+	lfs	f0, 4(r1)				# 1355
+	slwi	r18, r2, 2				# 1356
+	lwzx	r18, r5, r18				# 1356
+	slwi	r19, r16, 2				# 1357
+	lwzx	r19, r18, r19				# 1357
+	cmpw	cr7, r19, r15				# 1358
+	bne	cr7, beq_else.16150				# 1358
 	blr
-beq_else.17905:
-	slwi	r17, r22, 2				# 1011
-	lwzx	r17, r11, r17				# 1011
-	lwz	r23, 40(r17)				# 428
-	slwi	r24, r19, 2				# 1013
-	lfsx	f1, r23, r24				# 1013
-	slwi	r24, r20, 2				# 1014
-	lfsx	f2, r23, r24				# 1014
-	slwi	r24, r16, 2				# 1015
-	lfsx	f3, r23, r24				# 1015
-	lwz	r24, 4(r6)				# 514
-	slwi	r25, r22, 2				# 1017
-	lwzx	r24, r24, r25				# 1017
-	lwz	r25, 4(r17)				# 239
-	stw	r12, 0(r3)				# 1019
-	stw	r14, 4(r3)				# 1019
-	stw	r13, 8(r3)				# 1019
-	stw	r15, 12(r3)				# 1019
-	stw	r16, 16(r3)				# 1019
-	stw	r8, 20(r3)				# 1019
-	stw	r21, 24(r3)				# 1019
-	stw	r7, 28(r3)				# 1019
-	stfs	f0, 32(r3)				# 1019
-	stw	r10, 40(r3)				# 1019
-	stw	r6, 44(r3)				# 1019
-	stw	r5, 48(r3)				# 1019
-	stw	r30, 52(r3)				# 1019
-	stw	r20, 56(r3)				# 1019
-	stw	r2, 60(r3)				# 1019
-	stw	r11, 64(r3)				# 1019
-	stw	r22, 68(r3)				# 1019
-	stw	r19, 72(r3)				# 1019
-	cmpw	cr7, r25, r20				# 1019
-	bne	cr7, beq_else.17907				# 1019
-	lwz	r18, 0(r6)				# 508
-	mfspr	r31, 8				# 1020
-	mr	r6, r24				# 1020
-	mr	r5, r18				# 1020
-	mr	r2, r17				# 1020
-	mr	r30, r9				# 1020
-	fmr	f0, f1				# 1020
-	fmr	f1, f2				# 1020
-	fmr	f2, f3				# 1020
-	stw	r31, 76(r3)				# 1020
-	addi	r3, r3, 80				# 1020
-	lwz	r31, 0(r30)				# 1020
-	mtspr	9, r31				# 1020
-	bctrl				# 1020
-	addi	r3, r3, -80				# 1020
-	lwz	r31, 76(r3)				# 1020
-	mtspr	8, r31				# 1020
-	b	beq_cont.17908				# 1019
-beq_else.17907:
-	cmpw	cr7, r25, r16				# 1021
-	bne	cr7, beq_else.17909				# 1021
-	slwi	r9, r19, 2				# 984
-	lfsx	f1, r24, r9				# 984
-	stw	r23, 76(r3)				# 984
-	stw	r18, 80(r3)				# 984
-	stw	r24, 84(r3)				# 984
-	mfspr	r31, 8				# 984
-	fmr	f0, f1				# 984
-	stw	r31, 88(r3)				# 984
-	addi	r3, r3, 92				# 984
-	bl	min_caml_fisneg				# 984
-	addi	r3, r3, -92				# 984
-	lwz	r31, 88(r3)				# 984
-	mtspr	8, r31				# 984
-	lwz	r5, 72(r3)				# 984
-	cmpw	cr7, r2, r5				# 984
-	bne	cr7, beq_else.17911				# 984
+beq_else.16150:
+	stw	r6, 0(r3)				# 1361
+	stw	r5, 4(r3)				# 1361
+	stw	r1, 8(r3)				# 1361
+	stw	r17, 12(r3)				# 1361
+	stw	r2, 16(r3)				# 1361
+	cmpwi	cr7, r19, 99				# 1361
+	bne	cr7, beq_else.16152				# 1361
+	mfspr	r31, 8				# 1362
+	mr	r5, r18				# 1362
+	mr	r2, r17				# 1362
+	mr	r1, r12				# 1362
+	stw	r31, 20(r3)				# 1362
+	addi	r3, r3, 24				# 1362
+	lwz	r31, 0(r1)				# 1362
+	mtspr	9, r31				# 1362
+	bctr				# 1362
+	addi	r3, r3, -24				# 1362
+	lwz	r31, 20(r3)				# 1362
+	mtspr	8, r31				# 1362
+	b	beq_cont.16153				# 1361
+beq_else.16152:
+	slwi	r15, r19, 2				# 898
+	lwzx	r13, r13, r15				# 898
+	slwi	r15, r16, 2				# 900
+	lfsx	f1, r8, r15				# 900
+	lwz	r15, 20(r13)				# 330
+	slwi	r19, r16, 2				# 335
+	lfsx	f2, r15, r19				# 335
+	fsub	f1, f1, f2				# 900
+	slwi	r15, r17, 2				# 901
+	lfsx	f2, r8, r15				# 901
+	lwz	r15, 20(r13)				# 340
+	slwi	r19, r17, 2				# 345
+	lfsx	f3, r15, r19				# 345
+	fsub	f2, f2, f3				# 901
+	slwi	r15, r14, 2				# 902
+	lfsx	f3, r8, r15				# 902
+	lwz	r8, 20(r13)				# 350
+	slwi	r15, r14, 2				# 355
+	lfsx	f4, r8, r15				# 355
+	fsub	f3, f3, f4				# 902
+	lwz	r8, 4(r13)				# 252
+	stw	r18, 20(r3)				# 905
+	stw	r12, 24(r3)				# 905
+	stw	r7, 28(r3)				# 905
+	stw	r11, 32(r3)				# 905
+	stw	r16, 36(r3)				# 905
+	cmpw	cr7, r8, r17				# 905
+	bne	cr7, beq_else.16154				# 905
+	mfspr	r31, 8				# 905
+	mr	r5, r6				# 905
+	mr	r2, r13				# 905
+	mr	r1, r10				# 905
+	fmr	f0, f1				# 905
+	fmr	f1, f2				# 905
+	fmr	f2, f3				# 905
+	stw	r31, 40(r3)				# 905
+	addi	r3, r3, 44				# 905
+	lwz	r31, 0(r1)				# 905
+	mtspr	9, r31				# 905
+	bctr				# 905
+	addi	r3, r3, -44				# 905
+	lwz	r31, 40(r3)				# 905
+	mtspr	8, r31				# 905
+	b	beq_cont.16155				# 905
+beq_else.16154:
+	cmpw	cr7, r8, r14				# 906
+	bne	cr7, beq_else.16156				# 906
+	lwz	r8, 16(r13)				# 320
+	slwi	r9, r16, 2				# 195
+	lfsx	f4, r6, r9				# 195
+	slwi	r9, r16, 2				# 195
+	lfsx	f5, r8, r9				# 195
+	fmul	f4, f4, f5				# 195
+	slwi	r9, r17, 2				# 195
+	lfsx	f5, r6, r9				# 195
+	slwi	r9, r17, 2				# 195
+	lfsx	f6, r8, r9				# 195
+	fmul	f5, f5, f6				# 195
+	fadd	f4, f4, f5				# 195
+	slwi	r9, r14, 2				# 195
+	lfsx	f5, r6, r9				# 195
+	slwi	r9, r14, 2				# 195
+	lfsx	f6, r8, r9				# 195
+	fmul	f5, f5, f6				# 195
+	fadd	f4, f4, f5				# 195
+	fcmpu	cr7, f4, f0				# 113
+	bgt	cr7, ble_else.16158				# 113
+	addi	r9, 0, 0
+	b	ble_cont.16159				# 113
+ble_else.16158:
+	addi	r9, 0, 1
+ble_cont.16159:
+	cmpw	cr7, r9, r16				# 825
+	bne	cr7, beq_else.16160				# 825
 	addi	r2, 0, 0
-	b	beq_cont.17912				# 984
-beq_else.17911:
-	slwi	r2, r5, 2				# 985
-	lwz	r6, 84(r3)				# 985
-	lfsx	f0, r6, r2				# 985
-	lwz	r2, 80(r3)				# 985
-	slwi	r2, r2, 2				# 985
-	lwz	r6, 76(r3)				# 985
-	lfsx	f1, r6, r2				# 985
-	fmul	f0, f0, f1				# 985
-	slwi	r2, r5, 2				# 985
-	lwz	r6, 40(r3)				# 985
-	stfsx	f0, r6, r2				# 985
+	b	beq_cont.16161				# 825
+beq_else.16160:
+	slwi	r9, r16, 2				# 200
+	lfsx	f0, r8, r9				# 200
+	fmul	f0, f0, f1				# 200
+	slwi	r9, r17, 2				# 200
+	lfsx	f1, r8, r9				# 200
+	fmul	f1, f1, f2				# 200
+	fadd	f0, f0, f1				# 200
+	slwi	r9, r14, 2				# 200
+	lfsx	f1, r8, r9				# 200
+	fmul	f1, f1, f3				# 200
+	fadd	f0, f0, f1				# 200
+	fneg	f0, f0				# 107
+	fdiv	f0, f0, f4				# 826
+	slwi	r8, r16, 2				# 826
+	stfsx	f0, r11, r8				# 826
 	addi	r2, 0, 1
-beq_cont.17912:
-	b	beq_cont.17910				# 1021
-beq_else.17909:
-	slwi	r9, r19, 2				# 993
-	lfsx	f4, r24, r9				# 993
-	stw	r17, 88(r3)				# 994
-	stfs	f4, 96(r3)				# 994
-	stw	r23, 76(r3)				# 994
-	stfs	f3, 104(r3)				# 994
-	stw	r18, 80(r3)				# 994
-	stfs	f2, 112(r3)				# 994
-	stfs	f1, 120(r3)				# 994
-	stw	r24, 84(r3)				# 994
-	mfspr	r31, 8				# 994
-	fmr	f0, f4				# 994
-	stw	r31, 128(r3)				# 994
-	addi	r3, r3, 132				# 994
-	bl	min_caml_fiszero				# 994
-	addi	r3, r3, -132				# 994
-	lwz	r31, 128(r3)				# 994
-	mtspr	8, r31				# 994
-	lwz	r5, 72(r3)				# 994
-	cmpw	cr7, r2, r5				# 994
-	bne	cr7, beq_else.17914				# 994
-	lwz	r2, 56(r3)				# 997
-	slwi	r6, r2, 2				# 997
-	lwz	r7, 84(r3)				# 997
-	lfsx	f0, r7, r6				# 997
-	lfs	f1, 120(r3)				# 997
-	fmul	f0, f0, f1				# 997
-	lwz	r6, 16(r3)				# 997
-	slwi	r8, r6, 2				# 997
-	lfsx	f1, r7, r8				# 997
-	lfs	f2, 112(r3)				# 997
-	fmul	f1, f1, f2				# 997
-	fadd	f0, f0, f1				# 997
-	lwz	r8, 80(r3)				# 997
-	slwi	r9, r8, 2				# 997
-	lfsx	f1, r7, r9				# 997
-	lfs	f2, 104(r3)				# 997
-	fmul	f1, f1, f2				# 997
-	fadd	f0, f0, f1				# 997
-	slwi	r8, r8, 2				# 998
-	lwz	r9, 76(r3)				# 998
-	lfsx	f1, r9, r8				# 998
-	stfs	f0, 128(r3)				# 999
-	stfs	f1, 136(r3)				# 999
-	mfspr	r31, 8				# 999
-	stw	r31, 144(r3)				# 999
-	addi	r3, r3, 148				# 999
-	bl	min_caml_fsqr				# 999
-	addi	r3, r3, -148				# 999
-	lwz	r31, 144(r3)				# 999
-	mtspr	8, r31				# 999
-	lfs	f1, 136(r3)				# 999
-	lfs	f2, 96(r3)				# 999
-	fmul	f1, f2, f1				# 999
-	fsub	f0, f0, f1				# 999
-	stfs	f0, 144(r3)				# 1000
-	mfspr	r31, 8				# 1000
-	stw	r31, 152(r3)				# 1000
-	addi	r3, r3, 156				# 1000
-	bl	min_caml_fispos				# 1000
-	addi	r3, r3, -156				# 1000
-	lwz	r31, 152(r3)				# 1000
-	mtspr	8, r31				# 1000
-	lwz	r5, 72(r3)				# 1000
-	cmpw	cr7, r2, r5				# 1000
-	bne	cr7, beq_else.17916				# 1000
+beq_cont.16161:
+	b	beq_cont.16157				# 906
+beq_else.16156:
+	mfspr	r31, 8				# 907
+	mr	r5, r6				# 907
+	mr	r2, r13				# 907
+	mr	r1, r9				# 907
+	fmr	f0, f1				# 907
+	fmr	f1, f2				# 907
+	fmr	f2, f3				# 907
+	stw	r31, 40(r3)				# 907
+	addi	r3, r3, 44				# 907
+	lwz	r31, 0(r1)				# 907
+	mtspr	9, r31				# 907
+	bctr				# 907
+	addi	r3, r3, -44				# 907
+	lwz	r31, 40(r3)				# 907
+	mtspr	8, r31				# 907
+beq_cont.16157:
+beq_cont.16155:
+	lwz	r5, 36(r3)				# 1367
+	cmpw	cr7, r2, r5				# 1367
+	bne	cr7, beq_else.16162				# 1367
+	b	beq_cont.16163				# 1367
+beq_else.16162:
+	slwi	r2, r5, 2				# 1368
+	lwz	r6, 32(r3)				# 1368
+	lfsx	f0, r6, r2				# 1368
+	slwi	r2, r5, 2				# 1369
+	lwz	r6, 28(r3)				# 1369
+	lfsx	f1, r6, r2				# 1369
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.16164				# 109
 	addi	r2, 0, 0
-	b	beq_cont.17917				# 1000
-beq_else.17916:
-	lwz	r2, 88(r3)				# 259
-	lwz	r2, 24(r2)				# 259
-	cmpw	cr7, r2, r5				# 1001
-	bne	cr7, beq_else.17918				# 1001
-	lfs	f0, 144(r3)				# 1004
-	mfspr	r31, 8				# 1004
-	stw	r31, 152(r3)				# 1004
-	addi	r3, r3, 156				# 1004
-	bl	min_caml_sqrt				# 1004
-	addi	r3, r3, -156				# 1004
-	lwz	r31, 152(r3)				# 1004
-	mtspr	8, r31				# 1004
-	lfs	f1, 128(r3)				# 1004
-	fsub	f0, f1, f0				# 1004
-	lwz	r2, 84(r3)				# 1004
-	lfs	f1, 16(r2)				# 1004
-	fmul	f0, f0, f1				# 1004
-	lwz	r2, 72(r3)				# 1004
-	slwi	r5, r2, 2				# 1004
-	lwz	r6, 40(r3)				# 1004
-	stfsx	f0, r6, r5				# 1004
-	b	beq_cont.17919				# 1001
-beq_else.17918:
-	lfs	f0, 144(r3)				# 1002
-	mfspr	r31, 8				# 1002
-	stw	r31, 152(r3)				# 1002
-	addi	r3, r3, 156				# 1002
-	bl	min_caml_sqrt				# 1002
-	addi	r3, r3, -156				# 1002
-	lwz	r31, 152(r3)				# 1002
-	mtspr	8, r31				# 1002
-	lfs	f1, 128(r3)				# 1002
-	fadd	f0, f1, f0				# 1002
-	lwz	r2, 84(r3)				# 1002
-	lfs	f1, 16(r2)				# 1002
-	fmul	f0, f0, f1				# 1002
-	lwz	r2, 72(r3)				# 1002
-	slwi	r5, r2, 2				# 1002
-	lwz	r6, 40(r3)				# 1002
-	stfsx	f0, r6, r5				# 1002
-beq_cont.17919:
+	b	ble_cont.16165				# 109
+ble_else.16164:
 	addi	r2, 0, 1
-beq_cont.17917:
-	b	beq_cont.17915				# 994
-beq_else.17914:
-	addi	r2, 0, 0
-beq_cont.17915:
-beq_cont.17910:
-beq_cont.17908:
-	lwz	r5, 72(r3)				# 1388
-	cmpw	cr7, r2, r5				# 1388
-	bne	cr7, beq_else.17920				# 1388
-	lwz	r2, 68(r3)				# 1416
-	slwi	r2, r2, 2				# 1416
-	lwz	r6, 64(r3)				# 1416
-	lwzx	r2, r6, r2				# 1416
-	lwz	r2, 24(r2)				# 259
-	cmpw	cr7, r2, r5				# 1416
-	bne	cr7, beq_else.17921				# 1416
+ble_cont.16165:
+	cmpw	cr7, r2, r5				# 1369
+	bne	cr7, beq_else.16166				# 1369
+	b	beq_cont.16167				# 1369
+beq_else.16166:
+	lwz	r2, 12(r3)				# 1370
+	lwz	r5, 20(r3)				# 1370
+	lwz	r6, 0(r3)				# 1370
+	lwz	r1, 24(r3)				# 1370
+	mfspr	r31, 8				# 1370
+	stw	r31, 40(r3)				# 1370
+	addi	r3, r3, 44				# 1370
+	lwz	r31, 0(r1)				# 1370
+	mtspr	9, r31				# 1370
+	bctr				# 1370
+	addi	r3, r3, -44				# 1370
+	lwz	r31, 40(r3)				# 1370
+	mtspr	8, r31				# 1370
+beq_cont.16167:
+beq_cont.16163:
+beq_cont.16153:
+	lwz	r2, 12(r3)				# 1374
+	lwz	r5, 16(r3)				# 1374
+	add	r2, r5, r2				# 1374
+	lwz	r5, 4(r3)				# 1374
+	lwz	r6, 0(r3)				# 1374
+	lwz	r1, 8(r3)				# 1374
+	lwz	r30, 0(r1)				# 1374
+	mtspr	9, r30
+	bctr				# 1374
+solve_each_element_fast.2782:
+	lwz	r7, 60(r1)				# 1395
+	lwz	r8, 56(r1)				# 1395
+	lwz	r9, 52(r1)				# 1395
+	lwz	r10, 48(r1)				# 1395
+	lwz	r11, 44(r1)				# 1395
+	lwz	r12, 40(r1)				# 1395
+	lwz	r13, 36(r1)				# 1395
+	lwz	r14, 32(r1)				# 1395
+	lwz	r15, 28(r1)				# 1395
+	lwz	r16, 24(r1)				# 1395
+	lwz	r17, 20(r1)				# 1395
+	lwz	r18, 16(r1)				# 1395
+	lwz	r19, 12(r1)				# 1395
+	lwz	r20, 8(r1)				# 1395
+	lfs	f0, 4(r1)				# 1395
+	lwz	r21, 0(r6)				# 521
+	slwi	r22, r2, 2				# 1397
+	lwzx	r22, r5, r22				# 1397
+	cmpw	cr7, r22, r17				# 1398
+	bne	cr7, beq_else.16168				# 1398
 	blr
-beq_else.17921:
-	lwz	r2, 56(r3)				# 1417
-	lwz	r5, 60(r3)				# 1417
-	add	r2, r5, r2				# 1417
-	lwz	r5, 48(r3)				# 1417
-	lwz	r6, 44(r3)				# 1417
-	lwz	r30, 52(r3)				# 1417
-	lwz	r29, 0(r30)				# 1417
-	mtspr	9, r29
-	bctr				# 1417
-beq_else.17920:
-	slwi	r6, r5, 2				# 1392
-	lwz	r7, 40(r3)				# 1392
-	lfsx	f1, r7, r6				# 1392
-	lfs	f0, 32(r3)				# 1394
-	stw	r2, 152(r3)				# 1394
-	stfs	f1, 160(r3)				# 1394
-	mfspr	r31, 8				# 1394
-	stw	r31, 168(r3)				# 1394
-	addi	r3, r3, 172				# 1394
-	bl	min_caml_fless				# 1394
-	addi	r3, r3, -172				# 1394
-	lwz	r31, 168(r3)				# 1394
-	mtspr	8, r31				# 1394
-	lwz	r5, 72(r3)				# 1394
-	cmpw	cr7, r2, r5				# 1394
-	bne	cr7, beq_else.17924				# 1394
-	b	beq_cont.17925				# 1394
-beq_else.17924:
-	slwi	r2, r5, 2				# 1395
-	lwz	r6, 28(r3)				# 1395
-	lfsx	f1, r6, r2				# 1395
-	lfs	f0, 160(r3)				# 1395
-	mfspr	r31, 8				# 1395
-	stw	r31, 168(r3)				# 1395
-	addi	r3, r3, 172				# 1395
-	bl	min_caml_fless				# 1395
-	addi	r3, r3, -172				# 1395
-	lwz	r31, 168(r3)				# 1395
-	mtspr	8, r31				# 1395
-	lwz	r5, 72(r3)				# 1395
-	cmpw	cr7, r2, r5				# 1395
-	bne	cr7, beq_else.17926				# 1395
-	b	beq_cont.17927				# 1395
-beq_else.17926:
-	lis	r31, ha16(l.11923)
-	addi	r31, r31, lo16(l.11923)
-	lfs	f0, 0(r31)				# 1397
-	lfs	f1, 160(r3)				# 1397
-	fadd	f0, f1, f0				# 1397
-	slwi	r2, r5, 2				# 1398
-	lwz	r6, 24(r3)				# 1398
-	lfsx	f1, r6, r2				# 1398
-	fmul	f1, f1, f0				# 1398
-	slwi	r2, r5, 2				# 1398
-	lwz	r7, 20(r3)				# 1398
-	lfsx	f2, r7, r2				# 1398
-	fadd	f1, f1, f2				# 1398
-	lwz	r2, 56(r3)				# 1399
-	slwi	r8, r2, 2				# 1399
-	lfsx	f2, r6, r8				# 1399
-	fmul	f2, f2, f0				# 1399
-	slwi	r8, r2, 2				# 1399
-	lfsx	f3, r7, r8				# 1399
-	fadd	f2, f2, f3				# 1399
-	lwz	r8, 16(r3)				# 1400
-	slwi	r9, r8, 2				# 1400
-	lfsx	f3, r6, r9				# 1400
-	fmul	f3, f3, f0				# 1400
-	slwi	r6, r8, 2				# 1400
-	lfsx	f4, r7, r6				# 1400
-	fadd	f3, f3, f4				# 1400
-	lwz	r6, 48(r3)				# 1401
-	lwz	r30, 12(r3)				# 1401
-	stfs	f3, 168(r3)				# 1401
-	stfs	f2, 176(r3)				# 1401
-	stfs	f1, 184(r3)				# 1401
-	stfs	f0, 192(r3)				# 1401
-	mfspr	r31, 8				# 1401
-	mr	r2, r5				# 1401
-	mr	r5, r6				# 1401
-	fmr	f0, f1				# 1401
-	fmr	f1, f2				# 1401
-	fmr	f2, f3				# 1401
-	stw	r31, 200(r3)				# 1401
-	addi	r3, r3, 204				# 1401
-	lwz	r31, 0(r30)				# 1401
-	mtspr	9, r31				# 1401
-	bctrl				# 1401
-	addi	r3, r3, -204				# 1401
-	lwz	r31, 200(r3)				# 1401
-	mtspr	8, r31				# 1401
+beq_else.16168:
+	slwi	r17, r22, 2				# 1024
+	lwzx	r17, r11, r17				# 1024
+	lwz	r23, 40(r17)				# 441
+	slwi	r24, r19, 2				# 1026
+	lfsx	f1, r23, r24				# 1026
+	slwi	r24, r20, 2				# 1027
+	lfsx	f2, r23, r24				# 1027
+	slwi	r24, r16, 2				# 1028
+	lfsx	f3, r23, r24				# 1028
+	lwz	r24, 4(r6)				# 527
+	slwi	r25, r22, 2				# 1030
+	lwzx	r24, r24, r25				# 1030
+	lwz	r25, 4(r17)				# 252
+	stw	r12, 0(r3)				# 1032
+	stw	r14, 4(r3)				# 1032
+	stw	r13, 8(r3)				# 1032
+	stw	r15, 12(r3)				# 1032
+	stw	r16, 16(r3)				# 1032
+	stw	r8, 20(r3)				# 1032
+	stw	r21, 24(r3)				# 1032
+	stw	r7, 28(r3)				# 1032
+	stfs	f0, 32(r3)				# 1032
+	stw	r10, 40(r3)				# 1032
+	stw	r6, 44(r3)				# 1032
+	stw	r5, 48(r3)				# 1032
+	stw	r1, 52(r3)				# 1032
+	stw	r20, 56(r3)				# 1032
+	stw	r2, 60(r3)				# 1032
+	stw	r11, 64(r3)				# 1032
+	stw	r22, 68(r3)				# 1032
+	stw	r19, 72(r3)				# 1032
+	cmpw	cr7, r25, r20				# 1032
+	bne	cr7, beq_else.16170				# 1032
+	lwz	r18, 0(r6)				# 521
+	mfspr	r31, 8				# 1033
+	mr	r6, r24				# 1033
+	mr	r5, r18				# 1033
+	mr	r2, r17				# 1033
+	mr	r1, r9				# 1033
+	fmr	f0, f1				# 1033
+	fmr	f1, f2				# 1033
+	fmr	f2, f3				# 1033
+	stw	r31, 76(r3)				# 1033
+	addi	r3, r3, 80				# 1033
+	lwz	r31, 0(r1)				# 1033
+	mtspr	9, r31				# 1033
+	bctr				# 1033
+	addi	r3, r3, -80				# 1033
+	lwz	r31, 76(r3)				# 1033
+	mtspr	8, r31				# 1033
+	b	beq_cont.16171				# 1032
+beq_else.16170:
+	cmpw	cr7, r25, r16				# 1034
+	bne	cr7, beq_else.16172				# 1034
+	slwi	r9, r19, 2				# 997
+	lfsx	f1, r24, r9				# 997
+	fcmpu	cr7, f0, f1				# 115
+	bgt	cr7, ble_else.16174				# 115
+	addi	r9, 0, 0
+	b	ble_cont.16175				# 115
+ble_else.16174:
+	addi	r9, 0, 1
+ble_cont.16175:
+	cmpw	cr7, r9, r19				# 997
+	bne	cr7, beq_else.16176				# 997
+	addi	r2, 0, 0
+	b	beq_cont.16177				# 997
+beq_else.16176:
+	slwi	r9, r19, 2				# 998
+	lfsx	f1, r24, r9				# 998
+	slwi	r9, r18, 2				# 998
+	lfsx	f2, r23, r9				# 998
+	fmul	f1, f1, f2				# 998
+	slwi	r9, r19, 2				# 998
+	stfsx	f1, r10, r9				# 998
+	addi	r2, 0, 1
+beq_cont.16177:
+	b	beq_cont.16173				# 1034
+beq_else.16172:
+	slwi	r9, r19, 2				# 1006
+	lfsx	f4, r24, r9				# 1006
+	fcmpu	cr7, f4, f0				# 111
+	bne	cr7, beq_else.16178				# 111
+	addi	r9, 0, 1
+	b	beq_cont.16179				# 111
+beq_else.16178:
+	addi	r9, 0, 0
+beq_cont.16179:
+	cmpw	cr7, r9, r19				# 1007
+	bne	cr7, beq_else.16180				# 1007
+	slwi	r9, r20, 2				# 1010
+	lfsx	f5, r24, r9				# 1010
+	fmul	f1, f5, f1				# 1010
+	slwi	r9, r16, 2				# 1010
+	lfsx	f5, r24, r9				# 1010
+	fmul	f2, f5, f2				# 1010
+	fadd	f1, f1, f2				# 1010
+	slwi	r9, r18, 2				# 1010
+	lfsx	f2, r24, r9				# 1010
+	fmul	f2, f2, f3				# 1010
+	fadd	f1, f1, f2				# 1010
+	slwi	r9, r18, 2				# 1011
+	lfsx	f2, r23, r9				# 1011
+	fmul	f3, f1, f1				# 103
+	fmul	f2, f4, f2				# 1012
+	fsub	f2, f3, f2				# 1012
+	fcmpu	cr7, f2, f0				# 113
+	bgt	cr7, ble_else.16182				# 113
+	addi	r9, 0, 0
+	b	ble_cont.16183				# 113
+ble_else.16182:
+	addi	r9, 0, 1
+ble_cont.16183:
+	cmpw	cr7, r9, r19				# 1013
+	bne	cr7, beq_else.16184				# 1013
+	addi	r2, 0, 0
+	b	beq_cont.16185				# 1013
+beq_else.16184:
+	lwz	r9, 24(r17)				# 272
+	cmpw	cr7, r9, r19				# 1014
+	bne	cr7, beq_else.16186				# 1014
+	stw	r24, 76(r3)				# 1017
+	stfs	f1, 80(r3)				# 1017
+	mfspr	r31, 8				# 1017
+	fmr	f0, f2				# 1017
+	stw	r31, 88(r3)				# 1017
+	addi	r3, r3, 92				# 1017
+	bl	min_caml_sqrt				# 1017
+	addi	r3, r3, -92				# 1017
+	lwz	r31, 88(r3)				# 1017
+	mtspr	8, r31				# 1017
+	lfs	f1, 80(r3)				# 1017
+	fsub	f0, f1, f0				# 1017
+	lwz	r2, 76(r3)				# 1017
+	lfs	f1, 16(r2)				# 1017
+	fmul	f0, f0, f1				# 1017
+	lwz	r2, 72(r3)				# 1017
+	slwi	r5, r2, 2				# 1017
+	lwz	r6, 40(r3)				# 1017
+	stfsx	f0, r6, r5				# 1017
+	b	beq_cont.16187				# 1014
+beq_else.16186:
+	stw	r24, 76(r3)				# 1015
+	stfs	f1, 80(r3)				# 1015
+	mfspr	r31, 8				# 1015
+	fmr	f0, f2				# 1015
+	stw	r31, 88(r3)				# 1015
+	addi	r3, r3, 92				# 1015
+	bl	min_caml_sqrt				# 1015
+	addi	r3, r3, -92				# 1015
+	lwz	r31, 88(r3)				# 1015
+	mtspr	8, r31				# 1015
+	lfs	f1, 80(r3)				# 1015
+	fadd	f0, f1, f0				# 1015
+	lwz	r2, 76(r3)				# 1015
+	lfs	f1, 16(r2)				# 1015
+	fmul	f0, f0, f1				# 1015
+	lwz	r2, 72(r3)				# 1015
+	slwi	r5, r2, 2				# 1015
+	lwz	r6, 40(r3)				# 1015
+	stfsx	f0, r6, r5				# 1015
+beq_cont.16187:
+	addi	r2, 0, 1
+beq_cont.16185:
+	b	beq_cont.16181				# 1007
+beq_else.16180:
+	addi	r2, 0, 0
+beq_cont.16181:
+beq_cont.16173:
+beq_cont.16171:
 	lwz	r5, 72(r3)				# 1401
 	cmpw	cr7, r2, r5				# 1401
-	bne	cr7, beq_else.17928				# 1401
-	b	beq_cont.17929				# 1401
-beq_else.17928:
-	slwi	r2, r5, 2				# 1403
-	lwz	r6, 28(r3)				# 1403
-	lfs	f0, 192(r3)				# 1403
-	stfsx	f0, r6, r2				# 1403
-	slwi	r2, r5, 2				# 134
-	lwz	r6, 8(r3)				# 134
-	lfs	f0, 184(r3)				# 134
-	stfsx	f0, r6, r2				# 134
-	lwz	r2, 56(r3)				# 135
-	slwi	r7, r2, 2				# 135
-	lfs	f0, 176(r3)				# 135
-	stfsx	f0, r6, r7				# 135
-	lwz	r7, 16(r3)				# 136
-	slwi	r7, r7, 2				# 136
-	lfs	f0, 168(r3)				# 136
-	stfsx	f0, r6, r7				# 136
+	bne	cr7, beq_else.16188				# 1401
+	lwz	r2, 68(r3)				# 1429
+	slwi	r2, r2, 2				# 1429
+	lwz	r6, 64(r3)				# 1429
+	lwzx	r2, r6, r2				# 1429
+	lwz	r2, 24(r2)				# 272
+	cmpw	cr7, r2, r5				# 1429
+	bne	cr7, beq_else.16189				# 1429
+	blr
+beq_else.16189:
+	lwz	r2, 56(r3)				# 1430
+	lwz	r5, 60(r3)				# 1430
+	add	r2, r5, r2				# 1430
+	lwz	r5, 48(r3)				# 1430
+	lwz	r6, 44(r3)				# 1430
+	lwz	r1, 52(r3)				# 1430
+	lwz	r30, 0(r1)				# 1430
+	mtspr	9, r30
+	bctr				# 1430
+beq_else.16188:
 	slwi	r6, r5, 2				# 1405
-	lwz	r7, 4(r3)				# 1405
-	lwz	r8, 68(r3)				# 1405
-	stwx	r8, r7, r6				# 1405
-	slwi	r5, r5, 2				# 1406
-	lwz	r6, 0(r3)				# 1406
-	lwz	r7, 152(r3)				# 1406
-	stwx	r7, r6, r5				# 1406
-beq_cont.17929:
-beq_cont.17927:
-beq_cont.17925:
-	lwz	r2, 56(r3)				# 1412
-	lwz	r5, 60(r3)				# 1412
-	add	r2, r5, r2				# 1412
-	lwz	r5, 48(r3)				# 1412
-	lwz	r6, 44(r3)				# 1412
-	lwz	r30, 52(r3)				# 1412
-	lwz	r29, 0(r30)				# 1412
-	mtspr	9, r29
-	bctr				# 1412
-solve_one_or_network_fast.2768:
-	lwz	r7, 20(r30)				# 1423
-	lwz	r8, 16(r30)				# 1423
-	lwz	r9, 12(r30)				# 1423
-	lwz	r10, 8(r30)				# 1423
-	lwz	r11, 4(r30)				# 1423
-	slwi	r12, r2, 2				# 1424
-	lwzx	r12, r5, r12				# 1424
-	cmpw	cr7, r12, r9				# 1425
-	bne	cr7, beq_else.17930				# 1425
+	lwz	r7, 40(r3)				# 1405
+	lfsx	f0, r7, r6				# 1405
+	lfs	f1, 32(r3)				# 109
+	fcmpu	cr7, f0, f1				# 109
+	bgt	cr7, ble_else.16191				# 109
+	addi	r6, 0, 0
+	b	ble_cont.16192				# 109
+ble_else.16191:
+	addi	r6, 0, 1
+ble_cont.16192:
+	cmpw	cr7, r6, r5				# 1407
+	bne	cr7, beq_else.16193				# 1407
+	b	beq_cont.16194				# 1407
+beq_else.16193:
+	slwi	r6, r5, 2				# 1408
+	lwz	r7, 28(r3)				# 1408
+	lfsx	f1, r7, r6				# 1408
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.16195				# 109
+	addi	r6, 0, 0
+	b	ble_cont.16196				# 109
+ble_else.16195:
+	addi	r6, 0, 1
+ble_cont.16196:
+	cmpw	cr7, r6, r5				# 1408
+	bne	cr7, beq_else.16197				# 1408
+	b	beq_cont.16198				# 1408
+beq_else.16197:
+	lis	r31, ha16(l.11955)
+	addi	r31, r31, lo16(l.11955)
+	lfs	f1, 0(r31)				# 1410
+	fadd	f0, f0, f1				# 1410
+	slwi	r6, r5, 2				# 1411
+	lwz	r8, 24(r3)				# 1411
+	lfsx	f1, r8, r6				# 1411
+	fmul	f1, f1, f0				# 1411
+	slwi	r6, r5, 2				# 1411
+	lwz	r9, 20(r3)				# 1411
+	lfsx	f2, r9, r6				# 1411
+	fadd	f1, f1, f2				# 1411
+	lwz	r6, 56(r3)				# 1412
+	slwi	r10, r6, 2				# 1412
+	lfsx	f2, r8, r10				# 1412
+	fmul	f2, f2, f0				# 1412
+	slwi	r10, r6, 2				# 1412
+	lfsx	f3, r9, r10				# 1412
+	fadd	f2, f2, f3				# 1412
+	lwz	r10, 16(r3)				# 1413
+	slwi	r11, r10, 2				# 1413
+	lfsx	f3, r8, r11				# 1413
+	fmul	f3, f3, f0				# 1413
+	slwi	r8, r10, 2				# 1413
+	lfsx	f4, r9, r8				# 1413
+	fadd	f3, f3, f4				# 1413
+	lwz	r8, 48(r3)				# 1414
+	lwz	r1, 12(r3)				# 1414
+	stw	r2, 88(r3)				# 1414
+	stfs	f3, 96(r3)				# 1414
+	stfs	f2, 104(r3)				# 1414
+	stfs	f1, 112(r3)				# 1414
+	stfs	f0, 120(r3)				# 1414
+	mfspr	r31, 8				# 1414
+	mr	r2, r5				# 1414
+	mr	r5, r8				# 1414
+	fmr	f0, f1				# 1414
+	fmr	f1, f2				# 1414
+	fmr	f2, f3				# 1414
+	stw	r31, 128(r3)				# 1414
+	addi	r3, r3, 132				# 1414
+	lwz	r31, 0(r1)				# 1414
+	mtspr	9, r31				# 1414
+	bctr				# 1414
+	addi	r3, r3, -132				# 1414
+	lwz	r31, 128(r3)				# 1414
+	mtspr	8, r31				# 1414
+	lwz	r5, 72(r3)				# 1414
+	cmpw	cr7, r2, r5				# 1414
+	bne	cr7, beq_else.16200				# 1414
+	b	beq_cont.16201				# 1414
+beq_else.16200:
+	slwi	r2, r5, 2				# 1416
+	lwz	r6, 28(r3)				# 1416
+	lfs	f0, 120(r3)				# 1416
+	stfsx	f0, r6, r2				# 1416
+	slwi	r2, r5, 2				# 147
+	lwz	r6, 8(r3)				# 147
+	lfs	f0, 112(r3)				# 147
+	stfsx	f0, r6, r2				# 147
+	lwz	r2, 56(r3)				# 148
+	slwi	r7, r2, 2				# 148
+	lfs	f0, 104(r3)				# 148
+	stfsx	f0, r6, r7				# 148
+	lwz	r7, 16(r3)				# 149
+	slwi	r7, r7, 2				# 149
+	lfs	f0, 96(r3)				# 149
+	stfsx	f0, r6, r7				# 149
+	slwi	r6, r5, 2				# 1418
+	lwz	r7, 4(r3)				# 1418
+	lwz	r8, 68(r3)				# 1418
+	stwx	r8, r7, r6				# 1418
+	slwi	r5, r5, 2				# 1419
+	lwz	r6, 0(r3)				# 1419
+	lwz	r7, 88(r3)				# 1419
+	stwx	r7, r6, r5				# 1419
+beq_cont.16201:
+beq_cont.16198:
+beq_cont.16194:
+	lwz	r2, 56(r3)				# 1425
+	lwz	r5, 60(r3)				# 1425
+	add	r2, r5, r2				# 1425
+	lwz	r5, 48(r3)				# 1425
+	lwz	r6, 44(r3)				# 1425
+	lwz	r1, 52(r3)				# 1425
+	lwz	r30, 0(r1)				# 1425
+	mtspr	9, r30
+	bctr				# 1425
+solve_one_or_network_fast.2786:
+	lwz	r7, 20(r1)				# 1436
+	lwz	r8, 16(r1)				# 1436
+	lwz	r9, 12(r1)				# 1436
+	lwz	r10, 8(r1)				# 1436
+	lwz	r11, 4(r1)				# 1436
+	slwi	r12, r2, 2				# 1437
+	lwzx	r12, r5, r12				# 1437
+	cmpw	cr7, r12, r9				# 1438
+	bne	cr7, beq_else.16202				# 1438
 	blr
-beq_else.17930:
-	slwi	r9, r12, 2				# 1426
-	lwzx	r8, r8, r9				# 1426
-	stw	r6, 0(r3)				# 1427
-	stw	r5, 4(r3)				# 1427
-	stw	r30, 8(r3)				# 1427
-	stw	r11, 12(r3)				# 1427
-	stw	r2, 16(r3)				# 1427
-	mfspr	r31, 8				# 1427
-	mr	r5, r8				# 1427
-	mr	r2, r10				# 1427
-	mr	r30, r7				# 1427
-	stw	r31, 20(r3)				# 1427
-	addi	r3, r3, 24				# 1427
-	lwz	r31, 0(r30)				# 1427
-	mtspr	9, r31				# 1427
-	bctrl				# 1427
-	addi	r3, r3, -24				# 1427
-	lwz	r31, 20(r3)				# 1427
-	mtspr	8, r31				# 1427
-	lwz	r2, 12(r3)				# 1428
-	lwz	r5, 16(r3)				# 1428
-	add	r2, r5, r2				# 1428
-	lwz	r5, 4(r3)				# 1428
-	lwz	r6, 0(r3)				# 1428
-	lwz	r30, 8(r3)				# 1428
-	lwz	r29, 0(r30)				# 1428
-	mtspr	9, r29
-	bctr				# 1428
-trace_or_matrix_fast.2772:
-	lwz	r7, 40(r30)				# 1433
-	lwz	r8, 36(r30)				# 1433
-	lwz	r9, 32(r30)				# 1433
-	lwz	r10, 28(r30)				# 1433
-	lwz	r11, 24(r30)				# 1433
-	lwz	r12, 20(r30)				# 1433
-	lwz	r13, 16(r30)				# 1433
-	lwz	r14, 12(r30)				# 1433
-	lwz	r15, 8(r30)				# 1433
-	lwz	r16, 4(r30)				# 1433
-	slwi	r17, r2, 2				# 1434
-	lwzx	r17, r5, r17				# 1434
-	slwi	r18, r15, 2				# 1435
-	lwzx	r18, r17, r18				# 1435
-	cmpw	cr7, r18, r13				# 1436
-	bne	cr7, beq_else.17932				# 1436
-	blr
-beq_else.17932:
-	stw	r6, 0(r3)				# 1439
-	stw	r5, 4(r3)				# 1439
-	stw	r30, 8(r3)				# 1439
-	stw	r16, 12(r3)				# 1439
-	stw	r2, 16(r3)				# 1439
-	cmpwi	cr7, r18, 99				# 1439
-	bne	cr7, beq_else.17934				# 1439
+beq_else.16202:
+	slwi	r9, r12, 2				# 1439
+	lwzx	r8, r8, r9				# 1439
+	stw	r6, 0(r3)				# 1440
+	stw	r5, 4(r3)				# 1440
+	stw	r1, 8(r3)				# 1440
+	stw	r11, 12(r3)				# 1440
+	stw	r2, 16(r3)				# 1440
 	mfspr	r31, 8				# 1440
-	mr	r5, r17				# 1440
-	mr	r2, r16				# 1440
-	mr	r30, r10				# 1440
+	mr	r5, r8				# 1440
+	mr	r2, r10				# 1440
+	mr	r1, r7				# 1440
 	stw	r31, 20(r3)				# 1440
 	addi	r3, r3, 24				# 1440
-	lwz	r31, 0(r30)				# 1440
+	lwz	r31, 0(r1)				# 1440
 	mtspr	9, r31				# 1440
-	bctrl				# 1440
+	bctr				# 1440
 	addi	r3, r3, -24				# 1440
 	lwz	r31, 20(r3)				# 1440
 	mtspr	8, r31				# 1440
-	b	beq_cont.17935				# 1439
-beq_else.17934:
-	slwi	r13, r18, 2				# 1011
-	lwzx	r11, r11, r13				# 1011
-	lwz	r13, 40(r11)				# 428
-	slwi	r19, r15, 2				# 1013
-	lfsx	f0, r13, r19				# 1013
-	slwi	r19, r16, 2				# 1014
-	lfsx	f1, r13, r19				# 1014
-	slwi	r19, r12, 2				# 1015
-	lfsx	f2, r13, r19				# 1015
-	lwz	r19, 4(r6)				# 514
-	slwi	r18, r18, 2				# 1017
-	lwzx	r18, r19, r18				# 1017
-	lwz	r19, 4(r11)				# 239
-	stw	r17, 20(r3)				# 1019
-	stw	r10, 24(r3)				# 1019
-	stw	r7, 28(r3)				# 1019
-	stw	r9, 32(r3)				# 1019
-	stw	r15, 36(r3)				# 1019
-	cmpw	cr7, r19, r16				# 1019
-	bne	cr7, beq_else.17936				# 1019
-	lwz	r12, 0(r6)				# 508
-	mfspr	r31, 8				# 1020
-	mr	r6, r18				# 1020
-	mr	r5, r12				# 1020
-	mr	r2, r11				# 1020
-	mr	r30, r8				# 1020
-	stw	r31, 40(r3)				# 1020
-	addi	r3, r3, 44				# 1020
-	lwz	r31, 0(r30)				# 1020
-	mtspr	9, r31				# 1020
-	bctrl				# 1020
-	addi	r3, r3, -44				# 1020
-	lwz	r31, 40(r3)				# 1020
-	mtspr	8, r31				# 1020
-	b	beq_cont.17937				# 1019
-beq_else.17936:
-	cmpw	cr7, r19, r12				# 1021
-	bne	cr7, beq_else.17938				# 1021
-	slwi	r8, r15, 2				# 984
-	lfsx	f0, r18, r8				# 984
-	stw	r13, 40(r3)				# 984
-	stw	r14, 44(r3)				# 984
-	stw	r18, 48(r3)				# 984
-	mfspr	r31, 8				# 984
-	stw	r31, 52(r3)				# 984
-	addi	r3, r3, 56				# 984
-	bl	min_caml_fisneg				# 984
-	addi	r3, r3, -56				# 984
-	lwz	r31, 52(r3)				# 984
-	mtspr	8, r31				# 984
-	lwz	r5, 36(r3)				# 984
-	cmpw	cr7, r2, r5				# 984
-	bne	cr7, beq_else.17940				# 984
+	lwz	r2, 12(r3)				# 1441
+	lwz	r5, 16(r3)				# 1441
+	add	r2, r5, r2				# 1441
+	lwz	r5, 4(r3)				# 1441
+	lwz	r6, 0(r3)				# 1441
+	lwz	r1, 8(r3)				# 1441
+	lwz	r30, 0(r1)				# 1441
+	mtspr	9, r30
+	bctr				# 1441
+trace_or_matrix_fast.2790:
+	lwz	r7, 44(r1)				# 1446
+	lwz	r8, 40(r1)				# 1446
+	lwz	r9, 36(r1)				# 1446
+	lwz	r10, 32(r1)				# 1446
+	lwz	r11, 28(r1)				# 1446
+	lwz	r12, 24(r1)				# 1446
+	lwz	r13, 20(r1)				# 1446
+	lwz	r14, 16(r1)				# 1446
+	lwz	r15, 12(r1)				# 1446
+	lwz	r16, 8(r1)				# 1446
+	lfs	f0, 4(r1)				# 1446
+	slwi	r17, r2, 2				# 1447
+	lwzx	r17, r5, r17				# 1447
+	slwi	r18, r15, 2				# 1448
+	lwzx	r18, r17, r18				# 1448
+	cmpw	cr7, r18, r13				# 1449
+	bne	cr7, beq_else.16204				# 1449
+	blr
+beq_else.16204:
+	stw	r6, 0(r3)				# 1452
+	stw	r5, 4(r3)				# 1452
+	stw	r1, 8(r3)				# 1452
+	stw	r16, 12(r3)				# 1452
+	stw	r2, 16(r3)				# 1452
+	cmpwi	cr7, r18, 99				# 1452
+	bne	cr7, beq_else.16206				# 1452
+	mfspr	r31, 8				# 1453
+	mr	r5, r17				# 1453
+	mr	r2, r16				# 1453
+	mr	r1, r10				# 1453
+	stw	r31, 20(r3)				# 1453
+	addi	r3, r3, 24				# 1453
+	lwz	r31, 0(r1)				# 1453
+	mtspr	9, r31				# 1453
+	bctr				# 1453
+	addi	r3, r3, -24				# 1453
+	lwz	r31, 20(r3)				# 1453
+	mtspr	8, r31				# 1453
+	b	beq_cont.16207				# 1452
+beq_else.16206:
+	slwi	r13, r18, 2				# 1024
+	lwzx	r11, r11, r13				# 1024
+	lwz	r13, 40(r11)				# 441
+	slwi	r19, r15, 2				# 1026
+	lfsx	f1, r13, r19				# 1026
+	slwi	r19, r16, 2				# 1027
+	lfsx	f2, r13, r19				# 1027
+	slwi	r19, r12, 2				# 1028
+	lfsx	f3, r13, r19				# 1028
+	lwz	r19, 4(r6)				# 527
+	slwi	r18, r18, 2				# 1030
+	lwzx	r18, r19, r18				# 1030
+	lwz	r19, 4(r11)				# 252
+	stw	r17, 20(r3)				# 1032
+	stw	r10, 24(r3)				# 1032
+	stw	r7, 28(r3)				# 1032
+	stw	r9, 32(r3)				# 1032
+	stw	r15, 36(r3)				# 1032
+	cmpw	cr7, r19, r16				# 1032
+	bne	cr7, beq_else.16208				# 1032
+	lwz	r12, 0(r6)				# 521
+	mfspr	r31, 8				# 1033
+	mr	r6, r18				# 1033
+	mr	r5, r12				# 1033
+	mr	r2, r11				# 1033
+	mr	r1, r8				# 1033
+	fmr	f0, f1				# 1033
+	fmr	f1, f2				# 1033
+	fmr	f2, f3				# 1033
+	stw	r31, 40(r3)				# 1033
+	addi	r3, r3, 44				# 1033
+	lwz	r31, 0(r1)				# 1033
+	mtspr	9, r31				# 1033
+	bctr				# 1033
+	addi	r3, r3, -44				# 1033
+	lwz	r31, 40(r3)				# 1033
+	mtspr	8, r31				# 1033
+	b	beq_cont.16209				# 1032
+beq_else.16208:
+	cmpw	cr7, r19, r12				# 1034
+	bne	cr7, beq_else.16210				# 1034
+	slwi	r8, r15, 2				# 997
+	lfsx	f1, r18, r8				# 997
+	fcmpu	cr7, f0, f1				# 115
+	bgt	cr7, ble_else.16212				# 115
+	addi	r8, 0, 0
+	b	ble_cont.16213				# 115
+ble_else.16212:
+	addi	r8, 0, 1
+ble_cont.16213:
+	cmpw	cr7, r8, r15				# 997
+	bne	cr7, beq_else.16214				# 997
 	addi	r2, 0, 0
-	b	beq_cont.17941				# 984
-beq_else.17940:
-	slwi	r2, r5, 2				# 985
-	lwz	r6, 48(r3)				# 985
-	lfsx	f0, r6, r2				# 985
-	lwz	r2, 44(r3)				# 985
-	slwi	r2, r2, 2				# 985
-	lwz	r6, 40(r3)				# 985
-	lfsx	f1, r6, r2				# 985
-	fmul	f0, f0, f1				# 985
-	slwi	r2, r5, 2				# 985
-	lwz	r6, 32(r3)				# 985
-	stfsx	f0, r6, r2				# 985
+	b	beq_cont.16215				# 997
+beq_else.16214:
+	slwi	r8, r15, 2				# 998
+	lfsx	f0, r18, r8				# 998
+	slwi	r8, r14, 2				# 998
+	lfsx	f1, r13, r8				# 998
+	fmul	f0, f0, f1				# 998
+	slwi	r8, r15, 2				# 998
+	stfsx	f0, r9, r8				# 998
 	addi	r2, 0, 1
-beq_cont.17941:
-	b	beq_cont.17939				# 1021
-beq_else.17938:
-	slwi	r8, r15, 2				# 993
-	lfsx	f3, r18, r8				# 993
-	stw	r11, 52(r3)				# 994
-	stfs	f3, 56(r3)				# 994
-	stw	r13, 40(r3)				# 994
-	stfs	f2, 64(r3)				# 994
-	stw	r14, 44(r3)				# 994
-	stfs	f1, 72(r3)				# 994
-	stw	r12, 80(r3)				# 994
-	stfs	f0, 88(r3)				# 994
-	stw	r18, 48(r3)				# 994
-	mfspr	r31, 8				# 994
-	fmr	f0, f3				# 994
-	stw	r31, 96(r3)				# 994
-	addi	r3, r3, 100				# 994
-	bl	min_caml_fiszero				# 994
-	addi	r3, r3, -100				# 994
-	lwz	r31, 96(r3)				# 994
-	mtspr	8, r31				# 994
-	lwz	r5, 36(r3)				# 994
-	cmpw	cr7, r2, r5				# 994
-	bne	cr7, beq_else.17943				# 994
-	lwz	r2, 12(r3)				# 997
-	slwi	r6, r2, 2				# 997
-	lwz	r7, 48(r3)				# 997
-	lfsx	f0, r7, r6				# 997
-	lfs	f1, 88(r3)				# 997
-	fmul	f0, f0, f1				# 997
-	lwz	r6, 80(r3)				# 997
-	slwi	r6, r6, 2				# 997
-	lfsx	f1, r7, r6				# 997
-	lfs	f2, 72(r3)				# 997
-	fmul	f1, f1, f2				# 997
-	fadd	f0, f0, f1				# 997
-	lwz	r6, 44(r3)				# 997
-	slwi	r8, r6, 2				# 997
-	lfsx	f1, r7, r8				# 997
-	lfs	f2, 64(r3)				# 997
-	fmul	f1, f1, f2				# 997
-	fadd	f0, f0, f1				# 997
-	slwi	r6, r6, 2				# 998
-	lwz	r8, 40(r3)				# 998
-	lfsx	f1, r8, r6				# 998
-	stfs	f0, 96(r3)				# 999
-	stfs	f1, 104(r3)				# 999
-	mfspr	r31, 8				# 999
-	stw	r31, 112(r3)				# 999
-	addi	r3, r3, 116				# 999
-	bl	min_caml_fsqr				# 999
-	addi	r3, r3, -116				# 999
-	lwz	r31, 112(r3)				# 999
-	mtspr	8, r31				# 999
-	lfs	f1, 104(r3)				# 999
-	lfs	f2, 56(r3)				# 999
-	fmul	f1, f2, f1				# 999
-	fsub	f0, f0, f1				# 999
-	stfs	f0, 112(r3)				# 1000
-	mfspr	r31, 8				# 1000
-	stw	r31, 120(r3)				# 1000
-	addi	r3, r3, 124				# 1000
-	bl	min_caml_fispos				# 1000
-	addi	r3, r3, -124				# 1000
-	lwz	r31, 120(r3)				# 1000
-	mtspr	8, r31				# 1000
-	lwz	r5, 36(r3)				# 1000
-	cmpw	cr7, r2, r5				# 1000
-	bne	cr7, beq_else.17945				# 1000
+beq_cont.16215:
+	b	beq_cont.16211				# 1034
+beq_else.16210:
+	slwi	r8, r15, 2				# 1006
+	lfsx	f4, r18, r8				# 1006
+	fcmpu	cr7, f4, f0				# 111
+	bne	cr7, beq_else.16216				# 111
+	addi	r8, 0, 1
+	b	beq_cont.16217				# 111
+beq_else.16216:
+	addi	r8, 0, 0
+beq_cont.16217:
+	cmpw	cr7, r8, r15				# 1007
+	bne	cr7, beq_else.16218				# 1007
+	slwi	r8, r16, 2				# 1010
+	lfsx	f5, r18, r8				# 1010
+	fmul	f1, f5, f1				# 1010
+	slwi	r8, r12, 2				# 1010
+	lfsx	f5, r18, r8				# 1010
+	fmul	f2, f5, f2				# 1010
+	fadd	f1, f1, f2				# 1010
+	slwi	r8, r14, 2				# 1010
+	lfsx	f2, r18, r8				# 1010
+	fmul	f2, f2, f3				# 1010
+	fadd	f1, f1, f2				# 1010
+	slwi	r8, r14, 2				# 1011
+	lfsx	f2, r13, r8				# 1011
+	fmul	f3, f1, f1				# 103
+	fmul	f2, f4, f2				# 1012
+	fsub	f2, f3, f2				# 1012
+	fcmpu	cr7, f2, f0				# 113
+	bgt	cr7, ble_else.16220				# 113
+	addi	r8, 0, 0
+	b	ble_cont.16221				# 113
+ble_else.16220:
+	addi	r8, 0, 1
+ble_cont.16221:
+	cmpw	cr7, r8, r15				# 1013
+	bne	cr7, beq_else.16222				# 1013
 	addi	r2, 0, 0
-	b	beq_cont.17946				# 1000
-beq_else.17945:
-	lwz	r2, 52(r3)				# 259
-	lwz	r2, 24(r2)				# 259
-	cmpw	cr7, r2, r5				# 1001
-	bne	cr7, beq_else.17947				# 1001
-	lfs	f0, 112(r3)				# 1004
-	mfspr	r31, 8				# 1004
-	stw	r31, 120(r3)				# 1004
-	addi	r3, r3, 124				# 1004
-	bl	min_caml_sqrt				# 1004
-	addi	r3, r3, -124				# 1004
-	lwz	r31, 120(r3)				# 1004
-	mtspr	8, r31				# 1004
-	lfs	f1, 96(r3)				# 1004
-	fsub	f0, f1, f0				# 1004
-	lwz	r2, 48(r3)				# 1004
-	lfs	f1, 16(r2)				# 1004
-	fmul	f0, f0, f1				# 1004
-	lwz	r2, 36(r3)				# 1004
-	slwi	r5, r2, 2				# 1004
-	lwz	r6, 32(r3)				# 1004
-	stfsx	f0, r6, r5				# 1004
-	b	beq_cont.17948				# 1001
-beq_else.17947:
-	lfs	f0, 112(r3)				# 1002
-	mfspr	r31, 8				# 1002
-	stw	r31, 120(r3)				# 1002
-	addi	r3, r3, 124				# 1002
-	bl	min_caml_sqrt				# 1002
-	addi	r3, r3, -124				# 1002
-	lwz	r31, 120(r3)				# 1002
-	mtspr	8, r31				# 1002
-	lfs	f1, 96(r3)				# 1002
-	fadd	f0, f1, f0				# 1002
-	lwz	r2, 48(r3)				# 1002
-	lfs	f1, 16(r2)				# 1002
-	fmul	f0, f0, f1				# 1002
-	lwz	r2, 36(r3)				# 1002
-	slwi	r5, r2, 2				# 1002
-	lwz	r6, 32(r3)				# 1002
-	stfsx	f0, r6, r5				# 1002
-beq_cont.17948:
+	b	beq_cont.16223				# 1013
+beq_else.16222:
+	lwz	r8, 24(r11)				# 272
+	cmpw	cr7, r8, r15				# 1014
+	bne	cr7, beq_else.16224				# 1014
+	stw	r18, 40(r3)				# 1017
+	stfs	f1, 48(r3)				# 1017
+	mfspr	r31, 8				# 1017
+	fmr	f0, f2				# 1017
+	stw	r31, 56(r3)				# 1017
+	addi	r3, r3, 60				# 1017
+	bl	min_caml_sqrt				# 1017
+	addi	r3, r3, -60				# 1017
+	lwz	r31, 56(r3)				# 1017
+	mtspr	8, r31				# 1017
+	lfs	f1, 48(r3)				# 1017
+	fsub	f0, f1, f0				# 1017
+	lwz	r2, 40(r3)				# 1017
+	lfs	f1, 16(r2)				# 1017
+	fmul	f0, f0, f1				# 1017
+	lwz	r2, 36(r3)				# 1017
+	slwi	r5, r2, 2				# 1017
+	lwz	r6, 32(r3)				# 1017
+	stfsx	f0, r6, r5				# 1017
+	b	beq_cont.16225				# 1014
+beq_else.16224:
+	stw	r18, 40(r3)				# 1015
+	stfs	f1, 48(r3)				# 1015
+	mfspr	r31, 8				# 1015
+	fmr	f0, f2				# 1015
+	stw	r31, 56(r3)				# 1015
+	addi	r3, r3, 60				# 1015
+	bl	min_caml_sqrt				# 1015
+	addi	r3, r3, -60				# 1015
+	lwz	r31, 56(r3)				# 1015
+	mtspr	8, r31				# 1015
+	lfs	f1, 48(r3)				# 1015
+	fadd	f0, f1, f0				# 1015
+	lwz	r2, 40(r3)				# 1015
+	lfs	f1, 16(r2)				# 1015
+	fmul	f0, f0, f1				# 1015
+	lwz	r2, 36(r3)				# 1015
+	slwi	r5, r2, 2				# 1015
+	lwz	r6, 32(r3)				# 1015
+	stfsx	f0, r6, r5				# 1015
+beq_cont.16225:
 	addi	r2, 0, 1
-beq_cont.17946:
-	b	beq_cont.17944				# 994
-beq_else.17943:
+beq_cont.16223:
+	b	beq_cont.16219				# 1007
+beq_else.16218:
 	addi	r2, 0, 0
-beq_cont.17944:
-beq_cont.17939:
-beq_cont.17937:
-	lwz	r5, 36(r3)				# 1445
-	cmpw	cr7, r2, r5				# 1445
-	bne	cr7, beq_else.17949				# 1445
-	b	beq_cont.17950				# 1445
-beq_else.17949:
-	slwi	r2, r5, 2				# 1446
-	lwz	r6, 32(r3)				# 1446
-	lfsx	f0, r6, r2				# 1446
-	slwi	r2, r5, 2				# 1447
-	lwz	r6, 28(r3)				# 1447
-	lfsx	f1, r6, r2				# 1447
-	mfspr	r31, 8				# 1447
-	stw	r31, 120(r3)				# 1447
-	addi	r3, r3, 124				# 1447
-	bl	min_caml_fless				# 1447
-	addi	r3, r3, -124				# 1447
-	lwz	r31, 120(r3)				# 1447
-	mtspr	8, r31				# 1447
-	lwz	r5, 36(r3)				# 1447
-	cmpw	cr7, r2, r5				# 1447
-	bne	cr7, beq_else.17951				# 1447
-	b	beq_cont.17952				# 1447
-beq_else.17951:
-	lwz	r2, 12(r3)				# 1448
-	lwz	r5, 20(r3)				# 1448
-	lwz	r6, 0(r3)				# 1448
-	lwz	r30, 24(r3)				# 1448
-	mfspr	r31, 8				# 1448
-	stw	r31, 120(r3)				# 1448
-	addi	r3, r3, 124				# 1448
-	lwz	r31, 0(r30)				# 1448
-	mtspr	9, r31				# 1448
-	bctrl				# 1448
-	addi	r3, r3, -124				# 1448
-	lwz	r31, 120(r3)				# 1448
-	mtspr	8, r31				# 1448
-beq_cont.17952:
-beq_cont.17950:
-beq_cont.17935:
-	lwz	r2, 12(r3)				# 1452
-	lwz	r5, 16(r3)				# 1452
-	add	r2, r5, r2				# 1452
-	lwz	r5, 4(r3)				# 1452
-	lwz	r6, 0(r3)				# 1452
-	lwz	r30, 8(r3)				# 1452
-	lwz	r29, 0(r30)				# 1452
-	mtspr	9, r29
-	bctr				# 1452
-get_nvector_second.2782:
-	lwz	r5, 20(r30)				# 1492
-	lwz	r6, 16(r30)				# 1492
-	lwz	r7, 12(r30)				# 1492
-	lwz	r8, 8(r30)				# 1492
-	lwz	r9, 4(r30)				# 1492
-	slwi	r10, r8, 2				# 1493
-	lfsx	f0, r6, r10				# 1493
-	lwz	r10, 20(r2)				# 317
-	slwi	r11, r8, 2				# 322
-	lfsx	f1, r10, r11				# 322
-	fsub	f0, f0, f1				# 1493
-	slwi	r10, r9, 2				# 1494
-	lfsx	f1, r6, r10				# 1494
-	lwz	r10, 20(r2)				# 327
-	slwi	r11, r9, 2				# 332
-	lfsx	f2, r10, r11				# 332
-	fsub	f1, f1, f2				# 1494
-	slwi	r10, r7, 2				# 1495
-	lfsx	f2, r6, r10				# 1495
-	lwz	r6, 20(r2)				# 337
-	slwi	r10, r7, 2				# 342
-	lfsx	f3, r6, r10				# 342
-	fsub	f2, f2, f3				# 1495
-	lwz	r6, 16(r2)				# 277
-	slwi	r10, r8, 2				# 282
-	lfsx	f3, r6, r10				# 282
-	fmul	f3, f0, f3				# 1497
-	lwz	r6, 16(r2)				# 287
-	slwi	r10, r9, 2				# 292
-	lfsx	f4, r6, r10				# 292
-	fmul	f4, f1, f4				# 1498
-	lwz	r6, 16(r2)				# 297
-	slwi	r10, r7, 2				# 302
-	lfsx	f5, r6, r10				# 302
-	fmul	f5, f2, f5				# 1499
-	lwz	r6, 12(r2)				# 268
-	stw	r7, 0(r3)				# 1501
-	stw	r9, 4(r3)				# 1501
-	stw	r5, 8(r3)				# 1501
-	stw	r8, 12(r3)				# 1501
-	stw	r2, 16(r3)				# 1501
-	cmpw	cr7, r6, r8				# 1501
-	bne	cr7, beq_else.17953				# 1501
-	slwi	r6, r8, 2				# 1502
-	stfsx	f3, r5, r6				# 1502
-	slwi	r6, r9, 2				# 1503
-	stfsx	f4, r5, r6				# 1503
-	slwi	r6, r7, 2				# 1504
-	stfsx	f5, r5, r6				# 1504
-	b	beq_cont.17954				# 1501
-beq_else.17953:
-	lwz	r6, 36(r2)				# 417
-	slwi	r10, r7, 2				# 422
-	lfsx	f6, r6, r10				# 422
-	fmul	f6, f1, f6				# 1506
-	lwz	r6, 36(r2)				# 407
-	slwi	r10, r9, 2				# 412
-	lfsx	f7, r6, r10				# 412
-	fmul	f7, f2, f7				# 1506
-	fadd	f6, f6, f7				# 1506
-	stfs	f5, 24(r3)				# 1506
-	stfs	f1, 32(r3)				# 1506
-	stfs	f4, 40(r3)				# 1506
-	stfs	f2, 48(r3)				# 1506
-	stfs	f0, 56(r3)				# 1506
-	stfs	f3, 64(r3)				# 1506
-	mfspr	r31, 8				# 1506
-	fmr	f0, f6				# 1506
-	stw	r31, 72(r3)				# 1506
-	addi	r3, r3, 76				# 1506
-	bl	min_caml_fhalf				# 1506
-	addi	r3, r3, -76				# 1506
-	lwz	r31, 72(r3)				# 1506
-	mtspr	8, r31				# 1506
-	lfs	f1, 64(r3)				# 1506
-	fadd	f0, f1, f0				# 1506
-	lwz	r2, 12(r3)				# 1506
-	slwi	r5, r2, 2				# 1506
-	lwz	r6, 8(r3)				# 1506
-	stfsx	f0, r6, r5				# 1506
-	lwz	r5, 16(r3)				# 417
-	lwz	r7, 36(r5)				# 417
-	lwz	r8, 0(r3)				# 422
-	slwi	r9, r8, 2				# 422
-	lfsx	f0, r7, r9				# 422
-	lfs	f1, 56(r3)				# 1507
-	fmul	f0, f1, f0				# 1507
-	lwz	r7, 36(r5)				# 397
-	slwi	r9, r2, 2				# 402
-	lfsx	f2, r7, r9				# 402
-	lfs	f3, 48(r3)				# 1507
-	fmul	f2, f3, f2				# 1507
-	fadd	f0, f0, f2				# 1507
-	mfspr	r31, 8				# 1507
-	stw	r31, 72(r3)				# 1507
-	addi	r3, r3, 76				# 1507
-	bl	min_caml_fhalf				# 1507
-	addi	r3, r3, -76				# 1507
-	lwz	r31, 72(r3)				# 1507
-	mtspr	8, r31				# 1507
-	lfs	f1, 40(r3)				# 1507
-	fadd	f0, f1, f0				# 1507
-	lwz	r2, 4(r3)				# 1507
-	slwi	r5, r2, 2				# 1507
-	lwz	r6, 8(r3)				# 1507
-	stfsx	f0, r6, r5				# 1507
-	lwz	r5, 16(r3)				# 407
-	lwz	r7, 36(r5)				# 407
-	slwi	r8, r2, 2				# 412
-	lfsx	f0, r7, r8				# 412
-	lfs	f1, 56(r3)				# 1508
-	fmul	f0, f1, f0				# 1508
-	lwz	r7, 36(r5)				# 397
-	lwz	r8, 12(r3)				# 402
-	slwi	r9, r8, 2				# 402
-	lfsx	f1, r7, r9				# 402
-	lfs	f2, 32(r3)				# 1508
-	fmul	f1, f2, f1				# 1508
-	fadd	f0, f0, f1				# 1508
-	mfspr	r31, 8				# 1508
-	stw	r31, 72(r3)				# 1508
-	addi	r3, r3, 76				# 1508
-	bl	min_caml_fhalf				# 1508
-	addi	r3, r3, -76				# 1508
-	lwz	r31, 72(r3)				# 1508
-	mtspr	8, r31				# 1508
-	lfs	f1, 24(r3)				# 1508
-	fadd	f0, f1, f0				# 1508
-	lwz	r2, 0(r3)				# 1508
-	slwi	r5, r2, 2				# 1508
-	lwz	r6, 8(r3)				# 1508
-	stfsx	f0, r6, r5				# 1508
-beq_cont.17954:
-	lwz	r2, 16(r3)				# 259
-	lwz	r2, 24(r2)				# 259
-	lwz	r5, 12(r3)				# 173
-	slwi	r6, r5, 2				# 173
-	lwz	r7, 8(r3)				# 173
-	lfsx	f0, r7, r6				# 173
-	stw	r2, 72(r3)				# 173
-	mfspr	r31, 8				# 173
-	stw	r31, 76(r3)				# 173
-	addi	r3, r3, 80				# 173
-	bl	min_caml_fsqr				# 173
-	addi	r3, r3, -80				# 173
-	lwz	r31, 76(r3)				# 173
-	mtspr	8, r31				# 173
-	lwz	r2, 4(r3)				# 173
-	slwi	r5, r2, 2				# 173
-	lwz	r6, 8(r3)				# 173
-	lfsx	f1, r6, r5				# 173
-	stfs	f0, 80(r3)				# 173
-	mfspr	r31, 8				# 173
-	fmr	f0, f1				# 173
-	stw	r31, 88(r3)				# 173
-	addi	r3, r3, 92				# 173
-	bl	min_caml_fsqr				# 173
-	addi	r3, r3, -92				# 173
-	lwz	r31, 88(r3)				# 173
-	mtspr	8, r31				# 173
-	lfs	f1, 80(r3)				# 173
-	fadd	f0, f1, f0				# 173
-	lwz	r2, 0(r3)				# 173
-	slwi	r5, r2, 2				# 173
-	lwz	r6, 8(r3)				# 173
-	lfsx	f1, r6, r5				# 173
-	stfs	f0, 88(r3)				# 173
-	mfspr	r31, 8				# 173
-	fmr	f0, f1				# 173
-	stw	r31, 96(r3)				# 173
-	addi	r3, r3, 100				# 173
-	bl	min_caml_fsqr				# 173
-	addi	r3, r3, -100				# 173
-	lwz	r31, 96(r3)				# 173
-	mtspr	8, r31				# 173
-	lfs	f1, 88(r3)				# 173
-	fadd	f0, f1, f0				# 173
-	mfspr	r31, 8				# 173
-	stw	r31, 96(r3)				# 173
-	addi	r3, r3, 100				# 173
-	bl	min_caml_sqrt				# 173
-	addi	r3, r3, -100				# 173
-	lwz	r31, 96(r3)				# 173
-	mtspr	8, r31				# 173
-	stfs	f0, 96(r3)				# 174
-	mfspr	r31, 8				# 174
-	stw	r31, 104(r3)				# 174
-	addi	r3, r3, 108				# 174
-	bl	min_caml_fiszero				# 174
-	addi	r3, r3, -108				# 174
-	lwz	r31, 104(r3)				# 174
-	mtspr	8, r31				# 174
-	lwz	r5, 12(r3)				# 174
-	cmpw	cr7, r2, r5				# 174
-	bne	cr7, beq_else.17957				# 174
-	lwz	r2, 72(r3)				# 174
-	cmpw	cr7, r2, r5				# 174
-	bne	cr7, beq_else.17959				# 174
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 174
-	lfs	f1, 96(r3)				# 174
-	fdiv	f0, f0, f1				# 174
-	b	beq_cont.17960				# 174
-beq_else.17959:
-	lis	r31, ha16(l.11650)
-	addi	r31, r31, lo16(l.11650)
-	lfs	f0, 0(r31)				# 174
-	lfs	f1, 96(r3)				# 174
-	fdiv	f0, f0, f1				# 174
-beq_cont.17960:
-	b	beq_cont.17958				# 174
-beq_else.17957:
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 174
-beq_cont.17958:
-	slwi	r2, r5, 2				# 175
-	lwz	r6, 8(r3)				# 175
-	lfsx	f1, r6, r2				# 175
-	fmul	f1, f1, f0				# 175
-	slwi	r2, r5, 2				# 175
-	stfsx	f1, r6, r2				# 175
-	lwz	r2, 4(r3)				# 176
-	slwi	r5, r2, 2				# 176
-	lfsx	f1, r6, r5				# 176
-	fmul	f1, f1, f0				# 176
-	slwi	r2, r2, 2				# 176
-	stfsx	f1, r6, r2				# 176
-	lwz	r2, 0(r3)				# 177
-	slwi	r5, r2, 2				# 177
-	lfsx	f1, r6, r5				# 177
-	fmul	f0, f1, f0				# 177
-	slwi	r2, r2, 2				# 177
-	stfsx	f0, r6, r2				# 177
+beq_cont.16219:
+beq_cont.16211:
+beq_cont.16209:
+	lwz	r5, 36(r3)				# 1458
+	cmpw	cr7, r2, r5				# 1458
+	bne	cr7, beq_else.16227				# 1458
+	b	beq_cont.16228				# 1458
+beq_else.16227:
+	slwi	r2, r5, 2				# 1459
+	lwz	r6, 32(r3)				# 1459
+	lfsx	f0, r6, r2				# 1459
+	slwi	r2, r5, 2				# 1460
+	lwz	r6, 28(r3)				# 1460
+	lfsx	f1, r6, r2				# 1460
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.16229				# 109
+	addi	r2, 0, 0
+	b	ble_cont.16230				# 109
+ble_else.16229:
+	addi	r2, 0, 1
+ble_cont.16230:
+	cmpw	cr7, r2, r5				# 1460
+	bne	cr7, beq_else.16231				# 1460
+	b	beq_cont.16232				# 1460
+beq_else.16231:
+	lwz	r2, 12(r3)				# 1461
+	lwz	r5, 20(r3)				# 1461
+	lwz	r6, 0(r3)				# 1461
+	lwz	r1, 24(r3)				# 1461
+	mfspr	r31, 8				# 1461
+	stw	r31, 56(r3)				# 1461
+	addi	r3, r3, 60				# 1461
+	lwz	r31, 0(r1)				# 1461
+	mtspr	9, r31				# 1461
+	bctr				# 1461
+	addi	r3, r3, -60				# 1461
+	lwz	r31, 56(r3)				# 1461
+	mtspr	8, r31				# 1461
+beq_cont.16232:
+beq_cont.16228:
+beq_cont.16207:
+	lwz	r2, 12(r3)				# 1465
+	lwz	r5, 16(r3)				# 1465
+	add	r2, r5, r2				# 1465
+	lwz	r5, 4(r3)				# 1465
+	lwz	r6, 0(r3)				# 1465
+	lwz	r1, 8(r3)				# 1465
+	lwz	r30, 0(r1)				# 1465
+	mtspr	9, r30
+	bctr				# 1465
+get_nvector_second.2800:
+	lwz	r5, 24(r1)				# 1505
+	lwz	r6, 20(r1)				# 1505
+	lwz	r7, 16(r1)				# 1505
+	lwz	r8, 12(r1)				# 1505
+	lwz	r9, 8(r1)				# 1505
+	lfs	f0, 4(r1)				# 1505
+	slwi	r10, r8, 2				# 1506
+	lfsx	f1, r6, r10				# 1506
+	lwz	r10, 20(r2)				# 330
+	slwi	r11, r8, 2				# 335
+	lfsx	f2, r10, r11				# 335
+	fsub	f1, f1, f2				# 1506
+	slwi	r10, r9, 2				# 1507
+	lfsx	f2, r6, r10				# 1507
+	lwz	r10, 20(r2)				# 340
+	slwi	r11, r9, 2				# 345
+	lfsx	f3, r10, r11				# 345
+	fsub	f2, f2, f3				# 1507
+	slwi	r10, r7, 2				# 1508
+	lfsx	f3, r6, r10				# 1508
+	lwz	r6, 20(r2)				# 350
+	slwi	r10, r7, 2				# 355
+	lfsx	f4, r6, r10				# 355
+	fsub	f3, f3, f4				# 1508
+	lwz	r6, 16(r2)				# 290
+	slwi	r10, r8, 2				# 295
+	lfsx	f4, r6, r10				# 295
+	fmul	f4, f1, f4				# 1510
+	lwz	r6, 16(r2)				# 300
+	slwi	r10, r9, 2				# 305
+	lfsx	f5, r6, r10				# 305
+	fmul	f5, f2, f5				# 1511
+	lwz	r6, 16(r2)				# 310
+	slwi	r10, r7, 2				# 315
+	lfsx	f6, r6, r10				# 315
+	fmul	f6, f3, f6				# 1512
+	lwz	r6, 12(r2)				# 281
+	cmpw	cr7, r6, r8				# 1514
+	bne	cr7, beq_else.16233				# 1514
+	slwi	r6, r8, 2				# 1515
+	stfsx	f4, r5, r6				# 1515
+	slwi	r6, r9, 2				# 1516
+	stfsx	f5, r5, r6				# 1516
+	slwi	r6, r7, 2				# 1517
+	stfsx	f6, r5, r6				# 1517
+	b	beq_cont.16234				# 1514
+beq_else.16233:
+	lwz	r6, 36(r2)				# 430
+	slwi	r10, r7, 2				# 435
+	lfsx	f7, r6, r10				# 435
+	fmul	f7, f2, f7				# 1519
+	lwz	r6, 36(r2)				# 420
+	slwi	r10, r9, 2				# 425
+	lfsx	f8, r6, r10				# 425
+	fmul	f8, f3, f8				# 1519
+	fadd	f7, f7, f8				# 1519
+	lis	r31, ha16(l.11646)
+	addi	r31, r31, lo16(l.11646)
+	lfs	f8, 0(r31)				# 105
+	fdiv	f7, f7, f8				# 105
+	fadd	f4, f4, f7				# 1519
+	slwi	r6, r8, 2				# 1519
+	stfsx	f4, r5, r6				# 1519
+	lwz	r6, 36(r2)				# 430
+	slwi	r10, r7, 2				# 435
+	lfsx	f4, r6, r10				# 435
+	fmul	f4, f1, f4				# 1520
+	lwz	r6, 36(r2)				# 410
+	slwi	r10, r8, 2				# 415
+	lfsx	f7, r6, r10				# 415
+	fmul	f3, f3, f7				# 1520
+	fadd	f3, f4, f3				# 1520
+	fdiv	f3, f3, f8				# 105
+	fadd	f3, f5, f3				# 1520
+	slwi	r6, r9, 2				# 1520
+	stfsx	f3, r5, r6				# 1520
+	lwz	r6, 36(r2)				# 420
+	slwi	r10, r9, 2				# 425
+	lfsx	f3, r6, r10				# 425
+	fmul	f1, f1, f3				# 1521
+	lwz	r6, 36(r2)				# 410
+	slwi	r10, r8, 2				# 415
+	lfsx	f3, r6, r10				# 415
+	fmul	f2, f2, f3				# 1521
+	fadd	f1, f1, f2				# 1521
+	fdiv	f1, f1, f8				# 105
+	fadd	f1, f6, f1				# 1521
+	slwi	r6, r7, 2				# 1521
+	stfsx	f1, r5, r6				# 1521
+beq_cont.16234:
+	lwz	r2, 24(r2)				# 272
+	slwi	r6, r8, 2				# 186
+	lfsx	f1, r5, r6				# 186
+	fmul	f1, f1, f1				# 103
+	slwi	r6, r9, 2				# 186
+	lfsx	f2, r5, r6				# 186
+	fmul	f2, f2, f2				# 103
+	fadd	f1, f1, f2				# 186
+	slwi	r6, r7, 2				# 186
+	lfsx	f2, r5, r6				# 186
+	fmul	f2, f2, f2				# 103
+	fadd	f1, f1, f2				# 186
+	stw	r7, 0(r3)				# 186
+	stw	r9, 4(r3)				# 186
+	stw	r5, 8(r3)				# 186
+	stw	r2, 12(r3)				# 186
+	stw	r8, 16(r3)				# 186
+	stfs	f0, 24(r3)				# 186
+	mfspr	r31, 8				# 186
+	fmr	f0, f1				# 186
+	stw	r31, 32(r3)				# 186
+	addi	r3, r3, 36				# 186
+	bl	min_caml_sqrt				# 186
+	addi	r3, r3, -36				# 186
+	lwz	r31, 32(r3)				# 186
+	mtspr	8, r31				# 186
+	lfs	f1, 24(r3)				# 111
+	fcmpu	cr7, f0, f1				# 111
+	bne	cr7, beq_else.16236				# 111
+	addi	r2, 0, 1
+	b	beq_cont.16237				# 111
+beq_else.16236:
+	addi	r2, 0, 0
+beq_cont.16237:
+	lwz	r5, 16(r3)				# 187
+	cmpw	cr7, r2, r5				# 187
+	bne	cr7, beq_else.16238				# 187
+	lwz	r2, 12(r3)				# 187
+	cmpw	cr7, r2, r5				# 187
+	bne	cr7, beq_else.16240				# 187
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f1, 0(r31)				# 187
+	fdiv	f0, f1, f0				# 187
+	b	beq_cont.16241				# 187
+beq_else.16240:
+	lis	r31, ha16(l.11682)
+	addi	r31, r31, lo16(l.11682)
+	lfs	f1, 0(r31)				# 187
+	fdiv	f0, f1, f0				# 187
+beq_cont.16241:
+	b	beq_cont.16239				# 187
+beq_else.16238:
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f0, 0(r31)				# 187
+beq_cont.16239:
+	slwi	r2, r5, 2				# 188
+	lwz	r6, 8(r3)				# 188
+	lfsx	f1, r6, r2				# 188
+	fmul	f1, f1, f0				# 188
+	slwi	r2, r5, 2				# 188
+	stfsx	f1, r6, r2				# 188
+	lwz	r2, 4(r3)				# 189
+	slwi	r5, r2, 2				# 189
+	lfsx	f1, r6, r5				# 189
+	fmul	f1, f1, f0				# 189
+	slwi	r2, r2, 2				# 189
+	stfsx	f1, r6, r2				# 189
+	lwz	r2, 0(r3)				# 190
+	slwi	r5, r2, 2				# 190
+	lfsx	f1, r6, r5				# 190
+	fmul	f0, f1, f0				# 190
+	slwi	r2, r2, 2				# 190
+	stfsx	f0, r6, r2				# 190
 	blr
-get_nvector.2784:
-	lwz	r6, 28(r30)				# 1514
-	lwz	r7, 24(r30)				# 1514
-	lwz	r8, 20(r30)				# 1514
-	lwz	r9, 16(r30)				# 1514
-	lwz	r10, 12(r30)				# 1514
-	lwz	r11, 8(r30)				# 1514
-	lfs	f0, 4(r30)				# 1514
-	lwz	r12, 4(r2)				# 239
-	cmpw	cr7, r12, r11				# 1516
-	bne	cr7, beq_else.17962				# 1516
-	slwi	r2, r10, 2				# 1477
-	lwzx	r2, r7, r2				# 1477
-	slwi	r7, r10, 2				# 141
-	stfsx	f0, r6, r7				# 141
-	slwi	r7, r11, 2				# 142
-	stfsx	f0, r6, r7				# 142
-	slwi	r7, r9, 2				# 143
-	stfsx	f0, r6, r7				# 143
-	sub	r2, r2, r11				# 1480
-	slwi	r7, r2, 2				# 1480
-	lfsx	f0, r5, r7				# 1480
-	stw	r6, 0(r3)				# 112
-	stw	r2, 4(r3)				# 112
-	stfs	f0, 8(r3)				# 112
-	stw	r10, 16(r3)				# 112
-	mfspr	r31, 8				# 112
-	stw	r31, 20(r3)				# 112
-	addi	r3, r3, 24				# 112
-	bl	min_caml_fiszero				# 112
-	addi	r3, r3, -24				# 112
-	lwz	r31, 20(r3)				# 112
-	mtspr	8, r31				# 112
-	lwz	r5, 16(r3)				# 112
-	cmpw	cr7, r2, r5				# 112
-	bne	cr7, beq_else.17963				# 112
-	lfs	f0, 8(r3)				# 113
-	mfspr	r31, 8				# 113
-	stw	r31, 20(r3)				# 113
-	addi	r3, r3, 24				# 113
-	bl	min_caml_fispos				# 113
-	addi	r3, r3, -24				# 113
-	lwz	r31, 20(r3)				# 113
-	mtspr	8, r31				# 113
-	lwz	r5, 16(r3)				# 113
-	cmpw	cr7, r2, r5				# 113
-	bne	cr7, beq_else.17965				# 113
-	lis	r31, ha16(l.11650)
-	addi	r31, r31, lo16(l.11650)
-	lfs	f0, 0(r31)				# 114
-	b	beq_cont.17966				# 113
-beq_else.17965:
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 113
-beq_cont.17966:
-	b	beq_cont.17964				# 112
-beq_else.17963:
-	lis	r31, ha16(l.11658)
-	addi	r31, r31, lo16(l.11658)
-	lfs	f0, 0(r31)				# 112
-beq_cont.17964:
-	mfspr	r31, 8				# 1480
-	stw	r31, 20(r3)				# 1480
-	addi	r3, r3, 24				# 1480
-	bl	min_caml_fneg				# 1480
-	addi	r3, r3, -24				# 1480
-	lwz	r31, 20(r3)				# 1480
-	mtspr	8, r31				# 1480
-	lwz	r2, 4(r3)				# 1480
-	slwi	r2, r2, 2				# 1480
-	lwz	r5, 0(r3)				# 1480
-	stfsx	f0, r5, r2				# 1480
+get_nvector.2802:
+	lwz	r6, 28(r1)				# 1527
+	lwz	r7, 24(r1)				# 1527
+	lwz	r8, 20(r1)				# 1527
+	lwz	r9, 16(r1)				# 1527
+	lwz	r10, 12(r1)				# 1527
+	lwz	r11, 8(r1)				# 1527
+	lfs	f0, 4(r1)				# 1527
+	lwz	r12, 4(r2)				# 252
+	cmpw	cr7, r12, r11				# 1529
+	bne	cr7, beq_else.16243				# 1529
+	slwi	r2, r10, 2				# 1490
+	lwzx	r2, r7, r2				# 1490
+	slwi	r7, r10, 2				# 154
+	stfsx	f0, r6, r7				# 154
+	slwi	r7, r11, 2				# 155
+	stfsx	f0, r6, r7				# 155
+	slwi	r7, r9, 2				# 156
+	stfsx	f0, r6, r7				# 156
+	sub	r2, r2, r11				# 1493
+	slwi	r7, r2, 2				# 1493
+	lfsx	f1, r5, r7				# 1493
+	fcmpu	cr7, f1, f0				# 111
+	bne	cr7, beq_else.16244				# 111
+	addi	r5, 0, 1
+	b	beq_cont.16245				# 111
+beq_else.16244:
+	addi	r5, 0, 0
+beq_cont.16245:
+	cmpw	cr7, r5, r10				# 125
+	bne	cr7, beq_else.16246				# 125
+	fcmpu	cr7, f1, f0				# 113
+	bgt	cr7, ble_else.16248				# 113
+	addi	r5, 0, 0
+	b	ble_cont.16249				# 113
+ble_else.16248:
+	addi	r5, 0, 1
+ble_cont.16249:
+	cmpw	cr7, r5, r10				# 126
+	bne	cr7, beq_else.16250				# 126
+	lis	r31, ha16(l.11682)
+	addi	r31, r31, lo16(l.11682)
+	lfs	f0, 0(r31)				# 127
+	b	beq_cont.16251				# 126
+beq_else.16250:
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f0, 0(r31)				# 126
+beq_cont.16251:
+	b	beq_cont.16247				# 125
+beq_else.16246:
+	lis	r31, ha16(l.11690)
+	addi	r31, r31, lo16(l.11690)
+	lfs	f0, 0(r31)				# 125
+beq_cont.16247:
+	fneg	f0, f0				# 107
+	slwi	r2, r2, 2				# 1493
+	stfsx	f0, r6, r2				# 1493
 	blr
-beq_else.17962:
-	cmpw	cr7, r12, r9				# 1518
-	bne	cr7, beq_else.17968				# 1518
-	lwz	r5, 16(r2)				# 277
-	slwi	r7, r10, 2				# 282
-	lfsx	f0, r5, r7				# 282
-	stw	r9, 20(r3)				# 1486
-	stw	r11, 24(r3)				# 1486
-	stw	r2, 28(r3)				# 1486
-	stw	r6, 0(r3)				# 1486
-	stw	r10, 16(r3)				# 1486
-	mfspr	r31, 8				# 1486
-	stw	r31, 32(r3)				# 1486
-	addi	r3, r3, 36				# 1486
-	bl	min_caml_fneg				# 1486
-	addi	r3, r3, -36				# 1486
-	lwz	r31, 32(r3)				# 1486
-	mtspr	8, r31				# 1486
-	lwz	r2, 16(r3)				# 1486
-	slwi	r2, r2, 2				# 1486
-	lwz	r5, 0(r3)				# 1486
-	stfsx	f0, r5, r2				# 1486
-	lwz	r2, 28(r3)				# 287
-	lwz	r6, 16(r2)				# 287
-	lwz	r7, 24(r3)				# 292
-	slwi	r8, r7, 2				# 292
-	lfsx	f0, r6, r8				# 292
-	mfspr	r31, 8				# 1487
-	stw	r31, 32(r3)				# 1487
-	addi	r3, r3, 36				# 1487
-	bl	min_caml_fneg				# 1487
-	addi	r3, r3, -36				# 1487
-	lwz	r31, 32(r3)				# 1487
-	mtspr	8, r31				# 1487
-	lwz	r2, 24(r3)				# 1487
-	slwi	r2, r2, 2				# 1487
-	lwz	r5, 0(r3)				# 1487
-	stfsx	f0, r5, r2				# 1487
-	lwz	r2, 28(r3)				# 297
-	lwz	r2, 16(r2)				# 297
-	lwz	r6, 20(r3)				# 302
-	slwi	r7, r6, 2				# 302
-	lfsx	f0, r2, r7				# 302
-	mfspr	r31, 8				# 1488
-	stw	r31, 32(r3)				# 1488
-	addi	r3, r3, 36				# 1488
-	bl	min_caml_fneg				# 1488
-	addi	r3, r3, -36				# 1488
-	lwz	r31, 32(r3)				# 1488
-	mtspr	8, r31				# 1488
-	lwz	r2, 20(r3)				# 1488
-	slwi	r2, r2, 2				# 1488
-	lwz	r5, 0(r3)				# 1488
-	stfsx	f0, r5, r2				# 1488
+beq_else.16243:
+	cmpw	cr7, r12, r9				# 1531
+	bne	cr7, beq_else.16253				# 1531
+	lwz	r5, 16(r2)				# 290
+	slwi	r7, r10, 2				# 295
+	lfsx	f0, r5, r7				# 295
+	fneg	f0, f0				# 107
+	slwi	r5, r10, 2				# 1499
+	stfsx	f0, r6, r5				# 1499
+	lwz	r5, 16(r2)				# 300
+	slwi	r7, r11, 2				# 305
+	lfsx	f0, r5, r7				# 305
+	fneg	f0, f0				# 107
+	slwi	r5, r11, 2				# 1500
+	stfsx	f0, r6, r5				# 1500
+	lwz	r2, 16(r2)				# 310
+	slwi	r5, r9, 2				# 315
+	lfsx	f0, r2, r5				# 315
+	fneg	f0, f0				# 107
+	slwi	r2, r9, 2				# 1501
+	stfsx	f0, r6, r2				# 1501
 	blr
-beq_else.17968:
-	slwi	r5, r10, 2				# 1493
-	lfsx	f0, r8, r5				# 1493
-	lwz	r5, 20(r2)				# 317
-	slwi	r7, r10, 2				# 322
-	lfsx	f1, r5, r7				# 322
-	fsub	f0, f0, f1				# 1493
-	slwi	r5, r11, 2				# 1494
-	lfsx	f1, r8, r5				# 1494
-	lwz	r5, 20(r2)				# 327
-	slwi	r7, r11, 2				# 332
-	lfsx	f2, r5, r7				# 332
-	fsub	f1, f1, f2				# 1494
-	slwi	r5, r9, 2				# 1495
-	lfsx	f2, r8, r5				# 1495
-	lwz	r5, 20(r2)				# 337
-	slwi	r7, r9, 2				# 342
-	lfsx	f3, r5, r7				# 342
-	fsub	f2, f2, f3				# 1495
-	lwz	r5, 16(r2)				# 277
-	slwi	r7, r10, 2				# 282
-	lfsx	f3, r5, r7				# 282
-	fmul	f3, f0, f3				# 1497
-	lwz	r5, 16(r2)				# 287
-	slwi	r7, r11, 2				# 292
-	lfsx	f4, r5, r7				# 292
-	fmul	f4, f1, f4				# 1498
-	lwz	r5, 16(r2)				# 297
-	slwi	r7, r9, 2				# 302
-	lfsx	f5, r5, r7				# 302
-	fmul	f5, f2, f5				# 1499
-	lwz	r5, 12(r2)				# 268
-	stw	r9, 20(r3)				# 1501
-	stw	r11, 24(r3)				# 1501
-	stw	r10, 16(r3)				# 1501
-	stw	r2, 28(r3)				# 1501
-	cmpw	cr7, r5, r10				# 1501
-	bne	cr7, beq_else.17970				# 1501
-	slwi	r5, r10, 2				# 1502
-	stfsx	f3, r6, r5				# 1502
-	slwi	r5, r11, 2				# 1503
-	stfsx	f4, r6, r5				# 1503
-	slwi	r5, r9, 2				# 1504
-	stfsx	f5, r6, r5				# 1504
-	b	beq_cont.17971				# 1501
-beq_else.17970:
-	lwz	r5, 36(r2)				# 417
-	slwi	r7, r9, 2				# 422
-	lfsx	f6, r5, r7				# 422
-	fmul	f6, f1, f6				# 1506
-	lwz	r5, 36(r2)				# 407
-	slwi	r7, r11, 2				# 412
-	lfsx	f7, r5, r7				# 412
-	fmul	f7, f2, f7				# 1506
-	fadd	f6, f6, f7				# 1506
-	stfs	f5, 32(r3)				# 1506
-	stfs	f1, 40(r3)				# 1506
-	stfs	f4, 48(r3)				# 1506
-	stfs	f2, 56(r3)				# 1506
-	stfs	f0, 64(r3)				# 1506
-	stw	r6, 0(r3)				# 1506
-	stfs	f3, 72(r3)				# 1506
-	mfspr	r31, 8				# 1506
-	fmr	f0, f6				# 1506
-	stw	r31, 80(r3)				# 1506
-	addi	r3, r3, 84				# 1506
-	bl	min_caml_fhalf				# 1506
-	addi	r3, r3, -84				# 1506
-	lwz	r31, 80(r3)				# 1506
-	mtspr	8, r31				# 1506
-	lfs	f1, 72(r3)				# 1506
-	fadd	f0, f1, f0				# 1506
-	lwz	r2, 16(r3)				# 1506
-	slwi	r5, r2, 2				# 1506
-	lwz	r6, 0(r3)				# 1506
-	stfsx	f0, r6, r5				# 1506
-	lwz	r5, 28(r3)				# 417
-	lwz	r7, 36(r5)				# 417
-	lwz	r8, 20(r3)				# 422
-	slwi	r9, r8, 2				# 422
-	lfsx	f0, r7, r9				# 422
-	lfs	f1, 64(r3)				# 1507
-	fmul	f0, f1, f0				# 1507
-	lwz	r7, 36(r5)				# 397
-	slwi	r9, r2, 2				# 402
-	lfsx	f2, r7, r9				# 402
-	lfs	f3, 56(r3)				# 1507
-	fmul	f2, f3, f2				# 1507
-	fadd	f0, f0, f2				# 1507
-	mfspr	r31, 8				# 1507
-	stw	r31, 80(r3)				# 1507
-	addi	r3, r3, 84				# 1507
-	bl	min_caml_fhalf				# 1507
-	addi	r3, r3, -84				# 1507
-	lwz	r31, 80(r3)				# 1507
-	mtspr	8, r31				# 1507
-	lfs	f1, 48(r3)				# 1507
-	fadd	f0, f1, f0				# 1507
-	lwz	r2, 24(r3)				# 1507
-	slwi	r5, r2, 2				# 1507
-	lwz	r6, 0(r3)				# 1507
-	stfsx	f0, r6, r5				# 1507
-	lwz	r5, 28(r3)				# 407
-	lwz	r7, 36(r5)				# 407
-	slwi	r8, r2, 2				# 412
-	lfsx	f0, r7, r8				# 412
-	lfs	f1, 64(r3)				# 1508
-	fmul	f0, f1, f0				# 1508
-	lwz	r7, 36(r5)				# 397
-	lwz	r8, 16(r3)				# 402
-	slwi	r9, r8, 2				# 402
-	lfsx	f1, r7, r9				# 402
-	lfs	f2, 40(r3)				# 1508
-	fmul	f1, f2, f1				# 1508
-	fadd	f0, f0, f1				# 1508
-	mfspr	r31, 8				# 1508
-	stw	r31, 80(r3)				# 1508
-	addi	r3, r3, 84				# 1508
-	bl	min_caml_fhalf				# 1508
-	addi	r3, r3, -84				# 1508
-	lwz	r31, 80(r3)				# 1508
-	mtspr	8, r31				# 1508
-	lfs	f1, 32(r3)				# 1508
-	fadd	f0, f1, f0				# 1508
-	lwz	r2, 20(r3)				# 1508
-	slwi	r5, r2, 2				# 1508
-	lwz	r6, 0(r3)				# 1508
-	stfsx	f0, r6, r5				# 1508
-beq_cont.17971:
-	lwz	r2, 28(r3)				# 259
-	lwz	r2, 24(r2)				# 259
-	lwz	r5, 16(r3)				# 173
-	slwi	r7, r5, 2				# 173
-	lfsx	f0, r6, r7				# 173
-	stw	r2, 80(r3)				# 173
-	stw	r6, 0(r3)				# 173
-	mfspr	r31, 8				# 173
-	stw	r31, 84(r3)				# 173
-	addi	r3, r3, 88				# 173
-	bl	min_caml_fsqr				# 173
-	addi	r3, r3, -88				# 173
-	lwz	r31, 84(r3)				# 173
-	mtspr	8, r31				# 173
-	lwz	r2, 24(r3)				# 173
-	slwi	r5, r2, 2				# 173
-	lwz	r6, 0(r3)				# 173
-	lfsx	f1, r6, r5				# 173
-	stfs	f0, 88(r3)				# 173
-	mfspr	r31, 8				# 173
-	fmr	f0, f1				# 173
-	stw	r31, 96(r3)				# 173
-	addi	r3, r3, 100				# 173
-	bl	min_caml_fsqr				# 173
-	addi	r3, r3, -100				# 173
-	lwz	r31, 96(r3)				# 173
-	mtspr	8, r31				# 173
-	lfs	f1, 88(r3)				# 173
-	fadd	f0, f1, f0				# 173
-	lwz	r2, 20(r3)				# 173
-	slwi	r5, r2, 2				# 173
-	lwz	r6, 0(r3)				# 173
-	lfsx	f1, r6, r5				# 173
-	stfs	f0, 96(r3)				# 173
-	mfspr	r31, 8				# 173
-	fmr	f0, f1				# 173
-	stw	r31, 104(r3)				# 173
-	addi	r3, r3, 108				# 173
-	bl	min_caml_fsqr				# 173
-	addi	r3, r3, -108				# 173
-	lwz	r31, 104(r3)				# 173
-	mtspr	8, r31				# 173
-	lfs	f1, 96(r3)				# 173
-	fadd	f0, f1, f0				# 173
-	mfspr	r31, 8				# 173
-	stw	r31, 104(r3)				# 173
-	addi	r3, r3, 108				# 173
-	bl	min_caml_sqrt				# 173
-	addi	r3, r3, -108				# 173
-	lwz	r31, 104(r3)				# 173
-	mtspr	8, r31				# 173
-	stfs	f0, 104(r3)				# 174
-	mfspr	r31, 8				# 174
-	stw	r31, 112(r3)				# 174
-	addi	r3, r3, 116				# 174
-	bl	min_caml_fiszero				# 174
-	addi	r3, r3, -116				# 174
-	lwz	r31, 112(r3)				# 174
-	mtspr	8, r31				# 174
-	lwz	r5, 16(r3)				# 174
-	cmpw	cr7, r2, r5				# 174
-	bne	cr7, beq_else.17973				# 174
-	lwz	r2, 80(r3)				# 174
-	cmpw	cr7, r2, r5				# 174
-	bne	cr7, beq_else.17975				# 174
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 174
-	lfs	f1, 104(r3)				# 174
-	fdiv	f0, f0, f1				# 174
-	b	beq_cont.17976				# 174
-beq_else.17975:
-	lis	r31, ha16(l.11650)
-	addi	r31, r31, lo16(l.11650)
-	lfs	f0, 0(r31)				# 174
-	lfs	f1, 104(r3)				# 174
-	fdiv	f0, f0, f1				# 174
-beq_cont.17976:
-	b	beq_cont.17974				# 174
-beq_else.17973:
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 174
-beq_cont.17974:
-	slwi	r2, r5, 2				# 175
-	lwz	r6, 0(r3)				# 175
-	lfsx	f1, r6, r2				# 175
-	fmul	f1, f1, f0				# 175
-	slwi	r2, r5, 2				# 175
-	stfsx	f1, r6, r2				# 175
-	lwz	r2, 24(r3)				# 176
-	slwi	r5, r2, 2				# 176
-	lfsx	f1, r6, r5				# 176
-	fmul	f1, f1, f0				# 176
-	slwi	r2, r2, 2				# 176
-	stfsx	f1, r6, r2				# 176
-	lwz	r2, 20(r3)				# 177
-	slwi	r5, r2, 2				# 177
-	lfsx	f1, r6, r5				# 177
-	fmul	f0, f1, f0				# 177
-	slwi	r2, r2, 2				# 177
-	stfsx	f0, r6, r2				# 177
+beq_else.16253:
+	slwi	r5, r10, 2				# 1506
+	lfsx	f1, r8, r5				# 1506
+	lwz	r5, 20(r2)				# 330
+	slwi	r7, r10, 2				# 335
+	lfsx	f2, r5, r7				# 335
+	fsub	f1, f1, f2				# 1506
+	slwi	r5, r11, 2				# 1507
+	lfsx	f2, r8, r5				# 1507
+	lwz	r5, 20(r2)				# 340
+	slwi	r7, r11, 2				# 345
+	lfsx	f3, r5, r7				# 345
+	fsub	f2, f2, f3				# 1507
+	slwi	r5, r9, 2				# 1508
+	lfsx	f3, r8, r5				# 1508
+	lwz	r5, 20(r2)				# 350
+	slwi	r7, r9, 2				# 355
+	lfsx	f4, r5, r7				# 355
+	fsub	f3, f3, f4				# 1508
+	lwz	r5, 16(r2)				# 290
+	slwi	r7, r10, 2				# 295
+	lfsx	f4, r5, r7				# 295
+	fmul	f4, f1, f4				# 1510
+	lwz	r5, 16(r2)				# 300
+	slwi	r7, r11, 2				# 305
+	lfsx	f5, r5, r7				# 305
+	fmul	f5, f2, f5				# 1511
+	lwz	r5, 16(r2)				# 310
+	slwi	r7, r9, 2				# 315
+	lfsx	f6, r5, r7				# 315
+	fmul	f6, f3, f6				# 1512
+	lwz	r5, 12(r2)				# 281
+	cmpw	cr7, r5, r10				# 1514
+	bne	cr7, beq_else.16255				# 1514
+	slwi	r5, r10, 2				# 1515
+	stfsx	f4, r6, r5				# 1515
+	slwi	r5, r11, 2				# 1516
+	stfsx	f5, r6, r5				# 1516
+	slwi	r5, r9, 2				# 1517
+	stfsx	f6, r6, r5				# 1517
+	b	beq_cont.16256				# 1514
+beq_else.16255:
+	lwz	r5, 36(r2)				# 430
+	slwi	r7, r9, 2				# 435
+	lfsx	f7, r5, r7				# 435
+	fmul	f7, f2, f7				# 1519
+	lwz	r5, 36(r2)				# 420
+	slwi	r7, r11, 2				# 425
+	lfsx	f8, r5, r7				# 425
+	fmul	f8, f3, f8				# 1519
+	fadd	f7, f7, f8				# 1519
+	lis	r31, ha16(l.11646)
+	addi	r31, r31, lo16(l.11646)
+	lfs	f8, 0(r31)				# 105
+	fdiv	f7, f7, f8				# 105
+	fadd	f4, f4, f7				# 1519
+	slwi	r5, r10, 2				# 1519
+	stfsx	f4, r6, r5				# 1519
+	lwz	r5, 36(r2)				# 430
+	slwi	r7, r9, 2				# 435
+	lfsx	f4, r5, r7				# 435
+	fmul	f4, f1, f4				# 1520
+	lwz	r5, 36(r2)				# 410
+	slwi	r7, r10, 2				# 415
+	lfsx	f7, r5, r7				# 415
+	fmul	f3, f3, f7				# 1520
+	fadd	f3, f4, f3				# 1520
+	fdiv	f3, f3, f8				# 105
+	fadd	f3, f5, f3				# 1520
+	slwi	r5, r11, 2				# 1520
+	stfsx	f3, r6, r5				# 1520
+	lwz	r5, 36(r2)				# 420
+	slwi	r7, r11, 2				# 425
+	lfsx	f3, r5, r7				# 425
+	fmul	f1, f1, f3				# 1521
+	lwz	r5, 36(r2)				# 410
+	slwi	r7, r10, 2				# 415
+	lfsx	f3, r5, r7				# 415
+	fmul	f2, f2, f3				# 1521
+	fadd	f1, f1, f2				# 1521
+	fdiv	f1, f1, f8				# 105
+	fadd	f1, f6, f1				# 1521
+	slwi	r5, r9, 2				# 1521
+	stfsx	f1, r6, r5				# 1521
+beq_cont.16256:
+	lwz	r2, 24(r2)				# 272
+	slwi	r5, r10, 2				# 186
+	lfsx	f1, r6, r5				# 186
+	fmul	f1, f1, f1				# 103
+	slwi	r5, r11, 2				# 186
+	lfsx	f2, r6, r5				# 186
+	fmul	f2, f2, f2				# 103
+	fadd	f1, f1, f2				# 186
+	slwi	r5, r9, 2				# 186
+	lfsx	f2, r6, r5				# 186
+	fmul	f2, f2, f2				# 103
+	fadd	f1, f1, f2				# 186
+	stw	r9, 0(r3)				# 186
+	stw	r11, 4(r3)				# 186
+	stw	r6, 8(r3)				# 186
+	stw	r2, 12(r3)				# 186
+	stw	r10, 16(r3)				# 186
+	stfs	f0, 24(r3)				# 186
+	mfspr	r31, 8				# 186
+	fmr	f0, f1				# 186
+	stw	r31, 32(r3)				# 186
+	addi	r3, r3, 36				# 186
+	bl	min_caml_sqrt				# 186
+	addi	r3, r3, -36				# 186
+	lwz	r31, 32(r3)				# 186
+	mtspr	8, r31				# 186
+	lfs	f1, 24(r3)				# 111
+	fcmpu	cr7, f0, f1				# 111
+	bne	cr7, beq_else.16258				# 111
+	addi	r2, 0, 1
+	b	beq_cont.16259				# 111
+beq_else.16258:
+	addi	r2, 0, 0
+beq_cont.16259:
+	lwz	r5, 16(r3)				# 187
+	cmpw	cr7, r2, r5				# 187
+	bne	cr7, beq_else.16260				# 187
+	lwz	r2, 12(r3)				# 187
+	cmpw	cr7, r2, r5				# 187
+	bne	cr7, beq_else.16262				# 187
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f1, 0(r31)				# 187
+	fdiv	f0, f1, f0				# 187
+	b	beq_cont.16263				# 187
+beq_else.16262:
+	lis	r31, ha16(l.11682)
+	addi	r31, r31, lo16(l.11682)
+	lfs	f1, 0(r31)				# 187
+	fdiv	f0, f1, f0				# 187
+beq_cont.16263:
+	b	beq_cont.16261				# 187
+beq_else.16260:
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f0, 0(r31)				# 187
+beq_cont.16261:
+	slwi	r2, r5, 2				# 188
+	lwz	r6, 8(r3)				# 188
+	lfsx	f1, r6, r2				# 188
+	fmul	f1, f1, f0				# 188
+	slwi	r2, r5, 2				# 188
+	stfsx	f1, r6, r2				# 188
+	lwz	r2, 4(r3)				# 189
+	slwi	r5, r2, 2				# 189
+	lfsx	f1, r6, r5				# 189
+	fmul	f1, f1, f0				# 189
+	slwi	r2, r2, 2				# 189
+	stfsx	f1, r6, r2				# 189
+	lwz	r2, 0(r3)				# 190
+	slwi	r5, r2, 2				# 190
+	lfsx	f1, r6, r5				# 190
+	fmul	f0, f1, f0				# 190
+	slwi	r2, r2, 2				# 190
+	stfsx	f0, r6, r2				# 190
 	blr
-utexture.2787:
-	lwz	r6, 24(r30)				# 1528
-	lwz	r7, 20(r30)				# 1528
-	lwz	r8, 16(r30)				# 1528
-	lwz	r9, 12(r30)				# 1528
-	lwz	r10, 8(r30)				# 1528
-	lfs	f0, 4(r30)				# 1528
-	lwz	r11, 0(r2)				# 229
-	lwz	r12, 32(r2)				# 367
-	slwi	r13, r9, 2				# 372
-	lfsx	f1, r12, r13				# 372
-	slwi	r12, r9, 2				# 1531
-	stfsx	f1, r6, r12				# 1531
-	lwz	r12, 32(r2)				# 377
-	slwi	r13, r10, 2				# 382
-	lfsx	f1, r12, r13				# 382
-	slwi	r12, r10, 2				# 1532
-	stfsx	f1, r6, r12				# 1532
-	lwz	r12, 32(r2)				# 387
-	slwi	r13, r7, 2				# 392
-	lfsx	f1, r12, r13				# 392
-	slwi	r12, r7, 2				# 1533
-	stfsx	f1, r6, r12				# 1533
-	cmpw	cr7, r11, r10				# 1535
-	bne	cr7, beq_else.17978				# 1535
-	slwi	r8, r9, 2				# 1538
-	lfsx	f0, r5, r8				# 1538
-	lwz	r8, 20(r2)				# 317
-	slwi	r11, r9, 2				# 322
-	lfsx	f1, r8, r11				# 322
-	fsub	f0, f0, f1				# 1538
-	lis	r31, ha16(l.12172)
-	addi	r31, r31, lo16(l.12172)
-	lfs	f1, 0(r31)				# 1540
-	fmul	f2, f0, f1				# 1540
-	stw	r6, 0(r3)				# 1540
-	stw	r10, 4(r3)				# 1540
-	stw	r9, 8(r3)				# 1540
-	stfs	f1, 16(r3)				# 1540
-	stw	r2, 24(r3)				# 1540
-	stw	r5, 28(r3)				# 1540
-	stw	r7, 32(r3)				# 1540
-	stfs	f0, 40(r3)				# 1540
-	mfspr	r31, 8				# 1540
-	fmr	f0, f2				# 1540
-	stw	r31, 48(r3)				# 1540
-	addi	r3, r3, 52				# 1540
-	bl	min_caml_floor				# 1540
-	addi	r3, r3, -52				# 1540
-	lwz	r31, 48(r3)				# 1540
-	mtspr	8, r31				# 1540
-	lis	r31, ha16(l.12173)
-	addi	r31, r31, lo16(l.12173)
-	lfs	f1, 0(r31)				# 1540
-	fmul	f0, f0, f1				# 1540
-	lfs	f2, 40(r3)				# 1541
-	fsub	f0, f2, f0				# 1541
-	lis	r31, ha16(l.12163)
-	addi	r31, r31, lo16(l.12163)
-	lfs	f2, 0(r31)				# 1541
-	stfs	f2, 48(r3)				# 1541
-	stfs	f1, 56(r3)				# 1541
-	mfspr	r31, 8				# 1541
-	fmr	f1, f2				# 1541
-	stw	r31, 64(r3)				# 1541
-	addi	r3, r3, 68				# 1541
-	bl	min_caml_fless				# 1541
-	addi	r3, r3, -68				# 1541
-	lwz	r31, 64(r3)				# 1541
-	mtspr	8, r31				# 1541
-	lwz	r5, 32(r3)				# 1543
-	slwi	r6, r5, 2				# 1543
-	lwz	r7, 28(r3)				# 1543
-	lfsx	f0, r7, r6				# 1543
-	lwz	r6, 24(r3)				# 337
-	lwz	r6, 20(r6)				# 337
-	slwi	r5, r5, 2				# 342
-	lfsx	f1, r6, r5				# 342
-	fsub	f0, f0, f1				# 1543
-	lfs	f1, 16(r3)				# 1545
-	fmul	f1, f0, f1				# 1545
-	stw	r2, 64(r3)				# 1545
-	stfs	f0, 72(r3)				# 1545
-	mfspr	r31, 8				# 1545
-	fmr	f0, f1				# 1545
-	stw	r31, 80(r3)				# 1545
-	addi	r3, r3, 84				# 1545
-	bl	min_caml_floor				# 1545
-	addi	r3, r3, -84				# 1545
-	lwz	r31, 80(r3)				# 1545
-	mtspr	8, r31				# 1545
-	lfs	f1, 56(r3)				# 1545
-	fmul	f0, f0, f1				# 1545
-	lfs	f1, 72(r3)				# 1546
-	fsub	f0, f1, f0				# 1546
-	lfs	f1, 48(r3)				# 1546
-	mfspr	r31, 8				# 1546
-	stw	r31, 80(r3)				# 1546
-	addi	r3, r3, 84				# 1546
-	bl	min_caml_fless				# 1546
-	addi	r3, r3, -84				# 1546
-	lwz	r31, 80(r3)				# 1546
-	mtspr	8, r31				# 1546
-	lwz	r5, 8(r3)				# 1549
-	lwz	r6, 64(r3)				# 1549
-	cmpw	cr7, r6, r5				# 1549
-	bne	cr7, beq_else.17982				# 1549
-	cmpw	cr7, r2, r5				# 1551
-	bne	cr7, beq_else.17984				# 1551
-	lis	r31, ha16(l.12176)
-	addi	r31, r31, lo16(l.12176)
-	lfs	f0, 0(r31)				# 1551
-	b	beq_cont.17985				# 1551
-beq_else.17984:
-	lis	r31, ha16(l.11658)
-	addi	r31, r31, lo16(l.11658)
-	lfs	f0, 0(r31)				# 1551
-beq_cont.17985:
-	b	beq_cont.17983				# 1549
-beq_else.17982:
-	cmpw	cr7, r2, r5				# 1550
-	bne	cr7, beq_else.17986				# 1550
-	lis	r31, ha16(l.11658)
-	addi	r31, r31, lo16(l.11658)
-	lfs	f0, 0(r31)				# 1550
-	b	beq_cont.17987				# 1550
-beq_else.17986:
-	lis	r31, ha16(l.12176)
-	addi	r31, r31, lo16(l.12176)
-	lfs	f0, 0(r31)				# 1550
-beq_cont.17987:
-beq_cont.17983:
-	lwz	r2, 4(r3)				# 1548
-	slwi	r2, r2, 2				# 1548
-	lwz	r5, 0(r3)				# 1548
-	stfsx	f0, r5, r2				# 1548
+utexture.2805:
+	lwz	r6, 28(r1)				# 1541
+	lwz	r7, 24(r1)				# 1541
+	lwz	r8, 20(r1)				# 1541
+	lwz	r9, 16(r1)				# 1541
+	lwz	r10, 12(r1)				# 1541
+	lfs	f0, 8(r1)				# 1541
+	lfs	f1, 4(r1)				# 1541
+	lwz	r11, 0(r2)				# 242
+	lwz	r12, 32(r2)				# 380
+	slwi	r13, r9, 2				# 385
+	lfsx	f2, r12, r13				# 385
+	slwi	r12, r9, 2				# 1544
+	stfsx	f2, r6, r12				# 1544
+	lwz	r12, 32(r2)				# 390
+	slwi	r13, r10, 2				# 395
+	lfsx	f2, r12, r13				# 395
+	slwi	r12, r10, 2				# 1545
+	stfsx	f2, r6, r12				# 1545
+	lwz	r12, 32(r2)				# 400
+	slwi	r13, r7, 2				# 405
+	lfsx	f2, r12, r13				# 405
+	slwi	r12, r7, 2				# 1546
+	stfsx	f2, r6, r12				# 1546
+	cmpw	cr7, r11, r10				# 1547
+	bne	cr7, beq_else.16265				# 1547
+	slwi	r8, r9, 2				# 1550
+	lfsx	f0, r5, r8				# 1550
+	lwz	r8, 20(r2)				# 330
+	slwi	r11, r9, 2				# 335
+	lfsx	f1, r8, r11				# 335
+	fsub	f0, f0, f1				# 1550
+	lis	r31, ha16(l.12204)
+	addi	r31, r31, lo16(l.12204)
+	lfs	f1, 0(r31)				# 1552
+	fmul	f2, f0, f1				# 1552
+	stw	r6, 0(r3)				# 1552
+	stw	r10, 4(r3)				# 1552
+	stw	r9, 8(r3)				# 1552
+	stfs	f1, 16(r3)				# 1552
+	stw	r2, 24(r3)				# 1552
+	stw	r5, 28(r3)				# 1552
+	stw	r7, 32(r3)				# 1552
+	stfs	f0, 40(r3)				# 1552
+	mfspr	r31, 8				# 1552
+	fmr	f0, f2				# 1552
+	stw	r31, 48(r3)				# 1552
+	addi	r3, r3, 52				# 1552
+	bl	min_caml_floor				# 1552
+	addi	r3, r3, -52				# 1552
+	lwz	r31, 48(r3)				# 1552
+	mtspr	8, r31				# 1552
+	lis	r31, ha16(l.12205)
+	addi	r31, r31, lo16(l.12205)
+	lfs	f1, 0(r31)				# 1552
+	fmul	f0, f0, f1				# 1552
+	lfs	f2, 40(r3)				# 1553
+	fsub	f0, f2, f0				# 1553
+	lis	r31, ha16(l.12195)
+	addi	r31, r31, lo16(l.12195)
+	lfs	f2, 0(r31)				# 1553
+	fcmpu	cr7, f2, f0				# 109
+	bgt	cr7, ble_else.16268				# 109
+	addi	r2, 0, 0
+	b	ble_cont.16269				# 109
+ble_else.16268:
+	addi	r2, 0, 1
+ble_cont.16269:
+	lwz	r5, 32(r3)				# 1555
+	slwi	r6, r5, 2				# 1555
+	lwz	r7, 28(r3)				# 1555
+	lfsx	f0, r7, r6				# 1555
+	lwz	r6, 24(r3)				# 350
+	lwz	r6, 20(r6)				# 350
+	slwi	r5, r5, 2				# 355
+	lfsx	f3, r6, r5				# 355
+	fsub	f0, f0, f3				# 1555
+	lfs	f3, 16(r3)				# 1557
+	fmul	f3, f0, f3				# 1557
+	stw	r2, 48(r3)				# 1557
+	stfs	f2, 56(r3)				# 1557
+	stfs	f0, 64(r3)				# 1557
+	stfs	f1, 72(r3)				# 1557
+	mfspr	r31, 8				# 1557
+	fmr	f0, f3				# 1557
+	stw	r31, 80(r3)				# 1557
+	addi	r3, r3, 84				# 1557
+	bl	min_caml_floor				# 1557
+	addi	r3, r3, -84				# 1557
+	lwz	r31, 80(r3)				# 1557
+	mtspr	8, r31				# 1557
+	lfs	f1, 72(r3)				# 1557
+	fmul	f0, f0, f1				# 1557
+	lfs	f1, 64(r3)				# 1558
+	fsub	f0, f1, f0				# 1558
+	lfs	f1, 56(r3)				# 109
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.16271				# 109
+	addi	r2, 0, 0
+	b	ble_cont.16272				# 109
+ble_else.16271:
+	addi	r2, 0, 1
+ble_cont.16272:
+	lwz	r5, 8(r3)				# 1561
+	lwz	r6, 48(r3)				# 1561
+	cmpw	cr7, r6, r5				# 1561
+	bne	cr7, beq_else.16273				# 1561
+	cmpw	cr7, r2, r5				# 1563
+	bne	cr7, beq_else.16275				# 1563
+	lis	r31, ha16(l.12208)
+	addi	r31, r31, lo16(l.12208)
+	lfs	f0, 0(r31)				# 1563
+	b	beq_cont.16276				# 1563
+beq_else.16275:
+	lis	r31, ha16(l.11690)
+	addi	r31, r31, lo16(l.11690)
+	lfs	f0, 0(r31)				# 1563
+beq_cont.16276:
+	b	beq_cont.16274				# 1561
+beq_else.16273:
+	cmpw	cr7, r2, r5				# 1562
+	bne	cr7, beq_else.16277				# 1562
+	lis	r31, ha16(l.11690)
+	addi	r31, r31, lo16(l.11690)
+	lfs	f0, 0(r31)				# 1562
+	b	beq_cont.16278				# 1562
+beq_else.16277:
+	lis	r31, ha16(l.12208)
+	addi	r31, r31, lo16(l.12208)
+	lfs	f0, 0(r31)				# 1562
+beq_cont.16278:
+beq_cont.16274:
+	lwz	r2, 4(r3)				# 1560
+	slwi	r2, r2, 2				# 1560
+	lwz	r5, 0(r3)				# 1560
+	stfsx	f0, r5, r2				# 1560
 	blr
-beq_else.17978:
-	cmpw	cr7, r11, r7				# 1553
-	bne	cr7, beq_else.17989				# 1553
-	slwi	r2, r10, 2				# 1556
-	lfsx	f1, r5, r2				# 1556
-	lis	r31, ha16(l.12167)
-	addi	r31, r31, lo16(l.12167)
-	lfs	f2, 0(r31)				# 1556
-	fmul	f1, f1, f2				# 1556
-	stw	r10, 4(r3)				# 1556
-	stw	r6, 0(r3)				# 1556
-	stw	r9, 8(r3)				# 1556
-	stfs	f0, 80(r3)				# 1556
-	mfspr	r31, 8				# 1556
-	fmr	f0, f1				# 1556
-	stw	r31, 88(r3)				# 1556
-	addi	r3, r3, 92				# 1556
-	bl	min_caml_sin				# 1556
-	addi	r3, r3, -92				# 1556
-	lwz	r31, 88(r3)				# 1556
-	mtspr	8, r31				# 1556
-	mfspr	r31, 8				# 1556
-	stw	r31, 88(r3)				# 1556
-	addi	r3, r3, 92				# 1556
-	bl	min_caml_fsqr				# 1556
-	addi	r3, r3, -92				# 1556
-	lwz	r31, 88(r3)				# 1556
-	mtspr	8, r31				# 1556
-	lfs	f1, 80(r3)				# 1557
-	fmul	f2, f1, f0				# 1557
-	lwz	r2, 8(r3)				# 1557
-	slwi	r2, r2, 2				# 1557
-	lwz	r5, 0(r3)				# 1557
-	stfsx	f2, r5, r2				# 1557
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f2, 0(r31)				# 1558
-	fsub	f0, f2, f0				# 1558
-	fmul	f0, f1, f0				# 1558
-	lwz	r2, 4(r3)				# 1558
-	slwi	r2, r2, 2				# 1558
-	stfsx	f0, r5, r2				# 1558
-	blr
-beq_else.17989:
-	cmpw	cr7, r11, r8				# 1560
-	bne	cr7, beq_else.17991				# 1560
-	slwi	r8, r9, 2				# 1563
-	lfsx	f1, r5, r8				# 1563
-	lwz	r8, 20(r2)				# 317
-	slwi	r9, r9, 2				# 322
-	lfsx	f2, r8, r9				# 322
-	fsub	f1, f1, f2				# 1563
-	slwi	r8, r7, 2				# 1564
-	lfsx	f2, r5, r8				# 1564
-	lwz	r2, 20(r2)				# 337
-	slwi	r5, r7, 2				# 342
-	lfsx	f3, r2, r5				# 342
-	fsub	f2, f2, f3				# 1564
-	stw	r7, 32(r3)				# 1565
-	stw	r6, 0(r3)				# 1565
-	stw	r10, 4(r3)				# 1565
-	stfs	f0, 80(r3)				# 1565
-	stfs	f2, 88(r3)				# 1565
-	mfspr	r31, 8				# 1565
-	fmr	f0, f1				# 1565
-	stw	r31, 96(r3)				# 1565
-	addi	r3, r3, 100				# 1565
-	bl	min_caml_fsqr				# 1565
-	addi	r3, r3, -100				# 1565
-	lwz	r31, 96(r3)				# 1565
-	mtspr	8, r31				# 1565
-	lfs	f1, 88(r3)				# 1565
-	stfs	f0, 96(r3)				# 1565
-	mfspr	r31, 8				# 1565
-	fmr	f0, f1				# 1565
-	stw	r31, 104(r3)				# 1565
-	addi	r3, r3, 108				# 1565
-	bl	min_caml_fsqr				# 1565
-	addi	r3, r3, -108				# 1565
-	lwz	r31, 104(r3)				# 1565
-	mtspr	8, r31				# 1565
-	lfs	f1, 96(r3)				# 1565
-	fadd	f0, f1, f0				# 1565
-	mfspr	r31, 8				# 1565
-	stw	r31, 104(r3)				# 1565
-	addi	r3, r3, 108				# 1565
-	bl	min_caml_sqrt				# 1565
-	addi	r3, r3, -108				# 1565
-	lwz	r31, 104(r3)				# 1565
-	mtspr	8, r31				# 1565
-	lis	r31, ha16(l.12163)
-	addi	r31, r31, lo16(l.12163)
-	lfs	f1, 0(r31)				# 1565
-	fdiv	f0, f0, f1				# 1565
-	stfs	f0, 104(r3)				# 1566
-	mfspr	r31, 8				# 1566
-	stw	r31, 112(r3)				# 1566
-	addi	r3, r3, 116				# 1566
-	bl	min_caml_floor				# 1566
-	addi	r3, r3, -116				# 1566
-	lwz	r31, 112(r3)				# 1566
-	mtspr	8, r31				# 1566
-	lfs	f1, 104(r3)				# 1566
-	fsub	f0, f1, f0				# 1566
-	lis	r31, ha16(l.12151)
-	addi	r31, r31, lo16(l.12151)
-	lfs	f1, 0(r31)				# 1566
-	fmul	f0, f0, f1				# 1566
-	mfspr	r31, 8				# 1567
-	stw	r31, 112(r3)				# 1567
-	addi	r3, r3, 116				# 1567
-	bl	min_caml_cos				# 1567
-	addi	r3, r3, -116				# 1567
-	lwz	r31, 112(r3)				# 1567
-	mtspr	8, r31				# 1567
-	mfspr	r31, 8				# 1567
-	stw	r31, 112(r3)				# 1567
-	addi	r3, r3, 116				# 1567
-	bl	min_caml_fsqr				# 1567
-	addi	r3, r3, -116				# 1567
-	lwz	r31, 112(r3)				# 1567
-	mtspr	8, r31				# 1567
-	lfs	f1, 80(r3)				# 1568
-	fmul	f2, f0, f1				# 1568
-	lwz	r2, 4(r3)				# 1568
-	slwi	r2, r2, 2				# 1568
-	lwz	r5, 0(r3)				# 1568
-	stfsx	f2, r5, r2				# 1568
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f2, 0(r31)				# 1569
-	fsub	f0, f2, f0				# 1569
-	fmul	f0, f0, f1				# 1569
-	lwz	r2, 32(r3)				# 1569
+beq_else.16265:
+	cmpw	cr7, r11, r7				# 1565
+	bne	cr7, beq_else.16280				# 1565
+	slwi	r2, r10, 2				# 1568
+	lfsx	f1, r5, r2				# 1568
+	lis	r31, ha16(l.12199)
+	addi	r31, r31, lo16(l.12199)
+	lfs	f2, 0(r31)				# 1568
+	fmul	f1, f1, f2				# 1568
+	stw	r10, 4(r3)				# 1568
+	stw	r6, 0(r3)				# 1568
+	stw	r9, 8(r3)				# 1568
+	stfs	f0, 80(r3)				# 1568
+	mfspr	r31, 8				# 1568
+	fmr	f0, f1				# 1568
+	stw	r31, 88(r3)				# 1568
+	addi	r3, r3, 92				# 1568
+	bl	min_caml_sin				# 1568
+	addi	r3, r3, -92				# 1568
+	lwz	r31, 88(r3)				# 1568
+	mtspr	8, r31				# 1568
+	fmul	f0, f0, f0				# 103
+	lfs	f1, 80(r3)				# 1569
+	fmul	f2, f1, f0				# 1569
+	lwz	r2, 8(r3)				# 1569
 	slwi	r2, r2, 2				# 1569
-	stfsx	f0, r5, r2				# 1569
+	lwz	r5, 0(r3)				# 1569
+	stfsx	f2, r5, r2				# 1569
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f2, 0(r31)				# 1570
+	fsub	f0, f2, f0				# 1570
+	fmul	f0, f1, f0				# 1570
+	lwz	r2, 4(r3)				# 1570
+	slwi	r2, r2, 2				# 1570
+	stfsx	f0, r5, r2				# 1570
 	blr
-beq_else.17991:
-	cmpwi	cr7, r11, 4				# 1571
-	bne	cr7, beq_else.17993				# 1571
-	slwi	r8, r9, 2				# 1573
-	lfsx	f1, r5, r8				# 1573
-	lwz	r8, 20(r2)				# 317
-	slwi	r11, r9, 2				# 322
-	lfsx	f2, r8, r11				# 322
-	fsub	f1, f1, f2				# 1573
-	lwz	r8, 16(r2)				# 277
-	slwi	r11, r9, 2				# 282
-	lfsx	f2, r8, r11				# 282
-	stw	r6, 0(r3)				# 1573
-	stfs	f0, 80(r3)				# 1573
-	stw	r10, 4(r3)				# 1573
-	stw	r9, 8(r3)				# 1573
-	stw	r2, 24(r3)				# 1573
-	stw	r5, 28(r3)				# 1573
-	stw	r7, 32(r3)				# 1573
-	stfs	f1, 112(r3)				# 1573
-	mfspr	r31, 8				# 1573
-	fmr	f0, f2				# 1573
-	stw	r31, 120(r3)				# 1573
-	addi	r3, r3, 124				# 1573
-	bl	min_caml_sqrt				# 1573
-	addi	r3, r3, -124				# 1573
-	lwz	r31, 120(r3)				# 1573
-	mtspr	8, r31				# 1573
-	lfs	f1, 112(r3)				# 1573
-	fmul	f0, f1, f0				# 1573
-	lwz	r2, 32(r3)				# 1574
-	slwi	r5, r2, 2				# 1574
-	lwz	r6, 28(r3)				# 1574
-	lfsx	f1, r6, r5				# 1574
-	lwz	r5, 24(r3)				# 337
-	lwz	r7, 20(r5)				# 337
-	slwi	r8, r2, 2				# 342
-	lfsx	f2, r7, r8				# 342
-	fsub	f1, f1, f2				# 1574
-	lwz	r7, 16(r5)				# 297
-	slwi	r8, r2, 2				# 302
-	lfsx	f2, r7, r8				# 302
-	stfs	f0, 120(r3)				# 1574
-	stfs	f1, 128(r3)				# 1574
-	mfspr	r31, 8				# 1574
-	fmr	f0, f2				# 1574
-	stw	r31, 136(r3)				# 1574
-	addi	r3, r3, 140				# 1574
-	bl	min_caml_sqrt				# 1574
-	addi	r3, r3, -140				# 1574
-	lwz	r31, 136(r3)				# 1574
-	mtspr	8, r31				# 1574
-	lfs	f1, 128(r3)				# 1574
-	fmul	f0, f1, f0				# 1574
-	lfs	f1, 120(r3)				# 1575
-	stfs	f0, 136(r3)				# 1575
-	mfspr	r31, 8				# 1575
-	fmr	f0, f1				# 1575
-	stw	r31, 144(r3)				# 1575
-	addi	r3, r3, 148				# 1575
-	bl	min_caml_fsqr				# 1575
-	addi	r3, r3, -148				# 1575
-	lwz	r31, 144(r3)				# 1575
-	mtspr	8, r31				# 1575
-	lfs	f1, 136(r3)				# 1575
-	stfs	f0, 144(r3)				# 1575
-	mfspr	r31, 8				# 1575
-	fmr	f0, f1				# 1575
-	stw	r31, 152(r3)				# 1575
-	addi	r3, r3, 156				# 1575
-	bl	min_caml_fsqr				# 1575
-	addi	r3, r3, -156				# 1575
-	lwz	r31, 152(r3)				# 1575
-	mtspr	8, r31				# 1575
-	lfs	f1, 144(r3)				# 1575
-	fadd	f0, f1, f0				# 1575
-	lfs	f1, 120(r3)				# 1577
-	stfs	f0, 152(r3)				# 1577
+beq_else.16280:
+	cmpw	cr7, r11, r8				# 1572
+	bne	cr7, beq_else.16282				# 1572
+	slwi	r8, r9, 2				# 1575
+	lfsx	f1, r5, r8				# 1575
+	lwz	r8, 20(r2)				# 330
+	slwi	r9, r9, 2				# 335
+	lfsx	f2, r8, r9				# 335
+	fsub	f1, f1, f2				# 1575
+	slwi	r8, r7, 2				# 1576
+	lfsx	f2, r5, r8				# 1576
+	lwz	r2, 20(r2)				# 350
+	slwi	r5, r7, 2				# 355
+	lfsx	f3, r2, r5				# 355
+	fsub	f2, f2, f3				# 1576
+	fmul	f1, f1, f1				# 103
+	fmul	f2, f2, f2				# 103
+	fadd	f1, f1, f2				# 1577
+	stw	r7, 32(r3)				# 1577
+	stw	r6, 0(r3)				# 1577
+	stw	r10, 4(r3)				# 1577
+	stfs	f0, 80(r3)				# 1577
 	mfspr	r31, 8				# 1577
 	fmr	f0, f1				# 1577
-	stw	r31, 160(r3)				# 1577
-	addi	r3, r3, 164				# 1577
-	bl	min_caml_fabs				# 1577
-	addi	r3, r3, -164				# 1577
-	lwz	r31, 160(r3)				# 1577
+	stw	r31, 88(r3)				# 1577
+	addi	r3, r3, 92				# 1577
+	bl	min_caml_sqrt				# 1577
+	addi	r3, r3, -92				# 1577
+	lwz	r31, 88(r3)				# 1577
 	mtspr	8, r31				# 1577
-	lis	r31, ha16(l.12148)
-	addi	r31, r31, lo16(l.12148)
+	lis	r31, ha16(l.12195)
+	addi	r31, r31, lo16(l.12195)
 	lfs	f1, 0(r31)				# 1577
-	stfs	f1, 160(r3)				# 1577
-	mfspr	r31, 8				# 1577
-	stw	r31, 168(r3)				# 1577
-	addi	r3, r3, 172				# 1577
-	bl	min_caml_fless				# 1577
-	addi	r3, r3, -172				# 1577
-	lwz	r31, 168(r3)				# 1577
-	mtspr	8, r31				# 1577
-	lwz	r5, 8(r3)				# 1577
-	cmpw	cr7, r2, r5				# 1577
-	bne	cr7, beq_else.17994				# 1577
-	lfs	f0, 120(r3)				# 1580
-	lfs	f1, 136(r3)				# 1580
-	fdiv	f0, f1, f0				# 1580
-	mfspr	r31, 8				# 1580
-	stw	r31, 168(r3)				# 1580
-	addi	r3, r3, 172				# 1580
-	bl	min_caml_fabs				# 1580
-	addi	r3, r3, -172				# 1580
-	lwz	r31, 168(r3)				# 1580
-	mtspr	8, r31				# 1580
-	mfspr	r31, 8				# 1582
-	stw	r31, 168(r3)				# 1582
-	addi	r3, r3, 172				# 1582
-	bl	min_caml_atan				# 1582
-	addi	r3, r3, -172				# 1582
-	lwz	r31, 168(r3)				# 1582
-	mtspr	8, r31				# 1582
-	lis	r31, ha16(l.12150)
-	addi	r31, r31, lo16(l.12150)
-	lfs	f1, 0(r31)				# 1582
-	fmul	f0, f0, f1				# 1582
-	lis	r31, ha16(l.12151)
-	addi	r31, r31, lo16(l.12151)
-	lfs	f1, 0(r31)				# 1582
-	fdiv	f0, f0, f1				# 1582
-	b	beq_cont.17995				# 1577
-beq_else.17994:
-	lis	r31, ha16(l.12149)
-	addi	r31, r31, lo16(l.12149)
-	lfs	f0, 0(r31)				# 1578
-beq_cont.17995:
-	stfs	f0, 168(r3)				# 1584
-	mfspr	r31, 8				# 1584
-	stw	r31, 176(r3)				# 1584
-	addi	r3, r3, 180				# 1584
-	bl	min_caml_floor				# 1584
-	addi	r3, r3, -180				# 1584
-	lwz	r31, 176(r3)				# 1584
-	mtspr	8, r31				# 1584
-	lfs	f1, 168(r3)				# 1584
-	fsub	f0, f1, f0				# 1584
-	lwz	r2, 4(r3)				# 1586
+	fdiv	f0, f0, f1				# 1577
+	stfs	f0, 88(r3)				# 1578
+	mfspr	r31, 8				# 1578
+	stw	r31, 96(r3)				# 1578
+	addi	r3, r3, 100				# 1578
+	bl	min_caml_floor				# 1578
+	addi	r3, r3, -100				# 1578
+	lwz	r31, 96(r3)				# 1578
+	mtspr	8, r31				# 1578
+	lfs	f1, 88(r3)				# 1578
+	fsub	f0, f1, f0				# 1578
+	lis	r31, ha16(l.12183)
+	addi	r31, r31, lo16(l.12183)
+	lfs	f1, 0(r31)				# 1578
+	fmul	f0, f0, f1				# 1578
+	mfspr	r31, 8				# 1579
+	stw	r31, 96(r3)				# 1579
+	addi	r3, r3, 100				# 1579
+	bl	min_caml_cos				# 1579
+	addi	r3, r3, -100				# 1579
+	lwz	r31, 96(r3)				# 1579
+	mtspr	8, r31				# 1579
+	fmul	f0, f0, f0				# 103
+	lfs	f1, 80(r3)				# 1580
+	fmul	f2, f0, f1				# 1580
+	lwz	r2, 4(r3)				# 1580
+	slwi	r2, r2, 2				# 1580
+	lwz	r5, 0(r3)				# 1580
+	stfsx	f2, r5, r2				# 1580
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f2, 0(r31)				# 1581
+	fsub	f0, f2, f0				# 1581
+	fmul	f0, f0, f1				# 1581
+	lwz	r2, 32(r3)				# 1581
+	slwi	r2, r2, 2				# 1581
+	stfsx	f0, r5, r2				# 1581
+	blr
+beq_else.16282:
+	cmpwi	cr7, r11, 4				# 1583
+	bne	cr7, beq_else.16284				# 1583
+	slwi	r8, r9, 2				# 1585
+	lfsx	f2, r5, r8				# 1585
+	lwz	r8, 20(r2)				# 330
+	slwi	r11, r9, 2				# 335
+	lfsx	f3, r8, r11				# 335
+	fsub	f2, f2, f3				# 1585
+	lwz	r8, 16(r2)				# 290
+	slwi	r11, r9, 2				# 295
+	lfsx	f3, r8, r11				# 295
+	stw	r6, 0(r3)				# 1585
+	stfs	f0, 80(r3)				# 1585
+	stfs	f1, 96(r3)				# 1585
+	stw	r10, 4(r3)				# 1585
+	stw	r9, 8(r3)				# 1585
+	stw	r2, 24(r3)				# 1585
+	stw	r5, 28(r3)				# 1585
+	stw	r7, 32(r3)				# 1585
+	stfs	f2, 104(r3)				# 1585
+	mfspr	r31, 8				# 1585
+	fmr	f0, f3				# 1585
+	stw	r31, 112(r3)				# 1585
+	addi	r3, r3, 116				# 1585
+	bl	min_caml_sqrt				# 1585
+	addi	r3, r3, -116				# 1585
+	lwz	r31, 112(r3)				# 1585
+	mtspr	8, r31				# 1585
+	lfs	f1, 104(r3)				# 1585
+	fmul	f0, f1, f0				# 1585
+	lwz	r2, 32(r3)				# 1586
 	slwi	r5, r2, 2				# 1586
 	lwz	r6, 28(r3)				# 1586
 	lfsx	f1, r6, r5				# 1586
-	lwz	r5, 24(r3)				# 327
-	lwz	r6, 20(r5)				# 327
-	slwi	r7, r2, 2				# 332
-	lfsx	f2, r6, r7				# 332
+	lwz	r5, 24(r3)				# 350
+	lwz	r7, 20(r5)				# 350
+	slwi	r8, r2, 2				# 355
+	lfsx	f2, r7, r8				# 355
 	fsub	f1, f1, f2				# 1586
-	lwz	r5, 16(r5)				# 287
-	slwi	r2, r2, 2				# 292
-	lfsx	f2, r5, r2				# 292
-	stfs	f0, 176(r3)				# 1586
-	stfs	f1, 184(r3)				# 1586
+	lwz	r7, 16(r5)				# 310
+	slwi	r8, r2, 2				# 315
+	lfsx	f2, r7, r8				# 315
+	stfs	f0, 112(r3)				# 1586
+	stfs	f1, 120(r3)				# 1586
 	mfspr	r31, 8				# 1586
 	fmr	f0, f2				# 1586
-	stw	r31, 192(r3)				# 1586
-	addi	r3, r3, 196				# 1586
+	stw	r31, 128(r3)				# 1586
+	addi	r3, r3, 132				# 1586
 	bl	min_caml_sqrt				# 1586
-	addi	r3, r3, -196				# 1586
-	lwz	r31, 192(r3)				# 1586
+	addi	r3, r3, -132				# 1586
+	lwz	r31, 128(r3)				# 1586
 	mtspr	8, r31				# 1586
-	lfs	f1, 184(r3)				# 1586
+	lfs	f1, 120(r3)				# 1586
 	fmul	f0, f1, f0				# 1586
-	lfs	f1, 152(r3)				# 1588
-	stfs	f0, 192(r3)				# 1588
-	mfspr	r31, 8				# 1588
-	fmr	f0, f1				# 1588
-	stw	r31, 200(r3)				# 1588
-	addi	r3, r3, 204				# 1588
-	bl	min_caml_fabs				# 1588
-	addi	r3, r3, -204				# 1588
-	lwz	r31, 200(r3)				# 1588
-	mtspr	8, r31				# 1588
-	lfs	f1, 160(r3)				# 1588
-	mfspr	r31, 8				# 1588
-	stw	r31, 200(r3)				# 1588
-	addi	r3, r3, 204				# 1588
-	bl	min_caml_fless				# 1588
-	addi	r3, r3, -204				# 1588
-	lwz	r31, 200(r3)				# 1588
-	mtspr	8, r31				# 1588
-	lwz	r5, 8(r3)				# 1588
-	cmpw	cr7, r2, r5				# 1588
-	bne	cr7, beq_else.17996				# 1588
-	lfs	f0, 152(r3)				# 1591
-	lfs	f1, 192(r3)				# 1591
-	fdiv	f0, f1, f0				# 1591
-	mfspr	r31, 8				# 1591
-	stw	r31, 200(r3)				# 1591
-	addi	r3, r3, 204				# 1591
-	bl	min_caml_fabs				# 1591
-	addi	r3, r3, -204				# 1591
-	lwz	r31, 200(r3)				# 1591
-	mtspr	8, r31				# 1591
+	lfs	f1, 112(r3)				# 103
+	fmul	f2, f1, f1				# 103
+	fmul	f3, f0, f0				# 103
+	fadd	f2, f2, f3				# 1587
+	stfs	f2, 128(r3)				# 1589
+	stfs	f0, 136(r3)				# 1589
+	mfspr	r31, 8				# 1589
+	fmr	f0, f1				# 1589
+	stw	r31, 144(r3)				# 1589
+	addi	r3, r3, 148				# 1589
+	bl	min_caml_fabs				# 1589
+	addi	r3, r3, -148				# 1589
+	lwz	r31, 144(r3)				# 1589
+	mtspr	8, r31				# 1589
+	lis	r31, ha16(l.12180)
+	addi	r31, r31, lo16(l.12180)
+	lfs	f1, 0(r31)				# 1589
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.16285				# 109
+	addi	r2, 0, 0
+	b	ble_cont.16286				# 109
+ble_else.16285:
+	addi	r2, 0, 1
+ble_cont.16286:
+	lwz	r5, 8(r3)				# 1589
+	stfs	f1, 144(r3)				# 1589
+	cmpw	cr7, r2, r5				# 1589
+	bne	cr7, beq_else.16287				# 1589
+	lfs	f0, 112(r3)				# 1592
+	lfs	f2, 136(r3)				# 1592
+	fdiv	f0, f2, f0				# 1592
 	mfspr	r31, 8				# 1592
-	stw	r31, 200(r3)				# 1592
-	addi	r3, r3, 204				# 1592
-	bl	min_caml_atan				# 1592
-	addi	r3, r3, -204				# 1592
-	lwz	r31, 200(r3)				# 1592
+	stw	r31, 152(r3)				# 1592
+	addi	r3, r3, 156				# 1592
+	bl	min_caml_fabs				# 1592
+	addi	r3, r3, -156				# 1592
+	lwz	r31, 152(r3)				# 1592
 	mtspr	8, r31				# 1592
-	lis	r31, ha16(l.12150)
-	addi	r31, r31, lo16(l.12150)
-	lfs	f1, 0(r31)				# 1592
-	fmul	f0, f0, f1				# 1592
-	lis	r31, ha16(l.12151)
-	addi	r31, r31, lo16(l.12151)
-	lfs	f1, 0(r31)				# 1592
-	fdiv	f0, f0, f1				# 1592
-	b	beq_cont.17997				# 1588
-beq_else.17996:
-	lis	r31, ha16(l.12149)
-	addi	r31, r31, lo16(l.12149)
-	lfs	f0, 0(r31)				# 1589
-beq_cont.17997:
-	stfs	f0, 200(r3)				# 1594
 	mfspr	r31, 8				# 1594
-	stw	r31, 208(r3)				# 1594
-	addi	r3, r3, 212				# 1594
-	bl	min_caml_floor				# 1594
-	addi	r3, r3, -212				# 1594
-	lwz	r31, 208(r3)				# 1594
+	stw	r31, 152(r3)				# 1594
+	addi	r3, r3, 156				# 1594
+	bl	min_caml_atan				# 1594
+	addi	r3, r3, -156				# 1594
+	lwz	r31, 152(r3)				# 1594
 	mtspr	8, r31				# 1594
-	lfs	f1, 200(r3)				# 1594
-	fsub	f0, f1, f0				# 1594
-	lis	r31, ha16(l.12155)
-	addi	r31, r31, lo16(l.12155)
-	lfs	f1, 0(r31)				# 1595
-	lis	r31, ha16(l.12156)
-	addi	r31, r31, lo16(l.12156)
-	lfs	f2, 0(r31)				# 1595
-	lfs	f3, 176(r3)				# 1595
-	fsub	f3, f2, f3				# 1595
-	stfs	f0, 208(r3)				# 1595
-	stfs	f2, 216(r3)				# 1595
-	stfs	f1, 224(r3)				# 1595
-	mfspr	r31, 8				# 1595
-	fmr	f0, f3				# 1595
-	stw	r31, 232(r3)				# 1595
-	addi	r3, r3, 236				# 1595
-	bl	min_caml_fsqr				# 1595
-	addi	r3, r3, -236				# 1595
-	lwz	r31, 232(r3)				# 1595
-	mtspr	8, r31				# 1595
-	lfs	f1, 224(r3)				# 1595
-	fsub	f0, f1, f0				# 1595
-	lfs	f1, 208(r3)				# 1595
-	lfs	f2, 216(r3)				# 1595
-	fsub	f1, f2, f1				# 1595
-	stfs	f0, 232(r3)				# 1595
-	mfspr	r31, 8				# 1595
-	fmr	f0, f1				# 1595
-	stw	r31, 240(r3)				# 1595
-	addi	r3, r3, 244				# 1595
-	bl	min_caml_fsqr				# 1595
-	addi	r3, r3, -244				# 1595
-	lwz	r31, 240(r3)				# 1595
-	mtspr	8, r31				# 1595
-	lfs	f1, 232(r3)				# 1595
-	fsub	f0, f1, f0				# 1595
-	stfs	f0, 240(r3)				# 1596
+	lis	r31, ha16(l.12182)
+	addi	r31, r31, lo16(l.12182)
+	lfs	f1, 0(r31)				# 1594
+	fmul	f0, f0, f1				# 1594
+	lis	r31, ha16(l.12183)
+	addi	r31, r31, lo16(l.12183)
+	lfs	f1, 0(r31)				# 1594
+	fdiv	f0, f0, f1				# 1594
+	b	beq_cont.16288				# 1589
+beq_else.16287:
+	lis	r31, ha16(l.12181)
+	addi	r31, r31, lo16(l.12181)
+	lfs	f0, 0(r31)				# 1590
+beq_cont.16288:
+	stfs	f0, 152(r3)				# 1596
 	mfspr	r31, 8				# 1596
-	stw	r31, 248(r3)				# 1596
-	addi	r3, r3, 252				# 1596
-	bl	min_caml_fisneg				# 1596
-	addi	r3, r3, -252				# 1596
-	lwz	r31, 248(r3)				# 1596
+	stw	r31, 160(r3)				# 1596
+	addi	r3, r3, 164				# 1596
+	bl	min_caml_floor				# 1596
+	addi	r3, r3, -164				# 1596
+	lwz	r31, 160(r3)				# 1596
 	mtspr	8, r31				# 1596
-	lwz	r5, 8(r3)				# 1596
-	cmpw	cr7, r2, r5				# 1596
-	bne	cr7, beq_else.17998				# 1596
-	lfs	f0, 240(r3)				# 1596
-	b	beq_cont.17999				# 1596
-beq_else.17998:
-	lis	r31, ha16(l.11658)
-	addi	r31, r31, lo16(l.11658)
-	lfs	f0, 0(r31)				# 1596
-beq_cont.17999:
-	lfs	f1, 80(r3)				# 1597
-	fmul	f0, f1, f0				# 1597
-	lis	r31, ha16(l.12157)
-	addi	r31, r31, lo16(l.12157)
-	lfs	f1, 0(r31)				# 1597
-	fdiv	f0, f0, f1				# 1597
-	lwz	r2, 32(r3)				# 1597
-	slwi	r2, r2, 2				# 1597
-	lwz	r5, 0(r3)				# 1597
-	stfsx	f0, r5, r2				# 1597
-	blr
-beq_else.17993:
-	blr
-trace_reflections.2794:
-	lwz	r6, 56(r30)				# 1622
-	lwz	r7, 52(r30)				# 1622
-	lwz	r8, 48(r30)				# 1622
-	lwz	r9, 44(r30)				# 1622
-	lwz	r10, 40(r30)				# 1622
-	lwz	r11, 36(r30)				# 1622
-	lwz	r12, 32(r30)				# 1622
-	lwz	r13, 28(r30)				# 1622
-	lwz	r14, 24(r30)				# 1622
-	lwz	r15, 20(r30)				# 1622
-	lwz	r16, 16(r30)				# 1622
-	lwz	r17, 12(r30)				# 1622
-	lwz	r18, 8(r30)				# 1622
-	lfs	f2, 4(r30)				# 1622
-	cmpw	cr7, r17, r2				# 1624
-	bgt	cr7, ble_else.18002				# 1624
-	slwi	r19, r2, 2				# 1625
-	lwzx	r11, r11, r19				# 1625
-	lwz	r19, 4(r11)				# 528
-	slwi	r20, r17, 2				# 1459
-	stfsx	f2, r7, r20				# 1459
-	slwi	r20, r17, 2				# 1460
-	lwzx	r20, r12, r20				# 1460
-	stw	r30, 0(r3)				# 1460
-	stw	r2, 4(r3)				# 1460
-	stfs	f1, 8(r3)				# 1460
-	stw	r8, 16(r3)				# 1460
-	stw	r10, 20(r3)				# 1460
-	stw	r5, 24(r3)				# 1460
-	stfs	f0, 32(r3)				# 1460
-	stw	r16, 40(r3)				# 1460
-	stw	r18, 44(r3)				# 1460
-	stw	r13, 48(r3)				# 1460
-	stw	r19, 52(r3)				# 1460
-	stw	r9, 56(r3)				# 1460
-	stw	r12, 60(r3)				# 1460
-	stw	r11, 64(r3)				# 1460
-	stw	r14, 68(r3)				# 1460
-	stw	r15, 72(r3)				# 1460
-	stw	r7, 76(r3)				# 1460
-	stw	r17, 80(r3)				# 1460
-	mfspr	r31, 8				# 1460
-	mr	r5, r20				# 1460
-	mr	r2, r17				# 1460
-	mr	r30, r6				# 1460
-	mr	r6, r19				# 1460
-	stw	r31, 84(r3)				# 1460
-	addi	r3, r3, 88				# 1460
-	lwz	r31, 0(r30)				# 1460
-	mtspr	9, r31				# 1460
-	bctrl				# 1460
-	addi	r3, r3, -88				# 1460
-	lwz	r31, 84(r3)				# 1460
-	mtspr	8, r31				# 1460
-	lwz	r2, 80(r3)				# 1461
-	slwi	r5, r2, 2				# 1461
-	lwz	r6, 76(r3)				# 1461
-	lfsx	f1, r6, r5				# 1461
-	lis	r31, ha16(l.11949)
-	addi	r31, r31, lo16(l.11949)
-	lfs	f0, 0(r31)				# 1463
-	stfs	f1, 88(r3)				# 1463
-	mfspr	r31, 8				# 1463
-	stw	r31, 96(r3)				# 1463
-	addi	r3, r3, 100				# 1463
-	bl	min_caml_fless				# 1463
-	addi	r3, r3, -100				# 1463
-	lwz	r31, 96(r3)				# 1463
-	mtspr	8, r31				# 1463
-	lwz	r5, 80(r3)				# 1463
-	cmpw	cr7, r2, r5				# 1463
-	bne	cr7, beq_else.18005				# 1463
+	lfs	f1, 152(r3)				# 1596
+	fsub	f0, f1, f0				# 1596
+	lwz	r2, 4(r3)				# 1598
+	slwi	r5, r2, 2				# 1598
+	lwz	r6, 28(r3)				# 1598
+	lfsx	f1, r6, r5				# 1598
+	lwz	r5, 24(r3)				# 340
+	lwz	r6, 20(r5)				# 340
+	slwi	r7, r2, 2				# 345
+	lfsx	f2, r6, r7				# 345
+	fsub	f1, f1, f2				# 1598
+	lwz	r5, 16(r5)				# 300
+	slwi	r2, r2, 2				# 305
+	lfsx	f2, r5, r2				# 305
+	stfs	f0, 160(r3)				# 1598
+	stfs	f1, 168(r3)				# 1598
+	mfspr	r31, 8				# 1598
+	fmr	f0, f2				# 1598
+	stw	r31, 176(r3)				# 1598
+	addi	r3, r3, 180				# 1598
+	bl	min_caml_sqrt				# 1598
+	addi	r3, r3, -180				# 1598
+	lwz	r31, 176(r3)				# 1598
+	mtspr	8, r31				# 1598
+	lfs	f1, 168(r3)				# 1598
+	fmul	f0, f1, f0				# 1598
+	lfs	f1, 128(r3)				# 1600
+	stfs	f0, 176(r3)				# 1600
+	mfspr	r31, 8				# 1600
+	fmr	f0, f1				# 1600
+	stw	r31, 184(r3)				# 1600
+	addi	r3, r3, 188				# 1600
+	bl	min_caml_fabs				# 1600
+	addi	r3, r3, -188				# 1600
+	lwz	r31, 184(r3)				# 1600
+	mtspr	8, r31				# 1600
+	lfs	f1, 144(r3)				# 109
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.16289				# 109
 	addi	r2, 0, 0
-	b	beq_cont.18006				# 1463
-beq_else.18005:
+	b	ble_cont.16290				# 109
+ble_else.16289:
+	addi	r2, 0, 1
+ble_cont.16290:
+	lwz	r5, 8(r3)				# 1600
+	cmpw	cr7, r2, r5				# 1600
+	bne	cr7, beq_else.16291				# 1600
+	lfs	f0, 128(r3)				# 1603
+	lfs	f1, 176(r3)				# 1603
+	fdiv	f0, f1, f0				# 1603
+	mfspr	r31, 8				# 1603
+	stw	r31, 184(r3)				# 1603
+	addi	r3, r3, 188				# 1603
+	bl	min_caml_fabs				# 1603
+	addi	r3, r3, -188				# 1603
+	lwz	r31, 184(r3)				# 1603
+	mtspr	8, r31				# 1603
+	mfspr	r31, 8				# 1604
+	stw	r31, 184(r3)				# 1604
+	addi	r3, r3, 188				# 1604
+	bl	min_caml_atan				# 1604
+	addi	r3, r3, -188				# 1604
+	lwz	r31, 184(r3)				# 1604
+	mtspr	8, r31				# 1604
 	lis	r31, ha16(l.12182)
 	addi	r31, r31, lo16(l.12182)
-	lfs	f1, 0(r31)				# 1464
-	lfs	f0, 88(r3)				# 1464
-	mfspr	r31, 8				# 1464
-	stw	r31, 96(r3)				# 1464
-	addi	r3, r3, 100				# 1464
-	bl	min_caml_fless				# 1464
-	addi	r3, r3, -100				# 1464
-	lwz	r31, 96(r3)				# 1464
-	mtspr	8, r31				# 1464
-beq_cont.18006:
-	lwz	r5, 80(r3)				# 1629
-	cmpw	cr7, r2, r5				# 1629
-	bne	cr7, beq_else.18007				# 1629
-	b	beq_cont.18008				# 1629
-beq_else.18007:
-	slwi	r2, r5, 2				# 1630
-	lwz	r6, 72(r3)				# 1630
-	lwzx	r2, r6, r2				# 1630
-	slwi	r2, r2, 2				# 1630
-	slwi	r6, r5, 2				# 1630
-	lwz	r7, 68(r3)				# 1630
-	lwzx	r6, r7, r6				# 1630
-	add	r2, r2, r6				# 1630
-	lwz	r6, 64(r3)				# 522
-	lwz	r7, 0(r6)				# 522
-	cmpw	cr7, r2, r7				# 1631
-	bne	cr7, beq_else.18009				# 1631
-	slwi	r2, r5, 2				# 1633
-	lwz	r7, 60(r3)				# 1633
-	lwzx	r2, r7, r2				# 1633
-	lwz	r30, 56(r3)				# 1633
-	mfspr	r31, 8				# 1633
-	mr	r29, r5				# 1633
-	mr	r5, r2				# 1633
-	mr	r2, r29				# 1633
-	stw	r31, 96(r3)				# 1633
-	addi	r3, r3, 100				# 1633
-	lwz	r31, 0(r30)				# 1633
-	mtspr	9, r31				# 1633
-	bctrl				# 1633
-	addi	r3, r3, -100				# 1633
-	lwz	r31, 96(r3)				# 1633
-	mtspr	8, r31				# 1633
-	lwz	r5, 80(r3)				# 1633
-	cmpw	cr7, r2, r5				# 1633
-	bne	cr7, beq_else.18011				# 1633
-	lwz	r2, 52(r3)				# 508
-	lwz	r6, 0(r2)				# 508
-	slwi	r7, r5, 2				# 182
-	lwz	r8, 48(r3)				# 182
-	lfsx	f0, r8, r7				# 182
-	slwi	r7, r5, 2				# 182
-	lfsx	f1, r6, r7				# 182
-	fmul	f0, f0, f1				# 182
-	lwz	r7, 44(r3)				# 182
-	slwi	r9, r7, 2				# 182
-	lfsx	f1, r8, r9				# 182
-	slwi	r9, r7, 2				# 182
-	lfsx	f2, r6, r9				# 182
-	fmul	f1, f1, f2				# 182
-	fadd	f0, f0, f1				# 182
-	lwz	r9, 40(r3)				# 182
-	slwi	r10, r9, 2				# 182
-	lfsx	f1, r8, r10				# 182
-	slwi	r8, r9, 2				# 182
-	lfsx	f2, r6, r8				# 182
-	fmul	f1, f1, f2				# 182
-	fadd	f0, f0, f1				# 182
-	lwz	r6, 64(r3)				# 534
-	lfs	f1, 8(r6)				# 534
-	lfs	f2, 32(r3)				# 1637
-	fmul	f3, f1, f2				# 1637
-	fmul	f0, f3, f0				# 1637
-	lwz	r2, 0(r2)				# 508
-	slwi	r6, r5, 2				# 182
-	lwz	r8, 24(r3)				# 182
-	lfsx	f3, r8, r6				# 182
-	slwi	r6, r5, 2				# 182
-	lfsx	f4, r2, r6				# 182
-	fmul	f3, f3, f4				# 182
-	slwi	r6, r7, 2				# 182
-	lfsx	f4, r8, r6				# 182
-	slwi	r6, r7, 2				# 182
-	lfsx	f5, r2, r6				# 182
-	fmul	f4, f4, f5				# 182
-	fadd	f3, f3, f4				# 182
-	slwi	r6, r9, 2				# 182
-	lfsx	f4, r8, r6				# 182
-	slwi	r6, r9, 2				# 182
-	lfsx	f5, r2, r6				# 182
-	fmul	f4, f4, f5				# 182
-	fadd	f3, f3, f4				# 182
-	fmul	f1, f1, f3				# 1638
-	stfs	f1, 96(r3)				# 1608
-	stfs	f0, 104(r3)				# 1608
-	mfspr	r31, 8				# 1608
-	stw	r31, 112(r3)				# 1608
-	addi	r3, r3, 116				# 1608
-	bl	min_caml_fispos				# 1608
-	addi	r3, r3, -116				# 1608
-	lwz	r31, 112(r3)				# 1608
-	mtspr	8, r31				# 1608
-	lwz	r5, 80(r3)				# 1608
+	lfs	f1, 0(r31)				# 1604
+	fmul	f0, f0, f1				# 1604
+	lis	r31, ha16(l.12183)
+	addi	r31, r31, lo16(l.12183)
+	lfs	f1, 0(r31)				# 1604
+	fdiv	f0, f0, f1				# 1604
+	b	beq_cont.16292				# 1600
+beq_else.16291:
+	lis	r31, ha16(l.12181)
+	addi	r31, r31, lo16(l.12181)
+	lfs	f0, 0(r31)				# 1601
+beq_cont.16292:
+	stfs	f0, 184(r3)				# 1606
+	mfspr	r31, 8				# 1606
+	stw	r31, 192(r3)				# 1606
+	addi	r3, r3, 196				# 1606
+	bl	min_caml_floor				# 1606
+	addi	r3, r3, -196				# 1606
+	lwz	r31, 192(r3)				# 1606
+	mtspr	8, r31				# 1606
+	lfs	f1, 184(r3)				# 1606
+	fsub	f0, f1, f0				# 1606
+	lis	r31, ha16(l.12187)
+	addi	r31, r31, lo16(l.12187)
+	lfs	f1, 0(r31)				# 1607
+	lis	r31, ha16(l.12188)
+	addi	r31, r31, lo16(l.12188)
+	lfs	f2, 0(r31)				# 1607
+	lfs	f3, 160(r3)				# 1607
+	fsub	f3, f2, f3				# 1607
+	fmul	f3, f3, f3				# 103
+	fsub	f1, f1, f3				# 1607
+	fsub	f0, f2, f0				# 1607
+	fmul	f0, f0, f0				# 103
+	fsub	f0, f1, f0				# 1607
+	lfs	f1, 96(r3)				# 115
+	fcmpu	cr7, f1, f0				# 115
+	bgt	cr7, ble_else.16293				# 115
+	addi	r2, 0, 0
+	b	ble_cont.16294				# 115
+ble_else.16293:
+	addi	r2, 0, 1
+ble_cont.16294:
+	lwz	r5, 8(r3)				# 1608
 	cmpw	cr7, r2, r5				# 1608
-	bne	cr7, beq_else.18013				# 1608
-	b	beq_cont.18014				# 1608
-beq_else.18013:
-	slwi	r2, r5, 2				# 192
-	lwz	r6, 20(r3)				# 192
-	lfsx	f0, r6, r2				# 192
-	slwi	r2, r5, 2				# 192
-	lwz	r7, 16(r3)				# 192
-	lfsx	f1, r7, r2				# 192
-	lfs	f2, 104(r3)				# 192
-	fmul	f1, f2, f1				# 192
-	fadd	f0, f0, f1				# 192
-	slwi	r2, r5, 2				# 192
-	stfsx	f0, r6, r2				# 192
-	lwz	r2, 44(r3)				# 193
-	slwi	r8, r2, 2				# 193
-	lfsx	f0, r6, r8				# 193
-	slwi	r8, r2, 2				# 193
-	lfsx	f1, r7, r8				# 193
-	fmul	f1, f2, f1				# 193
-	fadd	f0, f0, f1				# 193
-	slwi	r8, r2, 2				# 193
-	stfsx	f0, r6, r8				# 193
-	lwz	r8, 40(r3)				# 194
-	slwi	r9, r8, 2				# 194
-	lfsx	f0, r6, r9				# 194
-	slwi	r9, r8, 2				# 194
-	lfsx	f1, r7, r9				# 194
-	fmul	f1, f2, f1				# 194
-	fadd	f0, f0, f1				# 194
-	slwi	r7, r8, 2				# 194
-	stfsx	f0, r6, r7				# 194
-beq_cont.18014:
-	lfs	f0, 96(r3)				# 1613
-	mfspr	r31, 8				# 1613
-	stw	r31, 112(r3)				# 1613
-	addi	r3, r3, 116				# 1613
-	bl	min_caml_fispos				# 1613
-	addi	r3, r3, -116				# 1613
-	lwz	r31, 112(r3)				# 1613
-	mtspr	8, r31				# 1613
-	lwz	r5, 80(r3)				# 1613
-	cmpw	cr7, r2, r5				# 1613
-	bne	cr7, beq_else.18015				# 1613
-	b	beq_cont.18016				# 1613
-beq_else.18015:
-	lfs	f0, 96(r3)				# 1614
-	mfspr	r31, 8				# 1614
-	stw	r31, 112(r3)				# 1614
-	addi	r3, r3, 116				# 1614
-	bl	min_caml_fsqr				# 1614
-	addi	r3, r3, -116				# 1614
-	lwz	r31, 112(r3)				# 1614
-	mtspr	8, r31				# 1614
-	mfspr	r31, 8				# 1614
-	stw	r31, 112(r3)				# 1614
-	addi	r3, r3, 116				# 1614
-	bl	min_caml_fsqr				# 1614
-	addi	r3, r3, -116				# 1614
-	lwz	r31, 112(r3)				# 1614
-	mtspr	8, r31				# 1614
-	lfs	f1, 8(r3)				# 1614
-	fmul	f0, f0, f1				# 1614
-	lwz	r2, 80(r3)				# 1615
-	slwi	r5, r2, 2				# 1615
-	lwz	r6, 20(r3)				# 1615
-	lfsx	f2, r6, r5				# 1615
-	fadd	f2, f2, f0				# 1615
-	slwi	r2, r2, 2				# 1615
-	stfsx	f2, r6, r2				# 1615
-	lwz	r2, 44(r3)				# 1616
-	slwi	r5, r2, 2				# 1616
-	lfsx	f2, r6, r5				# 1616
-	fadd	f2, f2, f0				# 1616
-	slwi	r5, r2, 2				# 1616
-	stfsx	f2, r6, r5				# 1616
-	lwz	r5, 40(r3)				# 1617
-	slwi	r7, r5, 2				# 1617
-	lfsx	f2, r6, r7				# 1617
-	fadd	f0, f2, f0				# 1617
-	slwi	r5, r5, 2				# 1617
-	stfsx	f0, r6, r5				# 1617
-beq_cont.18016:
-	b	beq_cont.18012				# 1633
-beq_else.18011:
-beq_cont.18012:
-	b	beq_cont.18010				# 1631
-beq_else.18009:
-beq_cont.18010:
-beq_cont.18008:
-	lwz	r2, 44(r3)				# 1643
-	lwz	r5, 4(r3)				# 1643
-	sub	r2, r5, r2				# 1643
-	lfs	f0, 32(r3)				# 1643
-	lfs	f1, 8(r3)				# 1643
-	lwz	r5, 24(r3)				# 1643
-	lwz	r30, 0(r3)				# 1643
-	lwz	r29, 0(r30)				# 1643
-	mtspr	9, r29
-	bctr				# 1643
-ble_else.18002:
+	bne	cr7, beq_else.16295				# 1608
+	b	beq_cont.16296				# 1608
+beq_else.16295:
+	lis	r31, ha16(l.11690)
+	addi	r31, r31, lo16(l.11690)
+	lfs	f0, 0(r31)				# 1608
+beq_cont.16296:
+	lfs	f1, 80(r3)				# 1609
+	fmul	f0, f1, f0				# 1609
+	lis	r31, ha16(l.12189)
+	addi	r31, r31, lo16(l.12189)
+	lfs	f1, 0(r31)				# 1609
+	fdiv	f0, f0, f1				# 1609
+	lwz	r2, 32(r3)				# 1609
+	slwi	r2, r2, 2				# 1609
+	lwz	r5, 0(r3)				# 1609
+	stfsx	f0, r5, r2				# 1609
 	blr
-trace_ray.2799:
-	lwz	r7, 108(r30)				# 1649
-	lwz	r8, 104(r30)				# 1649
-	lwz	r9, 100(r30)				# 1649
-	lwz	r10, 96(r30)				# 1649
-	lwz	r11, 92(r30)				# 1649
-	lwz	r12, 88(r30)				# 1649
-	lwz	r13, 84(r30)				# 1649
-	lwz	r14, 80(r30)				# 1649
-	lwz	r15, 76(r30)				# 1649
-	lwz	r16, 72(r30)				# 1649
-	lwz	r17, 68(r30)				# 1649
-	lwz	r18, 64(r30)				# 1649
-	lwz	r19, 60(r30)				# 1649
-	lwz	r20, 56(r30)				# 1649
-	lwz	r21, 52(r30)				# 1649
-	lwz	r22, 48(r30)				# 1649
-	lwz	r23, 44(r30)				# 1649
-	lwz	r24, 40(r30)				# 1649
-	lwz	r25, 36(r30)				# 1649
-	lwz	r26, 32(r30)				# 1649
-	lwz	r27, 28(r30)				# 1649
-	lwz	r28, 24(r30)				# 1649
-	lwz	r29, 20(r30)				# 1649
-	stw	r8, 0(r3)				# 1649
-	lwz	r8, 16(r30)				# 1649
-	stw	r20, 4(r3)				# 1649
-	lwz	r20, 12(r30)				# 1649
-	lfs	f2, 8(r30)				# 1649
-	lfs	f3, 4(r30)				# 1649
-	cmpwi	cr7, r2, 4				# 1650
-	bgt	cr7, ble_else.18018				# 1650
-	stw	r30, 8(r3)				# 455
-	lwz	r30, 8(r6)				# 455
-	stw	r15, 12(r3)				# 1370
-	slwi	r15, r8, 2				# 1370
-	stfsx	f2, r10, r15				# 1370
-	slwi	r15, r8, 2				# 1371
-	lwzx	r15, r17, r15				# 1371
-	stfs	f1, 16(r3)				# 1371
-	stw	r21, 24(r3)				# 1371
-	stw	r12, 28(r3)				# 1371
-	stw	r14, 32(r3)				# 1371
-	stw	r17, 36(r3)				# 1371
-	stw	r11, 40(r3)				# 1371
-	stw	r6, 44(r3)				# 1371
-	stw	r7, 48(r3)				# 1371
-	stw	r13, 52(r3)				# 1371
-	stw	r24, 56(r3)				# 1371
-	stw	r26, 60(r3)				# 1371
-	stw	r19, 64(r3)				# 1371
-	stfs	f3, 72(r3)				# 1371
-	stw	r23, 80(r3)				# 1371
-	stw	r18, 84(r3)				# 1371
-	stw	r25, 88(r3)				# 1371
-	stw	r16, 92(r3)				# 1371
-	stw	r27, 96(r3)				# 1371
-	stfs	f0, 104(r3)				# 1371
-	stw	r28, 112(r3)				# 1371
-	stw	r20, 116(r3)				# 1371
-	stw	r22, 120(r3)				# 1371
-	stw	r5, 124(r3)				# 1371
-	stw	r30, 128(r3)				# 1371
-	stw	r29, 132(r3)				# 1371
-	stw	r2, 136(r3)				# 1371
-	stw	r10, 140(r3)				# 1371
-	stw	r8, 144(r3)				# 1371
-	mfspr	r31, 8				# 1371
-	mr	r6, r5				# 1371
-	mr	r2, r8				# 1371
-	mr	r30, r9				# 1371
-	mr	r5, r15				# 1371
-	stw	r31, 148(r3)				# 1371
-	addi	r3, r3, 152				# 1371
-	lwz	r31, 0(r30)				# 1371
-	mtspr	9, r31				# 1371
-	bctrl				# 1371
-	addi	r3, r3, -152				# 1371
-	lwz	r31, 148(r3)				# 1371
-	mtspr	8, r31				# 1371
-	lwz	r2, 144(r3)				# 1372
-	slwi	r5, r2, 2				# 1372
-	lwz	r6, 140(r3)				# 1372
-	lfsx	f1, r6, r5				# 1372
-	lis	r31, ha16(l.11949)
-	addi	r31, r31, lo16(l.11949)
-	lfs	f0, 0(r31)				# 1374
-	stfs	f1, 152(r3)				# 1374
-	mfspr	r31, 8				# 1374
-	stw	r31, 160(r3)				# 1374
-	addi	r3, r3, 164				# 1374
-	bl	min_caml_fless				# 1374
-	addi	r3, r3, -164				# 1374
-	lwz	r31, 160(r3)				# 1374
-	mtspr	8, r31				# 1374
-	lwz	r5, 144(r3)				# 1374
-	cmpw	cr7, r2, r5				# 1374
-	bne	cr7, beq_else.18022				# 1374
+beq_else.16284:
+	blr
+trace_reflections.2812:
+	lwz	r6, 60(r1)				# 1634
+	lwz	r7, 56(r1)				# 1634
+	lwz	r8, 52(r1)				# 1634
+	lwz	r9, 48(r1)				# 1634
+	lwz	r10, 44(r1)				# 1634
+	lwz	r11, 40(r1)				# 1634
+	lwz	r12, 36(r1)				# 1634
+	lwz	r13, 32(r1)				# 1634
+	lwz	r14, 28(r1)				# 1634
+	lwz	r15, 24(r1)				# 1634
+	lwz	r16, 20(r1)				# 1634
+	lwz	r17, 16(r1)				# 1634
+	lwz	r18, 12(r1)				# 1634
+	lfs	f2, 8(r1)				# 1634
+	lfs	f3, 4(r1)				# 1634
+	cmpw	cr7, r17, r2				# 1636
+	bgt	cr7, ble_else.16299				# 1636
+	slwi	r19, r2, 2				# 1637
+	lwzx	r11, r11, r19				# 1637
+	lwz	r19, 4(r11)				# 541
+	slwi	r20, r17, 2				# 1472
+	stfsx	f2, r7, r20				# 1472
+	slwi	r20, r17, 2				# 1473
+	lwzx	r20, r12, r20				# 1473
+	stw	r1, 0(r3)				# 1473
+	stw	r2, 4(r3)				# 1473
+	stfs	f1, 8(r3)				# 1473
+	stw	r8, 16(r3)				# 1473
+	stw	r10, 20(r3)				# 1473
+	stfs	f3, 24(r3)				# 1473
+	stw	r5, 32(r3)				# 1473
+	stfs	f0, 40(r3)				# 1473
+	stw	r16, 48(r3)				# 1473
+	stw	r18, 52(r3)				# 1473
+	stw	r13, 56(r3)				# 1473
+	stw	r19, 60(r3)				# 1473
+	stw	r9, 64(r3)				# 1473
+	stw	r12, 68(r3)				# 1473
+	stw	r11, 72(r3)				# 1473
+	stw	r14, 76(r3)				# 1473
+	stw	r15, 80(r3)				# 1473
+	stw	r7, 84(r3)				# 1473
+	stw	r17, 88(r3)				# 1473
+	mfspr	r31, 8				# 1473
+	mr	r5, r20				# 1473
+	mr	r2, r17				# 1473
+	mr	r1, r6				# 1473
+	mr	r6, r19				# 1473
+	stw	r31, 92(r3)				# 1473
+	addi	r3, r3, 96				# 1473
+	lwz	r31, 0(r1)				# 1473
+	mtspr	9, r31				# 1473
+	bctr				# 1473
+	addi	r3, r3, -96				# 1473
+	lwz	r31, 92(r3)				# 1473
+	mtspr	8, r31				# 1473
+	lwz	r2, 88(r3)				# 1474
+	slwi	r5, r2, 2				# 1474
+	lwz	r6, 84(r3)				# 1474
+	lfsx	f0, r6, r5				# 1474
+	lis	r31, ha16(l.11981)
+	addi	r31, r31, lo16(l.11981)
+	lfs	f1, 0(r31)				# 1476
+	fcmpu	cr7, f0, f1				# 109
+	bgt	cr7, ble_else.16301				# 109
+	addi	r5, 0, 0
+	b	ble_cont.16302				# 109
+ble_else.16301:
+	addi	r5, 0, 1
+ble_cont.16302:
+	cmpw	cr7, r5, r2				# 1476
+	bne	cr7, beq_else.16303				# 1476
+	addi	r5, 0, 0
+	b	beq_cont.16304				# 1476
+beq_else.16303:
+	lis	r31, ha16(l.12214)
+	addi	r31, r31, lo16(l.12214)
+	lfs	f1, 0(r31)				# 1477
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.16305				# 109
+	addi	r5, 0, 0
+	b	ble_cont.16306				# 109
+ble_else.16305:
+	addi	r5, 0, 1
+ble_cont.16306:
+beq_cont.16304:
+	cmpw	cr7, r5, r2				# 1641
+	bne	cr7, beq_else.16307				# 1641
+	b	beq_cont.16308				# 1641
+beq_else.16307:
+	slwi	r5, r2, 2				# 1642
+	lwz	r6, 80(r3)				# 1642
+	lwzx	r5, r6, r5				# 1642
+	slwi	r5, r5, 2				# 1642
+	slwi	r6, r2, 2				# 1642
+	lwz	r7, 76(r3)				# 1642
+	lwzx	r6, r7, r6				# 1642
+	add	r5, r5, r6				# 1642
+	lwz	r6, 72(r3)				# 535
+	lwz	r7, 0(r6)				# 535
+	cmpw	cr7, r5, r7				# 1643
+	bne	cr7, beq_else.16309				# 1643
+	slwi	r5, r2, 2				# 1645
+	lwz	r7, 68(r3)				# 1645
+	lwzx	r5, r7, r5				# 1645
+	lwz	r1, 64(r3)				# 1645
+	mfspr	r31, 8				# 1645
+	stw	r31, 92(r3)				# 1645
+	addi	r3, r3, 96				# 1645
+	lwz	r31, 0(r1)				# 1645
+	mtspr	9, r31				# 1645
+	bctr				# 1645
+	addi	r3, r3, -96				# 1645
+	lwz	r31, 92(r3)				# 1645
+	mtspr	8, r31				# 1645
+	lwz	r5, 88(r3)				# 1645
+	cmpw	cr7, r2, r5				# 1645
+	bne	cr7, beq_else.16311				# 1645
+	lwz	r2, 60(r3)				# 521
+	lwz	r6, 0(r2)				# 521
+	slwi	r7, r5, 2				# 195
+	lwz	r8, 56(r3)				# 195
+	lfsx	f0, r8, r7				# 195
+	slwi	r7, r5, 2				# 195
+	lfsx	f1, r6, r7				# 195
+	fmul	f0, f0, f1				# 195
+	lwz	r7, 52(r3)				# 195
+	slwi	r9, r7, 2				# 195
+	lfsx	f1, r8, r9				# 195
+	slwi	r9, r7, 2				# 195
+	lfsx	f2, r6, r9				# 195
+	fmul	f1, f1, f2				# 195
+	fadd	f0, f0, f1				# 195
+	lwz	r9, 48(r3)				# 195
+	slwi	r10, r9, 2				# 195
+	lfsx	f1, r8, r10				# 195
+	slwi	r8, r9, 2				# 195
+	lfsx	f2, r6, r8				# 195
+	fmul	f1, f1, f2				# 195
+	fadd	f0, f0, f1				# 195
+	lwz	r6, 72(r3)				# 547
+	lfs	f1, 8(r6)				# 547
+	lfs	f2, 40(r3)				# 1649
+	fmul	f3, f1, f2				# 1649
+	fmul	f0, f3, f0				# 1649
+	lwz	r2, 0(r2)				# 521
+	slwi	r6, r5, 2				# 195
+	lwz	r8, 32(r3)				# 195
+	lfsx	f3, r8, r6				# 195
+	slwi	r6, r5, 2				# 195
+	lfsx	f4, r2, r6				# 195
+	fmul	f3, f3, f4				# 195
+	slwi	r6, r7, 2				# 195
+	lfsx	f4, r8, r6				# 195
+	slwi	r6, r7, 2				# 195
+	lfsx	f5, r2, r6				# 195
+	fmul	f4, f4, f5				# 195
+	fadd	f3, f3, f4				# 195
+	slwi	r6, r9, 2				# 195
+	lfsx	f4, r8, r6				# 195
+	slwi	r6, r9, 2				# 195
+	lfsx	f5, r2, r6				# 195
+	fmul	f4, f4, f5				# 195
+	fadd	f3, f3, f4				# 195
+	fmul	f1, f1, f3				# 1650
+	lfs	f3, 24(r3)				# 113
+	fcmpu	cr7, f0, f3				# 113
+	bgt	cr7, ble_else.16313				# 113
 	addi	r2, 0, 0
-	b	beq_cont.18023				# 1374
-beq_else.18022:
-	lis	r31, ha16(l.12182)
-	addi	r31, r31, lo16(l.12182)
-	lfs	f1, 0(r31)				# 1375
-	lfs	f0, 152(r3)				# 1375
-	mfspr	r31, 8				# 1375
-	stw	r31, 160(r3)				# 1375
-	addi	r3, r3, 164				# 1375
-	bl	min_caml_fless				# 1375
-	addi	r3, r3, -164				# 1375
-	lwz	r31, 160(r3)				# 1375
-	mtspr	8, r31				# 1375
-beq_cont.18023:
-	lwz	r5, 144(r3)				# 1652
-	cmpw	cr7, r2, r5				# 1652
-	bne	cr7, beq_else.18024				# 1652
-	lwz	r2, 136(r3)				# 1715
-	slwi	r6, r2, 2				# 1715
-	lwz	r7, 128(r3)				# 1715
-	lwz	r8, 132(r3)				# 1715
-	stwx	r8, r7, r6				# 1715
-	cmpw	cr7, r2, r5				# 1717
-	bne	cr7, beq_else.18025				# 1717
+	b	ble_cont.16314				# 113
+ble_else.16313:
+	addi	r2, 0, 1
+ble_cont.16314:
+	cmpw	cr7, r2, r5				# 1620
+	bne	cr7, beq_else.16315				# 1620
+	b	beq_cont.16316				# 1620
+beq_else.16315:
+	slwi	r2, r5, 2				# 205
+	lwz	r6, 20(r3)				# 205
+	lfsx	f4, r6, r2				# 205
+	slwi	r2, r5, 2				# 205
+	lwz	r10, 16(r3)				# 205
+	lfsx	f5, r10, r2				# 205
+	fmul	f5, f0, f5				# 205
+	fadd	f4, f4, f5				# 205
+	slwi	r2, r5, 2				# 205
+	stfsx	f4, r6, r2				# 205
+	slwi	r2, r7, 2				# 206
+	lfsx	f4, r6, r2				# 206
+	slwi	r2, r7, 2				# 206
+	lfsx	f5, r10, r2				# 206
+	fmul	f5, f0, f5				# 206
+	fadd	f4, f4, f5				# 206
+	slwi	r2, r7, 2				# 206
+	stfsx	f4, r6, r2				# 206
+	slwi	r2, r9, 2				# 207
+	lfsx	f4, r6, r2				# 207
+	slwi	r2, r9, 2				# 207
+	lfsx	f5, r10, r2				# 207
+	fmul	f0, f0, f5				# 207
+	fadd	f0, f4, f0				# 207
+	slwi	r2, r9, 2				# 207
+	stfsx	f0, r6, r2				# 207
+beq_cont.16316:
+	fcmpu	cr7, f1, f3				# 113
+	bgt	cr7, ble_else.16317				# 113
+	addi	r2, 0, 0
+	b	ble_cont.16318				# 113
+ble_else.16317:
+	addi	r2, 0, 1
+ble_cont.16318:
+	cmpw	cr7, r2, r5				# 1625
+	bne	cr7, beq_else.16319				# 1625
+	b	beq_cont.16320				# 1625
+beq_else.16319:
+	fmul	f0, f1, f1				# 103
+	fmul	f0, f0, f0				# 103
+	lfs	f1, 8(r3)				# 1626
+	fmul	f0, f0, f1				# 1626
+	slwi	r2, r5, 2				# 1627
+	lwz	r6, 20(r3)				# 1627
+	lfsx	f3, r6, r2				# 1627
+	fadd	f3, f3, f0				# 1627
+	slwi	r2, r5, 2				# 1627
+	stfsx	f3, r6, r2				# 1627
+	slwi	r2, r7, 2				# 1628
+	lfsx	f3, r6, r2				# 1628
+	fadd	f3, f3, f0				# 1628
+	slwi	r2, r7, 2				# 1628
+	stfsx	f3, r6, r2				# 1628
+	slwi	r2, r9, 2				# 1629
+	lfsx	f3, r6, r2				# 1629
+	fadd	f0, f3, f0				# 1629
+	slwi	r2, r9, 2				# 1629
+	stfsx	f0, r6, r2				# 1629
+beq_cont.16320:
+	b	beq_cont.16312				# 1645
+beq_else.16311:
+beq_cont.16312:
+	b	beq_cont.16310				# 1643
+beq_else.16309:
+beq_cont.16310:
+beq_cont.16308:
+	lwz	r2, 52(r3)				# 1655
+	lwz	r5, 4(r3)				# 1655
+	sub	r2, r5, r2				# 1655
+	lfs	f0, 40(r3)				# 1655
+	lfs	f1, 8(r3)				# 1655
+	lwz	r5, 32(r3)				# 1655
+	lwz	r1, 0(r3)				# 1655
+	lwz	r30, 0(r1)				# 1655
+	mtspr	9, r30
+	bctr				# 1655
+ble_else.16299:
 	blr
-beq_else.18025:
-	slwi	r2, r5, 2				# 182
-	lwz	r6, 124(r3)				# 182
-	lfsx	f0, r6, r2				# 182
-	slwi	r2, r5, 2				# 182
-	lwz	r7, 120(r3)				# 182
-	lfsx	f1, r7, r2				# 182
-	fmul	f0, f0, f1				# 182
-	lwz	r2, 116(r3)				# 182
-	slwi	r8, r2, 2				# 182
-	lfsx	f1, r6, r8				# 182
-	slwi	r8, r2, 2				# 182
-	lfsx	f2, r7, r8				# 182
-	fmul	f1, f1, f2				# 182
-	fadd	f0, f0, f1				# 182
-	lwz	r8, 112(r3)				# 182
-	slwi	r9, r8, 2				# 182
-	lfsx	f1, r6, r9				# 182
-	slwi	r6, r8, 2				# 182
-	lfsx	f2, r7, r6				# 182
-	fmul	f1, f1, f2				# 182
-	fadd	f0, f0, f1				# 182
-	mfspr	r31, 8				# 1718
-	stw	r31, 160(r3)				# 1718
-	addi	r3, r3, 164				# 1718
-	bl	min_caml_fneg				# 1718
-	addi	r3, r3, -164				# 1718
-	lwz	r31, 160(r3)				# 1718
-	mtspr	8, r31				# 1718
-	stfs	f0, 160(r3)				# 1720
-	mfspr	r31, 8				# 1720
-	stw	r31, 168(r3)				# 1720
-	addi	r3, r3, 172				# 1720
-	bl	min_caml_fispos				# 1720
-	addi	r3, r3, -172				# 1720
-	lwz	r31, 168(r3)				# 1720
-	mtspr	8, r31				# 1720
-	lwz	r5, 144(r3)				# 1720
-	cmpw	cr7, r2, r5				# 1720
-	bne	cr7, beq_else.18027				# 1720
+trace_ray.2817:
+	lwz	r7, 108(r1)				# 1661
+	lwz	r8, 104(r1)				# 1661
+	lwz	r9, 100(r1)				# 1661
+	lwz	r10, 96(r1)				# 1661
+	lwz	r11, 92(r1)				# 1661
+	lwz	r12, 88(r1)				# 1661
+	lwz	r13, 84(r1)				# 1661
+	lwz	r14, 80(r1)				# 1661
+	lwz	r15, 76(r1)				# 1661
+	lwz	r16, 72(r1)				# 1661
+	lwz	r17, 68(r1)				# 1661
+	lwz	r18, 64(r1)				# 1661
+	lwz	r19, 60(r1)				# 1661
+	lwz	r20, 56(r1)				# 1661
+	lwz	r21, 52(r1)				# 1661
+	lwz	r22, 48(r1)				# 1661
+	lwz	r23, 44(r1)				# 1661
+	lwz	r24, 40(r1)				# 1661
+	lwz	r25, 36(r1)				# 1661
+	lwz	r26, 32(r1)				# 1661
+	lwz	r27, 28(r1)				# 1661
+	lwz	r28, 24(r1)				# 1661
+	lwz	r29, 20(r1)				# 1661
+	lwz	r30, 16(r1)				# 1661
+	stw	r8, 0(r3)				# 1661
+	lwz	r8, 12(r1)				# 1661
+	lfs	f2, 8(r1)				# 1661
+	lfs	f3, 4(r1)				# 1661
+	cmpwi	cr7, r2, 4				# 1662
+	bgt	cr7, ble_else.16322				# 1662
+	stw	r1, 4(r3)				# 468
+	lwz	r1, 8(r6)				# 468
+	stw	r20, 8(r3)				# 1383
+	slwi	r20, r30, 2				# 1383
+	stfsx	f2, r10, r20				# 1383
+	slwi	r20, r30, 2				# 1384
+	lwzx	r20, r17, r20				# 1384
+	stfs	f1, 16(r3)				# 1384
+	stw	r15, 24(r3)				# 1384
+	stw	r21, 28(r3)				# 1384
+	stw	r12, 32(r3)				# 1384
+	stw	r14, 36(r3)				# 1384
+	stw	r17, 40(r3)				# 1384
+	stw	r11, 44(r3)				# 1384
+	stw	r6, 48(r3)				# 1384
+	stw	r7, 52(r3)				# 1384
+	stw	r13, 56(r3)				# 1384
+	stw	r24, 60(r3)				# 1384
+	stw	r26, 64(r3)				# 1384
+	stw	r19, 68(r3)				# 1384
+	stw	r23, 72(r3)				# 1384
+	stw	r18, 76(r3)				# 1384
+	stw	r25, 80(r3)				# 1384
+	stw	r16, 84(r3)				# 1384
+	stw	r27, 88(r3)				# 1384
+	stfs	f0, 96(r3)				# 1384
+	stfs	f3, 104(r3)				# 1384
+	stw	r28, 112(r3)				# 1384
+	stw	r8, 116(r3)				# 1384
+	stw	r22, 120(r3)				# 1384
+	stw	r5, 124(r3)				# 1384
+	stw	r1, 128(r3)				# 1384
+	stw	r29, 132(r3)				# 1384
+	stw	r2, 136(r3)				# 1384
+	stw	r10, 140(r3)				# 1384
+	stw	r30, 144(r3)				# 1384
+	mfspr	r31, 8				# 1384
+	mr	r6, r5				# 1384
+	mr	r2, r30				# 1384
+	mr	r1, r9				# 1384
+	mr	r5, r20				# 1384
+	stw	r31, 148(r3)				# 1384
+	addi	r3, r3, 152				# 1384
+	lwz	r31, 0(r1)				# 1384
+	mtspr	9, r31				# 1384
+	bctr				# 1384
+	addi	r3, r3, -152				# 1384
+	lwz	r31, 148(r3)				# 1384
+	mtspr	8, r31				# 1384
+	lwz	r2, 144(r3)				# 1385
+	slwi	r5, r2, 2				# 1385
+	lwz	r6, 140(r3)				# 1385
+	lfsx	f0, r6, r5				# 1385
+	lis	r31, ha16(l.11981)
+	addi	r31, r31, lo16(l.11981)
+	lfs	f1, 0(r31)				# 1387
+	fcmpu	cr7, f0, f1				# 109
+	bgt	cr7, ble_else.16325				# 109
+	addi	r5, 0, 0
+	b	ble_cont.16326				# 109
+ble_else.16325:
+	addi	r5, 0, 1
+ble_cont.16326:
+	cmpw	cr7, r5, r2				# 1387
+	bne	cr7, beq_else.16327				# 1387
+	addi	r5, 0, 0
+	b	beq_cont.16328				# 1387
+beq_else.16327:
+	lis	r31, ha16(l.12214)
+	addi	r31, r31, lo16(l.12214)
+	lfs	f1, 0(r31)				# 1388
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.16329				# 109
+	addi	r5, 0, 0
+	b	ble_cont.16330				# 109
+ble_else.16329:
+	addi	r5, 0, 1
+ble_cont.16330:
+beq_cont.16328:
+	cmpw	cr7, r5, r2				# 1664
+	bne	cr7, beq_else.16331				# 1664
+	lwz	r5, 136(r3)				# 1727
+	slwi	r6, r5, 2				# 1727
+	lwz	r7, 128(r3)				# 1727
+	lwz	r8, 132(r3)				# 1727
+	stwx	r8, r7, r6				# 1727
+	cmpw	cr7, r5, r2				# 1729
+	bne	cr7, beq_else.16332				# 1729
 	blr
-beq_else.18027:
-	lfs	f0, 160(r3)				# 1723
-	mfspr	r31, 8				# 1723
-	stw	r31, 168(r3)				# 1723
-	addi	r3, r3, 172				# 1723
-	bl	min_caml_fsqr				# 1723
-	addi	r3, r3, -172				# 1723
-	lwz	r31, 168(r3)				# 1723
-	mtspr	8, r31				# 1723
-	lfs	f1, 160(r3)				# 1723
-	fmul	f0, f0, f1				# 1723
-	lfs	f1, 104(r3)				# 1723
-	fmul	f0, f0, f1				# 1723
-	lwz	r2, 144(r3)				# 1723
-	slwi	r5, r2, 2				# 1723
-	lwz	r6, 96(r3)				# 1723
-	lfsx	f1, r6, r5				# 1723
-	fmul	f0, f0, f1				# 1723
-	slwi	r5, r2, 2				# 1724
-	lwz	r6, 92(r3)				# 1724
-	lfsx	f1, r6, r5				# 1724
-	fadd	f1, f1, f0				# 1724
-	slwi	r2, r2, 2				# 1724
-	stfsx	f1, r6, r2				# 1724
-	lwz	r2, 116(r3)				# 1725
-	slwi	r5, r2, 2				# 1725
-	lfsx	f1, r6, r5				# 1725
-	fadd	f1, f1, f0				# 1725
-	slwi	r2, r2, 2				# 1725
-	stfsx	f1, r6, r2				# 1725
-	lwz	r2, 112(r3)				# 1726
-	slwi	r5, r2, 2				# 1726
-	lfsx	f1, r6, r5				# 1726
-	fadd	f0, f1, f0				# 1726
-	slwi	r2, r2, 2				# 1726
-	stfsx	f0, r6, r2				# 1726
+beq_else.16332:
+	slwi	r5, r2, 2				# 195
+	lwz	r6, 124(r3)				# 195
+	lfsx	f0, r6, r5				# 195
+	slwi	r5, r2, 2				# 195
+	lwz	r7, 120(r3)				# 195
+	lfsx	f1, r7, r5				# 195
+	fmul	f0, f0, f1				# 195
+	lwz	r5, 116(r3)				# 195
+	slwi	r8, r5, 2				# 195
+	lfsx	f1, r6, r8				# 195
+	slwi	r8, r5, 2				# 195
+	lfsx	f2, r7, r8				# 195
+	fmul	f1, f1, f2				# 195
+	fadd	f0, f0, f1				# 195
+	lwz	r8, 112(r3)				# 195
+	slwi	r9, r8, 2				# 195
+	lfsx	f1, r6, r9				# 195
+	slwi	r6, r8, 2				# 195
+	lfsx	f2, r7, r6				# 195
+	fmul	f1, f1, f2				# 195
+	fadd	f0, f0, f1				# 195
+	fneg	f0, f0				# 107
+	lfs	f1, 104(r3)				# 113
+	fcmpu	cr7, f0, f1				# 113
+	bgt	cr7, ble_else.16334				# 113
+	addi	r6, 0, 0
+	b	ble_cont.16335				# 113
+ble_else.16334:
+	addi	r6, 0, 1
+ble_cont.16335:
+	cmpw	cr7, r6, r2				# 1732
+	bne	cr7, beq_else.16336				# 1732
 	blr
-beq_else.18024:
-	slwi	r2, r5, 2				# 1654
-	lwz	r6, 88(r3)				# 1654
-	lwzx	r2, r6, r2				# 1654
-	slwi	r6, r2, 2				# 1655
-	lwz	r7, 84(r3)				# 1655
-	lwzx	r6, r7, r6				# 1655
-	lwz	r7, 8(r6)				# 249
-	lwz	r8, 28(r6)				# 347
-	slwi	r9, r5, 2				# 352
-	lfsx	f0, r8, r9				# 352
-	lfs	f1, 104(r3)				# 1657
-	fmul	f0, f0, f1				# 1657
-	lwz	r8, 4(r6)				# 239
-	lwz	r9, 116(r3)				# 1516
-	stw	r7, 168(r3)				# 1516
-	stfs	f0, 176(r3)				# 1516
-	stw	r2, 184(r3)				# 1516
-	stw	r6, 188(r3)				# 1516
-	cmpw	cr7, r8, r9				# 1516
-	bne	cr7, beq_else.18031				# 1516
-	slwi	r8, r5, 2				# 1477
-	lwz	r10, 80(r3)				# 1477
-	lwzx	r8, r10, r8				# 1477
-	slwi	r11, r5, 2				# 141
-	lwz	r12, 64(r3)				# 141
-	lfs	f2, 72(r3)				# 141
-	stfsx	f2, r12, r11				# 141
-	slwi	r11, r9, 2				# 142
-	stfsx	f2, r12, r11				# 142
-	lwz	r11, 112(r3)				# 143
-	slwi	r13, r11, 2				# 143
-	stfsx	f2, r12, r13				# 143
-	sub	r8, r8, r9				# 1480
-	slwi	r13, r8, 2				# 1480
-	lwz	r14, 124(r3)				# 1480
-	lfsx	f2, r14, r13				# 1480
-	stw	r8, 192(r3)				# 112
-	stfs	f2, 200(r3)				# 112
-	mfspr	r31, 8				# 112
-	fmr	f0, f2				# 112
-	stw	r31, 208(r3)				# 112
-	addi	r3, r3, 212				# 112
-	bl	min_caml_fiszero				# 112
-	addi	r3, r3, -212				# 112
-	lwz	r31, 208(r3)				# 112
-	mtspr	8, r31				# 112
-	lwz	r5, 144(r3)				# 112
-	cmpw	cr7, r2, r5				# 112
-	bne	cr7, beq_else.18034				# 112
-	lfs	f0, 200(r3)				# 113
-	mfspr	r31, 8				# 113
-	stw	r31, 208(r3)				# 113
-	addi	r3, r3, 212				# 113
-	bl	min_caml_fispos				# 113
-	addi	r3, r3, -212				# 113
-	lwz	r31, 208(r3)				# 113
-	mtspr	8, r31				# 113
-	lwz	r5, 144(r3)				# 113
-	cmpw	cr7, r2, r5				# 113
-	bne	cr7, beq_else.18036				# 113
-	lis	r31, ha16(l.11650)
-	addi	r31, r31, lo16(l.11650)
-	lfs	f0, 0(r31)				# 114
-	b	beq_cont.18037				# 113
-beq_else.18036:
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 113
-beq_cont.18037:
-	b	beq_cont.18035				# 112
-beq_else.18034:
-	lis	r31, ha16(l.11658)
-	addi	r31, r31, lo16(l.11658)
-	lfs	f0, 0(r31)				# 112
-beq_cont.18035:
-	mfspr	r31, 8				# 1480
-	stw	r31, 208(r3)				# 1480
-	addi	r3, r3, 212				# 1480
-	bl	min_caml_fneg				# 1480
-	addi	r3, r3, -212				# 1480
-	lwz	r31, 208(r3)				# 1480
-	mtspr	8, r31				# 1480
-	lwz	r2, 192(r3)				# 1480
-	slwi	r2, r2, 2				# 1480
-	lwz	r5, 64(r3)				# 1480
-	stfsx	f0, r5, r2				# 1480
-	b	beq_cont.18032				# 1516
-beq_else.18031:
-	lwz	r10, 112(r3)				# 1518
-	cmpw	cr7, r8, r10				# 1518
-	bne	cr7, beq_else.18038				# 1518
-	lwz	r8, 16(r6)				# 277
-	slwi	r11, r5, 2				# 282
-	lfsx	f2, r8, r11				# 282
-	mfspr	r31, 8				# 1486
-	fmr	f0, f2				# 1486
-	stw	r31, 208(r3)				# 1486
-	addi	r3, r3, 212				# 1486
-	bl	min_caml_fneg				# 1486
-	addi	r3, r3, -212				# 1486
-	lwz	r31, 208(r3)				# 1486
-	mtspr	8, r31				# 1486
-	lwz	r2, 144(r3)				# 1486
-	slwi	r5, r2, 2				# 1486
-	lwz	r6, 64(r3)				# 1486
-	stfsx	f0, r6, r5				# 1486
-	lwz	r5, 188(r3)				# 287
-	lwz	r7, 16(r5)				# 287
-	lwz	r8, 116(r3)				# 292
-	slwi	r9, r8, 2				# 292
-	lfsx	f0, r7, r9				# 292
-	mfspr	r31, 8				# 1487
-	stw	r31, 208(r3)				# 1487
-	addi	r3, r3, 212				# 1487
-	bl	min_caml_fneg				# 1487
-	addi	r3, r3, -212				# 1487
-	lwz	r31, 208(r3)				# 1487
-	mtspr	8, r31				# 1487
-	lwz	r2, 116(r3)				# 1487
-	slwi	r5, r2, 2				# 1487
-	lwz	r6, 64(r3)				# 1487
-	stfsx	f0, r6, r5				# 1487
-	lwz	r5, 188(r3)				# 297
-	lwz	r7, 16(r5)				# 297
-	lwz	r8, 112(r3)				# 302
-	slwi	r9, r8, 2				# 302
-	lfsx	f0, r7, r9				# 302
-	mfspr	r31, 8				# 1488
-	stw	r31, 208(r3)				# 1488
-	addi	r3, r3, 212				# 1488
-	bl	min_caml_fneg				# 1488
-	addi	r3, r3, -212				# 1488
-	lwz	r31, 208(r3)				# 1488
-	mtspr	8, r31				# 1488
-	lwz	r2, 112(r3)				# 1488
-	slwi	r5, r2, 2				# 1488
-	lwz	r6, 64(r3)				# 1488
-	stfsx	f0, r6, r5				# 1488
-	b	beq_cont.18039				# 1518
-beq_else.18038:
-	lwz	r30, 60(r3)				# 1521
-	mfspr	r31, 8				# 1521
-	mr	r2, r6				# 1521
-	stw	r31, 208(r3)				# 1521
-	addi	r3, r3, 212				# 1521
-	lwz	r31, 0(r30)				# 1521
-	mtspr	9, r31				# 1521
-	bctrl				# 1521
-	addi	r3, r3, -212				# 1521
-	lwz	r31, 208(r3)				# 1521
-	mtspr	8, r31				# 1521
-beq_cont.18039:
-beq_cont.18032:
-	lwz	r2, 144(r3)				# 153
-	slwi	r5, r2, 2				# 153
-	lwz	r6, 56(r3)				# 153
-	lfsx	f0, r6, r5				# 153
-	slwi	r5, r2, 2				# 153
-	lwz	r7, 52(r3)				# 153
-	stfsx	f0, r7, r5				# 153
-	lwz	r5, 116(r3)				# 154
-	slwi	r8, r5, 2				# 154
-	lfsx	f0, r6, r8				# 154
-	slwi	r8, r5, 2				# 154
-	stfsx	f0, r7, r8				# 154
-	lwz	r8, 112(r3)				# 155
-	slwi	r9, r8, 2				# 155
-	lfsx	f0, r6, r9				# 155
-	slwi	r9, r8, 2				# 155
-	stfsx	f0, r7, r9				# 155
-	lwz	r7, 188(r3)				# 1661
-	lwz	r30, 48(r3)				# 1661
-	mfspr	r31, 8				# 1661
-	mr	r5, r6				# 1661
-	mr	r2, r7				# 1661
-	stw	r31, 208(r3)				# 1661
-	addi	r3, r3, 212				# 1661
-	lwz	r31, 0(r30)				# 1661
-	mtspr	9, r31				# 1661
-	bctrl				# 1661
-	addi	r3, r3, -212				# 1661
-	lwz	r31, 208(r3)				# 1661
-	mtspr	8, r31				# 1661
-	lwz	r2, 184(r3)				# 1664
-	slwi	r2, r2, 2				# 1664
-	lwz	r5, 144(r3)				# 1664
-	slwi	r6, r5, 2				# 1664
-	lwz	r7, 80(r3)				# 1664
-	lwzx	r6, r7, r6				# 1664
-	add	r2, r2, r6				# 1664
-	lwz	r6, 136(r3)				# 1664
-	slwi	r7, r6, 2				# 1664
-	lwz	r8, 128(r3)				# 1664
-	stwx	r2, r8, r7				# 1664
-	lwz	r2, 44(r3)				# 447
-	lwz	r7, 4(r2)				# 447
-	slwi	r9, r6, 2				# 1666
-	lwzx	r7, r7, r9				# 1666
-	slwi	r9, r5, 2				# 153
-	lwz	r10, 56(r3)				# 153
-	lfsx	f0, r10, r9				# 153
-	slwi	r9, r5, 2				# 153
-	stfsx	f0, r7, r9				# 153
-	lwz	r9, 116(r3)				# 154
-	slwi	r11, r9, 2				# 154
-	lfsx	f0, r10, r11				# 154
-	slwi	r11, r9, 2				# 154
-	stfsx	f0, r7, r11				# 154
-	lwz	r11, 112(r3)				# 155
-	slwi	r12, r11, 2				# 155
-	lfsx	f0, r10, r12				# 155
-	slwi	r12, r11, 2				# 155
-	stfsx	f0, r7, r12				# 155
-	lwz	r7, 12(r2)				# 462
-	lwz	r12, 188(r3)				# 347
-	lwz	r13, 28(r12)				# 347
-	slwi	r14, r5, 2				# 352
-	lfsx	f0, r13, r14				# 352
-	lis	r31, ha16(l.12156)
-	addi	r31, r31, lo16(l.12156)
-	lfs	f1, 0(r31)				# 1670
-	stw	r7, 208(r3)				# 1670
-	mfspr	r31, 8				# 1670
-	stw	r31, 212(r3)				# 1670
-	addi	r3, r3, 216				# 1670
-	bl	min_caml_fless				# 1670
-	addi	r3, r3, -216				# 1670
-	lwz	r31, 212(r3)				# 1670
-	mtspr	8, r31				# 1670
-	lwz	r5, 144(r3)				# 1670
-	cmpw	cr7, r2, r5				# 1670
-	bne	cr7, beq_else.18040				# 1670
-	lwz	r2, 136(r3)				# 1673
-	slwi	r6, r2, 2				# 1673
-	lwz	r7, 208(r3)				# 1673
-	lwz	r8, 116(r3)				# 1673
-	stwx	r8, r7, r6				# 1673
-	lwz	r6, 44(r3)				# 469
-	lwz	r7, 16(r6)				# 469
-	slwi	r9, r2, 2				# 1675
-	lwzx	r9, r7, r9				# 1675
-	slwi	r10, r5, 2				# 153
-	lwz	r11, 40(r3)				# 153
-	lfsx	f0, r11, r10				# 153
-	slwi	r10, r5, 2				# 153
-	stfsx	f0, r9, r10				# 153
-	slwi	r10, r8, 2				# 154
-	lfsx	f0, r11, r10				# 154
-	slwi	r10, r8, 2				# 154
-	stfsx	f0, r9, r10				# 154
-	lwz	r10, 112(r3)				# 155
+beq_else.16336:
+	fmul	f1, f0, f0				# 103
+	fmul	f0, f1, f0				# 1735
+	lfs	f1, 96(r3)				# 1735
+	fmul	f0, f0, f1				# 1735
+	slwi	r6, r2, 2				# 1735
+	lwz	r7, 88(r3)				# 1735
+	lfsx	f1, r7, r6				# 1735
+	fmul	f0, f0, f1				# 1735
+	slwi	r6, r2, 2				# 1736
+	lwz	r7, 84(r3)				# 1736
+	lfsx	f1, r7, r6				# 1736
+	fadd	f1, f1, f0				# 1736
+	slwi	r2, r2, 2				# 1736
+	stfsx	f1, r7, r2				# 1736
+	slwi	r2, r5, 2				# 1737
+	lfsx	f1, r7, r2				# 1737
+	fadd	f1, f1, f0				# 1737
+	slwi	r2, r5, 2				# 1737
+	stfsx	f1, r7, r2				# 1737
+	slwi	r2, r8, 2				# 1738
+	lfsx	f1, r7, r2				# 1738
+	fadd	f0, f1, f0				# 1738
+	slwi	r2, r8, 2				# 1738
+	stfsx	f0, r7, r2				# 1738
+	blr
+beq_else.16331:
+	slwi	r5, r2, 2				# 1666
+	lwz	r7, 80(r3)				# 1666
+	lwzx	r5, r7, r5				# 1666
+	slwi	r7, r5, 2				# 1667
+	lwz	r8, 76(r3)				# 1667
+	lwzx	r7, r8, r7				# 1667
+	lwz	r8, 8(r7)				# 262
+	lwz	r9, 28(r7)				# 360
+	slwi	r10, r2, 2				# 365
+	lfsx	f0, r9, r10				# 365
+	lfs	f1, 96(r3)				# 1669
+	fmul	f0, f0, f1				# 1669
+	lwz	r9, 4(r7)				# 252
+	lwz	r10, 116(r3)				# 1529
+	stw	r8, 148(r3)				# 1529
+	stfs	f0, 152(r3)				# 1529
+	stw	r5, 160(r3)				# 1529
+	stw	r7, 164(r3)				# 1529
+	cmpw	cr7, r9, r10				# 1529
+	bne	cr7, beq_else.16339				# 1529
+	slwi	r9, r2, 2				# 1490
+	lwz	r11, 72(r3)				# 1490
+	lwzx	r9, r11, r9				# 1490
+	slwi	r12, r2, 2				# 154
+	lwz	r13, 68(r3)				# 154
+	lfs	f2, 104(r3)				# 154
+	stfsx	f2, r13, r12				# 154
 	slwi	r12, r10, 2				# 155
-	lfsx	f0, r11, r12				# 155
-	slwi	r12, r10, 2				# 155
-	stfsx	f0, r9, r12				# 155
-	slwi	r9, r2, 2				# 1676
-	lwzx	r7, r7, r9				# 1676
-	lis	r31, ha16(l.12257)
-	addi	r31, r31, lo16(l.12257)
-	lfs	f0, 0(r31)				# 1676
-	lfs	f1, 176(r3)				# 1676
-	fmul	f0, f0, f1				# 1676
-	slwi	r9, r5, 2				# 213
-	lfsx	f2, r7, r9				# 213
-	fmul	f2, f2, f0				# 213
-	slwi	r9, r5, 2				# 213
-	stfsx	f2, r7, r9				# 213
-	slwi	r9, r8, 2				# 214
-	lfsx	f2, r7, r9				# 214
-	fmul	f2, f2, f0				# 214
-	slwi	r9, r8, 2				# 214
-	stfsx	f2, r7, r9				# 214
-	slwi	r9, r10, 2				# 215
-	lfsx	f2, r7, r9				# 215
-	fmul	f0, f2, f0				# 215
-	slwi	r9, r10, 2				# 215
-	stfsx	f0, r7, r9				# 215
-	lwz	r7, 28(r6)				# 499
-	slwi	r9, r2, 2				# 1678
+	stfsx	f2, r13, r12				# 155
+	lwz	r12, 112(r3)				# 156
+	slwi	r14, r12, 2				# 156
+	stfsx	f2, r13, r14				# 156
+	sub	r9, r9, r10				# 1493
+	slwi	r14, r9, 2				# 1493
+	lwz	r15, 124(r3)				# 1493
+	lfsx	f3, r15, r14				# 1493
+	fcmpu	cr7, f3, f2				# 111
+	bne	cr7, beq_else.16341				# 111
+	addi	r14, 0, 1
+	b	beq_cont.16342				# 111
+beq_else.16341:
+	addi	r14, 0, 0
+beq_cont.16342:
+	cmpw	cr7, r14, r2				# 125
+	bne	cr7, beq_else.16343				# 125
+	fcmpu	cr7, f3, f2				# 113
+	bgt	cr7, ble_else.16345				# 113
+	addi	r14, 0, 0
+	b	ble_cont.16346				# 113
+ble_else.16345:
+	addi	r14, 0, 1
+ble_cont.16346:
+	cmpw	cr7, r14, r2				# 126
+	bne	cr7, beq_else.16347				# 126
+	lis	r31, ha16(l.11682)
+	addi	r31, r31, lo16(l.11682)
+	lfs	f3, 0(r31)				# 127
+	b	beq_cont.16348				# 126
+beq_else.16347:
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f3, 0(r31)				# 126
+beq_cont.16348:
+	b	beq_cont.16344				# 125
+beq_else.16343:
+	lis	r31, ha16(l.11690)
+	addi	r31, r31, lo16(l.11690)
+	lfs	f3, 0(r31)				# 125
+beq_cont.16344:
+	fneg	f3, f3				# 107
+	slwi	r9, r9, 2				# 1493
+	stfsx	f3, r13, r9				# 1493
+	b	beq_cont.16340				# 1529
+beq_else.16339:
+	lwz	r11, 112(r3)				# 1531
+	cmpw	cr7, r9, r11				# 1531
+	bne	cr7, beq_else.16349				# 1531
+	lwz	r9, 16(r7)				# 290
+	slwi	r12, r2, 2				# 295
+	lfsx	f2, r9, r12				# 295
+	fneg	f2, f2				# 107
+	slwi	r9, r2, 2				# 1499
+	lwz	r12, 68(r3)				# 1499
+	stfsx	f2, r12, r9				# 1499
+	lwz	r9, 16(r7)				# 300
+	slwi	r13, r10, 2				# 305
+	lfsx	f2, r9, r13				# 305
+	fneg	f2, f2				# 107
+	slwi	r9, r10, 2				# 1500
+	stfsx	f2, r12, r9				# 1500
+	lwz	r9, 16(r7)				# 310
+	slwi	r13, r11, 2				# 315
+	lfsx	f2, r9, r13				# 315
+	fneg	f2, f2				# 107
+	slwi	r9, r11, 2				# 1501
+	stfsx	f2, r12, r9				# 1501
+	b	beq_cont.16350				# 1531
+beq_else.16349:
+	lwz	r1, 64(r3)				# 1534
+	mfspr	r31, 8				# 1534
+	mr	r2, r7				# 1534
+	stw	r31, 168(r3)				# 1534
+	addi	r3, r3, 172				# 1534
+	lwz	r31, 0(r1)				# 1534
+	mtspr	9, r31				# 1534
+	bctr				# 1534
+	addi	r3, r3, -172				# 1534
+	lwz	r31, 168(r3)				# 1534
+	mtspr	8, r31				# 1534
+beq_cont.16350:
+beq_cont.16340:
+	lwz	r2, 144(r3)				# 166
+	slwi	r5, r2, 2				# 166
+	lwz	r6, 60(r3)				# 166
+	lfsx	f0, r6, r5				# 166
+	slwi	r5, r2, 2				# 166
+	lwz	r7, 56(r3)				# 166
+	stfsx	f0, r7, r5				# 166
+	lwz	r5, 116(r3)				# 167
+	slwi	r8, r5, 2				# 167
+	lfsx	f0, r6, r8				# 167
+	slwi	r8, r5, 2				# 167
+	stfsx	f0, r7, r8				# 167
+	lwz	r8, 112(r3)				# 168
+	slwi	r9, r8, 2				# 168
+	lfsx	f0, r6, r9				# 168
+	slwi	r9, r8, 2				# 168
+	stfsx	f0, r7, r9				# 168
+	lwz	r7, 164(r3)				# 1673
+	lwz	r1, 52(r3)				# 1673
+	mfspr	r31, 8				# 1673
+	mr	r5, r6				# 1673
+	mr	r2, r7				# 1673
+	stw	r31, 168(r3)				# 1673
+	addi	r3, r3, 172				# 1673
+	lwz	r31, 0(r1)				# 1673
+	mtspr	9, r31				# 1673
+	bctr				# 1673
+	addi	r3, r3, -172				# 1673
+	lwz	r31, 168(r3)				# 1673
+	mtspr	8, r31				# 1673
+	lwz	r2, 160(r3)				# 1676
+	slwi	r2, r2, 2				# 1676
+	lwz	r5, 144(r3)				# 1676
+	slwi	r6, r5, 2				# 1676
+	lwz	r7, 72(r3)				# 1676
+	lwzx	r6, r7, r6				# 1676
+	add	r2, r2, r6				# 1676
+	lwz	r6, 136(r3)				# 1676
+	slwi	r7, r6, 2				# 1676
+	lwz	r8, 128(r3)				# 1676
+	stwx	r2, r8, r7				# 1676
+	lwz	r2, 48(r3)				# 460
+	lwz	r7, 4(r2)				# 460
+	slwi	r9, r6, 2				# 1678
 	lwzx	r7, r7, r9				# 1678
-	slwi	r9, r5, 2				# 153
-	lwz	r12, 64(r3)				# 153
-	lfsx	f0, r12, r9				# 153
-	slwi	r9, r5, 2				# 153
-	stfsx	f0, r7, r9				# 153
-	slwi	r9, r8, 2				# 154
-	lfsx	f0, r12, r9				# 154
-	slwi	r9, r8, 2				# 154
-	stfsx	f0, r7, r9				# 154
-	slwi	r9, r10, 2				# 155
-	lfsx	f0, r12, r9				# 155
-	slwi	r9, r10, 2				# 155
-	stfsx	f0, r7, r9				# 155
-	b	beq_cont.18041				# 1670
-beq_else.18040:
-	lwz	r2, 136(r3)				# 1671
-	slwi	r6, r2, 2				# 1671
-	lwz	r7, 208(r3)				# 1671
-	stwx	r5, r7, r6				# 1671
-beq_cont.18041:
-	lis	r31, ha16(l.12271)
-	addi	r31, r31, lo16(l.12271)
-	lfs	f0, 0(r31)				# 1681
-	slwi	r6, r5, 2				# 182
-	lwz	r7, 124(r3)				# 182
-	lfsx	f1, r7, r6				# 182
-	slwi	r6, r5, 2				# 182
-	lwz	r8, 64(r3)				# 182
-	lfsx	f2, r8, r6				# 182
-	fmul	f1, f1, f2				# 182
-	lwz	r6, 116(r3)				# 182
-	slwi	r9, r6, 2				# 182
-	lfsx	f2, r7, r9				# 182
-	slwi	r9, r6, 2				# 182
-	lfsx	f3, r8, r9				# 182
-	fmul	f2, f2, f3				# 182
-	fadd	f1, f1, f2				# 182
-	lwz	r9, 112(r3)				# 182
-	slwi	r10, r9, 2				# 182
-	lfsx	f2, r7, r10				# 182
-	slwi	r10, r9, 2				# 182
-	lfsx	f3, r8, r10				# 182
-	fmul	f2, f2, f3				# 182
-	fadd	f1, f1, f2				# 182
-	fmul	f0, f0, f1				# 1681
-	slwi	r10, r5, 2				# 192
-	lfsx	f1, r7, r10				# 192
-	slwi	r10, r5, 2				# 192
-	lfsx	f2, r8, r10				# 192
-	fmul	f2, f0, f2				# 192
-	fadd	f1, f1, f2				# 192
-	slwi	r10, r5, 2				# 192
-	stfsx	f1, r7, r10				# 192
-	slwi	r10, r6, 2				# 193
-	lfsx	f1, r7, r10				# 193
-	slwi	r10, r6, 2				# 193
-	lfsx	f2, r8, r10				# 193
-	fmul	f2, f0, f2				# 193
-	fadd	f1, f1, f2				# 193
-	slwi	r10, r6, 2				# 193
-	stfsx	f1, r7, r10				# 193
-	slwi	r10, r9, 2				# 194
-	lfsx	f1, r7, r10				# 194
-	slwi	r10, r9, 2				# 194
-	lfsx	f2, r8, r10				# 194
-	fmul	f0, f0, f2				# 194
-	fadd	f0, f1, f0				# 194
-	slwi	r10, r9, 2				# 194
-	stfsx	f0, r7, r10				# 194
-	lwz	r10, 188(r3)				# 357
-	lwz	r11, 28(r10)				# 357
-	slwi	r12, r6, 2				# 362
-	lfsx	f0, r11, r12				# 362
-	lfs	f1, 104(r3)				# 1685
-	fmul	f0, f1, f0				# 1685
-	slwi	r11, r5, 2				# 1688
-	lwz	r12, 36(r3)				# 1688
-	lwzx	r11, r12, r11				# 1688
-	lwz	r30, 32(r3)				# 1688
-	stfs	f0, 216(r3)				# 1688
-	mfspr	r31, 8				# 1688
-	mr	r2, r5				# 1688
-	mr	r5, r11				# 1688
-	stw	r31, 224(r3)				# 1688
-	addi	r3, r3, 228				# 1688
-	lwz	r31, 0(r30)				# 1688
-	mtspr	9, r31				# 1688
-	bctrl				# 1688
-	addi	r3, r3, -228				# 1688
-	lwz	r31, 224(r3)				# 1688
-	mtspr	8, r31				# 1688
-	lwz	r5, 144(r3)				# 1688
-	cmpw	cr7, r2, r5				# 1688
-	bne	cr7, beq_else.18043				# 1688
-	slwi	r2, r5, 2				# 182
-	lwz	r6, 64(r3)				# 182
-	lfsx	f0, r6, r2				# 182
-	slwi	r2, r5, 2				# 182
-	lwz	r7, 120(r3)				# 182
-	lfsx	f1, r7, r2				# 182
-	fmul	f0, f0, f1				# 182
-	lwz	r2, 116(r3)				# 182
-	slwi	r8, r2, 2				# 182
-	lfsx	f1, r6, r8				# 182
-	slwi	r8, r2, 2				# 182
-	lfsx	f2, r7, r8				# 182
-	fmul	f1, f1, f2				# 182
-	fadd	f0, f0, f1				# 182
-	lwz	r8, 112(r3)				# 182
-	slwi	r9, r8, 2				# 182
-	lfsx	f1, r6, r9				# 182
-	slwi	r6, r8, 2				# 182
-	lfsx	f2, r7, r6				# 182
-	fmul	f1, f1, f2				# 182
-	fadd	f0, f0, f1				# 182
-	mfspr	r31, 8				# 1689
-	stw	r31, 224(r3)				# 1689
-	addi	r3, r3, 228				# 1689
-	bl	min_caml_fneg				# 1689
-	addi	r3, r3, -228				# 1689
-	lwz	r31, 224(r3)				# 1689
-	mtspr	8, r31				# 1689
-	lfs	f1, 176(r3)				# 1689
-	fmul	f0, f0, f1				# 1689
-	lwz	r2, 144(r3)				# 182
-	slwi	r5, r2, 2				# 182
-	lwz	r6, 124(r3)				# 182
-	lfsx	f2, r6, r5				# 182
-	slwi	r5, r2, 2				# 182
-	lwz	r7, 120(r3)				# 182
-	lfsx	f3, r7, r5				# 182
-	fmul	f2, f2, f3				# 182
-	lwz	r5, 116(r3)				# 182
-	slwi	r8, r5, 2				# 182
-	lfsx	f3, r6, r8				# 182
-	slwi	r8, r5, 2				# 182
-	lfsx	f4, r7, r8				# 182
-	fmul	f3, f3, f4				# 182
-	fadd	f2, f2, f3				# 182
-	lwz	r8, 112(r3)				# 182
-	slwi	r9, r8, 2				# 182
-	lfsx	f3, r6, r9				# 182
-	slwi	r9, r8, 2				# 182
-	lfsx	f4, r7, r9				# 182
-	fmul	f3, f3, f4				# 182
-	fadd	f2, f2, f3				# 182
-	stfs	f0, 224(r3)				# 1690
-	mfspr	r31, 8				# 1690
-	fmr	f0, f2				# 1690
-	stw	r31, 232(r3)				# 1690
-	addi	r3, r3, 236				# 1690
-	bl	min_caml_fneg				# 1690
-	addi	r3, r3, -236				# 1690
-	lwz	r31, 232(r3)				# 1690
-	mtspr	8, r31				# 1690
-	lfs	f1, 224(r3)				# 1608
-	stfs	f0, 232(r3)				# 1608
-	mfspr	r31, 8				# 1608
-	fmr	f0, f1				# 1608
-	stw	r31, 240(r3)				# 1608
-	addi	r3, r3, 244				# 1608
-	bl	min_caml_fispos				# 1608
-	addi	r3, r3, -244				# 1608
-	lwz	r31, 240(r3)				# 1608
-	mtspr	8, r31				# 1608
-	lwz	r5, 144(r3)				# 1608
-	cmpw	cr7, r2, r5				# 1608
-	bne	cr7, beq_else.18045				# 1608
-	b	beq_cont.18046				# 1608
-beq_else.18045:
-	slwi	r2, r5, 2				# 192
-	lwz	r6, 92(r3)				# 192
-	lfsx	f0, r6, r2				# 192
-	slwi	r2, r5, 2				# 192
-	lwz	r7, 40(r3)				# 192
-	lfsx	f1, r7, r2				# 192
-	lfs	f2, 224(r3)				# 192
-	fmul	f1, f2, f1				# 192
-	fadd	f0, f0, f1				# 192
-	slwi	r2, r5, 2				# 192
-	stfsx	f0, r6, r2				# 192
-	lwz	r2, 116(r3)				# 193
-	slwi	r8, r2, 2				# 193
-	lfsx	f0, r6, r8				# 193
-	slwi	r8, r2, 2				# 193
-	lfsx	f1, r7, r8				# 193
-	fmul	f1, f2, f1				# 193
-	fadd	f0, f0, f1				# 193
-	slwi	r8, r2, 2				# 193
-	stfsx	f0, r6, r8				# 193
-	lwz	r8, 112(r3)				# 194
-	slwi	r9, r8, 2				# 194
-	lfsx	f0, r6, r9				# 194
-	slwi	r9, r8, 2				# 194
-	lfsx	f1, r7, r9				# 194
-	fmul	f1, f2, f1				# 194
-	fadd	f0, f0, f1				# 194
-	slwi	r7, r8, 2				# 194
-	stfsx	f0, r6, r7				# 194
-beq_cont.18046:
-	lfs	f0, 232(r3)				# 1613
-	mfspr	r31, 8				# 1613
-	stw	r31, 240(r3)				# 1613
-	addi	r3, r3, 244				# 1613
-	bl	min_caml_fispos				# 1613
-	addi	r3, r3, -244				# 1613
-	lwz	r31, 240(r3)				# 1613
-	mtspr	8, r31				# 1613
-	lwz	r5, 144(r3)				# 1613
-	cmpw	cr7, r2, r5				# 1613
-	bne	cr7, beq_else.18047				# 1613
-	b	beq_cont.18048				# 1613
-beq_else.18047:
-	lfs	f0, 232(r3)				# 1614
-	mfspr	r31, 8				# 1614
-	stw	r31, 240(r3)				# 1614
-	addi	r3, r3, 244				# 1614
-	bl	min_caml_fsqr				# 1614
-	addi	r3, r3, -244				# 1614
-	lwz	r31, 240(r3)				# 1614
-	mtspr	8, r31				# 1614
-	mfspr	r31, 8				# 1614
-	stw	r31, 240(r3)				# 1614
-	addi	r3, r3, 244				# 1614
-	bl	min_caml_fsqr				# 1614
-	addi	r3, r3, -244				# 1614
-	lwz	r31, 240(r3)				# 1614
-	mtspr	8, r31				# 1614
-	lfs	f1, 216(r3)				# 1614
-	fmul	f0, f0, f1				# 1614
-	lwz	r2, 144(r3)				# 1615
-	slwi	r5, r2, 2				# 1615
-	lwz	r6, 92(r3)				# 1615
-	lfsx	f2, r6, r5				# 1615
-	fadd	f2, f2, f0				# 1615
-	slwi	r5, r2, 2				# 1615
-	stfsx	f2, r6, r5				# 1615
-	lwz	r5, 116(r3)				# 1616
-	slwi	r7, r5, 2				# 1616
-	lfsx	f2, r6, r7				# 1616
-	fadd	f2, f2, f0				# 1616
-	slwi	r7, r5, 2				# 1616
-	stfsx	f2, r6, r7				# 1616
-	lwz	r7, 112(r3)				# 1617
-	slwi	r8, r7, 2				# 1617
-	lfsx	f2, r6, r8				# 1617
-	fadd	f0, f2, f0				# 1617
-	slwi	r8, r7, 2				# 1617
-	stfsx	f0, r6, r8				# 1617
-beq_cont.18048:
-	b	beq_cont.18044				# 1688
-beq_else.18043:
-beq_cont.18044:
-	lwz	r2, 144(r3)				# 153
-	slwi	r5, r2, 2				# 153
-	lwz	r6, 56(r3)				# 153
-	lfsx	f0, r6, r5				# 153
-	slwi	r5, r2, 2				# 153
-	lwz	r7, 28(r3)				# 153
-	stfsx	f0, r7, r5				# 153
-	lwz	r5, 116(r3)				# 154
-	slwi	r8, r5, 2				# 154
-	lfsx	f0, r6, r8				# 154
-	slwi	r8, r5, 2				# 154
-	stfsx	f0, r7, r8				# 154
-	lwz	r8, 112(r3)				# 155
-	slwi	r9, r8, 2				# 155
-	lfsx	f0, r6, r9				# 155
-	slwi	r9, r8, 2				# 155
-	stfsx	f0, r7, r9				# 155
-	slwi	r7, r2, 2				# 1148
-	lwz	r9, 24(r3)				# 1148
-	lwzx	r7, r9, r7				# 1148
-	sub	r7, r7, r5				# 1148
-	lwz	r30, 12(r3)				# 1148
-	mfspr	r31, 8				# 1148
-	mr	r5, r7				# 1148
-	mr	r2, r6				# 1148
-	stw	r31, 240(r3)				# 1148
-	addi	r3, r3, 244				# 1148
-	lwz	r31, 0(r30)				# 1148
-	mtspr	9, r31				# 1148
-	bctrl				# 1148
-	addi	r3, r3, -244				# 1148
-	lwz	r31, 240(r3)				# 1148
-	mtspr	8, r31				# 1148
-	lwz	r2, 144(r3)				# 1696
-	slwi	r5, r2, 2				# 1696
-	lwz	r6, 4(r3)				# 1696
-	lwzx	r5, r6, r5				# 1696
-	lwz	r6, 116(r3)				# 1696
-	sub	r5, r5, r6				# 1696
-	lfs	f0, 176(r3)				# 1696
-	lfs	f1, 216(r3)				# 1696
-	lwz	r7, 124(r3)				# 1696
-	lwz	r30, 0(r3)				# 1696
-	mfspr	r31, 8				# 1696
-	mr	r2, r5				# 1696
-	mr	r5, r7				# 1696
-	stw	r31, 240(r3)				# 1696
-	addi	r3, r3, 244				# 1696
-	lwz	r31, 0(r30)				# 1696
-	mtspr	9, r31				# 1696
-	bctrl				# 1696
-	addi	r3, r3, -244				# 1696
-	lwz	r31, 240(r3)				# 1696
-	mtspr	8, r31				# 1696
-	lis	r31, ha16(l.12324)
-	addi	r31, r31, lo16(l.12324)
-	lfs	f0, 0(r31)				# 1699
-	lfs	f1, 104(r3)				# 1699
-	mfspr	r31, 8				# 1699
-	stw	r31, 240(r3)				# 1699
-	addi	r3, r3, 244				# 1699
-	bl	min_caml_fless				# 1699
-	addi	r3, r3, -244				# 1699
-	lwz	r31, 240(r3)				# 1699
-	mtspr	8, r31				# 1699
-	lwz	r5, 144(r3)				# 1699
-	cmpw	cr7, r2, r5				# 1699
-	bne	cr7, beq_else.18049				# 1699
-	blr
-beq_else.18049:
-	lwz	r2, 136(r3)				# 1701
-	cmpwi	cr7, r2, 4				# 1701
-	blt	cr7, bge_else.18051				# 1701
-	b	bge_cont.18052				# 1701
-bge_else.18051:
-	lwz	r6, 116(r3)				# 1702
-	add	r7, r2, r6				# 1702
-	slwi	r7, r7, 2				# 1702
-	lwz	r8, 128(r3)				# 1702
-	lwz	r9, 132(r3)				# 1702
-	stwx	r9, r8, r7				# 1702
-bge_cont.18052:
-	lwz	r6, 112(r3)				# 1705
-	lwz	r7, 168(r3)				# 1705
-	cmpw	cr7, r7, r6				# 1705
-	bne	cr7, beq_else.18053				# 1705
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 1706
-	lwz	r6, 188(r3)				# 347
-	lwz	r6, 28(r6)				# 347
-	slwi	r7, r5, 2				# 352
-	lfsx	f1, r6, r7				# 352
-	fsub	f0, f0, f1				# 1706
-	lfs	f1, 104(r3)				# 1706
-	fmul	f0, f1, f0				# 1706
-	lwz	r6, 116(r3)				# 1707
-	add	r2, r2, r6				# 1707
-	slwi	r5, r5, 2				# 1707
-	lwz	r6, 140(r3)				# 1707
-	lfsx	f1, r6, r5				# 1707
-	lfs	f2, 16(r3)				# 1707
-	fadd	f1, f2, f1				# 1707
-	lwz	r5, 124(r3)				# 1707
-	lwz	r6, 44(r3)				# 1707
-	lwz	r30, 8(r3)				# 1707
-	lwz	r29, 0(r30)				# 1707
-	mtspr	9, r29
-	bctr				# 1707
-beq_else.18053:
-	blr
-ble_else.18018:
-	blr
-iter_trace_diffuse_rays.2808:
-	lwz	r8, 68(r30)				# 1757
-	lwz	r9, 64(r30)				# 1757
-	lwz	r10, 60(r30)				# 1757
-	lwz	r11, 56(r30)				# 1757
-	lwz	r12, 52(r30)				# 1757
-	lwz	r13, 48(r30)				# 1757
-	lwz	r14, 44(r30)				# 1757
-	lwz	r15, 40(r30)				# 1757
-	lwz	r16, 36(r30)				# 1757
-	lwz	r17, 32(r30)				# 1757
-	lwz	r18, 28(r30)				# 1757
-	lwz	r19, 24(r30)				# 1757
-	lwz	r20, 20(r30)				# 1757
-	lwz	r21, 16(r30)				# 1757
-	lwz	r22, 12(r30)				# 1757
-	lwz	r23, 8(r30)				# 1757
-	lfs	f0, 4(r30)				# 1757
-	cmpw	cr7, r22, r7				# 1758
-	bgt	cr7, ble_else.18056				# 1758
-	slwi	r24, r7, 2				# 1759
-	lwzx	r24, r2, r24				# 1759
-	lwz	r24, 0(r24)				# 508
-	slwi	r25, r22, 2				# 182
-	lfsx	f1, r24, r25				# 182
-	slwi	r25, r22, 2				# 182
-	lfsx	f2, r5, r25				# 182
-	fmul	f1, f1, f2				# 182
-	slwi	r25, r23, 2				# 182
-	lfsx	f2, r24, r25				# 182
-	slwi	r25, r23, 2				# 182
-	lfsx	f3, r5, r25				# 182
-	fmul	f2, f2, f3				# 182
-	fadd	f1, f1, f2				# 182
-	slwi	r25, r21, 2				# 182
-	lfsx	f2, r24, r25				# 182
-	slwi	r24, r21, 2				# 182
-	lfsx	f3, r5, r24				# 182
-	fmul	f2, f2, f3				# 182
-	fadd	f1, f1, f2				# 182
-	stw	r6, 0(r3)				# 1762
-	stw	r5, 4(r3)				# 1762
-	stw	r30, 8(r3)				# 1762
-	stw	r11, 12(r3)				# 1762
-	stw	r20, 16(r3)				# 1762
-	stw	r21, 20(r3)				# 1762
-	stw	r23, 24(r3)				# 1762
-	stw	r16, 28(r3)				# 1762
-	stw	r15, 32(r3)				# 1762
-	stw	r12, 36(r3)				# 1762
-	stw	r17, 40(r3)				# 1762
-	stw	r8, 44(r3)				# 1762
-	stw	r19, 48(r3)				# 1762
-	stw	r14, 52(r3)				# 1762
-	stw	r18, 56(r3)				# 1762
-	stw	r9, 60(r3)				# 1762
-	stw	r13, 64(r3)				# 1762
-	stw	r10, 68(r3)				# 1762
-	stfs	f0, 72(r3)				# 1762
-	stfs	f1, 80(r3)				# 1762
-	stw	r2, 88(r3)				# 1762
-	stw	r7, 92(r3)				# 1762
-	stw	r22, 96(r3)				# 1762
-	mfspr	r31, 8				# 1762
-	fmr	f0, f1				# 1762
-	stw	r31, 100(r3)				# 1762
-	addi	r3, r3, 104				# 1762
-	bl	min_caml_fisneg				# 1762
-	addi	r3, r3, -104				# 1762
-	lwz	r31, 100(r3)				# 1762
-	mtspr	8, r31				# 1762
-	lwz	r5, 96(r3)				# 1762
-	cmpw	cr7, r2, r5				# 1762
-	bne	cr7, beq_else.18057				# 1762
-	lwz	r2, 92(r3)				# 1765
-	slwi	r6, r2, 2				# 1765
-	lwz	r7, 88(r3)				# 1765
-	lwzx	r6, r7, r6				# 1765
-	lis	r31, ha16(l.12374)
-	addi	r31, r31, lo16(l.12374)
-	lfs	f0, 0(r31)				# 1765
-	lfs	f1, 80(r3)				# 1765
-	fdiv	f0, f1, f0				# 1765
-	slwi	r8, r5, 2				# 1459
-	lwz	r9, 68(r3)				# 1459
-	lfs	f1, 72(r3)				# 1459
-	stfsx	f1, r9, r8				# 1459
-	slwi	r8, r5, 2				# 1460
-	lwz	r10, 64(r3)				# 1460
-	lwzx	r8, r10, r8				# 1460
-	lwz	r30, 60(r3)				# 1460
-	stfs	f0, 104(r3)				# 1460
-	stw	r6, 112(r3)				# 1460
-	mfspr	r31, 8				# 1460
-	mr	r2, r5				# 1460
-	mr	r5, r8				# 1460
-	stw	r31, 116(r3)				# 1460
-	addi	r3, r3, 120				# 1460
-	lwz	r31, 0(r30)				# 1460
-	mtspr	9, r31				# 1460
-	bctrl				# 1460
-	addi	r3, r3, -120				# 1460
-	lwz	r31, 116(r3)				# 1460
-	mtspr	8, r31				# 1460
-	lwz	r2, 96(r3)				# 1461
-	slwi	r5, r2, 2				# 1461
-	lwz	r6, 68(r3)				# 1461
-	lfsx	f1, r6, r5				# 1461
-	lis	r31, ha16(l.11949)
-	addi	r31, r31, lo16(l.11949)
-	lfs	f0, 0(r31)				# 1463
-	stfs	f1, 120(r3)				# 1463
-	mfspr	r31, 8				# 1463
-	stw	r31, 128(r3)				# 1463
-	addi	r3, r3, 132				# 1463
-	bl	min_caml_fless				# 1463
-	addi	r3, r3, -132				# 1463
-	lwz	r31, 128(r3)				# 1463
-	mtspr	8, r31				# 1463
-	lwz	r5, 96(r3)				# 1463
-	cmpw	cr7, r2, r5				# 1463
-	bne	cr7, beq_else.18061				# 1463
+	slwi	r9, r5, 2				# 166
+	lwz	r10, 60(r3)				# 166
+	lfsx	f0, r10, r9				# 166
+	slwi	r9, r5, 2				# 166
+	stfsx	f0, r7, r9				# 166
+	lwz	r9, 116(r3)				# 167
+	slwi	r11, r9, 2				# 167
+	lfsx	f0, r10, r11				# 167
+	slwi	r11, r9, 2				# 167
+	stfsx	f0, r7, r11				# 167
+	lwz	r11, 112(r3)				# 168
+	slwi	r12, r11, 2				# 168
+	lfsx	f0, r10, r12				# 168
+	slwi	r12, r11, 2				# 168
+	stfsx	f0, r7, r12				# 168
+	lwz	r7, 12(r2)				# 475
+	lwz	r12, 164(r3)				# 360
+	lwz	r13, 28(r12)				# 360
+	slwi	r14, r5, 2				# 365
+	lfsx	f0, r13, r14				# 365
+	lis	r31, ha16(l.12188)
+	addi	r31, r31, lo16(l.12188)
+	lfs	f1, 0(r31)				# 1682
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.16351				# 109
+	addi	r13, 0, 0
+	b	ble_cont.16352				# 109
+ble_else.16351:
+	addi	r13, 0, 1
+ble_cont.16352:
+	cmpw	cr7, r13, r5				# 1682
+	bne	cr7, beq_else.16353				# 1682
+	slwi	r13, r6, 2				# 1685
+	stwx	r9, r7, r13				# 1685
+	lwz	r7, 16(r2)				# 482
+	slwi	r13, r6, 2				# 1687
+	lwzx	r13, r7, r13				# 1687
+	slwi	r14, r5, 2				# 166
+	lwz	r15, 44(r3)				# 166
+	lfsx	f0, r15, r14				# 166
+	slwi	r14, r5, 2				# 166
+	stfsx	f0, r13, r14				# 166
+	slwi	r14, r9, 2				# 167
+	lfsx	f0, r15, r14				# 167
+	slwi	r14, r9, 2				# 167
+	stfsx	f0, r13, r14				# 167
+	slwi	r14, r11, 2				# 168
+	lfsx	f0, r15, r14				# 168
+	slwi	r14, r11, 2				# 168
+	stfsx	f0, r13, r14				# 168
+	slwi	r13, r6, 2				# 1688
+	lwzx	r7, r7, r13				# 1688
+	lis	r31, ha16(l.12289)
+	addi	r31, r31, lo16(l.12289)
+	lfs	f0, 0(r31)				# 1688
+	lfs	f1, 152(r3)				# 1688
+	fmul	f0, f0, f1				# 1688
+	slwi	r13, r5, 2				# 226
+	lfsx	f2, r7, r13				# 226
+	fmul	f2, f2, f0				# 226
+	slwi	r13, r5, 2				# 226
+	stfsx	f2, r7, r13				# 226
+	slwi	r13, r9, 2				# 227
+	lfsx	f2, r7, r13				# 227
+	fmul	f2, f2, f0				# 227
+	slwi	r13, r9, 2				# 227
+	stfsx	f2, r7, r13				# 227
+	slwi	r13, r11, 2				# 228
+	lfsx	f2, r7, r13				# 228
+	fmul	f0, f2, f0				# 228
+	slwi	r13, r11, 2				# 228
+	stfsx	f0, r7, r13				# 228
+	lwz	r7, 28(r2)				# 512
+	slwi	r13, r6, 2				# 1690
+	lwzx	r7, r7, r13				# 1690
+	slwi	r13, r5, 2				# 166
+	lwz	r14, 68(r3)				# 166
+	lfsx	f0, r14, r13				# 166
+	slwi	r13, r5, 2				# 166
+	stfsx	f0, r7, r13				# 166
+	slwi	r13, r9, 2				# 167
+	lfsx	f0, r14, r13				# 167
+	slwi	r13, r9, 2				# 167
+	stfsx	f0, r7, r13				# 167
+	slwi	r13, r11, 2				# 168
+	lfsx	f0, r14, r13				# 168
+	slwi	r13, r11, 2				# 168
+	stfsx	f0, r7, r13				# 168
+	b	beq_cont.16354				# 1682
+beq_else.16353:
+	slwi	r13, r6, 2				# 1683
+	stwx	r5, r7, r13				# 1683
+beq_cont.16354:
+	lis	r31, ha16(l.12303)
+	addi	r31, r31, lo16(l.12303)
+	lfs	f0, 0(r31)				# 1693
+	slwi	r7, r5, 2				# 195
+	lwz	r13, 124(r3)				# 195
+	lfsx	f1, r13, r7				# 195
+	slwi	r7, r5, 2				# 195
+	lwz	r14, 68(r3)				# 195
+	lfsx	f2, r14, r7				# 195
+	fmul	f1, f1, f2				# 195
+	slwi	r7, r9, 2				# 195
+	lfsx	f2, r13, r7				# 195
+	slwi	r7, r9, 2				# 195
+	lfsx	f3, r14, r7				# 195
+	fmul	f2, f2, f3				# 195
+	fadd	f1, f1, f2				# 195
+	slwi	r7, r11, 2				# 195
+	lfsx	f2, r13, r7				# 195
+	slwi	r7, r11, 2				# 195
+	lfsx	f3, r14, r7				# 195
+	fmul	f2, f2, f3				# 195
+	fadd	f1, f1, f2				# 195
+	fmul	f0, f0, f1				# 1693
+	slwi	r7, r5, 2				# 205
+	lfsx	f1, r13, r7				# 205
+	slwi	r7, r5, 2				# 205
+	lfsx	f2, r14, r7				# 205
+	fmul	f2, f0, f2				# 205
+	fadd	f1, f1, f2				# 205
+	slwi	r7, r5, 2				# 205
+	stfsx	f1, r13, r7				# 205
+	slwi	r7, r9, 2				# 206
+	lfsx	f1, r13, r7				# 206
+	slwi	r7, r9, 2				# 206
+	lfsx	f2, r14, r7				# 206
+	fmul	f2, f0, f2				# 206
+	fadd	f1, f1, f2				# 206
+	slwi	r7, r9, 2				# 206
+	stfsx	f1, r13, r7				# 206
+	slwi	r7, r11, 2				# 207
+	lfsx	f1, r13, r7				# 207
+	slwi	r7, r11, 2				# 207
+	lfsx	f2, r14, r7				# 207
+	fmul	f0, f0, f2				# 207
+	fadd	f0, f1, f0				# 207
+	slwi	r7, r11, 2				# 207
+	stfsx	f0, r13, r7				# 207
+	lwz	r7, 28(r12)				# 370
+	slwi	r15, r9, 2				# 375
+	lfsx	f0, r7, r15				# 375
+	lfs	f1, 96(r3)				# 1697
+	fmul	f0, f1, f0				# 1697
+	slwi	r7, r5, 2				# 1700
+	lwz	r15, 40(r3)				# 1700
+	lwzx	r7, r15, r7				# 1700
+	lwz	r1, 36(r3)				# 1700
+	stfs	f0, 168(r3)				# 1700
+	mfspr	r31, 8				# 1700
+	mr	r2, r5				# 1700
+	mr	r5, r7				# 1700
+	stw	r31, 176(r3)				# 1700
+	addi	r3, r3, 180				# 1700
+	lwz	r31, 0(r1)				# 1700
+	mtspr	9, r31				# 1700
+	bctr				# 1700
+	addi	r3, r3, -180				# 1700
+	lwz	r31, 176(r3)				# 1700
+	mtspr	8, r31				# 1700
+	lwz	r5, 144(r3)				# 1700
+	cmpw	cr7, r2, r5				# 1700
+	bne	cr7, beq_else.16355				# 1700
+	slwi	r2, r5, 2				# 195
+	lwz	r6, 68(r3)				# 195
+	lfsx	f0, r6, r2				# 195
+	slwi	r2, r5, 2				# 195
+	lwz	r7, 120(r3)				# 195
+	lfsx	f1, r7, r2				# 195
+	fmul	f0, f0, f1				# 195
+	lwz	r2, 116(r3)				# 195
+	slwi	r8, r2, 2				# 195
+	lfsx	f1, r6, r8				# 195
+	slwi	r8, r2, 2				# 195
+	lfsx	f2, r7, r8				# 195
+	fmul	f1, f1, f2				# 195
+	fadd	f0, f0, f1				# 195
+	lwz	r8, 112(r3)				# 195
+	slwi	r9, r8, 2				# 195
+	lfsx	f1, r6, r9				# 195
+	slwi	r6, r8, 2				# 195
+	lfsx	f2, r7, r6				# 195
+	fmul	f1, f1, f2				# 195
+	fadd	f0, f0, f1				# 195
+	fneg	f0, f0				# 107
+	lfs	f1, 152(r3)				# 1701
+	fmul	f0, f0, f1				# 1701
+	slwi	r6, r5, 2				# 195
+	lwz	r9, 124(r3)				# 195
+	lfsx	f2, r9, r6				# 195
+	slwi	r6, r5, 2				# 195
+	lfsx	f3, r7, r6				# 195
+	fmul	f2, f2, f3				# 195
+	slwi	r6, r2, 2				# 195
+	lfsx	f3, r9, r6				# 195
+	slwi	r6, r2, 2				# 195
+	lfsx	f4, r7, r6				# 195
+	fmul	f3, f3, f4				# 195
+	fadd	f2, f2, f3				# 195
+	slwi	r6, r8, 2				# 195
+	lfsx	f3, r9, r6				# 195
+	slwi	r6, r8, 2				# 195
+	lfsx	f4, r7, r6				# 195
+	fmul	f3, f3, f4				# 195
+	fadd	f2, f2, f3				# 195
+	fneg	f2, f2				# 107
+	lfs	f3, 104(r3)				# 113
+	fcmpu	cr7, f0, f3				# 113
+	bgt	cr7, ble_else.16357				# 113
+	addi	r6, 0, 0
+	b	ble_cont.16358				# 113
+ble_else.16357:
+	addi	r6, 0, 1
+ble_cont.16358:
+	cmpw	cr7, r6, r5				# 1620
+	bne	cr7, beq_else.16359				# 1620
+	b	beq_cont.16360				# 1620
+beq_else.16359:
+	slwi	r6, r5, 2				# 205
+	lwz	r7, 84(r3)				# 205
+	lfsx	f4, r7, r6				# 205
+	slwi	r6, r5, 2				# 205
+	lwz	r10, 44(r3)				# 205
+	lfsx	f5, r10, r6				# 205
+	fmul	f5, f0, f5				# 205
+	fadd	f4, f4, f5				# 205
+	slwi	r6, r5, 2				# 205
+	stfsx	f4, r7, r6				# 205
+	slwi	r6, r2, 2				# 206
+	lfsx	f4, r7, r6				# 206
+	slwi	r6, r2, 2				# 206
+	lfsx	f5, r10, r6				# 206
+	fmul	f5, f0, f5				# 206
+	fadd	f4, f4, f5				# 206
+	slwi	r6, r2, 2				# 206
+	stfsx	f4, r7, r6				# 206
+	slwi	r6, r8, 2				# 207
+	lfsx	f4, r7, r6				# 207
+	slwi	r6, r8, 2				# 207
+	lfsx	f5, r10, r6				# 207
+	fmul	f0, f0, f5				# 207
+	fadd	f0, f4, f0				# 207
+	slwi	r6, r8, 2				# 207
+	stfsx	f0, r7, r6				# 207
+beq_cont.16360:
+	fcmpu	cr7, f2, f3				# 113
+	bgt	cr7, ble_else.16361				# 113
+	addi	r6, 0, 0
+	b	ble_cont.16362				# 113
+ble_else.16361:
+	addi	r6, 0, 1
+ble_cont.16362:
+	cmpw	cr7, r6, r5				# 1625
+	bne	cr7, beq_else.16363				# 1625
+	b	beq_cont.16364				# 1625
+beq_else.16363:
+	fmul	f0, f2, f2				# 103
+	fmul	f0, f0, f0				# 103
+	lfs	f2, 168(r3)				# 1626
+	fmul	f0, f0, f2				# 1626
+	slwi	r6, r5, 2				# 1627
+	lwz	r7, 84(r3)				# 1627
+	lfsx	f3, r7, r6				# 1627
+	fadd	f3, f3, f0				# 1627
+	slwi	r6, r5, 2				# 1627
+	stfsx	f3, r7, r6				# 1627
+	slwi	r6, r2, 2				# 1628
+	lfsx	f3, r7, r6				# 1628
+	fadd	f3, f3, f0				# 1628
+	slwi	r6, r2, 2				# 1628
+	stfsx	f3, r7, r6				# 1628
+	slwi	r6, r8, 2				# 1629
+	lfsx	f3, r7, r6				# 1629
+	fadd	f0, f3, f0				# 1629
+	slwi	r6, r8, 2				# 1629
+	stfsx	f0, r7, r6				# 1629
+beq_cont.16364:
+	b	beq_cont.16356				# 1700
+beq_else.16355:
+beq_cont.16356:
+	slwi	r2, r5, 2				# 166
+	lwz	r6, 60(r3)				# 166
+	lfsx	f0, r6, r2				# 166
+	slwi	r2, r5, 2				# 166
+	lwz	r7, 32(r3)				# 166
+	stfsx	f0, r7, r2				# 166
+	lwz	r2, 116(r3)				# 167
+	slwi	r8, r2, 2				# 167
+	lfsx	f0, r6, r8				# 167
+	slwi	r8, r2, 2				# 167
+	stfsx	f0, r7, r8				# 167
+	lwz	r8, 112(r3)				# 168
+	slwi	r9, r8, 2				# 168
+	lfsx	f0, r6, r9				# 168
+	slwi	r9, r8, 2				# 168
+	stfsx	f0, r7, r9				# 168
+	slwi	r7, r5, 2				# 1161
+	lwz	r9, 28(r3)				# 1161
+	lwzx	r7, r9, r7				# 1161
+	sub	r7, r7, r2				# 1161
+	lwz	r1, 24(r3)				# 1161
+	mfspr	r31, 8				# 1161
+	mr	r5, r7				# 1161
+	mr	r2, r6				# 1161
+	stw	r31, 176(r3)				# 1161
+	addi	r3, r3, 180				# 1161
+	lwz	r31, 0(r1)				# 1161
+	mtspr	9, r31				# 1161
+	bctr				# 1161
+	addi	r3, r3, -180				# 1161
+	lwz	r31, 176(r3)				# 1161
+	mtspr	8, r31				# 1161
+	lwz	r2, 144(r3)				# 1708
+	slwi	r5, r2, 2				# 1708
+	lwz	r6, 8(r3)				# 1708
+	lwzx	r5, r6, r5				# 1708
+	lwz	r6, 116(r3)				# 1708
+	sub	r5, r5, r6				# 1708
+	lfs	f0, 152(r3)				# 1708
+	lfs	f1, 168(r3)				# 1708
+	lwz	r7, 124(r3)				# 1708
+	lwz	r1, 0(r3)				# 1708
+	mfspr	r31, 8				# 1708
+	mr	r2, r5				# 1708
+	mr	r5, r7				# 1708
+	stw	r31, 176(r3)				# 1708
+	addi	r3, r3, 180				# 1708
+	lwz	r31, 0(r1)				# 1708
+	mtspr	9, r31				# 1708
+	bctr				# 1708
+	addi	r3, r3, -180				# 1708
+	lwz	r31, 176(r3)				# 1708
+	mtspr	8, r31				# 1708
+	lis	r31, ha16(l.12356)
+	addi	r31, r31, lo16(l.12356)
+	lfs	f0, 0(r31)				# 1711
+	lfs	f1, 96(r3)				# 109
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.16365				# 109
 	addi	r2, 0, 0
-	b	beq_cont.18062				# 1463
-beq_else.18061:
-	lis	r31, ha16(l.12182)
-	addi	r31, r31, lo16(l.12182)
-	lfs	f1, 0(r31)				# 1464
-	lfs	f0, 120(r3)				# 1464
-	mfspr	r31, 8				# 1464
-	stw	r31, 128(r3)				# 1464
-	addi	r3, r3, 132				# 1464
-	bl	min_caml_fless				# 1464
-	addi	r3, r3, -132				# 1464
-	lwz	r31, 128(r3)				# 1464
-	mtspr	8, r31				# 1464
-beq_cont.18062:
-	lwz	r5, 96(r3)				# 1742
-	cmpw	cr7, r2, r5				# 1742
-	bne	cr7, beq_else.18063				# 1742
-	b	beq_cont.18064				# 1742
-beq_else.18063:
-	slwi	r2, r5, 2				# 1743
-	lwz	r6, 56(r3)				# 1743
-	lwzx	r2, r6, r2				# 1743
-	slwi	r2, r2, 2				# 1743
-	lwz	r6, 52(r3)				# 1743
-	lwzx	r2, r6, r2				# 1743
-	lwz	r6, 112(r3)				# 508
-	lwz	r6, 0(r6)				# 508
-	lwz	r30, 48(r3)				# 1744
-	stw	r2, 128(r3)				# 1744
-	mfspr	r31, 8				# 1744
-	mr	r5, r6				# 1744
-	stw	r31, 132(r3)				# 1744
-	addi	r3, r3, 136				# 1744
-	lwz	r31, 0(r30)				# 1744
-	mtspr	9, r31				# 1744
-	bctrl				# 1744
-	addi	r3, r3, -136				# 1744
-	lwz	r31, 132(r3)				# 1744
-	mtspr	8, r31				# 1744
-	lwz	r2, 128(r3)				# 1745
-	lwz	r5, 40(r3)				# 1745
-	lwz	r30, 44(r3)				# 1745
-	mfspr	r31, 8				# 1745
-	stw	r31, 132(r3)				# 1745
-	addi	r3, r3, 136				# 1745
-	lwz	r31, 0(r30)				# 1745
-	mtspr	9, r31				# 1745
-	bctrl				# 1745
-	addi	r3, r3, -136				# 1745
-	lwz	r31, 132(r3)				# 1745
-	mtspr	8, r31				# 1745
-	lwz	r2, 96(r3)				# 1748
-	slwi	r5, r2, 2				# 1748
-	lwz	r6, 64(r3)				# 1748
-	lwzx	r5, r6, r5				# 1748
-	lwz	r30, 36(r3)				# 1748
-	mfspr	r31, 8				# 1748
-	stw	r31, 132(r3)				# 1748
-	addi	r3, r3, 136				# 1748
-	lwz	r31, 0(r30)				# 1748
-	mtspr	9, r31				# 1748
-	bctrl				# 1748
-	addi	r3, r3, -136				# 1748
-	lwz	r31, 132(r3)				# 1748
-	mtspr	8, r31				# 1748
-	lwz	r5, 96(r3)				# 1748
-	cmpw	cr7, r2, r5				# 1748
-	bne	cr7, beq_else.18065				# 1748
-	slwi	r2, r5, 2				# 182
-	lwz	r6, 32(r3)				# 182
-	lfsx	f0, r6, r2				# 182
-	slwi	r2, r5, 2				# 182
-	lwz	r7, 28(r3)				# 182
-	lfsx	f1, r7, r2				# 182
-	fmul	f0, f0, f1				# 182
-	lwz	r2, 24(r3)				# 182
-	slwi	r8, r2, 2				# 182
-	lfsx	f1, r6, r8				# 182
-	slwi	r8, r2, 2				# 182
-	lfsx	f2, r7, r8				# 182
-	fmul	f1, f1, f2				# 182
-	fadd	f0, f0, f1				# 182
-	lwz	r8, 20(r3)				# 182
-	slwi	r9, r8, 2				# 182
-	lfsx	f1, r6, r9				# 182
-	slwi	r6, r8, 2				# 182
-	lfsx	f2, r7, r6				# 182
-	fmul	f1, f1, f2				# 182
-	fadd	f0, f0, f1				# 182
-	mfspr	r31, 8				# 1749
-	stw	r31, 132(r3)				# 1749
-	addi	r3, r3, 136				# 1749
-	bl	min_caml_fneg				# 1749
-	addi	r3, r3, -136				# 1749
-	lwz	r31, 132(r3)				# 1749
-	mtspr	8, r31				# 1749
-	stfs	f0, 136(r3)				# 1750
-	mfspr	r31, 8				# 1750
-	stw	r31, 144(r3)				# 1750
-	addi	r3, r3, 148				# 1750
-	bl	min_caml_fispos				# 1750
-	addi	r3, r3, -148				# 1750
-	lwz	r31, 144(r3)				# 1750
-	mtspr	8, r31				# 1750
-	lwz	r5, 96(r3)				# 1750
-	cmpw	cr7, r2, r5				# 1750
-	bne	cr7, beq_else.18068				# 1750
-	lis	r31, ha16(l.11658)
-	addi	r31, r31, lo16(l.11658)
-	lfs	f0, 0(r31)				# 1750
-	b	beq_cont.18069				# 1750
-beq_else.18068:
-	lfs	f0, 136(r3)				# 1750
-beq_cont.18069:
-	lfs	f1, 104(r3)				# 1751
-	fmul	f0, f1, f0				# 1751
-	lwz	r2, 128(r3)				# 347
-	lwz	r2, 28(r2)				# 347
-	slwi	r6, r5, 2				# 352
-	lfsx	f1, r2, r6				# 352
-	fmul	f0, f0, f1				# 1751
-	slwi	r2, r5, 2				# 192
-	lwz	r6, 16(r3)				# 192
-	lfsx	f1, r6, r2				# 192
-	slwi	r2, r5, 2				# 192
-	lwz	r7, 12(r3)				# 192
-	lfsx	f2, r7, r2				# 192
-	fmul	f2, f0, f2				# 192
-	fadd	f1, f1, f2				# 192
-	slwi	r2, r5, 2				# 192
-	stfsx	f1, r6, r2				# 192
-	lwz	r2, 24(r3)				# 193
-	slwi	r5, r2, 2				# 193
-	lfsx	f1, r6, r5				# 193
-	slwi	r5, r2, 2				# 193
-	lfsx	f2, r7, r5				# 193
-	fmul	f2, f0, f2				# 193
-	fadd	f1, f1, f2				# 193
-	slwi	r2, r2, 2				# 193
-	stfsx	f1, r6, r2				# 193
-	lwz	r2, 20(r3)				# 194
-	slwi	r5, r2, 2				# 194
-	lfsx	f1, r6, r5				# 194
-	slwi	r5, r2, 2				# 194
-	lfsx	f2, r7, r5				# 194
-	fmul	f0, f0, f2				# 194
-	fadd	f0, f1, f0				# 194
-	slwi	r5, r2, 2				# 194
-	stfsx	f0, r6, r5				# 194
-	b	beq_cont.18066				# 1748
-beq_else.18065:
-beq_cont.18066:
-beq_cont.18064:
-	b	beq_cont.18058				# 1762
-beq_else.18057:
-	lwz	r2, 24(r3)				# 1763
-	lwz	r6, 92(r3)				# 1763
-	add	r7, r6, r2				# 1763
-	slwi	r7, r7, 2				# 1763
-	lwz	r8, 88(r3)				# 1763
-	lwzx	r7, r8, r7				# 1763
-	lis	r31, ha16(l.12350)
-	addi	r31, r31, lo16(l.12350)
-	lfs	f0, 0(r31)				# 1763
-	lfs	f1, 80(r3)				# 1763
-	fdiv	f0, f1, f0				# 1763
-	slwi	r9, r5, 2				# 1459
-	lwz	r10, 68(r3)				# 1459
-	lfs	f1, 72(r3)				# 1459
-	stfsx	f1, r10, r9				# 1459
-	slwi	r9, r5, 2				# 1460
-	lwz	r11, 64(r3)				# 1460
-	lwzx	r9, r11, r9				# 1460
-	lwz	r30, 60(r3)				# 1460
-	stfs	f0, 144(r3)				# 1460
-	stw	r7, 152(r3)				# 1460
-	mfspr	r31, 8				# 1460
-	mr	r6, r7				# 1460
-	mr	r2, r5				# 1460
-	mr	r5, r9				# 1460
-	stw	r31, 156(r3)				# 1460
-	addi	r3, r3, 160				# 1460
-	lwz	r31, 0(r30)				# 1460
-	mtspr	9, r31				# 1460
-	bctrl				# 1460
-	addi	r3, r3, -160				# 1460
-	lwz	r31, 156(r3)				# 1460
-	mtspr	8, r31				# 1460
-	lwz	r2, 96(r3)				# 1461
-	slwi	r5, r2, 2				# 1461
-	lwz	r6, 68(r3)				# 1461
-	lfsx	f1, r6, r5				# 1461
-	lis	r31, ha16(l.11949)
-	addi	r31, r31, lo16(l.11949)
-	lfs	f0, 0(r31)				# 1463
-	stfs	f1, 160(r3)				# 1463
-	mfspr	r31, 8				# 1463
-	stw	r31, 168(r3)				# 1463
-	addi	r3, r3, 172				# 1463
-	bl	min_caml_fless				# 1463
-	addi	r3, r3, -172				# 1463
-	lwz	r31, 168(r3)				# 1463
-	mtspr	8, r31				# 1463
-	lwz	r5, 96(r3)				# 1463
-	cmpw	cr7, r2, r5				# 1463
-	bne	cr7, beq_else.18071				# 1463
-	addi	r2, 0, 0
-	b	beq_cont.18072				# 1463
-beq_else.18071:
-	lis	r31, ha16(l.12182)
-	addi	r31, r31, lo16(l.12182)
-	lfs	f1, 0(r31)				# 1464
-	lfs	f0, 160(r3)				# 1464
-	mfspr	r31, 8				# 1464
-	stw	r31, 168(r3)				# 1464
-	addi	r3, r3, 172				# 1464
-	bl	min_caml_fless				# 1464
-	addi	r3, r3, -172				# 1464
-	lwz	r31, 168(r3)				# 1464
-	mtspr	8, r31				# 1464
-beq_cont.18072:
-	lwz	r5, 96(r3)				# 1742
-	cmpw	cr7, r2, r5				# 1742
-	bne	cr7, beq_else.18073				# 1742
-	b	beq_cont.18074				# 1742
-beq_else.18073:
-	slwi	r2, r5, 2				# 1743
-	lwz	r6, 56(r3)				# 1743
-	lwzx	r2, r6, r2				# 1743
-	slwi	r2, r2, 2				# 1743
-	lwz	r6, 52(r3)				# 1743
-	lwzx	r2, r6, r2				# 1743
-	lwz	r6, 152(r3)				# 508
-	lwz	r6, 0(r6)				# 508
-	lwz	r30, 48(r3)				# 1744
-	stw	r2, 168(r3)				# 1744
-	mfspr	r31, 8				# 1744
-	mr	r5, r6				# 1744
-	stw	r31, 172(r3)				# 1744
-	addi	r3, r3, 176				# 1744
-	lwz	r31, 0(r30)				# 1744
-	mtspr	9, r31				# 1744
-	bctrl				# 1744
-	addi	r3, r3, -176				# 1744
-	lwz	r31, 172(r3)				# 1744
-	mtspr	8, r31				# 1744
-	lwz	r2, 168(r3)				# 1745
-	lwz	r5, 40(r3)				# 1745
-	lwz	r30, 44(r3)				# 1745
-	mfspr	r31, 8				# 1745
-	stw	r31, 172(r3)				# 1745
-	addi	r3, r3, 176				# 1745
-	lwz	r31, 0(r30)				# 1745
-	mtspr	9, r31				# 1745
-	bctrl				# 1745
-	addi	r3, r3, -176				# 1745
-	lwz	r31, 172(r3)				# 1745
-	mtspr	8, r31				# 1745
-	lwz	r2, 96(r3)				# 1748
-	slwi	r5, r2, 2				# 1748
-	lwz	r6, 64(r3)				# 1748
-	lwzx	r5, r6, r5				# 1748
-	lwz	r30, 36(r3)				# 1748
-	mfspr	r31, 8				# 1748
-	stw	r31, 172(r3)				# 1748
-	addi	r3, r3, 176				# 1748
-	lwz	r31, 0(r30)				# 1748
-	mtspr	9, r31				# 1748
-	bctrl				# 1748
-	addi	r3, r3, -176				# 1748
-	lwz	r31, 172(r3)				# 1748
-	mtspr	8, r31				# 1748
-	lwz	r5, 96(r3)				# 1748
-	cmpw	cr7, r2, r5				# 1748
-	bne	cr7, beq_else.18075				# 1748
-	slwi	r2, r5, 2				# 182
-	lwz	r6, 32(r3)				# 182
-	lfsx	f0, r6, r2				# 182
-	slwi	r2, r5, 2				# 182
-	lwz	r7, 28(r3)				# 182
-	lfsx	f1, r7, r2				# 182
-	fmul	f0, f0, f1				# 182
-	lwz	r2, 24(r3)				# 182
-	slwi	r8, r2, 2				# 182
-	lfsx	f1, r6, r8				# 182
-	slwi	r8, r2, 2				# 182
-	lfsx	f2, r7, r8				# 182
-	fmul	f1, f1, f2				# 182
-	fadd	f0, f0, f1				# 182
-	lwz	r8, 20(r3)				# 182
-	slwi	r9, r8, 2				# 182
-	lfsx	f1, r6, r9				# 182
-	slwi	r6, r8, 2				# 182
-	lfsx	f2, r7, r6				# 182
-	fmul	f1, f1, f2				# 182
-	fadd	f0, f0, f1				# 182
-	mfspr	r31, 8				# 1749
-	stw	r31, 172(r3)				# 1749
-	addi	r3, r3, 176				# 1749
-	bl	min_caml_fneg				# 1749
-	addi	r3, r3, -176				# 1749
-	lwz	r31, 172(r3)				# 1749
-	mtspr	8, r31				# 1749
-	stfs	f0, 176(r3)				# 1750
-	mfspr	r31, 8				# 1750
-	stw	r31, 184(r3)				# 1750
-	addi	r3, r3, 188				# 1750
-	bl	min_caml_fispos				# 1750
-	addi	r3, r3, -188				# 1750
-	lwz	r31, 184(r3)				# 1750
-	mtspr	8, r31				# 1750
-	lwz	r5, 96(r3)				# 1750
-	cmpw	cr7, r2, r5				# 1750
-	bne	cr7, beq_else.18078				# 1750
-	lis	r31, ha16(l.11658)
-	addi	r31, r31, lo16(l.11658)
-	lfs	f0, 0(r31)				# 1750
-	b	beq_cont.18079				# 1750
-beq_else.18078:
-	lfs	f0, 176(r3)				# 1750
-beq_cont.18079:
-	lfs	f1, 144(r3)				# 1751
-	fmul	f0, f1, f0				# 1751
-	lwz	r2, 168(r3)				# 347
-	lwz	r2, 28(r2)				# 347
-	slwi	r6, r5, 2				# 352
-	lfsx	f1, r2, r6				# 352
-	fmul	f0, f0, f1				# 1751
-	slwi	r2, r5, 2				# 192
-	lwz	r6, 16(r3)				# 192
-	lfsx	f1, r6, r2				# 192
-	slwi	r2, r5, 2				# 192
-	lwz	r7, 12(r3)				# 192
-	lfsx	f2, r7, r2				# 192
-	fmul	f2, f0, f2				# 192
-	fadd	f1, f1, f2				# 192
-	slwi	r2, r5, 2				# 192
-	stfsx	f1, r6, r2				# 192
-	lwz	r2, 24(r3)				# 193
-	slwi	r5, r2, 2				# 193
-	lfsx	f1, r6, r5				# 193
-	slwi	r5, r2, 2				# 193
-	lfsx	f2, r7, r5				# 193
-	fmul	f2, f0, f2				# 193
-	fadd	f1, f1, f2				# 193
-	slwi	r2, r2, 2				# 193
-	stfsx	f1, r6, r2				# 193
-	lwz	r2, 20(r3)				# 194
-	slwi	r5, r2, 2				# 194
-	lfsx	f1, r6, r5				# 194
-	slwi	r5, r2, 2				# 194
-	lfsx	f2, r7, r5				# 194
-	fmul	f0, f0, f2				# 194
-	fadd	f0, f1, f0				# 194
-	slwi	r5, r2, 2				# 194
-	stfsx	f0, r6, r5				# 194
-	b	beq_cont.18076				# 1748
-beq_else.18075:
-beq_cont.18076:
-beq_cont.18074:
-beq_cont.18058:
-	lwz	r2, 20(r3)				# 1767
-	lwz	r5, 92(r3)				# 1767
-	sub	r7, r5, r2				# 1767
-	lwz	r2, 88(r3)				# 1767
-	lwz	r5, 4(r3)				# 1767
-	lwz	r6, 0(r3)				# 1767
-	lwz	r30, 8(r3)				# 1767
-	lwz	r29, 0(r30)				# 1767
-	mtspr	9, r29
-	bctr				# 1767
-ble_else.18056:
+	b	ble_cont.16366				# 109
+ble_else.16365:
+	addi	r2, 0, 1
+ble_cont.16366:
+	lwz	r5, 144(r3)				# 1711
+	cmpw	cr7, r2, r5				# 1711
+	bne	cr7, beq_else.16367				# 1711
 	blr
-do_without_neighbors.2830:
-	lwz	r6, 44(r30)				# 1843
-	lwz	r7, 40(r30)				# 1843
-	lwz	r8, 36(r30)				# 1843
-	lwz	r9, 32(r30)				# 1843
-	lwz	r10, 28(r30)				# 1843
-	lwz	r11, 24(r30)				# 1843
-	lwz	r12, 20(r30)				# 1843
-	lwz	r13, 16(r30)				# 1843
-	lwz	r14, 12(r30)				# 1843
-	lwz	r15, 8(r30)				# 1843
-	lwz	r16, 4(r30)				# 1843
-	cmpwi	cr7, r5, 4				# 1844
-	bgt	cr7, ble_else.18081				# 1844
-	lwz	r17, 8(r2)				# 455
-	slwi	r18, r5, 2				# 1847
-	lwzx	r17, r17, r18				# 1847
-	cmpw	cr7, r15, r17				# 1847
-	bgt	cr7, ble_else.18082				# 1847
-	lwz	r17, 12(r2)				# 462
-	slwi	r18, r5, 2				# 1849
-	lwzx	r17, r17, r18				# 1849
-	stw	r2, 0(r3)				# 1849
-	stw	r30, 4(r3)				# 1849
-	stw	r16, 8(r3)				# 1849
-	stw	r5, 12(r3)				# 1849
-	cmpw	cr7, r17, r15				# 1849
-	bne	cr7, beq_else.18083				# 1849
-	b	beq_cont.18084				# 1849
-beq_else.18083:
-	lwz	r17, 20(r2)				# 476
-	lwz	r18, 28(r2)				# 499
-	lwz	r19, 4(r2)				# 447
-	lwz	r20, 16(r2)				# 469
-	slwi	r21, r5, 2				# 1812
-	lwzx	r17, r17, r21				# 1812
-	slwi	r21, r15, 2				# 153
-	lfsx	f0, r17, r21				# 153
-	slwi	r21, r15, 2				# 153
-	stfsx	f0, r12, r21				# 153
-	slwi	r21, r16, 2				# 154
-	lfsx	f0, r17, r21				# 154
-	slwi	r21, r16, 2				# 154
-	stfsx	f0, r12, r21				# 154
-	slwi	r21, r13, 2				# 155
-	lfsx	f0, r17, r21				# 155
-	slwi	r17, r13, 2				# 155
-	stfsx	f0, r12, r17				# 155
-	lwz	r17, 24(r2)				# 485
-	slwi	r21, r15, 2				# 487
-	lwzx	r17, r17, r21				# 487
-	slwi	r21, r5, 2				# 1815
-	lwzx	r18, r18, r21				# 1815
-	slwi	r21, r5, 2				# 1816
-	lwzx	r19, r19, r21				# 1816
-	stw	r12, 16(r3)				# 1782
-	stw	r8, 20(r3)				# 1782
-	stw	r20, 24(r3)				# 1782
-	stw	r14, 28(r3)				# 1782
-	stw	r18, 32(r3)				# 1782
-	stw	r10, 36(r3)				# 1782
-	stw	r7, 40(r3)				# 1782
-	stw	r9, 44(r3)				# 1782
-	stw	r13, 48(r3)				# 1782
-	stw	r6, 52(r3)				# 1782
-	stw	r19, 56(r3)				# 1782
-	stw	r15, 60(r3)				# 1782
-	stw	r11, 64(r3)				# 1782
-	stw	r17, 68(r3)				# 1782
-	cmpw	cr7, r17, r15				# 1782
-	bne	cr7, beq_else.18085				# 1782
-	b	beq_cont.18086				# 1782
-beq_else.18085:
-	slwi	r21, r15, 2				# 1783
-	lwzx	r21, r11, r21				# 1783
-	slwi	r22, r15, 2				# 153
-	lfsx	f0, r19, r22				# 153
-	slwi	r22, r15, 2				# 153
-	stfsx	f0, r6, r22				# 153
-	slwi	r22, r16, 2				# 154
-	lfsx	f0, r19, r22				# 154
-	slwi	r22, r16, 2				# 154
-	stfsx	f0, r6, r22				# 154
-	slwi	r22, r13, 2				# 155
-	lfsx	f0, r19, r22				# 155
-	slwi	r22, r13, 2				# 155
-	stfsx	f0, r6, r22				# 155
-	slwi	r22, r15, 2				# 1148
-	lwzx	r22, r9, r22				# 1148
-	sub	r22, r22, r16				# 1148
-	stw	r21, 72(r3)				# 1148
-	mfspr	r31, 8				# 1148
-	mr	r5, r22				# 1148
-	mr	r2, r19				# 1148
-	mr	r30, r7				# 1148
-	stw	r31, 76(r3)				# 1148
-	addi	r3, r3, 80				# 1148
-	lwz	r31, 0(r30)				# 1148
-	mtspr	9, r31				# 1148
-	bctrl				# 1148
-	addi	r3, r3, -80				# 1148
-	lwz	r31, 76(r3)				# 1148
-	mtspr	8, r31				# 1148
-	addi	r7, 0, 118
-	lwz	r2, 72(r3)				# 1776
-	lwz	r5, 32(r3)				# 1776
-	lwz	r6, 56(r3)				# 1776
-	lwz	r30, 36(r3)				# 1776
-	mfspr	r31, 8				# 1776
-	stw	r31, 76(r3)				# 1776
-	addi	r3, r3, 80				# 1776
-	lwz	r31, 0(r30)				# 1776
-	mtspr	9, r31				# 1776
-	bctrl				# 1776
-	addi	r3, r3, -80				# 1776
-	lwz	r31, 76(r3)				# 1776
-	mtspr	8, r31				# 1776
-beq_cont.18086:
-	lwz	r2, 8(r3)				# 1786
-	lwz	r5, 68(r3)				# 1786
-	cmpw	cr7, r5, r2				# 1786
-	bne	cr7, beq_else.18087				# 1786
-	b	beq_cont.18088				# 1786
-beq_else.18087:
-	slwi	r6, r2, 2				# 1787
-	lwz	r7, 64(r3)				# 1787
-	lwzx	r6, r7, r6				# 1787
-	lwz	r8, 60(r3)				# 153
-	slwi	r9, r8, 2				# 153
-	lwz	r10, 56(r3)				# 153
-	lfsx	f0, r10, r9				# 153
-	slwi	r9, r8, 2				# 153
-	lwz	r11, 52(r3)				# 153
-	stfsx	f0, r11, r9				# 153
-	slwi	r9, r2, 2				# 154
-	lfsx	f0, r10, r9				# 154
-	slwi	r9, r2, 2				# 154
-	stfsx	f0, r11, r9				# 154
-	lwz	r9, 48(r3)				# 155
-	slwi	r12, r9, 2				# 155
-	lfsx	f0, r10, r12				# 155
-	slwi	r12, r9, 2				# 155
-	stfsx	f0, r11, r12				# 155
-	slwi	r12, r8, 2				# 1148
-	lwz	r13, 44(r3)				# 1148
-	lwzx	r12, r13, r12				# 1148
-	sub	r12, r12, r2				# 1148
-	lwz	r30, 40(r3)				# 1148
-	stw	r6, 76(r3)				# 1148
-	mfspr	r31, 8				# 1148
-	mr	r5, r12				# 1148
-	mr	r2, r10				# 1148
-	stw	r31, 80(r3)				# 1148
-	addi	r3, r3, 84				# 1148
-	lwz	r31, 0(r30)				# 1148
-	mtspr	9, r31				# 1148
-	bctrl				# 1148
-	addi	r3, r3, -84				# 1148
-	lwz	r31, 80(r3)				# 1148
-	mtspr	8, r31				# 1148
-	addi	r7, 0, 118
-	lwz	r2, 76(r3)				# 1776
-	lwz	r5, 32(r3)				# 1776
-	lwz	r6, 56(r3)				# 1776
-	lwz	r30, 36(r3)				# 1776
-	mfspr	r31, 8				# 1776
-	stw	r31, 80(r3)				# 1776
-	addi	r3, r3, 84				# 1776
-	lwz	r31, 0(r30)				# 1776
-	mtspr	9, r31				# 1776
-	bctrl				# 1776
-	addi	r3, r3, -84				# 1776
-	lwz	r31, 80(r3)				# 1776
-	mtspr	8, r31				# 1776
-beq_cont.18088:
-	lwz	r2, 48(r3)				# 1790
-	lwz	r5, 68(r3)				# 1790
-	cmpw	cr7, r5, r2				# 1790
-	bne	cr7, beq_else.18089				# 1790
-	b	beq_cont.18090				# 1790
-beq_else.18089:
-	slwi	r6, r2, 2				# 1791
-	lwz	r7, 64(r3)				# 1791
-	lwzx	r6, r7, r6				# 1791
-	lwz	r8, 60(r3)				# 153
-	slwi	r9, r8, 2				# 153
-	lwz	r10, 56(r3)				# 153
-	lfsx	f0, r10, r9				# 153
-	slwi	r9, r8, 2				# 153
-	lwz	r11, 52(r3)				# 153
-	stfsx	f0, r11, r9				# 153
-	lwz	r9, 8(r3)				# 154
-	slwi	r12, r9, 2				# 154
-	lfsx	f0, r10, r12				# 154
-	slwi	r12, r9, 2				# 154
-	stfsx	f0, r11, r12				# 154
-	slwi	r12, r2, 2				# 155
-	lfsx	f0, r10, r12				# 155
-	slwi	r12, r2, 2				# 155
-	stfsx	f0, r11, r12				# 155
-	slwi	r12, r8, 2				# 1148
-	lwz	r13, 44(r3)				# 1148
-	lwzx	r12, r13, r12				# 1148
-	sub	r12, r12, r9				# 1148
-	lwz	r30, 40(r3)				# 1148
-	stw	r6, 80(r3)				# 1148
-	mfspr	r31, 8				# 1148
-	mr	r5, r12				# 1148
-	mr	r2, r10				# 1148
-	stw	r31, 84(r3)				# 1148
-	addi	r3, r3, 88				# 1148
-	lwz	r31, 0(r30)				# 1148
-	mtspr	9, r31				# 1148
-	bctrl				# 1148
-	addi	r3, r3, -88				# 1148
-	lwz	r31, 84(r3)				# 1148
-	mtspr	8, r31				# 1148
-	addi	r7, 0, 118
-	lwz	r2, 80(r3)				# 1776
-	lwz	r5, 32(r3)				# 1776
-	lwz	r6, 56(r3)				# 1776
-	lwz	r30, 36(r3)				# 1776
-	mfspr	r31, 8				# 1776
-	stw	r31, 84(r3)				# 1776
-	addi	r3, r3, 88				# 1776
-	lwz	r31, 0(r30)				# 1776
-	mtspr	9, r31				# 1776
-	bctrl				# 1776
-	addi	r3, r3, -88				# 1776
-	lwz	r31, 84(r3)				# 1776
-	mtspr	8, r31				# 1776
-beq_cont.18090:
-	lwz	r2, 28(r3)				# 1794
-	lwz	r5, 68(r3)				# 1794
-	cmpw	cr7, r5, r2				# 1794
-	bne	cr7, beq_else.18091				# 1794
-	b	beq_cont.18092				# 1794
-beq_else.18091:
-	slwi	r2, r2, 2				# 1795
-	lwz	r6, 64(r3)				# 1795
-	lwzx	r2, r6, r2				# 1795
-	lwz	r7, 60(r3)				# 153
-	slwi	r8, r7, 2				# 153
-	lwz	r9, 56(r3)				# 153
-	lfsx	f0, r9, r8				# 153
-	slwi	r8, r7, 2				# 153
-	lwz	r10, 52(r3)				# 153
-	stfsx	f0, r10, r8				# 153
-	lwz	r8, 8(r3)				# 154
-	slwi	r11, r8, 2				# 154
-	lfsx	f0, r9, r11				# 154
-	slwi	r11, r8, 2				# 154
-	stfsx	f0, r10, r11				# 154
-	lwz	r11, 48(r3)				# 155
-	slwi	r12, r11, 2				# 155
-	lfsx	f0, r9, r12				# 155
-	slwi	r12, r11, 2				# 155
-	stfsx	f0, r10, r12				# 155
-	slwi	r12, r7, 2				# 1148
-	lwz	r13, 44(r3)				# 1148
-	lwzx	r12, r13, r12				# 1148
-	sub	r12, r12, r8				# 1148
-	lwz	r30, 40(r3)				# 1148
-	stw	r2, 84(r3)				# 1148
-	mfspr	r31, 8				# 1148
-	mr	r5, r12				# 1148
-	mr	r2, r9				# 1148
-	stw	r31, 88(r3)				# 1148
-	addi	r3, r3, 92				# 1148
-	lwz	r31, 0(r30)				# 1148
-	mtspr	9, r31				# 1148
-	bctrl				# 1148
-	addi	r3, r3, -92				# 1148
-	lwz	r31, 88(r3)				# 1148
-	mtspr	8, r31				# 1148
-	addi	r7, 0, 118
-	lwz	r2, 84(r3)				# 1776
-	lwz	r5, 32(r3)				# 1776
-	lwz	r6, 56(r3)				# 1776
-	lwz	r30, 36(r3)				# 1776
-	mfspr	r31, 8				# 1776
-	stw	r31, 88(r3)				# 1776
-	addi	r3, r3, 92				# 1776
-	lwz	r31, 0(r30)				# 1776
-	mtspr	9, r31				# 1776
-	bctrl				# 1776
-	addi	r3, r3, -92				# 1776
-	lwz	r31, 88(r3)				# 1776
-	mtspr	8, r31				# 1776
-beq_cont.18092:
-	lwz	r2, 68(r3)				# 1798
-	cmpwi	cr7, r2, 4				# 1798
-	bne	cr7, beq_else.18093				# 1798
-	b	beq_cont.18094				# 1798
-beq_else.18093:
-	lwz	r2, 64(r3)				# 1799
-	lwz	r2, 16(r2)				# 1799
-	lwz	r5, 60(r3)				# 153
-	slwi	r6, r5, 2				# 153
-	lwz	r7, 56(r3)				# 153
-	lfsx	f0, r7, r6				# 153
-	slwi	r6, r5, 2				# 153
-	lwz	r8, 52(r3)				# 153
-	stfsx	f0, r8, r6				# 153
-	lwz	r6, 8(r3)				# 154
-	slwi	r9, r6, 2				# 154
-	lfsx	f0, r7, r9				# 154
-	slwi	r9, r6, 2				# 154
-	stfsx	f0, r8, r9				# 154
-	lwz	r9, 48(r3)				# 155
-	slwi	r10, r9, 2				# 155
-	lfsx	f0, r7, r10				# 155
-	slwi	r10, r9, 2				# 155
-	stfsx	f0, r8, r10				# 155
-	slwi	r8, r5, 2				# 1148
-	lwz	r10, 44(r3)				# 1148
-	lwzx	r8, r10, r8				# 1148
-	sub	r8, r8, r6				# 1148
-	lwz	r30, 40(r3)				# 1148
-	stw	r2, 88(r3)				# 1148
-	mfspr	r31, 8				# 1148
-	mr	r5, r8				# 1148
-	mr	r2, r7				# 1148
-	stw	r31, 92(r3)				# 1148
-	addi	r3, r3, 96				# 1148
-	lwz	r31, 0(r30)				# 1148
-	mtspr	9, r31				# 1148
-	bctrl				# 1148
-	addi	r3, r3, -96				# 1148
-	lwz	r31, 92(r3)				# 1148
-	mtspr	8, r31				# 1148
-	addi	r7, 0, 118
-	lwz	r2, 88(r3)				# 1776
-	lwz	r5, 32(r3)				# 1776
-	lwz	r6, 56(r3)				# 1776
-	lwz	r30, 36(r3)				# 1776
-	mfspr	r31, 8				# 1776
-	stw	r31, 92(r3)				# 1776
-	addi	r3, r3, 96				# 1776
-	lwz	r31, 0(r30)				# 1776
-	mtspr	9, r31				# 1776
-	bctrl				# 1776
-	addi	r3, r3, -96				# 1776
-	lwz	r31, 92(r3)				# 1776
-	mtspr	8, r31				# 1776
-beq_cont.18094:
-	lwz	r2, 12(r3)				# 1817
-	slwi	r5, r2, 2				# 1817
-	lwz	r6, 24(r3)				# 1817
-	lwzx	r5, r6, r5				# 1817
-	lwz	r6, 60(r3)				# 220
-	slwi	r7, r6, 2				# 220
-	lwz	r8, 20(r3)				# 220
-	lfsx	f0, r8, r7				# 220
-	slwi	r7, r6, 2				# 220
-	lfsx	f1, r5, r7				# 220
-	slwi	r7, r6, 2				# 220
-	lwz	r9, 16(r3)				# 220
-	lfsx	f2, r9, r7				# 220
-	fmul	f1, f1, f2				# 220
-	fadd	f0, f0, f1				# 220
-	slwi	r6, r6, 2				# 220
-	stfsx	f0, r8, r6				# 220
-	lwz	r6, 8(r3)				# 221
-	slwi	r7, r6, 2				# 221
-	lfsx	f0, r8, r7				# 221
-	slwi	r7, r6, 2				# 221
-	lfsx	f1, r5, r7				# 221
-	slwi	r7, r6, 2				# 221
-	lfsx	f2, r9, r7				# 221
-	fmul	f1, f1, f2				# 221
-	fadd	f0, f0, f1				# 221
-	slwi	r7, r6, 2				# 221
-	stfsx	f0, r8, r7				# 221
-	lwz	r7, 48(r3)				# 222
-	slwi	r10, r7, 2				# 222
-	lfsx	f0, r8, r10				# 222
-	slwi	r10, r7, 2				# 222
-	lfsx	f1, r5, r10				# 222
-	slwi	r5, r7, 2				# 222
-	lfsx	f2, r9, r5				# 222
-	fmul	f1, f1, f2				# 222
-	fadd	f0, f0, f1				# 222
-	slwi	r5, r7, 2				# 222
-	stfsx	f0, r8, r5				# 222
-beq_cont.18084:
-	lwz	r2, 8(r3)				# 1852
-	lwz	r5, 12(r3)				# 1852
-	add	r5, r5, r2				# 1852
-	lwz	r2, 0(r3)				# 1852
-	lwz	r30, 4(r3)				# 1852
-	lwz	r29, 0(r30)				# 1852
-	mtspr	9, r29
-	bctr				# 1852
-ble_else.18082:
+beq_else.16367:
+	lwz	r2, 136(r3)				# 1713
+	cmpwi	cr7, r2, 4				# 1713
+	blt	cr7, bge_else.16369				# 1713
+	b	bge_cont.16370				# 1713
+bge_else.16369:
+	lwz	r6, 116(r3)				# 1714
+	add	r7, r2, r6				# 1714
+	slwi	r7, r7, 2				# 1714
+	lwz	r8, 128(r3)				# 1714
+	lwz	r9, 132(r3)				# 1714
+	stwx	r9, r8, r7				# 1714
+bge_cont.16370:
+	lwz	r6, 112(r3)				# 1717
+	lwz	r7, 148(r3)				# 1717
+	cmpw	cr7, r7, r6				# 1717
+	bne	cr7, beq_else.16371				# 1717
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f0, 0(r31)				# 1718
+	lwz	r6, 164(r3)				# 360
+	lwz	r6, 28(r6)				# 360
+	slwi	r7, r5, 2				# 365
+	lfsx	f2, r6, r7				# 365
+	fsub	f0, f0, f2				# 1718
+	fmul	f0, f1, f0				# 1718
+	lwz	r6, 116(r3)				# 1719
+	add	r2, r2, r6				# 1719
+	slwi	r5, r5, 2				# 1719
+	lwz	r6, 140(r3)				# 1719
+	lfsx	f1, r6, r5				# 1719
+	lfs	f2, 16(r3)				# 1719
+	fadd	f1, f2, f1				# 1719
+	lwz	r5, 124(r3)				# 1719
+	lwz	r6, 48(r3)				# 1719
+	lwz	r1, 4(r3)				# 1719
+	lwz	r30, 0(r1)				# 1719
+	mtspr	9, r30
+	bctr				# 1719
+beq_else.16371:
 	blr
-ble_else.18081:
+ble_else.16322:
 	blr
-try_exploit_neighbors.2846:
-	lwz	r10, 24(r30)				# 1892
-	lwz	r11, 20(r30)				# 1892
-	lwz	r12, 16(r30)				# 1892
-	lwz	r13, 12(r30)				# 1892
-	lwz	r14, 8(r30)				# 1892
-	lwz	r15, 4(r30)				# 1892
-	slwi	r16, r2, 2				# 1893
-	lwzx	r16, r7, r16				# 1893
-	cmpwi	cr7, r9, 4				# 1894
-	bgt	cr7, ble_else.18097				# 1894
-	lwz	r17, 8(r16)				# 455
-	slwi	r18, r9, 2				# 1872
-	lwzx	r17, r17, r18				# 1872
-	cmpw	cr7, r14, r17				# 1897
-	bgt	cr7, ble_else.18098				# 1897
-	slwi	r17, r2, 2				# 1877
-	lwzx	r17, r7, r17				# 1877
-	lwz	r17, 8(r17)				# 455
-	slwi	r18, r9, 2				# 1872
-	lwzx	r17, r17, r18				# 1872
-	slwi	r18, r2, 2				# 1879
-	lwzx	r18, r6, r18				# 1879
-	lwz	r18, 8(r18)				# 455
-	slwi	r19, r9, 2				# 1872
-	lwzx	r18, r18, r19				# 1872
-	cmpw	cr7, r18, r17				# 1879
-	bne	cr7, beq_else.18099				# 1879
-	slwi	r18, r2, 2				# 1880
-	lwzx	r18, r8, r18				# 1880
-	lwz	r18, 8(r18)				# 455
-	slwi	r19, r9, 2				# 1872
-	lwzx	r18, r18, r19				# 1872
-	cmpw	cr7, r18, r17				# 1880
-	bne	cr7, beq_else.18101				# 1880
-	sub	r18, r2, r15				# 1881
-	slwi	r18, r18, 2				# 1881
-	lwzx	r18, r7, r18				# 1881
-	lwz	r18, 8(r18)				# 455
-	slwi	r19, r9, 2				# 1872
-	lwzx	r18, r18, r19				# 1872
-	cmpw	cr7, r18, r17				# 1881
-	bne	cr7, beq_else.18103				# 1881
-	add	r18, r2, r15				# 1882
-	slwi	r18, r18, 2				# 1882
-	lwzx	r18, r7, r18				# 1882
-	lwz	r18, 8(r18)				# 455
-	slwi	r19, r9, 2				# 1872
-	lwzx	r18, r18, r19				# 1872
-	cmpw	cr7, r18, r17				# 1882
-	bne	cr7, beq_else.18105				# 1882
+iter_trace_diffuse_rays.2826:
+	lwz	r8, 72(r1)				# 1769
+	lwz	r9, 68(r1)				# 1769
+	lwz	r10, 64(r1)				# 1769
+	lwz	r11, 60(r1)				# 1769
+	lwz	r12, 56(r1)				# 1769
+	lwz	r13, 52(r1)				# 1769
+	lwz	r14, 48(r1)				# 1769
+	lwz	r15, 44(r1)				# 1769
+	lwz	r16, 40(r1)				# 1769
+	lwz	r17, 36(r1)				# 1769
+	lwz	r18, 32(r1)				# 1769
+	lwz	r19, 28(r1)				# 1769
+	lwz	r20, 24(r1)				# 1769
+	lwz	r21, 20(r1)				# 1769
+	lwz	r22, 16(r1)				# 1769
+	lwz	r23, 12(r1)				# 1769
+	lfs	f0, 8(r1)				# 1769
+	lfs	f1, 4(r1)				# 1769
+	cmpw	cr7, r22, r7				# 1770
+	bgt	cr7, ble_else.16374				# 1770
+	slwi	r24, r7, 2				# 1771
+	lwzx	r24, r2, r24				# 1771
+	lwz	r24, 0(r24)				# 521
+	slwi	r25, r22, 2				# 195
+	lfsx	f2, r24, r25				# 195
+	slwi	r25, r22, 2				# 195
+	lfsx	f3, r5, r25				# 195
+	fmul	f2, f2, f3				# 195
+	slwi	r25, r23, 2				# 195
+	lfsx	f3, r24, r25				# 195
+	slwi	r25, r23, 2				# 195
+	lfsx	f4, r5, r25				# 195
+	fmul	f3, f3, f4				# 195
+	fadd	f2, f2, f3				# 195
+	slwi	r25, r21, 2				# 195
+	lfsx	f3, r24, r25				# 195
+	slwi	r24, r21, 2				# 195
+	lfsx	f4, r5, r24				# 195
+	fmul	f3, f3, f4				# 195
+	fadd	f2, f2, f3				# 195
+	fcmpu	cr7, f1, f2				# 115
+	bgt	cr7, ble_else.16375				# 115
+	addi	r24, 0, 0
+	b	ble_cont.16376				# 115
+ble_else.16375:
+	addi	r24, 0, 1
+ble_cont.16376:
+	stw	r6, 0(r3)				# 1774
+	stw	r5, 4(r3)				# 1774
+	stw	r2, 8(r3)				# 1774
+	stw	r1, 12(r3)				# 1774
+	stw	r21, 16(r3)				# 1774
+	stw	r7, 20(r3)				# 1774
+	cmpw	cr7, r24, r22				# 1774
+	bne	cr7, beq_else.16377				# 1774
+	slwi	r24, r7, 2				# 1777
+	lwzx	r24, r2, r24				# 1777
+	lis	r31, ha16(l.12406)
+	addi	r31, r31, lo16(l.12406)
+	lfs	f3, 0(r31)				# 1777
+	fdiv	f2, f2, f3				# 1777
+	slwi	r25, r22, 2				# 1472
+	stfsx	f0, r10, r25				# 1472
+	slwi	r25, r22, 2				# 1473
+	lwzx	r25, r13, r25				# 1473
+	stw	r11, 24(r3)				# 1473
+	stw	r20, 28(r3)				# 1473
+	stfs	f2, 32(r3)				# 1473
+	stfs	f1, 40(r3)				# 1473
+	stw	r23, 48(r3)				# 1473
+	stw	r16, 52(r3)				# 1473
+	stw	r15, 56(r3)				# 1473
+	stw	r12, 60(r3)				# 1473
+	stw	r13, 64(r3)				# 1473
+	stw	r17, 68(r3)				# 1473
+	stw	r8, 72(r3)				# 1473
+	stw	r19, 76(r3)				# 1473
+	stw	r24, 80(r3)				# 1473
+	stw	r14, 84(r3)				# 1473
+	stw	r18, 88(r3)				# 1473
+	stw	r10, 92(r3)				# 1473
+	stw	r22, 96(r3)				# 1473
+	mfspr	r31, 8				# 1473
+	mr	r6, r24				# 1473
+	mr	r5, r25				# 1473
+	mr	r2, r22				# 1473
+	mr	r1, r9				# 1473
+	stw	r31, 100(r3)				# 1473
+	addi	r3, r3, 104				# 1473
+	lwz	r31, 0(r1)				# 1473
+	mtspr	9, r31				# 1473
+	bctr				# 1473
+	addi	r3, r3, -104				# 1473
+	lwz	r31, 100(r3)				# 1473
+	mtspr	8, r31				# 1473
+	lwz	r2, 96(r3)				# 1474
+	slwi	r5, r2, 2				# 1474
+	lwz	r6, 92(r3)				# 1474
+	lfsx	f0, r6, r5				# 1474
+	lis	r31, ha16(l.11981)
+	addi	r31, r31, lo16(l.11981)
+	lfs	f1, 0(r31)				# 1476
+	fcmpu	cr7, f0, f1				# 109
+	bgt	cr7, ble_else.16379				# 109
+	addi	r5, 0, 0
+	b	ble_cont.16380				# 109
+ble_else.16379:
+	addi	r5, 0, 1
+ble_cont.16380:
+	cmpw	cr7, r5, r2				# 1476
+	bne	cr7, beq_else.16381				# 1476
+	addi	r5, 0, 0
+	b	beq_cont.16382				# 1476
+beq_else.16381:
+	lis	r31, ha16(l.12214)
+	addi	r31, r31, lo16(l.12214)
+	lfs	f1, 0(r31)				# 1477
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.16383				# 109
+	addi	r5, 0, 0
+	b	ble_cont.16384				# 109
+ble_else.16383:
+	addi	r5, 0, 1
+ble_cont.16384:
+beq_cont.16382:
+	cmpw	cr7, r5, r2				# 1754
+	bne	cr7, beq_else.16385				# 1754
+	b	beq_cont.16386				# 1754
+beq_else.16385:
+	slwi	r5, r2, 2				# 1755
+	lwz	r6, 88(r3)				# 1755
+	lwzx	r5, r6, r5				# 1755
+	slwi	r5, r5, 2				# 1755
+	lwz	r6, 84(r3)				# 1755
+	lwzx	r5, r6, r5				# 1755
+	lwz	r6, 80(r3)				# 521
+	lwz	r6, 0(r6)				# 521
+	lwz	r1, 76(r3)				# 1756
+	stw	r5, 100(r3)				# 1756
+	mfspr	r31, 8				# 1756
+	mr	r2, r5				# 1756
+	mr	r5, r6				# 1756
+	stw	r31, 104(r3)				# 1756
+	addi	r3, r3, 108				# 1756
+	lwz	r31, 0(r1)				# 1756
+	mtspr	9, r31				# 1756
+	bctr				# 1756
+	addi	r3, r3, -108				# 1756
+	lwz	r31, 104(r3)				# 1756
+	mtspr	8, r31				# 1756
+	lwz	r2, 100(r3)				# 1757
+	lwz	r5, 68(r3)				# 1757
+	lwz	r1, 72(r3)				# 1757
+	mfspr	r31, 8				# 1757
+	stw	r31, 104(r3)				# 1757
+	addi	r3, r3, 108				# 1757
+	lwz	r31, 0(r1)				# 1757
+	mtspr	9, r31				# 1757
+	bctr				# 1757
+	addi	r3, r3, -108				# 1757
+	lwz	r31, 104(r3)				# 1757
+	mtspr	8, r31				# 1757
+	lwz	r2, 96(r3)				# 1760
+	slwi	r5, r2, 2				# 1760
+	lwz	r6, 64(r3)				# 1760
+	lwzx	r5, r6, r5				# 1760
+	lwz	r1, 60(r3)				# 1760
+	mfspr	r31, 8				# 1760
+	stw	r31, 104(r3)				# 1760
+	addi	r3, r3, 108				# 1760
+	lwz	r31, 0(r1)				# 1760
+	mtspr	9, r31				# 1760
+	bctr				# 1760
+	addi	r3, r3, -108				# 1760
+	lwz	r31, 104(r3)				# 1760
+	mtspr	8, r31				# 1760
+	lwz	r5, 96(r3)				# 1760
+	cmpw	cr7, r2, r5				# 1760
+	bne	cr7, beq_else.16387				# 1760
+	slwi	r2, r5, 2				# 195
+	lwz	r6, 56(r3)				# 195
+	lfsx	f0, r6, r2				# 195
+	slwi	r2, r5, 2				# 195
+	lwz	r7, 52(r3)				# 195
+	lfsx	f1, r7, r2				# 195
+	fmul	f0, f0, f1				# 195
+	lwz	r2, 48(r3)				# 195
+	slwi	r8, r2, 2				# 195
+	lfsx	f1, r6, r8				# 195
+	slwi	r8, r2, 2				# 195
+	lfsx	f2, r7, r8				# 195
+	fmul	f1, f1, f2				# 195
+	fadd	f0, f0, f1				# 195
+	lwz	r8, 16(r3)				# 195
+	slwi	r9, r8, 2				# 195
+	lfsx	f1, r6, r9				# 195
+	slwi	r6, r8, 2				# 195
+	lfsx	f2, r7, r6				# 195
+	fmul	f1, f1, f2				# 195
+	fadd	f0, f0, f1				# 195
+	fneg	f0, f0				# 107
+	lfs	f1, 40(r3)				# 113
+	fcmpu	cr7, f0, f1				# 113
+	bgt	cr7, ble_else.16389				# 113
+	addi	r6, 0, 0
+	b	ble_cont.16390				# 113
+ble_else.16389:
+	addi	r6, 0, 1
+ble_cont.16390:
+	cmpw	cr7, r6, r5				# 1762
+	bne	cr7, beq_else.16391				# 1762
+	lis	r31, ha16(l.11690)
+	addi	r31, r31, lo16(l.11690)
+	lfs	f0, 0(r31)				# 1762
+	b	beq_cont.16392				# 1762
+beq_else.16391:
+beq_cont.16392:
+	lfs	f1, 32(r3)				# 1763
+	fmul	f0, f1, f0				# 1763
+	lwz	r6, 100(r3)				# 360
+	lwz	r6, 28(r6)				# 360
+	slwi	r7, r5, 2				# 365
+	lfsx	f1, r6, r7				# 365
+	fmul	f0, f0, f1				# 1763
+	slwi	r6, r5, 2				# 205
+	lwz	r7, 28(r3)				# 205
+	lfsx	f1, r7, r6				# 205
+	slwi	r6, r5, 2				# 205
+	lwz	r9, 24(r3)				# 205
+	lfsx	f2, r9, r6				# 205
+	fmul	f2, f0, f2				# 205
+	fadd	f1, f1, f2				# 205
+	slwi	r5, r5, 2				# 205
+	stfsx	f1, r7, r5				# 205
+	slwi	r5, r2, 2				# 206
+	lfsx	f1, r7, r5				# 206
+	slwi	r5, r2, 2				# 206
+	lfsx	f2, r9, r5				# 206
+	fmul	f2, f0, f2				# 206
+	fadd	f1, f1, f2				# 206
+	slwi	r2, r2, 2				# 206
+	stfsx	f1, r7, r2				# 206
+	slwi	r2, r8, 2				# 207
+	lfsx	f1, r7, r2				# 207
+	slwi	r2, r8, 2				# 207
+	lfsx	f2, r9, r2				# 207
+	fmul	f0, f0, f2				# 207
+	fadd	f0, f1, f0				# 207
+	slwi	r2, r8, 2				# 207
+	stfsx	f0, r7, r2				# 207
+	b	beq_cont.16388				# 1760
+beq_else.16387:
+beq_cont.16388:
+beq_cont.16386:
+	b	beq_cont.16378				# 1774
+beq_else.16377:
+	add	r24, r7, r23				# 1775
+	slwi	r24, r24, 2				# 1775
+	lwzx	r24, r2, r24				# 1775
+	lis	r31, ha16(l.12382)
+	addi	r31, r31, lo16(l.12382)
+	lfs	f3, 0(r31)				# 1775
+	fdiv	f2, f2, f3				# 1775
+	slwi	r25, r22, 2				# 1472
+	stfsx	f0, r10, r25				# 1472
+	slwi	r25, r22, 2				# 1473
+	lwzx	r25, r13, r25				# 1473
+	stw	r11, 24(r3)				# 1473
+	stw	r20, 28(r3)				# 1473
+	stfs	f2, 104(r3)				# 1473
+	stfs	f1, 40(r3)				# 1473
+	stw	r23, 48(r3)				# 1473
+	stw	r16, 52(r3)				# 1473
+	stw	r15, 56(r3)				# 1473
+	stw	r12, 60(r3)				# 1473
+	stw	r13, 64(r3)				# 1473
+	stw	r17, 68(r3)				# 1473
+	stw	r8, 72(r3)				# 1473
+	stw	r19, 76(r3)				# 1473
+	stw	r24, 112(r3)				# 1473
+	stw	r14, 84(r3)				# 1473
+	stw	r18, 88(r3)				# 1473
+	stw	r10, 92(r3)				# 1473
+	stw	r22, 96(r3)				# 1473
+	mfspr	r31, 8				# 1473
+	mr	r6, r24				# 1473
+	mr	r5, r25				# 1473
+	mr	r2, r22				# 1473
+	mr	r1, r9				# 1473
+	stw	r31, 116(r3)				# 1473
+	addi	r3, r3, 120				# 1473
+	lwz	r31, 0(r1)				# 1473
+	mtspr	9, r31				# 1473
+	bctr				# 1473
+	addi	r3, r3, -120				# 1473
+	lwz	r31, 116(r3)				# 1473
+	mtspr	8, r31				# 1473
+	lwz	r2, 96(r3)				# 1474
+	slwi	r5, r2, 2				# 1474
+	lwz	r6, 92(r3)				# 1474
+	lfsx	f0, r6, r5				# 1474
+	lis	r31, ha16(l.11981)
+	addi	r31, r31, lo16(l.11981)
+	lfs	f1, 0(r31)				# 1476
+	fcmpu	cr7, f0, f1				# 109
+	bgt	cr7, ble_else.16393				# 109
+	addi	r5, 0, 0
+	b	ble_cont.16394				# 109
+ble_else.16393:
+	addi	r5, 0, 1
+ble_cont.16394:
+	cmpw	cr7, r5, r2				# 1476
+	bne	cr7, beq_else.16395				# 1476
+	addi	r5, 0, 0
+	b	beq_cont.16396				# 1476
+beq_else.16395:
+	lis	r31, ha16(l.12214)
+	addi	r31, r31, lo16(l.12214)
+	lfs	f1, 0(r31)				# 1477
+	fcmpu	cr7, f1, f0				# 109
+	bgt	cr7, ble_else.16397				# 109
+	addi	r5, 0, 0
+	b	ble_cont.16398				# 109
+ble_else.16397:
+	addi	r5, 0, 1
+ble_cont.16398:
+beq_cont.16396:
+	cmpw	cr7, r5, r2				# 1754
+	bne	cr7, beq_else.16399				# 1754
+	b	beq_cont.16400				# 1754
+beq_else.16399:
+	slwi	r5, r2, 2				# 1755
+	lwz	r6, 88(r3)				# 1755
+	lwzx	r5, r6, r5				# 1755
+	slwi	r5, r5, 2				# 1755
+	lwz	r6, 84(r3)				# 1755
+	lwzx	r5, r6, r5				# 1755
+	lwz	r6, 112(r3)				# 521
+	lwz	r6, 0(r6)				# 521
+	lwz	r1, 76(r3)				# 1756
+	stw	r5, 116(r3)				# 1756
+	mfspr	r31, 8				# 1756
+	mr	r2, r5				# 1756
+	mr	r5, r6				# 1756
+	stw	r31, 120(r3)				# 1756
+	addi	r3, r3, 124				# 1756
+	lwz	r31, 0(r1)				# 1756
+	mtspr	9, r31				# 1756
+	bctr				# 1756
+	addi	r3, r3, -124				# 1756
+	lwz	r31, 120(r3)				# 1756
+	mtspr	8, r31				# 1756
+	lwz	r2, 116(r3)				# 1757
+	lwz	r5, 68(r3)				# 1757
+	lwz	r1, 72(r3)				# 1757
+	mfspr	r31, 8				# 1757
+	stw	r31, 120(r3)				# 1757
+	addi	r3, r3, 124				# 1757
+	lwz	r31, 0(r1)				# 1757
+	mtspr	9, r31				# 1757
+	bctr				# 1757
+	addi	r3, r3, -124				# 1757
+	lwz	r31, 120(r3)				# 1757
+	mtspr	8, r31				# 1757
+	lwz	r2, 96(r3)				# 1760
+	slwi	r5, r2, 2				# 1760
+	lwz	r6, 64(r3)				# 1760
+	lwzx	r5, r6, r5				# 1760
+	lwz	r1, 60(r3)				# 1760
+	mfspr	r31, 8				# 1760
+	stw	r31, 120(r3)				# 1760
+	addi	r3, r3, 124				# 1760
+	lwz	r31, 0(r1)				# 1760
+	mtspr	9, r31				# 1760
+	bctr				# 1760
+	addi	r3, r3, -124				# 1760
+	lwz	r31, 120(r3)				# 1760
+	mtspr	8, r31				# 1760
+	lwz	r5, 96(r3)				# 1760
+	cmpw	cr7, r2, r5				# 1760
+	bne	cr7, beq_else.16401				# 1760
+	slwi	r2, r5, 2				# 195
+	lwz	r6, 56(r3)				# 195
+	lfsx	f0, r6, r2				# 195
+	slwi	r2, r5, 2				# 195
+	lwz	r7, 52(r3)				# 195
+	lfsx	f1, r7, r2				# 195
+	fmul	f0, f0, f1				# 195
+	lwz	r2, 48(r3)				# 195
+	slwi	r8, r2, 2				# 195
+	lfsx	f1, r6, r8				# 195
+	slwi	r8, r2, 2				# 195
+	lfsx	f2, r7, r8				# 195
+	fmul	f1, f1, f2				# 195
+	fadd	f0, f0, f1				# 195
+	lwz	r8, 16(r3)				# 195
+	slwi	r9, r8, 2				# 195
+	lfsx	f1, r6, r9				# 195
+	slwi	r6, r8, 2				# 195
+	lfsx	f2, r7, r6				# 195
+	fmul	f1, f1, f2				# 195
+	fadd	f0, f0, f1				# 195
+	fneg	f0, f0				# 107
+	lfs	f1, 40(r3)				# 113
+	fcmpu	cr7, f0, f1				# 113
+	bgt	cr7, ble_else.16403				# 113
+	addi	r6, 0, 0
+	b	ble_cont.16404				# 113
+ble_else.16403:
+	addi	r6, 0, 1
+ble_cont.16404:
+	cmpw	cr7, r6, r5				# 1762
+	bne	cr7, beq_else.16405				# 1762
+	lis	r31, ha16(l.11690)
+	addi	r31, r31, lo16(l.11690)
+	lfs	f0, 0(r31)				# 1762
+	b	beq_cont.16406				# 1762
+beq_else.16405:
+beq_cont.16406:
+	lfs	f1, 104(r3)				# 1763
+	fmul	f0, f1, f0				# 1763
+	lwz	r6, 116(r3)				# 360
+	lwz	r6, 28(r6)				# 360
+	slwi	r7, r5, 2				# 365
+	lfsx	f1, r6, r7				# 365
+	fmul	f0, f0, f1				# 1763
+	slwi	r6, r5, 2				# 205
+	lwz	r7, 28(r3)				# 205
+	lfsx	f1, r7, r6				# 205
+	slwi	r6, r5, 2				# 205
+	lwz	r9, 24(r3)				# 205
+	lfsx	f2, r9, r6				# 205
+	fmul	f2, f0, f2				# 205
+	fadd	f1, f1, f2				# 205
+	slwi	r5, r5, 2				# 205
+	stfsx	f1, r7, r5				# 205
+	slwi	r5, r2, 2				# 206
+	lfsx	f1, r7, r5				# 206
+	slwi	r5, r2, 2				# 206
+	lfsx	f2, r9, r5				# 206
+	fmul	f2, f0, f2				# 206
+	fadd	f1, f1, f2				# 206
+	slwi	r2, r2, 2				# 206
+	stfsx	f1, r7, r2				# 206
+	slwi	r2, r8, 2				# 207
+	lfsx	f1, r7, r2				# 207
+	slwi	r2, r8, 2				# 207
+	lfsx	f2, r9, r2				# 207
+	fmul	f0, f0, f2				# 207
+	fadd	f0, f1, f0				# 207
+	slwi	r2, r8, 2				# 207
+	stfsx	f0, r7, r2				# 207
+	b	beq_cont.16402				# 1760
+beq_else.16401:
+beq_cont.16402:
+beq_cont.16400:
+beq_cont.16378:
+	lwz	r2, 16(r3)				# 1779
+	lwz	r5, 20(r3)				# 1779
+	sub	r7, r5, r2				# 1779
+	lwz	r2, 8(r3)				# 1779
+	lwz	r5, 4(r3)				# 1779
+	lwz	r6, 0(r3)				# 1779
+	lwz	r1, 12(r3)				# 1779
+	lwz	r30, 0(r1)				# 1779
+	mtspr	9, r30
+	bctr				# 1779
+ble_else.16374:
+	blr
+do_without_neighbors.2848:
+	lwz	r6, 44(r1)				# 1855
+	lwz	r7, 40(r1)				# 1855
+	lwz	r8, 36(r1)				# 1855
+	lwz	r9, 32(r1)				# 1855
+	lwz	r10, 28(r1)				# 1855
+	lwz	r11, 24(r1)				# 1855
+	lwz	r12, 20(r1)				# 1855
+	lwz	r13, 16(r1)				# 1855
+	lwz	r14, 12(r1)				# 1855
+	lwz	r15, 8(r1)				# 1855
+	lwz	r16, 4(r1)				# 1855
+	cmpwi	cr7, r5, 4				# 1856
+	bgt	cr7, ble_else.16408				# 1856
+	lwz	r17, 8(r2)				# 468
+	slwi	r18, r5, 2				# 1859
+	lwzx	r17, r17, r18				# 1859
+	cmpw	cr7, r15, r17				# 1859
+	bgt	cr7, ble_else.16409				# 1859
+	lwz	r17, 12(r2)				# 475
+	slwi	r18, r5, 2				# 1861
+	lwzx	r17, r17, r18				# 1861
+	stw	r2, 0(r3)				# 1861
+	stw	r1, 4(r3)				# 1861
+	stw	r16, 8(r3)				# 1861
+	stw	r5, 12(r3)				# 1861
+	cmpw	cr7, r17, r15				# 1861
+	bne	cr7, beq_else.16410				# 1861
+	b	beq_cont.16411				# 1861
+beq_else.16410:
+	lwz	r17, 20(r2)				# 489
+	lwz	r18, 28(r2)				# 512
+	lwz	r19, 4(r2)				# 460
+	lwz	r20, 16(r2)				# 482
+	slwi	r21, r5, 2				# 1824
+	lwzx	r17, r17, r21				# 1824
+	slwi	r21, r15, 2				# 166
+	lfsx	f0, r17, r21				# 166
+	slwi	r21, r15, 2				# 166
+	stfsx	f0, r12, r21				# 166
+	slwi	r21, r16, 2				# 167
+	lfsx	f0, r17, r21				# 167
+	slwi	r21, r16, 2				# 167
+	stfsx	f0, r12, r21				# 167
+	slwi	r21, r13, 2				# 168
+	lfsx	f0, r17, r21				# 168
+	slwi	r17, r13, 2				# 168
+	stfsx	f0, r12, r17				# 168
+	lwz	r17, 24(r2)				# 498
+	slwi	r21, r15, 2				# 500
+	lwzx	r17, r17, r21				# 500
+	slwi	r21, r5, 2				# 1827
+	lwzx	r18, r18, r21				# 1827
+	slwi	r21, r5, 2				# 1828
+	lwzx	r19, r19, r21				# 1828
+	stw	r12, 16(r3)				# 1794
+	stw	r8, 20(r3)				# 1794
+	stw	r20, 24(r3)				# 1794
+	stw	r14, 28(r3)				# 1794
+	stw	r18, 32(r3)				# 1794
+	stw	r10, 36(r3)				# 1794
+	stw	r7, 40(r3)				# 1794
+	stw	r9, 44(r3)				# 1794
+	stw	r13, 48(r3)				# 1794
+	stw	r6, 52(r3)				# 1794
+	stw	r19, 56(r3)				# 1794
+	stw	r15, 60(r3)				# 1794
+	stw	r11, 64(r3)				# 1794
+	stw	r17, 68(r3)				# 1794
+	cmpw	cr7, r17, r15				# 1794
+	bne	cr7, beq_else.16412				# 1794
+	b	beq_cont.16413				# 1794
+beq_else.16412:
+	slwi	r21, r15, 2				# 1795
+	lwzx	r21, r11, r21				# 1795
+	slwi	r22, r15, 2				# 166
+	lfsx	f0, r19, r22				# 166
+	slwi	r22, r15, 2				# 166
+	stfsx	f0, r6, r22				# 166
+	slwi	r22, r16, 2				# 167
+	lfsx	f0, r19, r22				# 167
+	slwi	r22, r16, 2				# 167
+	stfsx	f0, r6, r22				# 167
+	slwi	r22, r13, 2				# 168
+	lfsx	f0, r19, r22				# 168
+	slwi	r22, r13, 2				# 168
+	stfsx	f0, r6, r22				# 168
+	slwi	r22, r15, 2				# 1161
+	lwzx	r22, r9, r22				# 1161
+	sub	r22, r22, r16				# 1161
+	stw	r21, 72(r3)				# 1161
+	mfspr	r31, 8				# 1161
+	mr	r5, r22				# 1161
+	mr	r2, r19				# 1161
+	mr	r1, r7				# 1161
+	stw	r31, 76(r3)				# 1161
+	addi	r3, r3, 80				# 1161
+	lwz	r31, 0(r1)				# 1161
+	mtspr	9, r31				# 1161
+	bctr				# 1161
+	addi	r3, r3, -80				# 1161
+	lwz	r31, 76(r3)				# 1161
+	mtspr	8, r31				# 1161
+	addi	r7, 0, 118
+	lwz	r2, 72(r3)				# 1788
+	lwz	r5, 32(r3)				# 1788
+	lwz	r6, 56(r3)				# 1788
+	lwz	r1, 36(r3)				# 1788
+	mfspr	r31, 8				# 1788
+	stw	r31, 76(r3)				# 1788
+	addi	r3, r3, 80				# 1788
+	lwz	r31, 0(r1)				# 1788
+	mtspr	9, r31				# 1788
+	bctr				# 1788
+	addi	r3, r3, -80				# 1788
+	lwz	r31, 76(r3)				# 1788
+	mtspr	8, r31				# 1788
+beq_cont.16413:
+	lwz	r2, 8(r3)				# 1798
+	lwz	r5, 68(r3)				# 1798
+	cmpw	cr7, r5, r2				# 1798
+	bne	cr7, beq_else.16414				# 1798
+	b	beq_cont.16415				# 1798
+beq_else.16414:
+	slwi	r6, r2, 2				# 1799
+	lwz	r7, 64(r3)				# 1799
+	lwzx	r6, r7, r6				# 1799
+	lwz	r8, 60(r3)				# 166
+	slwi	r9, r8, 2				# 166
+	lwz	r10, 56(r3)				# 166
+	lfsx	f0, r10, r9				# 166
+	slwi	r9, r8, 2				# 166
+	lwz	r11, 52(r3)				# 166
+	stfsx	f0, r11, r9				# 166
+	slwi	r9, r2, 2				# 167
+	lfsx	f0, r10, r9				# 167
+	slwi	r9, r2, 2				# 167
+	stfsx	f0, r11, r9				# 167
+	lwz	r9, 48(r3)				# 168
+	slwi	r12, r9, 2				# 168
+	lfsx	f0, r10, r12				# 168
+	slwi	r12, r9, 2				# 168
+	stfsx	f0, r11, r12				# 168
+	slwi	r12, r8, 2				# 1161
+	lwz	r13, 44(r3)				# 1161
+	lwzx	r12, r13, r12				# 1161
+	sub	r12, r12, r2				# 1161
+	lwz	r1, 40(r3)				# 1161
+	stw	r6, 76(r3)				# 1161
+	mfspr	r31, 8				# 1161
+	mr	r5, r12				# 1161
+	mr	r2, r10				# 1161
+	stw	r31, 80(r3)				# 1161
+	addi	r3, r3, 84				# 1161
+	lwz	r31, 0(r1)				# 1161
+	mtspr	9, r31				# 1161
+	bctr				# 1161
+	addi	r3, r3, -84				# 1161
+	lwz	r31, 80(r3)				# 1161
+	mtspr	8, r31				# 1161
+	addi	r7, 0, 118
+	lwz	r2, 76(r3)				# 1788
+	lwz	r5, 32(r3)				# 1788
+	lwz	r6, 56(r3)				# 1788
+	lwz	r1, 36(r3)				# 1788
+	mfspr	r31, 8				# 1788
+	stw	r31, 80(r3)				# 1788
+	addi	r3, r3, 84				# 1788
+	lwz	r31, 0(r1)				# 1788
+	mtspr	9, r31				# 1788
+	bctr				# 1788
+	addi	r3, r3, -84				# 1788
+	lwz	r31, 80(r3)				# 1788
+	mtspr	8, r31				# 1788
+beq_cont.16415:
+	lwz	r2, 48(r3)				# 1802
+	lwz	r5, 68(r3)				# 1802
+	cmpw	cr7, r5, r2				# 1802
+	bne	cr7, beq_else.16416				# 1802
+	b	beq_cont.16417				# 1802
+beq_else.16416:
+	slwi	r6, r2, 2				# 1803
+	lwz	r7, 64(r3)				# 1803
+	lwzx	r6, r7, r6				# 1803
+	lwz	r8, 60(r3)				# 166
+	slwi	r9, r8, 2				# 166
+	lwz	r10, 56(r3)				# 166
+	lfsx	f0, r10, r9				# 166
+	slwi	r9, r8, 2				# 166
+	lwz	r11, 52(r3)				# 166
+	stfsx	f0, r11, r9				# 166
+	lwz	r9, 8(r3)				# 167
+	slwi	r12, r9, 2				# 167
+	lfsx	f0, r10, r12				# 167
+	slwi	r12, r9, 2				# 167
+	stfsx	f0, r11, r12				# 167
+	slwi	r12, r2, 2				# 168
+	lfsx	f0, r10, r12				# 168
+	slwi	r12, r2, 2				# 168
+	stfsx	f0, r11, r12				# 168
+	slwi	r12, r8, 2				# 1161
+	lwz	r13, 44(r3)				# 1161
+	lwzx	r12, r13, r12				# 1161
+	sub	r12, r12, r9				# 1161
+	lwz	r1, 40(r3)				# 1161
+	stw	r6, 80(r3)				# 1161
+	mfspr	r31, 8				# 1161
+	mr	r5, r12				# 1161
+	mr	r2, r10				# 1161
+	stw	r31, 84(r3)				# 1161
+	addi	r3, r3, 88				# 1161
+	lwz	r31, 0(r1)				# 1161
+	mtspr	9, r31				# 1161
+	bctr				# 1161
+	addi	r3, r3, -88				# 1161
+	lwz	r31, 84(r3)				# 1161
+	mtspr	8, r31				# 1161
+	addi	r7, 0, 118
+	lwz	r2, 80(r3)				# 1788
+	lwz	r5, 32(r3)				# 1788
+	lwz	r6, 56(r3)				# 1788
+	lwz	r1, 36(r3)				# 1788
+	mfspr	r31, 8				# 1788
+	stw	r31, 84(r3)				# 1788
+	addi	r3, r3, 88				# 1788
+	lwz	r31, 0(r1)				# 1788
+	mtspr	9, r31				# 1788
+	bctr				# 1788
+	addi	r3, r3, -88				# 1788
+	lwz	r31, 84(r3)				# 1788
+	mtspr	8, r31				# 1788
+beq_cont.16417:
+	lwz	r2, 28(r3)				# 1806
+	lwz	r5, 68(r3)				# 1806
+	cmpw	cr7, r5, r2				# 1806
+	bne	cr7, beq_else.16418				# 1806
+	b	beq_cont.16419				# 1806
+beq_else.16418:
+	slwi	r2, r2, 2				# 1807
+	lwz	r6, 64(r3)				# 1807
+	lwzx	r2, r6, r2				# 1807
+	lwz	r7, 60(r3)				# 166
+	slwi	r8, r7, 2				# 166
+	lwz	r9, 56(r3)				# 166
+	lfsx	f0, r9, r8				# 166
+	slwi	r8, r7, 2				# 166
+	lwz	r10, 52(r3)				# 166
+	stfsx	f0, r10, r8				# 166
+	lwz	r8, 8(r3)				# 167
+	slwi	r11, r8, 2				# 167
+	lfsx	f0, r9, r11				# 167
+	slwi	r11, r8, 2				# 167
+	stfsx	f0, r10, r11				# 167
+	lwz	r11, 48(r3)				# 168
+	slwi	r12, r11, 2				# 168
+	lfsx	f0, r9, r12				# 168
+	slwi	r12, r11, 2				# 168
+	stfsx	f0, r10, r12				# 168
+	slwi	r12, r7, 2				# 1161
+	lwz	r13, 44(r3)				# 1161
+	lwzx	r12, r13, r12				# 1161
+	sub	r12, r12, r8				# 1161
+	lwz	r1, 40(r3)				# 1161
+	stw	r2, 84(r3)				# 1161
+	mfspr	r31, 8				# 1161
+	mr	r5, r12				# 1161
+	mr	r2, r9				# 1161
+	stw	r31, 88(r3)				# 1161
+	addi	r3, r3, 92				# 1161
+	lwz	r31, 0(r1)				# 1161
+	mtspr	9, r31				# 1161
+	bctr				# 1161
+	addi	r3, r3, -92				# 1161
+	lwz	r31, 88(r3)				# 1161
+	mtspr	8, r31				# 1161
+	addi	r7, 0, 118
+	lwz	r2, 84(r3)				# 1788
+	lwz	r5, 32(r3)				# 1788
+	lwz	r6, 56(r3)				# 1788
+	lwz	r1, 36(r3)				# 1788
+	mfspr	r31, 8				# 1788
+	stw	r31, 88(r3)				# 1788
+	addi	r3, r3, 92				# 1788
+	lwz	r31, 0(r1)				# 1788
+	mtspr	9, r31				# 1788
+	bctr				# 1788
+	addi	r3, r3, -92				# 1788
+	lwz	r31, 88(r3)				# 1788
+	mtspr	8, r31				# 1788
+beq_cont.16419:
+	lwz	r2, 68(r3)				# 1810
+	cmpwi	cr7, r2, 4				# 1810
+	bne	cr7, beq_else.16420				# 1810
+	b	beq_cont.16421				# 1810
+beq_else.16420:
+	lwz	r2, 64(r3)				# 1811
+	lwz	r2, 16(r2)				# 1811
+	lwz	r5, 60(r3)				# 166
+	slwi	r6, r5, 2				# 166
+	lwz	r7, 56(r3)				# 166
+	lfsx	f0, r7, r6				# 166
+	slwi	r6, r5, 2				# 166
+	lwz	r8, 52(r3)				# 166
+	stfsx	f0, r8, r6				# 166
+	lwz	r6, 8(r3)				# 167
+	slwi	r9, r6, 2				# 167
+	lfsx	f0, r7, r9				# 167
+	slwi	r9, r6, 2				# 167
+	stfsx	f0, r8, r9				# 167
+	lwz	r9, 48(r3)				# 168
+	slwi	r10, r9, 2				# 168
+	lfsx	f0, r7, r10				# 168
+	slwi	r10, r9, 2				# 168
+	stfsx	f0, r8, r10				# 168
+	slwi	r8, r5, 2				# 1161
+	lwz	r10, 44(r3)				# 1161
+	lwzx	r8, r10, r8				# 1161
+	sub	r8, r8, r6				# 1161
+	lwz	r1, 40(r3)				# 1161
+	stw	r2, 88(r3)				# 1161
+	mfspr	r31, 8				# 1161
+	mr	r5, r8				# 1161
+	mr	r2, r7				# 1161
+	stw	r31, 92(r3)				# 1161
+	addi	r3, r3, 96				# 1161
+	lwz	r31, 0(r1)				# 1161
+	mtspr	9, r31				# 1161
+	bctr				# 1161
+	addi	r3, r3, -96				# 1161
+	lwz	r31, 92(r3)				# 1161
+	mtspr	8, r31				# 1161
+	addi	r7, 0, 118
+	lwz	r2, 88(r3)				# 1788
+	lwz	r5, 32(r3)				# 1788
+	lwz	r6, 56(r3)				# 1788
+	lwz	r1, 36(r3)				# 1788
+	mfspr	r31, 8				# 1788
+	stw	r31, 92(r3)				# 1788
+	addi	r3, r3, 96				# 1788
+	lwz	r31, 0(r1)				# 1788
+	mtspr	9, r31				# 1788
+	bctr				# 1788
+	addi	r3, r3, -96				# 1788
+	lwz	r31, 92(r3)				# 1788
+	mtspr	8, r31				# 1788
+beq_cont.16421:
+	lwz	r2, 12(r3)				# 1829
+	slwi	r5, r2, 2				# 1829
+	lwz	r6, 24(r3)				# 1829
+	lwzx	r5, r6, r5				# 1829
+	lwz	r6, 60(r3)				# 233
+	slwi	r7, r6, 2				# 233
+	lwz	r8, 20(r3)				# 233
+	lfsx	f0, r8, r7				# 233
+	slwi	r7, r6, 2				# 233
+	lfsx	f1, r5, r7				# 233
+	slwi	r7, r6, 2				# 233
+	lwz	r9, 16(r3)				# 233
+	lfsx	f2, r9, r7				# 233
+	fmul	f1, f1, f2				# 233
+	fadd	f0, f0, f1				# 233
+	slwi	r6, r6, 2				# 233
+	stfsx	f0, r8, r6				# 233
+	lwz	r6, 8(r3)				# 234
+	slwi	r7, r6, 2				# 234
+	lfsx	f0, r8, r7				# 234
+	slwi	r7, r6, 2				# 234
+	lfsx	f1, r5, r7				# 234
+	slwi	r7, r6, 2				# 234
+	lfsx	f2, r9, r7				# 234
+	fmul	f1, f1, f2				# 234
+	fadd	f0, f0, f1				# 234
+	slwi	r7, r6, 2				# 234
+	stfsx	f0, r8, r7				# 234
+	lwz	r7, 48(r3)				# 235
+	slwi	r10, r7, 2				# 235
+	lfsx	f0, r8, r10				# 235
+	slwi	r10, r7, 2				# 235
+	lfsx	f1, r5, r10				# 235
+	slwi	r5, r7, 2				# 235
+	lfsx	f2, r9, r5				# 235
+	fmul	f1, f1, f2				# 235
+	fadd	f0, f0, f1				# 235
+	slwi	r5, r7, 2				# 235
+	stfsx	f0, r8, r5				# 235
+beq_cont.16411:
+	lwz	r2, 8(r3)				# 1864
+	lwz	r5, 12(r3)				# 1864
+	add	r5, r5, r2				# 1864
+	lwz	r2, 0(r3)				# 1864
+	lwz	r1, 4(r3)				# 1864
+	lwz	r30, 0(r1)				# 1864
+	mtspr	9, r30
+	bctr				# 1864
+ble_else.16409:
+	blr
+ble_else.16408:
+	blr
+try_exploit_neighbors.2864:
+	lwz	r10, 24(r1)				# 1904
+	lwz	r11, 20(r1)				# 1904
+	lwz	r12, 16(r1)				# 1904
+	lwz	r13, 12(r1)				# 1904
+	lwz	r14, 8(r1)				# 1904
+	lwz	r15, 4(r1)				# 1904
+	slwi	r16, r2, 2				# 1905
+	lwzx	r16, r7, r16				# 1905
+	cmpwi	cr7, r9, 4				# 1906
+	bgt	cr7, ble_else.16424				# 1906
+	lwz	r17, 8(r16)				# 468
+	slwi	r18, r9, 2				# 1884
+	lwzx	r17, r17, r18				# 1884
+	cmpw	cr7, r14, r17				# 1909
+	bgt	cr7, ble_else.16425				# 1909
+	slwi	r17, r2, 2				# 1889
+	lwzx	r17, r7, r17				# 1889
+	lwz	r17, 8(r17)				# 468
+	slwi	r18, r9, 2				# 1884
+	lwzx	r17, r17, r18				# 1884
+	slwi	r18, r2, 2				# 1891
+	lwzx	r18, r6, r18				# 1891
+	lwz	r18, 8(r18)				# 468
+	slwi	r19, r9, 2				# 1884
+	lwzx	r18, r18, r19				# 1884
+	cmpw	cr7, r18, r17				# 1891
+	bne	cr7, beq_else.16426				# 1891
+	slwi	r18, r2, 2				# 1892
+	lwzx	r18, r8, r18				# 1892
+	lwz	r18, 8(r18)				# 468
+	slwi	r19, r9, 2				# 1884
+	lwzx	r18, r18, r19				# 1884
+	cmpw	cr7, r18, r17				# 1892
+	bne	cr7, beq_else.16428				# 1892
+	sub	r18, r2, r15				# 1893
+	slwi	r18, r18, 2				# 1893
+	lwzx	r18, r7, r18				# 1893
+	lwz	r18, 8(r18)				# 468
+	slwi	r19, r9, 2				# 1884
+	lwzx	r18, r18, r19				# 1884
+	cmpw	cr7, r18, r17				# 1893
+	bne	cr7, beq_else.16430				# 1893
+	add	r18, r2, r15				# 1894
+	slwi	r18, r18, 2				# 1894
+	lwzx	r18, r7, r18				# 1894
+	lwz	r18, 8(r18)				# 468
+	slwi	r19, r9, 2				# 1884
+	lwzx	r18, r18, r19				# 1884
+	cmpw	cr7, r18, r17				# 1894
+	bne	cr7, beq_else.16432				# 1894
 	addi	r17, 0, 1
-	b	beq_cont.18106				# 1882
-beq_else.18105:
+	b	beq_cont.16433				# 1894
+beq_else.16432:
 	addi	r17, 0, 0
-beq_cont.18106:
-	b	beq_cont.18104				# 1881
-beq_else.18103:
+beq_cont.16433:
+	b	beq_cont.16431				# 1893
+beq_else.16430:
 	addi	r17, 0, 0
-beq_cont.18104:
-	b	beq_cont.18102				# 1880
-beq_else.18101:
+beq_cont.16431:
+	b	beq_cont.16429				# 1892
+beq_else.16428:
 	addi	r17, 0, 0
-beq_cont.18102:
-	b	beq_cont.18100				# 1879
-beq_else.18099:
+beq_cont.16429:
+	b	beq_cont.16427				# 1891
+beq_else.16426:
 	addi	r17, 0, 0
-beq_cont.18100:
-	cmpw	cr7, r17, r14				# 1899
-	bne	cr7, beq_else.18107				# 1899
-	slwi	r2, r2, 2				# 1911
-	lwzx	r2, r7, r2				# 1911
-	mr	r5, r9				# 1911
-	mr	r30, r11				# 1911
-	lwz	r29, 0(r30)				# 1911
-	mtspr	9, r29
-	bctr				# 1911
-beq_else.18107:
-	lwz	r11, 12(r16)				# 462
-	slwi	r16, r9, 2				# 1903
-	lwzx	r11, r11, r16				# 1903
-	cmpw	cr7, r11, r14				# 1903
-	bne	cr7, beq_else.18108				# 1903
-	b	beq_cont.18109				# 1903
-beq_else.18108:
-	slwi	r11, r2, 2				# 1825
-	lwzx	r11, r6, r11				# 1825
-	lwz	r11, 20(r11)				# 476
-	sub	r16, r2, r15				# 1826
-	slwi	r16, r16, 2				# 1826
-	lwzx	r16, r7, r16				# 1826
-	lwz	r16, 20(r16)				# 476
-	slwi	r17, r2, 2				# 1827
-	lwzx	r17, r7, r17				# 1827
-	lwz	r17, 20(r17)				# 476
-	add	r18, r2, r15				# 1828
-	slwi	r18, r18, 2				# 1828
-	lwzx	r18, r7, r18				# 1828
-	lwz	r18, 20(r18)				# 476
-	slwi	r19, r2, 2				# 1829
-	lwzx	r19, r8, r19				# 1829
-	lwz	r19, 20(r19)				# 476
-	slwi	r20, r9, 2				# 1831
-	lwzx	r11, r11, r20				# 1831
-	slwi	r20, r14, 2				# 153
-	lfsx	f0, r11, r20				# 153
-	slwi	r20, r14, 2				# 153
-	stfsx	f0, r12, r20				# 153
-	slwi	r20, r15, 2				# 154
-	lfsx	f0, r11, r20				# 154
-	slwi	r20, r15, 2				# 154
-	stfsx	f0, r12, r20				# 154
-	slwi	r20, r13, 2				# 155
-	lfsx	f0, r11, r20				# 155
-	slwi	r11, r13, 2				# 155
-	stfsx	f0, r12, r11				# 155
-	slwi	r11, r9, 2				# 1832
-	lwzx	r11, r16, r11				# 1832
-	slwi	r16, r14, 2				# 199
-	lfsx	f0, r12, r16				# 199
-	slwi	r16, r14, 2				# 199
-	lfsx	f1, r11, r16				# 199
-	fadd	f0, f0, f1				# 199
-	slwi	r16, r14, 2				# 199
-	stfsx	f0, r12, r16				# 199
-	slwi	r16, r15, 2				# 200
-	lfsx	f0, r12, r16				# 200
-	slwi	r16, r15, 2				# 200
-	lfsx	f1, r11, r16				# 200
-	fadd	f0, f0, f1				# 200
-	slwi	r16, r15, 2				# 200
-	stfsx	f0, r12, r16				# 200
-	slwi	r16, r13, 2				# 201
-	lfsx	f0, r12, r16				# 201
-	slwi	r16, r13, 2				# 201
-	lfsx	f1, r11, r16				# 201
-	fadd	f0, f0, f1				# 201
-	slwi	r11, r13, 2				# 201
-	stfsx	f0, r12, r11				# 201
-	slwi	r11, r9, 2				# 1833
-	lwzx	r11, r17, r11				# 1833
-	slwi	r16, r14, 2				# 199
-	lfsx	f0, r12, r16				# 199
-	slwi	r16, r14, 2				# 199
-	lfsx	f1, r11, r16				# 199
-	fadd	f0, f0, f1				# 199
-	slwi	r16, r14, 2				# 199
-	stfsx	f0, r12, r16				# 199
-	slwi	r16, r15, 2				# 200
-	lfsx	f0, r12, r16				# 200
-	slwi	r16, r15, 2				# 200
-	lfsx	f1, r11, r16				# 200
-	fadd	f0, f0, f1				# 200
-	slwi	r16, r15, 2				# 200
-	stfsx	f0, r12, r16				# 200
-	slwi	r16, r13, 2				# 201
-	lfsx	f0, r12, r16				# 201
-	slwi	r16, r13, 2				# 201
-	lfsx	f1, r11, r16				# 201
-	fadd	f0, f0, f1				# 201
-	slwi	r11, r13, 2				# 201
-	stfsx	f0, r12, r11				# 201
-	slwi	r11, r9, 2				# 1834
-	lwzx	r11, r18, r11				# 1834
-	slwi	r16, r14, 2				# 199
-	lfsx	f0, r12, r16				# 199
-	slwi	r16, r14, 2				# 199
-	lfsx	f1, r11, r16				# 199
-	fadd	f0, f0, f1				# 199
-	slwi	r16, r14, 2				# 199
-	stfsx	f0, r12, r16				# 199
-	slwi	r16, r15, 2				# 200
-	lfsx	f0, r12, r16				# 200
-	slwi	r16, r15, 2				# 200
-	lfsx	f1, r11, r16				# 200
-	fadd	f0, f0, f1				# 200
-	slwi	r16, r15, 2				# 200
-	stfsx	f0, r12, r16				# 200
-	slwi	r16, r13, 2				# 201
-	lfsx	f0, r12, r16				# 201
-	slwi	r16, r13, 2				# 201
-	lfsx	f1, r11, r16				# 201
-	fadd	f0, f0, f1				# 201
-	slwi	r11, r13, 2				# 201
-	stfsx	f0, r12, r11				# 201
-	slwi	r11, r9, 2				# 1835
-	lwzx	r11, r19, r11				# 1835
-	slwi	r16, r14, 2				# 199
-	lfsx	f0, r12, r16				# 199
-	slwi	r16, r14, 2				# 199
-	lfsx	f1, r11, r16				# 199
-	fadd	f0, f0, f1				# 199
-	slwi	r16, r14, 2				# 199
-	stfsx	f0, r12, r16				# 199
-	slwi	r16, r15, 2				# 200
-	lfsx	f0, r12, r16				# 200
-	slwi	r16, r15, 2				# 200
-	lfsx	f1, r11, r16				# 200
-	fadd	f0, f0, f1				# 200
-	slwi	r16, r15, 2				# 200
-	stfsx	f0, r12, r16				# 200
-	slwi	r16, r13, 2				# 201
-	lfsx	f0, r12, r16				# 201
-	slwi	r16, r13, 2				# 201
-	lfsx	f1, r11, r16				# 201
-	fadd	f0, f0, f1				# 201
-	slwi	r11, r13, 2				# 201
-	stfsx	f0, r12, r11				# 201
+beq_cont.16427:
+	cmpw	cr7, r17, r14				# 1911
+	bne	cr7, beq_else.16434				# 1911
+	slwi	r2, r2, 2				# 1923
+	lwzx	r2, r7, r2				# 1923
+	mr	r5, r9				# 1923
+	mr	r1, r11				# 1923
+	lwz	r30, 0(r1)				# 1923
+	mtspr	9, r30
+	bctr				# 1923
+beq_else.16434:
+	lwz	r11, 12(r16)				# 475
+	slwi	r16, r9, 2				# 1915
+	lwzx	r11, r11, r16				# 1915
+	cmpw	cr7, r11, r14				# 1915
+	bne	cr7, beq_else.16435				# 1915
+	b	beq_cont.16436				# 1915
+beq_else.16435:
 	slwi	r11, r2, 2				# 1837
-	lwzx	r11, r7, r11				# 1837
-	lwz	r11, 16(r11)				# 469
-	slwi	r16, r9, 2				# 1838
-	lwzx	r11, r11, r16				# 1838
-	slwi	r16, r14, 2				# 220
-	lfsx	f0, r10, r16				# 220
-	slwi	r16, r14, 2				# 220
-	lfsx	f1, r11, r16				# 220
-	slwi	r16, r14, 2				# 220
-	lfsx	f2, r12, r16				# 220
-	fmul	f1, f1, f2				# 220
-	fadd	f0, f0, f1				# 220
-	slwi	r14, r14, 2				# 220
-	stfsx	f0, r10, r14				# 220
-	slwi	r14, r15, 2				# 221
-	lfsx	f0, r10, r14				# 221
-	slwi	r14, r15, 2				# 221
-	lfsx	f1, r11, r14				# 221
-	slwi	r14, r15, 2				# 221
-	lfsx	f2, r12, r14				# 221
-	fmul	f1, f1, f2				# 221
-	fadd	f0, f0, f1				# 221
-	slwi	r14, r15, 2				# 221
-	stfsx	f0, r10, r14				# 221
-	slwi	r14, r13, 2				# 222
-	lfsx	f0, r10, r14				# 222
-	slwi	r14, r13, 2				# 222
-	lfsx	f1, r11, r14				# 222
-	slwi	r11, r13, 2				# 222
-	lfsx	f2, r12, r11				# 222
-	fmul	f1, f1, f2				# 222
-	fadd	f0, f0, f1				# 222
-	slwi	r11, r13, 2				# 222
-	stfsx	f0, r10, r11				# 222
-beq_cont.18109:
-	add	r9, r9, r15				# 1908
-	lwz	r29, 0(r30)				# 1908
-	mtspr	9, r29
-	bctr				# 1908
-ble_else.18098:
+	lwzx	r11, r6, r11				# 1837
+	lwz	r11, 20(r11)				# 489
+	sub	r16, r2, r15				# 1838
+	slwi	r16, r16, 2				# 1838
+	lwzx	r16, r7, r16				# 1838
+	lwz	r16, 20(r16)				# 489
+	slwi	r17, r2, 2				# 1839
+	lwzx	r17, r7, r17				# 1839
+	lwz	r17, 20(r17)				# 489
+	add	r18, r2, r15				# 1840
+	slwi	r18, r18, 2				# 1840
+	lwzx	r18, r7, r18				# 1840
+	lwz	r18, 20(r18)				# 489
+	slwi	r19, r2, 2				# 1841
+	lwzx	r19, r8, r19				# 1841
+	lwz	r19, 20(r19)				# 489
+	slwi	r20, r9, 2				# 1843
+	lwzx	r11, r11, r20				# 1843
+	slwi	r20, r14, 2				# 166
+	lfsx	f0, r11, r20				# 166
+	slwi	r20, r14, 2				# 166
+	stfsx	f0, r12, r20				# 166
+	slwi	r20, r15, 2				# 167
+	lfsx	f0, r11, r20				# 167
+	slwi	r20, r15, 2				# 167
+	stfsx	f0, r12, r20				# 167
+	slwi	r20, r13, 2				# 168
+	lfsx	f0, r11, r20				# 168
+	slwi	r11, r13, 2				# 168
+	stfsx	f0, r12, r11				# 168
+	slwi	r11, r9, 2				# 1844
+	lwzx	r11, r16, r11				# 1844
+	slwi	r16, r14, 2				# 212
+	lfsx	f0, r12, r16				# 212
+	slwi	r16, r14, 2				# 212
+	lfsx	f1, r11, r16				# 212
+	fadd	f0, f0, f1				# 212
+	slwi	r16, r14, 2				# 212
+	stfsx	f0, r12, r16				# 212
+	slwi	r16, r15, 2				# 213
+	lfsx	f0, r12, r16				# 213
+	slwi	r16, r15, 2				# 213
+	lfsx	f1, r11, r16				# 213
+	fadd	f0, f0, f1				# 213
+	slwi	r16, r15, 2				# 213
+	stfsx	f0, r12, r16				# 213
+	slwi	r16, r13, 2				# 214
+	lfsx	f0, r12, r16				# 214
+	slwi	r16, r13, 2				# 214
+	lfsx	f1, r11, r16				# 214
+	fadd	f0, f0, f1				# 214
+	slwi	r11, r13, 2				# 214
+	stfsx	f0, r12, r11				# 214
+	slwi	r11, r9, 2				# 1845
+	lwzx	r11, r17, r11				# 1845
+	slwi	r16, r14, 2				# 212
+	lfsx	f0, r12, r16				# 212
+	slwi	r16, r14, 2				# 212
+	lfsx	f1, r11, r16				# 212
+	fadd	f0, f0, f1				# 212
+	slwi	r16, r14, 2				# 212
+	stfsx	f0, r12, r16				# 212
+	slwi	r16, r15, 2				# 213
+	lfsx	f0, r12, r16				# 213
+	slwi	r16, r15, 2				# 213
+	lfsx	f1, r11, r16				# 213
+	fadd	f0, f0, f1				# 213
+	slwi	r16, r15, 2				# 213
+	stfsx	f0, r12, r16				# 213
+	slwi	r16, r13, 2				# 214
+	lfsx	f0, r12, r16				# 214
+	slwi	r16, r13, 2				# 214
+	lfsx	f1, r11, r16				# 214
+	fadd	f0, f0, f1				# 214
+	slwi	r11, r13, 2				# 214
+	stfsx	f0, r12, r11				# 214
+	slwi	r11, r9, 2				# 1846
+	lwzx	r11, r18, r11				# 1846
+	slwi	r16, r14, 2				# 212
+	lfsx	f0, r12, r16				# 212
+	slwi	r16, r14, 2				# 212
+	lfsx	f1, r11, r16				# 212
+	fadd	f0, f0, f1				# 212
+	slwi	r16, r14, 2				# 212
+	stfsx	f0, r12, r16				# 212
+	slwi	r16, r15, 2				# 213
+	lfsx	f0, r12, r16				# 213
+	slwi	r16, r15, 2				# 213
+	lfsx	f1, r11, r16				# 213
+	fadd	f0, f0, f1				# 213
+	slwi	r16, r15, 2				# 213
+	stfsx	f0, r12, r16				# 213
+	slwi	r16, r13, 2				# 214
+	lfsx	f0, r12, r16				# 214
+	slwi	r16, r13, 2				# 214
+	lfsx	f1, r11, r16				# 214
+	fadd	f0, f0, f1				# 214
+	slwi	r11, r13, 2				# 214
+	stfsx	f0, r12, r11				# 214
+	slwi	r11, r9, 2				# 1847
+	lwzx	r11, r19, r11				# 1847
+	slwi	r16, r14, 2				# 212
+	lfsx	f0, r12, r16				# 212
+	slwi	r16, r14, 2				# 212
+	lfsx	f1, r11, r16				# 212
+	fadd	f0, f0, f1				# 212
+	slwi	r16, r14, 2				# 212
+	stfsx	f0, r12, r16				# 212
+	slwi	r16, r15, 2				# 213
+	lfsx	f0, r12, r16				# 213
+	slwi	r16, r15, 2				# 213
+	lfsx	f1, r11, r16				# 213
+	fadd	f0, f0, f1				# 213
+	slwi	r16, r15, 2				# 213
+	stfsx	f0, r12, r16				# 213
+	slwi	r16, r13, 2				# 214
+	lfsx	f0, r12, r16				# 214
+	slwi	r16, r13, 2				# 214
+	lfsx	f1, r11, r16				# 214
+	fadd	f0, f0, f1				# 214
+	slwi	r11, r13, 2				# 214
+	stfsx	f0, r12, r11				# 214
+	slwi	r11, r2, 2				# 1849
+	lwzx	r11, r7, r11				# 1849
+	lwz	r11, 16(r11)				# 482
+	slwi	r16, r9, 2				# 1850
+	lwzx	r11, r11, r16				# 1850
+	slwi	r16, r14, 2				# 233
+	lfsx	f0, r10, r16				# 233
+	slwi	r16, r14, 2				# 233
+	lfsx	f1, r11, r16				# 233
+	slwi	r16, r14, 2				# 233
+	lfsx	f2, r12, r16				# 233
+	fmul	f1, f1, f2				# 233
+	fadd	f0, f0, f1				# 233
+	slwi	r14, r14, 2				# 233
+	stfsx	f0, r10, r14				# 233
+	slwi	r14, r15, 2				# 234
+	lfsx	f0, r10, r14				# 234
+	slwi	r14, r15, 2				# 234
+	lfsx	f1, r11, r14				# 234
+	slwi	r14, r15, 2				# 234
+	lfsx	f2, r12, r14				# 234
+	fmul	f1, f1, f2				# 234
+	fadd	f0, f0, f1				# 234
+	slwi	r14, r15, 2				# 234
+	stfsx	f0, r10, r14				# 234
+	slwi	r14, r13, 2				# 235
+	lfsx	f0, r10, r14				# 235
+	slwi	r14, r13, 2				# 235
+	lfsx	f1, r11, r14				# 235
+	slwi	r11, r13, 2				# 235
+	lfsx	f2, r12, r11				# 235
+	fmul	f1, f1, f2				# 235
+	fadd	f0, f0, f1				# 235
+	slwi	r11, r13, 2				# 235
+	stfsx	f0, r10, r11				# 235
+beq_cont.16436:
+	add	r9, r9, r15				# 1920
+	lwz	r30, 0(r1)				# 1920
+	mtspr	9, r30
+	bctr				# 1920
+ble_else.16425:
 	blr
-ble_else.18097:
+ble_else.16424:
 	blr
-pretrace_diffuse_rays.2859:
-	lwz	r6, 40(r30)				# 1951
-	lwz	r7, 36(r30)				# 1951
-	lwz	r8, 32(r30)				# 1951
-	lwz	r9, 28(r30)				# 1951
-	lwz	r10, 24(r30)				# 1951
-	lwz	r11, 20(r30)				# 1951
-	lwz	r12, 16(r30)				# 1951
-	lwz	r13, 12(r30)				# 1951
-	lwz	r14, 8(r30)				# 1951
-	lfs	f0, 4(r30)				# 1951
-	cmpwi	cr7, r5, 4				# 1952
-	bgt	cr7, ble_else.18112				# 1952
-	lwz	r15, 8(r2)				# 455
-	slwi	r16, r5, 2				# 1872
-	lwzx	r15, r15, r16				# 1872
-	cmpw	cr7, r13, r15				# 1956
-	bgt	cr7, ble_else.18113				# 1956
-	lwz	r15, 12(r2)				# 462
-	slwi	r16, r5, 2				# 1959
-	lwzx	r15, r15, r16				# 1959
-	stw	r30, 0(r3)				# 1959
-	stw	r14, 4(r3)				# 1959
-	stw	r5, 8(r3)				# 1959
-	cmpw	cr7, r15, r13				# 1959
-	bne	cr7, beq_else.18114				# 1959
-	b	beq_cont.18115				# 1959
-beq_else.18114:
-	lwz	r15, 24(r2)				# 485
-	slwi	r16, r13, 2				# 487
-	lwzx	r15, r15, r16				# 487
-	slwi	r16, r13, 2				# 141
-	stfsx	f0, r11, r16				# 141
-	slwi	r16, r14, 2				# 142
-	stfsx	f0, r11, r16				# 142
-	slwi	r16, r12, 2				# 143
-	stfsx	f0, r11, r16				# 143
-	lwz	r16, 28(r2)				# 499
-	lwz	r17, 4(r2)				# 447
-	slwi	r15, r15, 2				# 1967
-	lwzx	r10, r10, r15				# 1967
-	slwi	r15, r5, 2				# 1968
-	lwzx	r15, r16, r15				# 1968
-	slwi	r16, r5, 2				# 1969
-	lwzx	r16, r17, r16				# 1969
-	slwi	r17, r13, 2				# 153
-	lfsx	f0, r16, r17				# 153
-	slwi	r17, r13, 2				# 153
-	stfsx	f0, r6, r17				# 153
-	slwi	r17, r14, 2				# 154
-	lfsx	f0, r16, r17				# 154
-	slwi	r17, r14, 2				# 154
-	stfsx	f0, r6, r17				# 154
-	slwi	r17, r12, 2				# 155
-	lfsx	f0, r16, r17				# 155
-	slwi	r17, r12, 2				# 155
-	stfsx	f0, r6, r17				# 155
-	slwi	r6, r13, 2				# 1148
-	lwzx	r6, r8, r6				# 1148
-	sub	r6, r6, r14				# 1148
-	stw	r12, 12(r3)				# 1148
-	stw	r11, 16(r3)				# 1148
-	stw	r13, 20(r3)				# 1148
-	stw	r2, 24(r3)				# 1148
-	stw	r16, 28(r3)				# 1148
-	stw	r15, 32(r3)				# 1148
-	stw	r10, 36(r3)				# 1148
-	stw	r9, 40(r3)				# 1148
-	mfspr	r31, 8				# 1148
-	mr	r5, r6				# 1148
-	mr	r2, r16				# 1148
-	mr	r30, r7				# 1148
-	stw	r31, 44(r3)				# 1148
-	addi	r3, r3, 48				# 1148
-	lwz	r31, 0(r30)				# 1148
-	mtspr	9, r31				# 1148
-	bctrl				# 1148
-	addi	r3, r3, -48				# 1148
-	lwz	r31, 44(r3)				# 1148
-	mtspr	8, r31				# 1148
+pretrace_diffuse_rays.2877:
+	lwz	r6, 40(r1)				# 1963
+	lwz	r7, 36(r1)				# 1963
+	lwz	r8, 32(r1)				# 1963
+	lwz	r9, 28(r1)				# 1963
+	lwz	r10, 24(r1)				# 1963
+	lwz	r11, 20(r1)				# 1963
+	lwz	r12, 16(r1)				# 1963
+	lwz	r13, 12(r1)				# 1963
+	lwz	r14, 8(r1)				# 1963
+	lfs	f0, 4(r1)				# 1963
+	cmpwi	cr7, r5, 4				# 1964
+	bgt	cr7, ble_else.16439				# 1964
+	lwz	r15, 8(r2)				# 468
+	slwi	r16, r5, 2				# 1884
+	lwzx	r15, r15, r16				# 1884
+	cmpw	cr7, r13, r15				# 1968
+	bgt	cr7, ble_else.16440				# 1968
+	lwz	r15, 12(r2)				# 475
+	slwi	r16, r5, 2				# 1971
+	lwzx	r15, r15, r16				# 1971
+	stw	r1, 0(r3)				# 1971
+	stw	r14, 4(r3)				# 1971
+	stw	r5, 8(r3)				# 1971
+	cmpw	cr7, r15, r13				# 1971
+	bne	cr7, beq_else.16441				# 1971
+	b	beq_cont.16442				# 1971
+beq_else.16441:
+	lwz	r15, 24(r2)				# 498
+	slwi	r16, r13, 2				# 500
+	lwzx	r15, r15, r16				# 500
+	slwi	r16, r13, 2				# 154
+	stfsx	f0, r11, r16				# 154
+	slwi	r16, r14, 2				# 155
+	stfsx	f0, r11, r16				# 155
+	slwi	r16, r12, 2				# 156
+	stfsx	f0, r11, r16				# 156
+	lwz	r16, 28(r2)				# 512
+	lwz	r17, 4(r2)				# 460
+	slwi	r15, r15, 2				# 1979
+	lwzx	r10, r10, r15				# 1979
+	slwi	r15, r5, 2				# 1980
+	lwzx	r15, r16, r15				# 1980
+	slwi	r16, r5, 2				# 1981
+	lwzx	r16, r17, r16				# 1981
+	slwi	r17, r13, 2				# 166
+	lfsx	f0, r16, r17				# 166
+	slwi	r17, r13, 2				# 166
+	stfsx	f0, r6, r17				# 166
+	slwi	r17, r14, 2				# 167
+	lfsx	f0, r16, r17				# 167
+	slwi	r17, r14, 2				# 167
+	stfsx	f0, r6, r17				# 167
+	slwi	r17, r12, 2				# 168
+	lfsx	f0, r16, r17				# 168
+	slwi	r17, r12, 2				# 168
+	stfsx	f0, r6, r17				# 168
+	slwi	r6, r13, 2				# 1161
+	lwzx	r6, r8, r6				# 1161
+	sub	r6, r6, r14				# 1161
+	stw	r12, 12(r3)				# 1161
+	stw	r11, 16(r3)				# 1161
+	stw	r13, 20(r3)				# 1161
+	stw	r2, 24(r3)				# 1161
+	stw	r16, 28(r3)				# 1161
+	stw	r15, 32(r3)				# 1161
+	stw	r10, 36(r3)				# 1161
+	stw	r9, 40(r3)				# 1161
+	mfspr	r31, 8				# 1161
+	mr	r5, r6				# 1161
+	mr	r2, r16				# 1161
+	mr	r1, r7				# 1161
+	stw	r31, 44(r3)				# 1161
+	addi	r3, r3, 48				# 1161
+	lwz	r31, 0(r1)				# 1161
+	mtspr	9, r31				# 1161
+	bctr				# 1161
+	addi	r3, r3, -48				# 1161
+	lwz	r31, 44(r3)				# 1161
+	mtspr	8, r31				# 1161
 	addi	r7, 0, 118
-	lwz	r2, 36(r3)				# 1776
-	lwz	r5, 32(r3)				# 1776
-	lwz	r6, 28(r3)				# 1776
-	lwz	r30, 40(r3)				# 1776
-	mfspr	r31, 8				# 1776
-	stw	r31, 44(r3)				# 1776
-	addi	r3, r3, 48				# 1776
-	lwz	r31, 0(r30)				# 1776
-	mtspr	9, r31				# 1776
-	bctrl				# 1776
-	addi	r3, r3, -48				# 1776
-	lwz	r31, 44(r3)				# 1776
-	mtspr	8, r31				# 1776
-	lwz	r2, 24(r3)				# 476
-	lwz	r5, 20(r2)				# 476
-	lwz	r6, 8(r3)				# 1971
-	slwi	r7, r6, 2				# 1971
-	lwzx	r5, r5, r7				# 1971
-	lwz	r7, 20(r3)				# 153
-	slwi	r8, r7, 2				# 153
-	lwz	r9, 16(r3)				# 153
-	lfsx	f0, r9, r8				# 153
-	slwi	r7, r7, 2				# 153
-	stfsx	f0, r5, r7				# 153
-	lwz	r7, 4(r3)				# 154
-	slwi	r8, r7, 2				# 154
-	lfsx	f0, r9, r8				# 154
-	slwi	r8, r7, 2				# 154
-	stfsx	f0, r5, r8				# 154
-	lwz	r8, 12(r3)				# 155
-	slwi	r10, r8, 2				# 155
-	lfsx	f0, r9, r10				# 155
-	slwi	r8, r8, 2				# 155
-	stfsx	f0, r5, r8				# 155
-beq_cont.18115:
-	lwz	r5, 4(r3)				# 1973
-	lwz	r6, 8(r3)				# 1973
-	add	r5, r6, r5				# 1973
-	lwz	r30, 0(r3)				# 1973
-	lwz	r29, 0(r30)				# 1973
-	mtspr	9, r29
-	bctr				# 1973
-ble_else.18113:
+	lwz	r2, 36(r3)				# 1788
+	lwz	r5, 32(r3)				# 1788
+	lwz	r6, 28(r3)				# 1788
+	lwz	r1, 40(r3)				# 1788
+	mfspr	r31, 8				# 1788
+	stw	r31, 44(r3)				# 1788
+	addi	r3, r3, 48				# 1788
+	lwz	r31, 0(r1)				# 1788
+	mtspr	9, r31				# 1788
+	bctr				# 1788
+	addi	r3, r3, -48				# 1788
+	lwz	r31, 44(r3)				# 1788
+	mtspr	8, r31				# 1788
+	lwz	r2, 24(r3)				# 489
+	lwz	r5, 20(r2)				# 489
+	lwz	r6, 8(r3)				# 1983
+	slwi	r7, r6, 2				# 1983
+	lwzx	r5, r5, r7				# 1983
+	lwz	r7, 20(r3)				# 166
+	slwi	r8, r7, 2				# 166
+	lwz	r9, 16(r3)				# 166
+	lfsx	f0, r9, r8				# 166
+	slwi	r7, r7, 2				# 166
+	stfsx	f0, r5, r7				# 166
+	lwz	r7, 4(r3)				# 167
+	slwi	r8, r7, 2				# 167
+	lfsx	f0, r9, r8				# 167
+	slwi	r8, r7, 2				# 167
+	stfsx	f0, r5, r8				# 167
+	lwz	r8, 12(r3)				# 168
+	slwi	r10, r8, 2				# 168
+	lfsx	f0, r9, r10				# 168
+	slwi	r8, r8, 2				# 168
+	stfsx	f0, r5, r8				# 168
+beq_cont.16442:
+	lwz	r5, 4(r3)				# 1985
+	lwz	r6, 8(r3)				# 1985
+	add	r5, r6, r5				# 1985
+	lwz	r1, 0(r3)				# 1985
+	lwz	r30, 0(r1)				# 1985
+	mtspr	9, r30
+	bctr				# 1985
+ble_else.16440:
 	blr
-ble_else.18112:
+ble_else.16439:
 	blr
-pretrace_pixels.2862:
-	lwz	r7, 56(r30)				# 1980
-	lwz	r8, 52(r30)				# 1980
-	lwz	r9, 48(r30)				# 1980
-	lwz	r10, 44(r30)				# 1980
-	lwz	r11, 40(r30)				# 1980
-	lwz	r12, 36(r30)				# 1980
-	lwz	r13, 32(r30)				# 1980
-	lwz	r14, 28(r30)				# 1980
-	lwz	r15, 24(r30)				# 1980
-	lwz	r16, 20(r30)				# 1980
-	lwz	r17, 16(r30)				# 1980
-	lwz	r18, 12(r30)				# 1980
-	lwz	r19, 8(r30)				# 1980
-	lfs	f3, 4(r30)				# 1980
-	cmpw	cr7, r18, r5				# 1981
-	bgt	cr7, ble_else.18118				# 1981
-	slwi	r20, r18, 2				# 1983
-	lfsx	f4, r11, r20				# 1983
-	slwi	r11, r18, 2				# 1983
-	lwzx	r11, r15, r11				# 1983
-	sub	r11, r5, r11				# 1983
-	stw	r30, 0(r3)				# 1983
-	stw	r16, 4(r3)				# 1983
-	stw	r14, 8(r3)				# 1983
-	stw	r6, 12(r3)				# 1983
-	stw	r8, 16(r3)				# 1983
-	stw	r2, 20(r3)				# 1983
-	stw	r5, 24(r3)				# 1983
-	stw	r9, 28(r3)				# 1983
-	stw	r7, 32(r3)				# 1983
-	stw	r12, 36(r3)				# 1983
-	stfs	f3, 40(r3)				# 1983
-	stfs	f2, 48(r3)				# 1983
-	stw	r17, 56(r3)				# 1983
-	stfs	f1, 64(r3)				# 1983
-	stw	r19, 72(r3)				# 1983
-	stw	r13, 76(r3)				# 1983
-	stfs	f0, 80(r3)				# 1983
-	stw	r10, 88(r3)				# 1983
-	stw	r18, 92(r3)				# 1983
-	stfs	f4, 96(r3)				# 1983
-	mfspr	r31, 8				# 1983
-	mr	r2, r11				# 1983
-	stw	r31, 104(r3)				# 1983
-	addi	r3, r3, 108				# 1983
-	bl	min_caml_float_of_int				# 1983
-	addi	r3, r3, -108				# 1983
-	lwz	r31, 104(r3)				# 1983
-	mtspr	8, r31				# 1983
-	lfs	f1, 96(r3)				# 1983
-	fmul	f0, f1, f0				# 1983
-	lwz	r2, 92(r3)				# 1984
-	slwi	r5, r2, 2				# 1984
-	lwz	r6, 88(r3)				# 1984
-	lfsx	f1, r6, r5				# 1984
-	fmul	f1, f0, f1				# 1984
-	lfs	f2, 80(r3)				# 1984
-	fadd	f1, f1, f2				# 1984
-	slwi	r5, r2, 2				# 1984
-	lwz	r7, 76(r3)				# 1984
-	stfsx	f1, r7, r5				# 1984
-	lwz	r5, 72(r3)				# 1985
-	slwi	r8, r5, 2				# 1985
-	lfsx	f1, r6, r8				# 1985
-	fmul	f1, f0, f1				# 1985
-	lfs	f3, 64(r3)				# 1985
-	fadd	f1, f1, f3				# 1985
-	slwi	r8, r5, 2				# 1985
-	stfsx	f1, r7, r8				# 1985
-	lwz	r8, 56(r3)				# 1986
-	slwi	r9, r8, 2				# 1986
-	lfsx	f1, r6, r9				# 1986
-	fmul	f0, f0, f1				# 1986
-	lfs	f1, 48(r3)				# 1986
-	fadd	f0, f0, f1				# 1986
-	slwi	r6, r8, 2				# 1986
-	stfsx	f0, r7, r6				# 1986
-	slwi	r6, r2, 2				# 173
-	lfsx	f0, r7, r6				# 173
-	mfspr	r31, 8				# 173
-	stw	r31, 104(r3)				# 173
-	addi	r3, r3, 108				# 173
-	bl	min_caml_fsqr				# 173
-	addi	r3, r3, -108				# 173
-	lwz	r31, 104(r3)				# 173
-	mtspr	8, r31				# 173
-	lwz	r2, 72(r3)				# 173
-	slwi	r5, r2, 2				# 173
-	lwz	r6, 76(r3)				# 173
-	lfsx	f1, r6, r5				# 173
-	stfs	f0, 104(r3)				# 173
-	mfspr	r31, 8				# 173
-	fmr	f0, f1				# 173
-	stw	r31, 112(r3)				# 173
-	addi	r3, r3, 116				# 173
-	bl	min_caml_fsqr				# 173
-	addi	r3, r3, -116				# 173
-	lwz	r31, 112(r3)				# 173
-	mtspr	8, r31				# 173
-	lfs	f1, 104(r3)				# 173
-	fadd	f0, f1, f0				# 173
-	lwz	r2, 56(r3)				# 173
-	slwi	r5, r2, 2				# 173
-	lwz	r6, 76(r3)				# 173
-	lfsx	f1, r6, r5				# 173
-	stfs	f0, 112(r3)				# 173
-	mfspr	r31, 8				# 173
-	fmr	f0, f1				# 173
-	stw	r31, 120(r3)				# 173
-	addi	r3, r3, 124				# 173
-	bl	min_caml_fsqr				# 173
-	addi	r3, r3, -124				# 173
-	lwz	r31, 120(r3)				# 173
-	mtspr	8, r31				# 173
-	lfs	f1, 112(r3)				# 173
-	fadd	f0, f1, f0				# 173
-	mfspr	r31, 8				# 173
-	stw	r31, 120(r3)				# 173
-	addi	r3, r3, 124				# 173
-	bl	min_caml_sqrt				# 173
-	addi	r3, r3, -124				# 173
-	lwz	r31, 120(r3)				# 173
-	mtspr	8, r31				# 173
-	stfs	f0, 120(r3)				# 174
-	mfspr	r31, 8				# 174
-	stw	r31, 128(r3)				# 174
-	addi	r3, r3, 132				# 174
-	bl	min_caml_fiszero				# 174
-	addi	r3, r3, -132				# 174
-	lwz	r31, 128(r3)				# 174
-	mtspr	8, r31				# 174
-	lwz	r5, 92(r3)				# 174
-	cmpw	cr7, r2, r5				# 174
-	bne	cr7, beq_else.18120				# 174
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 174
-	lfs	f1, 120(r3)				# 174
-	fdiv	f0, f0, f1				# 174
-	b	beq_cont.18121				# 174
-beq_else.18120:
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 174
-beq_cont.18121:
-	slwi	r2, r5, 2				# 175
-	lwz	r6, 76(r3)				# 175
-	lfsx	f1, r6, r2				# 175
-	fmul	f1, f1, f0				# 175
-	slwi	r2, r5, 2				# 175
-	stfsx	f1, r6, r2				# 175
-	lwz	r2, 72(r3)				# 176
-	slwi	r7, r2, 2				# 176
-	lfsx	f1, r6, r7				# 176
-	fmul	f1, f1, f0				# 176
-	slwi	r7, r2, 2				# 176
-	stfsx	f1, r6, r7				# 176
-	lwz	r7, 56(r3)				# 177
-	slwi	r8, r7, 2				# 177
-	lfsx	f1, r6, r8				# 177
-	fmul	f0, f1, f0				# 177
-	slwi	r8, r7, 2				# 177
-	stfsx	f0, r6, r8				# 177
-	slwi	r8, r5, 2				# 141
-	lwz	r9, 36(r3)				# 141
-	lfs	f1, 40(r3)				# 141
-	stfsx	f1, r9, r8				# 141
-	slwi	r8, r2, 2				# 142
-	stfsx	f1, r9, r8				# 142
-	slwi	r8, r7, 2				# 143
-	stfsx	f1, r9, r8				# 143
-	slwi	r8, r5, 2				# 153
-	lwz	r10, 32(r3)				# 153
-	lfsx	f0, r10, r8				# 153
-	slwi	r8, r5, 2				# 153
-	lwz	r11, 28(r3)				# 153
-	stfsx	f0, r11, r8				# 153
-	slwi	r8, r2, 2				# 154
-	lfsx	f0, r10, r8				# 154
-	slwi	r8, r2, 2				# 154
-	stfsx	f0, r11, r8				# 154
-	slwi	r8, r7, 2				# 155
-	lfsx	f0, r10, r8				# 155
-	slwi	r8, r7, 2				# 155
-	stfsx	f0, r11, r8				# 155
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f0, 0(r31)				# 1992
-	lwz	r8, 24(r3)				# 1992
-	slwi	r10, r8, 2				# 1992
-	lwz	r11, 20(r3)				# 1992
-	lwzx	r10, r11, r10				# 1992
-	lwz	r30, 16(r3)				# 1992
-	mfspr	r31, 8				# 1992
-	mr	r2, r5				# 1992
-	mr	r5, r6				# 1992
-	mr	r6, r10				# 1992
-	stw	r31, 128(r3)				# 1992
-	addi	r3, r3, 132				# 1992
-	lwz	r31, 0(r30)				# 1992
-	mtspr	9, r31				# 1992
-	bctrl				# 1992
-	addi	r3, r3, -132				# 1992
-	lwz	r31, 128(r3)				# 1992
-	mtspr	8, r31				# 1992
-	lwz	r2, 24(r3)				# 1993
-	slwi	r5, r2, 2				# 1993
-	lwz	r6, 20(r3)				# 1993
-	lwzx	r5, r6, r5				# 1993
-	lwz	r5, 0(r5)				# 440
-	lwz	r7, 92(r3)				# 153
-	slwi	r8, r7, 2				# 153
-	lwz	r9, 36(r3)				# 153
-	lfsx	f0, r9, r8				# 153
-	slwi	r8, r7, 2				# 153
-	stfsx	f0, r5, r8				# 153
-	lwz	r8, 72(r3)				# 154
-	slwi	r10, r8, 2				# 154
-	lfsx	f0, r9, r10				# 154
-	slwi	r10, r8, 2				# 154
-	stfsx	f0, r5, r10				# 154
-	lwz	r10, 56(r3)				# 155
-	slwi	r11, r10, 2				# 155
-	lfsx	f0, r9, r11				# 155
-	slwi	r9, r10, 2				# 155
-	stfsx	f0, r5, r9				# 155
-	slwi	r5, r2, 2				# 1994
-	lwzx	r5, r6, r5				# 1994
-	lwz	r5, 24(r5)				# 492
-	slwi	r9, r7, 2				# 494
-	lwz	r10, 12(r3)				# 494
-	stwx	r10, r5, r9				# 494
-	slwi	r5, r2, 2				# 1997
-	lwzx	r5, r6, r5				# 1997
-	lwz	r30, 8(r3)				# 1997
-	mfspr	r31, 8				# 1997
-	mr	r2, r5				# 1997
-	mr	r5, r7				# 1997
-	stw	r31, 128(r3)				# 1997
-	addi	r3, r3, 132				# 1997
-	lwz	r31, 0(r30)				# 1997
-	mtspr	9, r31				# 1997
-	bctrl				# 1997
-	addi	r3, r3, -132				# 1997
-	lwz	r31, 128(r3)				# 1997
-	mtspr	8, r31				# 1997
-	lwz	r2, 72(r3)				# 1999
-	lwz	r5, 24(r3)				# 1999
-	sub	r5, r5, r2				# 1999
-	lwz	r6, 12(r3)				# 124
-	add	r2, r6, r2				# 124
-	lwz	r6, 4(r3)				# 125
-	cmpw	cr7, r6, r2				# 125
-	bgt	cr7, ble_else.18122				# 125
-	sub	r6, r2, r6				# 125
-	b	ble_cont.18123				# 125
-ble_else.18122:
-	mr	r6, r2				# 125
-ble_cont.18123:
-	lfs	f0, 80(r3)				# 1999
-	lfs	f1, 64(r3)				# 1999
-	lfs	f2, 48(r3)				# 1999
-	lwz	r2, 20(r3)				# 1999
-	lwz	r30, 0(r3)				# 1999
-	lwz	r29, 0(r30)				# 1999
-	mtspr	9, r29
-	bctr				# 1999
-ble_else.18118:
+pretrace_pixels.2880:
+	lwz	r7, 56(r1)				# 1992
+	lwz	r8, 52(r1)				# 1992
+	lwz	r9, 48(r1)				# 1992
+	lwz	r10, 44(r1)				# 1992
+	lwz	r11, 40(r1)				# 1992
+	lwz	r12, 36(r1)				# 1992
+	lwz	r13, 32(r1)				# 1992
+	lwz	r14, 28(r1)				# 1992
+	lwz	r15, 24(r1)				# 1992
+	lwz	r16, 20(r1)				# 1992
+	lwz	r17, 16(r1)				# 1992
+	lwz	r18, 12(r1)				# 1992
+	lwz	r19, 8(r1)				# 1992
+	lfs	f3, 4(r1)				# 1992
+	cmpw	cr7, r18, r5				# 1993
+	bgt	cr7, ble_else.16445				# 1993
+	slwi	r20, r18, 2				# 1995
+	lfsx	f4, r11, r20				# 1995
+	slwi	r11, r18, 2				# 1995
+	lwzx	r11, r15, r11				# 1995
+	sub	r11, r5, r11				# 1995
+	stw	r1, 0(r3)				# 1995
+	stw	r16, 4(r3)				# 1995
+	stw	r14, 8(r3)				# 1995
+	stw	r6, 12(r3)				# 1995
+	stw	r8, 16(r3)				# 1995
+	stw	r2, 20(r3)				# 1995
+	stw	r5, 24(r3)				# 1995
+	stw	r9, 28(r3)				# 1995
+	stw	r7, 32(r3)				# 1995
+	stw	r12, 36(r3)				# 1995
+	stfs	f3, 40(r3)				# 1995
+	stfs	f2, 48(r3)				# 1995
+	stw	r17, 56(r3)				# 1995
+	stfs	f1, 64(r3)				# 1995
+	stw	r19, 72(r3)				# 1995
+	stw	r13, 76(r3)				# 1995
+	stfs	f0, 80(r3)				# 1995
+	stw	r10, 88(r3)				# 1995
+	stw	r18, 92(r3)				# 1995
+	stfs	f4, 96(r3)				# 1995
+	mfspr	r31, 8				# 1995
+	mr	r2, r11				# 1995
+	stw	r31, 104(r3)				# 1995
+	addi	r3, r3, 108				# 1995
+	bl	min_caml_float_of_int				# 1995
+	addi	r3, r3, -108				# 1995
+	lwz	r31, 104(r3)				# 1995
+	mtspr	8, r31				# 1995
+	lfs	f1, 96(r3)				# 1995
+	fmul	f0, f1, f0				# 1995
+	lwz	r2, 92(r3)				# 1996
+	slwi	r5, r2, 2				# 1996
+	lwz	r6, 88(r3)				# 1996
+	lfsx	f1, r6, r5				# 1996
+	fmul	f1, f0, f1				# 1996
+	lfs	f2, 80(r3)				# 1996
+	fadd	f1, f1, f2				# 1996
+	slwi	r5, r2, 2				# 1996
+	lwz	r7, 76(r3)				# 1996
+	stfsx	f1, r7, r5				# 1996
+	lwz	r5, 72(r3)				# 1997
+	slwi	r8, r5, 2				# 1997
+	lfsx	f1, r6, r8				# 1997
+	fmul	f1, f0, f1				# 1997
+	lfs	f3, 64(r3)				# 1997
+	fadd	f1, f1, f3				# 1997
+	slwi	r8, r5, 2				# 1997
+	stfsx	f1, r7, r8				# 1997
+	lwz	r8, 56(r3)				# 1998
+	slwi	r9, r8, 2				# 1998
+	lfsx	f1, r6, r9				# 1998
+	fmul	f0, f0, f1				# 1998
+	lfs	f1, 48(r3)				# 1998
+	fadd	f0, f0, f1				# 1998
+	slwi	r6, r8, 2				# 1998
+	stfsx	f0, r7, r6				# 1998
+	slwi	r6, r2, 2				# 186
+	lfsx	f0, r7, r6				# 186
+	fmul	f0, f0, f0				# 103
+	slwi	r6, r5, 2				# 186
+	lfsx	f4, r7, r6				# 186
+	fmul	f4, f4, f4				# 103
+	fadd	f0, f0, f4				# 186
+	slwi	r6, r8, 2				# 186
+	lfsx	f4, r7, r6				# 186
+	fmul	f4, f4, f4				# 103
+	fadd	f0, f0, f4				# 186
+	mfspr	r31, 8				# 186
+	stw	r31, 104(r3)				# 186
+	addi	r3, r3, 108				# 186
+	bl	min_caml_sqrt				# 186
+	addi	r3, r3, -108				# 186
+	lwz	r31, 104(r3)				# 186
+	mtspr	8, r31				# 186
+	lfs	f1, 40(r3)				# 111
+	fcmpu	cr7, f0, f1				# 111
+	bne	cr7, beq_else.16447				# 111
+	addi	r2, 0, 1
+	b	beq_cont.16448				# 111
+beq_else.16447:
+	addi	r2, 0, 0
+beq_cont.16448:
+	lwz	r5, 92(r3)				# 187
+	cmpw	cr7, r2, r5				# 187
+	bne	cr7, beq_else.16449				# 187
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f2, 0(r31)				# 187
+	fdiv	f0, f2, f0				# 187
+	b	beq_cont.16450				# 187
+beq_else.16449:
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f0, 0(r31)				# 187
+beq_cont.16450:
+	slwi	r2, r5, 2				# 188
+	lwz	r6, 76(r3)				# 188
+	lfsx	f2, r6, r2				# 188
+	fmul	f2, f2, f0				# 188
+	slwi	r2, r5, 2				# 188
+	stfsx	f2, r6, r2				# 188
+	lwz	r2, 72(r3)				# 189
+	slwi	r7, r2, 2				# 189
+	lfsx	f2, r6, r7				# 189
+	fmul	f2, f2, f0				# 189
+	slwi	r7, r2, 2				# 189
+	stfsx	f2, r6, r7				# 189
+	lwz	r7, 56(r3)				# 190
+	slwi	r8, r7, 2				# 190
+	lfsx	f2, r6, r8				# 190
+	fmul	f0, f2, f0				# 190
+	slwi	r8, r7, 2				# 190
+	stfsx	f0, r6, r8				# 190
+	slwi	r8, r5, 2				# 154
+	lwz	r9, 36(r3)				# 154
+	stfsx	f1, r9, r8				# 154
+	slwi	r8, r2, 2				# 155
+	stfsx	f1, r9, r8				# 155
+	slwi	r8, r7, 2				# 156
+	stfsx	f1, r9, r8				# 156
+	slwi	r8, r5, 2				# 166
+	lwz	r10, 32(r3)				# 166
+	lfsx	f0, r10, r8				# 166
+	slwi	r8, r5, 2				# 166
+	lwz	r11, 28(r3)				# 166
+	stfsx	f0, r11, r8				# 166
+	slwi	r8, r2, 2				# 167
+	lfsx	f0, r10, r8				# 167
+	slwi	r8, r2, 2				# 167
+	stfsx	f0, r11, r8				# 167
+	slwi	r8, r7, 2				# 168
+	lfsx	f0, r10, r8				# 168
+	slwi	r8, r7, 2				# 168
+	stfsx	f0, r11, r8				# 168
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f0, 0(r31)				# 2004
+	lwz	r8, 24(r3)				# 2004
+	slwi	r10, r8, 2				# 2004
+	lwz	r11, 20(r3)				# 2004
+	lwzx	r10, r11, r10				# 2004
+	lwz	r1, 16(r3)				# 2004
+	mfspr	r31, 8				# 2004
+	mr	r2, r5				# 2004
+	mr	r5, r6				# 2004
+	mr	r6, r10				# 2004
+	stw	r31, 104(r3)				# 2004
+	addi	r3, r3, 108				# 2004
+	lwz	r31, 0(r1)				# 2004
+	mtspr	9, r31				# 2004
+	bctr				# 2004
+	addi	r3, r3, -108				# 2004
+	lwz	r31, 104(r3)				# 2004
+	mtspr	8, r31				# 2004
+	lwz	r2, 24(r3)				# 2005
+	slwi	r5, r2, 2				# 2005
+	lwz	r6, 20(r3)				# 2005
+	lwzx	r5, r6, r5				# 2005
+	lwz	r5, 0(r5)				# 453
+	lwz	r7, 92(r3)				# 166
+	slwi	r8, r7, 2				# 166
+	lwz	r9, 36(r3)				# 166
+	lfsx	f0, r9, r8				# 166
+	slwi	r8, r7, 2				# 166
+	stfsx	f0, r5, r8				# 166
+	lwz	r8, 72(r3)				# 167
+	slwi	r10, r8, 2				# 167
+	lfsx	f0, r9, r10				# 167
+	slwi	r10, r8, 2				# 167
+	stfsx	f0, r5, r10				# 167
+	lwz	r10, 56(r3)				# 168
+	slwi	r11, r10, 2				# 168
+	lfsx	f0, r9, r11				# 168
+	slwi	r9, r10, 2				# 168
+	stfsx	f0, r5, r9				# 168
+	slwi	r5, r2, 2				# 2006
+	lwzx	r5, r6, r5				# 2006
+	lwz	r5, 24(r5)				# 505
+	slwi	r9, r7, 2				# 507
+	lwz	r10, 12(r3)				# 507
+	stwx	r10, r5, r9				# 507
+	slwi	r5, r2, 2				# 2009
+	lwzx	r5, r6, r5				# 2009
+	lwz	r1, 8(r3)				# 2009
+	mfspr	r31, 8				# 2009
+	mr	r2, r5				# 2009
+	mr	r5, r7				# 2009
+	stw	r31, 104(r3)				# 2009
+	addi	r3, r3, 108				# 2009
+	lwz	r31, 0(r1)				# 2009
+	mtspr	9, r31				# 2009
+	bctr				# 2009
+	addi	r3, r3, -108				# 2009
+	lwz	r31, 104(r3)				# 2009
+	mtspr	8, r31				# 2009
+	lwz	r2, 72(r3)				# 2011
+	lwz	r5, 24(r3)				# 2011
+	sub	r5, r5, r2				# 2011
+	lwz	r6, 12(r3)				# 137
+	add	r2, r6, r2				# 137
+	lwz	r6, 4(r3)				# 138
+	cmpw	cr7, r6, r2				# 138
+	bgt	cr7, ble_else.16451				# 138
+	sub	r6, r2, r6				# 138
+	b	ble_cont.16452				# 138
+ble_else.16451:
+	mr	r6, r2				# 138
+ble_cont.16452:
+	lfs	f0, 80(r3)				# 2011
+	lfs	f1, 64(r3)				# 2011
+	lfs	f2, 48(r3)				# 2011
+	lwz	r2, 20(r3)				# 2011
+	lwz	r1, 0(r3)				# 2011
+	lwz	r30, 0(r1)				# 2011
+	mtspr	9, r30
+	bctr				# 2011
+ble_else.16445:
 	blr
-scan_pixel.2873:
-	lwz	r9, 28(r30)				# 2019
-	lwz	r10, 24(r30)				# 2019
-	lwz	r11, 20(r30)				# 2019
-	lwz	r12, 16(r30)				# 2019
-	lwz	r13, 12(r30)				# 2019
-	lwz	r14, 8(r30)				# 2019
-	lwz	r15, 4(r30)				# 2019
-	slwi	r16, r14, 2				# 2020
-	lwzx	r16, r11, r16				# 2020
-	cmpw	cr7, r16, r2				# 2020
-	bgt	cr7, ble_else.18125				# 2020
+scan_pixel.2891:
+	lwz	r9, 28(r1)				# 2031
+	lwz	r10, 24(r1)				# 2031
+	lwz	r11, 20(r1)				# 2031
+	lwz	r12, 16(r1)				# 2031
+	lwz	r13, 12(r1)				# 2031
+	lwz	r14, 8(r1)				# 2031
+	lwz	r15, 4(r1)				# 2031
+	slwi	r16, r14, 2				# 2032
+	lwzx	r16, r11, r16				# 2032
+	cmpw	cr7, r16, r2				# 2032
+	bgt	cr7, ble_else.16454				# 2032
 	blr
-ble_else.18125:
-	slwi	r16, r2, 2				# 2023
-	lwzx	r16, r7, r16				# 2023
-	lwz	r16, 0(r16)				# 440
-	slwi	r17, r14, 2				# 153
-	lfsx	f0, r16, r17				# 153
-	slwi	r17, r14, 2				# 153
-	stfsx	f0, r10, r17				# 153
-	slwi	r17, r15, 2				# 154
-	lfsx	f0, r16, r17				# 154
-	slwi	r17, r15, 2				# 154
-	stfsx	f0, r10, r17				# 154
-	slwi	r17, r13, 2				# 155
-	lfsx	f0, r16, r17				# 155
-	slwi	r16, r13, 2				# 155
-	stfsx	f0, r10, r16				# 155
-	slwi	r16, r15, 2				# 1859
-	lwzx	r16, r11, r16				# 1859
-	add	r17, r5, r15				# 1859
-	cmpw	cr7, r16, r17				# 1859
-	bgt	cr7, ble_else.18127				# 1859
+ble_else.16454:
+	slwi	r16, r2, 2				# 2035
+	lwzx	r16, r7, r16				# 2035
+	lwz	r16, 0(r16)				# 453
+	slwi	r17, r14, 2				# 166
+	lfsx	f0, r16, r17				# 166
+	slwi	r17, r14, 2				# 166
+	stfsx	f0, r10, r17				# 166
+	slwi	r17, r15, 2				# 167
+	lfsx	f0, r16, r17				# 167
+	slwi	r17, r15, 2				# 167
+	stfsx	f0, r10, r17				# 167
+	slwi	r17, r13, 2				# 168
+	lfsx	f0, r16, r17				# 168
+	slwi	r16, r13, 2				# 168
+	stfsx	f0, r10, r16				# 168
+	slwi	r16, r15, 2				# 1871
+	lwzx	r16, r11, r16				# 1871
+	add	r17, r5, r15				# 1871
+	cmpw	cr7, r16, r17				# 1871
+	bgt	cr7, ble_else.16456				# 1871
 	addi	r11, 0, 0
-	b	ble_cont.18128				# 1859
-ble_else.18127:
-	cmpw	cr7, r5, r14				# 1860
-	bgt	cr7, ble_else.18129				# 1860
+	b	ble_cont.16457				# 1871
+ble_else.16456:
+	cmpw	cr7, r5, r14				# 1872
+	bgt	cr7, ble_else.16458				# 1872
 	addi	r11, 0, 0
-	b	ble_cont.18130				# 1860
-ble_else.18129:
-	slwi	r16, r14, 2				# 1861
-	lwzx	r11, r11, r16				# 1861
-	add	r16, r2, r15				# 1861
-	cmpw	cr7, r11, r16				# 1861
-	bgt	cr7, ble_else.18131				# 1861
+	b	ble_cont.16459				# 1872
+ble_else.16458:
+	slwi	r16, r14, 2				# 1873
+	lwzx	r11, r11, r16				# 1873
+	add	r16, r2, r15				# 1873
+	cmpw	cr7, r11, r16				# 1873
+	bgt	cr7, ble_else.16460				# 1873
 	addi	r11, 0, 0
-	b	ble_cont.18132				# 1861
-ble_else.18131:
-	cmpw	cr7, r2, r14				# 1862
-	bgt	cr7, ble_else.18133				# 1862
+	b	ble_cont.16461				# 1873
+ble_else.16460:
+	cmpw	cr7, r2, r14				# 1874
+	bgt	cr7, ble_else.16462				# 1874
 	addi	r11, 0, 0
-	b	ble_cont.18134				# 1862
-ble_else.18133:
+	b	ble_cont.16463				# 1874
+ble_else.16462:
 	addi	r11, 0, 1
-ble_cont.18134:
-ble_cont.18132:
-ble_cont.18130:
-ble_cont.18128:
-	stw	r8, 0(r3)				# 2026
-	stw	r7, 4(r3)				# 2026
-	stw	r6, 8(r3)				# 2026
-	stw	r5, 12(r3)				# 2026
-	stw	r30, 16(r3)				# 2026
-	stw	r2, 20(r3)				# 2026
-	stw	r13, 24(r3)				# 2026
-	stw	r15, 28(r3)				# 2026
-	stw	r10, 32(r3)				# 2026
-	stw	r14, 36(r3)				# 2026
-	cmpw	cr7, r11, r14				# 2026
-	bne	cr7, beq_else.18135				# 2026
-	slwi	r9, r2, 2				# 2029
-	lwzx	r9, r7, r9				# 2029
-	mfspr	r31, 8				# 2029
-	mr	r5, r14				# 2029
-	mr	r2, r9				# 2029
-	mr	r30, r12				# 2029
-	stw	r31, 40(r3)				# 2029
-	addi	r3, r3, 44				# 2029
-	lwz	r31, 0(r30)				# 2029
-	mtspr	9, r31				# 2029
-	bctrl				# 2029
-	addi	r3, r3, -44				# 2029
-	lwz	r31, 40(r3)				# 2029
-	mtspr	8, r31				# 2029
-	b	beq_cont.18136				# 2026
-beq_else.18135:
-	mfspr	r31, 8				# 2027
-	mr	r30, r9				# 2027
-	mr	r9, r14				# 2027
-	stw	r31, 40(r3)				# 2027
-	addi	r3, r3, 44				# 2027
-	lwz	r31, 0(r30)				# 2027
-	mtspr	9, r31				# 2027
-	bctrl				# 2027
-	addi	r3, r3, -44				# 2027
-	lwz	r31, 40(r3)				# 2027
-	mtspr	8, r31				# 2027
-beq_cont.18136:
-	lwz	r2, 36(r3)				# 1938
-	slwi	r5, r2, 2				# 1938
-	lwz	r6, 32(r3)				# 1938
-	lfsx	f0, r6, r5				# 1938
-	mfspr	r31, 8				# 1932
-	stw	r31, 40(r3)				# 1932
-	addi	r3, r3, 44				# 1932
-	bl	min_caml_int_of_float				# 1932
-	addi	r3, r3, -44				# 1932
-	lwz	r31, 40(r3)				# 1932
-	mtspr	8, r31				# 1932
-	cmpwi	cr7, r2, 255				# 1933
-	bgt	cr7, ble_else.18137				# 1933
-	lwz	r5, 36(r3)				# 1933
-	cmpw	cr7, r5, r2				# 1933
-	bgt	cr7, ble_else.18139				# 1933
-	b	ble_cont.18140				# 1933
-ble_else.18139:
+ble_cont.16463:
+ble_cont.16461:
+ble_cont.16459:
+ble_cont.16457:
+	stw	r8, 0(r3)				# 2038
+	stw	r7, 4(r3)				# 2038
+	stw	r6, 8(r3)				# 2038
+	stw	r5, 12(r3)				# 2038
+	stw	r1, 16(r3)				# 2038
+	stw	r2, 20(r3)				# 2038
+	stw	r13, 24(r3)				# 2038
+	stw	r15, 28(r3)				# 2038
+	stw	r10, 32(r3)				# 2038
+	stw	r14, 36(r3)				# 2038
+	cmpw	cr7, r11, r14				# 2038
+	bne	cr7, beq_else.16464				# 2038
+	slwi	r9, r2, 2				# 2041
+	lwzx	r9, r7, r9				# 2041
+	mfspr	r31, 8				# 2041
+	mr	r5, r14				# 2041
+	mr	r2, r9				# 2041
+	mr	r1, r12				# 2041
+	stw	r31, 40(r3)				# 2041
+	addi	r3, r3, 44				# 2041
+	lwz	r31, 0(r1)				# 2041
+	mtspr	9, r31				# 2041
+	bctr				# 2041
+	addi	r3, r3, -44				# 2041
+	lwz	r31, 40(r3)				# 2041
+	mtspr	8, r31				# 2041
+	b	beq_cont.16465				# 2038
+beq_else.16464:
+	mfspr	r31, 8				# 2039
+	mr	r1, r9				# 2039
+	mr	r9, r14				# 2039
+	stw	r31, 40(r3)				# 2039
+	addi	r3, r3, 44				# 2039
+	lwz	r31, 0(r1)				# 2039
+	mtspr	9, r31				# 2039
+	bctr				# 2039
+	addi	r3, r3, -44				# 2039
+	lwz	r31, 40(r3)				# 2039
+	mtspr	8, r31				# 2039
+beq_cont.16465:
+	lwz	r2, 36(r3)				# 1950
+	slwi	r5, r2, 2				# 1950
+	lwz	r6, 32(r3)				# 1950
+	lfsx	f0, r6, r5				# 1950
+	mfspr	r31, 8				# 1944
+	stw	r31, 40(r3)				# 1944
+	addi	r3, r3, 44				# 1944
+	bl	min_caml_int_of_float				# 1944
+	addi	r3, r3, -44				# 1944
+	lwz	r31, 40(r3)				# 1944
+	mtspr	8, r31				# 1944
+	cmpwi	cr7, r2, 255				# 1945
+	bgt	cr7, ble_else.16466				# 1945
+	lwz	r5, 36(r3)				# 1945
+	cmpw	cr7, r5, r2				# 1945
+	bgt	cr7, ble_else.16468				# 1945
+	b	ble_cont.16469				# 1945
+ble_else.16468:
 	addi	r2, 0, 0
-ble_cont.18140:
-	b	ble_cont.18138				# 1933
-ble_else.18137:
+ble_cont.16469:
+	b	ble_cont.16467				# 1945
+ble_else.16466:
 	addi	r2, 0, 255
-ble_cont.18138:
-	mfspr	r31, 8				# 1934
-	stw	r31, 40(r3)				# 1934
-	addi	r3, r3, 44				# 1934
-	bl	min_caml_print_int				# 1934
-	addi	r3, r3, -44				# 1934
-	lwz	r31, 40(r3)				# 1934
-	mtspr	8, r31				# 1934
+ble_cont.16467:
+	mfspr	r31, 8				# 1946
+	stw	r31, 40(r3)				# 1946
+	addi	r3, r3, 44				# 1946
+	bl	min_caml_print_int				# 1946
+	addi	r3, r3, -44				# 1946
+	lwz	r31, 40(r3)				# 1946
+	mtspr	8, r31				# 1946
 	addi	r2, 0, 32
-	stw	r2, 40(r3)				# 1939
-	mfspr	r31, 8				# 1939
-	stw	r31, 44(r3)				# 1939
-	addi	r3, r3, 48				# 1939
-	bl	min_caml_print_char				# 1939
-	addi	r3, r3, -48				# 1939
-	lwz	r31, 44(r3)				# 1939
-	mtspr	8, r31				# 1939
-	lwz	r2, 28(r3)				# 1940
-	slwi	r5, r2, 2				# 1940
-	lwz	r6, 32(r3)				# 1940
-	lfsx	f0, r6, r5				# 1940
-	mfspr	r31, 8				# 1932
-	stw	r31, 44(r3)				# 1932
-	addi	r3, r3, 48				# 1932
-	bl	min_caml_int_of_float				# 1932
-	addi	r3, r3, -48				# 1932
-	lwz	r31, 44(r3)				# 1932
-	mtspr	8, r31				# 1932
-	cmpwi	cr7, r2, 255				# 1933
-	bgt	cr7, ble_else.18141				# 1933
-	lwz	r5, 36(r3)				# 1933
-	cmpw	cr7, r5, r2				# 1933
-	bgt	cr7, ble_else.18143				# 1933
-	b	ble_cont.18144				# 1933
-ble_else.18143:
+	stw	r2, 40(r3)				# 1951
+	mfspr	r31, 8				# 1951
+	stw	r31, 44(r3)				# 1951
+	addi	r3, r3, 48				# 1951
+	bl	min_caml_print_char				# 1951
+	addi	r3, r3, -48				# 1951
+	lwz	r31, 44(r3)				# 1951
+	mtspr	8, r31				# 1951
+	lwz	r2, 28(r3)				# 1952
+	slwi	r5, r2, 2				# 1952
+	lwz	r6, 32(r3)				# 1952
+	lfsx	f0, r6, r5				# 1952
+	mfspr	r31, 8				# 1944
+	stw	r31, 44(r3)				# 1944
+	addi	r3, r3, 48				# 1944
+	bl	min_caml_int_of_float				# 1944
+	addi	r3, r3, -48				# 1944
+	lwz	r31, 44(r3)				# 1944
+	mtspr	8, r31				# 1944
+	cmpwi	cr7, r2, 255				# 1945
+	bgt	cr7, ble_else.16470				# 1945
+	lwz	r5, 36(r3)				# 1945
+	cmpw	cr7, r5, r2				# 1945
+	bgt	cr7, ble_else.16472				# 1945
+	b	ble_cont.16473				# 1945
+ble_else.16472:
 	addi	r2, 0, 0
-ble_cont.18144:
-	b	ble_cont.18142				# 1933
-ble_else.18141:
+ble_cont.16473:
+	b	ble_cont.16471				# 1945
+ble_else.16470:
 	addi	r2, 0, 255
-ble_cont.18142:
-	mfspr	r31, 8				# 1934
-	stw	r31, 44(r3)				# 1934
-	addi	r3, r3, 48				# 1934
-	bl	min_caml_print_int				# 1934
-	addi	r3, r3, -48				# 1934
-	lwz	r31, 44(r3)				# 1934
-	mtspr	8, r31				# 1934
-	lwz	r2, 40(r3)				# 1941
-	mfspr	r31, 8				# 1941
-	stw	r31, 44(r3)				# 1941
-	addi	r3, r3, 48				# 1941
-	bl	min_caml_print_char				# 1941
-	addi	r3, r3, -48				# 1941
-	lwz	r31, 44(r3)				# 1941
-	mtspr	8, r31				# 1941
-	lwz	r2, 24(r3)				# 1942
-	slwi	r2, r2, 2				# 1942
-	lwz	r5, 32(r3)				# 1942
-	lfsx	f0, r5, r2				# 1942
-	mfspr	r31, 8				# 1932
-	stw	r31, 44(r3)				# 1932
-	addi	r3, r3, 48				# 1932
-	bl	min_caml_int_of_float				# 1932
-	addi	r3, r3, -48				# 1932
-	lwz	r31, 44(r3)				# 1932
-	mtspr	8, r31				# 1932
-	cmpwi	cr7, r2, 255				# 1933
-	bgt	cr7, ble_else.18145				# 1933
-	lwz	r5, 36(r3)				# 1933
-	cmpw	cr7, r5, r2				# 1933
-	bgt	cr7, ble_else.18147				# 1933
-	b	ble_cont.18148				# 1933
-ble_else.18147:
+ble_cont.16471:
+	mfspr	r31, 8				# 1946
+	stw	r31, 44(r3)				# 1946
+	addi	r3, r3, 48				# 1946
+	bl	min_caml_print_int				# 1946
+	addi	r3, r3, -48				# 1946
+	lwz	r31, 44(r3)				# 1946
+	mtspr	8, r31				# 1946
+	lwz	r2, 40(r3)				# 1953
+	mfspr	r31, 8				# 1953
+	stw	r31, 44(r3)				# 1953
+	addi	r3, r3, 48				# 1953
+	bl	min_caml_print_char				# 1953
+	addi	r3, r3, -48				# 1953
+	lwz	r31, 44(r3)				# 1953
+	mtspr	8, r31				# 1953
+	lwz	r2, 24(r3)				# 1954
+	slwi	r2, r2, 2				# 1954
+	lwz	r5, 32(r3)				# 1954
+	lfsx	f0, r5, r2				# 1954
+	mfspr	r31, 8				# 1944
+	stw	r31, 44(r3)				# 1944
+	addi	r3, r3, 48				# 1944
+	bl	min_caml_int_of_float				# 1944
+	addi	r3, r3, -48				# 1944
+	lwz	r31, 44(r3)				# 1944
+	mtspr	8, r31				# 1944
+	cmpwi	cr7, r2, 255				# 1945
+	bgt	cr7, ble_else.16474				# 1945
+	lwz	r5, 36(r3)				# 1945
+	cmpw	cr7, r5, r2				# 1945
+	bgt	cr7, ble_else.16476				# 1945
+	b	ble_cont.16477				# 1945
+ble_else.16476:
 	addi	r2, 0, 0
-ble_cont.18148:
-	b	ble_cont.18146				# 1933
-ble_else.18145:
+ble_cont.16477:
+	b	ble_cont.16475				# 1945
+ble_else.16474:
 	addi	r2, 0, 255
-ble_cont.18146:
-	mfspr	r31, 8				# 1934
-	stw	r31, 44(r3)				# 1934
-	addi	r3, r3, 48				# 1934
-	bl	min_caml_print_int				# 1934
-	addi	r3, r3, -48				# 1934
-	lwz	r31, 44(r3)				# 1934
-	mtspr	8, r31				# 1934
+ble_cont.16475:
+	mfspr	r31, 8				# 1946
+	stw	r31, 44(r3)				# 1946
+	addi	r3, r3, 48				# 1946
+	bl	min_caml_print_int				# 1946
+	addi	r3, r3, -48				# 1946
+	lwz	r31, 44(r3)				# 1946
+	mtspr	8, r31				# 1946
 	addi	r2, 0, 10
-	mfspr	r31, 8				# 1943
-	stw	r31, 44(r3)				# 1943
-	addi	r3, r3, 48				# 1943
-	bl	min_caml_print_char				# 1943
-	addi	r3, r3, -48				# 1943
-	lwz	r31, 44(r3)				# 1943
-	mtspr	8, r31				# 1943
-	lwz	r2, 28(r3)				# 2034
-	lwz	r5, 20(r3)				# 2034
-	add	r2, r5, r2				# 2034
-	lwz	r5, 12(r3)				# 2034
-	lwz	r6, 8(r3)				# 2034
-	lwz	r7, 4(r3)				# 2034
-	lwz	r8, 0(r3)				# 2034
-	lwz	r30, 16(r3)				# 2034
-	lwz	r29, 0(r30)				# 2034
-	mtspr	9, r29
-	bctr				# 2034
-scan_line.2879:
-	lwz	r9, 44(r30)				# 2039
-	lwz	r10, 40(r30)				# 2039
-	lwz	r11, 36(r30)				# 2039
-	lwz	r12, 32(r30)				# 2039
-	lwz	r13, 28(r30)				# 2039
-	lwz	r14, 24(r30)				# 2039
-	lwz	r15, 20(r30)				# 2039
-	lwz	r16, 16(r30)				# 2039
-	lwz	r17, 12(r30)				# 2039
-	lwz	r18, 8(r30)				# 2039
-	lwz	r19, 4(r30)				# 2039
-	slwi	r20, r19, 2				# 2041
-	lwzx	r20, r14, r20				# 2041
-	cmpw	cr7, r20, r2				# 2041
-	bgt	cr7, ble_else.18149				# 2041
+	mfspr	r31, 8				# 1955
+	stw	r31, 44(r3)				# 1955
+	addi	r3, r3, 48				# 1955
+	bl	min_caml_print_char				# 1955
+	addi	r3, r3, -48				# 1955
+	lwz	r31, 44(r3)				# 1955
+	mtspr	8, r31				# 1955
+	lwz	r2, 28(r3)				# 2046
+	lwz	r5, 20(r3)				# 2046
+	add	r2, r5, r2				# 2046
+	lwz	r5, 12(r3)				# 2046
+	lwz	r6, 8(r3)				# 2046
+	lwz	r7, 4(r3)				# 2046
+	lwz	r8, 0(r3)				# 2046
+	lwz	r1, 16(r3)				# 2046
+	lwz	r30, 0(r1)				# 2046
+	mtspr	9, r30
+	bctr				# 2046
+scan_line.2897:
+	lwz	r9, 44(r1)				# 2051
+	lwz	r10, 40(r1)				# 2051
+	lwz	r11, 36(r1)				# 2051
+	lwz	r12, 32(r1)				# 2051
+	lwz	r13, 28(r1)				# 2051
+	lwz	r14, 24(r1)				# 2051
+	lwz	r15, 20(r1)				# 2051
+	lwz	r16, 16(r1)				# 2051
+	lwz	r17, 12(r1)				# 2051
+	lwz	r18, 8(r1)				# 2051
+	lwz	r19, 4(r1)				# 2051
+	slwi	r20, r19, 2				# 2053
+	lwzx	r20, r14, r20				# 2053
+	cmpw	cr7, r20, r2				# 2053
+	bgt	cr7, ble_else.16478				# 2053
 	blr
-ble_else.18149:
-	slwi	r20, r19, 2				# 2043
-	lwzx	r20, r14, r20				# 2043
-	sub	r20, r20, r19				# 2043
-	stw	r30, 0(r3)				# 2043
-	stw	r16, 4(r3)				# 2043
-	stw	r17, 8(r3)				# 2043
-	stw	r8, 12(r3)				# 2043
-	stw	r19, 16(r3)				# 2043
-	stw	r7, 20(r3)				# 2043
-	stw	r6, 24(r3)				# 2043
-	stw	r5, 28(r3)				# 2043
-	stw	r2, 32(r3)				# 2043
-	stw	r18, 36(r3)				# 2043
-	stw	r11, 40(r3)				# 2043
-	cmpw	cr7, r20, r2				# 2043
-	bgt	cr7, ble_else.18151				# 2043
-	b	ble_cont.18152				# 2043
-ble_else.18151:
-	add	r20, r2, r19				# 2044
-	slwi	r21, r18, 2				# 2006
-	lfsx	f0, r12, r21				# 2006
-	slwi	r12, r19, 2				# 2006
-	lwzx	r12, r15, r12				# 2006
-	sub	r12, r20, r12				# 2006
-	stw	r13, 44(r3)				# 2006
-	stw	r14, 48(r3)				# 2006
-	stw	r9, 52(r3)				# 2006
-	stw	r10, 56(r3)				# 2006
-	stfs	f0, 64(r3)				# 2006
-	mfspr	r31, 8				# 2006
-	mr	r2, r12				# 2006
-	stw	r31, 72(r3)				# 2006
-	addi	r3, r3, 76				# 2006
-	bl	min_caml_float_of_int				# 2006
-	addi	r3, r3, -76				# 2006
-	lwz	r31, 72(r3)				# 2006
-	mtspr	8, r31				# 2006
-	lfs	f1, 64(r3)				# 2006
-	fmul	f0, f1, f0				# 2006
-	lwz	r2, 36(r3)				# 2009
-	slwi	r5, r2, 2				# 2009
-	lwz	r6, 56(r3)				# 2009
-	lfsx	f1, r6, r5				# 2009
-	fmul	f1, f0, f1				# 2009
-	slwi	r5, r2, 2				# 2009
-	lwz	r7, 52(r3)				# 2009
-	lfsx	f2, r7, r5				# 2009
-	fadd	f1, f1, f2				# 2009
-	lwz	r5, 16(r3)				# 2010
-	slwi	r8, r5, 2				# 2010
-	lfsx	f2, r6, r8				# 2010
-	fmul	f2, f0, f2				# 2010
-	slwi	r8, r5, 2				# 2010
-	lfsx	f3, r7, r8				# 2010
-	fadd	f2, f2, f3				# 2010
-	lwz	r8, 8(r3)				# 2011
-	slwi	r9, r8, 2				# 2011
-	lfsx	f3, r6, r9				# 2011
-	fmul	f0, f0, f3				# 2011
-	slwi	r6, r8, 2				# 2011
-	lfsx	f3, r7, r6				# 2011
-	fadd	f0, f0, f3				# 2011
-	slwi	r6, r2, 2				# 2012
-	lwz	r7, 48(r3)				# 2012
-	lwzx	r6, r7, r6				# 2012
-	sub	r6, r6, r5				# 2012
-	lwz	r7, 20(r3)				# 2012
-	lwz	r9, 12(r3)				# 2012
-	lwz	r30, 44(r3)				# 2012
-	mfspr	r31, 8				# 2012
-	mr	r5, r6				# 2012
-	mr	r2, r7				# 2012
-	mr	r6, r9				# 2012
-	fmr	f31, f2				# 2012
-	fmr	f2, f0				# 2012
-	fmr	f0, f1				# 2012
-	fmr	f1, f31				# 2012
-	stw	r31, 72(r3)				# 2012
-	addi	r3, r3, 76				# 2012
-	lwz	r31, 0(r30)				# 2012
-	mtspr	9, r31				# 2012
-	bctrl				# 2012
-	addi	r3, r3, -76				# 2012
-	lwz	r31, 72(r3)				# 2012
-	mtspr	8, r31				# 2012
-ble_cont.18152:
-	lwz	r2, 36(r3)				# 2046
-	lwz	r5, 32(r3)				# 2046
-	lwz	r6, 28(r3)				# 2046
-	lwz	r7, 24(r3)				# 2046
-	lwz	r8, 20(r3)				# 2046
-	lwz	r30, 40(r3)				# 2046
-	mfspr	r31, 8				# 2046
-	stw	r31, 72(r3)				# 2046
-	addi	r3, r3, 76				# 2046
-	lwz	r31, 0(r30)				# 2046
-	mtspr	9, r31				# 2046
-	bctrl				# 2046
-	addi	r3, r3, -76				# 2046
-	lwz	r31, 72(r3)				# 2046
-	mtspr	8, r31				# 2046
-	lwz	r2, 16(r3)				# 2047
-	lwz	r5, 32(r3)				# 2047
-	add	r2, r5, r2				# 2047
-	lwz	r5, 8(r3)				# 124
-	lwz	r6, 12(r3)				# 124
-	add	r5, r6, r5				# 124
-	lwz	r6, 4(r3)				# 125
-	cmpw	cr7, r6, r5				# 125
-	bgt	cr7, ble_else.18154				# 125
-	sub	r8, r5, r6				# 125
-	b	ble_cont.18155				# 125
-ble_else.18154:
-	mr	r8, r5				# 125
-ble_cont.18155:
-	lwz	r5, 24(r3)				# 2047
-	lwz	r6, 20(r3)				# 2047
-	lwz	r7, 28(r3)				# 2047
-	lwz	r30, 0(r3)				# 2047
-	lwz	r29, 0(r30)				# 2047
-	mtspr	9, r29
-	bctr				# 2047
-init_line_elements.2889:
-	lwz	r6, 24(r30)				# 2080
-	lwz	r7, 20(r30)				# 2080
-	lwz	r8, 16(r30)				# 2080
-	lwz	r9, 12(r30)				# 2080
-	lwz	r10, 8(r30)				# 2080
-	lfs	f0, 4(r30)				# 2080
-	cmpw	cr7, r9, r5				# 2081
-	bgt	cr7, ble_else.18156				# 2081
-	stw	r30, 0(r3)				# 2068
-	stw	r2, 4(r3)				# 2068
-	stw	r5, 8(r3)				# 2068
-	stw	r9, 12(r3)				# 2068
-	stw	r7, 16(r3)				# 2068
-	stw	r10, 20(r3)				# 2068
-	stw	r6, 24(r3)				# 2068
-	stfs	f0, 32(r3)				# 2068
-	stw	r8, 40(r3)				# 2068
-	mfspr	r31, 8				# 2068
-	mr	r2, r8				# 2068
-	stw	r31, 44(r3)				# 2068
-	addi	r3, r3, 48				# 2068
-	bl	min_caml_create_float_array				# 2068
-	addi	r3, r3, -48				# 2068
-	lwz	r31, 44(r3)				# 2068
-	mtspr	8, r31				# 2068
-	lfs	f0, 32(r3)				# 2056
-	lwz	r5, 40(r3)				# 2056
-	stw	r2, 44(r3)				# 2056
-	mfspr	r31, 8				# 2056
-	mr	r2, r5				# 2056
-	stw	r31, 48(r3)				# 2056
-	addi	r3, r3, 52				# 2056
-	bl	min_caml_create_float_array				# 2056
-	addi	r3, r3, -52				# 2056
-	lwz	r31, 48(r3)				# 2056
-	mr	r5, r2				# 2056
-	mtspr	8, r31				# 2056
-	lwz	r2, 24(r3)				# 2057
-	mfspr	r31, 8				# 2057
-	stw	r31, 48(r3)				# 2057
-	addi	r3, r3, 52				# 2057
-	bl	min_caml_create_array				# 2057
-	addi	r3, r3, -52				# 2057
-	lwz	r31, 48(r3)				# 2057
-	mtspr	8, r31				# 2057
-	lfs	f0, 32(r3)				# 2058
-	lwz	r5, 40(r3)				# 2058
-	stw	r2, 48(r3)				# 2058
+ble_else.16478:
+	slwi	r20, r19, 2				# 2055
+	lwzx	r20, r14, r20				# 2055
+	sub	r20, r20, r19				# 2055
+	stw	r1, 0(r3)				# 2055
+	stw	r16, 4(r3)				# 2055
+	stw	r17, 8(r3)				# 2055
+	stw	r8, 12(r3)				# 2055
+	stw	r19, 16(r3)				# 2055
+	stw	r7, 20(r3)				# 2055
+	stw	r6, 24(r3)				# 2055
+	stw	r5, 28(r3)				# 2055
+	stw	r2, 32(r3)				# 2055
+	stw	r18, 36(r3)				# 2055
+	stw	r11, 40(r3)				# 2055
+	cmpw	cr7, r20, r2				# 2055
+	bgt	cr7, ble_else.16480				# 2055
+	b	ble_cont.16481				# 2055
+ble_else.16480:
+	add	r20, r2, r19				# 2056
+	slwi	r21, r18, 2				# 2018
+	lfsx	f0, r12, r21				# 2018
+	slwi	r12, r19, 2				# 2018
+	lwzx	r12, r15, r12				# 2018
+	sub	r12, r20, r12				# 2018
+	stw	r13, 44(r3)				# 2018
+	stw	r14, 48(r3)				# 2018
+	stw	r9, 52(r3)				# 2018
+	stw	r10, 56(r3)				# 2018
+	stfs	f0, 64(r3)				# 2018
+	mfspr	r31, 8				# 2018
+	mr	r2, r12				# 2018
+	stw	r31, 72(r3)				# 2018
+	addi	r3, r3, 76				# 2018
+	bl	min_caml_float_of_int				# 2018
+	addi	r3, r3, -76				# 2018
+	lwz	r31, 72(r3)				# 2018
+	mtspr	8, r31				# 2018
+	lfs	f1, 64(r3)				# 2018
+	fmul	f0, f1, f0				# 2018
+	lwz	r2, 36(r3)				# 2021
+	slwi	r5, r2, 2				# 2021
+	lwz	r6, 56(r3)				# 2021
+	lfsx	f1, r6, r5				# 2021
+	fmul	f1, f0, f1				# 2021
+	slwi	r5, r2, 2				# 2021
+	lwz	r7, 52(r3)				# 2021
+	lfsx	f2, r7, r5				# 2021
+	fadd	f1, f1, f2				# 2021
+	lwz	r5, 16(r3)				# 2022
+	slwi	r8, r5, 2				# 2022
+	lfsx	f2, r6, r8				# 2022
+	fmul	f2, f0, f2				# 2022
+	slwi	r8, r5, 2				# 2022
+	lfsx	f3, r7, r8				# 2022
+	fadd	f2, f2, f3				# 2022
+	lwz	r8, 8(r3)				# 2023
+	slwi	r9, r8, 2				# 2023
+	lfsx	f3, r6, r9				# 2023
+	fmul	f0, f0, f3				# 2023
+	slwi	r6, r8, 2				# 2023
+	lfsx	f3, r7, r6				# 2023
+	fadd	f0, f0, f3				# 2023
+	slwi	r6, r2, 2				# 2024
+	lwz	r7, 48(r3)				# 2024
+	lwzx	r6, r7, r6				# 2024
+	sub	r6, r6, r5				# 2024
+	lwz	r7, 20(r3)				# 2024
+	lwz	r9, 12(r3)				# 2024
+	lwz	r1, 44(r3)				# 2024
+	mfspr	r31, 8				# 2024
+	mr	r5, r6				# 2024
+	mr	r2, r7				# 2024
+	mr	r6, r9				# 2024
+	fmr	f31, f2				# 2024
+	fmr	f2, f0				# 2024
+	fmr	f0, f1				# 2024
+	fmr	f1, f31				# 2024
+	stw	r31, 72(r3)				# 2024
+	addi	r3, r3, 76				# 2024
+	lwz	r31, 0(r1)				# 2024
+	mtspr	9, r31				# 2024
+	bctr				# 2024
+	addi	r3, r3, -76				# 2024
+	lwz	r31, 72(r3)				# 2024
+	mtspr	8, r31				# 2024
+ble_cont.16481:
+	lwz	r2, 36(r3)				# 2058
+	lwz	r5, 32(r3)				# 2058
+	lwz	r6, 28(r3)				# 2058
+	lwz	r7, 24(r3)				# 2058
+	lwz	r8, 20(r3)				# 2058
+	lwz	r1, 40(r3)				# 2058
 	mfspr	r31, 8				# 2058
-	mr	r2, r5				# 2058
-	stw	r31, 52(r3)				# 2058
-	addi	r3, r3, 56				# 2058
-	bl	min_caml_create_float_array				# 2058
-	addi	r3, r3, -56				# 2058
-	lwz	r31, 52(r3)				# 2058
+	stw	r31, 72(r3)				# 2058
+	addi	r3, r3, 76				# 2058
+	lwz	r31, 0(r1)				# 2058
+	mtspr	9, r31				# 2058
+	bctr				# 2058
+	addi	r3, r3, -76				# 2058
+	lwz	r31, 72(r3)				# 2058
 	mtspr	8, r31				# 2058
-	lwz	r5, 20(r3)				# 2058
-	slwi	r6, r5, 2				# 2058
-	lwz	r7, 48(r3)				# 2058
-	stwx	r2, r7, r6				# 2058
-	lfs	f0, 32(r3)				# 2059
-	lwz	r2, 40(r3)				# 2059
-	mfspr	r31, 8				# 2059
-	stw	r31, 52(r3)				# 2059
-	addi	r3, r3, 56				# 2059
-	bl	min_caml_create_float_array				# 2059
-	addi	r3, r3, -56				# 2059
-	lwz	r31, 52(r3)				# 2059
-	mtspr	8, r31				# 2059
-	lwz	r5, 16(r3)				# 2059
-	slwi	r6, r5, 2				# 2059
-	lwz	r7, 48(r3)				# 2059
-	stwx	r2, r7, r6				# 2059
-	lfs	f0, 32(r3)				# 2060
-	lwz	r2, 40(r3)				# 2060
-	mfspr	r31, 8				# 2060
-	stw	r31, 52(r3)				# 2060
-	addi	r3, r3, 56				# 2060
-	bl	min_caml_create_float_array				# 2060
-	addi	r3, r3, -56				# 2060
-	lwz	r31, 52(r3)				# 2060
-	mtspr	8, r31				# 2060
-	lwz	r5, 40(r3)				# 2060
-	slwi	r6, r5, 2				# 2060
-	lwz	r7, 48(r3)				# 2060
-	stwx	r2, r7, r6				# 2060
-	lfs	f0, 32(r3)				# 2061
-	mfspr	r31, 8				# 2061
-	mr	r2, r5				# 2061
-	stw	r31, 52(r3)				# 2061
-	addi	r3, r3, 56				# 2061
-	bl	min_caml_create_float_array				# 2061
-	addi	r3, r3, -56				# 2061
-	lwz	r31, 52(r3)				# 2061
-	mtspr	8, r31				# 2061
-	lwz	r5, 48(r3)				# 2061
-	stw	r2, 16(r5)				# 2061
-	lwz	r2, 24(r3)				# 2070
-	lwz	r6, 12(r3)				# 2070
+	lwz	r2, 16(r3)				# 2059
+	lwz	r5, 32(r3)				# 2059
+	add	r2, r5, r2				# 2059
+	lwz	r5, 8(r3)				# 137
+	lwz	r6, 12(r3)				# 137
+	add	r5, r6, r5				# 137
+	lwz	r6, 4(r3)				# 138
+	cmpw	cr7, r6, r5				# 138
+	bgt	cr7, ble_else.16483				# 138
+	sub	r8, r5, r6				# 138
+	b	ble_cont.16484				# 138
+ble_else.16483:
+	mr	r8, r5				# 138
+ble_cont.16484:
+	lwz	r5, 24(r3)				# 2059
+	lwz	r6, 20(r3)				# 2059
+	lwz	r7, 28(r3)				# 2059
+	lwz	r1, 0(r3)				# 2059
+	lwz	r30, 0(r1)				# 2059
+	mtspr	9, r30
+	bctr				# 2059
+init_line_elements.2907:
+	lwz	r6, 24(r1)				# 2092
+	lwz	r7, 20(r1)				# 2092
+	lwz	r8, 16(r1)				# 2092
+	lwz	r9, 12(r1)				# 2092
+	lwz	r10, 8(r1)				# 2092
+	lfs	f0, 4(r1)				# 2092
+	cmpw	cr7, r9, r5				# 2093
+	bgt	cr7, ble_else.16485				# 2093
+	stw	r1, 0(r3)				# 2080
+	stw	r2, 4(r3)				# 2080
+	stw	r5, 8(r3)				# 2080
+	stw	r9, 12(r3)				# 2080
+	stw	r7, 16(r3)				# 2080
+	stw	r10, 20(r3)				# 2080
+	stw	r6, 24(r3)				# 2080
+	stfs	f0, 32(r3)				# 2080
+	stw	r8, 40(r3)				# 2080
+	mfspr	r31, 8				# 2080
+	mr	r2, r8				# 2080
+	stw	r31, 44(r3)				# 2080
+	addi	r3, r3, 48				# 2080
+	bl	min_caml_create_float_array				# 2080
+	addi	r3, r3, -48				# 2080
+	lwz	r31, 44(r3)				# 2080
+	mtspr	8, r31				# 2080
+	lfs	f0, 32(r3)				# 2068
+	lwz	r5, 40(r3)				# 2068
+	stw	r2, 44(r3)				# 2068
+	mfspr	r31, 8				# 2068
+	mr	r2, r5				# 2068
+	stw	r31, 48(r3)				# 2068
+	addi	r3, r3, 52				# 2068
+	bl	min_caml_create_float_array				# 2068
+	addi	r3, r3, -52				# 2068
+	lwz	r31, 48(r3)				# 2068
+	mr	r5, r2				# 2068
+	mtspr	8, r31				# 2068
+	lwz	r2, 24(r3)				# 2069
+	mfspr	r31, 8				# 2069
+	stw	r31, 48(r3)				# 2069
+	addi	r3, r3, 52				# 2069
+	bl	min_caml_create_array				# 2069
+	addi	r3, r3, -52				# 2069
+	lwz	r31, 48(r3)				# 2069
+	mtspr	8, r31				# 2069
+	lfs	f0, 32(r3)				# 2070
+	lwz	r5, 40(r3)				# 2070
+	stw	r2, 48(r3)				# 2070
 	mfspr	r31, 8				# 2070
-	mr	r5, r6				# 2070
+	mr	r2, r5				# 2070
 	stw	r31, 52(r3)				# 2070
 	addi	r3, r3, 56				# 2070
-	bl	min_caml_create_array				# 2070
+	bl	min_caml_create_float_array				# 2070
 	addi	r3, r3, -56				# 2070
 	lwz	r31, 52(r3)				# 2070
 	mtspr	8, r31				# 2070
-	lwz	r5, 24(r3)				# 2071
-	lwz	r6, 12(r3)				# 2071
-	stw	r2, 52(r3)				# 2071
+	lwz	r5, 20(r3)				# 2070
+	slwi	r6, r5, 2				# 2070
+	lwz	r7, 48(r3)				# 2070
+	stwx	r2, r7, r6				# 2070
+	lfs	f0, 32(r3)				# 2071
+	lwz	r2, 40(r3)				# 2071
 	mfspr	r31, 8				# 2071
-	mr	r2, r5				# 2071
-	mr	r5, r6				# 2071
-	stw	r31, 56(r3)				# 2071
-	addi	r3, r3, 60				# 2071
-	bl	min_caml_create_array				# 2071
-	addi	r3, r3, -60				# 2071
-	lwz	r31, 56(r3)				# 2071
+	stw	r31, 52(r3)				# 2071
+	addi	r3, r3, 56				# 2071
+	bl	min_caml_create_float_array				# 2071
+	addi	r3, r3, -56				# 2071
+	lwz	r31, 52(r3)				# 2071
 	mtspr	8, r31				# 2071
-	lfs	f0, 32(r3)				# 2056
-	lwz	r5, 40(r3)				# 2056
-	stw	r2, 56(r3)				# 2056
-	mfspr	r31, 8				# 2056
-	mr	r2, r5				# 2056
-	stw	r31, 60(r3)				# 2056
-	addi	r3, r3, 64				# 2056
-	bl	min_caml_create_float_array				# 2056
-	addi	r3, r3, -64				# 2056
-	lwz	r31, 60(r3)				# 2056
-	mr	r5, r2				# 2056
-	mtspr	8, r31				# 2056
-	lwz	r2, 24(r3)				# 2057
-	mfspr	r31, 8				# 2057
-	stw	r31, 60(r3)				# 2057
-	addi	r3, r3, 64				# 2057
-	bl	min_caml_create_array				# 2057
-	addi	r3, r3, -64				# 2057
-	lwz	r31, 60(r3)				# 2057
-	mtspr	8, r31				# 2057
-	lfs	f0, 32(r3)				# 2058
-	lwz	r5, 40(r3)				# 2058
-	stw	r2, 60(r3)				# 2058
-	mfspr	r31, 8				# 2058
-	mr	r2, r5				# 2058
-	stw	r31, 64(r3)				# 2058
-	addi	r3, r3, 68				# 2058
-	bl	min_caml_create_float_array				# 2058
-	addi	r3, r3, -68				# 2058
-	lwz	r31, 64(r3)				# 2058
-	mtspr	8, r31				# 2058
-	lwz	r5, 20(r3)				# 2058
-	slwi	r6, r5, 2				# 2058
-	lwz	r7, 60(r3)				# 2058
-	stwx	r2, r7, r6				# 2058
-	lfs	f0, 32(r3)				# 2059
-	lwz	r2, 40(r3)				# 2059
-	mfspr	r31, 8				# 2059
-	stw	r31, 64(r3)				# 2059
-	addi	r3, r3, 68				# 2059
-	bl	min_caml_create_float_array				# 2059
-	addi	r3, r3, -68				# 2059
-	lwz	r31, 64(r3)				# 2059
-	mtspr	8, r31				# 2059
-	lwz	r5, 16(r3)				# 2059
-	slwi	r6, r5, 2				# 2059
-	lwz	r7, 60(r3)				# 2059
-	stwx	r2, r7, r6				# 2059
-	lfs	f0, 32(r3)				# 2060
-	lwz	r2, 40(r3)				# 2060
-	mfspr	r31, 8				# 2060
-	stw	r31, 64(r3)				# 2060
-	addi	r3, r3, 68				# 2060
-	bl	min_caml_create_float_array				# 2060
-	addi	r3, r3, -68				# 2060
-	lwz	r31, 64(r3)				# 2060
-	mtspr	8, r31				# 2060
-	lwz	r5, 40(r3)				# 2060
-	slwi	r6, r5, 2				# 2060
-	lwz	r7, 60(r3)				# 2060
-	stwx	r2, r7, r6				# 2060
-	lfs	f0, 32(r3)				# 2061
-	mfspr	r31, 8				# 2061
-	mr	r2, r5				# 2061
-	stw	r31, 64(r3)				# 2061
-	addi	r3, r3, 68				# 2061
-	bl	min_caml_create_float_array				# 2061
-	addi	r3, r3, -68				# 2061
-	lwz	r31, 64(r3)				# 2061
-	mtspr	8, r31				# 2061
-	lwz	r5, 60(r3)				# 2061
-	stw	r2, 16(r5)				# 2061
-	lfs	f0, 32(r3)				# 2056
-	lwz	r2, 40(r3)				# 2056
-	mfspr	r31, 8				# 2056
-	stw	r31, 64(r3)				# 2056
-	addi	r3, r3, 68				# 2056
-	bl	min_caml_create_float_array				# 2056
-	addi	r3, r3, -68				# 2056
-	lwz	r31, 64(r3)				# 2056
-	mr	r5, r2				# 2056
-	mtspr	8, r31				# 2056
-	lwz	r2, 24(r3)				# 2057
-	mfspr	r31, 8				# 2057
-	stw	r31, 64(r3)				# 2057
-	addi	r3, r3, 68				# 2057
-	bl	min_caml_create_array				# 2057
-	addi	r3, r3, -68				# 2057
-	lwz	r31, 64(r3)				# 2057
-	mtspr	8, r31				# 2057
-	lfs	f0, 32(r3)				# 2058
-	lwz	r5, 40(r3)				# 2058
-	stw	r2, 64(r3)				# 2058
-	mfspr	r31, 8				# 2058
-	mr	r2, r5				# 2058
-	stw	r31, 68(r3)				# 2058
-	addi	r3, r3, 72				# 2058
-	bl	min_caml_create_float_array				# 2058
-	addi	r3, r3, -72				# 2058
-	lwz	r31, 68(r3)				# 2058
-	mtspr	8, r31				# 2058
-	lwz	r5, 20(r3)				# 2058
-	slwi	r6, r5, 2				# 2058
-	lwz	r7, 64(r3)				# 2058
-	stwx	r2, r7, r6				# 2058
-	lfs	f0, 32(r3)				# 2059
-	lwz	r2, 40(r3)				# 2059
-	mfspr	r31, 8				# 2059
-	stw	r31, 68(r3)				# 2059
-	addi	r3, r3, 72				# 2059
-	bl	min_caml_create_float_array				# 2059
-	addi	r3, r3, -72				# 2059
-	lwz	r31, 68(r3)				# 2059
-	mtspr	8, r31				# 2059
-	lwz	r5, 16(r3)				# 2059
-	slwi	r6, r5, 2				# 2059
-	lwz	r7, 64(r3)				# 2059
-	stwx	r2, r7, r6				# 2059
-	lfs	f0, 32(r3)				# 2060
-	lwz	r2, 40(r3)				# 2060
-	mfspr	r31, 8				# 2060
-	stw	r31, 68(r3)				# 2060
-	addi	r3, r3, 72				# 2060
-	bl	min_caml_create_float_array				# 2060
-	addi	r3, r3, -72				# 2060
-	lwz	r31, 68(r3)				# 2060
-	mtspr	8, r31				# 2060
-	lwz	r5, 40(r3)				# 2060
-	slwi	r6, r5, 2				# 2060
-	lwz	r7, 64(r3)				# 2060
-	stwx	r2, r7, r6				# 2060
-	lfs	f0, 32(r3)				# 2061
-	mfspr	r31, 8				# 2061
-	mr	r2, r5				# 2061
-	stw	r31, 68(r3)				# 2061
-	addi	r3, r3, 72				# 2061
-	bl	min_caml_create_float_array				# 2061
-	addi	r3, r3, -72				# 2061
-	lwz	r31, 68(r3)				# 2061
-	mtspr	8, r31				# 2061
-	lwz	r5, 64(r3)				# 2061
-	stw	r2, 16(r5)				# 2061
-	lwz	r2, 20(r3)				# 2074
-	lwz	r6, 12(r3)				# 2074
-	mfspr	r31, 8				# 2074
-	mr	r5, r6				# 2074
-	stw	r31, 68(r3)				# 2074
-	addi	r3, r3, 72				# 2074
-	bl	min_caml_create_array				# 2074
-	addi	r3, r3, -72				# 2074
-	lwz	r31, 68(r3)				# 2074
-	mtspr	8, r31				# 2074
-	lfs	f0, 32(r3)				# 2056
-	lwz	r5, 40(r3)				# 2056
-	stw	r2, 68(r3)				# 2056
-	mfspr	r31, 8				# 2056
-	mr	r2, r5				# 2056
-	stw	r31, 72(r3)				# 2056
-	addi	r3, r3, 76				# 2056
-	bl	min_caml_create_float_array				# 2056
-	addi	r3, r3, -76				# 2056
-	lwz	r31, 72(r3)				# 2056
-	mr	r5, r2				# 2056
-	mtspr	8, r31				# 2056
-	lwz	r2, 24(r3)				# 2057
-	mfspr	r31, 8				# 2057
-	stw	r31, 72(r3)				# 2057
-	addi	r3, r3, 76				# 2057
-	bl	min_caml_create_array				# 2057
-	addi	r3, r3, -76				# 2057
-	lwz	r31, 72(r3)				# 2057
-	mtspr	8, r31				# 2057
-	lfs	f0, 32(r3)				# 2058
-	lwz	r5, 40(r3)				# 2058
-	stw	r2, 72(r3)				# 2058
-	mfspr	r31, 8				# 2058
-	mr	r2, r5				# 2058
-	stw	r31, 76(r3)				# 2058
-	addi	r3, r3, 80				# 2058
-	bl	min_caml_create_float_array				# 2058
-	addi	r3, r3, -80				# 2058
-	lwz	r31, 76(r3)				# 2058
-	mtspr	8, r31				# 2058
-	lwz	r5, 20(r3)				# 2058
-	slwi	r6, r5, 2				# 2058
-	lwz	r7, 72(r3)				# 2058
-	stwx	r2, r7, r6				# 2058
-	lfs	f0, 32(r3)				# 2059
-	lwz	r2, 40(r3)				# 2059
-	mfspr	r31, 8				# 2059
-	stw	r31, 76(r3)				# 2059
-	addi	r3, r3, 80				# 2059
-	bl	min_caml_create_float_array				# 2059
-	addi	r3, r3, -80				# 2059
-	lwz	r31, 76(r3)				# 2059
-	mtspr	8, r31				# 2059
-	lwz	r5, 16(r3)				# 2059
-	slwi	r5, r5, 2				# 2059
-	lwz	r6, 72(r3)				# 2059
-	stwx	r2, r6, r5				# 2059
-	lfs	f0, 32(r3)				# 2060
-	lwz	r2, 40(r3)				# 2060
-	mfspr	r31, 8				# 2060
-	stw	r31, 76(r3)				# 2060
-	addi	r3, r3, 80				# 2060
-	bl	min_caml_create_float_array				# 2060
-	addi	r3, r3, -80				# 2060
-	lwz	r31, 76(r3)				# 2060
-	mtspr	8, r31				# 2060
-	lwz	r5, 40(r3)				# 2060
-	slwi	r6, r5, 2				# 2060
-	lwz	r7, 72(r3)				# 2060
-	stwx	r2, r7, r6				# 2060
-	lfs	f0, 32(r3)				# 2061
-	mfspr	r31, 8				# 2061
-	mr	r2, r5				# 2061
-	stw	r31, 76(r3)				# 2061
-	addi	r3, r3, 80				# 2061
-	bl	min_caml_create_float_array				# 2061
-	addi	r3, r3, -80				# 2061
-	lwz	r31, 76(r3)				# 2061
-	mtspr	8, r31				# 2061
-	lwz	r5, 72(r3)				# 2061
-	stw	r2, 16(r5)				# 2061
-	mr	r2, r4				# 2076
-	addi	r4, r4, 32				# 2076
-	stw	r5, 28(r2)				# 2076
-	lwz	r5, 68(r3)				# 2076
-	stw	r5, 24(r2)				# 2076
-	lwz	r5, 64(r3)				# 2076
-	stw	r5, 20(r2)				# 2076
-	lwz	r5, 60(r3)				# 2076
-	stw	r5, 16(r2)				# 2076
-	lwz	r5, 56(r3)				# 2076
-	stw	r5, 12(r2)				# 2076
-	lwz	r5, 52(r3)				# 2076
-	stw	r5, 8(r2)				# 2076
-	lwz	r5, 48(r3)				# 2076
-	stw	r5, 4(r2)				# 2076
-	lwz	r5, 44(r3)				# 2076
-	stw	r5, 0(r2)				# 2076
-	lwz	r5, 8(r3)				# 2082
-	slwi	r6, r5, 2				# 2082
-	lwz	r7, 4(r3)				# 2082
-	stwx	r2, r7, r6				# 2082
-	lwz	r2, 20(r3)				# 2083
-	sub	r5, r5, r2				# 2083
-	lwz	r30, 0(r3)				# 2083
-	mr	r2, r7				# 2083
-	lwz	r29, 0(r30)				# 2083
-	mtspr	9, r29
-	bctr				# 2083
-ble_else.18156:
+	lwz	r5, 16(r3)				# 2071
+	slwi	r6, r5, 2				# 2071
+	lwz	r7, 48(r3)				# 2071
+	stwx	r2, r7, r6				# 2071
+	lfs	f0, 32(r3)				# 2072
+	lwz	r2, 40(r3)				# 2072
+	mfspr	r31, 8				# 2072
+	stw	r31, 52(r3)				# 2072
+	addi	r3, r3, 56				# 2072
+	bl	min_caml_create_float_array				# 2072
+	addi	r3, r3, -56				# 2072
+	lwz	r31, 52(r3)				# 2072
+	mtspr	8, r31				# 2072
+	lwz	r5, 40(r3)				# 2072
+	slwi	r6, r5, 2				# 2072
+	lwz	r7, 48(r3)				# 2072
+	stwx	r2, r7, r6				# 2072
+	lfs	f0, 32(r3)				# 2073
+	mfspr	r31, 8				# 2073
+	mr	r2, r5				# 2073
+	stw	r31, 52(r3)				# 2073
+	addi	r3, r3, 56				# 2073
+	bl	min_caml_create_float_array				# 2073
+	addi	r3, r3, -56				# 2073
+	lwz	r31, 52(r3)				# 2073
+	mtspr	8, r31				# 2073
+	lwz	r5, 48(r3)				# 2073
+	stw	r2, 16(r5)				# 2073
+	lwz	r2, 24(r3)				# 2082
+	lwz	r6, 12(r3)				# 2082
+	mfspr	r31, 8				# 2082
+	mr	r5, r6				# 2082
+	stw	r31, 52(r3)				# 2082
+	addi	r3, r3, 56				# 2082
+	bl	min_caml_create_array				# 2082
+	addi	r3, r3, -56				# 2082
+	lwz	r31, 52(r3)				# 2082
+	mtspr	8, r31				# 2082
+	lwz	r5, 24(r3)				# 2083
+	lwz	r6, 12(r3)				# 2083
+	stw	r2, 52(r3)				# 2083
+	mfspr	r31, 8				# 2083
+	mr	r2, r5				# 2083
+	mr	r5, r6				# 2083
+	stw	r31, 56(r3)				# 2083
+	addi	r3, r3, 60				# 2083
+	bl	min_caml_create_array				# 2083
+	addi	r3, r3, -60				# 2083
+	lwz	r31, 56(r3)				# 2083
+	mtspr	8, r31				# 2083
+	lfs	f0, 32(r3)				# 2068
+	lwz	r5, 40(r3)				# 2068
+	stw	r2, 56(r3)				# 2068
+	mfspr	r31, 8				# 2068
+	mr	r2, r5				# 2068
+	stw	r31, 60(r3)				# 2068
+	addi	r3, r3, 64				# 2068
+	bl	min_caml_create_float_array				# 2068
+	addi	r3, r3, -64				# 2068
+	lwz	r31, 60(r3)				# 2068
+	mr	r5, r2				# 2068
+	mtspr	8, r31				# 2068
+	lwz	r2, 24(r3)				# 2069
+	mfspr	r31, 8				# 2069
+	stw	r31, 60(r3)				# 2069
+	addi	r3, r3, 64				# 2069
+	bl	min_caml_create_array				# 2069
+	addi	r3, r3, -64				# 2069
+	lwz	r31, 60(r3)				# 2069
+	mtspr	8, r31				# 2069
+	lfs	f0, 32(r3)				# 2070
+	lwz	r5, 40(r3)				# 2070
+	stw	r2, 60(r3)				# 2070
+	mfspr	r31, 8				# 2070
+	mr	r2, r5				# 2070
+	stw	r31, 64(r3)				# 2070
+	addi	r3, r3, 68				# 2070
+	bl	min_caml_create_float_array				# 2070
+	addi	r3, r3, -68				# 2070
+	lwz	r31, 64(r3)				# 2070
+	mtspr	8, r31				# 2070
+	lwz	r5, 20(r3)				# 2070
+	slwi	r6, r5, 2				# 2070
+	lwz	r7, 60(r3)				# 2070
+	stwx	r2, r7, r6				# 2070
+	lfs	f0, 32(r3)				# 2071
+	lwz	r2, 40(r3)				# 2071
+	mfspr	r31, 8				# 2071
+	stw	r31, 64(r3)				# 2071
+	addi	r3, r3, 68				# 2071
+	bl	min_caml_create_float_array				# 2071
+	addi	r3, r3, -68				# 2071
+	lwz	r31, 64(r3)				# 2071
+	mtspr	8, r31				# 2071
+	lwz	r5, 16(r3)				# 2071
+	slwi	r6, r5, 2				# 2071
+	lwz	r7, 60(r3)				# 2071
+	stwx	r2, r7, r6				# 2071
+	lfs	f0, 32(r3)				# 2072
+	lwz	r2, 40(r3)				# 2072
+	mfspr	r31, 8				# 2072
+	stw	r31, 64(r3)				# 2072
+	addi	r3, r3, 68				# 2072
+	bl	min_caml_create_float_array				# 2072
+	addi	r3, r3, -68				# 2072
+	lwz	r31, 64(r3)				# 2072
+	mtspr	8, r31				# 2072
+	lwz	r5, 40(r3)				# 2072
+	slwi	r6, r5, 2				# 2072
+	lwz	r7, 60(r3)				# 2072
+	stwx	r2, r7, r6				# 2072
+	lfs	f0, 32(r3)				# 2073
+	mfspr	r31, 8				# 2073
+	mr	r2, r5				# 2073
+	stw	r31, 64(r3)				# 2073
+	addi	r3, r3, 68				# 2073
+	bl	min_caml_create_float_array				# 2073
+	addi	r3, r3, -68				# 2073
+	lwz	r31, 64(r3)				# 2073
+	mtspr	8, r31				# 2073
+	lwz	r5, 60(r3)				# 2073
+	stw	r2, 16(r5)				# 2073
+	lfs	f0, 32(r3)				# 2068
+	lwz	r2, 40(r3)				# 2068
+	mfspr	r31, 8				# 2068
+	stw	r31, 64(r3)				# 2068
+	addi	r3, r3, 68				# 2068
+	bl	min_caml_create_float_array				# 2068
+	addi	r3, r3, -68				# 2068
+	lwz	r31, 64(r3)				# 2068
+	mr	r5, r2				# 2068
+	mtspr	8, r31				# 2068
+	lwz	r2, 24(r3)				# 2069
+	mfspr	r31, 8				# 2069
+	stw	r31, 64(r3)				# 2069
+	addi	r3, r3, 68				# 2069
+	bl	min_caml_create_array				# 2069
+	addi	r3, r3, -68				# 2069
+	lwz	r31, 64(r3)				# 2069
+	mtspr	8, r31				# 2069
+	lfs	f0, 32(r3)				# 2070
+	lwz	r5, 40(r3)				# 2070
+	stw	r2, 64(r3)				# 2070
+	mfspr	r31, 8				# 2070
+	mr	r2, r5				# 2070
+	stw	r31, 68(r3)				# 2070
+	addi	r3, r3, 72				# 2070
+	bl	min_caml_create_float_array				# 2070
+	addi	r3, r3, -72				# 2070
+	lwz	r31, 68(r3)				# 2070
+	mtspr	8, r31				# 2070
+	lwz	r5, 20(r3)				# 2070
+	slwi	r6, r5, 2				# 2070
+	lwz	r7, 64(r3)				# 2070
+	stwx	r2, r7, r6				# 2070
+	lfs	f0, 32(r3)				# 2071
+	lwz	r2, 40(r3)				# 2071
+	mfspr	r31, 8				# 2071
+	stw	r31, 68(r3)				# 2071
+	addi	r3, r3, 72				# 2071
+	bl	min_caml_create_float_array				# 2071
+	addi	r3, r3, -72				# 2071
+	lwz	r31, 68(r3)				# 2071
+	mtspr	8, r31				# 2071
+	lwz	r5, 16(r3)				# 2071
+	slwi	r6, r5, 2				# 2071
+	lwz	r7, 64(r3)				# 2071
+	stwx	r2, r7, r6				# 2071
+	lfs	f0, 32(r3)				# 2072
+	lwz	r2, 40(r3)				# 2072
+	mfspr	r31, 8				# 2072
+	stw	r31, 68(r3)				# 2072
+	addi	r3, r3, 72				# 2072
+	bl	min_caml_create_float_array				# 2072
+	addi	r3, r3, -72				# 2072
+	lwz	r31, 68(r3)				# 2072
+	mtspr	8, r31				# 2072
+	lwz	r5, 40(r3)				# 2072
+	slwi	r6, r5, 2				# 2072
+	lwz	r7, 64(r3)				# 2072
+	stwx	r2, r7, r6				# 2072
+	lfs	f0, 32(r3)				# 2073
+	mfspr	r31, 8				# 2073
+	mr	r2, r5				# 2073
+	stw	r31, 68(r3)				# 2073
+	addi	r3, r3, 72				# 2073
+	bl	min_caml_create_float_array				# 2073
+	addi	r3, r3, -72				# 2073
+	lwz	r31, 68(r3)				# 2073
+	mtspr	8, r31				# 2073
+	lwz	r5, 64(r3)				# 2073
+	stw	r2, 16(r5)				# 2073
+	lwz	r2, 20(r3)				# 2086
+	lwz	r6, 12(r3)				# 2086
+	mfspr	r31, 8				# 2086
+	mr	r5, r6				# 2086
+	stw	r31, 68(r3)				# 2086
+	addi	r3, r3, 72				# 2086
+	bl	min_caml_create_array				# 2086
+	addi	r3, r3, -72				# 2086
+	lwz	r31, 68(r3)				# 2086
+	mtspr	8, r31				# 2086
+	lfs	f0, 32(r3)				# 2068
+	lwz	r5, 40(r3)				# 2068
+	stw	r2, 68(r3)				# 2068
+	mfspr	r31, 8				# 2068
+	mr	r2, r5				# 2068
+	stw	r31, 72(r3)				# 2068
+	addi	r3, r3, 76				# 2068
+	bl	min_caml_create_float_array				# 2068
+	addi	r3, r3, -76				# 2068
+	lwz	r31, 72(r3)				# 2068
+	mr	r5, r2				# 2068
+	mtspr	8, r31				# 2068
+	lwz	r2, 24(r3)				# 2069
+	mfspr	r31, 8				# 2069
+	stw	r31, 72(r3)				# 2069
+	addi	r3, r3, 76				# 2069
+	bl	min_caml_create_array				# 2069
+	addi	r3, r3, -76				# 2069
+	lwz	r31, 72(r3)				# 2069
+	mtspr	8, r31				# 2069
+	lfs	f0, 32(r3)				# 2070
+	lwz	r5, 40(r3)				# 2070
+	stw	r2, 72(r3)				# 2070
+	mfspr	r31, 8				# 2070
+	mr	r2, r5				# 2070
+	stw	r31, 76(r3)				# 2070
+	addi	r3, r3, 80				# 2070
+	bl	min_caml_create_float_array				# 2070
+	addi	r3, r3, -80				# 2070
+	lwz	r31, 76(r3)				# 2070
+	mtspr	8, r31				# 2070
+	lwz	r5, 20(r3)				# 2070
+	slwi	r6, r5, 2				# 2070
+	lwz	r7, 72(r3)				# 2070
+	stwx	r2, r7, r6				# 2070
+	lfs	f0, 32(r3)				# 2071
+	lwz	r2, 40(r3)				# 2071
+	mfspr	r31, 8				# 2071
+	stw	r31, 76(r3)				# 2071
+	addi	r3, r3, 80				# 2071
+	bl	min_caml_create_float_array				# 2071
+	addi	r3, r3, -80				# 2071
+	lwz	r31, 76(r3)				# 2071
+	mtspr	8, r31				# 2071
+	lwz	r5, 16(r3)				# 2071
+	slwi	r5, r5, 2				# 2071
+	lwz	r6, 72(r3)				# 2071
+	stwx	r2, r6, r5				# 2071
+	lfs	f0, 32(r3)				# 2072
+	lwz	r2, 40(r3)				# 2072
+	mfspr	r31, 8				# 2072
+	stw	r31, 76(r3)				# 2072
+	addi	r3, r3, 80				# 2072
+	bl	min_caml_create_float_array				# 2072
+	addi	r3, r3, -80				# 2072
+	lwz	r31, 76(r3)				# 2072
+	mtspr	8, r31				# 2072
+	lwz	r5, 40(r3)				# 2072
+	slwi	r6, r5, 2				# 2072
+	lwz	r7, 72(r3)				# 2072
+	stwx	r2, r7, r6				# 2072
+	lfs	f0, 32(r3)				# 2073
+	mfspr	r31, 8				# 2073
+	mr	r2, r5				# 2073
+	stw	r31, 76(r3)				# 2073
+	addi	r3, r3, 80				# 2073
+	bl	min_caml_create_float_array				# 2073
+	addi	r3, r3, -80				# 2073
+	lwz	r31, 76(r3)				# 2073
+	mtspr	8, r31				# 2073
+	lwz	r5, 72(r3)				# 2073
+	stw	r2, 16(r5)				# 2073
+	mr	r2, r4				# 2088
+	addi	r4, r4, 32				# 2088
+	stw	r5, 28(r2)				# 2088
+	lwz	r5, 68(r3)				# 2088
+	stw	r5, 24(r2)				# 2088
+	lwz	r5, 64(r3)				# 2088
+	stw	r5, 20(r2)				# 2088
+	lwz	r5, 60(r3)				# 2088
+	stw	r5, 16(r2)				# 2088
+	lwz	r5, 56(r3)				# 2088
+	stw	r5, 12(r2)				# 2088
+	lwz	r5, 52(r3)				# 2088
+	stw	r5, 8(r2)				# 2088
+	lwz	r5, 48(r3)				# 2088
+	stw	r5, 4(r2)				# 2088
+	lwz	r5, 44(r3)				# 2088
+	stw	r5, 0(r2)				# 2088
+	lwz	r5, 8(r3)				# 2094
+	slwi	r6, r5, 2				# 2094
+	lwz	r7, 4(r3)				# 2094
+	stwx	r2, r7, r6				# 2094
+	lwz	r2, 20(r3)				# 2095
+	sub	r5, r5, r2				# 2095
+	lwz	r1, 0(r3)				# 2095
+	mr	r2, r7				# 2095
+	lwz	r30, 0(r1)				# 2095
+	mtspr	9, r30
+	bctr				# 2095
+ble_else.16485:
 	blr
-calc_dirvec.2899:
-	lwz	r7, 20(r30)				# 2112
-	lwz	r8, 16(r30)				# 2112
-	lwz	r9, 12(r30)				# 2112
-	lwz	r10, 8(r30)				# 2112
-	lwz	r11, 4(r30)				# 2112
-	cmpw	cr7, r8, r2				# 2113
-	bgt	cr7, ble_else.18158				# 2113
-	stw	r9, 0(r3)				# 2114
-	stw	r11, 4(r3)				# 2114
-	stw	r10, 8(r3)				# 2114
-	stw	r6, 12(r3)				# 2114
-	stw	r7, 16(r3)				# 2114
-	stw	r5, 20(r3)				# 2114
-	stfs	f0, 24(r3)				# 2114
-	stfs	f1, 32(r3)				# 2114
-	mfspr	r31, 8				# 2114
-	stw	r31, 40(r3)				# 2114
-	addi	r3, r3, 44				# 2114
-	bl	min_caml_fsqr				# 2114
-	addi	r3, r3, -44				# 2114
-	lwz	r31, 40(r3)				# 2114
-	mtspr	8, r31				# 2114
-	lfs	f1, 32(r3)				# 2114
-	stfs	f0, 40(r3)				# 2114
-	mfspr	r31, 8				# 2114
-	fmr	f0, f1				# 2114
-	stw	r31, 48(r3)				# 2114
-	addi	r3, r3, 52				# 2114
-	bl	min_caml_fsqr				# 2114
-	addi	r3, r3, -52				# 2114
-	lwz	r31, 48(r3)				# 2114
-	mtspr	8, r31				# 2114
-	lfs	f1, 40(r3)				# 2114
-	fadd	f0, f1, f0				# 2114
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f1, 0(r31)				# 2114
-	fadd	f0, f0, f1				# 2114
-	stfs	f1, 48(r3)				# 2114
-	mfspr	r31, 8				# 2114
-	stw	r31, 56(r3)				# 2114
-	addi	r3, r3, 60				# 2114
-	bl	min_caml_sqrt				# 2114
-	addi	r3, r3, -60				# 2114
-	lwz	r31, 56(r3)				# 2114
-	mtspr	8, r31				# 2114
-	lfs	f1, 24(r3)				# 2115
-	fdiv	f1, f1, f0				# 2115
-	lfs	f2, 32(r3)				# 2116
-	fdiv	f2, f2, f0				# 2116
-	lfs	f3, 48(r3)				# 2117
-	fdiv	f0, f3, f0				# 2117
-	lwz	r2, 20(r3)				# 2120
-	slwi	r2, r2, 2				# 2120
-	lwz	r5, 16(r3)				# 2120
-	lwzx	r2, r5, r2				# 2120
-	lwz	r5, 12(r3)				# 2121
-	slwi	r6, r5, 2				# 2121
-	lwzx	r6, r2, r6				# 2121
-	lwz	r6, 0(r6)				# 508
-	lwz	r7, 8(r3)				# 134
-	slwi	r8, r7, 2				# 134
-	stfsx	f1, r6, r8				# 134
-	lwz	r8, 4(r3)				# 135
-	slwi	r9, r8, 2				# 135
-	stfsx	f2, r6, r9				# 135
-	lwz	r9, 0(r3)				# 136
-	slwi	r10, r9, 2				# 136
-	stfsx	f0, r6, r10				# 136
-	addi	r6, r5, 40				# 2122
-	slwi	r6, r6, 2				# 2122
-	lwzx	r6, r2, r6				# 2122
-	lwz	r6, 0(r6)				# 508
-	stfs	f2, 56(r3)				# 2122
-	stw	r2, 64(r3)				# 2122
-	stfs	f0, 72(r3)				# 2122
-	stw	r6, 80(r3)				# 2122
-	stfs	f1, 88(r3)				# 2122
-	mfspr	r31, 8				# 2122
-	fmr	f0, f2				# 2122
-	stw	r31, 96(r3)				# 2122
-	addi	r3, r3, 100				# 2122
-	bl	min_caml_fneg				# 2122
-	addi	r3, r3, -100				# 2122
-	lwz	r31, 96(r3)				# 2122
-	mtspr	8, r31				# 2122
-	lwz	r2, 8(r3)				# 134
-	slwi	r5, r2, 2				# 134
-	lwz	r6, 80(r3)				# 134
-	lfs	f1, 88(r3)				# 134
-	stfsx	f1, r6, r5				# 134
-	lwz	r5, 4(r3)				# 135
-	slwi	r7, r5, 2				# 135
-	lfs	f2, 72(r3)				# 135
-	stfsx	f2, r6, r7				# 135
-	lwz	r7, 0(r3)				# 136
-	slwi	r8, r7, 2				# 136
-	stfsx	f0, r6, r8				# 136
-	lwz	r6, 12(r3)				# 2123
-	addi	r8, r6, 80				# 2123
-	slwi	r8, r8, 2				# 2123
-	lwz	r9, 64(r3)				# 2123
-	lwzx	r8, r9, r8				# 2123
-	lwz	r8, 0(r8)				# 508
-	stw	r8, 96(r3)				# 2123
-	mfspr	r31, 8				# 2123
-	fmr	f0, f1				# 2123
-	stw	r31, 100(r3)				# 2123
-	addi	r3, r3, 104				# 2123
-	bl	min_caml_fneg				# 2123
-	addi	r3, r3, -104				# 2123
-	lwz	r31, 100(r3)				# 2123
-	mtspr	8, r31				# 2123
-	lfs	f1, 56(r3)				# 2123
-	stfs	f0, 104(r3)				# 2123
-	mfspr	r31, 8				# 2123
-	fmr	f0, f1				# 2123
-	stw	r31, 112(r3)				# 2123
-	addi	r3, r3, 116				# 2123
-	bl	min_caml_fneg				# 2123
-	addi	r3, r3, -116				# 2123
-	lwz	r31, 112(r3)				# 2123
-	mtspr	8, r31				# 2123
-	lwz	r2, 8(r3)				# 134
-	slwi	r5, r2, 2				# 134
-	lwz	r6, 96(r3)				# 134
-	lfs	f1, 72(r3)				# 134
-	stfsx	f1, r6, r5				# 134
-	lwz	r5, 4(r3)				# 135
-	slwi	r7, r5, 2				# 135
-	lfs	f2, 104(r3)				# 135
-	stfsx	f2, r6, r7				# 135
-	lwz	r7, 0(r3)				# 136
-	slwi	r8, r7, 2				# 136
-	stfsx	f0, r6, r8				# 136
-	lwz	r6, 12(r3)				# 2124
-	add	r8, r6, r5				# 2124
-	slwi	r8, r8, 2				# 2124
-	lwz	r9, 64(r3)				# 2124
-	lwzx	r8, r9, r8				# 2124
-	lwz	r8, 0(r8)				# 508
-	lfs	f0, 88(r3)				# 2124
-	stw	r8, 112(r3)				# 2124
-	mfspr	r31, 8				# 2124
-	stw	r31, 116(r3)				# 2124
-	addi	r3, r3, 120				# 2124
-	bl	min_caml_fneg				# 2124
-	addi	r3, r3, -120				# 2124
-	lwz	r31, 116(r3)				# 2124
-	mtspr	8, r31				# 2124
-	lfs	f1, 56(r3)				# 2124
-	stfs	f0, 120(r3)				# 2124
-	mfspr	r31, 8				# 2124
-	fmr	f0, f1				# 2124
-	stw	r31, 128(r3)				# 2124
-	addi	r3, r3, 132				# 2124
-	bl	min_caml_fneg				# 2124
-	addi	r3, r3, -132				# 2124
-	lwz	r31, 128(r3)				# 2124
-	mtspr	8, r31				# 2124
-	lfs	f1, 72(r3)				# 2124
-	stfs	f0, 128(r3)				# 2124
-	mfspr	r31, 8				# 2124
-	fmr	f0, f1				# 2124
-	stw	r31, 136(r3)				# 2124
-	addi	r3, r3, 140				# 2124
-	bl	min_caml_fneg				# 2124
-	addi	r3, r3, -140				# 2124
-	lwz	r31, 136(r3)				# 2124
-	mtspr	8, r31				# 2124
-	lwz	r2, 8(r3)				# 134
-	slwi	r5, r2, 2				# 134
-	lwz	r6, 112(r3)				# 134
-	lfs	f1, 120(r3)				# 134
-	stfsx	f1, r6, r5				# 134
-	lwz	r5, 4(r3)				# 135
-	slwi	r7, r5, 2				# 135
-	lfs	f1, 128(r3)				# 135
-	stfsx	f1, r6, r7				# 135
-	lwz	r7, 0(r3)				# 136
-	slwi	r8, r7, 2				# 136
-	stfsx	f0, r6, r8				# 136
-	lwz	r6, 12(r3)				# 2125
-	addi	r8, r6, 41				# 2125
-	slwi	r8, r8, 2				# 2125
-	lwz	r9, 64(r3)				# 2125
-	lwzx	r8, r9, r8				# 2125
-	lwz	r8, 0(r8)				# 508
-	lfs	f0, 88(r3)				# 2125
-	stw	r8, 136(r3)				# 2125
-	mfspr	r31, 8				# 2125
-	stw	r31, 140(r3)				# 2125
-	addi	r3, r3, 144				# 2125
-	bl	min_caml_fneg				# 2125
-	addi	r3, r3, -144				# 2125
-	lwz	r31, 140(r3)				# 2125
-	mtspr	8, r31				# 2125
-	lfs	f1, 72(r3)				# 2125
-	stfs	f0, 144(r3)				# 2125
-	mfspr	r31, 8				# 2125
-	fmr	f0, f1				# 2125
-	stw	r31, 152(r3)				# 2125
-	addi	r3, r3, 156				# 2125
-	bl	min_caml_fneg				# 2125
-	addi	r3, r3, -156				# 2125
-	lwz	r31, 152(r3)				# 2125
-	mtspr	8, r31				# 2125
-	lwz	r2, 8(r3)				# 134
-	slwi	r5, r2, 2				# 134
-	lwz	r6, 136(r3)				# 134
-	lfs	f1, 144(r3)				# 134
-	stfsx	f1, r6, r5				# 134
-	lwz	r5, 4(r3)				# 135
-	slwi	r7, r5, 2				# 135
-	stfsx	f0, r6, r7				# 135
-	lwz	r7, 0(r3)				# 136
-	slwi	r8, r7, 2				# 136
-	lfs	f0, 56(r3)				# 136
-	stfsx	f0, r6, r8				# 136
-	lwz	r6, 12(r3)				# 2126
-	addi	r6, r6, 81				# 2126
-	slwi	r6, r6, 2				# 2126
-	lwz	r8, 64(r3)				# 2126
-	lwzx	r6, r8, r6				# 2126
-	lwz	r6, 0(r6)				# 508
-	lfs	f1, 72(r3)				# 2126
-	stw	r6, 152(r3)				# 2126
+calc_dirvec.2917:
+	lwz	r7, 20(r1)				# 2124
+	lwz	r8, 16(r1)				# 2124
+	lwz	r9, 12(r1)				# 2124
+	lwz	r10, 8(r1)				# 2124
+	lwz	r11, 4(r1)				# 2124
+	cmpw	cr7, r8, r2				# 2125
+	bgt	cr7, ble_else.16487				# 2125
+	fmul	f2, f0, f0				# 103
+	fmul	f3, f1, f1				# 103
+	fadd	f2, f2, f3				# 2126
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f3, 0(r31)				# 2126
+	fadd	f2, f2, f3				# 2126
+	stw	r9, 0(r3)				# 2126
+	stw	r11, 4(r3)				# 2126
+	stw	r10, 8(r3)				# 2126
+	stw	r6, 12(r3)				# 2126
+	stw	r7, 16(r3)				# 2126
+	stw	r5, 20(r3)				# 2126
+	stfs	f3, 24(r3)				# 2126
+	stfs	f1, 32(r3)				# 2126
+	stfs	f0, 40(r3)				# 2126
 	mfspr	r31, 8				# 2126
-	fmr	f0, f1				# 2126
-	stw	r31, 156(r3)				# 2126
-	addi	r3, r3, 160				# 2126
-	bl	min_caml_fneg				# 2126
-	addi	r3, r3, -160				# 2126
-	lwz	r31, 156(r3)				# 2126
+	fmr	f0, f2				# 2126
+	stw	r31, 48(r3)				# 2126
+	addi	r3, r3, 52				# 2126
+	bl	min_caml_sqrt				# 2126
+	addi	r3, r3, -52				# 2126
+	lwz	r31, 48(r3)				# 2126
 	mtspr	8, r31				# 2126
-	lwz	r2, 8(r3)				# 134
-	slwi	r2, r2, 2				# 134
-	lwz	r5, 152(r3)				# 134
-	stfsx	f0, r5, r2				# 134
-	lwz	r2, 4(r3)				# 135
-	slwi	r2, r2, 2				# 135
-	lfs	f0, 88(r3)				# 135
-	stfsx	f0, r5, r2				# 135
-	lwz	r2, 0(r3)				# 136
-	slwi	r2, r2, 2				# 136
-	lfs	f0, 56(r3)				# 136
-	stfsx	f0, r5, r2				# 136
+	lfs	f1, 40(r3)				# 2127
+	fdiv	f1, f1, f0				# 2127
+	lfs	f2, 32(r3)				# 2128
+	fdiv	f2, f2, f0				# 2128
+	lfs	f3, 24(r3)				# 2129
+	fdiv	f0, f3, f0				# 2129
+	lwz	r2, 20(r3)				# 2132
+	slwi	r2, r2, 2				# 2132
+	lwz	r5, 16(r3)				# 2132
+	lwzx	r2, r5, r2				# 2132
+	lwz	r5, 12(r3)				# 2133
+	slwi	r6, r5, 2				# 2133
+	lwzx	r6, r2, r6				# 2133
+	lwz	r6, 0(r6)				# 521
+	lwz	r7, 8(r3)				# 147
+	slwi	r8, r7, 2				# 147
+	stfsx	f1, r6, r8				# 147
+	lwz	r8, 4(r3)				# 148
+	slwi	r9, r8, 2				# 148
+	stfsx	f2, r6, r9				# 148
+	lwz	r9, 0(r3)				# 149
+	slwi	r10, r9, 2				# 149
+	stfsx	f0, r6, r10				# 149
+	addi	r6, r5, 40				# 2134
+	slwi	r6, r6, 2				# 2134
+	lwzx	r6, r2, r6				# 2134
+	lwz	r6, 0(r6)				# 521
+	fneg	f3, f2				# 107
+	slwi	r10, r7, 2				# 147
+	stfsx	f1, r6, r10				# 147
+	slwi	r10, r8, 2				# 148
+	stfsx	f0, r6, r10				# 148
+	slwi	r10, r9, 2				# 149
+	stfsx	f3, r6, r10				# 149
+	addi	r6, r5, 80				# 2135
+	slwi	r6, r6, 2				# 2135
+	lwzx	r6, r2, r6				# 2135
+	lwz	r6, 0(r6)				# 521
+	fneg	f4, f1				# 107
+	slwi	r10, r7, 2				# 147
+	stfsx	f0, r6, r10				# 147
+	slwi	r10, r8, 2				# 148
+	stfsx	f4, r6, r10				# 148
+	slwi	r10, r9, 2				# 149
+	stfsx	f3, r6, r10				# 149
+	add	r6, r5, r8				# 2136
+	slwi	r6, r6, 2				# 2136
+	lwzx	r6, r2, r6				# 2136
+	lwz	r6, 0(r6)				# 521
+	fneg	f0, f0				# 107
+	slwi	r10, r7, 2				# 147
+	stfsx	f4, r6, r10				# 147
+	slwi	r10, r8, 2				# 148
+	stfsx	f3, r6, r10				# 148
+	slwi	r10, r9, 2				# 149
+	stfsx	f0, r6, r10				# 149
+	addi	r6, r5, 41				# 2137
+	slwi	r6, r6, 2				# 2137
+	lwzx	r6, r2, r6				# 2137
+	lwz	r6, 0(r6)				# 521
+	slwi	r10, r7, 2				# 147
+	stfsx	f4, r6, r10				# 147
+	slwi	r10, r8, 2				# 148
+	stfsx	f0, r6, r10				# 148
+	slwi	r10, r9, 2				# 149
+	stfsx	f2, r6, r10				# 149
+	addi	r5, r5, 81				# 2138
+	slwi	r5, r5, 2				# 2138
+	lwzx	r2, r2, r5				# 2138
+	lwz	r2, 0(r2)				# 521
+	slwi	r5, r7, 2				# 147
+	stfsx	f0, r2, r5				# 147
+	slwi	r5, r8, 2				# 148
+	stfsx	f1, r2, r5				# 148
+	slwi	r5, r9, 2				# 149
+	stfsx	f2, r2, r5				# 149
 	blr
-ble_else.18158:
-	fmul	f0, f1, f1				# 2104
-	lis	r31, ha16(l.12324)
-	addi	r31, r31, lo16(l.12324)
-	lfs	f1, 0(r31)				# 2104
-	fadd	f0, f0, f1				# 2104
-	stw	r6, 12(r3)				# 2104
-	stw	r5, 20(r3)				# 2104
-	stw	r30, 156(r3)				# 2104
-	stfs	f3, 160(r3)				# 2104
-	stfs	f1, 168(r3)				# 2104
-	stw	r11, 4(r3)				# 2104
-	stw	r2, 176(r3)				# 2104
-	stfs	f2, 184(r3)				# 2104
-	mfspr	r31, 8				# 2104
-	stw	r31, 192(r3)				# 2104
-	addi	r3, r3, 196				# 2104
-	bl	min_caml_sqrt				# 2104
-	addi	r3, r3, -196				# 2104
-	lwz	r31, 192(r3)				# 2104
-	mtspr	8, r31				# 2104
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f1, 0(r31)				# 2105
-	fdiv	f2, f1, f0				# 2105
-	stfs	f1, 192(r3)				# 2106
-	stfs	f0, 200(r3)				# 2106
-	mfspr	r31, 8				# 2106
-	fmr	f0, f2				# 2106
-	stw	r31, 208(r3)				# 2106
-	addi	r3, r3, 212				# 2106
-	bl	min_caml_atan				# 2106
-	addi	r3, r3, -212				# 2106
-	lwz	r31, 208(r3)				# 2106
-	mtspr	8, r31				# 2106
-	lfs	f1, 184(r3)				# 2107
-	fmul	f0, f0, f1				# 2107
-	stfs	f0, 208(r3)				# 2099
-	mfspr	r31, 8				# 2099
-	stw	r31, 216(r3)				# 2099
-	addi	r3, r3, 220				# 2099
-	bl	min_caml_sin				# 2099
-	addi	r3, r3, -220				# 2099
-	lwz	r31, 216(r3)				# 2099
-	mtspr	8, r31				# 2099
-	lfs	f1, 208(r3)				# 2099
-	stfs	f0, 216(r3)				# 2099
-	mfspr	r31, 8				# 2099
-	fmr	f0, f1				# 2099
-	stw	r31, 224(r3)				# 2099
-	addi	r3, r3, 228				# 2099
-	bl	min_caml_cos				# 2099
-	addi	r3, r3, -228				# 2099
-	lwz	r31, 224(r3)				# 2099
-	mtspr	8, r31				# 2099
-	lfs	f1, 216(r3)				# 2099
-	fdiv	f0, f1, f0				# 2099
-	lfs	f1, 200(r3)				# 2108
-	fmul	f0, f0, f1				# 2108
-	lwz	r2, 4(r3)				# 2129
-	lwz	r5, 176(r3)				# 2129
-	add	r2, r5, r2				# 2129
-	fmul	f1, f0, f0				# 2104
-	lfs	f2, 168(r3)				# 2104
-	fadd	f1, f1, f2				# 2104
-	stfs	f0, 224(r3)				# 2104
-	stw	r2, 232(r3)				# 2104
-	mfspr	r31, 8				# 2104
-	fmr	f0, f1				# 2104
-	stw	r31, 236(r3)				# 2104
-	addi	r3, r3, 240				# 2104
-	bl	min_caml_sqrt				# 2104
-	addi	r3, r3, -240				# 2104
-	lwz	r31, 236(r3)				# 2104
-	mtspr	8, r31				# 2104
-	lfs	f1, 192(r3)				# 2105
-	fdiv	f1, f1, f0				# 2105
-	stfs	f0, 240(r3)				# 2106
-	mfspr	r31, 8				# 2106
-	fmr	f0, f1				# 2106
-	stw	r31, 248(r3)				# 2106
-	addi	r3, r3, 252				# 2106
-	bl	min_caml_atan				# 2106
-	addi	r3, r3, -252				# 2106
-	lwz	r31, 248(r3)				# 2106
-	mtspr	8, r31				# 2106
-	lfs	f1, 160(r3)				# 2107
-	fmul	f0, f0, f1				# 2107
-	stfs	f0, 248(r3)				# 2099
-	mfspr	r31, 8				# 2099
-	stw	r31, 256(r3)				# 2099
-	addi	r3, r3, 260				# 2099
-	bl	min_caml_sin				# 2099
-	addi	r3, r3, -260				# 2099
-	lwz	r31, 256(r3)				# 2099
-	mtspr	8, r31				# 2099
-	lfs	f1, 248(r3)				# 2099
-	stfs	f0, 256(r3)				# 2099
-	mfspr	r31, 8				# 2099
-	fmr	f0, f1				# 2099
-	stw	r31, 264(r3)				# 2099
-	addi	r3, r3, 268				# 2099
-	bl	min_caml_cos				# 2099
-	addi	r3, r3, -268				# 2099
-	lwz	r31, 264(r3)				# 2099
-	mtspr	8, r31				# 2099
-	lfs	f1, 256(r3)				# 2099
-	fdiv	f0, f1, f0				# 2099
-	lfs	f1, 240(r3)				# 2108
-	fmul	f1, f0, f1				# 2108
-	lfs	f0, 224(r3)				# 2129
-	lfs	f2, 184(r3)				# 2129
-	lfs	f3, 160(r3)				# 2129
-	lwz	r2, 232(r3)				# 2129
-	lwz	r5, 20(r3)				# 2129
-	lwz	r6, 12(r3)				# 2129
-	lwz	r30, 156(r3)				# 2129
-	lwz	r29, 0(r30)				# 2129
-	mtspr	9, r29
-	bctr				# 2129
-calc_dirvecs.2907:
-	lwz	r7, 24(r30)				# 2133
-	lwz	r8, 20(r30)				# 2133
-	lwz	r9, 16(r30)				# 2133
-	lwz	r10, 12(r30)				# 2133
-	lwz	r11, 8(r30)				# 2133
-	lfs	f1, 4(r30)				# 2133
-	cmpw	cr7, r10, r2				# 2134
-	bgt	cr7, ble_else.18167				# 2134
-	stw	r30, 0(r3)				# 2136
-	stw	r8, 4(r3)				# 2136
-	stw	r11, 8(r3)				# 2136
-	stw	r9, 12(r3)				# 2136
-	stw	r2, 16(r3)				# 2136
-	stfs	f0, 24(r3)				# 2136
-	stfs	f1, 32(r3)				# 2136
-	stw	r6, 40(r3)				# 2136
-	stw	r5, 44(r3)				# 2136
-	stw	r10, 48(r3)				# 2136
-	stw	r7, 52(r3)				# 2136
-	mfspr	r31, 8				# 2136
-	stw	r31, 56(r3)				# 2136
-	addi	r3, r3, 60				# 2136
-	bl	min_caml_float_of_int				# 2136
-	addi	r3, r3, -60				# 2136
-	lwz	r31, 56(r3)				# 2136
-	mtspr	8, r31				# 2136
-	lis	r31, ha16(l.12678)
-	addi	r31, r31, lo16(l.12678)
-	lfs	f1, 0(r31)				# 2136
-	fmul	f0, f0, f1				# 2136
-	lis	r31, ha16(l.12679)
-	addi	r31, r31, lo16(l.12679)
-	lfs	f2, 0(r31)				# 2136
-	fsub	f2, f0, f2				# 2136
-	lfs	f0, 32(r3)				# 2137
-	lfs	f3, 24(r3)				# 2137
-	lwz	r2, 48(r3)				# 2137
-	lwz	r5, 44(r3)				# 2137
-	lwz	r6, 40(r3)				# 2137
-	lwz	r30, 52(r3)				# 2137
-	stfs	f1, 56(r3)				# 2137
-	mfspr	r31, 8				# 2137
-	fmr	f1, f0				# 2137
-	stw	r31, 64(r3)				# 2137
-	addi	r3, r3, 68				# 2137
-	lwz	r31, 0(r30)				# 2137
-	mtspr	9, r31				# 2137
-	bctrl				# 2137
-	addi	r3, r3, -68				# 2137
-	lwz	r31, 64(r3)				# 2137
-	mtspr	8, r31				# 2137
-	lwz	r2, 16(r3)				# 2139
-	mfspr	r31, 8				# 2139
-	stw	r31, 64(r3)				# 2139
-	addi	r3, r3, 68				# 2139
-	bl	min_caml_float_of_int				# 2139
-	addi	r3, r3, -68				# 2139
-	lwz	r31, 64(r3)				# 2139
-	mtspr	8, r31				# 2139
-	lfs	f1, 56(r3)				# 2139
-	fmul	f0, f0, f1				# 2139
-	lis	r31, ha16(l.12324)
-	addi	r31, r31, lo16(l.12324)
-	lfs	f1, 0(r31)				# 2139
-	fadd	f2, f0, f1				# 2139
-	lwz	r2, 12(r3)				# 2140
-	lwz	r5, 40(r3)				# 2140
-	add	r6, r5, r2				# 2140
-	lfs	f0, 32(r3)				# 2140
-	lfs	f3, 24(r3)				# 2140
-	lwz	r2, 48(r3)				# 2140
-	lwz	r7, 44(r3)				# 2140
-	lwz	r30, 52(r3)				# 2140
-	mfspr	r31, 8				# 2140
-	mr	r5, r7				# 2140
-	fmr	f1, f0				# 2140
-	stw	r31, 64(r3)				# 2140
-	addi	r3, r3, 68				# 2140
-	lwz	r31, 0(r30)				# 2140
-	mtspr	9, r31				# 2140
-	bctrl				# 2140
-	addi	r3, r3, -68				# 2140
-	lwz	r31, 64(r3)				# 2140
-	mtspr	8, r31				# 2140
-	lwz	r2, 8(r3)				# 2142
-	lwz	r5, 16(r3)				# 2142
-	sub	r5, r5, r2				# 2142
-	lwz	r6, 44(r3)				# 124
-	add	r2, r6, r2				# 124
-	lwz	r6, 4(r3)				# 125
-	cmpw	cr7, r6, r2				# 125
-	bgt	cr7, ble_else.18169				# 125
-	sub	r2, r2, r6				# 125
-	b	ble_cont.18170				# 125
-ble_else.18169:
-ble_cont.18170:
-	lfs	f0, 24(r3)				# 2142
-	lwz	r6, 40(r3)				# 2142
-	lwz	r30, 0(r3)				# 2142
-	mr	r29, r5				# 2142
-	mr	r5, r2				# 2142
-	mr	r2, r29				# 2142
-	lwz	r29, 0(r30)				# 2142
-	mtspr	9, r29
-	bctr				# 2142
-ble_else.18167:
-	blr
-calc_dirvec_rows.2912:
-	lwz	r7, 20(r30)				# 2147
-	lwz	r8, 16(r30)				# 2147
-	lwz	r9, 12(r30)				# 2147
-	lwz	r10, 8(r30)				# 2147
-	lwz	r11, 4(r30)				# 2147
-	cmpw	cr7, r10, r2				# 2148
-	bgt	cr7, ble_else.18172				# 2148
-	stw	r30, 0(r3)				# 2149
-	stw	r8, 4(r3)				# 2149
-	stw	r9, 8(r3)				# 2149
-	stw	r11, 12(r3)				# 2149
-	stw	r2, 16(r3)				# 2149
-	stw	r6, 20(r3)				# 2149
-	stw	r5, 24(r3)				# 2149
-	stw	r7, 28(r3)				# 2149
+ble_else.16487:
+	fmul	f0, f1, f1				# 2116
+	lis	r31, ha16(l.12356)
+	addi	r31, r31, lo16(l.12356)
+	lfs	f1, 0(r31)				# 2116
+	fadd	f0, f0, f1				# 2116
+	stw	r6, 12(r3)				# 2116
+	stw	r5, 20(r3)				# 2116
+	stw	r1, 48(r3)				# 2116
+	stfs	f3, 56(r3)				# 2116
+	stfs	f1, 64(r3)				# 2116
+	stw	r11, 4(r3)				# 2116
+	stw	r2, 72(r3)				# 2116
+	stfs	f2, 80(r3)				# 2116
+	mfspr	r31, 8				# 2116
+	stw	r31, 88(r3)				# 2116
+	addi	r3, r3, 92				# 2116
+	bl	min_caml_sqrt				# 2116
+	addi	r3, r3, -92				# 2116
+	lwz	r31, 88(r3)				# 2116
+	mtspr	8, r31				# 2116
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f1, 0(r31)				# 2117
+	fdiv	f2, f1, f0				# 2117
+	stfs	f1, 88(r3)				# 2118
+	stfs	f0, 96(r3)				# 2118
+	mfspr	r31, 8				# 2118
+	fmr	f0, f2				# 2118
+	stw	r31, 104(r3)				# 2118
+	addi	r3, r3, 108				# 2118
+	bl	min_caml_atan				# 2118
+	addi	r3, r3, -108				# 2118
+	lwz	r31, 104(r3)				# 2118
+	mtspr	8, r31				# 2118
+	lfs	f1, 80(r3)				# 2119
+	fmul	f0, f0, f1				# 2119
+	stfs	f0, 104(r3)				# 2111
+	mfspr	r31, 8				# 2111
+	stw	r31, 112(r3)				# 2111
+	addi	r3, r3, 116				# 2111
+	bl	min_caml_sin				# 2111
+	addi	r3, r3, -116				# 2111
+	lwz	r31, 112(r3)				# 2111
+	mtspr	8, r31				# 2111
+	lfs	f1, 104(r3)				# 2111
+	stfs	f0, 112(r3)				# 2111
+	mfspr	r31, 8				# 2111
+	fmr	f0, f1				# 2111
+	stw	r31, 120(r3)				# 2111
+	addi	r3, r3, 124				# 2111
+	bl	min_caml_cos				# 2111
+	addi	r3, r3, -124				# 2111
+	lwz	r31, 120(r3)				# 2111
+	mtspr	8, r31				# 2111
+	lfs	f1, 112(r3)				# 2111
+	fdiv	f0, f1, f0				# 2111
+	lfs	f1, 96(r3)				# 2120
+	fmul	f0, f0, f1				# 2120
+	lwz	r2, 4(r3)				# 2141
+	lwz	r5, 72(r3)				# 2141
+	add	r2, r5, r2				# 2141
+	fmul	f1, f0, f0				# 2116
+	lfs	f2, 64(r3)				# 2116
+	fadd	f1, f1, f2				# 2116
+	stfs	f0, 120(r3)				# 2116
+	stw	r2, 128(r3)				# 2116
+	mfspr	r31, 8				# 2116
+	fmr	f0, f1				# 2116
+	stw	r31, 132(r3)				# 2116
+	addi	r3, r3, 136				# 2116
+	bl	min_caml_sqrt				# 2116
+	addi	r3, r3, -136				# 2116
+	lwz	r31, 132(r3)				# 2116
+	mtspr	8, r31				# 2116
+	lfs	f1, 88(r3)				# 2117
+	fdiv	f1, f1, f0				# 2117
+	stfs	f0, 136(r3)				# 2118
+	mfspr	r31, 8				# 2118
+	fmr	f0, f1				# 2118
+	stw	r31, 144(r3)				# 2118
+	addi	r3, r3, 148				# 2118
+	bl	min_caml_atan				# 2118
+	addi	r3, r3, -148				# 2118
+	lwz	r31, 144(r3)				# 2118
+	mtspr	8, r31				# 2118
+	lfs	f1, 56(r3)				# 2119
+	fmul	f0, f0, f1				# 2119
+	stfs	f0, 144(r3)				# 2111
+	mfspr	r31, 8				# 2111
+	stw	r31, 152(r3)				# 2111
+	addi	r3, r3, 156				# 2111
+	bl	min_caml_sin				# 2111
+	addi	r3, r3, -156				# 2111
+	lwz	r31, 152(r3)				# 2111
+	mtspr	8, r31				# 2111
+	lfs	f1, 144(r3)				# 2111
+	stfs	f0, 152(r3)				# 2111
+	mfspr	r31, 8				# 2111
+	fmr	f0, f1				# 2111
+	stw	r31, 160(r3)				# 2111
+	addi	r3, r3, 164				# 2111
+	bl	min_caml_cos				# 2111
+	addi	r3, r3, -164				# 2111
+	lwz	r31, 160(r3)				# 2111
+	mtspr	8, r31				# 2111
+	lfs	f1, 152(r3)				# 2111
+	fdiv	f0, f1, f0				# 2111
+	lfs	f1, 136(r3)				# 2120
+	fmul	f1, f0, f1				# 2120
+	lfs	f0, 120(r3)				# 2141
+	lfs	f2, 80(r3)				# 2141
+	lfs	f3, 56(r3)				# 2141
+	lwz	r2, 128(r3)				# 2141
+	lwz	r5, 20(r3)				# 2141
+	lwz	r6, 12(r3)				# 2141
+	lwz	r1, 48(r3)				# 2141
+	lwz	r30, 0(r1)				# 2141
+	mtspr	9, r30
+	bctr				# 2141
+calc_dirvecs.2925:
+	lwz	r7, 24(r1)				# 2145
+	lwz	r8, 20(r1)				# 2145
+	lwz	r9, 16(r1)				# 2145
+	lwz	r10, 12(r1)				# 2145
+	lwz	r11, 8(r1)				# 2145
+	lfs	f1, 4(r1)				# 2145
+	cmpw	cr7, r10, r2				# 2146
+	bgt	cr7, ble_else.16492				# 2146
+	stw	r1, 0(r3)				# 2148
+	stw	r8, 4(r3)				# 2148
+	stw	r11, 8(r3)				# 2148
+	stw	r9, 12(r3)				# 2148
+	stw	r2, 16(r3)				# 2148
+	stfs	f0, 24(r3)				# 2148
+	stfs	f1, 32(r3)				# 2148
+	stw	r6, 40(r3)				# 2148
+	stw	r5, 44(r3)				# 2148
+	stw	r10, 48(r3)				# 2148
+	stw	r7, 52(r3)				# 2148
+	mfspr	r31, 8				# 2148
+	stw	r31, 56(r3)				# 2148
+	addi	r3, r3, 60				# 2148
+	bl	min_caml_float_of_int				# 2148
+	addi	r3, r3, -60				# 2148
+	lwz	r31, 56(r3)				# 2148
+	mtspr	8, r31				# 2148
+	lis	r31, ha16(l.12710)
+	addi	r31, r31, lo16(l.12710)
+	lfs	f1, 0(r31)				# 2148
+	fmul	f0, f0, f1				# 2148
+	lis	r31, ha16(l.12711)
+	addi	r31, r31, lo16(l.12711)
+	lfs	f2, 0(r31)				# 2148
+	fsub	f2, f0, f2				# 2148
+	lfs	f0, 32(r3)				# 2149
+	lfs	f3, 24(r3)				# 2149
+	lwz	r2, 48(r3)				# 2149
+	lwz	r5, 44(r3)				# 2149
+	lwz	r6, 40(r3)				# 2149
+	lwz	r1, 52(r3)				# 2149
+	stfs	f1, 56(r3)				# 2149
 	mfspr	r31, 8				# 2149
-	stw	r31, 32(r3)				# 2149
-	addi	r3, r3, 36				# 2149
-	bl	min_caml_float_of_int				# 2149
-	addi	r3, r3, -36				# 2149
-	lwz	r31, 32(r3)				# 2149
+	fmr	f1, f0				# 2149
+	stw	r31, 64(r3)				# 2149
+	addi	r3, r3, 68				# 2149
+	lwz	r31, 0(r1)				# 2149
+	mtspr	9, r31				# 2149
+	bctr				# 2149
+	addi	r3, r3, -68				# 2149
+	lwz	r31, 64(r3)				# 2149
 	mtspr	8, r31				# 2149
-	lis	r31, ha16(l.12678)
-	addi	r31, r31, lo16(l.12678)
-	lfs	f1, 0(r31)				# 2149
-	fmul	f0, f0, f1				# 2149
-	lis	r31, ha16(l.12679)
-	addi	r31, r31, lo16(l.12679)
-	lfs	f1, 0(r31)				# 2149
-	fsub	f0, f0, f1				# 2149
+	lwz	r2, 16(r3)				# 2151
+	mfspr	r31, 8				# 2151
+	stw	r31, 64(r3)				# 2151
+	addi	r3, r3, 68				# 2151
+	bl	min_caml_float_of_int				# 2151
+	addi	r3, r3, -68				# 2151
+	lwz	r31, 64(r3)				# 2151
+	mtspr	8, r31				# 2151
+	lfs	f1, 56(r3)				# 2151
+	fmul	f0, f0, f1				# 2151
+	lis	r31, ha16(l.12356)
+	addi	r31, r31, lo16(l.12356)
+	lfs	f1, 0(r31)				# 2151
+	fadd	f2, f0, f1				# 2151
+	lwz	r2, 12(r3)				# 2152
+	lwz	r5, 40(r3)				# 2152
+	add	r6, r5, r2				# 2152
+	lfs	f0, 32(r3)				# 2152
+	lfs	f3, 24(r3)				# 2152
+	lwz	r2, 48(r3)				# 2152
+	lwz	r7, 44(r3)				# 2152
+	lwz	r1, 52(r3)				# 2152
+	mfspr	r31, 8				# 2152
+	mr	r5, r7				# 2152
+	fmr	f1, f0				# 2152
+	stw	r31, 64(r3)				# 2152
+	addi	r3, r3, 68				# 2152
+	lwz	r31, 0(r1)				# 2152
+	mtspr	9, r31				# 2152
+	bctr				# 2152
+	addi	r3, r3, -68				# 2152
+	lwz	r31, 64(r3)				# 2152
+	mtspr	8, r31				# 2152
+	lwz	r2, 8(r3)				# 2154
+	lwz	r5, 16(r3)				# 2154
+	sub	r5, r5, r2				# 2154
+	lwz	r6, 44(r3)				# 137
+	add	r2, r6, r2				# 137
+	lwz	r6, 4(r3)				# 138
+	cmpw	cr7, r6, r2				# 138
+	bgt	cr7, ble_else.16494				# 138
+	sub	r2, r2, r6				# 138
+	b	ble_cont.16495				# 138
+ble_else.16494:
+ble_cont.16495:
+	lfs	f0, 24(r3)				# 2154
+	lwz	r6, 40(r3)				# 2154
+	lwz	r1, 0(r3)				# 2154
+	mr	r30, r5				# 2154
+	mr	r5, r2				# 2154
+	mr	r2, r30				# 2154
+	lwz	r30, 0(r1)				# 2154
+	mtspr	9, r30
+	bctr				# 2154
+ble_else.16492:
+	blr
+calc_dirvec_rows.2930:
+	lwz	r7, 20(r1)				# 2159
+	lwz	r8, 16(r1)				# 2159
+	lwz	r9, 12(r1)				# 2159
+	lwz	r10, 8(r1)				# 2159
+	lwz	r11, 4(r1)				# 2159
+	cmpw	cr7, r10, r2				# 2160
+	bgt	cr7, ble_else.16497				# 2160
+	stw	r1, 0(r3)				# 2161
+	stw	r8, 4(r3)				# 2161
+	stw	r9, 8(r3)				# 2161
+	stw	r11, 12(r3)				# 2161
+	stw	r2, 16(r3)				# 2161
+	stw	r6, 20(r3)				# 2161
+	stw	r5, 24(r3)				# 2161
+	stw	r7, 28(r3)				# 2161
+	mfspr	r31, 8				# 2161
+	stw	r31, 32(r3)				# 2161
+	addi	r3, r3, 36				# 2161
+	bl	min_caml_float_of_int				# 2161
+	addi	r3, r3, -36				# 2161
+	lwz	r31, 32(r3)				# 2161
+	mtspr	8, r31				# 2161
+	lis	r31, ha16(l.12710)
+	addi	r31, r31, lo16(l.12710)
+	lfs	f1, 0(r31)				# 2161
+	fmul	f0, f0, f1				# 2161
+	lis	r31, ha16(l.12711)
+	addi	r31, r31, lo16(l.12711)
+	lfs	f1, 0(r31)				# 2161
+	fsub	f0, f0, f1				# 2161
 	addi	r2, 0, 4
-	lwz	r5, 24(r3)				# 2150
-	lwz	r6, 20(r3)				# 2150
-	lwz	r30, 28(r3)				# 2150
-	mfspr	r31, 8				# 2150
-	stw	r31, 32(r3)				# 2150
-	addi	r3, r3, 36				# 2150
-	lwz	r31, 0(r30)				# 2150
-	mtspr	9, r31				# 2150
-	bctrl				# 2150
-	addi	r3, r3, -36				# 2150
-	lwz	r31, 32(r3)				# 2150
-	mtspr	8, r31				# 2150
-	lwz	r2, 12(r3)				# 2151
-	lwz	r5, 16(r3)				# 2151
-	sub	r2, r5, r2				# 2151
-	lwz	r5, 8(r3)				# 124
-	lwz	r6, 24(r3)				# 124
-	add	r5, r6, r5				# 124
-	lwz	r6, 4(r3)				# 125
-	cmpw	cr7, r6, r5				# 125
-	bgt	cr7, ble_else.18173				# 125
-	sub	r5, r5, r6				# 125
-	b	ble_cont.18174				# 125
-ble_else.18173:
-ble_cont.18174:
-	lwz	r6, 20(r3)				# 2151
-	addi	r6, r6, 4				# 2151
-	lwz	r30, 0(r3)				# 2151
-	lwz	r29, 0(r30)				# 2151
-	mtspr	9, r29
-	bctr				# 2151
-ble_else.18172:
+	lwz	r5, 24(r3)				# 2162
+	lwz	r6, 20(r3)				# 2162
+	lwz	r1, 28(r3)				# 2162
+	mfspr	r31, 8				# 2162
+	stw	r31, 32(r3)				# 2162
+	addi	r3, r3, 36				# 2162
+	lwz	r31, 0(r1)				# 2162
+	mtspr	9, r31				# 2162
+	bctr				# 2162
+	addi	r3, r3, -36				# 2162
+	lwz	r31, 32(r3)				# 2162
+	mtspr	8, r31				# 2162
+	lwz	r2, 12(r3)				# 2163
+	lwz	r5, 16(r3)				# 2163
+	sub	r2, r5, r2				# 2163
+	lwz	r5, 8(r3)				# 137
+	lwz	r6, 24(r3)				# 137
+	add	r5, r6, r5				# 137
+	lwz	r6, 4(r3)				# 138
+	cmpw	cr7, r6, r5				# 138
+	bgt	cr7, ble_else.16498				# 138
+	sub	r5, r5, r6				# 138
+	b	ble_cont.16499				# 138
+ble_else.16498:
+ble_cont.16499:
+	lwz	r6, 20(r3)				# 2163
+	addi	r6, r6, 4				# 2163
+	lwz	r1, 0(r3)				# 2163
+	lwz	r30, 0(r1)				# 2163
+	mtspr	9, r30
+	bctr				# 2163
+ble_else.16497:
 	blr
-create_dirvec_elements.2918:
-	lwz	r6, 20(r30)				# 2164
-	lwz	r7, 16(r30)				# 2164
-	lwz	r8, 12(r30)				# 2164
-	lwz	r9, 8(r30)				# 2164
-	lfs	f0, 4(r30)				# 2164
-	cmpw	cr7, r8, r5				# 2165
-	bgt	cr7, ble_else.18176				# 2165
-	stw	r30, 0(r3)				# 2159
-	stw	r9, 4(r3)				# 2159
-	stw	r2, 8(r3)				# 2159
-	stw	r5, 12(r3)				# 2159
-	stw	r6, 16(r3)				# 2159
-	stw	r8, 20(r3)				# 2159
-	mfspr	r31, 8				# 2159
-	mr	r2, r7				# 2159
-	stw	r31, 24(r3)				# 2159
-	addi	r3, r3, 28				# 2159
-	bl	min_caml_create_float_array				# 2159
-	addi	r3, r3, -28				# 2159
-	lwz	r31, 24(r3)				# 2159
-	mr	r5, r2				# 2159
-	mtspr	8, r31				# 2159
-	lwz	r2, 20(r3)				# 2160
-	slwi	r2, r2, 2				# 2160
-	lwz	r6, 16(r3)				# 2160
-	lwzx	r2, r6, r2				# 2160
-	stw	r5, 24(r3)				# 2160
-	mfspr	r31, 8				# 2160
-	stw	r31, 28(r3)				# 2160
-	addi	r3, r3, 32				# 2160
-	bl	min_caml_create_array				# 2160
-	addi	r3, r3, -32				# 2160
-	lwz	r31, 28(r3)				# 2160
-	mtspr	8, r31				# 2160
-	mr	r5, r4				# 2161
-	addi	r4, r4, 8				# 2161
-	stw	r2, 4(r5)				# 2161
-	lwz	r2, 24(r3)				# 2161
-	stw	r2, 0(r5)				# 2161
-	mr	r2, r5				# 2161
-	lwz	r5, 12(r3)				# 2166
-	slwi	r6, r5, 2				# 2166
-	lwz	r7, 8(r3)				# 2166
-	stwx	r2, r7, r6				# 2166
-	lwz	r2, 4(r3)				# 2167
-	sub	r5, r5, r2				# 2167
-	lwz	r30, 0(r3)				# 2167
-	mr	r2, r7				# 2167
-	lwz	r29, 0(r30)				# 2167
-	mtspr	9, r29
-	bctr				# 2167
-ble_else.18176:
+create_dirvec_elements.2936:
+	lwz	r6, 20(r1)				# 2176
+	lwz	r7, 16(r1)				# 2176
+	lwz	r8, 12(r1)				# 2176
+	lwz	r9, 8(r1)				# 2176
+	lfs	f0, 4(r1)				# 2176
+	cmpw	cr7, r8, r5				# 2177
+	bgt	cr7, ble_else.16501				# 2177
+	stw	r1, 0(r3)				# 2171
+	stw	r9, 4(r3)				# 2171
+	stw	r2, 8(r3)				# 2171
+	stw	r5, 12(r3)				# 2171
+	stw	r6, 16(r3)				# 2171
+	stw	r8, 20(r3)				# 2171
+	mfspr	r31, 8				# 2171
+	mr	r2, r7				# 2171
+	stw	r31, 24(r3)				# 2171
+	addi	r3, r3, 28				# 2171
+	bl	min_caml_create_float_array				# 2171
+	addi	r3, r3, -28				# 2171
+	lwz	r31, 24(r3)				# 2171
+	mr	r5, r2				# 2171
+	mtspr	8, r31				# 2171
+	lwz	r2, 20(r3)				# 2172
+	slwi	r2, r2, 2				# 2172
+	lwz	r6, 16(r3)				# 2172
+	lwzx	r2, r6, r2				# 2172
+	stw	r5, 24(r3)				# 2172
+	mfspr	r31, 8				# 2172
+	stw	r31, 28(r3)				# 2172
+	addi	r3, r3, 32				# 2172
+	bl	min_caml_create_array				# 2172
+	addi	r3, r3, -32				# 2172
+	lwz	r31, 28(r3)				# 2172
+	mtspr	8, r31				# 2172
+	mr	r5, r4				# 2173
+	addi	r4, r4, 8				# 2173
+	stw	r2, 4(r5)				# 2173
+	lwz	r2, 24(r3)				# 2173
+	stw	r2, 0(r5)				# 2173
+	mr	r2, r5				# 2173
+	lwz	r5, 12(r3)				# 2178
+	slwi	r6, r5, 2				# 2178
+	lwz	r7, 8(r3)				# 2178
+	stwx	r2, r7, r6				# 2178
+	lwz	r2, 4(r3)				# 2179
+	sub	r5, r5, r2				# 2179
+	lwz	r1, 0(r3)				# 2179
+	mr	r2, r7				# 2179
+	lwz	r30, 0(r1)				# 2179
+	mtspr	9, r30
+	bctr				# 2179
+ble_else.16501:
 	blr
-create_dirvecs.2921:
-	lwz	r5, 28(r30)				# 2171
-	lwz	r6, 24(r30)				# 2171
-	lwz	r7, 20(r30)				# 2171
-	lwz	r8, 16(r30)				# 2171
-	lwz	r9, 12(r30)				# 2171
-	lwz	r10, 8(r30)				# 2171
-	lfs	f0, 4(r30)				# 2171
-	cmpw	cr7, r9, r2				# 2172
-	bgt	cr7, ble_else.18178				# 2172
+create_dirvecs.2939:
+	lwz	r5, 28(r1)				# 2183
+	lwz	r6, 24(r1)				# 2183
+	lwz	r7, 20(r1)				# 2183
+	lwz	r8, 16(r1)				# 2183
+	lwz	r9, 12(r1)				# 2183
+	lwz	r10, 8(r1)				# 2183
+	lfs	f0, 4(r1)				# 2183
+	cmpw	cr7, r9, r2				# 2184
+	bgt	cr7, ble_else.16503				# 2184
 	addi	r11, 0, 120
-	stw	r30, 0(r3)				# 2159
-	stw	r10, 4(r3)				# 2159
-	stw	r7, 8(r3)				# 2159
-	stw	r6, 12(r3)				# 2159
-	stw	r2, 16(r3)				# 2159
-	stw	r11, 20(r3)				# 2159
-	stw	r5, 24(r3)				# 2159
-	stw	r9, 28(r3)				# 2159
-	mfspr	r31, 8				# 2159
-	mr	r2, r8				# 2159
-	stw	r31, 32(r3)				# 2159
-	addi	r3, r3, 36				# 2159
-	bl	min_caml_create_float_array				# 2159
-	addi	r3, r3, -36				# 2159
-	lwz	r31, 32(r3)				# 2159
-	mr	r5, r2				# 2159
-	mtspr	8, r31				# 2159
-	lwz	r2, 28(r3)				# 2160
-	slwi	r2, r2, 2				# 2160
-	lwz	r6, 24(r3)				# 2160
-	lwzx	r2, r6, r2				# 2160
-	stw	r5, 32(r3)				# 2160
-	mfspr	r31, 8				# 2160
-	stw	r31, 36(r3)				# 2160
-	addi	r3, r3, 40				# 2160
-	bl	min_caml_create_array				# 2160
-	addi	r3, r3, -40				# 2160
-	lwz	r31, 36(r3)				# 2160
-	mtspr	8, r31				# 2160
-	mr	r5, r4				# 2161
-	addi	r4, r4, 8				# 2161
-	stw	r2, 4(r5)				# 2161
-	lwz	r2, 32(r3)				# 2161
-	stw	r2, 0(r5)				# 2161
-	lwz	r2, 20(r3)				# 2173
-	mfspr	r31, 8				# 2173
-	stw	r31, 36(r3)				# 2173
-	addi	r3, r3, 40				# 2173
-	bl	min_caml_create_array				# 2173
-	addi	r3, r3, -40				# 2173
-	lwz	r31, 36(r3)				# 2173
-	mtspr	8, r31				# 2173
-	lwz	r5, 16(r3)				# 2173
-	slwi	r6, r5, 2				# 2173
-	lwz	r7, 12(r3)				# 2173
-	stwx	r2, r7, r6				# 2173
-	slwi	r2, r5, 2				# 2174
-	lwzx	r2, r7, r2				# 2174
+	stw	r1, 0(r3)				# 2171
+	stw	r10, 4(r3)				# 2171
+	stw	r7, 8(r3)				# 2171
+	stw	r6, 12(r3)				# 2171
+	stw	r2, 16(r3)				# 2171
+	stw	r11, 20(r3)				# 2171
+	stw	r5, 24(r3)				# 2171
+	stw	r9, 28(r3)				# 2171
+	mfspr	r31, 8				# 2171
+	mr	r2, r8				# 2171
+	stw	r31, 32(r3)				# 2171
+	addi	r3, r3, 36				# 2171
+	bl	min_caml_create_float_array				# 2171
+	addi	r3, r3, -36				# 2171
+	lwz	r31, 32(r3)				# 2171
+	mr	r5, r2				# 2171
+	mtspr	8, r31				# 2171
+	lwz	r2, 28(r3)				# 2172
+	slwi	r2, r2, 2				# 2172
+	lwz	r6, 24(r3)				# 2172
+	lwzx	r2, r6, r2				# 2172
+	stw	r5, 32(r3)				# 2172
+	mfspr	r31, 8				# 2172
+	stw	r31, 36(r3)				# 2172
+	addi	r3, r3, 40				# 2172
+	bl	min_caml_create_array				# 2172
+	addi	r3, r3, -40				# 2172
+	lwz	r31, 36(r3)				# 2172
+	mtspr	8, r31				# 2172
+	mr	r5, r4				# 2173
+	addi	r4, r4, 8				# 2173
+	stw	r2, 4(r5)				# 2173
+	lwz	r2, 32(r3)				# 2173
+	stw	r2, 0(r5)				# 2173
+	lwz	r2, 20(r3)				# 2185
+	mfspr	r31, 8				# 2185
+	stw	r31, 36(r3)				# 2185
+	addi	r3, r3, 40				# 2185
+	bl	min_caml_create_array				# 2185
+	addi	r3, r3, -40				# 2185
+	lwz	r31, 36(r3)				# 2185
+	mtspr	8, r31				# 2185
+	lwz	r5, 16(r3)				# 2185
+	slwi	r6, r5, 2				# 2185
+	lwz	r7, 12(r3)				# 2185
+	stwx	r2, r7, r6				# 2185
+	slwi	r2, r5, 2				# 2186
+	lwzx	r2, r7, r2				# 2186
 	addi	r6, 0, 118
-	lwz	r30, 8(r3)				# 2174
-	mfspr	r31, 8				# 2174
-	mr	r5, r6				# 2174
-	stw	r31, 36(r3)				# 2174
-	addi	r3, r3, 40				# 2174
-	lwz	r31, 0(r30)				# 2174
-	mtspr	9, r31				# 2174
-	bctrl				# 2174
-	addi	r3, r3, -40				# 2174
-	lwz	r31, 36(r3)				# 2174
-	mtspr	8, r31				# 2174
-	lwz	r2, 4(r3)				# 2175
-	lwz	r5, 16(r3)				# 2175
-	sub	r2, r5, r2				# 2175
-	lwz	r30, 0(r3)				# 2175
-	lwz	r29, 0(r30)				# 2175
-	mtspr	9, r29
-	bctr				# 2175
-ble_else.18178:
+	lwz	r1, 8(r3)				# 2186
+	mfspr	r31, 8				# 2186
+	mr	r5, r6				# 2186
+	stw	r31, 36(r3)				# 2186
+	addi	r3, r3, 40				# 2186
+	lwz	r31, 0(r1)				# 2186
+	mtspr	9, r31				# 2186
+	bctr				# 2186
+	addi	r3, r3, -40				# 2186
+	lwz	r31, 36(r3)				# 2186
+	mtspr	8, r31				# 2186
+	lwz	r2, 4(r3)				# 2187
+	lwz	r5, 16(r3)				# 2187
+	sub	r2, r5, r2				# 2187
+	lwz	r1, 0(r3)				# 2187
+	lwz	r30, 0(r1)				# 2187
+	mtspr	9, r30
+	bctr				# 2187
+ble_else.16503:
 	blr
-init_dirvec_constants.2923:
-	lwz	r6, 16(r30)				# 2181
-	lwz	r7, 12(r30)				# 2181
-	lwz	r8, 8(r30)				# 2181
-	lwz	r9, 4(r30)				# 2181
-	cmpw	cr7, r8, r5				# 2182
-	bgt	cr7, ble_else.18180				# 2182
-	slwi	r10, r5, 2				# 2183
-	lwzx	r10, r2, r10				# 2183
-	slwi	r8, r8, 2				# 1122
-	lwzx	r6, r6, r8				# 1122
-	sub	r6, r6, r9				# 1122
-	stw	r2, 0(r3)				# 1122
-	stw	r30, 4(r3)				# 1122
-	stw	r9, 8(r3)				# 1122
-	stw	r5, 12(r3)				# 1122
-	mfspr	r31, 8				# 1122
-	mr	r5, r6				# 1122
-	mr	r2, r10				# 1122
-	mr	r30, r7				# 1122
-	stw	r31, 16(r3)				# 1122
-	addi	r3, r3, 20				# 1122
-	lwz	r31, 0(r30)				# 1122
-	mtspr	9, r31				# 1122
-	bctrl				# 1122
-	addi	r3, r3, -20				# 1122
-	lwz	r31, 16(r3)				# 1122
-	mtspr	8, r31				# 1122
-	lwz	r2, 8(r3)				# 2184
-	lwz	r5, 12(r3)				# 2184
-	sub	r5, r5, r2				# 2184
-	lwz	r2, 0(r3)				# 2184
-	lwz	r30, 4(r3)				# 2184
-	lwz	r29, 0(r30)				# 2184
-	mtspr	9, r29
-	bctr				# 2184
-ble_else.18180:
+init_dirvec_constants.2941:
+	lwz	r6, 16(r1)				# 2193
+	lwz	r7, 12(r1)				# 2193
+	lwz	r8, 8(r1)				# 2193
+	lwz	r9, 4(r1)				# 2193
+	cmpw	cr7, r8, r5				# 2194
+	bgt	cr7, ble_else.16505				# 2194
+	slwi	r10, r5, 2				# 2195
+	lwzx	r10, r2, r10				# 2195
+	slwi	r8, r8, 2				# 1135
+	lwzx	r6, r6, r8				# 1135
+	sub	r6, r6, r9				# 1135
+	stw	r2, 0(r3)				# 1135
+	stw	r1, 4(r3)				# 1135
+	stw	r9, 8(r3)				# 1135
+	stw	r5, 12(r3)				# 1135
+	mfspr	r31, 8				# 1135
+	mr	r5, r6				# 1135
+	mr	r2, r10				# 1135
+	mr	r1, r7				# 1135
+	stw	r31, 16(r3)				# 1135
+	addi	r3, r3, 20				# 1135
+	lwz	r31, 0(r1)				# 1135
+	mtspr	9, r31				# 1135
+	bctr				# 1135
+	addi	r3, r3, -20				# 1135
+	lwz	r31, 16(r3)				# 1135
+	mtspr	8, r31				# 1135
+	lwz	r2, 8(r3)				# 2196
+	lwz	r5, 12(r3)				# 2196
+	sub	r5, r5, r2				# 2196
+	lwz	r2, 0(r3)				# 2196
+	lwz	r1, 4(r3)				# 2196
+	lwz	r30, 0(r1)				# 2196
+	mtspr	9, r30
+	bctr				# 2196
+ble_else.16505:
 	blr
-init_vecset_constants.2926:
-	lwz	r5, 16(r30)				# 2188
-	lwz	r6, 12(r30)				# 2188
-	lwz	r7, 8(r30)				# 2188
-	lwz	r8, 4(r30)				# 2188
-	cmpw	cr7, r7, r2				# 2189
-	bgt	cr7, ble_else.18182				# 2189
-	slwi	r7, r2, 2				# 2190
-	lwzx	r6, r6, r7				# 2190
+init_vecset_constants.2944:
+	lwz	r5, 16(r1)				# 2200
+	lwz	r6, 12(r1)				# 2200
+	lwz	r7, 8(r1)				# 2200
+	lwz	r8, 4(r1)				# 2200
+	cmpw	cr7, r7, r2				# 2201
+	bgt	cr7, ble_else.16507				# 2201
+	slwi	r7, r2, 2				# 2202
+	lwzx	r6, r6, r7				# 2202
 	addi	r7, 0, 119
-	stw	r30, 0(r3)				# 2190
-	stw	r8, 4(r3)				# 2190
-	stw	r2, 8(r3)				# 2190
-	mfspr	r31, 8				# 2190
-	mr	r2, r6				# 2190
-	mr	r30, r5				# 2190
-	mr	r5, r7				# 2190
-	stw	r31, 12(r3)				# 2190
-	addi	r3, r3, 16				# 2190
-	lwz	r31, 0(r30)				# 2190
-	mtspr	9, r31				# 2190
-	bctrl				# 2190
-	addi	r3, r3, -16				# 2190
-	lwz	r31, 12(r3)				# 2190
-	mtspr	8, r31				# 2190
-	lwz	r2, 4(r3)				# 2191
-	lwz	r5, 8(r3)				# 2191
-	sub	r2, r5, r2				# 2191
-	lwz	r30, 0(r3)				# 2191
-	lwz	r29, 0(r30)				# 2191
-	mtspr	9, r29
-	bctr				# 2191
-ble_else.18182:
+	stw	r1, 0(r3)				# 2202
+	stw	r8, 4(r3)				# 2202
+	stw	r2, 8(r3)				# 2202
+	mfspr	r31, 8				# 2202
+	mr	r2, r6				# 2202
+	mr	r1, r5				# 2202
+	mr	r5, r7				# 2202
+	stw	r31, 12(r3)				# 2202
+	addi	r3, r3, 16				# 2202
+	lwz	r31, 0(r1)				# 2202
+	mtspr	9, r31				# 2202
+	bctr				# 2202
+	addi	r3, r3, -16				# 2202
+	lwz	r31, 12(r3)				# 2202
+	mtspr	8, r31				# 2202
+	lwz	r2, 4(r3)				# 2203
+	lwz	r5, 8(r3)				# 2203
+	sub	r2, r5, r2				# 2203
+	lwz	r1, 0(r3)				# 2203
+	lwz	r30, 0(r1)				# 2203
+	mtspr	9, r30
+	bctr				# 2203
+ble_else.16507:
 	blr
-setup_reflections.2943:
-	lwz	r5, 44(r30)				# 2242
-	lwz	r6, 40(r30)				# 2242
-	lwz	r7, 36(r30)				# 2242
-	lwz	r8, 32(r30)				# 2242
-	lwz	r9, 28(r30)				# 2242
-	lwz	r10, 24(r30)				# 2242
-	lwz	r11, 20(r30)				# 2242
-	lwz	r12, 16(r30)				# 2242
-	lwz	r13, 12(r30)				# 2242
-	lwz	r14, 8(r30)				# 2242
-	lfs	f0, 4(r30)				# 2242
-	cmpw	cr7, r13, r2				# 2243
-	bgt	cr7, ble_else.18184				# 2243
-	slwi	r15, r2, 2				# 2244
-	lwzx	r6, r6, r15				# 2244
-	lwz	r15, 8(r6)				# 249
-	cmpw	cr7, r15, r11				# 2245
-	bne	cr7, beq_else.18185				# 2245
-	lwz	r15, 28(r6)				# 347
-	slwi	r16, r13, 2				# 352
-	lfsx	f1, r15, r16				# 352
-	lis	r31, ha16(l.11649)
-	addi	r31, r31, lo16(l.11649)
-	lfs	f2, 0(r31)				# 2246
-	stw	r5, 0(r3)				# 2246
-	stw	r10, 4(r3)				# 2246
-	stw	r8, 8(r3)				# 2246
-	stfs	f0, 16(r3)				# 2246
-	stw	r12, 24(r3)				# 2246
-	stw	r11, 28(r3)				# 2246
-	stw	r9, 32(r3)				# 2246
-	stfs	f2, 40(r3)				# 2246
-	stw	r7, 48(r3)				# 2246
-	stw	r2, 52(r3)				# 2246
-	stw	r14, 56(r3)				# 2246
-	stw	r6, 60(r3)				# 2246
-	stw	r13, 64(r3)				# 2246
-	mfspr	r31, 8				# 2246
-	fmr	f0, f1				# 2246
-	fmr	f1, f2				# 2246
-	stw	r31, 68(r3)				# 2246
-	addi	r3, r3, 72				# 2246
-	bl	min_caml_fless				# 2246
-	addi	r3, r3, -72				# 2246
-	lwz	r31, 68(r3)				# 2246
-	mtspr	8, r31				# 2246
-	lwz	r5, 64(r3)				# 2246
-	cmpw	cr7, r2, r5				# 2246
-	bne	cr7, beq_else.18188				# 2246
+setup_reflections.2961:
+	lwz	r5, 44(r1)				# 2254
+	lwz	r6, 40(r1)				# 2254
+	lwz	r7, 36(r1)				# 2254
+	lwz	r8, 32(r1)				# 2254
+	lwz	r9, 28(r1)				# 2254
+	lwz	r10, 24(r1)				# 2254
+	lwz	r11, 20(r1)				# 2254
+	lwz	r12, 16(r1)				# 2254
+	lwz	r13, 12(r1)				# 2254
+	lwz	r14, 8(r1)				# 2254
+	lfs	f0, 4(r1)				# 2254
+	cmpw	cr7, r13, r2				# 2255
+	bgt	cr7, ble_else.16509				# 2255
+	slwi	r15, r2, 2				# 2256
+	lwzx	r6, r6, r15				# 2256
+	lwz	r15, 8(r6)				# 262
+	cmpw	cr7, r15, r11				# 2257
+	bne	cr7, beq_else.16510				# 2257
+	lwz	r15, 28(r6)				# 360
+	slwi	r16, r13, 2				# 365
+	lfsx	f1, r15, r16				# 365
+	lis	r31, ha16(l.11681)
+	addi	r31, r31, lo16(l.11681)
+	lfs	f2, 0(r31)				# 2258
+	fcmpu	cr7, f2, f1				# 109
+	bgt	cr7, ble_else.16511				# 109
+	addi	r15, 0, 0
+	b	ble_cont.16512				# 109
+ble_else.16511:
+	addi	r15, 0, 1
+ble_cont.16512:
+	cmpw	cr7, r15, r13				# 2258
+	bne	cr7, beq_else.16513				# 2258
 	blr
-beq_else.18188:
-	lwz	r2, 60(r3)				# 239
-	lwz	r6, 4(r2)				# 239
-	lwz	r7, 56(r3)				# 2249
-	cmpw	cr7, r6, r7				# 2249
-	bne	cr7, beq_else.18190				# 2249
-	lwz	r6, 52(r3)				# 2214
-	slwi	r6, r6, 2				# 2214
-	slwi	r8, r5, 2				# 2215
-	lwz	r9, 48(r3)				# 2215
-	lwzx	r8, r9, r8				# 2215
-	lwz	r2, 28(r2)				# 347
-	slwi	r10, r5, 2				# 352
-	lfsx	f0, r2, r10				# 352
-	lfs	f1, 40(r3)				# 2216
-	fsub	f0, f1, f0				# 2216
-	slwi	r2, r5, 2				# 2217
-	lwz	r10, 32(r3)				# 2217
-	lfsx	f1, r10, r2				# 2217
-	stw	r8, 68(r3)				# 2217
-	stfs	f0, 72(r3)				# 2217
-	stw	r6, 80(r3)				# 2217
-	mfspr	r31, 8				# 2217
-	fmr	f0, f1				# 2217
-	stw	r31, 84(r3)				# 2217
-	addi	r3, r3, 88				# 2217
-	bl	min_caml_fneg				# 2217
-	addi	r3, r3, -88				# 2217
-	lwz	r31, 84(r3)				# 2217
-	mtspr	8, r31				# 2217
-	lwz	r2, 56(r3)				# 2218
-	slwi	r5, r2, 2				# 2218
-	lwz	r6, 32(r3)				# 2218
-	lfsx	f1, r6, r5				# 2218
-	stfs	f0, 88(r3)				# 2218
-	mfspr	r31, 8				# 2218
-	fmr	f0, f1				# 2218
-	stw	r31, 96(r3)				# 2218
-	addi	r3, r3, 100				# 2218
-	bl	min_caml_fneg				# 2218
-	addi	r3, r3, -100				# 2218
-	lwz	r31, 96(r3)				# 2218
-	mtspr	8, r31				# 2218
-	lwz	r2, 28(r3)				# 2219
-	slwi	r5, r2, 2				# 2219
-	lwz	r6, 32(r3)				# 2219
-	lfsx	f1, r6, r5				# 2219
-	stfs	f0, 96(r3)				# 2219
-	mfspr	r31, 8				# 2219
-	fmr	f0, f1				# 2219
-	stw	r31, 104(r3)				# 2219
-	addi	r3, r3, 108				# 2219
-	bl	min_caml_fneg				# 2219
-	addi	r3, r3, -108				# 2219
-	lwz	r31, 104(r3)				# 2219
-	mtspr	8, r31				# 2219
-	lwz	r2, 56(r3)				# 2220
-	lwz	r5, 80(r3)				# 2220
-	add	r6, r5, r2				# 2220
-	lwz	r7, 64(r3)				# 2220
-	slwi	r8, r7, 2				# 2220
-	lwz	r9, 32(r3)				# 2220
-	lfsx	f1, r9, r8				# 2220
-	lfs	f2, 16(r3)				# 2159
-	lwz	r8, 24(r3)				# 2159
-	stw	r6, 104(r3)				# 2159
-	stfs	f0, 112(r3)				# 2159
-	stfs	f1, 120(r3)				# 2159
-	mfspr	r31, 8				# 2159
-	mr	r2, r8				# 2159
-	fmr	f0, f2				# 2159
-	stw	r31, 128(r3)				# 2159
-	addi	r3, r3, 132				# 2159
-	bl	min_caml_create_float_array				# 2159
-	addi	r3, r3, -132				# 2159
-	lwz	r31, 128(r3)				# 2159
-	mr	r5, r2				# 2159
-	mtspr	8, r31				# 2159
-	lwz	r2, 64(r3)				# 2160
-	slwi	r6, r2, 2				# 2160
-	lwz	r7, 8(r3)				# 2160
-	lwzx	r6, r7, r6				# 2160
-	stw	r5, 128(r3)				# 2160
-	mfspr	r31, 8				# 2160
-	mr	r2, r6				# 2160
-	stw	r31, 132(r3)				# 2160
-	addi	r3, r3, 136				# 2160
-	bl	min_caml_create_array				# 2160
-	addi	r3, r3, -136				# 2160
-	lwz	r31, 132(r3)				# 2160
-	mtspr	8, r31				# 2160
-	mr	r5, r4				# 2161
-	addi	r4, r4, 8				# 2161
-	stw	r2, 4(r5)				# 2161
-	lwz	r2, 128(r3)				# 2161
-	stw	r2, 0(r5)				# 2161
-	lwz	r6, 64(r3)				# 134
-	slwi	r7, r6, 2				# 134
-	lfs	f0, 120(r3)				# 134
-	stfsx	f0, r2, r7				# 134
-	lwz	r7, 56(r3)				# 135
-	slwi	r8, r7, 2				# 135
-	lfs	f0, 96(r3)				# 135
-	stfsx	f0, r2, r8				# 135
-	lwz	r8, 28(r3)				# 136
-	slwi	r9, r8, 2				# 136
-	lfs	f1, 112(r3)				# 136
-	stfsx	f1, r2, r9				# 136
-	slwi	r2, r6, 2				# 1122
-	lwz	r9, 8(r3)				# 1122
-	lwzx	r2, r9, r2				# 1122
-	sub	r2, r2, r7				# 1122
-	lwz	r30, 4(r3)				# 1122
-	stw	r5, 132(r3)				# 1122
-	mfspr	r31, 8				# 1122
-	mr	r29, r5				# 1122
-	mr	r5, r2				# 1122
-	mr	r2, r29				# 1122
-	stw	r31, 136(r3)				# 1122
-	addi	r3, r3, 140				# 1122
-	lwz	r31, 0(r30)				# 1122
-	mtspr	9, r31				# 1122
-	bctrl				# 1122
-	addi	r3, r3, -140				# 1122
-	lwz	r31, 136(r3)				# 1122
-	mtspr	8, r31				# 1122
-	mr	r2, r4				# 2209
-	addi	r4, r4, 12				# 2209
-	lfs	f0, 72(r3)				# 2209
-	stfs	f0, 8(r2)				# 2209
-	lwz	r5, 132(r3)				# 2209
-	stw	r5, 4(r2)				# 2209
-	lwz	r5, 104(r3)				# 2209
-	stw	r5, 0(r2)				# 2209
-	lwz	r5, 68(r3)				# 2209
-	slwi	r6, r5, 2				# 2209
-	lwz	r7, 0(r3)				# 2209
-	stwx	r2, r7, r6				# 2209
-	lwz	r2, 56(r3)				# 2221
-	add	r6, r5, r2				# 2221
-	lwz	r8, 28(r3)				# 2221
-	lwz	r9, 80(r3)				# 2221
-	add	r10, r9, r8				# 2221
-	slwi	r11, r2, 2				# 2221
-	lwz	r12, 32(r3)				# 2221
-	lfsx	f1, r12, r11				# 2221
-	lfs	f2, 16(r3)				# 2159
-	lwz	r11, 24(r3)				# 2159
-	stw	r6, 136(r3)				# 2159
-	stw	r10, 140(r3)				# 2159
-	stfs	f1, 144(r3)				# 2159
-	mfspr	r31, 8				# 2159
-	mr	r2, r11				# 2159
-	fmr	f0, f2				# 2159
-	stw	r31, 152(r3)				# 2159
-	addi	r3, r3, 156				# 2159
-	bl	min_caml_create_float_array				# 2159
-	addi	r3, r3, -156				# 2159
-	lwz	r31, 152(r3)				# 2159
-	mr	r5, r2				# 2159
-	mtspr	8, r31				# 2159
-	lwz	r2, 64(r3)				# 2160
-	slwi	r6, r2, 2				# 2160
-	lwz	r7, 8(r3)				# 2160
-	lwzx	r6, r7, r6				# 2160
-	stw	r5, 152(r3)				# 2160
-	mfspr	r31, 8				# 2160
-	mr	r2, r6				# 2160
-	stw	r31, 156(r3)				# 2160
-	addi	r3, r3, 160				# 2160
-	bl	min_caml_create_array				# 2160
-	addi	r3, r3, -160				# 2160
-	lwz	r31, 156(r3)				# 2160
-	mtspr	8, r31				# 2160
-	mr	r5, r4				# 2161
-	addi	r4, r4, 8				# 2161
-	stw	r2, 4(r5)				# 2161
-	lwz	r2, 152(r3)				# 2161
-	stw	r2, 0(r5)				# 2161
-	lwz	r6, 64(r3)				# 134
-	slwi	r7, r6, 2				# 134
-	lfs	f0, 88(r3)				# 134
-	stfsx	f0, r2, r7				# 134
-	lwz	r7, 56(r3)				# 135
-	slwi	r8, r7, 2				# 135
-	lfs	f1, 144(r3)				# 135
-	stfsx	f1, r2, r8				# 135
-	lwz	r8, 28(r3)				# 136
-	slwi	r9, r8, 2				# 136
-	lfs	f1, 112(r3)				# 136
-	stfsx	f1, r2, r9				# 136
-	slwi	r2, r6, 2				# 1122
-	lwz	r9, 8(r3)				# 1122
-	lwzx	r2, r9, r2				# 1122
-	sub	r2, r2, r7				# 1122
-	lwz	r30, 4(r3)				# 1122
-	stw	r5, 156(r3)				# 1122
-	mfspr	r31, 8				# 1122
-	mr	r29, r5				# 1122
-	mr	r5, r2				# 1122
-	mr	r2, r29				# 1122
-	stw	r31, 160(r3)				# 1122
-	addi	r3, r3, 164				# 1122
-	lwz	r31, 0(r30)				# 1122
-	mtspr	9, r31				# 1122
-	bctrl				# 1122
-	addi	r3, r3, -164				# 1122
-	lwz	r31, 160(r3)				# 1122
-	mtspr	8, r31				# 1122
-	mr	r2, r4				# 2209
-	addi	r4, r4, 12				# 2209
-	lfs	f0, 72(r3)				# 2209
-	stfs	f0, 8(r2)				# 2209
-	lwz	r5, 156(r3)				# 2209
-	stw	r5, 4(r2)				# 2209
-	lwz	r5, 140(r3)				# 2209
-	stw	r5, 0(r2)				# 2209
-	lwz	r5, 136(r3)				# 2209
-	slwi	r5, r5, 2				# 2209
-	lwz	r6, 0(r3)				# 2209
-	stwx	r2, r6, r5				# 2209
-	lwz	r2, 28(r3)				# 2222
-	lwz	r5, 68(r3)				# 2222
-	add	r7, r5, r2				# 2222
-	lwz	r8, 24(r3)				# 2222
-	lwz	r9, 80(r3)				# 2222
-	add	r9, r9, r8				# 2222
-	slwi	r10, r2, 2				# 2222
-	lwz	r11, 32(r3)				# 2222
-	lfsx	f1, r11, r10				# 2222
-	lfs	f2, 16(r3)				# 2159
-	stw	r7, 160(r3)				# 2159
-	stw	r9, 164(r3)				# 2159
-	stfs	f1, 168(r3)				# 2159
-	mfspr	r31, 8				# 2159
-	mr	r2, r8				# 2159
-	fmr	f0, f2				# 2159
-	stw	r31, 176(r3)				# 2159
-	addi	r3, r3, 180				# 2159
-	bl	min_caml_create_float_array				# 2159
-	addi	r3, r3, -180				# 2159
-	lwz	r31, 176(r3)				# 2159
-	mr	r5, r2				# 2159
-	mtspr	8, r31				# 2159
-	lwz	r2, 64(r3)				# 2160
-	slwi	r6, r2, 2				# 2160
-	lwz	r7, 8(r3)				# 2160
-	lwzx	r6, r7, r6				# 2160
-	stw	r5, 176(r3)				# 2160
-	mfspr	r31, 8				# 2160
-	mr	r2, r6				# 2160
-	stw	r31, 180(r3)				# 2160
-	addi	r3, r3, 184				# 2160
-	bl	min_caml_create_array				# 2160
-	addi	r3, r3, -184				# 2160
-	lwz	r31, 180(r3)				# 2160
-	mtspr	8, r31				# 2160
-	mr	r5, r4				# 2161
-	addi	r4, r4, 8				# 2161
-	stw	r2, 4(r5)				# 2161
-	lwz	r2, 176(r3)				# 2161
-	stw	r2, 0(r5)				# 2161
-	lwz	r6, 64(r3)				# 134
-	slwi	r7, r6, 2				# 134
-	lfs	f0, 88(r3)				# 134
-	stfsx	f0, r2, r7				# 134
-	lwz	r7, 56(r3)				# 135
-	slwi	r8, r7, 2				# 135
-	lfs	f0, 96(r3)				# 135
-	stfsx	f0, r2, r8				# 135
-	lwz	r8, 28(r3)				# 136
-	slwi	r8, r8, 2				# 136
-	lfs	f0, 168(r3)				# 136
-	stfsx	f0, r2, r8				# 136
-	slwi	r2, r6, 2				# 1122
-	lwz	r8, 8(r3)				# 1122
-	lwzx	r2, r8, r2				# 1122
-	sub	r2, r2, r7				# 1122
-	lwz	r30, 4(r3)				# 1122
-	stw	r5, 180(r3)				# 1122
-	mfspr	r31, 8				# 1122
-	mr	r29, r5				# 1122
-	mr	r5, r2				# 1122
-	mr	r2, r29				# 1122
-	stw	r31, 184(r3)				# 1122
-	addi	r3, r3, 188				# 1122
-	lwz	r31, 0(r30)				# 1122
-	mtspr	9, r31				# 1122
-	bctrl				# 1122
-	addi	r3, r3, -188				# 1122
-	lwz	r31, 184(r3)				# 1122
-	mtspr	8, r31				# 1122
-	mr	r2, r4				# 2209
-	addi	r4, r4, 12				# 2209
-	lfs	f0, 72(r3)				# 2209
-	stfs	f0, 8(r2)				# 2209
-	lwz	r5, 180(r3)				# 2209
-	stw	r5, 4(r2)				# 2209
-	lwz	r5, 164(r3)				# 2209
-	stw	r5, 0(r2)				# 2209
-	lwz	r5, 160(r3)				# 2209
-	slwi	r5, r5, 2				# 2209
-	lwz	r6, 0(r3)				# 2209
-	stwx	r2, r6, r5				# 2209
-	lwz	r2, 24(r3)				# 2223
-	lwz	r5, 68(r3)				# 2223
-	add	r2, r5, r2				# 2223
-	lwz	r5, 64(r3)				# 2223
-	slwi	r5, r5, 2				# 2223
-	lwz	r6, 48(r3)				# 2223
-	stwx	r2, r6, r5				# 2223
+beq_else.16513:
+	lwz	r15, 4(r6)				# 252
+	cmpw	cr7, r15, r14				# 2261
+	bne	cr7, beq_else.16515				# 2261
+	slwi	r2, r2, 2				# 2226
+	slwi	r15, r13, 2				# 2227
+	lwzx	r15, r7, r15				# 2227
+	lwz	r6, 28(r6)				# 360
+	slwi	r16, r13, 2				# 365
+	lfsx	f1, r6, r16				# 365
+	fsub	f1, f2, f1				# 2228
+	slwi	r6, r13, 2				# 2229
+	lfsx	f2, r9, r6				# 2229
+	fneg	f2, f2				# 107
+	slwi	r6, r14, 2				# 2230
+	lfsx	f3, r9, r6				# 2230
+	fneg	f3, f3				# 107
+	slwi	r6, r11, 2				# 2231
+	lfsx	f4, r9, r6				# 2231
+	fneg	f4, f4				# 107
+	add	r6, r2, r14				# 2232
+	slwi	r16, r13, 2				# 2232
+	lfsx	f5, r9, r16				# 2232
+	stw	r7, 0(r3)				# 2171
+	stfs	f2, 8(r3)				# 2171
+	stfs	f0, 16(r3)				# 2171
+	stw	r12, 24(r3)				# 2171
+	stw	r9, 28(r3)				# 2171
+	stw	r2, 32(r3)				# 2171
+	stw	r5, 36(r3)				# 2171
+	stw	r15, 40(r3)				# 2171
+	stw	r6, 44(r3)				# 2171
+	stfs	f1, 48(r3)				# 2171
+	stw	r10, 56(r3)				# 2171
+	stfs	f4, 64(r3)				# 2171
+	stw	r11, 72(r3)				# 2171
+	stfs	f3, 80(r3)				# 2171
+	stw	r14, 88(r3)				# 2171
+	stfs	f5, 96(r3)				# 2171
+	stw	r8, 104(r3)				# 2171
+	stw	r13, 108(r3)				# 2171
+	mfspr	r31, 8				# 2171
+	mr	r2, r12				# 2171
+	stw	r31, 112(r3)				# 2171
+	addi	r3, r3, 116				# 2171
+	bl	min_caml_create_float_array				# 2171
+	addi	r3, r3, -116				# 2171
+	lwz	r31, 112(r3)				# 2171
+	mr	r5, r2				# 2171
+	mtspr	8, r31				# 2171
+	lwz	r2, 108(r3)				# 2172
+	slwi	r6, r2, 2				# 2172
+	lwz	r7, 104(r3)				# 2172
+	lwzx	r6, r7, r6				# 2172
+	stw	r5, 112(r3)				# 2172
+	mfspr	r31, 8				# 2172
+	mr	r2, r6				# 2172
+	stw	r31, 116(r3)				# 2172
+	addi	r3, r3, 120				# 2172
+	bl	min_caml_create_array				# 2172
+	addi	r3, r3, -120				# 2172
+	lwz	r31, 116(r3)				# 2172
+	mtspr	8, r31				# 2172
+	mr	r5, r4				# 2173
+	addi	r4, r4, 8				# 2173
+	stw	r2, 4(r5)				# 2173
+	lwz	r2, 112(r3)				# 2173
+	stw	r2, 0(r5)				# 2173
+	lwz	r6, 108(r3)				# 147
+	slwi	r7, r6, 2				# 147
+	lfs	f0, 96(r3)				# 147
+	stfsx	f0, r2, r7				# 147
+	lwz	r7, 88(r3)				# 148
+	slwi	r8, r7, 2				# 148
+	lfs	f0, 80(r3)				# 148
+	stfsx	f0, r2, r8				# 148
+	lwz	r8, 72(r3)				# 149
+	slwi	r9, r8, 2				# 149
+	lfs	f1, 64(r3)				# 149
+	stfsx	f1, r2, r9				# 149
+	slwi	r2, r6, 2				# 1135
+	lwz	r9, 104(r3)				# 1135
+	lwzx	r2, r9, r2				# 1135
+	sub	r2, r2, r7				# 1135
+	lwz	r1, 56(r3)				# 1135
+	stw	r5, 116(r3)				# 1135
+	mfspr	r31, 8				# 1135
+	mr	r30, r5				# 1135
+	mr	r5, r2				# 1135
+	mr	r2, r30				# 1135
+	stw	r31, 120(r3)				# 1135
+	addi	r3, r3, 124				# 1135
+	lwz	r31, 0(r1)				# 1135
+	mtspr	9, r31				# 1135
+	bctr				# 1135
+	addi	r3, r3, -124				# 1135
+	lwz	r31, 120(r3)				# 1135
+	mtspr	8, r31				# 1135
+	mr	r2, r4				# 2221
+	addi	r4, r4, 12				# 2221
+	lfs	f0, 48(r3)				# 2221
+	stfs	f0, 8(r2)				# 2221
+	lwz	r5, 116(r3)				# 2221
+	stw	r5, 4(r2)				# 2221
+	lwz	r5, 44(r3)				# 2221
+	stw	r5, 0(r2)				# 2221
+	lwz	r5, 40(r3)				# 2221
+	slwi	r6, r5, 2				# 2221
+	lwz	r7, 36(r3)				# 2221
+	stwx	r2, r7, r6				# 2221
+	lwz	r2, 88(r3)				# 2233
+	add	r6, r5, r2				# 2233
+	lwz	r8, 72(r3)				# 2233
+	lwz	r9, 32(r3)				# 2233
+	add	r10, r9, r8				# 2233
+	slwi	r11, r2, 2				# 2233
+	lwz	r12, 28(r3)				# 2233
+	lfsx	f1, r12, r11				# 2233
+	lfs	f2, 16(r3)				# 2171
+	lwz	r11, 24(r3)				# 2171
+	stw	r6, 120(r3)				# 2171
+	stw	r10, 124(r3)				# 2171
+	stfs	f1, 128(r3)				# 2171
+	mfspr	r31, 8				# 2171
+	mr	r2, r11				# 2171
+	fmr	f0, f2				# 2171
+	stw	r31, 136(r3)				# 2171
+	addi	r3, r3, 140				# 2171
+	bl	min_caml_create_float_array				# 2171
+	addi	r3, r3, -140				# 2171
+	lwz	r31, 136(r3)				# 2171
+	mr	r5, r2				# 2171
+	mtspr	8, r31				# 2171
+	lwz	r2, 108(r3)				# 2172
+	slwi	r6, r2, 2				# 2172
+	lwz	r7, 104(r3)				# 2172
+	lwzx	r6, r7, r6				# 2172
+	stw	r5, 136(r3)				# 2172
+	mfspr	r31, 8				# 2172
+	mr	r2, r6				# 2172
+	stw	r31, 140(r3)				# 2172
+	addi	r3, r3, 144				# 2172
+	bl	min_caml_create_array				# 2172
+	addi	r3, r3, -144				# 2172
+	lwz	r31, 140(r3)				# 2172
+	mtspr	8, r31				# 2172
+	mr	r5, r4				# 2173
+	addi	r4, r4, 8				# 2173
+	stw	r2, 4(r5)				# 2173
+	lwz	r2, 136(r3)				# 2173
+	stw	r2, 0(r5)				# 2173
+	lwz	r6, 108(r3)				# 147
+	slwi	r7, r6, 2				# 147
+	lfs	f0, 8(r3)				# 147
+	stfsx	f0, r2, r7				# 147
+	lwz	r7, 88(r3)				# 148
+	slwi	r8, r7, 2				# 148
+	lfs	f1, 128(r3)				# 148
+	stfsx	f1, r2, r8				# 148
+	lwz	r8, 72(r3)				# 149
+	slwi	r9, r8, 2				# 149
+	lfs	f1, 64(r3)				# 149
+	stfsx	f1, r2, r9				# 149
+	slwi	r2, r6, 2				# 1135
+	lwz	r9, 104(r3)				# 1135
+	lwzx	r2, r9, r2				# 1135
+	sub	r2, r2, r7				# 1135
+	lwz	r1, 56(r3)				# 1135
+	stw	r5, 140(r3)				# 1135
+	mfspr	r31, 8				# 1135
+	mr	r30, r5				# 1135
+	mr	r5, r2				# 1135
+	mr	r2, r30				# 1135
+	stw	r31, 144(r3)				# 1135
+	addi	r3, r3, 148				# 1135
+	lwz	r31, 0(r1)				# 1135
+	mtspr	9, r31				# 1135
+	bctr				# 1135
+	addi	r3, r3, -148				# 1135
+	lwz	r31, 144(r3)				# 1135
+	mtspr	8, r31				# 1135
+	mr	r2, r4				# 2221
+	addi	r4, r4, 12				# 2221
+	lfs	f0, 48(r3)				# 2221
+	stfs	f0, 8(r2)				# 2221
+	lwz	r5, 140(r3)				# 2221
+	stw	r5, 4(r2)				# 2221
+	lwz	r5, 124(r3)				# 2221
+	stw	r5, 0(r2)				# 2221
+	lwz	r5, 120(r3)				# 2221
+	slwi	r5, r5, 2				# 2221
+	lwz	r6, 36(r3)				# 2221
+	stwx	r2, r6, r5				# 2221
+	lwz	r2, 72(r3)				# 2234
+	lwz	r5, 40(r3)				# 2234
+	add	r7, r5, r2				# 2234
+	lwz	r8, 24(r3)				# 2234
+	lwz	r9, 32(r3)				# 2234
+	add	r9, r9, r8				# 2234
+	slwi	r10, r2, 2				# 2234
+	lwz	r11, 28(r3)				# 2234
+	lfsx	f1, r11, r10				# 2234
+	lfs	f2, 16(r3)				# 2171
+	stw	r7, 144(r3)				# 2171
+	stw	r9, 148(r3)				# 2171
+	stfs	f1, 152(r3)				# 2171
+	mfspr	r31, 8				# 2171
+	mr	r2, r8				# 2171
+	fmr	f0, f2				# 2171
+	stw	r31, 160(r3)				# 2171
+	addi	r3, r3, 164				# 2171
+	bl	min_caml_create_float_array				# 2171
+	addi	r3, r3, -164				# 2171
+	lwz	r31, 160(r3)				# 2171
+	mr	r5, r2				# 2171
+	mtspr	8, r31				# 2171
+	lwz	r2, 108(r3)				# 2172
+	slwi	r6, r2, 2				# 2172
+	lwz	r7, 104(r3)				# 2172
+	lwzx	r6, r7, r6				# 2172
+	stw	r5, 160(r3)				# 2172
+	mfspr	r31, 8				# 2172
+	mr	r2, r6				# 2172
+	stw	r31, 164(r3)				# 2172
+	addi	r3, r3, 168				# 2172
+	bl	min_caml_create_array				# 2172
+	addi	r3, r3, -168				# 2172
+	lwz	r31, 164(r3)				# 2172
+	mtspr	8, r31				# 2172
+	mr	r5, r4				# 2173
+	addi	r4, r4, 8				# 2173
+	stw	r2, 4(r5)				# 2173
+	lwz	r2, 160(r3)				# 2173
+	stw	r2, 0(r5)				# 2173
+	lwz	r6, 108(r3)				# 147
+	slwi	r7, r6, 2				# 147
+	lfs	f0, 8(r3)				# 147
+	stfsx	f0, r2, r7				# 147
+	lwz	r7, 88(r3)				# 148
+	slwi	r8, r7, 2				# 148
+	lfs	f0, 80(r3)				# 148
+	stfsx	f0, r2, r8				# 148
+	lwz	r8, 72(r3)				# 149
+	slwi	r8, r8, 2				# 149
+	lfs	f0, 152(r3)				# 149
+	stfsx	f0, r2, r8				# 149
+	slwi	r2, r6, 2				# 1135
+	lwz	r8, 104(r3)				# 1135
+	lwzx	r2, r8, r2				# 1135
+	sub	r2, r2, r7				# 1135
+	lwz	r1, 56(r3)				# 1135
+	stw	r5, 164(r3)				# 1135
+	mfspr	r31, 8				# 1135
+	mr	r30, r5				# 1135
+	mr	r5, r2				# 1135
+	mr	r2, r30				# 1135
+	stw	r31, 168(r3)				# 1135
+	addi	r3, r3, 172				# 1135
+	lwz	r31, 0(r1)				# 1135
+	mtspr	9, r31				# 1135
+	bctr				# 1135
+	addi	r3, r3, -172				# 1135
+	lwz	r31, 168(r3)				# 1135
+	mtspr	8, r31				# 1135
+	mr	r2, r4				# 2221
+	addi	r4, r4, 12				# 2221
+	lfs	f0, 48(r3)				# 2221
+	stfs	f0, 8(r2)				# 2221
+	lwz	r5, 164(r3)				# 2221
+	stw	r5, 4(r2)				# 2221
+	lwz	r5, 148(r3)				# 2221
+	stw	r5, 0(r2)				# 2221
+	lwz	r5, 144(r3)				# 2221
+	slwi	r5, r5, 2				# 2221
+	lwz	r6, 36(r3)				# 2221
+	stwx	r2, r6, r5				# 2221
+	lwz	r2, 24(r3)				# 2235
+	lwz	r5, 40(r3)				# 2235
+	add	r2, r5, r2				# 2235
+	lwz	r5, 108(r3)				# 2235
+	slwi	r5, r5, 2				# 2235
+	lwz	r6, 0(r3)				# 2235
+	stwx	r2, r6, r5				# 2235
 	blr
-beq_else.18190:
-	lwz	r8, 28(r3)				# 2251
-	cmpw	cr7, r6, r8				# 2251
-	bne	cr7, beq_else.18194				# 2251
-	lwz	r6, 52(r3)				# 2228
-	slwi	r6, r6, 2				# 2228
-	add	r6, r6, r7				# 2228
-	slwi	r9, r5, 2				# 2229
-	lwz	r10, 48(r3)				# 2229
-	lwzx	r9, r10, r9				# 2229
-	lwz	r11, 28(r2)				# 347
-	slwi	r12, r5, 2				# 352
-	lfsx	f0, r11, r12				# 352
-	lfs	f1, 40(r3)				# 2230
-	fsub	f0, f1, f0				# 2230
-	lwz	r11, 16(r2)				# 307
-	slwi	r12, r5, 2				# 182
-	lwz	r13, 32(r3)				# 182
-	lfsx	f1, r13, r12				# 182
-	slwi	r12, r5, 2				# 182
-	lfsx	f2, r11, r12				# 182
-	fmul	f1, f1, f2				# 182
-	slwi	r12, r7, 2				# 182
-	lfsx	f2, r13, r12				# 182
-	slwi	r12, r7, 2				# 182
-	lfsx	f3, r11, r12				# 182
-	fmul	f2, f2, f3				# 182
-	fadd	f1, f1, f2				# 182
-	slwi	r12, r8, 2				# 182
-	lfsx	f2, r13, r12				# 182
-	slwi	r12, r8, 2				# 182
-	lfsx	f3, r11, r12				# 182
-	fmul	f2, f2, f3				# 182
-	fadd	f1, f1, f2				# 182
-	lis	r31, ha16(l.11614)
-	addi	r31, r31, lo16(l.11614)
-	lfs	f2, 0(r31)				# 2234
-	lwz	r11, 16(r2)				# 277
-	slwi	r12, r5, 2				# 282
-	lfsx	f3, r11, r12				# 282
-	fmul	f3, f2, f3				# 2234
-	fmul	f3, f3, f1				# 2234
-	slwi	r11, r5, 2				# 2234
-	lfsx	f4, r13, r11				# 2234
-	fsub	f3, f3, f4				# 2234
-	lwz	r11, 16(r2)				# 287
-	slwi	r12, r7, 2				# 292
-	lfsx	f4, r11, r12				# 292
-	fmul	f4, f2, f4				# 2235
-	fmul	f4, f4, f1				# 2235
-	slwi	r11, r7, 2				# 2235
-	lfsx	f5, r13, r11				# 2235
-	fsub	f4, f4, f5				# 2235
-	lwz	r2, 16(r2)				# 297
-	slwi	r11, r8, 2				# 302
-	lfsx	f5, r2, r11				# 302
-	fmul	f2, f2, f5				# 2236
-	fmul	f1, f2, f1				# 2236
-	slwi	r2, r8, 2				# 2236
-	lfsx	f2, r13, r2				# 2236
-	fsub	f1, f1, f2				# 2236
-	lfs	f2, 16(r3)				# 2159
-	lwz	r2, 24(r3)				# 2159
-	stw	r9, 184(r3)				# 2159
-	stw	r6, 188(r3)				# 2159
-	stfs	f0, 192(r3)				# 2159
-	stfs	f1, 200(r3)				# 2159
-	stfs	f4, 208(r3)				# 2159
-	stfs	f3, 216(r3)				# 2159
-	mfspr	r31, 8				# 2159
-	fmr	f0, f2				# 2159
-	stw	r31, 224(r3)				# 2159
-	addi	r3, r3, 228				# 2159
-	bl	min_caml_create_float_array				# 2159
-	addi	r3, r3, -228				# 2159
-	lwz	r31, 224(r3)				# 2159
-	mr	r5, r2				# 2159
-	mtspr	8, r31				# 2159
-	lwz	r2, 64(r3)				# 2160
-	slwi	r6, r2, 2				# 2160
-	lwz	r7, 8(r3)				# 2160
-	lwzx	r6, r7, r6				# 2160
-	stw	r5, 224(r3)				# 2160
-	mfspr	r31, 8				# 2160
-	mr	r2, r6				# 2160
-	stw	r31, 228(r3)				# 2160
-	addi	r3, r3, 232				# 2160
-	bl	min_caml_create_array				# 2160
-	addi	r3, r3, -232				# 2160
-	lwz	r31, 228(r3)				# 2160
-	mtspr	8, r31				# 2160
-	mr	r5, r4				# 2161
-	addi	r4, r4, 8				# 2161
-	stw	r2, 4(r5)				# 2161
-	lwz	r2, 224(r3)				# 2161
-	stw	r2, 0(r5)				# 2161
-	lwz	r6, 64(r3)				# 134
-	slwi	r7, r6, 2				# 134
-	lfs	f0, 216(r3)				# 134
-	stfsx	f0, r2, r7				# 134
-	lwz	r7, 56(r3)				# 135
-	slwi	r8, r7, 2				# 135
-	lfs	f0, 208(r3)				# 135
-	stfsx	f0, r2, r8				# 135
-	lwz	r8, 28(r3)				# 136
-	slwi	r8, r8, 2				# 136
-	lfs	f0, 200(r3)				# 136
-	stfsx	f0, r2, r8				# 136
-	slwi	r2, r6, 2				# 1122
-	lwz	r8, 8(r3)				# 1122
-	lwzx	r2, r8, r2				# 1122
-	sub	r2, r2, r7				# 1122
-	lwz	r30, 4(r3)				# 1122
-	stw	r5, 228(r3)				# 1122
-	mfspr	r31, 8				# 1122
-	mr	r29, r5				# 1122
-	mr	r5, r2				# 1122
-	mr	r2, r29				# 1122
-	stw	r31, 232(r3)				# 1122
-	addi	r3, r3, 236				# 1122
-	lwz	r31, 0(r30)				# 1122
-	mtspr	9, r31				# 1122
-	bctrl				# 1122
-	addi	r3, r3, -236				# 1122
-	lwz	r31, 232(r3)				# 1122
-	mtspr	8, r31				# 1122
-	mr	r2, r4				# 2209
-	addi	r4, r4, 12				# 2209
-	lfs	f0, 192(r3)				# 2209
-	stfs	f0, 8(r2)				# 2209
-	lwz	r5, 228(r3)				# 2209
-	stw	r5, 4(r2)				# 2209
-	lwz	r5, 188(r3)				# 2209
-	stw	r5, 0(r2)				# 2209
-	lwz	r5, 184(r3)				# 2209
-	slwi	r6, r5, 2				# 2209
-	lwz	r7, 0(r3)				# 2209
-	stwx	r2, r7, r6				# 2209
-	lwz	r2, 56(r3)				# 2237
-	add	r2, r5, r2				# 2237
-	lwz	r5, 64(r3)				# 2237
-	slwi	r5, r5, 2				# 2237
-	lwz	r6, 48(r3)				# 2237
-	stwx	r2, r6, r5				# 2237
+beq_else.16515:
+	cmpw	cr7, r15, r11				# 2263
+	bne	cr7, beq_else.16521				# 2263
+	slwi	r2, r2, 2				# 2240
+	add	r2, r2, r14				# 2240
+	slwi	r15, r13, 2				# 2241
+	lwzx	r15, r7, r15				# 2241
+	lwz	r16, 28(r6)				# 360
+	slwi	r17, r13, 2				# 365
+	lfsx	f1, r16, r17				# 365
+	fsub	f1, f2, f1				# 2242
+	lwz	r16, 16(r6)				# 320
+	slwi	r17, r13, 2				# 195
+	lfsx	f2, r9, r17				# 195
+	slwi	r17, r13, 2				# 195
+	lfsx	f3, r16, r17				# 195
+	fmul	f2, f2, f3				# 195
+	slwi	r17, r14, 2				# 195
+	lfsx	f3, r9, r17				# 195
+	slwi	r17, r14, 2				# 195
+	lfsx	f4, r16, r17				# 195
+	fmul	f3, f3, f4				# 195
+	fadd	f2, f2, f3				# 195
+	slwi	r17, r11, 2				# 195
+	lfsx	f3, r9, r17				# 195
+	slwi	r17, r11, 2				# 195
+	lfsx	f4, r16, r17				# 195
+	fmul	f3, f3, f4				# 195
+	fadd	f2, f2, f3				# 195
+	lis	r31, ha16(l.11646)
+	addi	r31, r31, lo16(l.11646)
+	lfs	f3, 0(r31)				# 2246
+	lwz	r16, 16(r6)				# 290
+	slwi	r17, r13, 2				# 295
+	lfsx	f4, r16, r17				# 295
+	fmul	f4, f3, f4				# 2246
+	fmul	f4, f4, f2				# 2246
+	slwi	r16, r13, 2				# 2246
+	lfsx	f5, r9, r16				# 2246
+	fsub	f4, f4, f5				# 2246
+	lwz	r16, 16(r6)				# 300
+	slwi	r17, r14, 2				# 305
+	lfsx	f5, r16, r17				# 305
+	fmul	f5, f3, f5				# 2247
+	fmul	f5, f5, f2				# 2247
+	slwi	r16, r14, 2				# 2247
+	lfsx	f6, r9, r16				# 2247
+	fsub	f5, f5, f6				# 2247
+	lwz	r6, 16(r6)				# 310
+	slwi	r16, r11, 2				# 315
+	lfsx	f6, r6, r16				# 315
+	fmul	f3, f3, f6				# 2248
+	fmul	f2, f3, f2				# 2248
+	slwi	r6, r11, 2				# 2248
+	lfsx	f3, r9, r6				# 2248
+	fsub	f2, f2, f3				# 2248
+	stw	r7, 0(r3)				# 2171
+	stw	r5, 36(r3)				# 2171
+	stw	r15, 168(r3)				# 2171
+	stw	r2, 172(r3)				# 2171
+	stfs	f1, 176(r3)				# 2171
+	stw	r10, 56(r3)				# 2171
+	stfs	f2, 184(r3)				# 2171
+	stw	r11, 72(r3)				# 2171
+	stfs	f5, 192(r3)				# 2171
+	stw	r14, 88(r3)				# 2171
+	stfs	f4, 200(r3)				# 2171
+	stw	r8, 104(r3)				# 2171
+	stw	r13, 108(r3)				# 2171
+	mfspr	r31, 8				# 2171
+	mr	r2, r12				# 2171
+	stw	r31, 208(r3)				# 2171
+	addi	r3, r3, 212				# 2171
+	bl	min_caml_create_float_array				# 2171
+	addi	r3, r3, -212				# 2171
+	lwz	r31, 208(r3)				# 2171
+	mr	r5, r2				# 2171
+	mtspr	8, r31				# 2171
+	lwz	r2, 108(r3)				# 2172
+	slwi	r6, r2, 2				# 2172
+	lwz	r7, 104(r3)				# 2172
+	lwzx	r6, r7, r6				# 2172
+	stw	r5, 208(r3)				# 2172
+	mfspr	r31, 8				# 2172
+	mr	r2, r6				# 2172
+	stw	r31, 212(r3)				# 2172
+	addi	r3, r3, 216				# 2172
+	bl	min_caml_create_array				# 2172
+	addi	r3, r3, -216				# 2172
+	lwz	r31, 212(r3)				# 2172
+	mtspr	8, r31				# 2172
+	mr	r5, r4				# 2173
+	addi	r4, r4, 8				# 2173
+	stw	r2, 4(r5)				# 2173
+	lwz	r2, 208(r3)				# 2173
+	stw	r2, 0(r5)				# 2173
+	lwz	r6, 108(r3)				# 147
+	slwi	r7, r6, 2				# 147
+	lfs	f0, 200(r3)				# 147
+	stfsx	f0, r2, r7				# 147
+	lwz	r7, 88(r3)				# 148
+	slwi	r8, r7, 2				# 148
+	lfs	f0, 192(r3)				# 148
+	stfsx	f0, r2, r8				# 148
+	lwz	r8, 72(r3)				# 149
+	slwi	r8, r8, 2				# 149
+	lfs	f0, 184(r3)				# 149
+	stfsx	f0, r2, r8				# 149
+	slwi	r2, r6, 2				# 1135
+	lwz	r8, 104(r3)				# 1135
+	lwzx	r2, r8, r2				# 1135
+	sub	r2, r2, r7				# 1135
+	lwz	r1, 56(r3)				# 1135
+	stw	r5, 212(r3)				# 1135
+	mfspr	r31, 8				# 1135
+	mr	r30, r5				# 1135
+	mr	r5, r2				# 1135
+	mr	r2, r30				# 1135
+	stw	r31, 216(r3)				# 1135
+	addi	r3, r3, 220				# 1135
+	lwz	r31, 0(r1)				# 1135
+	mtspr	9, r31				# 1135
+	bctr				# 1135
+	addi	r3, r3, -220				# 1135
+	lwz	r31, 216(r3)				# 1135
+	mtspr	8, r31				# 1135
+	mr	r2, r4				# 2221
+	addi	r4, r4, 12				# 2221
+	lfs	f0, 176(r3)				# 2221
+	stfs	f0, 8(r2)				# 2221
+	lwz	r5, 212(r3)				# 2221
+	stw	r5, 4(r2)				# 2221
+	lwz	r5, 172(r3)				# 2221
+	stw	r5, 0(r2)				# 2221
+	lwz	r5, 168(r3)				# 2221
+	slwi	r6, r5, 2				# 2221
+	lwz	r7, 36(r3)				# 2221
+	stwx	r2, r7, r6				# 2221
+	lwz	r2, 88(r3)				# 2249
+	add	r2, r5, r2				# 2249
+	lwz	r5, 108(r3)				# 2249
+	slwi	r5, r5, 2				# 2249
+	lwz	r6, 0(r3)				# 2249
+	stwx	r2, r6, r5				# 2249
 	blr
-beq_else.18194:
+beq_else.16521:
 	blr
-beq_else.18185:
+beq_else.16510:
 	blr
-ble_else.18184:
+ble_else.16509:
 	blr
 _min_caml_start: # main entry point
 	addi	r2, 0, 1
@@ -11885,8 +10278,8 @@ _min_caml_start: # main entry point
 	addi	r3, r3, -12				# 17
 	lwz	r31, 8(r3)				# 17
 	mtspr	8, r31				# 17
-	lis	r31, ha16(l.11658)
-	addi	r31, r31, lo16(l.11658)
+	lis	r31, ha16(l.11690)
+	addi	r31, r31, lo16(l.11690)
 	lfs	f0, 0(r31)				# 21
 	lwz	r5, 4(r3)				# 21
 	stw	r2, 8(r3)				# 21
@@ -11917,9 +10310,9 @@ _min_caml_start: # main entry point
 	mr	r2, r6				# 22
 	stw	r5, 24(r3)				# 22
 	mfspr	r31, 8				# 22
-	mr	r29, r5				# 22
+	mr	r30, r5				# 22
 	mr	r5, r2				# 22
-	mr	r2, r29				# 22
+	mr	r2, r30				# 22
 	stw	r31, 28(r3)				# 22
 	addi	r3, r3, 32				# 22
 	bl	min_caml_create_array				# 22
@@ -11960,8 +10353,8 @@ _min_caml_start: # main entry point
 	addi	r3, r3, -48				# 29
 	lwz	r31, 44(r3)				# 29
 	mtspr	8, r31				# 29
-	lis	r31, ha16(l.12176)
-	addi	r31, r31, lo16(l.12176)
+	lis	r31, ha16(l.12208)
+	addi	r31, r31, lo16(l.12208)
 	lfs	f0, 0(r31)				# 31
 	lwz	r5, 0(r3)				# 31
 	stfs	f0, 48(r3)				# 31
@@ -12041,8 +10434,8 @@ _min_caml_start: # main entry point
 	addi	r3, r3, -88				# 41
 	lwz	r31, 84(r3)				# 41
 	mtspr	8, r31				# 41
-	lis	r31, ha16(l.12785)
-	addi	r31, r31, lo16(l.12785)
+	lis	r31, ha16(l.12817)
+	addi	r31, r31, lo16(l.12817)
 	lfs	f0, 0(r31)				# 43
 	lwz	r5, 0(r3)				# 43
 	stfs	f0, 88(r3)				# 43
@@ -12364,1950 +10757,1961 @@ _min_caml_start: # main entry point
 	addi	r3, r3, -208				# 101
 	lwz	r31, 204(r3)				# 101
 	mtspr	8, r31				# 101
-	mr	r5, r4				# 601
-	addi	r4, r4, 16				# 601
-	lis	r6, ha16(rotate_quadratic_matrix.2595)
-	addi	r6, r6, lo16(rotate_quadratic_matrix.2595)
-	stw	r6, 0(r5)				# 601
-	lwz	r6, 128(r3)				# 601
-	stw	r6, 12(r5)				# 601
-	lwz	r7, 4(r3)				# 601
-	stw	r7, 8(r5)				# 601
-	lwz	r8, 0(r3)				# 601
-	stw	r8, 4(r5)				# 601
-	mr	r9, r4				# 642
-	addi	r4, r4, 36				# 642
-	lis	r10, ha16(read_nth_object.2598)
-	addi	r10, r10, lo16(read_nth_object.2598)
-	stw	r10, 0(r9)				# 642
-	stw	r5, 32(r9)				# 642
-	lwz	r5, 28(r3)				# 642
-	stw	r5, 28(r9)				# 642
-	stw	r6, 24(r9)				# 642
-	lwz	r10, 64(r3)				# 642
-	stw	r10, 20(r9)				# 642
-	lwz	r11, 32(r3)				# 642
-	stw	r11, 16(r9)				# 642
-	stw	r7, 12(r9)				# 642
-	stw	r8, 8(r9)				# 642
-	lfs	f0, 16(r3)				# 642
-	stfs	f0, 4(r9)				# 642
-	mr	r12, r4				# 725
-	addi	r4, r4, 24				# 725
-	lis	r13, ha16(read_object.2600)
-	addi	r13, r13, lo16(read_object.2600)
-	stw	r13, 0(r12)				# 725
-	stw	r9, 20(r12)				# 725
-	lwz	r9, 8(r3)				# 725
-	stw	r9, 16(r12)				# 725
-	lwz	r13, 24(r3)				# 725
-	stw	r13, 12(r12)				# 725
-	stw	r7, 8(r12)				# 725
-	stw	r8, 4(r12)				# 725
-	mr	r13, r4				# 741
-	addi	r4, r4, 12				# 741
-	lis	r14, ha16(read_net_item.2604)
-	addi	r14, r14, lo16(read_net_item.2604)
-	stw	r14, 0(r13)				# 741
-	stw	r10, 8(r13)				# 741
-	stw	r8, 4(r13)				# 741
-	mr	r14, r4				# 749
-	addi	r4, r4, 20				# 749
-	lis	r15, ha16(read_or_network.2606)
-	addi	r15, r15, lo16(read_or_network.2606)
-	stw	r15, 0(r14)				# 749
-	stw	r13, 16(r14)				# 749
-	stw	r10, 12(r14)				# 749
-	stw	r7, 8(r14)				# 749
-	stw	r8, 4(r14)				# 749
-	mr	r15, r4				# 758
-	addi	r4, r4, 24				# 758
-	lis	r16, ha16(read_and_network.2608)
-	addi	r16, r16, lo16(read_and_network.2608)
-	stw	r16, 0(r15)				# 758
-	stw	r13, 20(r15)				# 758
-	lwz	r13, 72(r3)				# 758
-	stw	r13, 16(r15)				# 758
-	stw	r10, 12(r15)				# 758
-	stw	r7, 8(r15)				# 758
-	stw	r8, 4(r15)				# 758
-	mr	r16, r4				# 767
-	addi	r4, r4, 64				# 767
-	lis	r17, ha16(read_parameter.2610)
-	addi	r17, r17, lo16(read_parameter.2610)
-	stw	r17, 0(r16)				# 767
-	lwz	r17, 40(r3)				# 767
-	stw	r17, 60(r16)				# 767
-	lwz	r18, 160(r3)				# 767
-	stw	r18, 56(r16)				# 767
-	lwz	r19, 156(r3)				# 767
-	stw	r19, 52(r16)				# 767
-	lwz	r20, 152(r3)				# 767
-	stw	r20, 48(r16)				# 767
-	lwz	r21, 36(r3)				# 767
-	stw	r21, 44(r16)				# 767
-	stw	r14, 40(r16)				# 767
-	stw	r12, 36(r16)				# 767
-	stw	r15, 32(r16)				# 767
-	lwz	r12, 76(r3)				# 767
-	stw	r12, 28(r16)				# 767
-	lwz	r14, 56(r3)				# 767
-	stw	r14, 24(r16)				# 767
-	lwz	r15, 60(r3)				# 767
-	stw	r15, 20(r16)				# 767
-	stw	r6, 16(r16)				# 767
-	stw	r7, 12(r16)				# 767
-	stw	r8, 8(r16)				# 767
-	stfs	f0, 4(r16)				# 767
-	mr	r21, r4				# 798
-	addi	r4, r4, 20				# 798
-	lis	r22, ha16(solver_rect.2621)
-	addi	r22, r22, lo16(solver_rect.2621)
-	stw	r22, 0(r21)				# 798
-	lwz	r22, 80(r3)				# 798
-	stw	r22, 16(r21)				# 798
-	stw	r6, 12(r21)				# 798
-	stw	r7, 8(r21)				# 798
-	stw	r8, 4(r21)				# 798
-	mr	r23, r4				# 855
-	addi	r4, r4, 24				# 855
-	lis	r24, ha16(solver_second.2646)
-	addi	r24, r24, lo16(solver_second.2646)
-	stw	r24, 0(r23)				# 855
-	stw	r22, 20(r23)				# 855
-	stw	r6, 16(r23)				# 855
-	stw	r11, 12(r23)				# 855
-	stw	r7, 8(r23)				# 855
-	stw	r8, 4(r23)				# 855
-	mr	r24, r4				# 901
-	addi	r4, r4, 28				# 901
-	lis	r25, ha16(solver_rect_fast.2656)
-	addi	r25, r25, lo16(solver_rect_fast.2656)
-	stw	r25, 0(r24)				# 901
-	stw	r22, 24(r24)				# 901
-	lwz	r25, 172(r3)				# 901
-	stw	r25, 20(r24)				# 901
-	stw	r6, 16(r24)				# 901
-	stw	r11, 12(r24)				# 901
-	stw	r7, 8(r24)				# 901
-	stw	r8, 4(r24)				# 901
-	mr	r26, r4				# 943
-	addi	r4, r4, 24				# 943
-	lis	r27, ha16(solver_second_fast.2669)
-	addi	r27, r27, lo16(solver_second_fast.2669)
-	stw	r27, 0(r26)				# 943
-	stw	r22, 20(r26)				# 943
-	stw	r6, 16(r26)				# 943
-	stw	r11, 12(r26)				# 943
-	stw	r7, 8(r26)				# 943
-	stw	r8, 4(r26)				# 943
-	mr	r27, r4				# 1076
-	addi	r4, r4, 28				# 1076
-	lis	r28, ha16(setup_second_table.2702)
-	addi	r28, r28, lo16(setup_second_table.2702)
-	stw	r28, 0(r27)				# 1076
-	stw	r25, 24(r27)				# 1076
-	stw	r6, 20(r27)				# 1076
-	stw	r11, 16(r27)				# 1076
-	stw	r7, 12(r27)				# 1076
-	stw	r8, 8(r27)				# 1076
-	stfs	f0, 4(r27)				# 1076
-	mr	r28, r4				# 1104
-	addi	r4, r4, 36				# 1104
-	lis	r29, ha16(iter_setup_dirvec_constants.2705)
-	addi	r29, r29, lo16(iter_setup_dirvec_constants.2705)
-	stw	r29, 0(r28)				# 1104
-	stw	r27, 32(r28)				# 1104
-	stw	r5, 28(r28)				# 1104
-	stw	r25, 24(r28)				# 1104
-	stw	r6, 20(r28)				# 1104
-	stw	r11, 16(r28)				# 1104
-	stw	r7, 12(r28)				# 1104
-	stw	r8, 8(r28)				# 1104
-	stfs	f0, 4(r28)				# 1104
-	mr	r27, r4				# 1127
-	addi	r4, r4, 24				# 1127
-	lis	r29, ha16(setup_startp_constants.2710)
-	addi	r29, r29, lo16(setup_startp_constants.2710)
-	stw	r29, 0(r27)				# 1127
-	stw	r5, 20(r27)				# 1127
-	stw	r6, 16(r27)				# 1127
-	stw	r11, 12(r27)				# 1127
-	stw	r7, 8(r27)				# 1127
-	stw	r8, 4(r27)				# 1127
-	mr	r29, r4				# 1194
-	addi	r4, r4, 28				# 1194
-	lis	r30, ha16(check_all_inside.2735)
-	addi	r30, r30, lo16(check_all_inside.2735)
-	stw	r30, 0(r29)				# 1194
-	stw	r5, 24(r29)				# 1194
-	stw	r6, 20(r29)				# 1194
-	stw	r10, 16(r29)				# 1194
-	stw	r11, 12(r29)				# 1194
-	stw	r7, 8(r29)				# 1194
-	stw	r8, 4(r29)				# 1194
-	mr	r30, r4				# 1212
-	addi	r4, r4, 60				# 1212
-	stw	r16, 204(r3)				# 1212
-	lis	r16, ha16(shadow_check_and_group.2741)
-	addi	r16, r16, lo16(shadow_check_and_group.2741)
-	stw	r16, 0(r30)				# 1212
-	lwz	r16, 184(r3)				# 1212
-	stw	r16, 56(r30)				# 1212
-	stw	r26, 52(r30)				# 1212
-	stw	r24, 48(r30)				# 1212
-	stw	r22, 44(r30)				# 1212
-	stw	r5, 40(r30)				# 1212
-	stw	r14, 36(r30)				# 1212
-	stw	r28, 208(r3)				# 1212
-	lwz	r28, 104(r3)				# 1212
-	stw	r28, 32(r30)				# 1212
-	lwz	r19, 192(r3)				# 1212
-	stw	r19, 28(r30)				# 1212
-	stw	r29, 24(r30)				# 1212
-	stw	r6, 20(r30)				# 1212
-	stw	r10, 16(r30)				# 1212
-	stw	r11, 12(r30)				# 1212
-	stw	r7, 8(r30)				# 1212
-	stw	r8, 4(r30)				# 1212
-	mr	r18, r4				# 1242
-	addi	r4, r4, 24				# 1242
-	lis	r25, ha16(shadow_check_one_or_group.2744)
-	addi	r25, r25, lo16(shadow_check_one_or_group.2744)
-	stw	r25, 0(r18)				# 1242
-	stw	r30, 20(r18)				# 1242
-	stw	r13, 16(r18)				# 1242
-	stw	r10, 12(r18)				# 1242
-	stw	r7, 8(r18)				# 1242
-	stw	r8, 4(r18)				# 1242
-	mr	r25, r4				# 1257
-	addi	r4, r4, 56				# 1257
-	lis	r30, ha16(shadow_check_one_or_matrix.2747)
-	addi	r30, r30, lo16(shadow_check_one_or_matrix.2747)
-	stw	r30, 0(r25)				# 1257
-	stw	r16, 52(r25)				# 1257
-	stw	r26, 48(r25)				# 1257
-	stw	r24, 44(r25)				# 1257
-	stw	r22, 40(r25)				# 1257
-	stw	r18, 36(r25)				# 1257
-	stw	r5, 32(r25)				# 1257
-	stw	r28, 28(r25)				# 1257
-	stw	r19, 24(r25)				# 1257
-	stw	r6, 20(r25)				# 1257
-	stw	r10, 16(r25)				# 1257
-	stw	r11, 12(r25)				# 1257
-	stw	r7, 8(r25)				# 1257
-	stw	r8, 4(r25)				# 1257
-	mr	r18, r4				# 1291
-	addi	r4, r4, 64				# 1291
-	lis	r19, ha16(solve_each_element.2750)
-	addi	r19, r19, lo16(solve_each_element.2750)
-	stw	r19, 0(r18)				# 1291
-	lwz	r19, 100(r3)				# 1291
-	stw	r19, 60(r18)				# 1291
-	lwz	r26, 144(r3)				# 1291
-	stw	r26, 56(r18)				# 1291
-	stw	r23, 52(r18)				# 1291
-	stw	r21, 48(r18)				# 1291
-	stw	r22, 44(r18)				# 1291
-	stw	r5, 40(r18)				# 1291
-	lwz	r30, 96(r3)				# 1291
-	stw	r30, 36(r18)				# 1291
-	stw	r28, 32(r18)				# 1291
-	lwz	r16, 108(r3)				# 1291
-	stw	r16, 28(r18)				# 1291
-	stw	r29, 24(r18)				# 1291
-	stw	r6, 20(r18)				# 1291
-	stw	r10, 16(r18)				# 1291
-	stw	r7, 12(r18)				# 1291
-	stw	r8, 8(r18)				# 1291
-	stfs	f0, 4(r18)				# 1291
-	mr	r20, r4				# 1332
-	addi	r4, r4, 24				# 1332
-	lis	r17, ha16(solve_one_or_network.2754)
-	addi	r17, r17, lo16(solve_one_or_network.2754)
-	stw	r17, 0(r20)				# 1332
-	stw	r18, 20(r20)				# 1332
-	stw	r13, 16(r20)				# 1332
-	stw	r10, 12(r20)				# 1332
-	stw	r7, 8(r20)				# 1332
-	stw	r8, 4(r20)				# 1332
-	mr	r17, r4				# 1342
-	addi	r4, r4, 48				# 1342
-	lis	r18, ha16(trace_or_matrix.2758)
-	addi	r18, r18, lo16(trace_or_matrix.2758)
-	stw	r18, 0(r17)				# 1342
-	stw	r19, 44(r17)				# 1342
-	stw	r26, 40(r17)				# 1342
-	stw	r23, 36(r17)				# 1342
-	stw	r21, 32(r17)				# 1342
-	stw	r22, 28(r17)				# 1342
-	stw	r20, 24(r17)				# 1342
-	stw	r5, 20(r17)				# 1342
-	stw	r6, 16(r17)				# 1342
-	stw	r10, 12(r17)				# 1342
-	stw	r7, 8(r17)				# 1342
-	stw	r8, 4(r17)				# 1342
-	mr	r18, r4				# 1382
-	addi	r4, r4, 64				# 1382
-	lis	r20, ha16(solve_each_element_fast.2764)
-	addi	r20, r20, lo16(solve_each_element_fast.2764)
-	stw	r20, 0(r18)				# 1382
-	stw	r19, 60(r18)				# 1382
-	lwz	r20, 148(r3)				# 1382
-	stw	r20, 56(r18)				# 1382
-	stw	r24, 52(r18)				# 1382
-	stw	r22, 48(r18)				# 1382
-	stw	r5, 44(r18)				# 1382
-	stw	r30, 40(r18)				# 1382
-	stw	r28, 36(r18)				# 1382
-	stw	r16, 32(r18)				# 1382
-	stw	r29, 28(r18)				# 1382
-	stw	r6, 24(r18)				# 1382
-	stw	r10, 20(r18)				# 1382
-	stw	r11, 16(r18)				# 1382
-	stw	r7, 12(r18)				# 1382
-	stw	r8, 8(r18)				# 1382
-	stfs	f0, 4(r18)				# 1382
-	mr	r21, r4				# 1423
-	addi	r4, r4, 24				# 1423
-	lis	r23, ha16(solve_one_or_network_fast.2768)
-	addi	r23, r23, lo16(solve_one_or_network_fast.2768)
-	stw	r23, 0(r21)				# 1423
-	stw	r18, 20(r21)				# 1423
-	stw	r13, 16(r21)				# 1423
-	stw	r10, 12(r21)				# 1423
-	stw	r7, 8(r21)				# 1423
-	stw	r8, 4(r21)				# 1423
-	mr	r13, r4				# 1433
-	addi	r4, r4, 44				# 1433
-	lis	r18, ha16(trace_or_matrix_fast.2772)
-	addi	r18, r18, lo16(trace_or_matrix_fast.2772)
-	stw	r18, 0(r13)				# 1433
-	stw	r19, 40(r13)				# 1433
-	stw	r24, 36(r13)				# 1433
-	stw	r22, 32(r13)				# 1433
-	stw	r21, 28(r13)				# 1433
-	stw	r5, 24(r13)				# 1433
-	stw	r6, 20(r13)				# 1433
-	stw	r10, 16(r13)				# 1433
-	stw	r11, 12(r13)				# 1433
-	stw	r7, 8(r13)				# 1433
-	stw	r8, 4(r13)				# 1433
-	mr	r18, r4				# 1492
-	addi	r4, r4, 24				# 1492
-	lis	r21, ha16(get_nvector_second.2782)
-	addi	r21, r21, lo16(get_nvector_second.2782)
-	stw	r21, 0(r18)				# 1492
-	lwz	r21, 112(r3)				# 1492
-	stw	r21, 20(r18)				# 1492
-	stw	r28, 16(r18)				# 1492
-	stw	r6, 12(r18)				# 1492
-	stw	r7, 8(r18)				# 1492
-	stw	r8, 4(r18)				# 1492
-	mr	r22, r4				# 1514
-	addi	r4, r4, 32				# 1514
-	lis	r23, ha16(get_nvector.2784)
-	addi	r23, r23, lo16(get_nvector.2784)
-	stw	r23, 0(r22)				# 1514
-	stw	r21, 28(r22)				# 1514
-	stw	r30, 24(r22)				# 1514
-	stw	r28, 20(r22)				# 1514
-	stw	r6, 16(r22)				# 1514
-	stw	r7, 12(r22)				# 1514
-	stw	r8, 8(r22)				# 1514
-	stfs	f0, 4(r22)				# 1514
-	mr	r23, r4				# 1528
-	addi	r4, r4, 28				# 1528
-	lis	r24, ha16(utexture.2787)
-	addi	r24, r24, lo16(utexture.2787)
-	stw	r24, 0(r23)				# 1528
-	lwz	r24, 116(r3)				# 1528
-	stw	r24, 24(r23)				# 1528
-	stw	r6, 20(r23)				# 1528
-	stw	r11, 16(r23)				# 1528
-	stw	r7, 12(r23)				# 1528
-	stw	r8, 8(r23)				# 1528
-	lfs	f1, 48(r3)				# 1528
-	stfs	f1, 4(r23)				# 1528
-	mr	r29, r4				# 1622
-	addi	r4, r4, 60				# 1622
-	lis	r11, ha16(trace_reflections.2794)
-	addi	r11, r11, lo16(trace_reflections.2794)
-	stw	r11, 0(r29)				# 1622
-	stw	r13, 56(r29)				# 1622
-	stw	r19, 52(r29)				# 1622
-	stw	r24, 48(r29)				# 1622
-	stw	r25, 44(r29)				# 1622
-	lwz	r11, 124(r3)				# 1622
-	stw	r11, 40(r29)				# 1622
-	stw	r22, 212(r3)				# 1622
-	lwz	r22, 200(r3)				# 1622
-	stw	r22, 36(r29)				# 1622
-	stw	r12, 32(r29)				# 1622
-	stw	r21, 28(r29)				# 1622
-	stw	r30, 24(r29)				# 1622
-	stw	r16, 20(r29)				# 1622
-	stw	r6, 16(r29)				# 1622
-	stw	r7, 12(r29)				# 1622
-	stw	r8, 8(r29)				# 1622
-	lfs	f1, 88(r3)				# 1622
-	stfs	f1, 4(r29)				# 1622
-	mr	r22, r4				# 1649
-	addi	r4, r4, 112				# 1649
-	stw	r13, 216(r3)				# 1649
-	lis	r13, ha16(trace_ray.2799)
-	addi	r13, r13, lo16(trace_ray.2799)
-	stw	r13, 0(r22)				# 1649
-	stw	r23, 108(r22)				# 1649
-	stw	r29, 104(r22)				# 1649
-	stw	r17, 100(r22)				# 1649
-	stw	r19, 96(r22)				# 1649
-	stw	r24, 92(r22)				# 1649
-	stw	r20, 88(r22)				# 1649
-	stw	r26, 84(r22)				# 1649
-	stw	r25, 80(r22)				# 1649
-	stw	r27, 76(r22)				# 1649
-	stw	r11, 72(r22)				# 1649
-	stw	r12, 68(r22)				# 1649
-	stw	r5, 64(r22)				# 1649
-	stw	r21, 60(r22)				# 1649
-	stw	r2, 56(r22)				# 1649
-	stw	r9, 52(r22)				# 1649
-	stw	r14, 48(r22)				# 1649
-	stw	r30, 44(r22)				# 1649
-	stw	r28, 40(r22)				# 1649
-	stw	r16, 36(r22)				# 1649
-	stw	r18, 32(r22)				# 1649
-	stw	r15, 28(r22)				# 1649
-	stw	r6, 24(r22)				# 1649
-	stw	r10, 20(r22)				# 1649
-	stw	r7, 16(r22)				# 1649
-	stw	r8, 12(r22)				# 1649
-	stfs	f1, 8(r22)				# 1649
-	stfs	f0, 4(r22)				# 1649
-	mr	r10, r4				# 1757
-	addi	r4, r4, 72				# 1757
-	lis	r13, ha16(iter_trace_diffuse_rays.2808)
-	addi	r13, r13, lo16(iter_trace_diffuse_rays.2808)
-	stw	r13, 0(r10)				# 1757
-	stw	r23, 68(r10)				# 1757
-	lwz	r13, 216(r3)				# 1757
-	stw	r13, 64(r10)				# 1757
-	stw	r19, 60(r10)				# 1757
-	stw	r24, 56(r10)				# 1757
-	stw	r25, 52(r10)				# 1757
-	stw	r12, 48(r10)				# 1757
-	stw	r5, 44(r10)				# 1757
-	stw	r21, 40(r10)				# 1757
-	stw	r14, 36(r10)				# 1757
-	stw	r28, 32(r10)				# 1757
-	stw	r16, 28(r10)				# 1757
-	lwz	r12, 212(r3)				# 1757
-	stw	r12, 24(r10)				# 1757
-	lwz	r12, 120(r3)				# 1757
-	stw	r12, 20(r10)				# 1757
-	stw	r6, 16(r10)				# 1757
-	stw	r7, 12(r10)				# 1757
-	stw	r8, 8(r10)				# 1757
-	stfs	f1, 4(r10)				# 1757
-	mr	r13, r4				# 1843
-	addi	r4, r4, 48				# 1843
-	lis	r15, ha16(do_without_neighbors.2830)
-	addi	r15, r15, lo16(do_without_neighbors.2830)
-	stw	r15, 0(r13)				# 1843
-	stw	r20, 44(r13)				# 1843
-	stw	r27, 40(r13)				# 1843
-	stw	r11, 36(r13)				# 1843
-	stw	r9, 32(r13)				# 1843
-	stw	r10, 28(r13)				# 1843
-	lwz	r15, 176(r3)				# 1843
-	stw	r15, 24(r13)				# 1843
-	stw	r12, 20(r13)				# 1843
-	stw	r6, 16(r13)				# 1843
-	lwz	r16, 32(r3)				# 1843
-	stw	r16, 12(r13)				# 1843
-	stw	r7, 8(r13)				# 1843
-	stw	r8, 4(r13)				# 1843
-	mr	r17, r4				# 1892
-	addi	r4, r4, 28				# 1892
-	lis	r18, ha16(try_exploit_neighbors.2846)
-	addi	r18, r18, lo16(try_exploit_neighbors.2846)
-	stw	r18, 0(r17)				# 1892
-	stw	r11, 24(r17)				# 1892
-	stw	r13, 20(r17)				# 1892
-	stw	r12, 16(r17)				# 1892
-	stw	r6, 12(r17)				# 1892
-	stw	r7, 8(r17)				# 1892
-	stw	r8, 4(r17)				# 1892
-	mr	r18, r4				# 1951
-	addi	r4, r4, 44				# 1951
-	lis	r19, ha16(pretrace_diffuse_rays.2859)
-	addi	r19, r19, lo16(pretrace_diffuse_rays.2859)
-	stw	r19, 0(r18)				# 1951
-	stw	r20, 40(r18)				# 1951
-	stw	r27, 36(r18)				# 1951
-	stw	r9, 32(r18)				# 1951
-	stw	r10, 28(r18)				# 1951
-	stw	r15, 24(r18)				# 1951
-	stw	r12, 20(r18)				# 1951
-	stw	r6, 16(r18)				# 1951
-	stw	r7, 12(r18)				# 1951
-	stw	r8, 8(r18)				# 1951
-	stfs	f0, 4(r18)				# 1951
-	mr	r10, r4				# 1980
-	addi	r4, r4, 60				# 1980
-	lis	r12, ha16(pretrace_pixels.2862)
-	addi	r12, r12, lo16(pretrace_pixels.2862)
-	stw	r12, 0(r10)				# 1980
-	lwz	r12, 40(r3)				# 1980
-	stw	r12, 56(r10)				# 1980
-	stw	r22, 52(r10)				# 1980
-	stw	r26, 48(r10)				# 1980
-	lwz	r12, 152(r3)				# 1980
-	stw	r12, 44(r10)				# 1980
-	lwz	r12, 140(r3)				# 1980
-	stw	r12, 40(r10)				# 1980
-	stw	r11, 36(r10)				# 1980
-	lwz	r19, 164(r3)				# 1980
-	stw	r19, 32(r10)				# 1980
-	stw	r18, 28(r10)				# 1980
-	lwz	r18, 136(r3)				# 1980
-	stw	r18, 24(r10)				# 1980
-	lwz	r19, 172(r3)				# 1980
-	stw	r19, 20(r10)				# 1980
-	stw	r6, 16(r10)				# 1980
-	stw	r7, 12(r10)				# 1980
-	stw	r8, 8(r10)				# 1980
-	stfs	f0, 4(r10)				# 1980
-	mr	r20, r4				# 2019
-	addi	r4, r4, 32				# 2019
-	lis	r21, ha16(scan_pixel.2873)
-	addi	r21, r21, lo16(scan_pixel.2873)
-	stw	r21, 0(r20)				# 2019
-	stw	r17, 28(r20)				# 2019
-	stw	r11, 24(r20)				# 2019
-	lwz	r11, 132(r3)				# 2019
-	stw	r11, 20(r20)				# 2019
-	stw	r13, 16(r20)				# 2019
-	stw	r6, 12(r20)				# 2019
-	stw	r7, 8(r20)				# 2019
-	stw	r8, 4(r20)				# 2019
-	mr	r13, r4				# 2039
-	addi	r4, r4, 48				# 2039
-	lis	r17, ha16(scan_line.2879)
-	addi	r17, r17, lo16(scan_line.2879)
-	stw	r17, 0(r13)				# 2039
-	lwz	r17, 160(r3)				# 2039
-	stw	r17, 44(r13)				# 2039
-	lwz	r21, 156(r3)				# 2039
-	stw	r21, 40(r13)				# 2039
-	stw	r20, 36(r13)				# 2039
-	stw	r12, 32(r13)				# 2039
-	stw	r10, 28(r13)				# 2039
-	stw	r11, 24(r13)				# 2039
-	stw	r18, 20(r13)				# 2039
-	stw	r19, 16(r13)				# 2039
-	stw	r6, 12(r13)				# 2039
-	stw	r7, 8(r13)				# 2039
-	stw	r8, 4(r13)				# 2039
-	mr	r20, r4				# 2080
-	addi	r4, r4, 28				# 2080
-	lis	r22, ha16(init_line_elements.2889)
-	addi	r22, r22, lo16(init_line_elements.2889)
-	stw	r22, 0(r20)				# 2080
-	stw	r19, 24(r20)				# 2080
-	stw	r6, 20(r20)				# 2080
-	stw	r16, 16(r20)				# 2080
-	stw	r7, 12(r20)				# 2080
-	stw	r8, 8(r20)				# 2080
-	stfs	f0, 4(r20)				# 2080
-	mr	r22, r4				# 2112
-	addi	r4, r4, 24				# 2112
-	lis	r23, ha16(calc_dirvec.2899)
-	addi	r23, r23, lo16(calc_dirvec.2899)
-	stw	r23, 0(r22)				# 2112
-	stw	r15, 20(r22)				# 2112
-	stw	r19, 16(r22)				# 2112
-	stw	r6, 12(r22)				# 2112
-	stw	r7, 8(r22)				# 2112
-	stw	r8, 4(r22)				# 2112
-	mr	r23, r4				# 2133
-	addi	r4, r4, 28				# 2133
-	lis	r24, ha16(calc_dirvecs.2907)
-	addi	r24, r24, lo16(calc_dirvecs.2907)
-	stw	r24, 0(r23)				# 2133
-	stw	r22, 24(r23)				# 2133
-	stw	r19, 20(r23)				# 2133
-	stw	r6, 16(r23)				# 2133
-	stw	r7, 12(r23)				# 2133
-	stw	r8, 8(r23)				# 2133
-	stfs	f0, 4(r23)				# 2133
-	mr	r22, r4				# 2147
-	addi	r4, r4, 24				# 2147
-	lis	r24, ha16(calc_dirvec_rows.2912)
-	addi	r24, r24, lo16(calc_dirvec_rows.2912)
-	stw	r24, 0(r22)				# 2147
-	stw	r23, 20(r22)				# 2147
-	stw	r19, 16(r22)				# 2147
-	stw	r6, 12(r22)				# 2147
-	stw	r7, 8(r22)				# 2147
-	stw	r8, 4(r22)				# 2147
-	mr	r23, r4				# 2164
-	addi	r4, r4, 24				# 2164
-	lis	r24, ha16(create_dirvec_elements.2918)
-	addi	r24, r24, lo16(create_dirvec_elements.2918)
-	stw	r24, 0(r23)				# 2164
-	stw	r9, 20(r23)				# 2164
-	stw	r16, 16(r23)				# 2164
-	stw	r7, 12(r23)				# 2164
-	stw	r8, 8(r23)				# 2164
-	stfs	f0, 4(r23)				# 2164
-	mr	r24, r4				# 2171
-	addi	r4, r4, 32				# 2171
-	lis	r25, ha16(create_dirvecs.2921)
-	addi	r25, r25, lo16(create_dirvecs.2921)
-	stw	r25, 0(r24)				# 2171
-	stw	r9, 28(r24)				# 2171
-	stw	r15, 24(r24)				# 2171
-	stw	r23, 20(r24)				# 2171
-	stw	r16, 16(r24)				# 2171
-	stw	r7, 12(r24)				# 2171
-	stw	r8, 8(r24)				# 2171
-	stfs	f0, 4(r24)				# 2171
-	mr	r23, r4				# 2181
-	addi	r4, r4, 20				# 2181
-	lis	r25, ha16(init_dirvec_constants.2923)
-	addi	r25, r25, lo16(init_dirvec_constants.2923)
-	stw	r25, 0(r23)				# 2181
-	stw	r9, 16(r23)				# 2181
-	lwz	r25, 208(r3)				# 2181
-	stw	r25, 12(r23)				# 2181
-	stw	r7, 8(r23)				# 2181
-	stw	r8, 4(r23)				# 2181
-	mr	r26, r4				# 2188
-	addi	r4, r4, 20				# 2188
-	lis	r27, ha16(init_vecset_constants.2926)
-	addi	r27, r27, lo16(init_vecset_constants.2926)
-	stw	r27, 0(r26)				# 2188
-	stw	r23, 16(r26)				# 2188
-	stw	r15, 12(r26)				# 2188
-	stw	r7, 8(r26)				# 2188
-	stw	r8, 4(r26)				# 2188
-	mr	r15, r4				# 2242
-	addi	r4, r4, 48				# 2242
-	lis	r23, ha16(setup_reflections.2943)
-	addi	r23, r23, lo16(setup_reflections.2943)
-	stw	r23, 0(r15)				# 2242
-	lwz	r23, 200(r3)				# 2242
-	stw	r23, 44(r15)				# 2242
-	stw	r5, 40(r15)				# 2242
-	stw	r2, 36(r15)				# 2242
-	stw	r9, 32(r15)				# 2242
-	stw	r14, 28(r15)				# 2242
-	stw	r25, 24(r15)				# 2242
-	stw	r6, 20(r15)				# 2242
-	stw	r16, 16(r15)				# 2242
-	stw	r7, 12(r15)				# 2242
-	stw	r8, 8(r15)				# 2242
-	stfs	f0, 4(r15)				# 2242
+	mr	r5, r4				# 614
+	addi	r4, r4, 16				# 614
+	lis	r6, ha16(rotate_quadratic_matrix.2613)
+	addi	r6, r6, lo16(rotate_quadratic_matrix.2613)
+	stw	r6, 0(r5)				# 614
+	lwz	r6, 128(r3)				# 614
+	stw	r6, 12(r5)				# 614
+	lwz	r7, 4(r3)				# 614
+	stw	r7, 8(r5)				# 614
+	lwz	r8, 0(r3)				# 614
+	stw	r8, 4(r5)				# 614
+	mr	r9, r4				# 655
+	addi	r4, r4, 36				# 655
+	lis	r10, ha16(read_nth_object.2616)
+	addi	r10, r10, lo16(read_nth_object.2616)
+	stw	r10, 0(r9)				# 655
+	stw	r5, 32(r9)				# 655
+	lwz	r5, 28(r3)				# 655
+	stw	r5, 28(r9)				# 655
+	stw	r6, 24(r9)				# 655
+	lwz	r10, 64(r3)				# 655
+	stw	r10, 20(r9)				# 655
+	lwz	r11, 32(r3)				# 655
+	stw	r11, 16(r9)				# 655
+	stw	r7, 12(r9)				# 655
+	stw	r8, 8(r9)				# 655
+	lfs	f0, 16(r3)				# 655
+	stfs	f0, 4(r9)				# 655
+	mr	r12, r4				# 738
+	addi	r4, r4, 24				# 738
+	lis	r13, ha16(read_object.2618)
+	addi	r13, r13, lo16(read_object.2618)
+	stw	r13, 0(r12)				# 738
+	stw	r9, 20(r12)				# 738
+	lwz	r9, 8(r3)				# 738
+	stw	r9, 16(r12)				# 738
+	lwz	r13, 24(r3)				# 738
+	stw	r13, 12(r12)				# 738
+	stw	r7, 8(r12)				# 738
+	stw	r8, 4(r12)				# 738
+	mr	r13, r4				# 754
+	addi	r4, r4, 12				# 754
+	lis	r14, ha16(read_net_item.2622)
+	addi	r14, r14, lo16(read_net_item.2622)
+	stw	r14, 0(r13)				# 754
+	stw	r10, 8(r13)				# 754
+	stw	r8, 4(r13)				# 754
+	mr	r14, r4				# 762
+	addi	r4, r4, 20				# 762
+	lis	r15, ha16(read_or_network.2624)
+	addi	r15, r15, lo16(read_or_network.2624)
+	stw	r15, 0(r14)				# 762
+	stw	r13, 16(r14)				# 762
+	stw	r10, 12(r14)				# 762
+	stw	r7, 8(r14)				# 762
+	stw	r8, 4(r14)				# 762
+	mr	r15, r4				# 771
+	addi	r4, r4, 24				# 771
+	lis	r16, ha16(read_and_network.2626)
+	addi	r16, r16, lo16(read_and_network.2626)
+	stw	r16, 0(r15)				# 771
+	stw	r13, 20(r15)				# 771
+	lwz	r13, 72(r3)				# 771
+	stw	r13, 16(r15)				# 771
+	stw	r10, 12(r15)				# 771
+	stw	r7, 8(r15)				# 771
+	stw	r8, 4(r15)				# 771
+	mr	r16, r4				# 780
+	addi	r4, r4, 64				# 780
+	lis	r17, ha16(read_parameter.2628)
+	addi	r17, r17, lo16(read_parameter.2628)
+	stw	r17, 0(r16)				# 780
+	lwz	r17, 40(r3)				# 780
+	stw	r17, 60(r16)				# 780
+	lwz	r18, 160(r3)				# 780
+	stw	r18, 56(r16)				# 780
+	lwz	r19, 156(r3)				# 780
+	stw	r19, 52(r16)				# 780
+	lwz	r20, 152(r3)				# 780
+	stw	r20, 48(r16)				# 780
+	lwz	r21, 36(r3)				# 780
+	stw	r21, 44(r16)				# 780
+	stw	r14, 40(r16)				# 780
+	stw	r12, 36(r16)				# 780
+	stw	r15, 32(r16)				# 780
+	lwz	r12, 76(r3)				# 780
+	stw	r12, 28(r16)				# 780
+	lwz	r14, 56(r3)				# 780
+	stw	r14, 24(r16)				# 780
+	lwz	r15, 60(r3)				# 780
+	stw	r15, 20(r16)				# 780
+	stw	r6, 16(r16)				# 780
+	stw	r7, 12(r16)				# 780
+	stw	r8, 8(r16)				# 780
+	stfs	f0, 4(r16)				# 780
+	mr	r21, r4				# 811
+	addi	r4, r4, 24				# 811
+	lis	r22, ha16(solver_rect.2639)
+	addi	r22, r22, lo16(solver_rect.2639)
+	stw	r22, 0(r21)				# 811
+	lwz	r22, 80(r3)				# 811
+	stw	r22, 20(r21)				# 811
+	stw	r6, 16(r21)				# 811
+	stw	r7, 12(r21)				# 811
+	stw	r8, 8(r21)				# 811
+	stfs	f0, 4(r21)				# 811
+	mr	r23, r4				# 868
+	addi	r4, r4, 28				# 868
+	lis	r24, ha16(solver_second.2664)
+	addi	r24, r24, lo16(solver_second.2664)
+	stw	r24, 0(r23)				# 868
+	stw	r22, 24(r23)				# 868
+	stw	r6, 20(r23)				# 868
+	stw	r11, 16(r23)				# 868
+	stw	r7, 12(r23)				# 868
+	stw	r8, 8(r23)				# 868
+	stfs	f0, 4(r23)				# 868
+	mr	r24, r4				# 914
+	addi	r4, r4, 32				# 914
+	lis	r25, ha16(solver_rect_fast.2674)
+	addi	r25, r25, lo16(solver_rect_fast.2674)
+	stw	r25, 0(r24)				# 914
+	stw	r22, 28(r24)				# 914
+	lwz	r25, 172(r3)				# 914
+	stw	r25, 24(r24)				# 914
+	stw	r6, 20(r24)				# 914
+	stw	r11, 16(r24)				# 914
+	stw	r7, 12(r24)				# 914
+	stw	r8, 8(r24)				# 914
+	stfs	f0, 4(r24)				# 914
+	mr	r26, r4				# 956
+	addi	r4, r4, 28				# 956
+	lis	r27, ha16(solver_second_fast.2687)
+	addi	r27, r27, lo16(solver_second_fast.2687)
+	stw	r27, 0(r26)				# 956
+	stw	r22, 24(r26)				# 956
+	stw	r6, 20(r26)				# 956
+	stw	r11, 16(r26)				# 956
+	stw	r7, 12(r26)				# 956
+	stw	r8, 8(r26)				# 956
+	stfs	f0, 4(r26)				# 956
+	mr	r27, r4				# 1089
+	addi	r4, r4, 28				# 1089
+	lis	r28, ha16(setup_second_table.2720)
+	addi	r28, r28, lo16(setup_second_table.2720)
+	stw	r28, 0(r27)				# 1089
+	stw	r25, 24(r27)				# 1089
+	stw	r6, 20(r27)				# 1089
+	stw	r11, 16(r27)				# 1089
+	stw	r7, 12(r27)				# 1089
+	stw	r8, 8(r27)				# 1089
+	stfs	f0, 4(r27)				# 1089
+	mr	r28, r4				# 1117
+	addi	r4, r4, 36				# 1117
+	lis	r29, ha16(iter_setup_dirvec_constants.2723)
+	addi	r29, r29, lo16(iter_setup_dirvec_constants.2723)
+	stw	r29, 0(r28)				# 1117
+	stw	r27, 32(r28)				# 1117
+	stw	r5, 28(r28)				# 1117
+	stw	r25, 24(r28)				# 1117
+	stw	r6, 20(r28)				# 1117
+	stw	r11, 16(r28)				# 1117
+	stw	r7, 12(r28)				# 1117
+	stw	r8, 8(r28)				# 1117
+	stfs	f0, 4(r28)				# 1117
+	mr	r27, r4				# 1140
+	addi	r4, r4, 24				# 1140
+	lis	r29, ha16(setup_startp_constants.2728)
+	addi	r29, r29, lo16(setup_startp_constants.2728)
+	stw	r29, 0(r27)				# 1140
+	stw	r5, 20(r27)				# 1140
+	stw	r6, 16(r27)				# 1140
+	stw	r11, 12(r27)				# 1140
+	stw	r7, 8(r27)				# 1140
+	stw	r8, 4(r27)				# 1140
+	mr	r29, r4				# 1207
+	addi	r4, r4, 32				# 1207
+	lis	r30, ha16(check_all_inside.2753)
+	addi	r30, r30, lo16(check_all_inside.2753)
+	stw	r30, 0(r29)				# 1207
+	stw	r5, 28(r29)				# 1207
+	stw	r6, 24(r29)				# 1207
+	stw	r10, 20(r29)				# 1207
+	stw	r11, 16(r29)				# 1207
+	stw	r7, 12(r29)				# 1207
+	stw	r8, 8(r29)				# 1207
+	stfs	f0, 4(r29)				# 1207
+	mr	r30, r4				# 1225
+	addi	r4, r4, 64				# 1225
+	lis	r1, ha16(shadow_check_and_group.2759)
+	addi	r1, r1, lo16(shadow_check_and_group.2759)
+	stw	r1, 0(r30)				# 1225
+	lwz	r1, 184(r3)				# 1225
+	stw	r1, 60(r30)				# 1225
+	stw	r26, 56(r30)				# 1225
+	stw	r24, 52(r30)				# 1225
+	stw	r22, 48(r30)				# 1225
+	stw	r5, 44(r30)				# 1225
+	stw	r14, 40(r30)				# 1225
+	stw	r16, 204(r3)				# 1225
+	lwz	r16, 104(r3)				# 1225
+	stw	r16, 36(r30)				# 1225
+	stw	r28, 208(r3)				# 1225
+	lwz	r28, 192(r3)				# 1225
+	stw	r28, 32(r30)				# 1225
+	stw	r29, 28(r30)				# 1225
+	stw	r6, 24(r30)				# 1225
+	stw	r10, 20(r30)				# 1225
+	stw	r11, 16(r30)				# 1225
+	stw	r7, 12(r30)				# 1225
+	stw	r8, 8(r30)				# 1225
+	stfs	f0, 4(r30)				# 1225
+	mr	r19, r4				# 1255
+	addi	r4, r4, 24				# 1255
+	lis	r18, ha16(shadow_check_one_or_group.2762)
+	addi	r18, r18, lo16(shadow_check_one_or_group.2762)
+	stw	r18, 0(r19)				# 1255
+	stw	r30, 20(r19)				# 1255
+	stw	r13, 16(r19)				# 1255
+	stw	r10, 12(r19)				# 1255
+	stw	r7, 8(r19)				# 1255
+	stw	r8, 4(r19)				# 1255
+	mr	r18, r4				# 1270
+	addi	r4, r4, 60				# 1270
+	lis	r30, ha16(shadow_check_one_or_matrix.2765)
+	addi	r30, r30, lo16(shadow_check_one_or_matrix.2765)
+	stw	r30, 0(r18)				# 1270
+	stw	r1, 56(r18)				# 1270
+	stw	r26, 52(r18)				# 1270
+	stw	r24, 48(r18)				# 1270
+	stw	r22, 44(r18)				# 1270
+	stw	r19, 40(r18)				# 1270
+	stw	r5, 36(r18)				# 1270
+	stw	r16, 32(r18)				# 1270
+	stw	r28, 28(r18)				# 1270
+	stw	r6, 24(r18)				# 1270
+	stw	r10, 20(r18)				# 1270
+	stw	r11, 16(r18)				# 1270
+	stw	r7, 12(r18)				# 1270
+	stw	r8, 8(r18)				# 1270
+	stfs	f0, 4(r18)				# 1270
+	mr	r19, r4				# 1304
+	addi	r4, r4, 64				# 1304
+	lis	r26, ha16(solve_each_element.2768)
+	addi	r26, r26, lo16(solve_each_element.2768)
+	stw	r26, 0(r19)				# 1304
+	lwz	r26, 100(r3)				# 1304
+	stw	r26, 60(r19)				# 1304
+	lwz	r28, 144(r3)				# 1304
+	stw	r28, 56(r19)				# 1304
+	stw	r23, 52(r19)				# 1304
+	stw	r21, 48(r19)				# 1304
+	stw	r22, 44(r19)				# 1304
+	stw	r5, 40(r19)				# 1304
+	lwz	r30, 96(r3)				# 1304
+	stw	r30, 36(r19)				# 1304
+	stw	r16, 32(r19)				# 1304
+	lwz	r1, 108(r3)				# 1304
+	stw	r1, 28(r19)				# 1304
+	stw	r29, 24(r19)				# 1304
+	stw	r6, 20(r19)				# 1304
+	stw	r10, 16(r19)				# 1304
+	stw	r7, 12(r19)				# 1304
+	stw	r8, 8(r19)				# 1304
+	stfs	f0, 4(r19)				# 1304
+	mr	r25, r4				# 1345
+	addi	r4, r4, 24				# 1345
+	lis	r20, ha16(solve_one_or_network.2772)
+	addi	r20, r20, lo16(solve_one_or_network.2772)
+	stw	r20, 0(r25)				# 1345
+	stw	r19, 20(r25)				# 1345
+	stw	r13, 16(r25)				# 1345
+	stw	r10, 12(r25)				# 1345
+	stw	r7, 8(r25)				# 1345
+	stw	r8, 4(r25)				# 1345
+	mr	r19, r4				# 1355
+	addi	r4, r4, 52				# 1355
+	lis	r20, ha16(trace_or_matrix.2776)
+	addi	r20, r20, lo16(trace_or_matrix.2776)
+	stw	r20, 0(r19)				# 1355
+	stw	r26, 48(r19)				# 1355
+	stw	r28, 44(r19)				# 1355
+	stw	r23, 40(r19)				# 1355
+	stw	r21, 36(r19)				# 1355
+	stw	r22, 32(r19)				# 1355
+	stw	r25, 28(r19)				# 1355
+	stw	r5, 24(r19)				# 1355
+	stw	r6, 20(r19)				# 1355
+	stw	r10, 16(r19)				# 1355
+	stw	r7, 12(r19)				# 1355
+	stw	r8, 8(r19)				# 1355
+	stfs	f0, 4(r19)				# 1355
+	mr	r20, r4				# 1395
+	addi	r4, r4, 64				# 1395
+	lis	r21, ha16(solve_each_element_fast.2782)
+	addi	r21, r21, lo16(solve_each_element_fast.2782)
+	stw	r21, 0(r20)				# 1395
+	stw	r26, 60(r20)				# 1395
+	lwz	r21, 148(r3)				# 1395
+	stw	r21, 56(r20)				# 1395
+	stw	r24, 52(r20)				# 1395
+	stw	r22, 48(r20)				# 1395
+	stw	r5, 44(r20)				# 1395
+	stw	r30, 40(r20)				# 1395
+	stw	r16, 36(r20)				# 1395
+	stw	r1, 32(r20)				# 1395
+	stw	r29, 28(r20)				# 1395
+	stw	r6, 24(r20)				# 1395
+	stw	r10, 20(r20)				# 1395
+	stw	r11, 16(r20)				# 1395
+	stw	r7, 12(r20)				# 1395
+	stw	r8, 8(r20)				# 1395
+	stfs	f0, 4(r20)				# 1395
+	mr	r23, r4				# 1436
+	addi	r4, r4, 24				# 1436
+	lis	r25, ha16(solve_one_or_network_fast.2786)
+	addi	r25, r25, lo16(solve_one_or_network_fast.2786)
+	stw	r25, 0(r23)				# 1436
+	stw	r20, 20(r23)				# 1436
+	stw	r13, 16(r23)				# 1436
+	stw	r10, 12(r23)				# 1436
+	stw	r7, 8(r23)				# 1436
+	stw	r8, 4(r23)				# 1436
+	mr	r13, r4				# 1446
+	addi	r4, r4, 48				# 1446
+	lis	r20, ha16(trace_or_matrix_fast.2790)
+	addi	r20, r20, lo16(trace_or_matrix_fast.2790)
+	stw	r20, 0(r13)				# 1446
+	stw	r26, 44(r13)				# 1446
+	stw	r24, 40(r13)				# 1446
+	stw	r22, 36(r13)				# 1446
+	stw	r23, 32(r13)				# 1446
+	stw	r5, 28(r13)				# 1446
+	stw	r6, 24(r13)				# 1446
+	stw	r10, 20(r13)				# 1446
+	stw	r11, 16(r13)				# 1446
+	stw	r7, 12(r13)				# 1446
+	stw	r8, 8(r13)				# 1446
+	stfs	f0, 4(r13)				# 1446
+	mr	r20, r4				# 1505
+	addi	r4, r4, 28				# 1505
+	lis	r22, ha16(get_nvector_second.2800)
+	addi	r22, r22, lo16(get_nvector_second.2800)
+	stw	r22, 0(r20)				# 1505
+	lwz	r22, 112(r3)				# 1505
+	stw	r22, 24(r20)				# 1505
+	stw	r16, 20(r20)				# 1505
+	stw	r6, 16(r20)				# 1505
+	stw	r7, 12(r20)				# 1505
+	stw	r8, 8(r20)				# 1505
+	stfs	f0, 4(r20)				# 1505
+	mr	r23, r4				# 1527
+	addi	r4, r4, 32				# 1527
+	lis	r24, ha16(get_nvector.2802)
+	addi	r24, r24, lo16(get_nvector.2802)
+	stw	r24, 0(r23)				# 1527
+	stw	r22, 28(r23)				# 1527
+	stw	r30, 24(r23)				# 1527
+	stw	r16, 20(r23)				# 1527
+	stw	r6, 16(r23)				# 1527
+	stw	r7, 12(r23)				# 1527
+	stw	r8, 8(r23)				# 1527
+	stfs	f0, 4(r23)				# 1527
+	mr	r24, r4				# 1541
+	addi	r4, r4, 32				# 1541
+	lis	r25, ha16(utexture.2805)
+	addi	r25, r25, lo16(utexture.2805)
+	stw	r25, 0(r24)				# 1541
+	lwz	r25, 116(r3)				# 1541
+	stw	r25, 28(r24)				# 1541
+	stw	r6, 24(r24)				# 1541
+	stw	r11, 20(r24)				# 1541
+	stw	r7, 16(r24)				# 1541
+	stw	r8, 12(r24)				# 1541
+	lfs	f1, 48(r3)				# 1541
+	stfs	f1, 8(r24)				# 1541
+	stfs	f0, 4(r24)				# 1541
+	mr	r29, r4				# 1634
+	addi	r4, r4, 64				# 1634
+	lis	r17, ha16(trace_reflections.2812)
+	addi	r17, r17, lo16(trace_reflections.2812)
+	stw	r17, 0(r29)				# 1634
+	stw	r13, 60(r29)				# 1634
+	stw	r26, 56(r29)				# 1634
+	stw	r25, 52(r29)				# 1634
+	stw	r18, 48(r29)				# 1634
+	lwz	r17, 124(r3)				# 1634
+	stw	r17, 44(r29)				# 1634
+	lwz	r11, 200(r3)				# 1634
+	stw	r11, 40(r29)				# 1634
+	stw	r12, 36(r29)				# 1634
+	stw	r22, 32(r29)				# 1634
+	stw	r30, 28(r29)				# 1634
+	stw	r1, 24(r29)				# 1634
+	stw	r6, 20(r29)				# 1634
+	stw	r7, 16(r29)				# 1634
+	stw	r8, 12(r29)				# 1634
+	lfs	f1, 88(r3)				# 1634
+	stfs	f1, 8(r29)				# 1634
+	stfs	f0, 4(r29)				# 1634
+	mr	r11, r4				# 1661
+	addi	r4, r4, 112				# 1661
+	stw	r23, 212(r3)				# 1661
+	lis	r23, ha16(trace_ray.2817)
+	addi	r23, r23, lo16(trace_ray.2817)
+	stw	r23, 0(r11)				# 1661
+	stw	r24, 108(r11)				# 1661
+	stw	r29, 104(r11)				# 1661
+	stw	r19, 100(r11)				# 1661
+	stw	r26, 96(r11)				# 1661
+	stw	r25, 92(r11)				# 1661
+	stw	r21, 88(r11)				# 1661
+	stw	r28, 84(r11)				# 1661
+	stw	r18, 80(r11)				# 1661
+	stw	r27, 76(r11)				# 1661
+	stw	r17, 72(r11)				# 1661
+	stw	r12, 68(r11)				# 1661
+	stw	r5, 64(r11)				# 1661
+	stw	r22, 60(r11)				# 1661
+	stw	r2, 56(r11)				# 1661
+	stw	r9, 52(r11)				# 1661
+	stw	r14, 48(r11)				# 1661
+	stw	r30, 44(r11)				# 1661
+	stw	r16, 40(r11)				# 1661
+	stw	r1, 36(r11)				# 1661
+	stw	r20, 32(r11)				# 1661
+	stw	r15, 28(r11)				# 1661
+	stw	r6, 24(r11)				# 1661
+	stw	r10, 20(r11)				# 1661
+	stw	r7, 16(r11)				# 1661
+	stw	r8, 12(r11)				# 1661
+	stfs	f1, 8(r11)				# 1661
+	stfs	f0, 4(r11)				# 1661
+	mr	r10, r4				# 1769
+	addi	r4, r4, 76				# 1769
+	lis	r15, ha16(iter_trace_diffuse_rays.2826)
+	addi	r15, r15, lo16(iter_trace_diffuse_rays.2826)
+	stw	r15, 0(r10)				# 1769
+	stw	r24, 72(r10)				# 1769
+	stw	r13, 68(r10)				# 1769
+	stw	r26, 64(r10)				# 1769
+	stw	r25, 60(r10)				# 1769
+	stw	r18, 56(r10)				# 1769
+	stw	r12, 52(r10)				# 1769
+	stw	r5, 48(r10)				# 1769
+	stw	r22, 44(r10)				# 1769
+	stw	r14, 40(r10)				# 1769
+	stw	r16, 36(r10)				# 1769
+	stw	r1, 32(r10)				# 1769
+	lwz	r12, 212(r3)				# 1769
+	stw	r12, 28(r10)				# 1769
+	lwz	r12, 120(r3)				# 1769
+	stw	r12, 24(r10)				# 1769
+	stw	r6, 20(r10)				# 1769
+	stw	r7, 16(r10)				# 1769
+	stw	r8, 12(r10)				# 1769
+	stfs	f1, 8(r10)				# 1769
+	stfs	f0, 4(r10)				# 1769
+	mr	r13, r4				# 1855
+	addi	r4, r4, 48				# 1855
+	lis	r15, ha16(do_without_neighbors.2848)
+	addi	r15, r15, lo16(do_without_neighbors.2848)
+	stw	r15, 0(r13)				# 1855
+	stw	r21, 44(r13)				# 1855
+	stw	r27, 40(r13)				# 1855
+	stw	r17, 36(r13)				# 1855
+	stw	r9, 32(r13)				# 1855
+	stw	r10, 28(r13)				# 1855
+	lwz	r15, 176(r3)				# 1855
+	stw	r15, 24(r13)				# 1855
+	stw	r12, 20(r13)				# 1855
+	stw	r6, 16(r13)				# 1855
+	lwz	r16, 32(r3)				# 1855
+	stw	r16, 12(r13)				# 1855
+	stw	r7, 8(r13)				# 1855
+	stw	r8, 4(r13)				# 1855
+	mr	r18, r4				# 1904
+	addi	r4, r4, 28				# 1904
+	lis	r19, ha16(try_exploit_neighbors.2864)
+	addi	r19, r19, lo16(try_exploit_neighbors.2864)
+	stw	r19, 0(r18)				# 1904
+	stw	r17, 24(r18)				# 1904
+	stw	r13, 20(r18)				# 1904
+	stw	r12, 16(r18)				# 1904
+	stw	r6, 12(r18)				# 1904
+	stw	r7, 8(r18)				# 1904
+	stw	r8, 4(r18)				# 1904
+	mr	r19, r4				# 1963
+	addi	r4, r4, 44				# 1963
+	lis	r20, ha16(pretrace_diffuse_rays.2877)
+	addi	r20, r20, lo16(pretrace_diffuse_rays.2877)
+	stw	r20, 0(r19)				# 1963
+	stw	r21, 40(r19)				# 1963
+	stw	r27, 36(r19)				# 1963
+	stw	r9, 32(r19)				# 1963
+	stw	r10, 28(r19)				# 1963
+	stw	r15, 24(r19)				# 1963
+	stw	r12, 20(r19)				# 1963
+	stw	r6, 16(r19)				# 1963
+	stw	r7, 12(r19)				# 1963
+	stw	r8, 8(r19)				# 1963
+	stfs	f0, 4(r19)				# 1963
+	mr	r10, r4				# 1992
+	addi	r4, r4, 60				# 1992
+	lis	r12, ha16(pretrace_pixels.2880)
+	addi	r12, r12, lo16(pretrace_pixels.2880)
+	stw	r12, 0(r10)				# 1992
+	lwz	r12, 40(r3)				# 1992
+	stw	r12, 56(r10)				# 1992
+	stw	r11, 52(r10)				# 1992
+	stw	r28, 48(r10)				# 1992
+	lwz	r11, 152(r3)				# 1992
+	stw	r11, 44(r10)				# 1992
+	lwz	r11, 140(r3)				# 1992
+	stw	r11, 40(r10)				# 1992
+	stw	r17, 36(r10)				# 1992
+	lwz	r12, 164(r3)				# 1992
+	stw	r12, 32(r10)				# 1992
+	stw	r19, 28(r10)				# 1992
+	lwz	r12, 136(r3)				# 1992
+	stw	r12, 24(r10)				# 1992
+	lwz	r19, 172(r3)				# 1992
+	stw	r19, 20(r10)				# 1992
+	stw	r6, 16(r10)				# 1992
+	stw	r7, 12(r10)				# 1992
+	stw	r8, 8(r10)				# 1992
+	stfs	f0, 4(r10)				# 1992
+	mr	r20, r4				# 2031
+	addi	r4, r4, 32				# 2031
+	lis	r21, ha16(scan_pixel.2891)
+	addi	r21, r21, lo16(scan_pixel.2891)
+	stw	r21, 0(r20)				# 2031
+	stw	r18, 28(r20)				# 2031
+	stw	r17, 24(r20)				# 2031
+	lwz	r17, 132(r3)				# 2031
+	stw	r17, 20(r20)				# 2031
+	stw	r13, 16(r20)				# 2031
+	stw	r6, 12(r20)				# 2031
+	stw	r7, 8(r20)				# 2031
+	stw	r8, 4(r20)				# 2031
+	mr	r13, r4				# 2051
+	addi	r4, r4, 48				# 2051
+	lis	r18, ha16(scan_line.2897)
+	addi	r18, r18, lo16(scan_line.2897)
+	stw	r18, 0(r13)				# 2051
+	lwz	r18, 160(r3)				# 2051
+	stw	r18, 44(r13)				# 2051
+	lwz	r21, 156(r3)				# 2051
+	stw	r21, 40(r13)				# 2051
+	stw	r20, 36(r13)				# 2051
+	stw	r11, 32(r13)				# 2051
+	stw	r10, 28(r13)				# 2051
+	stw	r17, 24(r13)				# 2051
+	stw	r12, 20(r13)				# 2051
+	stw	r19, 16(r13)				# 2051
+	stw	r6, 12(r13)				# 2051
+	stw	r7, 8(r13)				# 2051
+	stw	r8, 4(r13)				# 2051
+	mr	r20, r4				# 2092
+	addi	r4, r4, 28				# 2092
+	lis	r22, ha16(init_line_elements.2907)
+	addi	r22, r22, lo16(init_line_elements.2907)
+	stw	r22, 0(r20)				# 2092
+	stw	r19, 24(r20)				# 2092
+	stw	r6, 20(r20)				# 2092
+	stw	r16, 16(r20)				# 2092
+	stw	r7, 12(r20)				# 2092
+	stw	r8, 8(r20)				# 2092
+	stfs	f0, 4(r20)				# 2092
+	mr	r22, r4				# 2124
+	addi	r4, r4, 24				# 2124
+	lis	r23, ha16(calc_dirvec.2917)
+	addi	r23, r23, lo16(calc_dirvec.2917)
+	stw	r23, 0(r22)				# 2124
+	stw	r15, 20(r22)				# 2124
+	stw	r19, 16(r22)				# 2124
+	stw	r6, 12(r22)				# 2124
+	stw	r7, 8(r22)				# 2124
+	stw	r8, 4(r22)				# 2124
+	mr	r23, r4				# 2145
+	addi	r4, r4, 28				# 2145
+	lis	r24, ha16(calc_dirvecs.2925)
+	addi	r24, r24, lo16(calc_dirvecs.2925)
+	stw	r24, 0(r23)				# 2145
+	stw	r22, 24(r23)				# 2145
+	stw	r19, 20(r23)				# 2145
+	stw	r6, 16(r23)				# 2145
+	stw	r7, 12(r23)				# 2145
+	stw	r8, 8(r23)				# 2145
+	stfs	f0, 4(r23)				# 2145
+	mr	r22, r4				# 2159
+	addi	r4, r4, 24				# 2159
+	lis	r24, ha16(calc_dirvec_rows.2930)
+	addi	r24, r24, lo16(calc_dirvec_rows.2930)
+	stw	r24, 0(r22)				# 2159
+	stw	r23, 20(r22)				# 2159
+	stw	r19, 16(r22)				# 2159
+	stw	r6, 12(r22)				# 2159
+	stw	r7, 8(r22)				# 2159
+	stw	r8, 4(r22)				# 2159
+	mr	r23, r4				# 2176
+	addi	r4, r4, 24				# 2176
+	lis	r24, ha16(create_dirvec_elements.2936)
+	addi	r24, r24, lo16(create_dirvec_elements.2936)
+	stw	r24, 0(r23)				# 2176
+	stw	r9, 20(r23)				# 2176
+	stw	r16, 16(r23)				# 2176
+	stw	r7, 12(r23)				# 2176
+	stw	r8, 8(r23)				# 2176
+	stfs	f0, 4(r23)				# 2176
+	mr	r24, r4				# 2183
+	addi	r4, r4, 32				# 2183
+	lis	r25, ha16(create_dirvecs.2939)
+	addi	r25, r25, lo16(create_dirvecs.2939)
+	stw	r25, 0(r24)				# 2183
+	stw	r9, 28(r24)				# 2183
+	stw	r15, 24(r24)				# 2183
+	stw	r23, 20(r24)				# 2183
+	stw	r16, 16(r24)				# 2183
+	stw	r7, 12(r24)				# 2183
+	stw	r8, 8(r24)				# 2183
+	stfs	f0, 4(r24)				# 2183
+	mr	r23, r4				# 2193
+	addi	r4, r4, 20				# 2193
+	lis	r25, ha16(init_dirvec_constants.2941)
+	addi	r25, r25, lo16(init_dirvec_constants.2941)
+	stw	r25, 0(r23)				# 2193
+	stw	r9, 16(r23)				# 2193
+	lwz	r25, 208(r3)				# 2193
+	stw	r25, 12(r23)				# 2193
+	stw	r7, 8(r23)				# 2193
+	stw	r8, 4(r23)				# 2193
+	mr	r26, r4				# 2200
+	addi	r4, r4, 20				# 2200
+	lis	r27, ha16(init_vecset_constants.2944)
+	addi	r27, r27, lo16(init_vecset_constants.2944)
+	stw	r27, 0(r26)				# 2200
+	stw	r23, 16(r26)				# 2200
+	stw	r15, 12(r26)				# 2200
+	stw	r7, 8(r26)				# 2200
+	stw	r8, 4(r26)				# 2200
+	mr	r15, r4				# 2254
+	addi	r4, r4, 48				# 2254
+	lis	r23, ha16(setup_reflections.2961)
+	addi	r23, r23, lo16(setup_reflections.2961)
+	stw	r23, 0(r15)				# 2254
+	lwz	r23, 200(r3)				# 2254
+	stw	r23, 44(r15)				# 2254
+	stw	r5, 40(r15)				# 2254
+	stw	r2, 36(r15)				# 2254
+	stw	r9, 32(r15)				# 2254
+	stw	r14, 28(r15)				# 2254
+	stw	r25, 24(r15)				# 2254
+	stw	r6, 20(r15)				# 2254
+	stw	r16, 16(r15)				# 2254
+	stw	r7, 12(r15)				# 2254
+	stw	r8, 8(r15)				# 2254
+	stfs	f0, 4(r15)				# 2254
 	addi	r2, 0, 512
-	stw	r2, 0(r11)				# 2264
-	stw	r2, 4(r11)				# 2265
+	stw	r2, 0(r17)				# 2276
+	stw	r2, 4(r17)				# 2277
 	addi	r5, 0, 256
-	stw	r5, 0(r18)				# 2266
-	stw	r5, 4(r18)				# 2267
-	lis	r31, ha16(l.12803)
-	addi	r31, r31, lo16(l.12803)
-	lfs	f1, 0(r31)				# 2268
-	stw	r13, 220(r3)				# 2268
-	stw	r10, 224(r3)				# 2268
-	stw	r15, 228(r3)				# 2268
-	stw	r26, 232(r3)				# 2268
-	stw	r22, 236(r3)				# 2268
-	stw	r24, 240(r3)				# 2268
-	stw	r20, 244(r3)				# 2268
-	stfs	f1, 248(r3)				# 2268
-	mfspr	r31, 8				# 2268
-	stw	r31, 256(r3)				# 2268
-	addi	r3, r3, 260				# 2268
-	bl	min_caml_float_of_int				# 2268
-	addi	r3, r3, -260				# 2268
-	lwz	r31, 256(r3)				# 2268
-	mtspr	8, r31				# 2268
-	lfs	f1, 248(r3)				# 2268
-	fdiv	f0, f1, f0				# 2268
-	lwz	r2, 140(r3)				# 2268
-	stfs	f0, 0(r2)				# 2268
-	lwz	r5, 132(r3)				# 2090
-	lwz	r6, 0(r5)				# 2090
+	stw	r5, 0(r12)				# 2278
+	stw	r5, 4(r12)				# 2279
+	lis	r31, ha16(l.12835)
+	addi	r31, r31, lo16(l.12835)
+	lfs	f1, 0(r31)				# 2280
+	stw	r13, 216(r3)				# 2280
+	stw	r10, 220(r3)				# 2280
+	stw	r15, 224(r3)				# 2280
+	stw	r26, 228(r3)				# 2280
+	stw	r22, 232(r3)				# 2280
+	stw	r24, 236(r3)				# 2280
+	stw	r20, 240(r3)				# 2280
+	stfs	f1, 248(r3)				# 2280
+	mfspr	r31, 8				# 2280
+	stw	r31, 256(r3)				# 2280
+	addi	r3, r3, 260				# 2280
+	bl	min_caml_float_of_int				# 2280
+	addi	r3, r3, -260				# 2280
+	lwz	r31, 256(r3)				# 2280
+	mtspr	8, r31				# 2280
+	lfs	f1, 248(r3)				# 2280
+	fdiv	f0, f1, f0				# 2280
+	lwz	r2, 140(r3)				# 2280
+	stfs	f0, 0(r2)				# 2280
+	lwz	r5, 132(r3)				# 2102
+	lwz	r6, 0(r5)				# 2102
+	lfs	f0, 16(r3)				# 2080
+	lwz	r7, 32(r3)				# 2080
+	stw	r6, 256(r3)				# 2080
+	mfspr	r31, 8				# 2080
+	mr	r2, r7				# 2080
+	stw	r31, 260(r3)				# 2080
+	addi	r3, r3, 264				# 2080
+	bl	min_caml_create_float_array				# 2080
+	addi	r3, r3, -264				# 2080
+	lwz	r31, 260(r3)				# 2080
+	mtspr	8, r31				# 2080
 	lfs	f0, 16(r3)				# 2068
-	lwz	r7, 32(r3)				# 2068
-	stw	r6, 256(r3)				# 2068
+	lwz	r5, 32(r3)				# 2068
+	stw	r2, 260(r3)				# 2068
 	mfspr	r31, 8				# 2068
-	mr	r2, r7				# 2068
-	stw	r31, 260(r3)				# 2068
-	addi	r3, r3, 264				# 2068
+	mr	r2, r5				# 2068
+	stw	r31, 264(r3)				# 2068
+	addi	r3, r3, 268				# 2068
 	bl	min_caml_create_float_array				# 2068
-	addi	r3, r3, -264				# 2068
-	lwz	r31, 260(r3)				# 2068
+	addi	r3, r3, -268				# 2068
+	lwz	r31, 264(r3)				# 2068
+	mr	r5, r2				# 2068
 	mtspr	8, r31				# 2068
-	lfs	f0, 16(r3)				# 2056
-	lwz	r5, 32(r3)				# 2056
-	stw	r2, 260(r3)				# 2056
-	mfspr	r31, 8				# 2056
-	mr	r2, r5				# 2056
-	stw	r31, 264(r3)				# 2056
-	addi	r3, r3, 268				# 2056
-	bl	min_caml_create_float_array				# 2056
-	addi	r3, r3, -268				# 2056
-	lwz	r31, 264(r3)				# 2056
-	mr	r5, r2				# 2056
-	mtspr	8, r31				# 2056
-	lwz	r2, 172(r3)				# 2057
-	mfspr	r31, 8				# 2057
-	stw	r31, 264(r3)				# 2057
-	addi	r3, r3, 268				# 2057
-	bl	min_caml_create_array				# 2057
-	addi	r3, r3, -268				# 2057
-	lwz	r31, 264(r3)				# 2057
-	mtspr	8, r31				# 2057
-	lfs	f0, 16(r3)				# 2058
-	lwz	r5, 32(r3)				# 2058
-	stw	r2, 264(r3)				# 2058
-	mfspr	r31, 8				# 2058
-	mr	r2, r5				# 2058
-	stw	r31, 268(r3)				# 2058
-	addi	r3, r3, 272				# 2058
-	bl	min_caml_create_float_array				# 2058
-	addi	r3, r3, -272				# 2058
-	lwz	r31, 268(r3)				# 2058
-	mtspr	8, r31				# 2058
-	lwz	r5, 264(r3)				# 2058
-	stw	r2, 4(r5)				# 2058
-	lfs	f0, 16(r3)				# 2059
-	lwz	r2, 32(r3)				# 2059
-	mfspr	r31, 8				# 2059
-	stw	r31, 268(r3)				# 2059
-	addi	r3, r3, 272				# 2059
-	bl	min_caml_create_float_array				# 2059
-	addi	r3, r3, -272				# 2059
-	lwz	r31, 268(r3)				# 2059
-	mtspr	8, r31				# 2059
-	lwz	r5, 264(r3)				# 2059
-	stw	r2, 8(r5)				# 2059
-	lfs	f0, 16(r3)				# 2060
-	lwz	r2, 32(r3)				# 2060
-	mfspr	r31, 8				# 2060
-	stw	r31, 268(r3)				# 2060
-	addi	r3, r3, 272				# 2060
-	bl	min_caml_create_float_array				# 2060
-	addi	r3, r3, -272				# 2060
-	lwz	r31, 268(r3)				# 2060
-	mtspr	8, r31				# 2060
-	lwz	r5, 264(r3)				# 2060
-	stw	r2, 12(r5)				# 2060
-	addi	r2, 0, 4
-	lfs	f0, 16(r3)				# 2061
-	lwz	r6, 32(r3)				# 2061
-	stw	r2, 268(r3)				# 2061
-	mfspr	r31, 8				# 2061
-	mr	r2, r6				# 2061
-	stw	r31, 272(r3)				# 2061
-	addi	r3, r3, 276				# 2061
-	bl	min_caml_create_float_array				# 2061
-	addi	r3, r3, -276				# 2061
-	lwz	r31, 272(r3)				# 2061
-	mtspr	8, r31				# 2061
-	lwz	r5, 264(r3)				# 2061
-	stw	r2, 16(r5)				# 2061
-	lwz	r2, 172(r3)				# 2070
-	lwz	r6, 4(r3)				# 2070
+	lwz	r2, 172(r3)				# 2069
+	mfspr	r31, 8				# 2069
+	stw	r31, 264(r3)				# 2069
+	addi	r3, r3, 268				# 2069
+	bl	min_caml_create_array				# 2069
+	addi	r3, r3, -268				# 2069
+	lwz	r31, 264(r3)				# 2069
+	mtspr	8, r31				# 2069
+	lfs	f0, 16(r3)				# 2070
+	lwz	r5, 32(r3)				# 2070
+	stw	r2, 264(r3)				# 2070
 	mfspr	r31, 8				# 2070
-	mr	r5, r6				# 2070
-	stw	r31, 272(r3)				# 2070
-	addi	r3, r3, 276				# 2070
-	bl	min_caml_create_array				# 2070
-	addi	r3, r3, -276				# 2070
-	lwz	r31, 272(r3)				# 2070
+	mr	r2, r5				# 2070
+	stw	r31, 268(r3)				# 2070
+	addi	r3, r3, 272				# 2070
+	bl	min_caml_create_float_array				# 2070
+	addi	r3, r3, -272				# 2070
+	lwz	r31, 268(r3)				# 2070
 	mtspr	8, r31				# 2070
-	lwz	r5, 172(r3)				# 2071
-	lwz	r6, 4(r3)				# 2071
-	stw	r2, 272(r3)				# 2071
+	lwz	r5, 264(r3)				# 2070
+	stw	r2, 4(r5)				# 2070
+	lfs	f0, 16(r3)				# 2071
+	lwz	r2, 32(r3)				# 2071
 	mfspr	r31, 8				# 2071
-	mr	r2, r5				# 2071
-	mr	r5, r6				# 2071
-	stw	r31, 276(r3)				# 2071
-	addi	r3, r3, 280				# 2071
-	bl	min_caml_create_array				# 2071
-	addi	r3, r3, -280				# 2071
-	lwz	r31, 276(r3)				# 2071
+	stw	r31, 268(r3)				# 2071
+	addi	r3, r3, 272				# 2071
+	bl	min_caml_create_float_array				# 2071
+	addi	r3, r3, -272				# 2071
+	lwz	r31, 268(r3)				# 2071
 	mtspr	8, r31				# 2071
-	lfs	f0, 16(r3)				# 2056
-	lwz	r5, 32(r3)				# 2056
-	stw	r2, 276(r3)				# 2056
-	mfspr	r31, 8				# 2056
-	mr	r2, r5				# 2056
-	stw	r31, 280(r3)				# 2056
-	addi	r3, r3, 284				# 2056
-	bl	min_caml_create_float_array				# 2056
-	addi	r3, r3, -284				# 2056
-	lwz	r31, 280(r3)				# 2056
-	mr	r5, r2				# 2056
-	mtspr	8, r31				# 2056
-	lwz	r2, 172(r3)				# 2057
-	mfspr	r31, 8				# 2057
-	stw	r31, 280(r3)				# 2057
-	addi	r3, r3, 284				# 2057
-	bl	min_caml_create_array				# 2057
-	addi	r3, r3, -284				# 2057
-	lwz	r31, 280(r3)				# 2057
-	mtspr	8, r31				# 2057
-	lfs	f0, 16(r3)				# 2058
-	lwz	r5, 32(r3)				# 2058
-	stw	r2, 280(r3)				# 2058
-	mfspr	r31, 8				# 2058
-	mr	r2, r5				# 2058
-	stw	r31, 284(r3)				# 2058
-	addi	r3, r3, 288				# 2058
-	bl	min_caml_create_float_array				# 2058
-	addi	r3, r3, -288				# 2058
-	lwz	r31, 284(r3)				# 2058
-	mtspr	8, r31				# 2058
-	lwz	r5, 280(r3)				# 2058
-	stw	r2, 4(r5)				# 2058
-	lfs	f0, 16(r3)				# 2059
-	lwz	r2, 32(r3)				# 2059
-	mfspr	r31, 8				# 2059
-	stw	r31, 284(r3)				# 2059
-	addi	r3, r3, 288				# 2059
-	bl	min_caml_create_float_array				# 2059
-	addi	r3, r3, -288				# 2059
-	lwz	r31, 284(r3)				# 2059
-	mtspr	8, r31				# 2059
-	lwz	r5, 280(r3)				# 2059
-	stw	r2, 8(r5)				# 2059
-	lfs	f0, 16(r3)				# 2060
-	lwz	r2, 32(r3)				# 2060
-	mfspr	r31, 8				# 2060
-	stw	r31, 284(r3)				# 2060
-	addi	r3, r3, 288				# 2060
-	bl	min_caml_create_float_array				# 2060
-	addi	r3, r3, -288				# 2060
-	lwz	r31, 284(r3)				# 2060
-	mtspr	8, r31				# 2060
-	lwz	r5, 280(r3)				# 2060
-	stw	r2, 12(r5)				# 2060
-	lfs	f0, 16(r3)				# 2061
-	lwz	r2, 32(r3)				# 2061
-	mfspr	r31, 8				# 2061
-	stw	r31, 284(r3)				# 2061
-	addi	r3, r3, 288				# 2061
-	bl	min_caml_create_float_array				# 2061
-	addi	r3, r3, -288				# 2061
-	lwz	r31, 284(r3)				# 2061
-	mtspr	8, r31				# 2061
-	lwz	r5, 280(r3)				# 2061
-	stw	r2, 16(r5)				# 2061
-	lfs	f0, 16(r3)				# 2056
-	lwz	r2, 32(r3)				# 2056
-	mfspr	r31, 8				# 2056
-	stw	r31, 284(r3)				# 2056
-	addi	r3, r3, 288				# 2056
-	bl	min_caml_create_float_array				# 2056
-	addi	r3, r3, -288				# 2056
-	lwz	r31, 284(r3)				# 2056
-	mr	r5, r2				# 2056
-	mtspr	8, r31				# 2056
-	lwz	r2, 172(r3)				# 2057
-	mfspr	r31, 8				# 2057
-	stw	r31, 284(r3)				# 2057
-	addi	r3, r3, 288				# 2057
-	bl	min_caml_create_array				# 2057
-	addi	r3, r3, -288				# 2057
-	lwz	r31, 284(r3)				# 2057
-	mtspr	8, r31				# 2057
-	lfs	f0, 16(r3)				# 2058
-	lwz	r5, 32(r3)				# 2058
-	stw	r2, 284(r3)				# 2058
-	mfspr	r31, 8				# 2058
-	mr	r2, r5				# 2058
-	stw	r31, 288(r3)				# 2058
-	addi	r3, r3, 292				# 2058
-	bl	min_caml_create_float_array				# 2058
-	addi	r3, r3, -292				# 2058
-	lwz	r31, 288(r3)				# 2058
-	mtspr	8, r31				# 2058
-	lwz	r5, 284(r3)				# 2058
-	stw	r2, 4(r5)				# 2058
-	lfs	f0, 16(r3)				# 2059
-	lwz	r2, 32(r3)				# 2059
-	mfspr	r31, 8				# 2059
-	stw	r31, 288(r3)				# 2059
-	addi	r3, r3, 292				# 2059
-	bl	min_caml_create_float_array				# 2059
-	addi	r3, r3, -292				# 2059
-	lwz	r31, 288(r3)				# 2059
-	mtspr	8, r31				# 2059
-	lwz	r5, 284(r3)				# 2059
-	stw	r2, 8(r5)				# 2059
-	lfs	f0, 16(r3)				# 2060
-	lwz	r2, 32(r3)				# 2060
-	mfspr	r31, 8				# 2060
-	stw	r31, 288(r3)				# 2060
-	addi	r3, r3, 292				# 2060
-	bl	min_caml_create_float_array				# 2060
-	addi	r3, r3, -292				# 2060
-	lwz	r31, 288(r3)				# 2060
-	mtspr	8, r31				# 2060
-	lwz	r5, 284(r3)				# 2060
-	stw	r2, 12(r5)				# 2060
-	lfs	f0, 16(r3)				# 2061
-	lwz	r2, 32(r3)				# 2061
-	mfspr	r31, 8				# 2061
-	stw	r31, 288(r3)				# 2061
-	addi	r3, r3, 292				# 2061
-	bl	min_caml_create_float_array				# 2061
-	addi	r3, r3, -292				# 2061
-	lwz	r31, 288(r3)				# 2061
-	mtspr	8, r31				# 2061
-	lwz	r5, 284(r3)				# 2061
-	stw	r2, 16(r5)				# 2061
-	lwz	r2, 0(r3)				# 2074
-	lwz	r6, 4(r3)				# 2074
-	mfspr	r31, 8				# 2074
-	mr	r5, r6				# 2074
-	stw	r31, 288(r3)				# 2074
-	addi	r3, r3, 292				# 2074
-	bl	min_caml_create_array				# 2074
-	addi	r3, r3, -292				# 2074
-	lwz	r31, 288(r3)				# 2074
-	mtspr	8, r31				# 2074
-	lfs	f0, 16(r3)				# 2056
-	lwz	r5, 32(r3)				# 2056
-	stw	r2, 288(r3)				# 2056
-	mfspr	r31, 8				# 2056
-	mr	r2, r5				# 2056
-	stw	r31, 292(r3)				# 2056
-	addi	r3, r3, 296				# 2056
-	bl	min_caml_create_float_array				# 2056
-	addi	r3, r3, -296				# 2056
-	lwz	r31, 292(r3)				# 2056
-	mr	r5, r2				# 2056
-	mtspr	8, r31				# 2056
-	lwz	r2, 172(r3)				# 2057
-	mfspr	r31, 8				# 2057
-	stw	r31, 292(r3)				# 2057
-	addi	r3, r3, 296				# 2057
-	bl	min_caml_create_array				# 2057
-	addi	r3, r3, -296				# 2057
-	lwz	r31, 292(r3)				# 2057
-	mtspr	8, r31				# 2057
-	lfs	f0, 16(r3)				# 2058
-	lwz	r5, 32(r3)				# 2058
-	stw	r2, 292(r3)				# 2058
-	mfspr	r31, 8				# 2058
-	mr	r2, r5				# 2058
-	stw	r31, 296(r3)				# 2058
-	addi	r3, r3, 300				# 2058
-	bl	min_caml_create_float_array				# 2058
-	addi	r3, r3, -300				# 2058
-	lwz	r31, 296(r3)				# 2058
-	mtspr	8, r31				# 2058
-	lwz	r5, 292(r3)				# 2058
-	stw	r2, 4(r5)				# 2058
-	lfs	f0, 16(r3)				# 2059
-	lwz	r2, 32(r3)				# 2059
-	mfspr	r31, 8				# 2059
-	stw	r31, 296(r3)				# 2059
-	addi	r3, r3, 300				# 2059
-	bl	min_caml_create_float_array				# 2059
-	addi	r3, r3, -300				# 2059
-	lwz	r31, 296(r3)				# 2059
-	mtspr	8, r31				# 2059
-	lwz	r5, 292(r3)				# 2059
-	stw	r2, 8(r5)				# 2059
-	lfs	f0, 16(r3)				# 2060
-	lwz	r2, 32(r3)				# 2060
-	mfspr	r31, 8				# 2060
-	stw	r31, 296(r3)				# 2060
-	addi	r3, r3, 300				# 2060
-	bl	min_caml_create_float_array				# 2060
-	addi	r3, r3, -300				# 2060
-	lwz	r31, 296(r3)				# 2060
-	mtspr	8, r31				# 2060
-	lwz	r5, 292(r3)				# 2060
-	stw	r2, 12(r5)				# 2060
-	lfs	f0, 16(r3)				# 2061
-	lwz	r2, 32(r3)				# 2061
-	mfspr	r31, 8				# 2061
-	stw	r31, 296(r3)				# 2061
-	addi	r3, r3, 300				# 2061
-	bl	min_caml_create_float_array				# 2061
-	addi	r3, r3, -300				# 2061
-	lwz	r31, 296(r3)				# 2061
-	mtspr	8, r31				# 2061
-	lwz	r5, 292(r3)				# 2061
-	stw	r2, 16(r5)				# 2061
-	mr	r2, r4				# 2076
-	addi	r4, r4, 32				# 2076
-	stw	r5, 28(r2)				# 2076
-	lwz	r5, 288(r3)				# 2076
-	stw	r5, 24(r2)				# 2076
-	lwz	r5, 284(r3)				# 2076
-	stw	r5, 20(r2)				# 2076
-	lwz	r5, 280(r3)				# 2076
-	stw	r5, 16(r2)				# 2076
-	lwz	r5, 276(r3)				# 2076
-	stw	r5, 12(r2)				# 2076
-	lwz	r5, 272(r3)				# 2076
-	stw	r5, 8(r2)				# 2076
-	lwz	r5, 264(r3)				# 2076
-	stw	r5, 4(r2)				# 2076
-	lwz	r5, 260(r3)				# 2076
-	stw	r5, 0(r2)				# 2076
-	mr	r5, r2				# 2076
-	lwz	r2, 256(r3)				# 2090
-	mfspr	r31, 8				# 2090
-	stw	r31, 296(r3)				# 2090
-	addi	r3, r3, 300				# 2090
-	bl	min_caml_create_array				# 2090
-	addi	r3, r3, -300				# 2090
-	lwz	r31, 296(r3)				# 2090
-	mtspr	8, r31				# 2090
-	lwz	r5, 132(r3)				# 2091
-	lwz	r6, 0(r5)				# 2091
-	addi	r6, r6, -2				# 2091
-	lwz	r30, 244(r3)				# 2091
-	mfspr	r31, 8				# 2091
-	mr	r5, r6				# 2091
-	stw	r31, 296(r3)				# 2091
-	addi	r3, r3, 300				# 2091
-	lwz	r31, 0(r30)				# 2091
-	mtspr	9, r31				# 2091
-	bctrl				# 2091
-	addi	r3, r3, -300				# 2091
-	lwz	r31, 296(r3)				# 2091
-	mtspr	8, r31				# 2091
-	lwz	r5, 132(r3)				# 2090
-	lwz	r6, 0(r5)				# 2090
+	lwz	r5, 264(r3)				# 2071
+	stw	r2, 8(r5)				# 2071
+	lfs	f0, 16(r3)				# 2072
+	lwz	r2, 32(r3)				# 2072
+	mfspr	r31, 8				# 2072
+	stw	r31, 268(r3)				# 2072
+	addi	r3, r3, 272				# 2072
+	bl	min_caml_create_float_array				# 2072
+	addi	r3, r3, -272				# 2072
+	lwz	r31, 268(r3)				# 2072
+	mtspr	8, r31				# 2072
+	lwz	r5, 264(r3)				# 2072
+	stw	r2, 12(r5)				# 2072
+	addi	r2, 0, 4
+	lfs	f0, 16(r3)				# 2073
+	lwz	r6, 32(r3)				# 2073
+	stw	r2, 268(r3)				# 2073
+	mfspr	r31, 8				# 2073
+	mr	r2, r6				# 2073
+	stw	r31, 272(r3)				# 2073
+	addi	r3, r3, 276				# 2073
+	bl	min_caml_create_float_array				# 2073
+	addi	r3, r3, -276				# 2073
+	lwz	r31, 272(r3)				# 2073
+	mtspr	8, r31				# 2073
+	lwz	r5, 264(r3)				# 2073
+	stw	r2, 16(r5)				# 2073
+	lwz	r2, 172(r3)				# 2082
+	lwz	r6, 4(r3)				# 2082
+	mfspr	r31, 8				# 2082
+	mr	r5, r6				# 2082
+	stw	r31, 272(r3)				# 2082
+	addi	r3, r3, 276				# 2082
+	bl	min_caml_create_array				# 2082
+	addi	r3, r3, -276				# 2082
+	lwz	r31, 272(r3)				# 2082
+	mtspr	8, r31				# 2082
+	lwz	r5, 172(r3)				# 2083
+	lwz	r6, 4(r3)				# 2083
+	stw	r2, 272(r3)				# 2083
+	mfspr	r31, 8				# 2083
+	mr	r2, r5				# 2083
+	mr	r5, r6				# 2083
+	stw	r31, 276(r3)				# 2083
+	addi	r3, r3, 280				# 2083
+	bl	min_caml_create_array				# 2083
+	addi	r3, r3, -280				# 2083
+	lwz	r31, 276(r3)				# 2083
+	mtspr	8, r31				# 2083
 	lfs	f0, 16(r3)				# 2068
-	lwz	r7, 32(r3)				# 2068
-	stw	r2, 296(r3)				# 2068
-	stw	r6, 300(r3)				# 2068
+	lwz	r5, 32(r3)				# 2068
+	stw	r2, 276(r3)				# 2068
 	mfspr	r31, 8				# 2068
-	mr	r2, r7				# 2068
-	stw	r31, 304(r3)				# 2068
-	addi	r3, r3, 308				# 2068
+	mr	r2, r5				# 2068
+	stw	r31, 280(r3)				# 2068
+	addi	r3, r3, 284				# 2068
 	bl	min_caml_create_float_array				# 2068
-	addi	r3, r3, -308				# 2068
-	lwz	r31, 304(r3)				# 2068
+	addi	r3, r3, -284				# 2068
+	lwz	r31, 280(r3)				# 2068
+	mr	r5, r2				# 2068
 	mtspr	8, r31				# 2068
-	lfs	f0, 16(r3)				# 2056
-	lwz	r5, 32(r3)				# 2056
-	stw	r2, 304(r3)				# 2056
-	mfspr	r31, 8				# 2056
-	mr	r2, r5				# 2056
-	stw	r31, 308(r3)				# 2056
-	addi	r3, r3, 312				# 2056
-	bl	min_caml_create_float_array				# 2056
-	addi	r3, r3, -312				# 2056
-	lwz	r31, 308(r3)				# 2056
-	mr	r5, r2				# 2056
-	mtspr	8, r31				# 2056
-	lwz	r2, 172(r3)				# 2057
-	mfspr	r31, 8				# 2057
-	stw	r31, 308(r3)				# 2057
-	addi	r3, r3, 312				# 2057
-	bl	min_caml_create_array				# 2057
-	addi	r3, r3, -312				# 2057
-	lwz	r31, 308(r3)				# 2057
-	mtspr	8, r31				# 2057
-	lfs	f0, 16(r3)				# 2058
-	lwz	r5, 32(r3)				# 2058
-	stw	r2, 308(r3)				# 2058
-	mfspr	r31, 8				# 2058
-	mr	r2, r5				# 2058
-	stw	r31, 312(r3)				# 2058
-	addi	r3, r3, 316				# 2058
-	bl	min_caml_create_float_array				# 2058
-	addi	r3, r3, -316				# 2058
-	lwz	r31, 312(r3)				# 2058
-	mtspr	8, r31				# 2058
-	lwz	r5, 308(r3)				# 2058
-	stw	r2, 4(r5)				# 2058
-	lfs	f0, 16(r3)				# 2059
-	lwz	r2, 32(r3)				# 2059
-	mfspr	r31, 8				# 2059
-	stw	r31, 312(r3)				# 2059
-	addi	r3, r3, 316				# 2059
-	bl	min_caml_create_float_array				# 2059
-	addi	r3, r3, -316				# 2059
-	lwz	r31, 312(r3)				# 2059
-	mtspr	8, r31				# 2059
-	lwz	r5, 308(r3)				# 2059
-	stw	r2, 8(r5)				# 2059
-	lfs	f0, 16(r3)				# 2060
-	lwz	r2, 32(r3)				# 2060
-	mfspr	r31, 8				# 2060
-	stw	r31, 312(r3)				# 2060
-	addi	r3, r3, 316				# 2060
-	bl	min_caml_create_float_array				# 2060
-	addi	r3, r3, -316				# 2060
-	lwz	r31, 312(r3)				# 2060
-	mtspr	8, r31				# 2060
-	lwz	r5, 308(r3)				# 2060
-	stw	r2, 12(r5)				# 2060
-	lfs	f0, 16(r3)				# 2061
-	lwz	r2, 32(r3)				# 2061
-	mfspr	r31, 8				# 2061
-	stw	r31, 312(r3)				# 2061
-	addi	r3, r3, 316				# 2061
-	bl	min_caml_create_float_array				# 2061
-	addi	r3, r3, -316				# 2061
-	lwz	r31, 312(r3)				# 2061
-	mtspr	8, r31				# 2061
-	lwz	r5, 308(r3)				# 2061
-	stw	r2, 16(r5)				# 2061
-	lwz	r2, 172(r3)				# 2070
-	lwz	r6, 4(r3)				# 2070
+	lwz	r2, 172(r3)				# 2069
+	mfspr	r31, 8				# 2069
+	stw	r31, 280(r3)				# 2069
+	addi	r3, r3, 284				# 2069
+	bl	min_caml_create_array				# 2069
+	addi	r3, r3, -284				# 2069
+	lwz	r31, 280(r3)				# 2069
+	mtspr	8, r31				# 2069
+	lfs	f0, 16(r3)				# 2070
+	lwz	r5, 32(r3)				# 2070
+	stw	r2, 280(r3)				# 2070
 	mfspr	r31, 8				# 2070
-	mr	r5, r6				# 2070
+	mr	r2, r5				# 2070
+	stw	r31, 284(r3)				# 2070
+	addi	r3, r3, 288				# 2070
+	bl	min_caml_create_float_array				# 2070
+	addi	r3, r3, -288				# 2070
+	lwz	r31, 284(r3)				# 2070
+	mtspr	8, r31				# 2070
+	lwz	r5, 280(r3)				# 2070
+	stw	r2, 4(r5)				# 2070
+	lfs	f0, 16(r3)				# 2071
+	lwz	r2, 32(r3)				# 2071
+	mfspr	r31, 8				# 2071
+	stw	r31, 284(r3)				# 2071
+	addi	r3, r3, 288				# 2071
+	bl	min_caml_create_float_array				# 2071
+	addi	r3, r3, -288				# 2071
+	lwz	r31, 284(r3)				# 2071
+	mtspr	8, r31				# 2071
+	lwz	r5, 280(r3)				# 2071
+	stw	r2, 8(r5)				# 2071
+	lfs	f0, 16(r3)				# 2072
+	lwz	r2, 32(r3)				# 2072
+	mfspr	r31, 8				# 2072
+	stw	r31, 284(r3)				# 2072
+	addi	r3, r3, 288				# 2072
+	bl	min_caml_create_float_array				# 2072
+	addi	r3, r3, -288				# 2072
+	lwz	r31, 284(r3)				# 2072
+	mtspr	8, r31				# 2072
+	lwz	r5, 280(r3)				# 2072
+	stw	r2, 12(r5)				# 2072
+	lfs	f0, 16(r3)				# 2073
+	lwz	r2, 32(r3)				# 2073
+	mfspr	r31, 8				# 2073
+	stw	r31, 284(r3)				# 2073
+	addi	r3, r3, 288				# 2073
+	bl	min_caml_create_float_array				# 2073
+	addi	r3, r3, -288				# 2073
+	lwz	r31, 284(r3)				# 2073
+	mtspr	8, r31				# 2073
+	lwz	r5, 280(r3)				# 2073
+	stw	r2, 16(r5)				# 2073
+	lfs	f0, 16(r3)				# 2068
+	lwz	r2, 32(r3)				# 2068
+	mfspr	r31, 8				# 2068
+	stw	r31, 284(r3)				# 2068
+	addi	r3, r3, 288				# 2068
+	bl	min_caml_create_float_array				# 2068
+	addi	r3, r3, -288				# 2068
+	lwz	r31, 284(r3)				# 2068
+	mr	r5, r2				# 2068
+	mtspr	8, r31				# 2068
+	lwz	r2, 172(r3)				# 2069
+	mfspr	r31, 8				# 2069
+	stw	r31, 284(r3)				# 2069
+	addi	r3, r3, 288				# 2069
+	bl	min_caml_create_array				# 2069
+	addi	r3, r3, -288				# 2069
+	lwz	r31, 284(r3)				# 2069
+	mtspr	8, r31				# 2069
+	lfs	f0, 16(r3)				# 2070
+	lwz	r5, 32(r3)				# 2070
+	stw	r2, 284(r3)				# 2070
+	mfspr	r31, 8				# 2070
+	mr	r2, r5				# 2070
+	stw	r31, 288(r3)				# 2070
+	addi	r3, r3, 292				# 2070
+	bl	min_caml_create_float_array				# 2070
+	addi	r3, r3, -292				# 2070
+	lwz	r31, 288(r3)				# 2070
+	mtspr	8, r31				# 2070
+	lwz	r5, 284(r3)				# 2070
+	stw	r2, 4(r5)				# 2070
+	lfs	f0, 16(r3)				# 2071
+	lwz	r2, 32(r3)				# 2071
+	mfspr	r31, 8				# 2071
+	stw	r31, 288(r3)				# 2071
+	addi	r3, r3, 292				# 2071
+	bl	min_caml_create_float_array				# 2071
+	addi	r3, r3, -292				# 2071
+	lwz	r31, 288(r3)				# 2071
+	mtspr	8, r31				# 2071
+	lwz	r5, 284(r3)				# 2071
+	stw	r2, 8(r5)				# 2071
+	lfs	f0, 16(r3)				# 2072
+	lwz	r2, 32(r3)				# 2072
+	mfspr	r31, 8				# 2072
+	stw	r31, 288(r3)				# 2072
+	addi	r3, r3, 292				# 2072
+	bl	min_caml_create_float_array				# 2072
+	addi	r3, r3, -292				# 2072
+	lwz	r31, 288(r3)				# 2072
+	mtspr	8, r31				# 2072
+	lwz	r5, 284(r3)				# 2072
+	stw	r2, 12(r5)				# 2072
+	lfs	f0, 16(r3)				# 2073
+	lwz	r2, 32(r3)				# 2073
+	mfspr	r31, 8				# 2073
+	stw	r31, 288(r3)				# 2073
+	addi	r3, r3, 292				# 2073
+	bl	min_caml_create_float_array				# 2073
+	addi	r3, r3, -292				# 2073
+	lwz	r31, 288(r3)				# 2073
+	mtspr	8, r31				# 2073
+	lwz	r5, 284(r3)				# 2073
+	stw	r2, 16(r5)				# 2073
+	lwz	r2, 0(r3)				# 2086
+	lwz	r6, 4(r3)				# 2086
+	mfspr	r31, 8				# 2086
+	mr	r5, r6				# 2086
+	stw	r31, 288(r3)				# 2086
+	addi	r3, r3, 292				# 2086
+	bl	min_caml_create_array				# 2086
+	addi	r3, r3, -292				# 2086
+	lwz	r31, 288(r3)				# 2086
+	mtspr	8, r31				# 2086
+	lfs	f0, 16(r3)				# 2068
+	lwz	r5, 32(r3)				# 2068
+	stw	r2, 288(r3)				# 2068
+	mfspr	r31, 8				# 2068
+	mr	r2, r5				# 2068
+	stw	r31, 292(r3)				# 2068
+	addi	r3, r3, 296				# 2068
+	bl	min_caml_create_float_array				# 2068
+	addi	r3, r3, -296				# 2068
+	lwz	r31, 292(r3)				# 2068
+	mr	r5, r2				# 2068
+	mtspr	8, r31				# 2068
+	lwz	r2, 172(r3)				# 2069
+	mfspr	r31, 8				# 2069
+	stw	r31, 292(r3)				# 2069
+	addi	r3, r3, 296				# 2069
+	bl	min_caml_create_array				# 2069
+	addi	r3, r3, -296				# 2069
+	lwz	r31, 292(r3)				# 2069
+	mtspr	8, r31				# 2069
+	lfs	f0, 16(r3)				# 2070
+	lwz	r5, 32(r3)				# 2070
+	stw	r2, 292(r3)				# 2070
+	mfspr	r31, 8				# 2070
+	mr	r2, r5				# 2070
+	stw	r31, 296(r3)				# 2070
+	addi	r3, r3, 300				# 2070
+	bl	min_caml_create_float_array				# 2070
+	addi	r3, r3, -300				# 2070
+	lwz	r31, 296(r3)				# 2070
+	mtspr	8, r31				# 2070
+	lwz	r5, 292(r3)				# 2070
+	stw	r2, 4(r5)				# 2070
+	lfs	f0, 16(r3)				# 2071
+	lwz	r2, 32(r3)				# 2071
+	mfspr	r31, 8				# 2071
+	stw	r31, 296(r3)				# 2071
+	addi	r3, r3, 300				# 2071
+	bl	min_caml_create_float_array				# 2071
+	addi	r3, r3, -300				# 2071
+	lwz	r31, 296(r3)				# 2071
+	mtspr	8, r31				# 2071
+	lwz	r5, 292(r3)				# 2071
+	stw	r2, 8(r5)				# 2071
+	lfs	f0, 16(r3)				# 2072
+	lwz	r2, 32(r3)				# 2072
+	mfspr	r31, 8				# 2072
+	stw	r31, 296(r3)				# 2072
+	addi	r3, r3, 300				# 2072
+	bl	min_caml_create_float_array				# 2072
+	addi	r3, r3, -300				# 2072
+	lwz	r31, 296(r3)				# 2072
+	mtspr	8, r31				# 2072
+	lwz	r5, 292(r3)				# 2072
+	stw	r2, 12(r5)				# 2072
+	lfs	f0, 16(r3)				# 2073
+	lwz	r2, 32(r3)				# 2073
+	mfspr	r31, 8				# 2073
+	stw	r31, 296(r3)				# 2073
+	addi	r3, r3, 300				# 2073
+	bl	min_caml_create_float_array				# 2073
+	addi	r3, r3, -300				# 2073
+	lwz	r31, 296(r3)				# 2073
+	mtspr	8, r31				# 2073
+	lwz	r5, 292(r3)				# 2073
+	stw	r2, 16(r5)				# 2073
+	mr	r2, r4				# 2088
+	addi	r4, r4, 32				# 2088
+	stw	r5, 28(r2)				# 2088
+	lwz	r5, 288(r3)				# 2088
+	stw	r5, 24(r2)				# 2088
+	lwz	r5, 284(r3)				# 2088
+	stw	r5, 20(r2)				# 2088
+	lwz	r5, 280(r3)				# 2088
+	stw	r5, 16(r2)				# 2088
+	lwz	r5, 276(r3)				# 2088
+	stw	r5, 12(r2)				# 2088
+	lwz	r5, 272(r3)				# 2088
+	stw	r5, 8(r2)				# 2088
+	lwz	r5, 264(r3)				# 2088
+	stw	r5, 4(r2)				# 2088
+	lwz	r5, 260(r3)				# 2088
+	stw	r5, 0(r2)				# 2088
+	mr	r5, r2				# 2088
+	lwz	r2, 256(r3)				# 2102
+	mfspr	r31, 8				# 2102
+	stw	r31, 296(r3)				# 2102
+	addi	r3, r3, 300				# 2102
+	bl	min_caml_create_array				# 2102
+	addi	r3, r3, -300				# 2102
+	lwz	r31, 296(r3)				# 2102
+	mtspr	8, r31				# 2102
+	lwz	r5, 132(r3)				# 2103
+	lwz	r6, 0(r5)				# 2103
+	addi	r6, r6, -2				# 2103
+	lwz	r1, 240(r3)				# 2103
+	mfspr	r31, 8				# 2103
+	mr	r5, r6				# 2103
+	stw	r31, 296(r3)				# 2103
+	addi	r3, r3, 300				# 2103
+	lwz	r31, 0(r1)				# 2103
+	mtspr	9, r31				# 2103
+	bctr				# 2103
+	addi	r3, r3, -300				# 2103
+	lwz	r31, 296(r3)				# 2103
+	mtspr	8, r31				# 2103
+	lwz	r5, 132(r3)				# 2102
+	lwz	r6, 0(r5)				# 2102
+	lfs	f0, 16(r3)				# 2080
+	lwz	r7, 32(r3)				# 2080
+	stw	r2, 296(r3)				# 2080
+	stw	r6, 300(r3)				# 2080
+	mfspr	r31, 8				# 2080
+	mr	r2, r7				# 2080
+	stw	r31, 304(r3)				# 2080
+	addi	r3, r3, 308				# 2080
+	bl	min_caml_create_float_array				# 2080
+	addi	r3, r3, -308				# 2080
+	lwz	r31, 304(r3)				# 2080
+	mtspr	8, r31				# 2080
+	lfs	f0, 16(r3)				# 2068
+	lwz	r5, 32(r3)				# 2068
+	stw	r2, 304(r3)				# 2068
+	mfspr	r31, 8				# 2068
+	mr	r2, r5				# 2068
+	stw	r31, 308(r3)				# 2068
+	addi	r3, r3, 312				# 2068
+	bl	min_caml_create_float_array				# 2068
+	addi	r3, r3, -312				# 2068
+	lwz	r31, 308(r3)				# 2068
+	mr	r5, r2				# 2068
+	mtspr	8, r31				# 2068
+	lwz	r2, 172(r3)				# 2069
+	mfspr	r31, 8				# 2069
+	stw	r31, 308(r3)				# 2069
+	addi	r3, r3, 312				# 2069
+	bl	min_caml_create_array				# 2069
+	addi	r3, r3, -312				# 2069
+	lwz	r31, 308(r3)				# 2069
+	mtspr	8, r31				# 2069
+	lfs	f0, 16(r3)				# 2070
+	lwz	r5, 32(r3)				# 2070
+	stw	r2, 308(r3)				# 2070
+	mfspr	r31, 8				# 2070
+	mr	r2, r5				# 2070
 	stw	r31, 312(r3)				# 2070
 	addi	r3, r3, 316				# 2070
-	bl	min_caml_create_array				# 2070
+	bl	min_caml_create_float_array				# 2070
 	addi	r3, r3, -316				# 2070
 	lwz	r31, 312(r3)				# 2070
 	mtspr	8, r31				# 2070
-	lwz	r5, 172(r3)				# 2071
-	lwz	r6, 4(r3)				# 2071
-	stw	r2, 312(r3)				# 2071
+	lwz	r5, 308(r3)				# 2070
+	stw	r2, 4(r5)				# 2070
+	lfs	f0, 16(r3)				# 2071
+	lwz	r2, 32(r3)				# 2071
 	mfspr	r31, 8				# 2071
-	mr	r2, r5				# 2071
-	mr	r5, r6				# 2071
-	stw	r31, 316(r3)				# 2071
-	addi	r3, r3, 320				# 2071
-	bl	min_caml_create_array				# 2071
-	addi	r3, r3, -320				# 2071
-	lwz	r31, 316(r3)				# 2071
+	stw	r31, 312(r3)				# 2071
+	addi	r3, r3, 316				# 2071
+	bl	min_caml_create_float_array				# 2071
+	addi	r3, r3, -316				# 2071
+	lwz	r31, 312(r3)				# 2071
 	mtspr	8, r31				# 2071
-	lfs	f0, 16(r3)				# 2056
-	lwz	r5, 32(r3)				# 2056
-	stw	r2, 316(r3)				# 2056
-	mfspr	r31, 8				# 2056
-	mr	r2, r5				# 2056
-	stw	r31, 320(r3)				# 2056
-	addi	r3, r3, 324				# 2056
-	bl	min_caml_create_float_array				# 2056
-	addi	r3, r3, -324				# 2056
-	lwz	r31, 320(r3)				# 2056
-	mr	r5, r2				# 2056
-	mtspr	8, r31				# 2056
-	lwz	r2, 172(r3)				# 2057
-	mfspr	r31, 8				# 2057
-	stw	r31, 320(r3)				# 2057
-	addi	r3, r3, 324				# 2057
-	bl	min_caml_create_array				# 2057
-	addi	r3, r3, -324				# 2057
-	lwz	r31, 320(r3)				# 2057
-	mtspr	8, r31				# 2057
-	lfs	f0, 16(r3)				# 2058
-	lwz	r5, 32(r3)				# 2058
-	stw	r2, 320(r3)				# 2058
-	mfspr	r31, 8				# 2058
-	mr	r2, r5				# 2058
-	stw	r31, 324(r3)				# 2058
-	addi	r3, r3, 328				# 2058
-	bl	min_caml_create_float_array				# 2058
-	addi	r3, r3, -328				# 2058
-	lwz	r31, 324(r3)				# 2058
-	mtspr	8, r31				# 2058
-	lwz	r5, 320(r3)				# 2058
-	stw	r2, 4(r5)				# 2058
-	lfs	f0, 16(r3)				# 2059
-	lwz	r2, 32(r3)				# 2059
-	mfspr	r31, 8				# 2059
-	stw	r31, 324(r3)				# 2059
-	addi	r3, r3, 328				# 2059
-	bl	min_caml_create_float_array				# 2059
-	addi	r3, r3, -328				# 2059
-	lwz	r31, 324(r3)				# 2059
-	mtspr	8, r31				# 2059
-	lwz	r5, 320(r3)				# 2059
-	stw	r2, 8(r5)				# 2059
-	lfs	f0, 16(r3)				# 2060
-	lwz	r2, 32(r3)				# 2060
-	mfspr	r31, 8				# 2060
-	stw	r31, 324(r3)				# 2060
-	addi	r3, r3, 328				# 2060
-	bl	min_caml_create_float_array				# 2060
-	addi	r3, r3, -328				# 2060
-	lwz	r31, 324(r3)				# 2060
-	mtspr	8, r31				# 2060
-	lwz	r5, 320(r3)				# 2060
-	stw	r2, 12(r5)				# 2060
-	lfs	f0, 16(r3)				# 2061
-	lwz	r2, 32(r3)				# 2061
-	mfspr	r31, 8				# 2061
-	stw	r31, 324(r3)				# 2061
-	addi	r3, r3, 328				# 2061
-	bl	min_caml_create_float_array				# 2061
-	addi	r3, r3, -328				# 2061
-	lwz	r31, 324(r3)				# 2061
-	mtspr	8, r31				# 2061
-	lwz	r5, 320(r3)				# 2061
-	stw	r2, 16(r5)				# 2061
-	lfs	f0, 16(r3)				# 2056
-	lwz	r2, 32(r3)				# 2056
-	mfspr	r31, 8				# 2056
-	stw	r31, 324(r3)				# 2056
-	addi	r3, r3, 328				# 2056
-	bl	min_caml_create_float_array				# 2056
-	addi	r3, r3, -328				# 2056
-	lwz	r31, 324(r3)				# 2056
-	mr	r5, r2				# 2056
-	mtspr	8, r31				# 2056
-	lwz	r2, 172(r3)				# 2057
-	mfspr	r31, 8				# 2057
-	stw	r31, 324(r3)				# 2057
-	addi	r3, r3, 328				# 2057
-	bl	min_caml_create_array				# 2057
-	addi	r3, r3, -328				# 2057
-	lwz	r31, 324(r3)				# 2057
-	mtspr	8, r31				# 2057
-	lfs	f0, 16(r3)				# 2058
-	lwz	r5, 32(r3)				# 2058
-	stw	r2, 324(r3)				# 2058
-	mfspr	r31, 8				# 2058
-	mr	r2, r5				# 2058
-	stw	r31, 328(r3)				# 2058
-	addi	r3, r3, 332				# 2058
-	bl	min_caml_create_float_array				# 2058
-	addi	r3, r3, -332				# 2058
-	lwz	r31, 328(r3)				# 2058
-	mtspr	8, r31				# 2058
-	lwz	r5, 324(r3)				# 2058
-	stw	r2, 4(r5)				# 2058
-	lfs	f0, 16(r3)				# 2059
-	lwz	r2, 32(r3)				# 2059
-	mfspr	r31, 8				# 2059
-	stw	r31, 328(r3)				# 2059
-	addi	r3, r3, 332				# 2059
-	bl	min_caml_create_float_array				# 2059
-	addi	r3, r3, -332				# 2059
-	lwz	r31, 328(r3)				# 2059
-	mtspr	8, r31				# 2059
-	lwz	r5, 324(r3)				# 2059
-	stw	r2, 8(r5)				# 2059
-	lfs	f0, 16(r3)				# 2060
-	lwz	r2, 32(r3)				# 2060
-	mfspr	r31, 8				# 2060
-	stw	r31, 328(r3)				# 2060
-	addi	r3, r3, 332				# 2060
-	bl	min_caml_create_float_array				# 2060
-	addi	r3, r3, -332				# 2060
-	lwz	r31, 328(r3)				# 2060
-	mtspr	8, r31				# 2060
-	lwz	r5, 324(r3)				# 2060
-	stw	r2, 12(r5)				# 2060
-	lfs	f0, 16(r3)				# 2061
-	lwz	r2, 32(r3)				# 2061
-	mfspr	r31, 8				# 2061
-	stw	r31, 328(r3)				# 2061
-	addi	r3, r3, 332				# 2061
-	bl	min_caml_create_float_array				# 2061
-	addi	r3, r3, -332				# 2061
-	lwz	r31, 328(r3)				# 2061
-	mtspr	8, r31				# 2061
-	lwz	r5, 324(r3)				# 2061
-	stw	r2, 16(r5)				# 2061
-	lwz	r2, 0(r3)				# 2074
-	lwz	r6, 4(r3)				# 2074
-	mfspr	r31, 8				# 2074
-	mr	r5, r6				# 2074
-	stw	r31, 328(r3)				# 2074
-	addi	r3, r3, 332				# 2074
-	bl	min_caml_create_array				# 2074
-	addi	r3, r3, -332				# 2074
-	lwz	r31, 328(r3)				# 2074
-	mtspr	8, r31				# 2074
-	lfs	f0, 16(r3)				# 2056
-	lwz	r5, 32(r3)				# 2056
-	stw	r2, 328(r3)				# 2056
-	mfspr	r31, 8				# 2056
-	mr	r2, r5				# 2056
-	stw	r31, 332(r3)				# 2056
-	addi	r3, r3, 336				# 2056
-	bl	min_caml_create_float_array				# 2056
-	addi	r3, r3, -336				# 2056
-	lwz	r31, 332(r3)				# 2056
-	mr	r5, r2				# 2056
-	mtspr	8, r31				# 2056
-	lwz	r2, 172(r3)				# 2057
-	mfspr	r31, 8				# 2057
-	stw	r31, 332(r3)				# 2057
-	addi	r3, r3, 336				# 2057
-	bl	min_caml_create_array				# 2057
-	addi	r3, r3, -336				# 2057
-	lwz	r31, 332(r3)				# 2057
-	mtspr	8, r31				# 2057
-	lfs	f0, 16(r3)				# 2058
-	lwz	r5, 32(r3)				# 2058
-	stw	r2, 332(r3)				# 2058
-	mfspr	r31, 8				# 2058
-	mr	r2, r5				# 2058
-	stw	r31, 336(r3)				# 2058
-	addi	r3, r3, 340				# 2058
-	bl	min_caml_create_float_array				# 2058
-	addi	r3, r3, -340				# 2058
-	lwz	r31, 336(r3)				# 2058
-	mtspr	8, r31				# 2058
-	lwz	r5, 332(r3)				# 2058
-	stw	r2, 4(r5)				# 2058
-	lfs	f0, 16(r3)				# 2059
-	lwz	r2, 32(r3)				# 2059
-	mfspr	r31, 8				# 2059
-	stw	r31, 336(r3)				# 2059
-	addi	r3, r3, 340				# 2059
-	bl	min_caml_create_float_array				# 2059
-	addi	r3, r3, -340				# 2059
-	lwz	r31, 336(r3)				# 2059
-	mtspr	8, r31				# 2059
-	lwz	r5, 332(r3)				# 2059
-	stw	r2, 8(r5)				# 2059
-	lfs	f0, 16(r3)				# 2060
-	lwz	r2, 32(r3)				# 2060
-	mfspr	r31, 8				# 2060
-	stw	r31, 336(r3)				# 2060
-	addi	r3, r3, 340				# 2060
-	bl	min_caml_create_float_array				# 2060
-	addi	r3, r3, -340				# 2060
-	lwz	r31, 336(r3)				# 2060
-	mtspr	8, r31				# 2060
-	lwz	r5, 332(r3)				# 2060
-	stw	r2, 12(r5)				# 2060
-	lfs	f0, 16(r3)				# 2061
-	lwz	r2, 32(r3)				# 2061
-	mfspr	r31, 8				# 2061
-	stw	r31, 336(r3)				# 2061
-	addi	r3, r3, 340				# 2061
-	bl	min_caml_create_float_array				# 2061
-	addi	r3, r3, -340				# 2061
-	lwz	r31, 336(r3)				# 2061
-	mtspr	8, r31				# 2061
-	lwz	r5, 332(r3)				# 2061
-	stw	r2, 16(r5)				# 2061
-	mr	r2, r4				# 2076
-	addi	r4, r4, 32				# 2076
-	stw	r5, 28(r2)				# 2076
-	lwz	r5, 328(r3)				# 2076
-	stw	r5, 24(r2)				# 2076
-	lwz	r5, 324(r3)				# 2076
-	stw	r5, 20(r2)				# 2076
-	lwz	r5, 320(r3)				# 2076
-	stw	r5, 16(r2)				# 2076
-	lwz	r5, 316(r3)				# 2076
-	stw	r5, 12(r2)				# 2076
-	lwz	r5, 312(r3)				# 2076
-	stw	r5, 8(r2)				# 2076
-	lwz	r5, 308(r3)				# 2076
-	stw	r5, 4(r2)				# 2076
-	lwz	r5, 304(r3)				# 2076
-	stw	r5, 0(r2)				# 2076
-	mr	r5, r2				# 2076
-	lwz	r2, 300(r3)				# 2090
-	mfspr	r31, 8				# 2090
-	stw	r31, 336(r3)				# 2090
-	addi	r3, r3, 340				# 2090
-	bl	min_caml_create_array				# 2090
-	addi	r3, r3, -340				# 2090
-	lwz	r31, 336(r3)				# 2090
-	mtspr	8, r31				# 2090
-	lwz	r5, 132(r3)				# 2091
-	lwz	r6, 0(r5)				# 2091
-	addi	r6, r6, -2				# 2091
-	lwz	r30, 244(r3)				# 2091
-	mfspr	r31, 8				# 2091
-	mr	r5, r6				# 2091
-	stw	r31, 336(r3)				# 2091
-	addi	r3, r3, 340				# 2091
-	lwz	r31, 0(r30)				# 2091
-	mtspr	9, r31				# 2091
-	bctrl				# 2091
-	addi	r3, r3, -340				# 2091
-	lwz	r31, 336(r3)				# 2091
-	mtspr	8, r31				# 2091
-	lwz	r5, 132(r3)				# 2090
-	lwz	r6, 0(r5)				# 2090
+	lwz	r5, 308(r3)				# 2071
+	stw	r2, 8(r5)				# 2071
+	lfs	f0, 16(r3)				# 2072
+	lwz	r2, 32(r3)				# 2072
+	mfspr	r31, 8				# 2072
+	stw	r31, 312(r3)				# 2072
+	addi	r3, r3, 316				# 2072
+	bl	min_caml_create_float_array				# 2072
+	addi	r3, r3, -316				# 2072
+	lwz	r31, 312(r3)				# 2072
+	mtspr	8, r31				# 2072
+	lwz	r5, 308(r3)				# 2072
+	stw	r2, 12(r5)				# 2072
+	lfs	f0, 16(r3)				# 2073
+	lwz	r2, 32(r3)				# 2073
+	mfspr	r31, 8				# 2073
+	stw	r31, 312(r3)				# 2073
+	addi	r3, r3, 316				# 2073
+	bl	min_caml_create_float_array				# 2073
+	addi	r3, r3, -316				# 2073
+	lwz	r31, 312(r3)				# 2073
+	mtspr	8, r31				# 2073
+	lwz	r5, 308(r3)				# 2073
+	stw	r2, 16(r5)				# 2073
+	lwz	r2, 172(r3)				# 2082
+	lwz	r6, 4(r3)				# 2082
+	mfspr	r31, 8				# 2082
+	mr	r5, r6				# 2082
+	stw	r31, 312(r3)				# 2082
+	addi	r3, r3, 316				# 2082
+	bl	min_caml_create_array				# 2082
+	addi	r3, r3, -316				# 2082
+	lwz	r31, 312(r3)				# 2082
+	mtspr	8, r31				# 2082
+	lwz	r5, 172(r3)				# 2083
+	lwz	r6, 4(r3)				# 2083
+	stw	r2, 312(r3)				# 2083
+	mfspr	r31, 8				# 2083
+	mr	r2, r5				# 2083
+	mr	r5, r6				# 2083
+	stw	r31, 316(r3)				# 2083
+	addi	r3, r3, 320				# 2083
+	bl	min_caml_create_array				# 2083
+	addi	r3, r3, -320				# 2083
+	lwz	r31, 316(r3)				# 2083
+	mtspr	8, r31				# 2083
 	lfs	f0, 16(r3)				# 2068
-	lwz	r7, 32(r3)				# 2068
-	stw	r2, 336(r3)				# 2068
-	stw	r6, 340(r3)				# 2068
+	lwz	r5, 32(r3)				# 2068
+	stw	r2, 316(r3)				# 2068
 	mfspr	r31, 8				# 2068
-	mr	r2, r7				# 2068
-	stw	r31, 344(r3)				# 2068
-	addi	r3, r3, 348				# 2068
+	mr	r2, r5				# 2068
+	stw	r31, 320(r3)				# 2068
+	addi	r3, r3, 324				# 2068
 	bl	min_caml_create_float_array				# 2068
-	addi	r3, r3, -348				# 2068
-	lwz	r31, 344(r3)				# 2068
+	addi	r3, r3, -324				# 2068
+	lwz	r31, 320(r3)				# 2068
+	mr	r5, r2				# 2068
 	mtspr	8, r31				# 2068
-	lfs	f0, 16(r3)				# 2056
-	lwz	r5, 32(r3)				# 2056
-	stw	r2, 344(r3)				# 2056
-	mfspr	r31, 8				# 2056
-	mr	r2, r5				# 2056
-	stw	r31, 348(r3)				# 2056
-	addi	r3, r3, 352				# 2056
-	bl	min_caml_create_float_array				# 2056
-	addi	r3, r3, -352				# 2056
-	lwz	r31, 348(r3)				# 2056
-	mr	r5, r2				# 2056
-	mtspr	8, r31				# 2056
-	lwz	r2, 172(r3)				# 2057
-	mfspr	r31, 8				# 2057
-	stw	r31, 348(r3)				# 2057
-	addi	r3, r3, 352				# 2057
-	bl	min_caml_create_array				# 2057
-	addi	r3, r3, -352				# 2057
-	lwz	r31, 348(r3)				# 2057
-	mtspr	8, r31				# 2057
-	lfs	f0, 16(r3)				# 2058
-	lwz	r5, 32(r3)				# 2058
-	stw	r2, 348(r3)				# 2058
-	mfspr	r31, 8				# 2058
-	mr	r2, r5				# 2058
-	stw	r31, 352(r3)				# 2058
-	addi	r3, r3, 356				# 2058
-	bl	min_caml_create_float_array				# 2058
-	addi	r3, r3, -356				# 2058
-	lwz	r31, 352(r3)				# 2058
-	mtspr	8, r31				# 2058
-	lwz	r5, 348(r3)				# 2058
-	stw	r2, 4(r5)				# 2058
-	lfs	f0, 16(r3)				# 2059
-	lwz	r2, 32(r3)				# 2059
-	mfspr	r31, 8				# 2059
-	stw	r31, 352(r3)				# 2059
-	addi	r3, r3, 356				# 2059
-	bl	min_caml_create_float_array				# 2059
-	addi	r3, r3, -356				# 2059
-	lwz	r31, 352(r3)				# 2059
-	mtspr	8, r31				# 2059
-	lwz	r5, 348(r3)				# 2059
-	stw	r2, 8(r5)				# 2059
-	lfs	f0, 16(r3)				# 2060
-	lwz	r2, 32(r3)				# 2060
-	mfspr	r31, 8				# 2060
-	stw	r31, 352(r3)				# 2060
-	addi	r3, r3, 356				# 2060
-	bl	min_caml_create_float_array				# 2060
-	addi	r3, r3, -356				# 2060
-	lwz	r31, 352(r3)				# 2060
-	mtspr	8, r31				# 2060
-	lwz	r5, 348(r3)				# 2060
-	stw	r2, 12(r5)				# 2060
-	lfs	f0, 16(r3)				# 2061
-	lwz	r2, 32(r3)				# 2061
-	mfspr	r31, 8				# 2061
-	stw	r31, 352(r3)				# 2061
-	addi	r3, r3, 356				# 2061
-	bl	min_caml_create_float_array				# 2061
-	addi	r3, r3, -356				# 2061
-	lwz	r31, 352(r3)				# 2061
-	mtspr	8, r31				# 2061
-	lwz	r5, 348(r3)				# 2061
-	stw	r2, 16(r5)				# 2061
-	lwz	r2, 172(r3)				# 2070
-	lwz	r6, 4(r3)				# 2070
+	lwz	r2, 172(r3)				# 2069
+	mfspr	r31, 8				# 2069
+	stw	r31, 320(r3)				# 2069
+	addi	r3, r3, 324				# 2069
+	bl	min_caml_create_array				# 2069
+	addi	r3, r3, -324				# 2069
+	lwz	r31, 320(r3)				# 2069
+	mtspr	8, r31				# 2069
+	lfs	f0, 16(r3)				# 2070
+	lwz	r5, 32(r3)				# 2070
+	stw	r2, 320(r3)				# 2070
 	mfspr	r31, 8				# 2070
-	mr	r5, r6				# 2070
+	mr	r2, r5				# 2070
+	stw	r31, 324(r3)				# 2070
+	addi	r3, r3, 328				# 2070
+	bl	min_caml_create_float_array				# 2070
+	addi	r3, r3, -328				# 2070
+	lwz	r31, 324(r3)				# 2070
+	mtspr	8, r31				# 2070
+	lwz	r5, 320(r3)				# 2070
+	stw	r2, 4(r5)				# 2070
+	lfs	f0, 16(r3)				# 2071
+	lwz	r2, 32(r3)				# 2071
+	mfspr	r31, 8				# 2071
+	stw	r31, 324(r3)				# 2071
+	addi	r3, r3, 328				# 2071
+	bl	min_caml_create_float_array				# 2071
+	addi	r3, r3, -328				# 2071
+	lwz	r31, 324(r3)				# 2071
+	mtspr	8, r31				# 2071
+	lwz	r5, 320(r3)				# 2071
+	stw	r2, 8(r5)				# 2071
+	lfs	f0, 16(r3)				# 2072
+	lwz	r2, 32(r3)				# 2072
+	mfspr	r31, 8				# 2072
+	stw	r31, 324(r3)				# 2072
+	addi	r3, r3, 328				# 2072
+	bl	min_caml_create_float_array				# 2072
+	addi	r3, r3, -328				# 2072
+	lwz	r31, 324(r3)				# 2072
+	mtspr	8, r31				# 2072
+	lwz	r5, 320(r3)				# 2072
+	stw	r2, 12(r5)				# 2072
+	lfs	f0, 16(r3)				# 2073
+	lwz	r2, 32(r3)				# 2073
+	mfspr	r31, 8				# 2073
+	stw	r31, 324(r3)				# 2073
+	addi	r3, r3, 328				# 2073
+	bl	min_caml_create_float_array				# 2073
+	addi	r3, r3, -328				# 2073
+	lwz	r31, 324(r3)				# 2073
+	mtspr	8, r31				# 2073
+	lwz	r5, 320(r3)				# 2073
+	stw	r2, 16(r5)				# 2073
+	lfs	f0, 16(r3)				# 2068
+	lwz	r2, 32(r3)				# 2068
+	mfspr	r31, 8				# 2068
+	stw	r31, 324(r3)				# 2068
+	addi	r3, r3, 328				# 2068
+	bl	min_caml_create_float_array				# 2068
+	addi	r3, r3, -328				# 2068
+	lwz	r31, 324(r3)				# 2068
+	mr	r5, r2				# 2068
+	mtspr	8, r31				# 2068
+	lwz	r2, 172(r3)				# 2069
+	mfspr	r31, 8				# 2069
+	stw	r31, 324(r3)				# 2069
+	addi	r3, r3, 328				# 2069
+	bl	min_caml_create_array				# 2069
+	addi	r3, r3, -328				# 2069
+	lwz	r31, 324(r3)				# 2069
+	mtspr	8, r31				# 2069
+	lfs	f0, 16(r3)				# 2070
+	lwz	r5, 32(r3)				# 2070
+	stw	r2, 324(r3)				# 2070
+	mfspr	r31, 8				# 2070
+	mr	r2, r5				# 2070
+	stw	r31, 328(r3)				# 2070
+	addi	r3, r3, 332				# 2070
+	bl	min_caml_create_float_array				# 2070
+	addi	r3, r3, -332				# 2070
+	lwz	r31, 328(r3)				# 2070
+	mtspr	8, r31				# 2070
+	lwz	r5, 324(r3)				# 2070
+	stw	r2, 4(r5)				# 2070
+	lfs	f0, 16(r3)				# 2071
+	lwz	r2, 32(r3)				# 2071
+	mfspr	r31, 8				# 2071
+	stw	r31, 328(r3)				# 2071
+	addi	r3, r3, 332				# 2071
+	bl	min_caml_create_float_array				# 2071
+	addi	r3, r3, -332				# 2071
+	lwz	r31, 328(r3)				# 2071
+	mtspr	8, r31				# 2071
+	lwz	r5, 324(r3)				# 2071
+	stw	r2, 8(r5)				# 2071
+	lfs	f0, 16(r3)				# 2072
+	lwz	r2, 32(r3)				# 2072
+	mfspr	r31, 8				# 2072
+	stw	r31, 328(r3)				# 2072
+	addi	r3, r3, 332				# 2072
+	bl	min_caml_create_float_array				# 2072
+	addi	r3, r3, -332				# 2072
+	lwz	r31, 328(r3)				# 2072
+	mtspr	8, r31				# 2072
+	lwz	r5, 324(r3)				# 2072
+	stw	r2, 12(r5)				# 2072
+	lfs	f0, 16(r3)				# 2073
+	lwz	r2, 32(r3)				# 2073
+	mfspr	r31, 8				# 2073
+	stw	r31, 328(r3)				# 2073
+	addi	r3, r3, 332				# 2073
+	bl	min_caml_create_float_array				# 2073
+	addi	r3, r3, -332				# 2073
+	lwz	r31, 328(r3)				# 2073
+	mtspr	8, r31				# 2073
+	lwz	r5, 324(r3)				# 2073
+	stw	r2, 16(r5)				# 2073
+	lwz	r2, 0(r3)				# 2086
+	lwz	r6, 4(r3)				# 2086
+	mfspr	r31, 8				# 2086
+	mr	r5, r6				# 2086
+	stw	r31, 328(r3)				# 2086
+	addi	r3, r3, 332				# 2086
+	bl	min_caml_create_array				# 2086
+	addi	r3, r3, -332				# 2086
+	lwz	r31, 328(r3)				# 2086
+	mtspr	8, r31				# 2086
+	lfs	f0, 16(r3)				# 2068
+	lwz	r5, 32(r3)				# 2068
+	stw	r2, 328(r3)				# 2068
+	mfspr	r31, 8				# 2068
+	mr	r2, r5				# 2068
+	stw	r31, 332(r3)				# 2068
+	addi	r3, r3, 336				# 2068
+	bl	min_caml_create_float_array				# 2068
+	addi	r3, r3, -336				# 2068
+	lwz	r31, 332(r3)				# 2068
+	mr	r5, r2				# 2068
+	mtspr	8, r31				# 2068
+	lwz	r2, 172(r3)				# 2069
+	mfspr	r31, 8				# 2069
+	stw	r31, 332(r3)				# 2069
+	addi	r3, r3, 336				# 2069
+	bl	min_caml_create_array				# 2069
+	addi	r3, r3, -336				# 2069
+	lwz	r31, 332(r3)				# 2069
+	mtspr	8, r31				# 2069
+	lfs	f0, 16(r3)				# 2070
+	lwz	r5, 32(r3)				# 2070
+	stw	r2, 332(r3)				# 2070
+	mfspr	r31, 8				# 2070
+	mr	r2, r5				# 2070
+	stw	r31, 336(r3)				# 2070
+	addi	r3, r3, 340				# 2070
+	bl	min_caml_create_float_array				# 2070
+	addi	r3, r3, -340				# 2070
+	lwz	r31, 336(r3)				# 2070
+	mtspr	8, r31				# 2070
+	lwz	r5, 332(r3)				# 2070
+	stw	r2, 4(r5)				# 2070
+	lfs	f0, 16(r3)				# 2071
+	lwz	r2, 32(r3)				# 2071
+	mfspr	r31, 8				# 2071
+	stw	r31, 336(r3)				# 2071
+	addi	r3, r3, 340				# 2071
+	bl	min_caml_create_float_array				# 2071
+	addi	r3, r3, -340				# 2071
+	lwz	r31, 336(r3)				# 2071
+	mtspr	8, r31				# 2071
+	lwz	r5, 332(r3)				# 2071
+	stw	r2, 8(r5)				# 2071
+	lfs	f0, 16(r3)				# 2072
+	lwz	r2, 32(r3)				# 2072
+	mfspr	r31, 8				# 2072
+	stw	r31, 336(r3)				# 2072
+	addi	r3, r3, 340				# 2072
+	bl	min_caml_create_float_array				# 2072
+	addi	r3, r3, -340				# 2072
+	lwz	r31, 336(r3)				# 2072
+	mtspr	8, r31				# 2072
+	lwz	r5, 332(r3)				# 2072
+	stw	r2, 12(r5)				# 2072
+	lfs	f0, 16(r3)				# 2073
+	lwz	r2, 32(r3)				# 2073
+	mfspr	r31, 8				# 2073
+	stw	r31, 336(r3)				# 2073
+	addi	r3, r3, 340				# 2073
+	bl	min_caml_create_float_array				# 2073
+	addi	r3, r3, -340				# 2073
+	lwz	r31, 336(r3)				# 2073
+	mtspr	8, r31				# 2073
+	lwz	r5, 332(r3)				# 2073
+	stw	r2, 16(r5)				# 2073
+	mr	r2, r4				# 2088
+	addi	r4, r4, 32				# 2088
+	stw	r5, 28(r2)				# 2088
+	lwz	r5, 328(r3)				# 2088
+	stw	r5, 24(r2)				# 2088
+	lwz	r5, 324(r3)				# 2088
+	stw	r5, 20(r2)				# 2088
+	lwz	r5, 320(r3)				# 2088
+	stw	r5, 16(r2)				# 2088
+	lwz	r5, 316(r3)				# 2088
+	stw	r5, 12(r2)				# 2088
+	lwz	r5, 312(r3)				# 2088
+	stw	r5, 8(r2)				# 2088
+	lwz	r5, 308(r3)				# 2088
+	stw	r5, 4(r2)				# 2088
+	lwz	r5, 304(r3)				# 2088
+	stw	r5, 0(r2)				# 2088
+	mr	r5, r2				# 2088
+	lwz	r2, 300(r3)				# 2102
+	mfspr	r31, 8				# 2102
+	stw	r31, 336(r3)				# 2102
+	addi	r3, r3, 340				# 2102
+	bl	min_caml_create_array				# 2102
+	addi	r3, r3, -340				# 2102
+	lwz	r31, 336(r3)				# 2102
+	mtspr	8, r31				# 2102
+	lwz	r5, 132(r3)				# 2103
+	lwz	r6, 0(r5)				# 2103
+	addi	r6, r6, -2				# 2103
+	lwz	r1, 240(r3)				# 2103
+	mfspr	r31, 8				# 2103
+	mr	r5, r6				# 2103
+	stw	r31, 336(r3)				# 2103
+	addi	r3, r3, 340				# 2103
+	lwz	r31, 0(r1)				# 2103
+	mtspr	9, r31				# 2103
+	bctr				# 2103
+	addi	r3, r3, -340				# 2103
+	lwz	r31, 336(r3)				# 2103
+	mtspr	8, r31				# 2103
+	lwz	r5, 132(r3)				# 2102
+	lwz	r6, 0(r5)				# 2102
+	lfs	f0, 16(r3)				# 2080
+	lwz	r7, 32(r3)				# 2080
+	stw	r2, 336(r3)				# 2080
+	stw	r6, 340(r3)				# 2080
+	mfspr	r31, 8				# 2080
+	mr	r2, r7				# 2080
+	stw	r31, 344(r3)				# 2080
+	addi	r3, r3, 348				# 2080
+	bl	min_caml_create_float_array				# 2080
+	addi	r3, r3, -348				# 2080
+	lwz	r31, 344(r3)				# 2080
+	mtspr	8, r31				# 2080
+	lfs	f0, 16(r3)				# 2068
+	lwz	r5, 32(r3)				# 2068
+	stw	r2, 344(r3)				# 2068
+	mfspr	r31, 8				# 2068
+	mr	r2, r5				# 2068
+	stw	r31, 348(r3)				# 2068
+	addi	r3, r3, 352				# 2068
+	bl	min_caml_create_float_array				# 2068
+	addi	r3, r3, -352				# 2068
+	lwz	r31, 348(r3)				# 2068
+	mr	r5, r2				# 2068
+	mtspr	8, r31				# 2068
+	lwz	r2, 172(r3)				# 2069
+	mfspr	r31, 8				# 2069
+	stw	r31, 348(r3)				# 2069
+	addi	r3, r3, 352				# 2069
+	bl	min_caml_create_array				# 2069
+	addi	r3, r3, -352				# 2069
+	lwz	r31, 348(r3)				# 2069
+	mtspr	8, r31				# 2069
+	lfs	f0, 16(r3)				# 2070
+	lwz	r5, 32(r3)				# 2070
+	stw	r2, 348(r3)				# 2070
+	mfspr	r31, 8				# 2070
+	mr	r2, r5				# 2070
 	stw	r31, 352(r3)				# 2070
 	addi	r3, r3, 356				# 2070
-	bl	min_caml_create_array				# 2070
+	bl	min_caml_create_float_array				# 2070
 	addi	r3, r3, -356				# 2070
 	lwz	r31, 352(r3)				# 2070
 	mtspr	8, r31				# 2070
-	lwz	r5, 172(r3)				# 2071
-	lwz	r6, 4(r3)				# 2071
-	stw	r2, 352(r3)				# 2071
+	lwz	r5, 348(r3)				# 2070
+	stw	r2, 4(r5)				# 2070
+	lfs	f0, 16(r3)				# 2071
+	lwz	r2, 32(r3)				# 2071
 	mfspr	r31, 8				# 2071
-	mr	r2, r5				# 2071
-	mr	r5, r6				# 2071
-	stw	r31, 356(r3)				# 2071
-	addi	r3, r3, 360				# 2071
-	bl	min_caml_create_array				# 2071
-	addi	r3, r3, -360				# 2071
-	lwz	r31, 356(r3)				# 2071
+	stw	r31, 352(r3)				# 2071
+	addi	r3, r3, 356				# 2071
+	bl	min_caml_create_float_array				# 2071
+	addi	r3, r3, -356				# 2071
+	lwz	r31, 352(r3)				# 2071
 	mtspr	8, r31				# 2071
-	lfs	f0, 16(r3)				# 2056
-	lwz	r5, 32(r3)				# 2056
-	stw	r2, 356(r3)				# 2056
-	mfspr	r31, 8				# 2056
-	mr	r2, r5				# 2056
-	stw	r31, 360(r3)				# 2056
-	addi	r3, r3, 364				# 2056
-	bl	min_caml_create_float_array				# 2056
-	addi	r3, r3, -364				# 2056
-	lwz	r31, 360(r3)				# 2056
-	mr	r5, r2				# 2056
-	mtspr	8, r31				# 2056
-	lwz	r2, 172(r3)				# 2057
-	mfspr	r31, 8				# 2057
-	stw	r31, 360(r3)				# 2057
-	addi	r3, r3, 364				# 2057
-	bl	min_caml_create_array				# 2057
-	addi	r3, r3, -364				# 2057
-	lwz	r31, 360(r3)				# 2057
-	mtspr	8, r31				# 2057
-	lfs	f0, 16(r3)				# 2058
-	lwz	r5, 32(r3)				# 2058
-	stw	r2, 360(r3)				# 2058
-	mfspr	r31, 8				# 2058
-	mr	r2, r5				# 2058
-	stw	r31, 364(r3)				# 2058
-	addi	r3, r3, 368				# 2058
-	bl	min_caml_create_float_array				# 2058
-	addi	r3, r3, -368				# 2058
-	lwz	r31, 364(r3)				# 2058
-	mtspr	8, r31				# 2058
-	lwz	r5, 360(r3)				# 2058
-	stw	r2, 4(r5)				# 2058
-	lfs	f0, 16(r3)				# 2059
-	lwz	r2, 32(r3)				# 2059
-	mfspr	r31, 8				# 2059
-	stw	r31, 364(r3)				# 2059
-	addi	r3, r3, 368				# 2059
-	bl	min_caml_create_float_array				# 2059
-	addi	r3, r3, -368				# 2059
-	lwz	r31, 364(r3)				# 2059
-	mtspr	8, r31				# 2059
-	lwz	r5, 360(r3)				# 2059
-	stw	r2, 8(r5)				# 2059
-	lfs	f0, 16(r3)				# 2060
-	lwz	r2, 32(r3)				# 2060
-	mfspr	r31, 8				# 2060
-	stw	r31, 364(r3)				# 2060
-	addi	r3, r3, 368				# 2060
-	bl	min_caml_create_float_array				# 2060
-	addi	r3, r3, -368				# 2060
-	lwz	r31, 364(r3)				# 2060
-	mtspr	8, r31				# 2060
-	lwz	r5, 360(r3)				# 2060
-	stw	r2, 12(r5)				# 2060
-	lfs	f0, 16(r3)				# 2061
-	lwz	r2, 32(r3)				# 2061
-	mfspr	r31, 8				# 2061
-	stw	r31, 364(r3)				# 2061
-	addi	r3, r3, 368				# 2061
-	bl	min_caml_create_float_array				# 2061
-	addi	r3, r3, -368				# 2061
-	lwz	r31, 364(r3)				# 2061
-	mtspr	8, r31				# 2061
-	lwz	r5, 360(r3)				# 2061
-	stw	r2, 16(r5)				# 2061
-	lfs	f0, 16(r3)				# 2056
-	lwz	r2, 32(r3)				# 2056
-	mfspr	r31, 8				# 2056
-	stw	r31, 364(r3)				# 2056
-	addi	r3, r3, 368				# 2056
-	bl	min_caml_create_float_array				# 2056
-	addi	r3, r3, -368				# 2056
-	lwz	r31, 364(r3)				# 2056
-	mr	r5, r2				# 2056
-	mtspr	8, r31				# 2056
-	lwz	r2, 172(r3)				# 2057
-	mfspr	r31, 8				# 2057
-	stw	r31, 364(r3)				# 2057
-	addi	r3, r3, 368				# 2057
-	bl	min_caml_create_array				# 2057
-	addi	r3, r3, -368				# 2057
-	lwz	r31, 364(r3)				# 2057
-	mtspr	8, r31				# 2057
-	lfs	f0, 16(r3)				# 2058
-	lwz	r5, 32(r3)				# 2058
-	stw	r2, 364(r3)				# 2058
-	mfspr	r31, 8				# 2058
-	mr	r2, r5				# 2058
-	stw	r31, 368(r3)				# 2058
-	addi	r3, r3, 372				# 2058
-	bl	min_caml_create_float_array				# 2058
-	addi	r3, r3, -372				# 2058
-	lwz	r31, 368(r3)				# 2058
-	mtspr	8, r31				# 2058
-	lwz	r5, 364(r3)				# 2058
-	stw	r2, 4(r5)				# 2058
-	lfs	f0, 16(r3)				# 2059
-	lwz	r2, 32(r3)				# 2059
-	mfspr	r31, 8				# 2059
-	stw	r31, 368(r3)				# 2059
-	addi	r3, r3, 372				# 2059
-	bl	min_caml_create_float_array				# 2059
-	addi	r3, r3, -372				# 2059
-	lwz	r31, 368(r3)				# 2059
-	mtspr	8, r31				# 2059
-	lwz	r5, 364(r3)				# 2059
-	stw	r2, 8(r5)				# 2059
-	lfs	f0, 16(r3)				# 2060
-	lwz	r2, 32(r3)				# 2060
-	mfspr	r31, 8				# 2060
-	stw	r31, 368(r3)				# 2060
-	addi	r3, r3, 372				# 2060
-	bl	min_caml_create_float_array				# 2060
-	addi	r3, r3, -372				# 2060
-	lwz	r31, 368(r3)				# 2060
-	mtspr	8, r31				# 2060
-	lwz	r5, 364(r3)				# 2060
-	stw	r2, 12(r5)				# 2060
-	lfs	f0, 16(r3)				# 2061
-	lwz	r2, 32(r3)				# 2061
-	mfspr	r31, 8				# 2061
-	stw	r31, 368(r3)				# 2061
-	addi	r3, r3, 372				# 2061
-	bl	min_caml_create_float_array				# 2061
-	addi	r3, r3, -372				# 2061
-	lwz	r31, 368(r3)				# 2061
-	mtspr	8, r31				# 2061
-	lwz	r5, 364(r3)				# 2061
-	stw	r2, 16(r5)				# 2061
-	lwz	r2, 0(r3)				# 2074
-	lwz	r6, 4(r3)				# 2074
-	mfspr	r31, 8				# 2074
-	mr	r5, r6				# 2074
-	stw	r31, 368(r3)				# 2074
-	addi	r3, r3, 372				# 2074
-	bl	min_caml_create_array				# 2074
-	addi	r3, r3, -372				# 2074
-	lwz	r31, 368(r3)				# 2074
-	mtspr	8, r31				# 2074
-	lfs	f0, 16(r3)				# 2056
-	lwz	r5, 32(r3)				# 2056
-	stw	r2, 368(r3)				# 2056
-	mfspr	r31, 8				# 2056
-	mr	r2, r5				# 2056
-	stw	r31, 372(r3)				# 2056
-	addi	r3, r3, 376				# 2056
-	bl	min_caml_create_float_array				# 2056
-	addi	r3, r3, -376				# 2056
-	lwz	r31, 372(r3)				# 2056
-	mr	r5, r2				# 2056
-	mtspr	8, r31				# 2056
-	lwz	r2, 172(r3)				# 2057
-	mfspr	r31, 8				# 2057
-	stw	r31, 372(r3)				# 2057
-	addi	r3, r3, 376				# 2057
-	bl	min_caml_create_array				# 2057
-	addi	r3, r3, -376				# 2057
-	lwz	r31, 372(r3)				# 2057
-	mtspr	8, r31				# 2057
-	lfs	f0, 16(r3)				# 2058
-	lwz	r5, 32(r3)				# 2058
-	stw	r2, 372(r3)				# 2058
-	mfspr	r31, 8				# 2058
-	mr	r2, r5				# 2058
-	stw	r31, 376(r3)				# 2058
-	addi	r3, r3, 380				# 2058
-	bl	min_caml_create_float_array				# 2058
-	addi	r3, r3, -380				# 2058
-	lwz	r31, 376(r3)				# 2058
-	mtspr	8, r31				# 2058
-	lwz	r5, 372(r3)				# 2058
-	stw	r2, 4(r5)				# 2058
-	lfs	f0, 16(r3)				# 2059
-	lwz	r2, 32(r3)				# 2059
-	mfspr	r31, 8				# 2059
-	stw	r31, 376(r3)				# 2059
-	addi	r3, r3, 380				# 2059
-	bl	min_caml_create_float_array				# 2059
-	addi	r3, r3, -380				# 2059
-	lwz	r31, 376(r3)				# 2059
-	mtspr	8, r31				# 2059
-	lwz	r5, 372(r3)				# 2059
-	stw	r2, 8(r5)				# 2059
-	lfs	f0, 16(r3)				# 2060
-	lwz	r2, 32(r3)				# 2060
-	mfspr	r31, 8				# 2060
-	stw	r31, 376(r3)				# 2060
-	addi	r3, r3, 380				# 2060
-	bl	min_caml_create_float_array				# 2060
-	addi	r3, r3, -380				# 2060
-	lwz	r31, 376(r3)				# 2060
-	mtspr	8, r31				# 2060
-	lwz	r5, 372(r3)				# 2060
-	stw	r2, 12(r5)				# 2060
-	lfs	f0, 16(r3)				# 2061
-	lwz	r2, 32(r3)				# 2061
-	mfspr	r31, 8				# 2061
-	stw	r31, 376(r3)				# 2061
-	addi	r3, r3, 380				# 2061
-	bl	min_caml_create_float_array				# 2061
-	addi	r3, r3, -380				# 2061
-	lwz	r31, 376(r3)				# 2061
-	mtspr	8, r31				# 2061
-	lwz	r5, 372(r3)				# 2061
-	stw	r2, 16(r5)				# 2061
-	mr	r2, r4				# 2076
-	addi	r4, r4, 32				# 2076
-	stw	r5, 28(r2)				# 2076
-	lwz	r5, 368(r3)				# 2076
-	stw	r5, 24(r2)				# 2076
-	lwz	r5, 364(r3)				# 2076
-	stw	r5, 20(r2)				# 2076
-	lwz	r5, 360(r3)				# 2076
-	stw	r5, 16(r2)				# 2076
-	lwz	r5, 356(r3)				# 2076
-	stw	r5, 12(r2)				# 2076
-	lwz	r5, 352(r3)				# 2076
-	stw	r5, 8(r2)				# 2076
-	lwz	r5, 348(r3)				# 2076
-	stw	r5, 4(r2)				# 2076
-	lwz	r5, 344(r3)				# 2076
-	stw	r5, 0(r2)				# 2076
-	mr	r5, r2				# 2076
-	lwz	r2, 340(r3)				# 2090
-	mfspr	r31, 8				# 2090
-	stw	r31, 376(r3)				# 2090
-	addi	r3, r3, 380				# 2090
-	bl	min_caml_create_array				# 2090
-	addi	r3, r3, -380				# 2090
-	lwz	r31, 376(r3)				# 2090
-	mtspr	8, r31				# 2090
-	lwz	r5, 132(r3)				# 2091
-	lwz	r6, 0(r5)				# 2091
-	addi	r6, r6, -2				# 2091
-	lwz	r30, 244(r3)				# 2091
-	mfspr	r31, 8				# 2091
-	mr	r5, r6				# 2091
-	stw	r31, 376(r3)				# 2091
-	addi	r3, r3, 380				# 2091
-	lwz	r31, 0(r30)				# 2091
-	mtspr	9, r31				# 2091
-	bctrl				# 2091
-	addi	r3, r3, -380				# 2091
-	lwz	r31, 376(r3)				# 2091
-	mtspr	8, r31				# 2091
-	lwz	r30, 204(r3)				# 2272
-	stw	r2, 376(r3)				# 2272
-	mfspr	r31, 8				# 2272
-	stw	r31, 380(r3)				# 2272
-	addi	r3, r3, 384				# 2272
-	lwz	r31, 0(r30)				# 2272
-	mtspr	9, r31				# 2272
-	bctrl				# 2272
-	addi	r3, r3, -384				# 2272
-	lwz	r31, 380(r3)				# 2272
-	mtspr	8, r31				# 2272
+	lwz	r5, 348(r3)				# 2071
+	stw	r2, 8(r5)				# 2071
+	lfs	f0, 16(r3)				# 2072
+	lwz	r2, 32(r3)				# 2072
+	mfspr	r31, 8				# 2072
+	stw	r31, 352(r3)				# 2072
+	addi	r3, r3, 356				# 2072
+	bl	min_caml_create_float_array				# 2072
+	addi	r3, r3, -356				# 2072
+	lwz	r31, 352(r3)				# 2072
+	mtspr	8, r31				# 2072
+	lwz	r5, 348(r3)				# 2072
+	stw	r2, 12(r5)				# 2072
+	lfs	f0, 16(r3)				# 2073
+	lwz	r2, 32(r3)				# 2073
+	mfspr	r31, 8				# 2073
+	stw	r31, 352(r3)				# 2073
+	addi	r3, r3, 356				# 2073
+	bl	min_caml_create_float_array				# 2073
+	addi	r3, r3, -356				# 2073
+	lwz	r31, 352(r3)				# 2073
+	mtspr	8, r31				# 2073
+	lwz	r5, 348(r3)				# 2073
+	stw	r2, 16(r5)				# 2073
+	lwz	r2, 172(r3)				# 2082
+	lwz	r6, 4(r3)				# 2082
+	mfspr	r31, 8				# 2082
+	mr	r5, r6				# 2082
+	stw	r31, 352(r3)				# 2082
+	addi	r3, r3, 356				# 2082
+	bl	min_caml_create_array				# 2082
+	addi	r3, r3, -356				# 2082
+	lwz	r31, 352(r3)				# 2082
+	mtspr	8, r31				# 2082
+	lwz	r5, 172(r3)				# 2083
+	lwz	r6, 4(r3)				# 2083
+	stw	r2, 352(r3)				# 2083
+	mfspr	r31, 8				# 2083
+	mr	r2, r5				# 2083
+	mr	r5, r6				# 2083
+	stw	r31, 356(r3)				# 2083
+	addi	r3, r3, 360				# 2083
+	bl	min_caml_create_array				# 2083
+	addi	r3, r3, -360				# 2083
+	lwz	r31, 356(r3)				# 2083
+	mtspr	8, r31				# 2083
+	lfs	f0, 16(r3)				# 2068
+	lwz	r5, 32(r3)				# 2068
+	stw	r2, 356(r3)				# 2068
+	mfspr	r31, 8				# 2068
+	mr	r2, r5				# 2068
+	stw	r31, 360(r3)				# 2068
+	addi	r3, r3, 364				# 2068
+	bl	min_caml_create_float_array				# 2068
+	addi	r3, r3, -364				# 2068
+	lwz	r31, 360(r3)				# 2068
+	mr	r5, r2				# 2068
+	mtspr	8, r31				# 2068
+	lwz	r2, 172(r3)				# 2069
+	mfspr	r31, 8				# 2069
+	stw	r31, 360(r3)				# 2069
+	addi	r3, r3, 364				# 2069
+	bl	min_caml_create_array				# 2069
+	addi	r3, r3, -364				# 2069
+	lwz	r31, 360(r3)				# 2069
+	mtspr	8, r31				# 2069
+	lfs	f0, 16(r3)				# 2070
+	lwz	r5, 32(r3)				# 2070
+	stw	r2, 360(r3)				# 2070
+	mfspr	r31, 8				# 2070
+	mr	r2, r5				# 2070
+	stw	r31, 364(r3)				# 2070
+	addi	r3, r3, 368				# 2070
+	bl	min_caml_create_float_array				# 2070
+	addi	r3, r3, -368				# 2070
+	lwz	r31, 364(r3)				# 2070
+	mtspr	8, r31				# 2070
+	lwz	r5, 360(r3)				# 2070
+	stw	r2, 4(r5)				# 2070
+	lfs	f0, 16(r3)				# 2071
+	lwz	r2, 32(r3)				# 2071
+	mfspr	r31, 8				# 2071
+	stw	r31, 364(r3)				# 2071
+	addi	r3, r3, 368				# 2071
+	bl	min_caml_create_float_array				# 2071
+	addi	r3, r3, -368				# 2071
+	lwz	r31, 364(r3)				# 2071
+	mtspr	8, r31				# 2071
+	lwz	r5, 360(r3)				# 2071
+	stw	r2, 8(r5)				# 2071
+	lfs	f0, 16(r3)				# 2072
+	lwz	r2, 32(r3)				# 2072
+	mfspr	r31, 8				# 2072
+	stw	r31, 364(r3)				# 2072
+	addi	r3, r3, 368				# 2072
+	bl	min_caml_create_float_array				# 2072
+	addi	r3, r3, -368				# 2072
+	lwz	r31, 364(r3)				# 2072
+	mtspr	8, r31				# 2072
+	lwz	r5, 360(r3)				# 2072
+	stw	r2, 12(r5)				# 2072
+	lfs	f0, 16(r3)				# 2073
+	lwz	r2, 32(r3)				# 2073
+	mfspr	r31, 8				# 2073
+	stw	r31, 364(r3)				# 2073
+	addi	r3, r3, 368				# 2073
+	bl	min_caml_create_float_array				# 2073
+	addi	r3, r3, -368				# 2073
+	lwz	r31, 364(r3)				# 2073
+	mtspr	8, r31				# 2073
+	lwz	r5, 360(r3)				# 2073
+	stw	r2, 16(r5)				# 2073
+	lfs	f0, 16(r3)				# 2068
+	lwz	r2, 32(r3)				# 2068
+	mfspr	r31, 8				# 2068
+	stw	r31, 364(r3)				# 2068
+	addi	r3, r3, 368				# 2068
+	bl	min_caml_create_float_array				# 2068
+	addi	r3, r3, -368				# 2068
+	lwz	r31, 364(r3)				# 2068
+	mr	r5, r2				# 2068
+	mtspr	8, r31				# 2068
+	lwz	r2, 172(r3)				# 2069
+	mfspr	r31, 8				# 2069
+	stw	r31, 364(r3)				# 2069
+	addi	r3, r3, 368				# 2069
+	bl	min_caml_create_array				# 2069
+	addi	r3, r3, -368				# 2069
+	lwz	r31, 364(r3)				# 2069
+	mtspr	8, r31				# 2069
+	lfs	f0, 16(r3)				# 2070
+	lwz	r5, 32(r3)				# 2070
+	stw	r2, 364(r3)				# 2070
+	mfspr	r31, 8				# 2070
+	mr	r2, r5				# 2070
+	stw	r31, 368(r3)				# 2070
+	addi	r3, r3, 372				# 2070
+	bl	min_caml_create_float_array				# 2070
+	addi	r3, r3, -372				# 2070
+	lwz	r31, 368(r3)				# 2070
+	mtspr	8, r31				# 2070
+	lwz	r5, 364(r3)				# 2070
+	stw	r2, 4(r5)				# 2070
+	lfs	f0, 16(r3)				# 2071
+	lwz	r2, 32(r3)				# 2071
+	mfspr	r31, 8				# 2071
+	stw	r31, 368(r3)				# 2071
+	addi	r3, r3, 372				# 2071
+	bl	min_caml_create_float_array				# 2071
+	addi	r3, r3, -372				# 2071
+	lwz	r31, 368(r3)				# 2071
+	mtspr	8, r31				# 2071
+	lwz	r5, 364(r3)				# 2071
+	stw	r2, 8(r5)				# 2071
+	lfs	f0, 16(r3)				# 2072
+	lwz	r2, 32(r3)				# 2072
+	mfspr	r31, 8				# 2072
+	stw	r31, 368(r3)				# 2072
+	addi	r3, r3, 372				# 2072
+	bl	min_caml_create_float_array				# 2072
+	addi	r3, r3, -372				# 2072
+	lwz	r31, 368(r3)				# 2072
+	mtspr	8, r31				# 2072
+	lwz	r5, 364(r3)				# 2072
+	stw	r2, 12(r5)				# 2072
+	lfs	f0, 16(r3)				# 2073
+	lwz	r2, 32(r3)				# 2073
+	mfspr	r31, 8				# 2073
+	stw	r31, 368(r3)				# 2073
+	addi	r3, r3, 372				# 2073
+	bl	min_caml_create_float_array				# 2073
+	addi	r3, r3, -372				# 2073
+	lwz	r31, 368(r3)				# 2073
+	mtspr	8, r31				# 2073
+	lwz	r5, 364(r3)				# 2073
+	stw	r2, 16(r5)				# 2073
+	lwz	r2, 0(r3)				# 2086
+	lwz	r6, 4(r3)				# 2086
+	mfspr	r31, 8				# 2086
+	mr	r5, r6				# 2086
+	stw	r31, 368(r3)				# 2086
+	addi	r3, r3, 372				# 2086
+	bl	min_caml_create_array				# 2086
+	addi	r3, r3, -372				# 2086
+	lwz	r31, 368(r3)				# 2086
+	mtspr	8, r31				# 2086
+	lfs	f0, 16(r3)				# 2068
+	lwz	r5, 32(r3)				# 2068
+	stw	r2, 368(r3)				# 2068
+	mfspr	r31, 8				# 2068
+	mr	r2, r5				# 2068
+	stw	r31, 372(r3)				# 2068
+	addi	r3, r3, 376				# 2068
+	bl	min_caml_create_float_array				# 2068
+	addi	r3, r3, -376				# 2068
+	lwz	r31, 372(r3)				# 2068
+	mr	r5, r2				# 2068
+	mtspr	8, r31				# 2068
+	lwz	r2, 172(r3)				# 2069
+	mfspr	r31, 8				# 2069
+	stw	r31, 372(r3)				# 2069
+	addi	r3, r3, 376				# 2069
+	bl	min_caml_create_array				# 2069
+	addi	r3, r3, -376				# 2069
+	lwz	r31, 372(r3)				# 2069
+	mtspr	8, r31				# 2069
+	lfs	f0, 16(r3)				# 2070
+	lwz	r5, 32(r3)				# 2070
+	stw	r2, 372(r3)				# 2070
+	mfspr	r31, 8				# 2070
+	mr	r2, r5				# 2070
+	stw	r31, 376(r3)				# 2070
+	addi	r3, r3, 380				# 2070
+	bl	min_caml_create_float_array				# 2070
+	addi	r3, r3, -380				# 2070
+	lwz	r31, 376(r3)				# 2070
+	mtspr	8, r31				# 2070
+	lwz	r5, 372(r3)				# 2070
+	stw	r2, 4(r5)				# 2070
+	lfs	f0, 16(r3)				# 2071
+	lwz	r2, 32(r3)				# 2071
+	mfspr	r31, 8				# 2071
+	stw	r31, 376(r3)				# 2071
+	addi	r3, r3, 380				# 2071
+	bl	min_caml_create_float_array				# 2071
+	addi	r3, r3, -380				# 2071
+	lwz	r31, 376(r3)				# 2071
+	mtspr	8, r31				# 2071
+	lwz	r5, 372(r3)				# 2071
+	stw	r2, 8(r5)				# 2071
+	lfs	f0, 16(r3)				# 2072
+	lwz	r2, 32(r3)				# 2072
+	mfspr	r31, 8				# 2072
+	stw	r31, 376(r3)				# 2072
+	addi	r3, r3, 380				# 2072
+	bl	min_caml_create_float_array				# 2072
+	addi	r3, r3, -380				# 2072
+	lwz	r31, 376(r3)				# 2072
+	mtspr	8, r31				# 2072
+	lwz	r5, 372(r3)				# 2072
+	stw	r2, 12(r5)				# 2072
+	lfs	f0, 16(r3)				# 2073
+	lwz	r2, 32(r3)				# 2073
+	mfspr	r31, 8				# 2073
+	stw	r31, 376(r3)				# 2073
+	addi	r3, r3, 380				# 2073
+	bl	min_caml_create_float_array				# 2073
+	addi	r3, r3, -380				# 2073
+	lwz	r31, 376(r3)				# 2073
+	mtspr	8, r31				# 2073
+	lwz	r5, 372(r3)				# 2073
+	stw	r2, 16(r5)				# 2073
+	mr	r2, r4				# 2088
+	addi	r4, r4, 32				# 2088
+	stw	r5, 28(r2)				# 2088
+	lwz	r5, 368(r3)				# 2088
+	stw	r5, 24(r2)				# 2088
+	lwz	r5, 364(r3)				# 2088
+	stw	r5, 20(r2)				# 2088
+	lwz	r5, 360(r3)				# 2088
+	stw	r5, 16(r2)				# 2088
+	lwz	r5, 356(r3)				# 2088
+	stw	r5, 12(r2)				# 2088
+	lwz	r5, 352(r3)				# 2088
+	stw	r5, 8(r2)				# 2088
+	lwz	r5, 348(r3)				# 2088
+	stw	r5, 4(r2)				# 2088
+	lwz	r5, 344(r3)				# 2088
+	stw	r5, 0(r2)				# 2088
+	mr	r5, r2				# 2088
+	lwz	r2, 340(r3)				# 2102
+	mfspr	r31, 8				# 2102
+	stw	r31, 376(r3)				# 2102
+	addi	r3, r3, 380				# 2102
+	bl	min_caml_create_array				# 2102
+	addi	r3, r3, -380				# 2102
+	lwz	r31, 376(r3)				# 2102
+	mtspr	8, r31				# 2102
+	lwz	r5, 132(r3)				# 2103
+	lwz	r6, 0(r5)				# 2103
+	addi	r6, r6, -2				# 2103
+	lwz	r1, 240(r3)				# 2103
+	mfspr	r31, 8				# 2103
+	mr	r5, r6				# 2103
+	stw	r31, 376(r3)				# 2103
+	addi	r3, r3, 380				# 2103
+	lwz	r31, 0(r1)				# 2103
+	mtspr	9, r31				# 2103
+	bctr				# 2103
+	addi	r3, r3, -380				# 2103
+	lwz	r31, 376(r3)				# 2103
+	mtspr	8, r31				# 2103
+	lwz	r1, 204(r3)				# 2284
+	stw	r2, 376(r3)				# 2284
+	mfspr	r31, 8				# 2284
+	stw	r31, 380(r3)				# 2284
+	addi	r3, r3, 384				# 2284
+	lwz	r31, 0(r1)				# 2284
+	mtspr	9, r31				# 2284
+	bctr				# 2284
+	addi	r3, r3, -384				# 2284
+	lwz	r31, 380(r3)				# 2284
+	mtspr	8, r31				# 2284
 	addi	r2, 0, 80
-	mfspr	r31, 8				# 1919
-	stw	r31, 380(r3)				# 1919
-	addi	r3, r3, 384				# 1919
-	bl	min_caml_print_char				# 1919
-	addi	r3, r3, -384				# 1919
-	lwz	r31, 380(r3)				# 1919
-	mtspr	8, r31				# 1919
+	mfspr	r31, 8				# 1931
+	stw	r31, 380(r3)				# 1931
+	addi	r3, r3, 384				# 1931
+	bl	min_caml_print_char				# 1931
+	addi	r3, r3, -384				# 1931
+	lwz	r31, 380(r3)				# 1931
+	mtspr	8, r31				# 1931
 	addi	r2, 0, 51
-	mfspr	r31, 8				# 1920
-	stw	r31, 380(r3)				# 1920
-	addi	r3, r3, 384				# 1920
-	bl	min_caml_print_char				# 1920
-	addi	r3, r3, -384				# 1920
-	lwz	r31, 380(r3)				# 1920
-	mtspr	8, r31				# 1920
+	mfspr	r31, 8				# 1932
+	stw	r31, 380(r3)				# 1932
+	addi	r3, r3, 384				# 1932
+	bl	min_caml_print_char				# 1932
+	addi	r3, r3, -384				# 1932
+	lwz	r31, 380(r3)				# 1932
+	mtspr	8, r31				# 1932
 	addi	r2, 0, 10
-	stw	r2, 380(r3)				# 1921
-	mfspr	r31, 8				# 1921
-	stw	r31, 384(r3)				# 1921
-	addi	r3, r3, 388				# 1921
-	bl	min_caml_print_char				# 1921
-	addi	r3, r3, -388				# 1921
-	lwz	r31, 384(r3)				# 1921
-	mtspr	8, r31				# 1921
-	lwz	r2, 132(r3)				# 1922
-	lwz	r5, 0(r2)				# 1922
-	mfspr	r31, 8				# 1922
-	mr	r2, r5				# 1922
-	stw	r31, 384(r3)				# 1922
-	addi	r3, r3, 388				# 1922
-	bl	min_caml_print_int				# 1922
-	addi	r3, r3, -388				# 1922
-	lwz	r31, 384(r3)				# 1922
-	mtspr	8, r31				# 1922
+	stw	r2, 380(r3)				# 1933
+	mfspr	r31, 8				# 1933
+	stw	r31, 384(r3)				# 1933
+	addi	r3, r3, 388				# 1933
+	bl	min_caml_print_char				# 1933
+	addi	r3, r3, -388				# 1933
+	lwz	r31, 384(r3)				# 1933
+	mtspr	8, r31				# 1933
+	lwz	r2, 132(r3)				# 1934
+	lwz	r5, 0(r2)				# 1934
+	mfspr	r31, 8				# 1934
+	mr	r2, r5				# 1934
+	stw	r31, 384(r3)				# 1934
+	addi	r3, r3, 388				# 1934
+	bl	min_caml_print_int				# 1934
+	addi	r3, r3, -388				# 1934
+	lwz	r31, 384(r3)				# 1934
+	mtspr	8, r31				# 1934
 	addi	r2, 0, 32
-	stw	r2, 384(r3)				# 1923
-	mfspr	r31, 8				# 1923
-	stw	r31, 388(r3)				# 1923
-	addi	r3, r3, 392				# 1923
-	bl	min_caml_print_char				# 1923
-	addi	r3, r3, -392				# 1923
-	lwz	r31, 388(r3)				# 1923
-	mtspr	8, r31				# 1923
-	lwz	r2, 132(r3)				# 1924
-	lwz	r5, 4(r2)				# 1924
-	mfspr	r31, 8				# 1924
-	mr	r2, r5				# 1924
-	stw	r31, 388(r3)				# 1924
-	addi	r3, r3, 392				# 1924
-	bl	min_caml_print_int				# 1924
-	addi	r3, r3, -392				# 1924
-	lwz	r31, 388(r3)				# 1924
-	mtspr	8, r31				# 1924
-	lwz	r2, 384(r3)				# 1925
-	mfspr	r31, 8				# 1925
-	stw	r31, 388(r3)				# 1925
-	addi	r3, r3, 392				# 1925
-	bl	min_caml_print_char				# 1925
-	addi	r3, r3, -392				# 1925
-	lwz	r31, 388(r3)				# 1925
-	mtspr	8, r31				# 1925
+	stw	r2, 384(r3)				# 1935
+	mfspr	r31, 8				# 1935
+	stw	r31, 388(r3)				# 1935
+	addi	r3, r3, 392				# 1935
+	bl	min_caml_print_char				# 1935
+	addi	r3, r3, -392				# 1935
+	lwz	r31, 388(r3)				# 1935
+	mtspr	8, r31				# 1935
+	lwz	r2, 132(r3)				# 1936
+	lwz	r5, 4(r2)				# 1936
+	mfspr	r31, 8				# 1936
+	mr	r2, r5				# 1936
+	stw	r31, 388(r3)				# 1936
+	addi	r3, r3, 392				# 1936
+	bl	min_caml_print_int				# 1936
+	addi	r3, r3, -392				# 1936
+	lwz	r31, 388(r3)				# 1936
+	mtspr	8, r31				# 1936
+	lwz	r2, 384(r3)				# 1937
+	mfspr	r31, 8				# 1937
+	stw	r31, 388(r3)				# 1937
+	addi	r3, r3, 392				# 1937
+	bl	min_caml_print_char				# 1937
+	addi	r3, r3, -392				# 1937
+	lwz	r31, 388(r3)				# 1937
+	mtspr	8, r31				# 1937
 	addi	r2, 0, 255
-	mfspr	r31, 8				# 1926
-	stw	r31, 388(r3)				# 1926
-	addi	r3, r3, 392				# 1926
-	bl	min_caml_print_int				# 1926
-	addi	r3, r3, -392				# 1926
-	lwz	r31, 388(r3)				# 1926
-	mtspr	8, r31				# 1926
-	lwz	r2, 380(r3)				# 1927
-	mfspr	r31, 8				# 1927
-	stw	r31, 388(r3)				# 1927
-	addi	r3, r3, 392				# 1927
-	bl	min_caml_print_char				# 1927
-	addi	r3, r3, -392				# 1927
-	lwz	r31, 388(r3)				# 1927
-	mtspr	8, r31				# 1927
-	lwz	r2, 268(r3)				# 2196
-	lwz	r30, 240(r3)				# 2196
-	mfspr	r31, 8				# 2196
-	stw	r31, 388(r3)				# 2196
-	addi	r3, r3, 392				# 2196
-	lwz	r31, 0(r30)				# 2196
-	mtspr	9, r31				# 2196
-	bctrl				# 2196
-	addi	r3, r3, -392				# 2196
-	lwz	r31, 388(r3)				# 2196
-	mtspr	8, r31				# 2196
+	mfspr	r31, 8				# 1938
+	stw	r31, 388(r3)				# 1938
+	addi	r3, r3, 392				# 1938
+	bl	min_caml_print_int				# 1938
+	addi	r3, r3, -392				# 1938
+	lwz	r31, 388(r3)				# 1938
+	mtspr	8, r31				# 1938
+	lwz	r2, 380(r3)				# 1939
+	mfspr	r31, 8				# 1939
+	stw	r31, 388(r3)				# 1939
+	addi	r3, r3, 392				# 1939
+	bl	min_caml_print_char				# 1939
+	addi	r3, r3, -392				# 1939
+	lwz	r31, 388(r3)				# 1939
+	mtspr	8, r31				# 1939
+	lwz	r2, 268(r3)				# 2208
+	lwz	r1, 236(r3)				# 2208
+	mfspr	r31, 8				# 2208
+	stw	r31, 388(r3)				# 2208
+	addi	r3, r3, 392				# 2208
+	lwz	r31, 0(r1)				# 2208
+	mtspr	9, r31				# 2208
+	bctr				# 2208
+	addi	r3, r3, -392				# 2208
+	lwz	r31, 388(r3)				# 2208
+	mtspr	8, r31				# 2208
 	addi	r2, 0, 9
-	lwz	r5, 4(r3)				# 2197
-	lwz	r30, 236(r3)				# 2197
-	mfspr	r31, 8				# 2197
-	mr	r6, r5				# 2197
-	stw	r31, 388(r3)				# 2197
-	addi	r3, r3, 392				# 2197
-	lwz	r31, 0(r30)				# 2197
-	mtspr	9, r31				# 2197
-	bctrl				# 2197
-	addi	r3, r3, -392				# 2197
-	lwz	r31, 388(r3)				# 2197
-	mtspr	8, r31				# 2197
-	lwz	r2, 268(r3)				# 2198
-	lwz	r30, 232(r3)				# 2198
-	mfspr	r31, 8				# 2198
-	stw	r31, 388(r3)				# 2198
-	addi	r3, r3, 392				# 2198
-	lwz	r31, 0(r30)				# 2198
-	mtspr	9, r31				# 2198
-	bctrl				# 2198
-	addi	r3, r3, -392				# 2198
-	lwz	r31, 388(r3)				# 2198
-	mtspr	8, r31				# 2198
-	lwz	r2, 56(r3)				# 153
-	lfs	f0, 0(r2)				# 153
-	lwz	r5, 184(r3)				# 153
-	stfs	f0, 0(r5)				# 153
-	lfs	f0, 4(r2)				# 154
-	stfs	f0, 4(r5)				# 154
-	lfs	f0, 8(r2)				# 155
-	stfs	f0, 8(r5)				# 155
-	lwz	r2, 8(r3)				# 1122
-	lwz	r5, 0(r2)				# 1122
-	addi	r5, r5, -1				# 1122
-	lwz	r6, 188(r3)				# 1122
-	lwz	r30, 208(r3)				# 1122
-	mfspr	r31, 8				# 1122
-	mr	r2, r6				# 1122
-	stw	r31, 388(r3)				# 1122
-	addi	r3, r3, 392				# 1122
-	lwz	r31, 0(r30)				# 1122
-	mtspr	9, r31				# 1122
-	bctrl				# 1122
-	addi	r3, r3, -392				# 1122
-	lwz	r31, 388(r3)				# 1122
-	mtspr	8, r31				# 1122
-	lwz	r2, 8(r3)				# 2277
-	lwz	r2, 0(r2)				# 2277
-	addi	r2, r2, -1				# 2277
-	lwz	r30, 228(r3)				# 2277
-	mfspr	r31, 8				# 2277
-	stw	r31, 388(r3)				# 2277
-	addi	r3, r3, 392				# 2277
-	lwz	r31, 0(r30)				# 2277
-	mtspr	9, r31				# 2277
-	bctrl				# 2277
-	addi	r3, r3, -392				# 2277
-	lwz	r31, 388(r3)				# 2277
-	mtspr	8, r31				# 2277
-	lwz	r2, 140(r3)				# 2006
-	lfs	f0, 0(r2)				# 2006
-	lwz	r2, 136(r3)				# 2006
-	lwz	r2, 4(r2)				# 2006
-	lwz	r5, 4(r3)				# 2006
-	sub	r2, r5, r2				# 2006
-	stfs	f0, 392(r3)				# 2006
-	mfspr	r31, 8				# 2006
-	stw	r31, 400(r3)				# 2006
-	addi	r3, r3, 404				# 2006
-	bl	min_caml_float_of_int				# 2006
-	addi	r3, r3, -404				# 2006
-	lwz	r31, 400(r3)				# 2006
-	mtspr	8, r31				# 2006
-	lfs	f1, 392(r3)				# 2006
-	fmul	f0, f1, f0				# 2006
-	lwz	r2, 156(r3)				# 2009
-	lfs	f1, 0(r2)				# 2009
-	fmul	f1, f0, f1				# 2009
-	lwz	r5, 160(r3)				# 2009
-	lfs	f2, 0(r5)				# 2009
-	fadd	f1, f1, f2				# 2009
-	lfs	f2, 4(r2)				# 2010
-	fmul	f2, f0, f2				# 2010
-	lfs	f3, 4(r5)				# 2010
-	fadd	f2, f2, f3				# 2010
-	lfs	f3, 8(r2)				# 2011
-	fmul	f0, f0, f3				# 2011
-	lfs	f3, 8(r5)				# 2011
-	fadd	f0, f0, f3				# 2011
-	lwz	r2, 132(r3)				# 2012
-	lwz	r2, 0(r2)				# 2012
-	addi	r5, r2, -1				# 2012
-	lwz	r2, 336(r3)				# 2012
-	lwz	r6, 4(r3)				# 2012
-	lwz	r30, 224(r3)				# 2012
-	mfspr	r31, 8				# 2012
-	fmr	f31, f2				# 2012
-	fmr	f2, f0				# 2012
-	fmr	f0, f1				# 2012
-	fmr	f1, f31				# 2012
-	stw	r31, 400(r3)				# 2012
-	addi	r3, r3, 404				# 2012
-	lwz	r31, 0(r30)				# 2012
-	mtspr	9, r31				# 2012
-	bctrl				# 2012
-	addi	r3, r3, -404				# 2012
-	lwz	r31, 400(r3)				# 2012
-	mtspr	8, r31				# 2012
-	lwz	r2, 4(r3)				# 2279
-	lwz	r5, 296(r3)				# 2279
-	lwz	r6, 336(r3)				# 2279
-	lwz	r7, 376(r3)				# 2279
-	lwz	r8, 128(r3)				# 2279
-	lwz	r30, 220(r3)				# 2279
-	mfspr	r31, 8				# 2279
-	stw	r31, 400(r3)				# 2279
-	addi	r3, r3, 404				# 2279
-	lwz	r31, 0(r30)				# 2279
-	mtspr	9, r31				# 2279
-	bctrl				# 2279
-	addi	r3, r3, -404				# 2279
-	lwz	r31, 400(r3)				# 2279
-	mtspr	8, r31				# 2279
+	lwz	r5, 4(r3)				# 2209
+	lwz	r1, 232(r3)				# 2209
+	mfspr	r31, 8				# 2209
+	mr	r6, r5				# 2209
+	stw	r31, 388(r3)				# 2209
+	addi	r3, r3, 392				# 2209
+	lwz	r31, 0(r1)				# 2209
+	mtspr	9, r31				# 2209
+	bctr				# 2209
+	addi	r3, r3, -392				# 2209
+	lwz	r31, 388(r3)				# 2209
+	mtspr	8, r31				# 2209
+	lwz	r2, 268(r3)				# 2210
+	lwz	r1, 228(r3)				# 2210
+	mfspr	r31, 8				# 2210
+	stw	r31, 388(r3)				# 2210
+	addi	r3, r3, 392				# 2210
+	lwz	r31, 0(r1)				# 2210
+	mtspr	9, r31				# 2210
+	bctr				# 2210
+	addi	r3, r3, -392				# 2210
+	lwz	r31, 388(r3)				# 2210
+	mtspr	8, r31				# 2210
+	lwz	r2, 56(r3)				# 166
+	lfs	f0, 0(r2)				# 166
+	lwz	r5, 184(r3)				# 166
+	stfs	f0, 0(r5)				# 166
+	lfs	f0, 4(r2)				# 167
+	stfs	f0, 4(r5)				# 167
+	lfs	f0, 8(r2)				# 168
+	stfs	f0, 8(r5)				# 168
+	lwz	r2, 8(r3)				# 1135
+	lwz	r5, 0(r2)				# 1135
+	addi	r5, r5, -1				# 1135
+	lwz	r6, 188(r3)				# 1135
+	lwz	r1, 208(r3)				# 1135
+	mfspr	r31, 8				# 1135
+	mr	r2, r6				# 1135
+	stw	r31, 388(r3)				# 1135
+	addi	r3, r3, 392				# 1135
+	lwz	r31, 0(r1)				# 1135
+	mtspr	9, r31				# 1135
+	bctr				# 1135
+	addi	r3, r3, -392				# 1135
+	lwz	r31, 388(r3)				# 1135
+	mtspr	8, r31				# 1135
+	lwz	r2, 8(r3)				# 2289
+	lwz	r2, 0(r2)				# 2289
+	addi	r2, r2, -1				# 2289
+	lwz	r1, 224(r3)				# 2289
+	mfspr	r31, 8				# 2289
+	stw	r31, 388(r3)				# 2289
+	addi	r3, r3, 392				# 2289
+	lwz	r31, 0(r1)				# 2289
+	mtspr	9, r31				# 2289
+	bctr				# 2289
+	addi	r3, r3, -392				# 2289
+	lwz	r31, 388(r3)				# 2289
+	mtspr	8, r31				# 2289
+	lwz	r2, 140(r3)				# 2018
+	lfs	f0, 0(r2)				# 2018
+	lwz	r2, 136(r3)				# 2018
+	lwz	r2, 4(r2)				# 2018
+	lwz	r5, 4(r3)				# 2018
+	sub	r2, r5, r2				# 2018
+	stfs	f0, 392(r3)				# 2018
+	mfspr	r31, 8				# 2018
+	stw	r31, 400(r3)				# 2018
+	addi	r3, r3, 404				# 2018
+	bl	min_caml_float_of_int				# 2018
+	addi	r3, r3, -404				# 2018
+	lwz	r31, 400(r3)				# 2018
+	mtspr	8, r31				# 2018
+	lfs	f1, 392(r3)				# 2018
+	fmul	f0, f1, f0				# 2018
+	lwz	r2, 156(r3)				# 2021
+	lfs	f1, 0(r2)				# 2021
+	fmul	f1, f0, f1				# 2021
+	lwz	r5, 160(r3)				# 2021
+	lfs	f2, 0(r5)				# 2021
+	fadd	f1, f1, f2				# 2021
+	lfs	f2, 4(r2)				# 2022
+	fmul	f2, f0, f2				# 2022
+	lfs	f3, 4(r5)				# 2022
+	fadd	f2, f2, f3				# 2022
+	lfs	f3, 8(r2)				# 2023
+	fmul	f0, f0, f3				# 2023
+	lfs	f3, 8(r5)				# 2023
+	fadd	f0, f0, f3				# 2023
+	lwz	r2, 132(r3)				# 2024
+	lwz	r2, 0(r2)				# 2024
+	addi	r5, r2, -1				# 2024
+	lwz	r2, 336(r3)				# 2024
+	lwz	r6, 4(r3)				# 2024
+	lwz	r1, 220(r3)				# 2024
+	mfspr	r31, 8				# 2024
+	fmr	f31, f2				# 2024
+	fmr	f2, f0				# 2024
+	fmr	f0, f1				# 2024
+	fmr	f1, f31				# 2024
+	stw	r31, 400(r3)				# 2024
+	addi	r3, r3, 404				# 2024
+	lwz	r31, 0(r1)				# 2024
+	mtspr	9, r31				# 2024
+	bctr				# 2024
+	addi	r3, r3, -404				# 2024
+	lwz	r31, 400(r3)				# 2024
+	mtspr	8, r31				# 2024
+	lwz	r2, 4(r3)				# 2291
+	lwz	r5, 296(r3)				# 2291
+	lwz	r6, 336(r3)				# 2291
+	lwz	r7, 376(r3)				# 2291
+	lwz	r8, 128(r3)				# 2291
+	lwz	r1, 216(r3)				# 2291
+	mfspr	r31, 8				# 2291
+	stw	r31, 400(r3)				# 2291
+	addi	r3, r3, 404				# 2291
+	lwz	r31, 0(r1)				# 2291
+	mtspr	9, r31				# 2291
+	bctr				# 2291
+	addi	r3, r3, -404				# 2291
+	lwz	r31, 400(r3)				# 2291
+	mtspr	8, r31				# 2291
 #	main program ends
 	halt

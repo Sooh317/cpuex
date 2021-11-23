@@ -14,14 +14,14 @@ fmr f0, f1
 fmul f0, f0, f1
 fneg f0, f0
 fsub f1, f1, f2
-lfd f1, 0(r2)
+lfs f1, 0(r2)
 lwz r2, 4(r3)
 lwzx r6, r5, r6
 mfspr r31, 8
 mr r2, r5
 mtspr 8, r31
 slwi r7, r2, 2
-stfd f1, 0(r2)
+stfs f1, 0(r2)
 stw r31, 84(r3)
 stwu r1, -96(r1)
 stwx r6, r2, r5

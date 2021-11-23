@@ -136,13 +136,13 @@ enum INSTR_KIND{
     IN, 
     OUT, 
     FLUSH, 
-    LFD,  
+    LFS,  
     LWZX, 
     MULLI,
     MULHWU,
     SLWI, 
     SRWI,
-    STFD, 
+    STFS, 
     STWX, 
 
     // ゴミ
