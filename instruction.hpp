@@ -28,6 +28,7 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "bcl") return BCL;
     if(s == "lwz") return LWZ;
     if(s == "lwzu") return LWZU;
+    if(s == "sub") return SUB;
     if(s == "stw") return STW;
     if(s == "stwu") return STWU;
     if(s == "mfspr") return MFSPR;
@@ -84,10 +85,14 @@ std::string opcode_to_string(INSTR_KIND kind){
         return "bcl";
     case BCTR:
         return "bctr";
+    case BCTRL:
+        return "bctrl";
     case LWZ:
         return "lwz";
     case LWZU:
         return "lwzu";
+    case SUB:
+        return "sub";
     case STW:
         return "stw";
     case STWU:
@@ -252,6 +257,11 @@ INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::st
             ra = call(2, 0);
             rb = call(3, 0);
             break;
+        case SUB:
+            rd = call(1, 0);
+            ra = call(2, 0);
+            rb = call(3, 0);
+            break;
         case ADDI:
             rd = call(1, 0);
             ra = call(2, 0);
@@ -305,6 +315,8 @@ INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::st
             }
             break;
         case BCTR: // 無条件分岐
+            break;
+        case BCTRL: // 無条件分岐
             break;
         case LWZ:
             rd = call(1, 0);
@@ -524,10 +536,14 @@ int opcode_to_bit(INSTR_KIND kind){
     case BCTR: 
         // bcctr
         return 0x13;
+    case BCTRL:
+        return 0x13;
     case LWZ: // d a d
         return 0x20;
     case LWZU: // d a d
         return 0x21;
+    case SUB: 
+        return 0x1f;
     case STW:// s a d
         return 0x24;
     case STWU: // s a d
@@ -630,6 +646,9 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
     case BCTR:
         fprintf(stdout, "bctr\n");
         return;
+    case BCTRL:
+        fprintf(stdout, "bctrl\n");
+        return;
     case LWZ:
         if(b == 0) fprintf(stdout, "lwz, r%d, %d(0)\n", d, a);
         else fprintf(stdout, "lwz, r%d, %d(r%d)\n", d, a, b);
@@ -639,6 +658,9 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
         return;
     case LWZX:
         fprintf(stdout, "lwzx r%d, r%d, r%d\n", d, a, b);
+        return;
+    case SUB:
+        fprintf(stdout, "sub r%d, r%d, r%d\n", d, a, b);
         return;
     case STW:
         if(b == 0) fprintf(stdout, "stw, r%d, %d(0)\n", d, a);
@@ -774,11 +796,17 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
     case BCTR:
         res |= (20 << 21) | (528 << 1);
         break;
+    case BCTRL:
+        res |= (20 << 21) | (528 << 1) | 1;
+        break;
     case LWZ:
         res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
         break;
     case LWZU:
         res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
+        break;
+    case SUB:
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | ((0x10b) << 1);
         break;
     case STW:
         res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));

@@ -33,6 +33,9 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
         case ADD:
             cpu.gpr[d] = cpu.gpr[a] + cpu.gpr[b];
             return false;
+        case SUB:
+            cpu.gpr[d] = cpu.gpr[a] - cpu.gpr[b];
+            return false;
         case ADDI:
             cpu.gpr[d] = (a ? cpu.gpr[a] : 0) + b;
             return false;
@@ -90,6 +93,10 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             if(ctr_ok && cond_ok) cpu.pc = b;
             return false;
         case BCTR:
+            cpu.pc = segment(cpu.ctr, 0, 29) << 2;
+            return false;
+        case BCTRL:
+            cpu.lr = cpu.pc;
             cpu.pc = segment(cpu.ctr, 0, 29) << 2;
             return false;
         case LWZ: 

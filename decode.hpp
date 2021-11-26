@@ -172,6 +172,12 @@ INSTR decode_bin(const std::string& bit){
             a = btoi(bit.substr(11, 5));
             b = btoi(bit.substr(16, 5));
         }
+        else if(imm == 0x10b){
+            opcode = SUB;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(11, 5));
+            b = btoi(bit.substr(16, 5));
+        }
         else if(imm == 0x00b){
             opcode = MULHWU;
             d = btoi(bit.substr(6, 5));
@@ -239,7 +245,10 @@ INSTR decode_bin(const std::string& bit){
     case 0x13: // bctr, blr
         imm = btoi(bit.substr(21, 10));
         if(imm == 16) opcode = BLR;
-        else if(imm == 528) opcode = BCTR;
+        else if(imm == 528){
+            if(bit.back() == '1') opcode = BCTRL;
+            else opcode = BCTR;
+        }
         else assert(false);
         break;
     case 0x15:

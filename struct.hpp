@@ -89,37 +89,24 @@ enum INSTR_KIND{
     ADD, 
     ADDI,
     ADDIS, 
-    /*LI, // addi 0 */
-    /*SUBI, */
-
-    // logic operation
-
-    // comparison
+    SUB,
     CMPWI, 
-    // branch
     BGT,
     BL,
     BLR, // jump to LINK Register
     BCTR,
+    BCTRL,
     BCL,
-    // load
     LWZ,
     LWZU,
-    /* LMW, // load multiple word */
-    // store
     STW,
-    /* STMW, // store multiple word */
     STWU, // store word with update
-    // link register
     MFSPR, // move from link register
-    // move
     MR,   // move register
     MTSPR, // refer to p526 
-
     // 1st architecture
     FCTIWZ,
     XORIS,
-
     B, 
     BLT, 
     BNE, 
