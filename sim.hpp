@@ -82,7 +82,6 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             cpu.pc = d;
             return false;
         case BLR:
-            if(cpu.pc == (unsigned int)mem.index) return true; // program ends
             cpu.pc = segment(cpu.lr, 0, 29) << 2;
             return false;
         case BCL:
@@ -152,6 +151,9 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             for(int i = 0; i < cpu.sbptr; i++) flushed[flush++] = cpu.send_buf[i];
             cpu.sbptr = 0;
             return false;
+        case ORI:
+            cpu.gpr[d] = cpu.gpr[a] | b;
+            return false;
         case FABS:
             cpu.fpr[d] = std::abs(cpu.fpr[a]); // 多分これで問題ないよね...
             return false;
@@ -182,10 +184,38 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
         case FSUB:
             cpu.fpr[d] = fsub(cpu.fpr[a], cpu.fpr[b]);
             return false;
+        case FSQRT:
+            cpu.fpr[d] = fsqrt(cpu.fpr[d], fpu);
+            return false;
+        case FFLOOR: // stdを使ってます
+            cpu.fpr[d] = std::floor(cpu.fpr[d]);
+            return false;
+        case FHALF: // なにこれ
+            cpu.fpr[d] = cpu.fpr[d] / 2.0;
+            return false;
+        case FCOS: // stdを使ってる
+            cpu.fpr[d] = std::cos(cpu.fpr[d]);
+            return false;
+        case FSIN: // stdを使ってる
+            cpu.fpr[d] = std::sin(cpu.fpr[d]);
+            return false;
+        case FATAN:
+            cpu.fpr[d] = atan(cpu.fpr[d], fpu);
+            return false;
         case LFS:
             tmp = (b == 0 ? 0 : cpu.gpr[b]);
             ea = tmp + a;
             cpu.fpr[d] = mem.data[addr_to_index(ea)].f;
+            return false;
+        case LFSX:
+            tmp = (a == 0 ? 0 : cpu.gpr[a]);
+            ea = tmp + cpu.gpr[b];
+            cpu.fpr[d] = mem.data[addr_to_index(ea)].f;
+            return false;
+        case STFSX:
+            tmp = (a == 0 ? 0 : cpu.gpr[a]);
+            ea = tmp + cpu.gpr[b];
+            mem.data[addr_to_index(ea)].f = cpu.fpr[d];
             return false;
         case LWZX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
@@ -214,6 +244,8 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             ea = cpu.gpr[b] + a;
             mem.data[addr_to_index(ea)].i = cpu.gpr[d];
             return false;
+        case HALT:
+            return true;
         default:
             warning(opcode_to_string(opc));
             assert(false);
@@ -292,11 +324,10 @@ void execution(CPU& cpu, MEMORY& mem, OPTION& option, FPU& fpu){
 }
 
 
-
-
 void translator(MEMORY& mem, OPTION& option){
     std::ifstream ifs;
     std::string s;
+    mem.lbl["L"] = 0;
     if(option.binTOasm){
         if(option.binary) ifs.open("assembly_binary/binary.txt");
         while((option.binary ? ifs : std::cin) >> s){
@@ -307,7 +338,9 @@ void translator(MEMORY& mem, OPTION& option){
     else{
         if(option.assembly) ifs.open("assembly_binary/assembly.s");
         while(std::getline(option.assembly ? ifs : std::cin, s)){
-            auto [opc, d, a, b] = recognize_instr(mem.lbl, remove_chars(s, " ,\t\n"));
+            auto vec = remove_chars(s, " ,\t\n");
+            if(vec.size() == 0) continue;
+            auto [opc, d, a, b] = recognize_instr(mem.lbl, vec);
             show_instr_binary(opc, d, a, b);
         }
     }

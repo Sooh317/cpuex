@@ -147,7 +147,7 @@ min_caml_read_float:
 	.text
 	.align	2
 	.globl	min_caml_create_array
-min_caml_create_array:	
+min_caml_create_array:
 	mr	r6, r2
 	mr	r2, r4
 create_array_loop:
@@ -158,7 +158,7 @@ create_array_exit:
 	blr
 create_array_cont:
 	stw	r5, 0(r4)
-	subi  	r6, r6, 1
+	addi  	r6, r6, -1
 	addi	r4, r4, 4
 	b	create_array_loop
 #	create_float_array
@@ -172,8 +172,8 @@ create_float_array_loop:
 	blr
 create_float_array_cont:
 	stfs	f0, 0(r4)
-	subi	r5, r5, 1
-	addi	r4, r4, 8
+	addi	r5, r5, -1
+	addi	r4, r4, 4
 	b		create_float_array_loop
 #	fabs
 	.text

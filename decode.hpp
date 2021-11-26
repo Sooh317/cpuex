@@ -88,7 +88,9 @@ void decode(const std::string file, MEMORY &mem){
 
     std::string str;
     while(std::getline(ifs, str)){
+        printout(str);
         put_instr_into_memory(str, mem);
+
     }
 }
 
@@ -131,11 +133,13 @@ INSTR decode_bin(const std::string& bit){
         a = btoi(bit.substr(16, 16));
         break;
     case 0x2:
+        opcode = FLUSH;
         break;
     case 0x1b:
         opcode = XORIS;
         d = btoi(bit.substr(11, 5));
         a = btoi(bit.substr(6, 5));
+        b = btoi(bit.substr(16, 16));
         break;
     case 0x1f: // add, mfspr, mr, mtspr
         imm = btoi(bit.substr(21, 10));
@@ -154,7 +158,7 @@ INSTR decode_bin(const std::string& bit){
             d = btoi(bit.substr(11, 5));
             a = btoi(bit.substr(6, 5));
         }
-        else if(imm == 0x037){
+        else if(imm == 0x017){
             opcode = LWZX;
             d = btoi(bit.substr(6, 5));
             a = btoi(bit.substr(11, 5));
@@ -189,6 +193,20 @@ INSTR decode_bin(const std::string& bit){
             d = btoi(bit.substr(6, 3));
             a = btoi(bit.substr(11, 5));
             b = btoi(bit.substr(16, 5));
+        }
+        else if(imm == 0x217){
+            opcode = LFSX;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(11, 5));
+            b = btoi(bit.substr(16, 5));
+            break;
+        }
+        else if(imm == 0x297){
+            opcode = STFSX;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(11, 5));
+            b = btoi(bit.substr(16, 5));
+            break;
         }
         break;
     case 0xe: // addi
@@ -259,7 +277,13 @@ INSTR decode_bin(const std::string& bit){
         a = btoi(bit.substr(6, 5));
         d = btoi(bit.substr(11, 5));
         b = btoi(bit.substr(16, 5));
-        break;    
+        break; 
+    case 0x18:
+        opcode = ORI;
+        a = btoi(bit.substr(6, 5));
+        d = btoi(bit.substr(11, 5));
+        b = btoi(bit.substr(16, 16));
+        break;
     case 0x20: // lwz
         opcode = LWZ;
         d = btoi(bit.substr(6, 5));
@@ -297,28 +321,26 @@ INSTR decode_bin(const std::string& bit){
         b = btoi(bit.substr(11, 5));
         break;
     case 0x3f:
+        if(btoi(bit) == (~0)){
+            opcode = HALT;
+            break;
+        }
         imm = btoi(bit.substr(21, 10));
-        if(imm == 0x00f){
-            opcode = FCTIWZ;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(16, 5));
-        }
-        else if(imm == 0x108){
-            opcode = FABS;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(16, 5));
-        }
-        else if(imm == 0x015){
-            opcode = FADD;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(11, 5));
-            b = btoi(bit.substr(16, 5));
-        }
-        else if(imm == 0){
+        if(imm == 0){
             opcode = FCMPU;
             d = btoi(bit.substr(6, 3));
             a = btoi(bit.substr(11, 5));
             b = btoi(bit.substr(16, 5));
+        }
+        else if(imm == 0x00f){
+            opcode = FCTIWZ;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(16, 5));
+        }
+        else if(imm == 0x010){
+            opcode = FCFIW;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(16, 5));
         }
         else if(imm == 0x012){
             opcode = FDIV;
@@ -326,30 +348,66 @@ INSTR decode_bin(const std::string& bit){
             a = btoi(bit.substr(11, 5));
             b = btoi(bit.substr(16, 5));
         }
-        else if(imm == 0x48){
-            opcode = FMR;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(16, 5));
-        }
-        else if((imm & bitmask(5)) == 0x019){
-            opcode = FMUL;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(11, 5));
-            b = btoi(bit.substr(21, 5));
-        }
-        else if(imm == 0x028){
-            opcode = FNEG;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(16, 5));
-        }
         else if(imm == 0x014){
             opcode = FSUB;
             d = btoi(bit.substr(6, 5));
             a = btoi(bit.substr(11, 5));
             b = btoi(bit.substr(16, 5));
         }
-        else if(imm == 0x010){
-            opcode = FCFIW;
+        else if(imm == 0x015){
+            opcode = FADD;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(11, 5));
+            b = btoi(bit.substr(16, 5));
+        }
+        else if((imm & bitmask(5)) == 22){
+            opcode = FSQRT;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(16, 5));
+        }
+        else if((imm & bitmask(5)) == 25){
+            opcode = FMUL;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(11, 5));
+            b = btoi(bit.substr(21, 5));
+        }
+        else if((imm & bitmask(5)) == 28){
+            opcode = FSIN;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(16, 5));
+        }
+        else if((imm & bitmask(5)) == 29){
+            opcode = FCOS;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(16, 5));
+        }
+        else if((imm & bitmask(5)) == 30){
+            opcode = FATAN;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(16, 5));
+        }
+        else if(imm == 0x028){
+            opcode = FNEG;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(16, 5));
+        }
+        else if(imm == 0x40){ // mcrfs を借りた
+            opcode = FFLOOR;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(16, 5));
+        }
+        else if(imm == 0x46){ // mtfsb0 を借りた
+            opcode = FHALF;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(16, 5));
+        }
+        else if(imm == 0x48){
+            opcode = FMR;
+            d = btoi(bit.substr(6, 5));
+            a = btoi(bit.substr(16, 5));
+        }
+        else if(imm == 0x108){
+            opcode = FABS;
             d = btoi(bit.substr(6, 5));
             a = btoi(bit.substr(16, 5));
         }
