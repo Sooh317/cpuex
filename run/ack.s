@@ -27,32 +27,21 @@ ble_else.34:
 	lwz	r2, 0(r3)				# 4
 	b	ack.15				# 4
 _min_caml_start: # main entry point
-	mfspr	r0, 8
-	stw	r30, -8(r1)
-	stw	r31, -4(r1)
-	stw	r0, 8(r1)
-	stwu	r1, -96(r1)
-#	main program starts
 	addi	r2, 0, 3
 	addi	r5, 0, 10
 	mfspr	r31, 8				# 5
-	stw	r31, 4(r3)				# 5
-	addi	r3, r3, 8				# 5
+	stw	r31, 0(r3)				# 5
+	addi	r3, r3, 4				# 5
 	bl	ack.15				# 5
-	addi	r3, r3, -8				# 5
-	lwz	r31, 4(r3)				# 5
+	addi	r3, r3, -4				# 5
+	lwz	r31, 0(r3)				# 5
 	mtspr	8, r31				# 5
 	mfspr	r31, 8				# 5
-	stw	r31, 4(r3)				# 5
-	addi	r3, r3, 8				# 5
+	stw	r31, 0(r3)				# 5
+	addi	r3, r3, 4				# 5
 	bl	min_caml_print_int				# 5
-	addi	r3, r3, -8				# 5
-	lwz	r31, 4(r3)				# 5
+	addi	r3, r3, -4				# 5
+	lwz	r31, 0(r3)				# 5
 	mtspr	8, r31				# 5
 #	main program ends
-	lwz	r1, 0(r1)
-	lwz	r0, 8(r1)
-	mtspr	8, r0
-	lwz	r30, -8(r1)
-	lwz	r31, -4(r1)
-	blr
+	halt
