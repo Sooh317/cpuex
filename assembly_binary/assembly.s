@@ -26,7 +26,7 @@ cmpw cr7, r31, r0
 fabs f31, f31
 fadd f31, f0, f31
 fcmpu cr7, f31, f31
-# fcfiw f31, r31
+fcfiw f31, r31
 fdiv f31, f0, f31
 fmr f31, f31
 fmul f31, f0, f31

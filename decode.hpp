@@ -213,19 +213,19 @@ INSTR decode_bin(const std::string& bit){
         opcode = ADDI;
         d = btoi(bit.substr(6, 5));
         a = btoi(bit.substr(11, 5));
-        b = exts(bit.substr(16, 16));
+        b = btoi(bit.substr(16, 16));
         break;
     case 0xf: // addis
         opcode = ADDIS;
         d = btoi(bit.substr(6, 5));
         a = btoi(bit.substr(11, 5));
-        b = exts(bit.substr(16, 16));
+        b = btoi(bit.substr(16, 16));
         break;
     case 0x0b: // cmpwi
         opcode = CMPWI;
         d = btoi(bit.substr(6, 3));
         a = btoi(bit.substr(11, 5));
-        b = exts(bit.substr(16, 16));
+        b = btoi(bit.substr(16, 16));
         break;
     case 0x07:
         opcode = MULLI;
@@ -287,25 +287,25 @@ INSTR decode_bin(const std::string& bit){
     case 0x20: // lwz
         opcode = LWZ;
         d = btoi(bit.substr(6, 5));
-        a = exts(bit.substr(16, 16));
+        a = btoi(bit.substr(16, 16));
         b = btoi(bit.substr(11, 5));
         break;
     case 0x21: // lwzu
         opcode = LWZU;
         d = btoi(bit.substr(6, 5));
-        a = exts(bit.substr(16, 16));
+        a = btoi(bit.substr(16, 16));
         b = btoi(bit.substr(11, 5));
         break;
     case 0x24: // stw
         opcode = STW;
         d = btoi(bit.substr(6, 5));
-        a = exts(bit.substr(16, 16));
+        a = btoi(bit.substr(16, 16));
         b = btoi(bit.substr(11, 5));
         break;
     case 0x25: // stwu
         opcode = STWU;
         d = btoi(bit.substr(6, 5));
-        a = exts(bit.substr(16, 16));
+        a = btoi(bit.substr(16, 16));
         b = btoi(bit.substr(11, 5));
         break;
     case 0x30:

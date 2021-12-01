@@ -13,7 +13,7 @@
 extern char flushed[1024*1024];
 int flush = 0;
 
-constexpr int addr_to_index(int k){ return k >> 2;}
+inline int addr_to_index(int k){ return k >> 2;}
 
 INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
     assert(cpu.pc < (unsigned int)mem.index);
@@ -37,15 +37,16 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             cpu.gpr[d] = cpu.gpr[a] - cpu.gpr[b];
             return false;
         case ADDI:
-            cpu.gpr[d] = (a ? cpu.gpr[a] : 0) + b;
+            cpu.gpr[d] = (a ? cpu.gpr[a] : 0) + exts(b);
             return false;
         case ADDIS:
-            cpu.gpr[d] = (a ? cpu.gpr[a] : 0) + (b << 16);
+            cpu.gpr[d] = (a ? cpu.gpr[a] : 0) + int(b << 16);
             return false;
         case CMPWI:
             c = 0;
-            if(cpu.gpr[a] < b) c = 0b100;
-            else if(cpu.gpr[a] > b) c = 0b010;
+            tmp = exts(b);
+            if(cpu.gpr[a] < tmp) c = 0b100;
+            else if(cpu.gpr[a] > tmp) c = 0b010;
             else c = 0b001;
             tmp = cpu.cr;
             clear_and_set(tmp, 4*d, 4*d + 3, (c << 1) | (cpu.xer & 1));
@@ -82,6 +83,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             cpu.pc = d;
             return false;
         case BLR:
+            print_binary_int(cpu.lr);
             cpu.pc = segment(cpu.lr, 0, 29) << 2;
             return false;
         case BCL:
@@ -99,18 +101,18 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             cpu.pc = segment(cpu.ctr, 0, 29) << 2;
             return false;
         case LWZ: 
-            cpu.gpr[d] = mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + a)).i;
+            cpu.gpr[d] = mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + exts(a))).i;
             return false;
         case LWZU:
-            ea = cpu.gpr[b] + a;
+            ea = cpu.gpr[b] + exts(a);
             cpu.gpr[d] = mem.data.at(addr_to_index(ea)).i;
             cpu.gpr[b] = ea;
             return false;
         case STW:   
-            mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + a)).i = cpu.gpr[d];
+            mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + exts(a))).i = cpu.gpr[d];
             return false;
         case STWU:
-            ea = cpu.gpr[b] + a;
+            ea = cpu.gpr[b] + exts(a);
             mem.data.at(addr_to_index(ea)).i = cpu.gpr[d];
             cpu.gpr[b] = ea;
             return false;
@@ -153,7 +155,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             cpu.sbptr = 0;
             return false;
         case ORI:
-            cpu.gpr[d] = cpu.gpr[a] | b;
+            cpu.gpr[d] = cpu.gpr[a] | (int16_t)b;
             return false;
         case FABS:
             cpu.fpr[d] = std::abs(cpu.fpr[a]); // 多分これで問題ないよね...
@@ -205,7 +207,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             return false;
         case LFS:
             tmp = (b == 0 ? 0 : cpu.gpr[b]);
-            ea = tmp + a;
+            ea = tmp + exts(a);
             cpu.fpr[d] = mem.data[addr_to_index(ea)].f;
             return false;
         case LFSX:
@@ -237,7 +239,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             return false;
         case STFS: // LFSと同じ
             tmp = (b == 0 ? 0 : cpu.gpr[b]);
-            ea = tmp + a;
+            ea = tmp + exts(a);
             mem.data[addr_to_index(ea)].f = cpu.fpr[d];
             return false;
         case STWX:

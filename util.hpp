@@ -91,13 +91,17 @@ int btoi(const std::string& s){
     return res;
 }
 
-int exts(const std::string& s, int base = 0){
+int exts(const std::string& s, int base){
     int res = btoi(s);
     res <<= base;
     if(s[0] == '1'){
         if(s.size() == 16) res |= 0xffff0000;
     }
     return res;
+}
+
+inline int exts(int v){
+    return (v >> 16 & 1 ? (v | 0xffff0000) : v);
 }
 
 
