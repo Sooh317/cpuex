@@ -752,7 +752,7 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
         return;
     case STW:
         if(b == 0) fprintf(stdout, "stw, r%d, %d(0)\n", d, a);
-        else fprintf(stdout, "lwz, r%d, %d(r%d)\n", d, a, b);
+        else fprintf(stdout, "stw, r%d, %d(r%d)\n", d, a, b);
         return;
     case STWU:
         fprintf(stdout, "stwu r%d, %d(r%d)\n", d, a, b);

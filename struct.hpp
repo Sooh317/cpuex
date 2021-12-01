@@ -81,6 +81,10 @@ struct cpu_t{
         std::cerr << "\033[m\n";
         std::cerr << std::endl;
     }
+    void show_sendbuf(){
+        for(int i = 0; i < SEND_BUFFER_SIZE; i++) std::cout << send_buf[i];
+        std::cout << "\n" << std::flush;
+    }
 };
 using CPU = cpu_t;
 
@@ -161,7 +165,7 @@ struct instr_t{
 using INSTR = instr_t;
 
 #define INSTR_SIZE 1024*1024
-#define DATA_SIZE 1024*1024
+#define DATA_SIZE 1024*1024*32
 
 // http://apfel.mathematik.uni-ulm.de/~lehn/sghpc_ws14/OSXAssembler.pdf
 enum DIRECTIVE_KIND{

@@ -146,6 +146,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             return false;
         case OUT: // imm + 1 byte目はどこ
             cpu.send_buf[cpu.sbptr++] = char(segment(cpu.gpr[d], 4*a, 4*a + 7));
+            cpu.show_sendbuf();
             return false;
         case FLUSH: // 
             for(int i = 0; i < cpu.sbptr; i++) flushed[flush++] = cpu.send_buf[i];
@@ -223,7 +224,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             cpu.gpr[d] = mem.data[addr_to_index(ea)].i;
             return false;
         case MULLI:
-            cpu.gpr[d] = int(((long long)cpu.gpr[a] * (long long)cpu.gpr[b]) & bitmask(32));
+            cpu.gpr[d] = int(((long long)cpu.gpr[a] * (long long)b) & bitmask(32));
             return false;
         case MULHWU:
             cpu.gpr[d] = (int)((((long long)cpu.gpr[a] * (long long)cpu.gpr[b])) >> 32);

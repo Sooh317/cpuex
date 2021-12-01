@@ -1,5 +1,6 @@
 #pragma once
 #include "struct.hpp"
+#include "util.hpp"
 #include <string>
 #include <vector>
 
@@ -31,17 +32,18 @@ enum DIRECTIVE_KIND directive_kind(const std::string &ss){
 void process_long_directive(MEMORY& mem, const std::string& s){
     mem.instr[mem.index >> 2].opcode = NOT_INSTR;
     for(int i = 0; i < (int)s.size(); i++){
-        if('0' <= s[i] && s[i] <= '9') continue;
+        if(s[i] == '-' || ('0' <= s[i] && s[i] <= '9')) continue;
         else return;
     }
-    mem.instr[mem.index >> 2].ra = stoi(s);
+    mem.data[mem.index >> 2].i = stoi(s);
 }
 
 void process_ascii_directive(MEMORY& mem, const std::string& s){ // "...\0"の形
+    assert(false);
     int index = mem.index;
     mem.instr[index].opcode = NOT_INSTR;
     for(int i = 1; i < (int)s.size(); i++){
-        mem.instr[mem.index >> 2].ra = ((uint8_t)s[i]) << (mem.index % 4);
+        mem.data[mem.index >> 2].i = ((uint8_t)s[i]) << (mem.index & bitmask(3));
         mem.index++;
     }
     mem.index = index;

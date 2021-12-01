@@ -107,7 +107,7 @@ Lprint_int_gtzero:
 	sub		r7, r2, r7
 	stw		r5, 4(r3)
 	addi 	r3, r3, 4
-	mr		r6, r2
+	mr		r2, r6
 	addi	r5, r5, 1
 	cmpwi	cr7, r2, 0
 	bne		cr7, Lprint_int_gtzero

@@ -71,7 +71,7 @@ void put_instr_into_memory(std::string& str, MEMORY& mem){
         else if(kind == ALIGN);
         else{
             auto ins = recognize_instr(mem.lbl, s);
-            printout(opcode_to_string(ins.opcode));
+            //printout(opcode_to_string(ins.opcode));
             mem.instr[mem.index >> 2] = ins;
         }
         next_memory_address(mem.index, s);
@@ -88,7 +88,7 @@ void decode(const std::string file, MEMORY &mem){
 
     std::string str;
     while(std::getline(ifs, str)){
-        printout(str);
+        //printout(str);
         put_instr_into_memory(str, mem);
 
     }
