@@ -13,7 +13,6 @@
 extern char flushed[1024*1024];
 int flush = 0;
 
-inline int addr_to_index(int k){ return k >> 2;}
 
 INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
     assert(cpu.pc < (unsigned int)mem.index);
@@ -83,7 +82,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             cpu.pc = d;
             return false;
         case BLR:
-            print_binary_int(cpu.lr);
+            //print_binary_int(cpu.lr);
             cpu.pc = segment(cpu.lr, 0, 29) << 2;
             return false;
         case BCL:
@@ -148,7 +147,6 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             return false;
         case OUT: // imm + 1 byte目はどこ
             cpu.send_buf[cpu.sbptr++] = char(segment(cpu.gpr[d], 4*a, 4*a + 7));
-            cpu.show_sendbuf();
             return false;
         case FLUSH: // 
             for(int i = 0; i < cpu.sbptr; i++) flushed[flush++] = cpu.send_buf[i];
@@ -266,6 +264,7 @@ SHOW show_what(const std::vector<std::string>& s){
     SHOW ss;
     for(const char& c : s[0]){
         if(c == 's') ss.next = false;
+        else if(c == 'S') ss.S = true;
         else if(c == 'g') ss.gr = true;
         else if(c == 'f') ss.fr = true;
         else if(c == 'c') ss.cr = true;

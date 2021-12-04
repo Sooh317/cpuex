@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 #include <assert.h>
+#include "util.hpp"
 
 
 using GPR = int32_t; // general purpose register
@@ -32,58 +33,51 @@ struct cpu_t{
     cpu_t():cr(0), lr(0), ctr(0), xer(0),pc(0), sbptr(0), gpr(GPR_SIZE), fpr(FPR_SIZE), send_buf(SEND_BUFFER_SIZE){}
 
     void show_gpr(){
-        std::cerr << "\033[1;31m";
+        std::cout << "\033[1;31m";
         for(int i = 0; i < GPR_SIZE; i++){
-            std::cerr << "gpr[" << i << "] = " << gpr[i] << std::endl;
+            std::cout << "gpr[" << i << "] = (" << gpr[i] << ", ";
+            print_binary_int1(gpr[1]);
+            std::cout << ")\n";
         }
-        std::cerr << "\033[m\n";
+        std::cout << "\033[m\n";
     }
     void show_fpr(){
-        std::cerr << "\033[1;32m";
+        std::cout << "\033[1;32m";
+        union {float f; int i;} d;
         for(int i = 0; i < FPR_SIZE; i++){
-            std::cerr << "fpr[" << i << "] = " << fpr[i] << '\n';
+            d.f = fpr[i];
+            std::cout << "fpr[" << i << "] = (" << fpr[i] << ", ";
+            print_binary_int1(d.i);
+            std::cout << ")\n";
         }
-        std::cerr << "\033[m\n";
+        std::cout << "\033[m\n";
     }
     void show_cr(){
-        std::cerr << "\033[1;33m";
-        std::cerr << "cr : ";
-        for(int i = 31; i >= 0; i--){
-            if(i % 8 == 7) std::cerr << " ";
-            std::cerr << (cr >> i & 1);
-        }
-        std::cerr << "\033[m\n";
-        std::cerr << std::endl;
+        std::cout << "\033[1;33m";
+        std::cout << "cr : ";
+        print_binary_int1(cr);
+        std::cout << "\033[m\n";
+        std::cout << std::endl;
 
     }
     void show_lr(){
-        /*std::cerr << "lr : ";
-        for(int i = 31; i >= 0; i--){
-            std::cerr << (lr >> i & 1);
-        }
-        std::cerr << std::endl;*/
-        std::cerr << "\033[1;34m";
-        std::cerr << "lr : ";
-        for(int i = 31; i >= 0; i--){
-            if(i % 8 == 7) std::cerr << " ";
-            std::cerr << (lr >> i & 1);
-        }
-        std::cerr << "\033[m\n";
-        std::cerr << std::endl;
+        std::cout << "\033[1;34m";
+        std::cout << "lr : ";
+        print_binary_int1(lr);
+        std::cout << "\033[m\n";
+        std::cout << std::endl;
     }
     void show_ctr(){
-        std::cerr << "\033[1;35m";
-        std::cerr << "ctr : ";
-        for(int i = 31; i >= 0; i--){
-            if(i % 8 == 7) std::cerr << " ";
-            std::cerr << (ctr >> i & 1);
-        }
-        std::cerr << "\033[m\n";
-        std::cerr << std::endl;
+        std::cout << "\033[1;35m";
+        std::cout << "ctr : ";
+        print_binary_int1(ctr);
+        std::cout << "\033[m\n";
+        std::cout << std::endl;
     }
+
     void show_sendbuf(){
         for(int i = 0; i < SEND_BUFFER_SIZE; i++) std::cout << send_buf[i];
-        std::cout << "\n" << std::flush;
+        std::cout << "\n" << std::endl;
     }
 };
 using CPU = cpu_t;
@@ -150,6 +144,12 @@ enum INSTR_KIND{
     INSTR_UNKNOWN
 };
 
+enum INSTR_FORM{
+    DAB,
+    DAIMM,
+    
+};
+
 struct instr_t{
     INSTR_KIND opcode;
     int32_t rd; // rd or rs
@@ -189,11 +189,11 @@ enum DIRECTIVE_KIND{
 
 
 struct show_t{
-    bool gr, fr, lr, cr, ctr, m, M;
+    bool S, gr, fr, lr, cr, ctr, m, M;
     bool next;
     int wid;
     std::vector<int> addr;
-    show_t():gr(0), fr(0), lr(0), cr(0), ctr(0), m(0), M(0),next(1), wid(3){}
+    show_t():S(0), gr(0), fr(0), lr(0), cr(0), ctr(0), m(0), M(0),next(1), wid(3){}
 };
 using SHOW = show_t;
 
@@ -234,14 +234,14 @@ struct memory_t{
                 assert(show.addr[i] < DATA_SIZE && show.addr[i + 1] < DATA_SIZE && show.addr[i] >= 0 && show.addr[i + 1] >= 0);
                 std::cerr << "from " << show.addr[i] << " to " << show.addr[i + 1] << std::endl;
                 for(int j = show.addr[i]; j <= show.addr[i + 1]; j += 4){
-                    std::cerr << "mem[" << j << "~" << j + 3 << "] = " << (type[j >> 2] ? data[j >> 2].f : data[j >> 2].i) << "  0b'";
+                    std::cerr << "mem[" << (j >> 2) << "~" << (j >> 2) + 3 << "] = " << (type[j >> 2] ? data[j >> 2].f : data[j >> 2].i) << "  0b'";
                     for(int i = 31; i >= 0; i--){
                         std::cerr << (data[j >> 2].i >> i & 1);
                         if(i % 8 == 0) std::cerr << " ";
                     }
                     std::cerr << std::endl;
                 }
-                std::cerr << "\n";
+                std::cerr << std::endl;
             }
         }
         std::cerr << "\033[m";

@@ -8,24 +8,12 @@
 
 using u32 = std::uint32_t;
 
-constexpr u32 bitmask(int x) {
-    return (1u << x) - 1u;
-}
+constexpr u32 bitmask(int x) { return (1u << x) - 1u;}
 
 #define printerr(x) std::cerr << (x) << std::endl;
 #define printout(x) std::cout << (x) << std::endl;
 #define warning(x) std::cerr << "## WARNING ##\n" << x << " is unknown" << std::endl;
 #define rep(i,n) for(int i = 0; i < n; i++)
-/*
-void print_binary_int(int);
-int lo16(int);
-int ha16(int);
-void clear_and_set(int&, int, int, int);
-int kth_bit(int, int, int field = 32);
-int segment(int, int, int);
-int btoi(const std::string&);
-int exts(const std::string&, int base = 0);
-*/
 
 // [0,1,2,...,31]
 // MSB        LSB
@@ -41,16 +29,14 @@ void print_binary_int(int a){
     std::cout << std::endl;
 }
 
-constexpr int bp(int k){
-    return 31 - k;
+void print_binary_int1(int a){
+    for(int i = 31; i >= 0; i--){
+        std::cout << (a >> i & 1);
+        if(i && i % 8 == 0) std::cout << " ";
+    }
 }
 
-int cut_bit(int a, int l, int r){ // [l, r]
-    int d = r - l + 1;
-    r = bp(r);
-    a >>= r;
-    return a & bitmask(d);
-}
+constexpr int bp(int k){ return 31 - k;}
 
 // 以下全てマニュアルの処理を実現する関数
 // kth_bit は実際には 31 - k 桁目(左からk番目)にあるとして扱う
@@ -61,27 +47,19 @@ void clear_and_set(int &k, int l, int r, int v){ // clear [l, r] and substitute 
     k = (k & mask) | (v << r);
 }
 
-inline int kth_bit(int a, int k, int field = 32){
-    assert(k < field);
-    return (a >> (field - 1 - k)) & 1;
-}
+inline int kth_bit(int a, int k, int field = 32){ return (a >> (field - 1 - k)) & 1;}
 
 // [l, r]
 int segment(int a, int l, int r){
     int d = r - l + 1;
-    l = bp(l);
-    //r = bp(r);
-    // for(int i = 0; r + i <= l; i++){
-    //     res |= (a >> (r + i) & 1) << i;
-    // }
-    //return res;
-    return (a >> l) & bitmask(d);
+    r = bp(r);
+    return (a >> r) & bitmask(d);
 }
 
 // low -> [16, ..., 31]
 inline int lo16(int x){return (x & 0xffff);}
 // high -> [0, ..., 15]
-inline int ha16(int x){return (x & 0xffff0000) >> 16;}
+inline int ha16(int x){return x >> 16;}
 
 int btoi(const std::string& s){
     int res = 0;
@@ -101,7 +79,9 @@ int exts(const std::string& s, int base){
 }
 
 inline int exts(int v){
-    return (v >> 16 & 1 ? (v | 0xffff0000) : v);
+    return (v >> 15 & 1 ? (v | 0xffff0000) : v);
 }
+
+inline int addr_to_index(int k){ return k >> 2;}
 
 

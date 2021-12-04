@@ -383,7 +383,7 @@ float atan(float f, const FPU& fpu){
 
     float mymidy, mydydx, mymidx;
     if(depth > 0){
-        unsigned  offset = cut_bit(manti, 9, 9 + depth - 1);
+        unsigned  offset = segment(manti, 9, 9 + depth - 1);
         std::tie(mymidy, mydydx) = fpu.Atantable(head + offset);
         offset |= 1 << depth;
         offset = offset << (23 - depth) | (1 << (22 - depth));
