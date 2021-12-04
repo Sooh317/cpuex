@@ -230,7 +230,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             cpu.gpr[d] = int(((long long)cpu.gpr[a] * (long long)b) & bitmask(32));
             return false;
         case MULHWU:
-            cpu.gpr[d] = (int)((((long long)cpu.gpr[a] * (long long)cpu.gpr[b])) >> 32);
+            cpu.gpr[d] = int(((((unsigned long long)cpu.gpr[a] & bitmask(32)) * ((unsigned long long)cpu.gpr[b] & bitmask(32)))) >> 32);
             return false;
         case SLWI:
             cpu.gpr[d] = (cpu.gpr[a] & bitmask(32 - b)) << b;
