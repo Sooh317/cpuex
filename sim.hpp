@@ -156,7 +156,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             cpu.sbptr = 0;
             return false;
         case ORI:
-            cpu.gpr[d] = cpu.gpr[a] | (int16_t)b;
+            cpu.gpr[d] = cpu.gpr[a] | (b & bitmask(16));
             return false;
         case FABS:
             cpu.fpr[d] = std::abs(cpu.fpr[a]); // 多分これで問題ないよね...
@@ -233,10 +233,10 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             cpu.gpr[d] = (int)((((long long)cpu.gpr[a] * (long long)cpu.gpr[b])) >> 32);
             return false;
         case SLWI:
-            cpu.gpr[d] = cpu.gpr[a] << b;
+            cpu.gpr[d] = (cpu.gpr[a] & bitmask(32 - b)) << b;
             return false;
         case SRWI:
-            cpu.gpr[d] = cpu.gpr[a] >> b;
+            cpu.gpr[d] = (cpu.gpr[a] >> b) & bitmask(32 - b);
             return false;
         case STFS: // LFSと同じ
             tmp = (b == 0 ? 0 : cpu.gpr[b]);

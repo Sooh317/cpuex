@@ -1,2 +1,2 @@
 libmincaml.S
-gcd.s
+print.s

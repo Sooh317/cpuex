@@ -39,6 +39,12 @@ int main(int argc, char* argv[]){
 
     init_cpu(cpu, option, mem.lbl);
 
+    long long a = (int)0b11001100110011001100110011001101;
+    long long b = 123;
+    long long c = a * b;
+    printout(c);
+    printout((c >> 32));
+
     execution(cpu, mem, option, fpu);
 
     return 0;
