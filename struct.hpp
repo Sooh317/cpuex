@@ -36,7 +36,7 @@ struct cpu_t{
         std::cout << "\033[1;31m";
         for(int i = 0; i < GPR_SIZE; i++){
             std::cout << "gpr[" << i << "] = (" << gpr[i] << ", ";
-            print_binary_int1(gpr[1]);
+            print_binary_int1(gpr[i]);
             std::cout << ")\n";
         }
         std::cout << "\033[m\n";
@@ -147,7 +147,7 @@ enum INSTR_KIND{
 enum INSTR_FORM{
     DAB,
     DAIMM,
-    
+
 };
 
 struct instr_t{

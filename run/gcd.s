@@ -31,7 +31,7 @@ _min_caml_start: # main entry point
 	mfspr	r31, 8				# 4
 	stw	r31, 0(r3)				# 4
 	addi	r3, r3, 4				# 4
-	bl	min_caml_print_int				# 4
+#	bl	min_caml_print_int				# 4
 	addi	r3, r3, -4				# 4
 	lwz	r31, 0(r3)				# 4
 	mtspr	8, r31				# 4

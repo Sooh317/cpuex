@@ -720,7 +720,7 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
         return;
     case BGT:
         if(d == 0) fprintf(stdout, "bgt %d\n", a);
-        else fprintf(stdout, "bgt cr%d, %d\n", d / 4, a);
+        else fprintf(stdout, "bgt cr%d, %d\n", d, a);
         return;
     case BL:
         fprintf(stdout, "bl %d\n", d);

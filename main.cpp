@@ -32,10 +32,12 @@ int main(int argc, char* argv[]){
 
     init_memory(mem, option);
 
+
     std::cout << "loading success!" << std::endl;
     
     show_lable(mem.lbl);
-    init_cpu(cpu, option, mem.lbl, 1024);
+
+    init_cpu(cpu, option, mem.lbl);
 
     execution(cpu, mem, option, fpu);
 

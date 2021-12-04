@@ -61,6 +61,9 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             clear_and_set(tmp, 4*d, 4*d + 3, (c << 1) | (cpu.xer & 1));
             cpu.cr = tmp;
             return false;
+        case B:
+            cpu.pc = d;
+            return false;
         case BGT:   
             //bo = 0b01100;
             bi = d*4 + 1;
