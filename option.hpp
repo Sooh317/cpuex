@@ -8,40 +8,13 @@ struct option_t{
     bool display_binary;
     bool display_assembly;
     int exec_mode;
-    bool jump_to_label;
     bool binary;
     bool binTOasm;
     bool asmTObin;
     bool assembly;
     int label_addr;
-    option_t():display_binary(0), display_assembly(0),exec_mode(0), jump_to_label(false), binary(0), binTOasm(0), asmTObin(0), assembly(0), label_addr(0){}
+    option_t():display_binary(0), display_assembly(0),exec_mode(0), binary(0), binTOasm(0), asmTObin(0), assembly(0), label_addr(0){}
 
-    void label_ask(std::map<std::string, int> &mp){
-        printerr("次にjumpしたいラベル名を入力してください");
-        printerr("jumpしない場合はNと入力してください");
-        std::string s;
-        std::cerr << "\033[36m";
-        std::cerr << "> " << std::flush; 
-        std::cin >> s;
-        std::cerr << "\033[m";
-        if(s == "N"){
-            jump_to_label = 0;
-            return;
-        }
-        else{
-            while(mp.find(s) == mp.end() && s != "N"){
-                std::cerr << s << " は存在しないラベルです" << std::endl;
-                printerr("次にjumpしたいラベル名を入力してください");
-                printerr("jumpしない場合はNと入力してください");
-                std::cerr << "\033[36m";
-                std::cerr << "> " << std::flush;
-                std::cin >> s;
-                std::cerr << "\033[m";
-            }
-            if(s == "N") jump_to_label = 0;
-            else label_addr = mp[s];
-        }
-    }
     void show_option(){
         std::cerr << "### showing options ###\n";
         if(binTOasm){
@@ -56,7 +29,6 @@ struct option_t{
         }
         if(exec_mode == 0) std::cerr << "simulate whole" << std::endl;
         else if(exec_mode == 1) std::cerr << "step execution" << std::endl;
-        if(jump_to_label) std::cerr << "You can set break points" << std::endl;
         if(display_assembly) std::cerr << "display instructions in assembly" << std::endl;
         if(display_binary) std::cerr << "display instructions in binary" << std::endl;
         if(binary) std::cerr << "reading binary" << std::endl;
@@ -74,7 +46,6 @@ void init_option(OPTION& option, int argc, char* argv[]){
                 option.exec_mode = 1;
                 option.display_binary = option.display_assembly = 1;
             }
-            else if(argv[i][1] == 'j') option.jump_to_label = 1;
             else if(argv[i][1] == 'd'){
                 option.display_assembly = option.display_binary = 1;
                 if(argv[i][2] == 'a') option.display_binary = 0;
@@ -101,14 +72,6 @@ void init_option(OPTION& option, int argc, char* argv[]){
 }
 
 void show_option(OPTION option){
-    if(option.exec_mode == 0){
-        std::cerr << "一気に実行" << std::endl;
-        if(option.jump_to_label == 1){
-            std::cerr << "### warning ###\n" << "-jは無駄な指定です" << std::endl;
-        }
-    }
-    else if(option.exec_mode == 1){
-        std::cerr << "step実行" << std::endl;
-        if(option.jump_to_label) std::cerr << "次のラベルを指定してjumpする" << std::endl;
-    }
+    if(option.exec_mode == 0) std::cerr << "一気に実行" << std::endl;
+    else if(option.exec_mode == 1) std::cerr << "step実行" << std::endl;
 }

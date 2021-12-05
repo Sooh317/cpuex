@@ -192,8 +192,10 @@ struct show_t{
     bool S, gr, fr, lr, cr, ctr, m, M;
     bool next;
     int wid;
-    std::vector<int> addr;
-    show_t():S(0), gr(0), fr(0), lr(0), cr(0), ctr(0), m(0), M(0),next(1), wid(3){}
+    int Sval;
+    std::vector<int> maddr;
+    std::vector<std::pair<int, int>> Maddr;
+    show_t():S(0), gr(0), fr(0), lr(0), cr(0), ctr(0), m(0), M(0),next(1), wid(3), Sval(0){}
 };
 using SHOW = show_t;
 
@@ -215,7 +217,7 @@ struct memory_t{
     void show_memory(const SHOW& show){
         std::cerr << "\033[1m";
         if(show.m){
-            for(int ad : show.addr){
+            for(int ad : show.maddr){
                 ad = ((ad >> 2) << 2);
                 std::cerr << "around " << ad << std::endl;
                 for(int j = std::max(-(ad >> 2), -show.wid); j <= std::min(DATA_SIZE - 1 - (ad >> 2), show.wid); j++){
@@ -230,11 +232,14 @@ struct memory_t{
             }
         }
         else{ // show.M = 1
-            for(int i = 0; i < (int)show.addr.size(); i += 2){
-                assert(show.addr[i] < DATA_SIZE && show.addr[i + 1] < DATA_SIZE && show.addr[i] >= 0 && show.addr[i + 1] >= 0);
-                std::cerr << "from " << show.addr[i] << " to " << show.addr[i + 1] << std::endl;
-                for(int j = show.addr[i]; j <= show.addr[i + 1]; j += 4){
-                    std::cerr << "mem[" << (j >> 2) << "~" << (j >> 2) + 3 << "] = " << (type[j >> 2] ? data[j >> 2].f : data[j >> 2].i) << "  0b'";
+            for(auto[l, r] : show.Maddr){
+                if(!(l < DATA_SIZE && r < DATA_SIZE && 0 <= l && 0 <= r)){
+                    std::cout << "invalid range : [l, r] = " << "[" << l << ", " << r << "]" << std::endl;
+                    continue;
+                }
+                std::cerr << "from " << l << " to " << r << std::endl;
+                for(int j = l; j <= r; j += 4){
+                    std::cerr << "mem[" << j << "~" << j + 3 << "] = " << (type[j >> 2] ? data[j >> 2].f : data[j >> 2].i) << "  0b'";
                     for(int i = 31; i >= 0; i--){
                         std::cerr << (data[j >> 2].i >> i & 1);
                         if(i % 8 == 0) std::cerr << " ";

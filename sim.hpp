@@ -265,59 +265,78 @@ int simulate_whole(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu){
     return 0;
 }
 
-SHOW show_what(const std::vector<std::string>& s){
-    SHOW ss;
-    for(const char& c : s[0]){
+void show_what(SHOW& ss, const std::string& s){
+    std::string garbage;
+    for(const char& c : s){
         if(c == 's') ss.next = false;
-        else if(c == 'S') ss.S = true;
+        else if(c == 'S'){
+            ss.S = true;
+            std::cout << "何ステップ進めますか?(ex: 25)" << std::endl;
+            std::cout << "\033[36m> " << std::flush;
+            std::cin >> ss.Sval;
+            std::cout << "\033[m";
+            std::getline(std::cin, garbage);
+        }
+        else if(c == 'M'){
+            ss.M = true;
+            std::cout << "メモリアドレスをbyte単位で指定してください(ex: 8-100, 200-300)" << std::endl;
+            std::cout << "\033[36m> " << std::flush;
+            std::string t; std::cin >> t;
+            auto res = remove_chars(t, " -,");
+            for(int i = 0; i < (int)res.size() / 2; i++) ss.Maddr.emplace_back(stoi(res[2*i]), stoi(res[2*i + 1]));
+            std::cout << "\033[m";
+            std::getline(std::cin, garbage);
+        }
+        else if(c == 'm'){
+            ss.m = true;
+            std::cout << "メモリアドレスをbyte単位で指定してください(ex: 100, 12, 300)" << std::endl;
+            std::cout << "\033[36m> " << std::flush;
+            std::string t; std::cin >> t;
+            auto res = remove_chars(t, " ,");
+            for(int i = 0; i < (int)res.size(); i++) ss.maddr.emplace_back(stoi(res[i]));
+            std::cout << "\033[m";
+            std::getline(std::cin, garbage);
+        }
         else if(c == 'g') ss.gr = true;
         else if(c == 'f') ss.fr = true;
         else if(c == 'c') ss.cr = true;
         else if(c == 't') ss.ctr = true;
         else if(c == 'l') ss.lr = true;
-        else if(c == 'M') ss.M = true;
-        else if(c == 'm') ss.m = true;
     }
-    if(s.size() >= 2){
-        for(int i = 1; i < (int)s.size(); i++) ss.addr.emplace_back(stoi(s[i]));
-    }
-    return ss;
 }
 
 
 int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu){
-    bool tmpb = false, tmpa = false;
-    std::swap(tmpa, option.display_assembly);
-    std::swap(tmpb, option.display_binary);
-    while(1){
-        option.label_ask(mem.lbl);
-        if(!option.jump_to_label) break;
-        exec(cpu, mem, option, fpu);
-        while(cpu.pc != (unsigned int)option.label_addr){
-            if(exec(cpu, mem, option, fpu)){
-                std::cerr << "program finished!" << std::endl;
-                return 0;
-            }
-        }
-    }
-    std::swap(tmpa, option.display_assembly);
-    std::swap(tmpb, option.display_binary);
-
+    int cnt = 0;    
     std::string s;
-    std::getline(std::cin, s);
+
     while(std::cout << "\033[36m> " << std::flush, std::getline(std::cin, s)){
         std::cout << "\033[m";
-        SHOW ss = show_what(remove_chars(s, " -,"));
+        if(s.size() == 0) continue;
+        SHOW ss;
+        show_what(ss, s);
         if(ss.gr) cpu.show_gpr();
         if(ss.fr) cpu.show_fpr();
         if(ss.lr) cpu.show_lr();
         if(ss.cr) cpu.show_cr();
         if(ss.ctr) cpu.show_ctr();
-        if(ss.m) mem.show_memory(ss);
-        else if(ss.M) mem.show_memory(ss);
+        if(ss.m || ss.M) mem.show_memory(ss);
+        if(ss.S){
+            for(int i = 0; i < ss.Sval; i++){
+                if(exec(cpu, mem, option, fpu)){
+                    std::cout << "program finished!" << std::endl;
+                    return 0;
+                }
+            }
+            cnt += ss.Sval;
+            std::cout << ss.Sval << " steps finished!" << std::endl;
+            ss.next = true;
+        }
         if(ss.next) continue;
+        cnt++;
+        std::cout << cnt << "命令目" << std::endl;
         if(exec(cpu, mem, option, fpu)){
-            std::cerr << "program finished!" << std::endl;
+            std::cout << "program finished!" << std::endl;
             return 0;
         }
     }

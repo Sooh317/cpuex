@@ -35,7 +35,7 @@ int main(int argc, char* argv[]){
 
     std::cout << "loading success!" << std::endl;
     
-    show_lable(mem.lbl);
+    //show_lable(mem.lbl);
 
     init_cpu(cpu, option, mem.lbl);
 
