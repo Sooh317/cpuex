@@ -39,16 +39,6 @@ int main(int argc, char* argv[]){
 
     init_cpu(cpu, option, mem.lbl);
 
-    int aa = 0b11001100110011001100110011001101;
-    unsigned long long a = aa;
-    unsigned long long b = 123;
-    unsigned long long c = a * b;
-    printout(aa);
-    printout(a);
-    printout(b);
-    printout(c);
-    printout((c >> 32));
-
     execution(cpu, mem, option, fpu);
 
     return 0;

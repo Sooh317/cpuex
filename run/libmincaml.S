@@ -93,7 +93,7 @@ min_caml_print_int:
 Lprint_int_nezero:
 	addi 	r2, 0, 45		# '-' == 45
 	out 	r2, 0
-	mulli	r2, -1
+	mulli	r2, r2, -1
 Lprint_int_gtzero:
 	# count -> r5
 	# y -> r6
@@ -105,19 +105,19 @@ Lprint_int_gtzero:
 	srwi 	r6, r6, 3
 	mulli	r7, r6, 10
 	sub		r7, r2, r7
-	stw		r5, 4(r3)
+	stw		r7, 4(r3)
 	addi 	r3, r3, 4
 	mr		r2, r6
 	addi	r5, r5, 1
 	cmpwi	cr7, r2, 0
 	bne		cr7, Lprint_int_gtzero
 Lprint_int_nonempty:
-	stw		r2, 0(r3)
+	lwz		r2, 0(r3)
 	addi 	r3, r3, -4
-	addi 	r2, 0, 48		# '0' == 48
+	addi 	r2, r2, 48		# '0' == 48
 	out 	r2, 0
 	addi	r5, r5, -1
-	cmpwi	cr7, r2, 0
+	cmpwi	cr7, r5, 0
 	bne		cr7, Lprint_int_nonempty
 	blr
 #	print_byte

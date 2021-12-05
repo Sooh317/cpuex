@@ -149,7 +149,9 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             cpu.gpr[d] = tmp;
             return false;
         case OUT: // imm + 1 byte目はどこ
-            cpu.send_buf[cpu.sbptr++] = char(segment(cpu.gpr[d], 4*a, 4*a + 7));
+            a = 3 - a;
+            cpu.send_buf[cpu.sbptr++] = char(segment(cpu.gpr[d], 8*a, 8*a + 7));
+            cpu.show_sendbuf();
             return false;
         case FLUSH: // 
             for(int i = 0; i < cpu.sbptr; i++) flushed[flush++] = cpu.send_buf[i];
