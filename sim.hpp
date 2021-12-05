@@ -279,7 +279,7 @@ void show_what(SHOW& ss, const std::string& s){
         }
         else if(c == 'M'){
             ss.M = true;
-            std::cout << "メモリアドレスをbyte単位で指定してください(ex: 8-100, 200-300)" << std::endl;
+            std::cout << "メモリアドレスの範囲をbyte単位で指定してください(ex: 8-100, 200-300)" << std::endl;
             std::cout << "\033[36m> " << std::flush;
             std::string t; std::cin >> t;
             auto res = remove_chars(t, " -,");
