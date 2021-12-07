@@ -222,7 +222,10 @@ float fadd(float f, float g){
             newmanti ^= (1 << 23); // 最上位clear
         }
     }
-    if(newexp < 0) newexp = 0;
+    if(newexp < 0){
+        newexp = 0;
+        newmanti = 0;
+    }
     return make_float(kth_bit(pre.i, 0), newexp, newmanti);
 }
 
