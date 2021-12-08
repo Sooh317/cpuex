@@ -93,7 +93,7 @@ min_caml_print_int:
 Lprint_int_nezero:
 	addi 	r3, 0, 45		# '-' == 45
 	out 	r3, 0
-	mulli	r2, -1
+	mulli	r2, r2, -1
 Lprint_int_gtzero:
 	# count -> r5
 	# y -> r6
@@ -158,7 +158,7 @@ create_array_exit:
 	blr
 create_array_cont:
 	stw		r5, 0(r4)
-	subi  	r6, r6, 1
+	addi  	r6, r6, -1
 	addi	r4, r4, 4
 	b		create_array_loop
 #	create_float_array

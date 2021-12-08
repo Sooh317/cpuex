@@ -153,11 +153,11 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu, CACHE& cache){
             return false;
         case OUT: // imm + 1 byte目はどこ
             a = 3 - a;
-            cpu.send_buf[cpu.sbptr++] = char(segment(cpu.gpr[d], 8*a, 8*a + 7));
+            // cpu.send_buf[cpu.sbptr++] = char(segment(cpu.gpr[d], 8*a, 8*a + 7));
             cpu.show_sendbuf();
             return false;
         case FLUSH: // 
-            for(int i = 0; i < cpu.sbptr; i++) flushed[flush++] = cpu.send_buf[i];
+            // for(int i = 0; i < cpu.sbptr; i++) flushed[flush++] = cpu.send_buf[i];
             cpu.sbptr = 0;
             return false;
         case ORI:
@@ -341,12 +341,17 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu, CACHE_PRO& ca
             }
         }
         if(ss.S){
+            bool da = false, db = false;
+            std::swap(option.display_assembly, da);
+            std::swap(option.display_binary, db);
             for(int i = 0; i < ss.Sval; i++){
                 if(exec(cpu, mem, option, fpu, cache)){
                     std::cout << "program finished!" << std::endl;
                     return 0;
                 }
             }
+            std::swap(option.display_assembly, da);
+            std::swap(option.display_binary, db);
             cnt += ss.Sval;
             std::cout << ss.Sval << " steps finished!" << std::endl;
             ss.next = true;

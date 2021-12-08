@@ -58,7 +58,7 @@ public:
             // 仕様による
             state[index].dirty = 1;
             for(int i = 0; i < width; i++){
-                data[index][i] = mem.data[(addr >> 2) + i];
+                data[index][i] = mem.data[addr_to_index(addr) + i];
             }
             data[index][offset >> 2] = d;
         }
@@ -78,7 +78,7 @@ public:
                 state[index].dirty = 0;
             }
             for(int i = 0; i < width; i++){
-                data[index][i] = mem.data[(addr >> 2) + i]; // line size により maskの長さが変わるので注意
+                data[index][i] = mem.data[addr_to_index(addr) + i]; // line size により maskの長さが変わるので注意
             }
         }
         else ++hit;
@@ -87,14 +87,14 @@ public:
     virtual void swf(int32_t addr, MEMORY& mem, float f){
         DATA d;
         d.f = f;
-        mem.type[addr] = 1;
+        mem.type[addr_to_index(addr)] = 1;
         sw(addr, mem, d);
     }
 
     virtual void swi(int32_t addr, MEMORY& mem, int i){
         DATA d;
         d.i = i;
-        mem.type[addr] = 0;
+        mem.type[addr_to_index(addr)] = 0;
         sw(addr, mem, d);
     }
 

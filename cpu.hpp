@@ -7,7 +7,7 @@
 //void init_cpu(CPU&, OPTION&, std::map<std::string, int>&, int);
 
 // stack pointer　初期値 -> 2^25 - 1
-void init_cpu(CPU& cpu, OPTION& option, std::map<std::string, int> &lbl, int sp = 10000){
+void init_cpu(CPU& cpu, OPTION& option, std::map<std::string, int> &lbl, int sp = (DATA_SIZE - 1) * 4){
     cpu.gpr[3] = sp; 
     cpu.lr = 0xffffffff;
     if(!option.binary){
