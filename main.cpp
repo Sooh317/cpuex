@@ -10,14 +10,14 @@
 #include "option.hpp"
 #include "util.hpp"
 #include "fpu.hpp"
-//#include "cache.hpp"
+#include "cache.hpp"
 
 char flushed[1024*1024];
 
 int main(int argc, char* argv[]){
     CPU cpu;
     MEMORY mem;
-    //CACHE cache;
+    CACHE cache;
     OPTION option;
     FPU fpu;
     init_fpu(fpu);
@@ -39,7 +39,7 @@ int main(int argc, char* argv[]){
 
     init_cpu(cpu, option, mem.lbl);
 
-    execution(cpu, mem, option, fpu);
+    execution(cpu, mem, option, fpu, cache);
 
     return 0;
 }

@@ -91,9 +91,9 @@ min_caml_print_int:
 	out 	r2, 0
 	blr
 Lprint_int_nezero:
-	addi 	r2, 0, 45		# '-' == 45
-	out 	r2, 0
-	mulli	r2, r2, -1
+	addi 	r3, 0, 45		# '-' == 45
+	out 	r3, 0
+	mulli	r2, -1
 Lprint_int_gtzero:
 	# count -> r5
 	# y -> r6
@@ -105,15 +105,15 @@ Lprint_int_gtzero:
 	srwi 	r6, r6, 3
 	mulli	r7, r6, 10
 	sub		r7, r2, r7
-	stw		r7, 4(r3)
-	addi 	r3, r3, 4
+	stw		r7, -4(r3)
+	addi 	r3, r3, -4
 	mr		r2, r6
 	addi	r5, r5, 1
 	cmpwi	cr7, r2, 0
 	bne		cr7, Lprint_int_gtzero
 Lprint_int_nonempty:
-	lwz		r2, 0(r3)
-	addi 	r3, r3, -4
+	stw		r2, 0(r3)
+	addi 	r3, r3, 4
 	addi 	r2, r2, 48		# '0' == 48
 	out 	r2, 0
 	addi	r5, r5, -1
@@ -147,20 +147,20 @@ min_caml_read_float:
 	.text
 	.align	2
 	.globl	min_caml_create_array
-min_caml_create_array:
-	mr	r6, r2
-	mr	r2, r4
+min_caml_create_array:	
+	mr		r6, r2
+	mr		r2, r4
 create_array_loop:
 	cmpwi	cr7, r6, 0
-	bne	cr7, create_array_cont
-	b	create_array_exit
+	bne		cr7, create_array_cont
+	b		create_array_exit
 create_array_exit:
 	blr
 create_array_cont:
-	stw	r5, 0(r4)
-	addi  	r6, r6, -1
+	stw		r5, 0(r4)
+	subi  	r6, r6, 1
 	addi	r4, r4, 4
-	b	create_array_loop
+	b		create_array_loop
 #	create_float_array
 	.globl	min_caml_create_float_array
 min_caml_create_float_array:
@@ -275,9 +275,9 @@ min_caml_reduce_to_2pi:
 	stw		r2, 0(r3)
 	addis	r5, 0, ha16(LF_PI)
 	add		r5, r5, lo16(LF_PI)
-	stw		r5, 4(r3)
+	stw		r5, -4(r3)
 	lfs		f2, 0(r3)
-	lfs		f1, 4(r3)
+	lfs		f1, -4(r3)
 	fmul	f3, f1, f2
 	fmr		f1, f3
 	fcmpu	cr7, f0, f1
@@ -306,8 +306,8 @@ Lreduce_to_2pi_Alt2pi:
 	.globl min_caml_cos
 min_caml_cos:
 	mfspr	r2, 8
-	addi	r3, r3, 4
-	stw		r2, -4(r3)
+	addi	r3, r3, -4
+	stw		r2, 4(r3)
 	fabs	f0, f0
 	bl		min_caml_reduce_to_2pi
 	addis	r5, 0, ha16(LF_PI)
@@ -315,13 +315,13 @@ min_caml_cos:
 	stw		r5, 0(r3)
 	addis	r6, 0, ha16(LF_HALFPI)
 	add		r6, r6, lo16(LF_HALFPI)
-	stw		r6, 4(r3)
+	stw		r6, -4(r3)
 	addis	r7, 0, ha16(LF_QUATPI)
 	add		r7, r7, lo16(LF_QUATPI)
-	stw		r5, 8(r3)
+	stw		r5, -8(r3)
 	lfs		f1, 0(r3)
-	lfs		f2, 4(r3)
-	lfs		f3, 8(r3)
+	lfs		f2, -4(r3)
+	lfs		f3, -8(r3)
 	addi	r2, 0, 1	# r2 is a sgn (-1 is minus)
 	fcmpu	cr7, f0, f1
 	blt		cr7, Lcos_ltPi
@@ -345,8 +345,8 @@ Lcos_end:
 	blt		cr7, Lcos_signed
 	fneg	f0, f0
 Lcos_signed:
-	lwz		r2, -4(r3)
-	addi	r3, r3, -4
+	lwz		r2, 4(r3)
+	addi	r3, r3, 4
 	mtspr	8, r2
 	blr
 
@@ -356,33 +356,33 @@ Lcos_signed:
 	.globl 	min_caml_sin
 min_caml_sin:
 	mfspr	r2, 8
-	addi	r3, r3, 8
-	stw		r2, -8(r3)
+	addi	r3, r3, -8
+	stw		r2, 8(r3)
 	addi	r5, 0, 0
-	stw		r5, -4(r3)
-	lfs		f1,	-4(r3)
+	stw		r5, 4(r3)
+	lfs		f1,	4(r3)
 	addi	r6, 0, 1
 	fcmpu	cr7, f1, f0
 	blt		cr7, Lsin_positive
 	addi	r6, 0, -1
 Lsin_positive:
-	stw		r6, -4(r3)
+	stw		r6, 4(r3)
 	fabs	f0, f0
 	bl		min_caml_reduce_to_2pi
-	lwz		r2, -4(r3)		# r2 is a sgn (-1 is minus)
-	addi	r3, r3, -4
+	lwz		r2, 4(r3)		# r2 is a sgn (-1 is minus)
+	addi	r3, r3, 4
 	addis	r5, 0, ha16(LF_PI)
 	add		r5, r5, lo16(LF_PI)
 	stw		r5, 0(r3)
 	addis	r6, 0, ha16(LF_HALFPI)
 	add		r6, r6, lo16(LF_HALFPI)
-	stw		r6, 4(r3)
+	stw		r6, -4(r3)
 	addis	r7, 0, ha16(LF_QUATPI)
 	add		r7, r7, lo16(LF_QUATPI)
-	stw		r5, 8(r3)
+	stw		r5, -8(r3)
 	lfs		f1, 0(r3)
-	lfs		f2, 4(r3)
-	lfs		f3, 8(r3)
+	lfs		f2, -4(r3)
+	lfs		f3, -8(r3)
 	fcmpu	cr7, f0, f1
 	blt		cr7, Lsin_ltPi
 	fsub	f0, f0, f1
@@ -404,8 +404,8 @@ Lsin_end:
 	blt		cr7, Lsin_signed
 	fneg	f0, f0
 Lsin_signed:
-	lwz		r2, -4(r3)
-	addi	r3, r3, -4
+	lwz		r2, 4(r3)
+	addi	r3, r3, 4
 	mtspr	8, r2
 	blr
 

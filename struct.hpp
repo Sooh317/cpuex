@@ -189,13 +189,14 @@ enum DIRECTIVE_KIND{
 
 
 struct show_t{
-    bool S, gr, fr, lr, cr, ctr, m, M;
+    bool S, gr, fr, lr, cr, ctr, m, M, cache;
     bool next;
     int wid;
     int Sval;
     std::vector<int> maddr;
     std::vector<std::pair<int, int>> Maddr;
-    show_t():S(0), gr(0), fr(0), lr(0), cr(0), ctr(0), m(0), M(0),next(1), wid(3), Sval(0){}
+    std::vector<int> index;
+    show_t():S(0), gr(0), fr(0), lr(0), cr(0), ctr(0), m(0), M(0), cache(0),next(1), wid(3), Sval(0){}
 };
 using SHOW = show_t;
 
@@ -215,20 +216,21 @@ struct memory_t{
     memory_t():index(0), instr(INSTR_SIZE), data(DATA_SIZE), type(DATA_SIZE){} 
 
     void show_memory(const SHOW& show){
-        std::cerr << "\033[1m";
         if(show.m){
             for(int ad : show.maddr){
                 ad = ((ad >> 2) << 2);
-                std::cerr << "around " << ad << std::endl;
+                std::cout << "around " << ad << std::endl;
                 for(int j = std::max(-(ad >> 2), -show.wid); j <= std::min(DATA_SIZE - 1 - (ad >> 2), show.wid); j++){
-                    std::cerr << "mem[" << ad + 4*j << "~" << ad + 4*j + 3 << "] = " << (type[(ad >> 2) + j] ? data[(ad >> 2) + j].f : data[(ad >> 2) + j].i) << "  0b'";
+                    if(j == 0) std::cout << "\033[1;34m";
+                    std::cout << "mem[" << ad + 4*j << "~" << ad + 4*j + 3 << "] = (" << (type[(ad >> 2) + j] ? data[(ad >> 2) + j].f : data[(ad >> 2) + j].i) << ", 0b'";
                     for(int i = 31; i >= 0; i--){
-                        std::cerr << (data[(ad >> 2) + j].i >> i & 1);
-                        if(i % 8 == 0) std::cerr << " ";
+                        std::cout << (data[(ad >> 2) + j].i >> i & 1);
+                        if(i % 8 == 0 && i) std::cout << " ";
                     }
-                    std::cerr << std::endl;
+                    std::cout << ")" << std::endl;
+                    if(j == 0) std::cout << "\033[m";
                 }
-                std::cerr << std::endl;
+                std::cout << std::endl;
             }
         }
         else{ // show.M = 1
@@ -237,19 +239,19 @@ struct memory_t{
                     std::cout << "invalid range : [l, r] = " << "[" << l << ", " << r << "]" << std::endl;
                     continue;
                 }
-                std::cerr << "from " << l << " to " << r << std::endl;
+                std::cout << "from " << l << " to " << r << std::endl;
+                std::cout << "\033[1;34m";
                 for(int j = l; j <= r; j += 4){
-                    std::cerr << "mem[" << j << "~" << j + 3 << "] = " << (type[j >> 2] ? data[j >> 2].f : data[j >> 2].i) << "  0b'";
+                    std::cout << "mem[" << j << "~" << j + 3 << "] = (" << (type[j >> 2] ? data[j >> 2].f : data[j >> 2].i) << ", 0b'";
                     for(int i = 31; i >= 0; i--){
-                        std::cerr << (data[j >> 2].i >> i & 1);
-                        if(i % 8 == 0) std::cerr << " ";
+                        std::cout << (data[j >> 2].i >> i & 1);
+                        if(i % 8 == 0 && i) std::cout << " ";
                     }
-                    std::cerr << std::endl;
+                    std::cout << ")" << std::endl;
                 }
-                std::cerr << std::endl;
+                std::cout << "\033[m" << std::endl;
             }
         }
-        std::cerr << "\033[m";
     }
 };
 using MEMORY = memory_t;

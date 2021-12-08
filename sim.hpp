@@ -9,6 +9,7 @@
 #include "decode.hpp"
 #include "util.hpp"
 #include "fpu.hpp"
+#include "cache.hpp"
 
 extern char flushed[1024*1024];
 int flush = 0;
@@ -21,7 +22,7 @@ INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
     return mem.instr[pc];
 }
 
-bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
+bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu, CACHE& cache){
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
     if(option.display_assembly) show_instr(opc, d, a, b);
     if(option.display_binary) show_instr_binary(opc, d, a, b);
@@ -103,19 +104,21 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
             cpu.pc = segment(cpu.ctr, 0, 29) << 2;
             return false;
         case LWZ: 
-            cpu.gpr[d] = mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + exts(a))).i;
+            ea = (b ? cpu.gpr[b] : 0) + exts(a);
+            cpu.gpr[d] = cache.lw(ea, mem).i;
             return false;
         case LWZU:
             ea = cpu.gpr[b] + exts(a);
-            cpu.gpr[d] = mem.data.at(addr_to_index(ea)).i;
+            cpu.gpr[d] = cache.lw(ea, mem).i;
             cpu.gpr[b] = ea;
             return false;
         case STW:   
-            mem.data.at(addr_to_index((b ? cpu.gpr[b] : 0) + exts(a))).i = cpu.gpr[d];
+            ea = (b ? cpu.gpr[b] : 0) + exts(a);
+            cache.swi(ea, mem, cpu.gpr[d]);
             return false;
         case STWU:
             ea = cpu.gpr[b] + exts(a);
-            mem.data.at(addr_to_index(ea)).i = cpu.gpr[d];
+            cache.swi(ea, mem, cpu.gpr[d]);
             cpu.gpr[b] = ea;
             return false;
         case MFSPR:
@@ -211,22 +214,22 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
         case LFS:
             tmp = (b == 0 ? 0 : cpu.gpr[b]);
             ea = tmp + exts(a);
-            cpu.fpr[d] = mem.data[addr_to_index(ea)].f;
+            cpu.fpr[d] = cache.lw(ea, mem).f;
             return false;
         case LFSX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = tmp + cpu.gpr[b];
-            cpu.fpr[d] = mem.data[addr_to_index(ea)].f;
+            cpu.fpr[d] = cache.lw(ea, mem).f;
             return false;
         case STFSX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = tmp + cpu.gpr[b];
-            mem.data[addr_to_index(ea)].f = cpu.fpr[d];
+            cache.swf(ea, mem, cpu.fpr[d]);
             return false;
         case LWZX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = tmp + cpu.gpr[b];
-            cpu.gpr[d] = mem.data[addr_to_index(ea)].i;
+            cpu.gpr[d] = cache.lw(ea, mem).i;
             return false;
         case MULLI:
             cpu.gpr[d] = int(((long long)cpu.gpr[a] * (long long)b) & bitmask(32));
@@ -243,12 +246,12 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
         case STFS: // LFSと同じ
             tmp = (b == 0 ? 0 : cpu.gpr[b]);
             ea = tmp + exts(a);
-            mem.data[addr_to_index(ea)].f = cpu.fpr[d];
+            cache.swf(ea, mem, cpu.fpr[d]);
             return false;
         case STWX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = cpu.gpr[b] + a;
-            mem.data[addr_to_index(ea)].i = cpu.gpr[d];
+            cache.swi(ea, mem, cpu.gpr[d]);
             return false;
         case HALT:
             return true;
@@ -259,8 +262,8 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu){
     }
 }
 
-int simulate_whole(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu){
-    while(!exec(cpu, mem, option, fpu));
+int simulate_whole(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu, CACHE& cache){
+    while(!exec(cpu, mem, option, fpu, cache));
     std::cerr << "program finised!" << std::endl;
     return 0;
 }
@@ -281,21 +284,28 @@ void show_what(SHOW& ss, const std::string& s){
             ss.M = true;
             std::cout << "メモリアドレスの範囲をbyte単位で指定してください(ex: 8-100, 200-300)" << std::endl;
             std::cout << "\033[36m> " << std::flush;
-            std::string t; std::cin >> t;
+            std::string t; std::getline(std::cin, t);
             auto res = remove_chars(t, " -,");
             for(int i = 0; i < (int)res.size() / 2; i++) ss.Maddr.emplace_back(stoi(res[2*i]), stoi(res[2*i + 1]));
             std::cout << "\033[m";
-            std::getline(std::cin, garbage);
         }
         else if(c == 'm'){
             ss.m = true;
             std::cout << "メモリアドレスをbyte単位で指定してください(ex: 100, 12, 300)" << std::endl;
             std::cout << "\033[36m> " << std::flush;
-            std::string t; std::cin >> t;
+            std::string t; std::getline(std::cin, t);
             auto res = remove_chars(t, " ,");
             for(int i = 0; i < (int)res.size(); i++) ss.maddr.emplace_back(stoi(res[i]));
             std::cout << "\033[m";
-            std::getline(std::cin, garbage);
+        }
+        else if(c == 'C'){
+            ss.cache = true;
+            std::cout << "表示するキャッシュのインデックスを指定してください(ex: 0, 3, 10)(max:" << CACHE_LINE_NUM - 1 << ")" << std::endl;
+            std::cout << "\033[36m> " << std::flush;
+            std::string t; std::getline(std::cin, t);
+            std::cout << "\033[m";
+            auto res = remove_chars(t, " ,");
+            for(int i = 0; i < (int)res.size(); i++) ss.index.emplace_back(stoi(res[i]));
         }
         else if(c == 'g') ss.gr = true;
         else if(c == 'f') ss.fr = true;
@@ -306,7 +316,7 @@ void show_what(SHOW& ss, const std::string& s){
 }
 
 
-int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu){
+int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu, CACHE_PRO& cache){
     int cnt = 0;    
     std::string s;
 
@@ -320,10 +330,19 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu){
         if(ss.lr) cpu.show_lr();
         if(ss.cr) cpu.show_cr();
         if(ss.ctr) cpu.show_ctr();
-        if(ss.m || ss.M) mem.show_memory(ss);
+        if(ss.m || ss.M){
+            mem.show_memory(ss);
+            cache.show_cache(ss, mem);
+        }
+        if(ss.cache){
+            for(int ind : ss.index){
+                cache.show_cache_line(ind, mem);
+                std::cout << '\n';
+            }
+        }
         if(ss.S){
             for(int i = 0; i < ss.Sval; i++){
-                if(exec(cpu, mem, option, fpu)){
+                if(exec(cpu, mem, option, fpu, cache)){
                     std::cout << "program finished!" << std::endl;
                     return 0;
                 }
@@ -335,7 +354,7 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu){
         if(ss.next) continue;
         cnt++;
         std::cout << cnt << "命令目" << std::endl;
-        if(exec(cpu, mem, option, fpu)){
+        if(exec(cpu, mem, option, fpu, cache)){
             std::cout << "program finished!" << std::endl;
             return 0;
         }
@@ -344,9 +363,13 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu){
 }
 
 
-void execution(CPU& cpu, MEMORY& mem, OPTION& option, FPU& fpu){
-    if(option.exec_mode == 0) simulate_whole(cpu, mem, option, fpu);
-    else if(option.exec_mode == 1) simulate_step(cpu, mem, option, fpu);
+void execution(CPU& cpu, MEMORY& mem, OPTION& option, FPU& fpu, CACHE& cache){
+    if(option.exec_mode == 0) simulate_whole(cpu, mem, option, fpu, cache);
+    else if(option.exec_mode == 1){
+        CACHE_PRO cache_pro;
+        simulate_step(cpu, mem, option, fpu, cache_pro);
+        cache = cache_pro;
+    }
 }
 
 
