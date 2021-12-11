@@ -111,12 +111,10 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu, CACHE& cache){
             cpu.gpr[b] = ea;
             return false;
         case STW:   
-            std::cout << "stw" << std::endl;
             ea = (b ? cpu.gpr[b] : 0) + exts(a);
             cache.swi(ea, mem, cpu.gpr[d]);
             return false;
         case STWU:
-            std::cout << "stwu" << std::endl;
             ea = cpu.gpr[b] + exts(a);
             cache.swi(ea, mem, cpu.gpr[d]);
             cpu.gpr[b] = ea;
@@ -153,7 +151,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu, CACHE& cache){
             return false;
         case OUT: // imm + 1 byte目はどこ
             a = 3 - a;
-            cpu.write(char(segment(cpu.gpr[d], 8*a, 8*a + 7)));
+            cpu.write(segment(cpu.gpr[d], 8*a, 8*a + 7));
             return false;
         case FLUSH: // 
             cpu.flush();
@@ -247,7 +245,6 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu, CACHE& cache){
             cache.swf(ea, mem, cpu.fpr[d]);
             return false;
         case STWX:
-            std::cout << "stwx" << std::endl;
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = cpu.gpr[b] + a;
             cache.swi(ea, mem, cpu.gpr[d]);

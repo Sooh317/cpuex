@@ -87,7 +87,7 @@ min_caml_print_int:
 	addi	r5, 0, 0
 	bgt		cr7, Lprint_int_gtzero
 	bne		cr7, Lprint_int_nezero
-	addi 	r2, 0, 48		# '0' == 48
+	addi 	r2, r2, 48		# '0' == 48
 	out 	r2, 0
 	blr
 Lprint_int_nezero:
@@ -112,7 +112,7 @@ Lprint_int_gtzero:
 	cmpwi	cr7, r2, 0
 	bne		cr7, Lprint_int_gtzero
 Lprint_int_nonempty:
-	stw		r2, 0(r3)
+	lwz		r2, 0(r3)
 	addi 	r3, r3, 4
 	addi 	r2, r2, 48		# '0' == 48
 	out 	r2, 0

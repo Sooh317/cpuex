@@ -166,11 +166,9 @@ public:
     }
     
     void swi(int32_t addr, MEMORY& mem, int i){
-        std::cout << addr << std::endl;
-        std::cout << i << std::endl;
         DATA d;
         d.i = i;
-        mem.type[addr] = 0;
+        mem.type[addr_to_index(addr)] = 0;
         update(addr);
         this->sw(addr, mem, d);
     }

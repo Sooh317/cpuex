@@ -28,8 +28,8 @@ struct cpu_t{
     int sbptr; // send buffer pointer
     std::vector<GPR> gpr;
     std::vector<FPR> fpr;
-    std::vector<char> send_buf;
-    std::vector<char> flushed;
+    std::vector<int8_t> send_buf;
+    std::vector<int8_t> flushed;
 
     cpu_t():cr(0), lr(0), ctr(0), xer(0),pc(0), sbptr(0), gpr(GPR_SIZE, 0), fpr(FPR_SIZE, 0), send_buf(SEND_BUFFER_SIZE, '\0'){
         flushed.reserve(1024 * 1024);
@@ -84,7 +84,7 @@ struct cpu_t{
         return;
     }
 
-    void write(char c){
+    void write(int8_t c){
         send_buf[sbptr++] = c;
         if(sbptr == SEND_BUFFER_SIZE){
             for(int i = 0; i < SEND_BUFFER_SIZE; i++) flushed.push_back(send_buf[i]);
@@ -94,7 +94,7 @@ struct cpu_t{
 
     void show_sendbuf(){
         std::cout << "pointer: " << sbptr << std::endl;
-        for(int i = 0; i < SEND_BUFFER_SIZE; i++) std::cout << send_buf[i];
+        for(int i = 0; i < SEND_BUFFER_SIZE; i++) std::cout << (int8_t)send_buf[i];
         std::cout << "\n" << std::endl;
     }
 };

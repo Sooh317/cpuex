@@ -797,11 +797,11 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
         return;
     case BLT:
         if(d == -1) fprintf(stdout, "blt %d\n", a);
-        else fprintf(stdout, "blt cr%d, %d\n", d / 4, a);
+        else fprintf(stdout, "blt cr%d, %d\n", d, a);
         return;
     case BNE:
         if(d == -1) fprintf(stdout, "bne %d\n", a);
-        else fprintf(stdout, "bne cr%d, %d\n", d / 4, a);
+        else fprintf(stdout, "bne cr%d, %d\n", d, a);
         return;
     case CMPW:
         fprintf(stdout, "cmpw cr%d, r%d, r%d\n", d, a, b);
