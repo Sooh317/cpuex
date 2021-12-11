@@ -12,8 +12,6 @@
 #include "fpu.hpp"
 #include "cache.hpp"
 
-char flushed[1024*1024];
-
 int main(int argc, char* argv[]){
     CPU cpu;
     MEMORY mem;

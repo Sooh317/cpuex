@@ -278,7 +278,6 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
 
 INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::string> &s){
     auto call = [&](int id, bool in_flag)->int{return internal_reg_number(s[id], in_flag, lbl);};
-    std::cout << s[0] << std::endl;
     INSTR_KIND opc = opcode_of_instr(s[0]);
     int rd = 0, ra = 0, rb = 0;
     switch (opc){

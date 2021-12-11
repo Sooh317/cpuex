@@ -29,8 +29,11 @@ struct cpu_t{
     std::vector<GPR> gpr;
     std::vector<FPR> fpr;
     std::vector<char> send_buf;
+    std::vector<char> flushed;
 
-    cpu_t():cr(0), lr(0), ctr(0), xer(0),pc(0), sbptr(0), gpr(GPR_SIZE), fpr(FPR_SIZE), send_buf(SEND_BUFFER_SIZE){}
+    cpu_t():cr(0), lr(0), ctr(0), xer(0),pc(0), sbptr(0), gpr(GPR_SIZE, 0), fpr(FPR_SIZE, 0), send_buf(SEND_BUFFER_SIZE, '\0'){
+        flushed.reserve(1024 * 1024);
+    }
 
     void show_gpr(){
         std::cout << "\033[1;31m";
@@ -75,7 +78,22 @@ struct cpu_t{
         std::cout << std::endl;
     }
 
+    void flush(){
+        for(int i = 0; i < sbptr; i++) flushed.push_back(send_buf[i]);
+        sbptr = 0;
+        return;
+    }
+
+    void write(char c){
+        send_buf[sbptr++] = c;
+        if(sbptr == SEND_BUFFER_SIZE){
+            for(int i = 0; i < SEND_BUFFER_SIZE; i++) flushed.push_back(send_buf[i]);
+            sbptr = 0;
+        }
+    }
+
     void show_sendbuf(){
+        std::cout << "pointer: " << sbptr << std::endl;
         for(int i = 0; i < SEND_BUFFER_SIZE; i++) std::cout << send_buf[i];
         std::cout << "\n" << std::endl;
     }
@@ -189,14 +207,14 @@ enum DIRECTIVE_KIND{
 
 
 struct show_t{
-    bool S, gr, fr, lr, cr, ctr, m, M, cache;
+    bool S, gr, fr, lr, cr, ctr, m, M, cache, F, B;
     bool next;
     int wid;
     int Sval;
     std::vector<int> maddr;
     std::vector<std::pair<int, int>> Maddr;
     std::vector<int> index;
-    show_t():S(0), gr(0), fr(0), lr(0), cr(0), ctr(0), m(0), M(0), cache(0),next(1), wid(3), Sval(0){}
+    show_t():S(0), gr(0), fr(0), lr(0), cr(0), ctr(0), m(0), M(0), cache(0),F(0), B(0), next(1), wid(3), Sval(0){}
 };
 using SHOW = show_t;
 
