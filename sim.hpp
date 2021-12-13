@@ -201,7 +201,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu, CACHE& cache){
             cpu.fpr[d] = std::floor(cpu.fpr[d]);
             return false;
         case FHALF: // なにこれ
-            cpu.fpr[d] = cpu.fpr[d] / 2.0;
+            cpu.fpr[d] = cpu.fpr[a] / 2.0;
             return false;
         case FCOS: // stdを使ってる
             cpu.fpr[d] = std::cos(cpu.fpr[a]);
@@ -251,7 +251,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu, CACHE& cache){
             return false;
         case STWX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
-            ea = cpu.gpr[b] + a;
+            ea = cpu.gpr[b] + tmp;
             cache.swi(ea, mem, cpu.gpr[d]);
             return false;
         case HALT:

@@ -82,6 +82,7 @@ public:
             }
         }
         else ++hit;
+
         return data[index][offset >> 2];
     }
     virtual void swf(int32_t addr, MEMORY& mem, float f){

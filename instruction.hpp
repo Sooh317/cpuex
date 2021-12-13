@@ -825,7 +825,7 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
         return;
     case BGE:
         if(d == -1) fprintf(stdout, "bge %d\n", a);
-        else fprintf(stdout, "blt cr%d, %d\n", d, a);
+        else fprintf(stdout, "bge cr%d, %d\n", d, a);
         return;
     case BNE:
         if(d == -1) fprintf(stdout, "bne %d\n", a);
