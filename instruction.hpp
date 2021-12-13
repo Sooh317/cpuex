@@ -45,6 +45,7 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "bctrl") return BCTRL;
     if(s == "blt") return BLT;
     if(s == "bne") return BNE;
+    if(s == "bge") return BGE;
     if(s == "cmpw") return CMPW;
     if(s == "fadd") return FADD;
     if(s == "fcmpu") return FCMPU;
@@ -123,6 +124,8 @@ std::string opcode_to_string(INSTR_KIND kind){
         return "blt";
     case BNE:
         return "bne";
+    case BGE:
+        return "bge";
     case CMPW:
         return "cmpw";
     case FABS:
@@ -429,6 +432,25 @@ INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::st
             }
             else assert(false);
             break;
+        case BGE:
+            if(s.size() == 3){
+                rd = call(1, 0);
+                if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
+                else{
+                    printout(s[2]);
+                    assert(false);
+                }
+            }
+            else if(s.size() == 2){
+                rd = 0;
+                if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
+                else{
+                    printout(s[2]);
+                    assert(false);
+                }
+            }
+            else assert(false);
+            break;
         case BNE: //かなり怪しい
             if(s.size() == 3){
                 rd = call(1, 0);
@@ -635,6 +657,8 @@ int opcode_to_bit(INSTR_KIND kind){
         return 0x10;
     case BNE:
         return 0x10;
+    case BGE:
+        return 0x10;
     case CMPW:
         return 0x1f;
     case FABS:
@@ -797,6 +821,10 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
         return;
     case BLT:
         if(d == -1) fprintf(stdout, "blt %d\n", a);
+        else fprintf(stdout, "blt cr%d, %d\n", d, a);
+        return;
+    case BGE:
+        if(d == -1) fprintf(stdout, "bge %d\n", a);
         else fprintf(stdout, "blt cr%d, %d\n", d, a);
         return;
     case BNE:
@@ -973,6 +1001,11 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
         d *= 4;
         a /= 4;
         res |= (12 << 21) | ((d & bitmask(5)) << 16) | ((a & bitmask(14)) << 2);
+        break;
+    case BGE:
+        d *= 4;
+        a /= 4;
+        res |= (4 << 21) | ((d & bitmask(5)) << 16) | ((a & bitmask(14)) << 2);
         break;
     case BNE://怪しいのでとばす
         a /= 4;

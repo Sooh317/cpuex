@@ -74,6 +74,11 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu, CACHE& cache){
             cond_ok = kth_bit(cpu.cr, bi);
             if(cond_ok) cpu.pc = a;
             return false;
+        case BGE:
+            bi = d*4;
+            cond_ok = kth_bit(cpu.cr, bi);
+            if(!cond_ok) cpu.pc = a;
+            return false;
         case BNE:
             bi = d*4 + 2;
             cond_ok = kth_bit(cpu.cr, bi) ^ 1;
@@ -199,10 +204,10 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu, CACHE& cache){
             cpu.fpr[d] = cpu.fpr[d] / 2.0;
             return false;
         case FCOS: // stdを使ってる
-            cpu.fpr[d] = std::cos(cpu.fpr[d]);
+            cpu.fpr[d] = std::cos(cpu.fpr[a]);
             return false;
         case FSIN: // stdを使ってる
-            cpu.fpr[d] = std::sin(cpu.fpr[d]);
+            cpu.fpr[d] = std::sin(cpu.fpr[a]);
             return false;
         case FATAN:
             cpu.fpr[d] = atan(cpu.fpr[d], fpu);
@@ -315,7 +320,7 @@ void show_what(SHOW& ss, const std::string& s){
 
 
 int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu, CACHE_PRO& cache){
-    int cnt = 0;    
+    long long cnt = 0;    
     std::string s;
 
     while(std::cout << "\033[36m> " << std::flush, std::getline(std::cin, s)){

@@ -87,12 +87,12 @@ min_caml_print_int:
 	addi	r5, 0, 0
 	bgt		cr7, Lprint_int_gtzero
 	bne		cr7, Lprint_int_nezero
-	addi 	r2, r2, 48		# '0' == 48
+	addi 	r2, 0, 48		# '0' == 48
 	out 	r2, 0
 	blr
 Lprint_int_nezero:
-	addi 	r3, 0, 45		# '-' == 45
-	out 	r3, 0
+	addi 	r6, 0, 45		# '-' == 45
+	out 	r6, 0
 	mulli	r2, r2, -1
 Lprint_int_gtzero:
 	# count -> r5

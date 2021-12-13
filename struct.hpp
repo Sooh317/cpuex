@@ -125,6 +125,7 @@ enum INSTR_KIND{
     XORIS,
     B, 
     BLT, 
+    BGE,
     BNE, 
     CMPW, 
     FABS, 
@@ -210,7 +211,7 @@ struct show_t{
     bool S, gr, fr, lr, cr, ctr, m, M, cache, F, B;
     bool next;
     int wid;
-    int Sval;
+    long long Sval;
     std::vector<int> maddr;
     std::vector<std::pair<int, int>> Maddr;
     std::vector<int> index;

@@ -87,5 +87,6 @@ _min_caml_start: # main entry point
 	addi	r3, r3, 28				# 4
 	lwz	r31, -24(r3)				# 4
 	mtspr	8, r31				# 4
+    flush
 #	main program ends
 	halt

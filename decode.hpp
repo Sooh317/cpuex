@@ -250,6 +250,7 @@ INSTR decode_bin(const std::string& bit){
             }
             else if(bit.substr(6, 5) == "00100"){
                 if((d & bitmask(2)) == 2) opcode = BNE;
+                else if((d & bitmask(2)) == 0) opcode = BGE;
             }
         }
         else assert(false);
