@@ -149,7 +149,7 @@ public:
         std::cout << "Addr: " << addr << " ~ " << addr + (this->width) * 4 - 1 << std::endl;
         for(int i = 0; i < width; i++){
             std::cout << i << ": ";
-            if(mem.type[addr_to_index(addr)]) std::cout << this->data[line][i].f << " ";
+            if(mem.type[addr_to_index(addr) + i]) std::cout << this->data[line][i].f << " ";
             else std::cout << this->data[line][i].i << " ";
             print_binary_int1(this->data[line][i].i);
             std::cout << std::endl;
@@ -162,6 +162,7 @@ public:
     void swf(int32_t addr, MEMORY& mem, float f){
         DATA d;
         d.f = f;
+        mem.type[addr_to_index(addr)] = 1;
         update(addr);
         this->sw(addr, mem, d);
     }

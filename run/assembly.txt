@@ -1,2 +1,2 @@
 libmincaml.S
-run2.s
+run3.s
