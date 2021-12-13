@@ -94,7 +94,7 @@ void decode(const std::string file, MEMORY &mem){
     }
 }
 
-int collect_label(const std::string file, std::map<std::string, int>& label, int tmp){
+int collect_label(const std::string file, MEMORY& mem, int tmp){
     std::ifstream ifs(file);
     if(!ifs){
         std::cerr << "cannot open file" << std::endl;
@@ -106,7 +106,8 @@ int collect_label(const std::string file, std::map<std::string, int>& label, int
         if(str.size() == 0 || str[0] == '#') continue; // comment
         else if(str[0] != '\t' && str[0] != ' '){ // label
             str = remove_chars(str, " \t:")[0];
-            label[str] = cnt;
+            mem.lbl[str] = cnt;
+            mem.inv[cnt] = str;
         }
         else{
             auto ss = remove_chars(str, ", \t\n");

@@ -231,6 +231,7 @@ struct memory_t{
     std::vector<DATA> data;
     std::vector<bool> type; // type = 1 : float
     std::map<std::string, int> lbl;
+    std::map<int, std::string> inv;
 
     memory_t():index(0), instr(INSTR_SIZE), data(DATA_SIZE), type(DATA_SIZE){} 
 

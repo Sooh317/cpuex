@@ -20,7 +20,7 @@ void init_memory(MEMORY& mem, OPTION& option){
         std::string s;
         while(ifs >> s){
             s = "run/" + s;
-            tmp = collect_label(s, mem.lbl, tmp);
+            tmp = collect_label(s, mem, tmp);
         }
         ifs.clear();
         ifs.seekg(0, std::ios_base::beg);
