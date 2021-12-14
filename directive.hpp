@@ -35,7 +35,7 @@ void process_long_directive(MEMORY& mem, const std::string& s){
         if(s[i] == '-' || ('0' <= s[i] && s[i] <= '9')) continue;
         else return;
     }
-    mem.data[mem.index >> 2].i = stoi(s);
+    mem.data[mem.index >> 2] = stoi(s);
 }
 
 void process_ascii_directive(MEMORY& mem, const std::string& s){ // "...\0"の形
@@ -43,7 +43,7 @@ void process_ascii_directive(MEMORY& mem, const std::string& s){ // "...\0"の�
     int index = mem.index;
     mem.instr[index].opcode = NOT_INSTR;
     for(int i = 1; i < (int)s.size(); i++){
-        mem.data[mem.index >> 2].i = ((uint8_t)s[i]) << (mem.index & bitmask(3));
+        mem.data[mem.index >> 2] = ((uint8_t)s[i]) << (mem.index & bitmask(3));
         mem.index++;
     }
     mem.index = index;

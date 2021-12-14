@@ -86,15 +86,13 @@ public:
         return data[index][offset >> 2];
     }
     virtual void swf(int32_t addr, MEMORY& mem, float f){
-        DATA d;
-        d.f = f;
+        DATA d = bit_cast<DATA, float>(f);
         mem.type[addr_to_index(addr)] = 1;
         sw(addr, mem, d);
     }
 
     virtual void swi(int32_t addr, MEMORY& mem, int i){
-        DATA d;
-        d.i = i;
+        DATA d = i;
         mem.type[addr_to_index(addr)] = 0;
         sw(addr, mem, d);
     }
@@ -121,8 +119,8 @@ private:
             for(int i = 0; i < width; i++){
                 if(i == (offset >> 2)) std::cout << "\033[1;34m";
                 std::cout << i << ": ";
-                if(mem.type[addr_to_index(addr) + i]) std::cout << data[index][i].f << std::endl;
-                else std::cout << data[index][i].i << std::endl;
+                if(mem.type[addr_to_index(addr) + i]) std::cout << bit_cast<float, int>(data[index][i]) << std::endl;
+                else std::cout << data[index][i] << std::endl;
                 if(i == (offset >> 2)) std::cout << "\033[m";
             }
         }
@@ -149,9 +147,9 @@ public:
         std::cout << "Addr: " << addr << " ~ " << addr + (this->width) * 4 - 1 << std::endl;
         for(int i = 0; i < width; i++){
             std::cout << i << ": ";
-            if(mem.type[addr_to_index(addr) + i]) std::cout << this->data[line][i].f << " ";
-            else std::cout << this->data[line][i].i << " ";
-            print_binary_int1(this->data[line][i].i);
+            if(mem.type[addr_to_index(addr) + i]) std::cout << bit_cast<float, int>(this->data[line][i]) << " ";
+            else std::cout << this->data[line][i] << " ";
+            print_binary_int1(this->data[line][i]);
             std::cout << std::endl;
         }
     }
@@ -160,16 +158,14 @@ public:
     }
 
     void swf(int32_t addr, MEMORY& mem, float f){
-        DATA d;
-        d.f = f;
+        DATA d = bit_cast<DATA, float>(f);
         mem.type[addr_to_index(addr)] = 1;
         update(addr);
         this->sw(addr, mem, d);
     }
     
     void swi(int32_t addr, MEMORY& mem, int i){
-        DATA d;
-        d.i = i;
+        DATA d = i;
         mem.type[addr_to_index(addr)] = 0;
         update(addr);
         this->sw(addr, mem, d);

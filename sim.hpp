@@ -108,11 +108,11 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu, CACHE& cache){
             return false;
         case LWZ: 
             ea = (b ? cpu.gpr[b] : 0) + exts(a);
-            cpu.gpr[d] = cache.lw(ea, mem).i;
+            cpu.gpr[d] = cache.lw(ea, mem);
             return false;
         case LWZU:
             ea = cpu.gpr[b] + exts(a);
-            cpu.gpr[d] = cache.lw(ea, mem).i;
+            cpu.gpr[d] = cache.lw(ea, mem);
             cpu.gpr[b] = ea;
             return false;
         case STW:   
@@ -215,12 +215,12 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu, CACHE& cache){
         case LFS:
             tmp = (b == 0 ? 0 : cpu.gpr[b]);
             ea = tmp + exts(a);
-            cpu.fpr[d] = cache.lw(ea, mem).f;
+            cpu.fpr[d] = bit_cast<float, int>(cache.lw(ea, mem));
             return false;
         case LFSX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = tmp + cpu.gpr[b];
-            cpu.fpr[d] = cache.lw(ea, mem).f;
+            cpu.fpr[d] = bit_cast<float, int>(cache.lw(ea, mem));
             return false;
         case STFSX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
@@ -230,7 +230,7 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu, CACHE& cache){
         case LWZX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = tmp + cpu.gpr[b];
-            cpu.gpr[d] = cache.lw(ea, mem).i;
+            cpu.gpr[d] = cache.lw(ea, mem);
             return false;
         case MULLI:
             cpu.gpr[d] = int(((long long)cpu.gpr[a] * (long long)b) & bitmask(32));
@@ -366,6 +366,7 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu, CACHE_PRO& ca
         if(ss.F){
             std::ofstream wf("flushed.txt");
             for(int i = 0; i < (int)cpu.flushed.size(); i++) wf << cpu.flushed[i];
+            cpu.flushed.clear();
             std::cout << "flushed.txtを確認してください" << std::endl;
         }
         if(ss.next) continue;

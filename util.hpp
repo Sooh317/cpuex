@@ -68,6 +68,13 @@ int btoi(const std::string& s){
     return res;
 }
 
+template<typename To, typename From>
+To bit_cast(const From& from) noexcept {
+  To result;
+  std::memcpy(&result, &from, sizeof(To));
+  return result;
+}
+
 int exts(const std::string& s, int base){
     int res = btoi(s);
     res <<= base;

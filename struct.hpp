@@ -46,11 +46,10 @@ struct cpu_t{
     }
     void show_fpr(){
         std::cout << "\033[1;32m";
-        union {float f; int i;} d;
         for(int i = 0; i < FPR_SIZE; i++){
-            d.f = fpr[i];
+            int d = bit_cast<int, float>(fpr[i]);
             std::cout << "fpr[" << i << "] = (" << fpr[i] << ", ";
-            print_binary_int1(d.i);
+            print_binary_int1(d);
             std::cout << ")\n";
         }
         std::cout << "\033[m\n";
@@ -219,11 +218,13 @@ struct show_t{
 };
 using SHOW = show_t;
 
-union data_t{
-    int i;
-    float f;
-};
-using DATA = data_t;
+// union data_t{
+//     int i;
+//     float f;
+// };
+// using DATA = data_t;
+
+using DATA = int32_t;
 
 struct memory_t{
     int index;
@@ -242,9 +243,9 @@ struct memory_t{
                 std::cout << "around " << ad << std::endl;
                 for(int j = std::max(-(ad >> 2), -show.wid); j <= std::min(DATA_SIZE - 1 - (ad >> 2), show.wid); j++){
                     if(j == 0) std::cout << "\033[1;34m";
-                    std::cout << "mem[" << ad + 4*j << "~" << ad + 4*j + 3 << "] = (" << (type[(ad >> 2) + j] ? data[(ad >> 2) + j].f : data[(ad >> 2) + j].i) << ", 0b'";
+                    std::cout << "mem[" << ad + 4*j << "~" << ad + 4*j + 3 << "] = (" << (type[(ad >> 2) + j] ? bit_cast<float, int>(data[(ad >> 2) + j]) : data[(ad >> 2) + j]) << ", 0b'";
                     for(int i = 31; i >= 0; i--){
-                        std::cout << (data[(ad >> 2) + j].i >> i & 1);
+                        std::cout << (data[(ad >> 2) + j] >> i & 1);
                         if(i % 8 == 0 && i) std::cout << " ";
                     }
                     std::cout << ")" << std::endl;
@@ -262,9 +263,9 @@ struct memory_t{
                 std::cout << "from " << l << " to " << r << std::endl;
                 std::cout << "\033[1;34m";
                 for(int j = l; j <= r; j += 4){
-                    std::cout << "mem[" << j << "~" << j + 3 << "] = (" << (type[j >> 2] ? data[j >> 2].f : data[j >> 2].i) << ", 0b'";
+                    std::cout << "mem[" << j << "~" << j + 3 << "] = (" << (type[j >> 2] ? bit_cast<float, int>(data[j >> 2]) : data[j >> 2]) << ", 0b'";
                     for(int i = 31; i >= 0; i--){
-                        std::cout << (data[j >> 2].i >> i & 1);
+                        std::cout << (data[j >> 2] >> i & 1);
                         if(i % 8 == 0 && i) std::cout << " ";
                     }
                     std::cout << ")" << std::endl;

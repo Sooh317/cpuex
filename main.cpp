@@ -11,6 +11,7 @@
 #include "util.hpp"
 #include "fpu.hpp"
 #include "cache.hpp"
+#include "result.hpp"
 
 int main(int argc, char* argv[]){
     CPU cpu;
@@ -37,6 +38,8 @@ int main(int argc, char* argv[]){
     init_cpu(cpu, option, mem.lbl);
 
     execution(cpu, mem, option, fpu, cache);
+
+    show_result(cpu);
 
     return 0;
 }

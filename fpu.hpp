@@ -49,14 +49,13 @@ public:
         atantable.resize(ATAN_TABLE_LINE);
         sintable.resize(SIN_TABLE_LINE);
         costable.resize(COS_TABLE_LINE);
-        union {float f; int i;} d;
-        d.i = 0b01000000010010010000111111011011;
-        PI = d.f;
-        d.i = 0b00111111110010010000111111011011;
-        HALFPI = d.f;
-        union {double f; uint64_t i;} e;
-        e.i = 0b11111111111001001000011111101101010100010001000010110100100000u;
-        LONGHALFPI = e.f;
+        int d = 0b01000000010010010000111111011011;
+        PI = bit_cast<float, int>(d);
+        d = 0b00111111110010010000111111011011;
+        HALFPI = bit_cast<float, int>(d);
+        uint64_t e;
+        e = 0b11111111111001001000011111101101010100010001000010110100100000ull;
+        LONGHALFPI = bit_cast<double, uint64_t>(e);
     }
     void add_data_fsqrt(const float f, const float g){
         assert(cnt_sqrt < FSQRT_TABLE_LINE);
@@ -121,9 +120,9 @@ using FPU = fpu_t;
 
 
 float float_parse(const std::string &s){
-    union { float f; int i; } d;
-    d.i = btoi(s);
-    return d.f;
+    int d;
+    d = btoi(s);
+    return bit_cast<float, int>(d);
 }
 
 void init_fpu(FPU& fpu){
@@ -170,40 +169,50 @@ void init_fpu(FPU& fpu){
 }
 
 void print_float(float f){
-   union{float f; int i;} d;
-    d.f = f;
+    int d;
+    d = bit_cast<int, float>(f);
     std::cout << "value : " << f << '\n';
-    std::cout << "sig   : " << kth_bit(d.i, 0) \
-              << "\nexp : " << ((d.i >> 23) & bitmask(8)) << " = " << (int)((d.i >> 23) & bitmask(8)) - 127 \
-              << "\nman : " << ((1 << 23) | (d.i & bitmask(23))) << '\n';
-    print_binary_int(d.i);
+    std::cout << "sig   : " << kth_bit(d, 0) \
+              << "\nexp : " << ((d >> 23) & bitmask(8)) << " = " << (int)((d >> 23) & bitmask(8)) - 127 \
+              << "\nman : " << ((1 << 23) | (d & bitmask(23))) << '\n';
+    print_binary_int(d);
 }
 
 
 inline float make_float(unsigned sig, int exp, unsigned manti){
-   union{float f; int i;} d;
-    d.i = (sig << 31) | (exp << 23) | (manti & bitmask(23));
-    return d.f;
+    int d = (sig << 31) | (exp << 23) | (manti & bitmask(23));
+    return bit_cast<float, int>(d);
 }
 
 float fadd(float f, float g){
-   union{float f; int i;} a, b, pre, post;
-    a.f = f, b.f = g;
-    int exp_a = (a.i >> 23) & bitmask(8), exp_b = (b.i >> 23) & bitmask(8);
+    int a = bit_cast<int, float>(f), b = bit_cast<int, float>(g);
+    int pre, post;
+    int exp_a = (a >> 23) & bitmask(8), exp_b = (b >> 23) & bitmask(8);
     if(exp_a < exp_b) pre = b, post = a;
     else if(exp_a > exp_b) pre = a, post = b;
     else{
-        if((a.i & bitmask(23)) > (b.i & bitmask(23))) pre = a, post = b;
+        if((a & bitmask(23)) > (b & bitmask(23))) pre = a, post = b;
         else pre = b, post = a;
     }
-    int newexp = (pre.i >> 23) & bitmask(8);
-    int expdiff = newexp - ((post.i >> 23) & bitmask(8));
+    int newexp = (pre >> 23) & bitmask(8);
+    int expdiff = newexp - ((post >> 23) & bitmask(8));
+    // union{float f; int i;} a, b, pre, post;
+    // a.f = f, b.f = g;
+    // int exp_a = (a.i >> 23) & bitmask(8), exp_b = (b.i >> 23) & bitmask(8);
+    // if(exp_a < exp_b) pre = b, post = a;
+    // else if(exp_a > exp_b) pre = a, post = b;
+    // else{
+    //     if((a.i & bitmask(23)) > (b.i & bitmask(23))) pre = a, post = b;
+    //     else pre = b, post = a;
+    // }
+    // int newexp = (pre.i >> 23) & bitmask(8);
+    // int expdiff = newexp - ((post.i >> 23) & bitmask(8));
     unsigned newmanti;
 
-    if(((post.i >> 23) & bitmask(8)) == 0) newmanti = (pre.i & bitmask(23)); //post_exp = 0
-    else if(kth_bit(pre.i, 0) == kth_bit(post.i, 0)){
-        newmanti = ((1 << 23) | (pre.i & bitmask(23)));
-        if(expdiff < 32) newmanti += (((1 << 23) | (post.i & bitmask(23))) >> expdiff);
+    if(((post >> 23) & bitmask(8)) == 0) newmanti = (pre & bitmask(23)); //post_exp = 0
+    else if(kth_bit(pre, 0) == kth_bit(post, 0)){
+        newmanti = ((1 << 23) | (pre & bitmask(23)));
+        if(expdiff < 32) newmanti += (((1 << 23) | (post & bitmask(23))) >> expdiff);
         if(newmanti >= 1 << 24){
             newmanti = (newmanti ^ (1 << 24)) >> 1; // 最上位clear
             newexp++;
@@ -211,8 +220,8 @@ float fadd(float f, float g){
         else newmanti ^= 1 << 23;
     }
     else{
-        newmanti = ((1 << 23) | (pre.i & bitmask(23)));
-        if(expdiff < 32) newmanti -= (((1 << 23) | (post.i & bitmask(23))) >> expdiff);
+        newmanti = ((1 << 23) | (pre & bitmask(23)));
+        if(expdiff < 32) newmanti -= (((1 << 23) | (post & bitmask(23))) >> expdiff);
         if(newmanti == 0) newexp = 0;
         else{
             while(newmanti < (1 << 23)){
@@ -226,7 +235,7 @@ float fadd(float f, float g){
         newexp = 0;
         newmanti = 0;
     }
-    return make_float(kth_bit(pre.i, 0), newexp, newmanti);
+    return make_float(kth_bit(pre, 0), newexp, newmanti);
 }
 
 float fsub(float f, float g){
@@ -234,10 +243,13 @@ float fsub(float f, float g){
 }
 
 float fmul(float f, float g){
-   union{float f; int i;} a, b;
-    a.f = f, b.f = g;
-    unsigned manti1 = a.i & bitmask(23);
-    unsigned manti2 = b.i & bitmask(23);
+    int a = bit_cast<int, float>(f), b = bit_cast<int, float>(g);
+    unsigned manti1 = a & bitmask(23);
+    unsigned manti2 = b & bitmask(23);
+    // union{float f; int i;} a, b;
+    // a.f = f, b.f = g;
+    // unsigned manti1 = a.i & bitmask(23);
+    // unsigned manti2 = b.i & bitmask(23);
 
     std::vector<unsigned> bits = {(1 << 23 | manti1)};
     std::vector<unsigned> carry(23, 0);
@@ -286,12 +298,15 @@ float fmul(float f, float g){
 
     while(tmp) cnt++, tmp >>= 1;
 
-    unsigned newsig = kth_bit(a.i, 0, 32) ^ kth_bit(b.i, 0, 32);
-    int newexp = ((a.i >> 23) & bitmask(8)) + ((b.i >> 23) & bitmask(8)) - 127;
+    // unsigned newsig = kth_bit(a.i, 0, 32) ^ kth_bit(b.i, 0, 32);
+    // int newexp = ((a.i >> 23) & bitmask(8)) + ((b.i >> 23) & bitmask(8)) - 127;
+    unsigned newsig = kth_bit(a, 0, 32) ^ kth_bit(b, 0, 32);
+    int newexp = ((a >> 23) & bitmask(8)) + ((b >> 23) & bitmask(8)) - 127;
     unsigned newmanti = ans >> (cnt - 24);
 
     if(cnt == 27) newexp++;
-    if(newexp < 1 || ((a.i >> 23) & bitmask(8)) == 0 || ((b.i >> 23) & bitmask(8)) == 0) newexp = 0;
+    // if(newexp < 1 || ((a.i >> 23) & bitmask(8)) == 0 || ((b.i >> 23) & bitmask(8)) == 0) newexp = 0;
+    if(newexp < 1 || ((a >> 23) & bitmask(8)) == 0 || ((b >> 23) & bitmask(8)) == 0) newexp = 0;
 
     //std::cout << newsig << " " << newexp << " " << newmanti << std::endl;
 
@@ -299,37 +314,57 @@ float fmul(float f, float g){
 }
 
 float fsqrt(float f, const FPU& fpu){
-   union{float f; int i;} d, tmp;
-    d.f = f;
-    unsigned tag = ((d.i >> 14) & bitmask(10)) ^ (1 << 9);
+    int d = bit_cast<int, float>(f);
+    // union{float f; int i;} d, tmp;
+    // d.f = f;
+    // unsigned tag = ((d.i >> 14) & bitmask(10)) ^ (1 << 9);
+    unsigned tag = ((d >> 14) & bitmask(10)) ^ (1 << 9);
     auto [midy, mydydx] = fpu.Fsqrttable(tag);
-    int exp = (d.i >> 23 & 1) ? 127 : 128;
-    float midx = make_float(0, exp, (((d.i >> 14) & bitmask(9)) << 14) | (1 << 13));
-    float target = make_float(0, exp, d.i);
+    // int exp = (d.i >> 23 & 1) ? 127 : 128;
+    // float midx = make_float(0, exp, (((d.i >> 14) & bitmask(9)) << 14) | (1 << 13));
+    // float target = make_float(0, exp, d.i);
+    int exp = (d >> 23 & 1) ? 127 : 128;
+    float midx = make_float(0, exp, (((d >> 14) & bitmask(9)) << 14) | (1 << 13));
+    float target = make_float(0, exp, d);
     float dx = fsub(target, midx);
     float ydiff = fmul(dx, mydydx);
     float myans = fadd(midy, ydiff);
-    tmp.f = myans;
-    int newexp = (d.i >> 24 & bitmask(7)) - ((d.i >> 23 & 1) ? 63 : 64) + ((tmp.i >> 23) & bitmask(8));
-    if((d.i >> 23 & bitmask(8)) == 0) newexp = 0;
-    return make_float(0, newexp, tmp.i);
+    // tmp.f = myans;
+    int tmp = bit_cast<int, float>(myans);
+    // int newexp = (d.i >> 24 & bitmask(7)) - ((d.i >> 23 & 1) ? 63 : 64) + ((tmp.i >> 23) & bitmask(8));
+    // if((d.i >> 23 & bitmask(8)) == 0) newexp = 0;
+    // return make_float(0, newexp, tmp.i);
+    int newexp = (d >> 24 & bitmask(7)) - ((d >> 23 & 1) ? 63 : 64) + ((tmp >> 23) & bitmask(8));
+    if((d >> 23 & bitmask(8)) == 0) newexp = 0;
+    return make_float(0, newexp, tmp);
 }
 
 float finv(float f, const FPU& fpu){
-   union{float f; int i;} d, normfl, tmp;
-    d.f = f;
-    unsigned sig = kth_bit(d.i, 0);
-    int oldexp = (d.i >> 23 & bitmask(8)) - 127;
-    normfl.f = make_float(0, 127, d.i);
-    unsigned tag = (normfl.i >> 13) & bitmask(10);
+    // union{float f; int i;} d, normfl, tmp;
+    // d.f = f;
+    // unsigned sig = kth_bit(d.i, 0);
+    // int oldexp = (d.i >> 23 & bitmask(8)) - 127;
+    // normfl.f = make_float(0, 127, d.i);
+    // unsigned tag = (normfl.i >> 13) & bitmask(10);
+    int d = bit_cast<int, float>(f);
+    unsigned sig = kth_bit(d, 0);
+    int oldexp = (d >> 23 & bitmask(8)) - 127;
+    float normflf = make_float(0, 127, d);
+    int normfl = bit_cast<int, float>(normflf);
+    unsigned tag = (normfl >> 13) & bitmask(10);
     auto [midy, mydydx] = fpu.Finvtable(tag);
-    d.i = ((d.i >> 13) << 13) | (1 << 12);
-    float dx = fsub(normfl.f, d.f);
+    // d.i = ((d.i >> 13) << 13) | (1 << 12);
+    d = ((d >> 13) << 13) | (1 << 12);
+    // float dx = fsub(normfl.f, d.f);
+    float dx = fsub(normfl, d);
     float ydiff = fmul(dx, mydydx);
     float myans = fadd(midy, ydiff);
-    tmp.f = myans;
-    int newexp = (tmp.i >> 23 & bitmask(8)) - oldexp;
-    unsigned manti = tmp.i & bitmask(23);
+    // tmp.f = myans;
+    int tmp = bit_cast<int, float>(myans);
+    // int newexp = (tmp.i >> 23 & bitmask(8)) - oldexp;
+    // unsigned manti = tmp.i & bitmask(23);
+    int newexp = (tmp >> 23 & bitmask(8)) - oldexp;
+    unsigned manti = tmp & bitmask(23);
     if(newexp < 0){
         std::cerr << "exp too small, given float.exp may be more than 126" << std::endl;
         assert(false);
@@ -338,13 +373,20 @@ float finv(float f, const FPU& fpu){
 }   
 
 float fdiv(float f, float g, const FPU& fpu){
-   union{float f; int i;} a, b, core;
-    a.f = f, b.f = g;
-    core.f = fmul(make_float(0, 127, a.i), finv(make_float(0, 127, b.i), fpu));
-    unsigned sig = kth_bit(a.i, 0) ^ kth_bit(b.i, 0);
-    int diffexp = (a.i >> 23 & bitmask(8)) - (b.i >> 23 & bitmask(8));
-    int newexp = std::max(0, (int)(core.i >> 23 & bitmask(8)) + diffexp);
-    if(((a.i >> 23) & bitmask(8)) == 0 || ((b.i >> 23) & bitmask(8)) == 0) newexp = 0;
+    // union{float f; int i;} a, b, core;
+    // a.f = f, b.f = g;
+    // core.f = fmul(make_float(0, 127, a.i), finv(make_float(0, 127, b.i), fpu));
+    int a = bit_cast<int, float>(f), b = bit_cast<int, float>(g);
+    float ccore = fmul(make_float(0, 127, a), finv(make_float(0, 127, b), fpu));
+    int core = bit_cast<int, float>(ccore);
+    // unsigned sig = kth_bit(a.i, 0) ^ kth_bit(b.i, 0);
+    // int diffexp = (a.i >> 23 & bitmask(8)) - (b.i >> 23 & bitmask(8));
+    // int newexp = std::max(0, (int)(core.i >> 23 & bitmask(8)) + diffexp);
+    // if(((a.i >> 23) & bitmask(8)) == 0 || ((b.i >> 23) & bitmask(8)) == 0) newexp = 0;
+    unsigned sig = kth_bit(a, 0) ^ kth_bit(b, 0);
+    int diffexp = (a >> 23 & bitmask(8)) - (b >> 23 & bitmask(8));
+    int newexp = std::max(0, (int)(core >> 23 & bitmask(8)) + diffexp);
+    if(((a >> 23) & bitmask(8)) == 0 || ((b >> 23) & bitmask(8)) == 0) newexp = 0;
     if(newexp >= 256){
         std::cerr << "### overflowing in fdiv ###" << std::endl;
         print_float(f);
@@ -354,29 +396,33 @@ float fdiv(float f, float g, const FPU& fpu){
         std::cout << res << std::endl;
         assert(false);
     }
-    return make_float(sig, newexp, core.i);
+    return make_float(sig, newexp, core);
 }
 
 float atan(float f, const FPU& fpu){
-    union{float f; int i;} d;
-    d.f = f;
-    unsigned sig = kth_bit(d.i, 0);
-    int exp = d.i >> 23 & bitmask(8);
-    unsigned manti = d.i & bitmask(23);
+    // union{float f; int i;} d;
+    // d.f = f;
+    int d = bit_cast<int, float>(f);
+    // unsigned sig = kth_bit(d.i, 0);
+    // int exp = d.i >> 23 & bitmask(8);
+    // unsigned manti = d.i & bitmask(23);
+    unsigned sig = kth_bit(d, 0);
+    int exp = d >> 23 & bitmask(8);
+    unsigned manti = d & bitmask(23);
     if(exp >= 19 + 127){
-       union{float f; int i;} tmp;
-        tmp.i = 0b00111111110010010000111111001111 | (sig << 31);
-        return tmp.f;
+        // union{float f; int i;} tmp;
+        int tmp = 0b00111111110010010000111111001111 | (sig << 31);
+        return bit_cast<float, int>(tmp);
     }
     if(-125 + 127 <= exp && exp <= -11 + 127){
-       union{float f; int i;} tmp;
-        tmp.i = 0b00111111011111111111111111111011;
-        return fmul(f, tmp.f);
+        // union{float f; int i;} tmp;
+        int tmp = 0b00111111011111111111111111111011;
+        return fmul(f, bit_cast<float, int>(tmp));
     }
     if(exp == -126 + 127){
-        union{float f; int i;} tmp;
-        tmp.i = 0b00000000110000000000000000000000;
-        return make_float(sig, (tmp.i >> 23) & bitmask(8), tmp.i);
+        // union{float f; int i;} tmp;
+        int tmp = 0b00000000110000000000000000000000;
+        return make_float(sig, (tmp >> 23) & bitmask(8), tmp);
     }
     if(exp == -127 + 127){
         return make_float(sig, 0, 0);
@@ -398,27 +444,31 @@ float atan(float f, const FPU& fpu){
     }
     float mydx = fsub(make_float(0, exp, manti), mymidx);
     float ydiff = fmul(mydydx, mydx);
-   union{float f; int i;} myans;
-    myans.f = fadd(mymidy, ydiff);
-    return make_float(sig, myans.i >> 23 & bitmask(8), myans.i);
+    // union{float f; int i;} myans;
+    float myansf = fadd(mymidy, ydiff);
+    int myans = bit_cast<int, float>(myansf);
+    return make_float(sig, myans >> 23 & bitmask(8), myans);
 }
 
 float sin_core(float f, const FPU& fpu){
-    union {float f; int i;} d;
-    d.f = f;
-    int exp = ((d.i >> 23) & bitmask(8)) - 127;
+    // union {float f; int i;} d;
+    // d.f = f;
+    // int exp = ((d.i >> 23) & bitmask(8)) - 127;
+    int d = bit_cast<int, float>(f);
+    int exp = ((d >> 23) & bitmask(8)) - 127;
     if(-9 <= exp && exp <= 0){
-        int tag = (d.i & bitmask(23)) >> (23 - fpu.Taglendict(exp));
+        // int tag = (d.i & bitmask(23)) >> (23 - fpu.Taglendict(exp));
+        int tag = (d & bitmask(23)) >> (23 - fpu.Taglendict(exp));
         auto[mysep, mydydx] = fpu.Sintable(fpu.Inddict(exp) + tag);
         return fadd(mysep, fmul(mydydx, f));
     }
     else if(-125 <= exp && exp <= -10){
-        d.i = 0b00111111011111111111111111010101;
-        return fmul(f, d.f);
+        d = 0b00111111011111111111111111010101;
+        return fmul(f, bit_cast<float, int>(d));
     }
     else if(exp == -126){
-        d.i = 0b00000000110000000000000000000000;
-        return d.f;
+        d = 0b00000000110000000000000000000000;
+        return bit_cast<float, int>(d);
     }
     else{
         return make_float(0, 0, 0);
@@ -426,16 +476,18 @@ float sin_core(float f, const FPU& fpu){
 }
 
 float cos_exp0(float f, const FPU& fpu){
-    union {float f; int i;} theta, retfromsin;
+    // union {float f; int i;} theta, retfromsin;
     if(f == fpu.HALFPI){
-        theta.i = 0b00110011001110111011110100101111;
-        retfromsin.f = sin_core(theta.f, fpu);
-        return make_float(1, (retfromsin.i >> 23) & bitmask(8), retfromsin.i);
+        int theta = 0b00110011001110111011110100101111;
+        float retfromsinf = sin_core(bit_cast<float, int>(theta), fpu);
+        int retfromsin = bit_cast<int, float>(retfromsinf);
+        return make_float(1, (retfromsin >> 23) & bitmask(8), retfromsin);
     }
     else{ // わからん
-        union {double f; uint64_t i;} tmp;
-        tmp.f = fpu.LONGHALFPI - (double)f;
-        float theta = make_float(0, int((tmp.i >> 52) & bitmask(11)) - 1023 + 127, (tmp.i >> 29) & bitmask(23));
+        // union {double f; uint64_t i;} tmp;
+        double tmpf = fpu.LONGHALFPI - (double)f;
+        uint64_t tmp = bit_cast<uint64_t, double>(tmpf);
+        float theta = make_float(0, int((tmp >> 52) & bitmask(11)) - 1023 + 127, (tmp >> 29) & bitmask(23));
         return sin_core(theta, fpu);
     }
 }
@@ -445,11 +497,13 @@ float cos_core(float f, const FPU& fpu){
         std::cerr << "CosOutOfRange\n" << std::endl;
         assert(false);
     }
-    union {float f; int i;} d;
-    d.f = f;
-    int exp = int((d.i >> 23) & bitmask(8)) - 127;
+    // union {float f; int i;} d;
+    // int exp = int((d.i >> 23) & bitmask(8)) - 127;
+    int d = bit_cast<float, int>(f);
+    int exp = int((d >> 23) & bitmask(8)) - 127;
     if(-9 <= exp && exp <= -1){
-        int tag = (d.i & bitmask(23)) >> (23 - fpu.Taglendict(exp));
+        // int tag = (d.i & bitmask(23)) >> (23 - fpu.Taglendict(exp));
+        int tag = (d & bitmask(23)) >> (23 - fpu.Taglendict(exp));
         auto[mysep, mydydx] = fpu.Costable(fpu.Inddict(exp) + tag);
 
         return fadd(mysep, fmul(mydydx, f));
