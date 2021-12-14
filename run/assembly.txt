@@ -1,2 +1,2 @@
 libmincaml.S
-minrt.s
+print.s

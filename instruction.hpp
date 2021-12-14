@@ -795,7 +795,7 @@ void show_instr(MEMORY& mem, INSTR_KIND instr, int d, int a, int b){
         fprintf(stdout, "fctiwz f%d, f%d\n", d, a);
         return;
     case FCFIW:
-        fprintf(stdout, "fctiwz f%d, r%d\n", d, a);
+        fprintf(stdout, "fcfiw f%d, r%d\n", d, a);
         return;
     case IN:
         fprintf(stdout, "in r%d\n", d);
@@ -904,6 +904,7 @@ void show_instr(MEMORY& mem, INSTR_KIND instr, int d, int a, int b){
         fprintf(stdout, "stwx r%d, r%d, r%d\n", d, a, b);
         return;
     case NOT_INSTR:
+        fprintf(stdout, "%d\n", d);
         return;
     default:
         fprintf(stdout, "## WARNING ##\nUNKNOWN_INSTRUCTION\n");
@@ -1089,10 +1090,11 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
         break;
     case NOT_INSTR:
         res = d;
+        std::cout << "-";
         break;
     default:
         assert(false);
         break;
     }
-    print_binary_int(res);
+    print_binary_int_nspace(res);
 }

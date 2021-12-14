@@ -121,6 +121,10 @@ INSTR decode_bin(const std::string& bit){
     int val = btoi(bit.substr(0, 6));
     INSTR_KIND opcode = NOT_INSTR;
     int d = 0, a = 0, b = 0, imm;
+    if(bit.size() == 33){
+        d = stoi(bit.substr(1, 32), nullptr, 2);
+        return INSTR(opcode, d, a, b);
+    }
     [[maybe_unused]]int mb, me;
     switch (val){
     case 0x0: // かわるかも
@@ -214,7 +218,7 @@ INSTR decode_bin(const std::string& bit){
         opcode = ADDI;
         d = btoi(bit.substr(6, 5));
         a = btoi(bit.substr(11, 5));
-        b = btoi(bit.substr(16, 16));
+        b = exts(btoi(bit.substr(16, 16)));
         break;
     case 0xf: // addis
         opcode = ADDIS;
@@ -226,13 +230,13 @@ INSTR decode_bin(const std::string& bit){
         opcode = CMPWI;
         d = btoi(bit.substr(6, 3));
         a = btoi(bit.substr(11, 5));
-        b = btoi(bit.substr(16, 16));
+        b = exts(btoi(bit.substr(16, 16)));
         break;
     case 0x07:
         opcode = MULLI;
         d = btoi(bit.substr(6, 5));
         a = btoi(bit.substr(11, 5));
-        b = btoi(bit.substr(16, 16));
+        b = exts(btoi(bit.substr(16, 16)));
         break;
     case 0x10: // bgt,  bcl
         //01000001100001111010101010101000
@@ -253,6 +257,7 @@ INSTR decode_bin(const std::string& bit){
                 if((d & bitmask(2)) == 2) opcode = BNE;
                 else if((d & bitmask(2)) == 0) opcode = BGE;
             }
+            d /= 4;
         }
         else assert(false);
         break;
@@ -289,37 +294,37 @@ INSTR decode_bin(const std::string& bit){
     case 0x20: // lwz
         opcode = LWZ;
         d = btoi(bit.substr(6, 5));
-        a = btoi(bit.substr(16, 16));
+        a = exts(btoi(bit.substr(16, 16)));
         b = btoi(bit.substr(11, 5));
         break;
     case 0x21: // lwzu
         opcode = LWZU;
         d = btoi(bit.substr(6, 5));
         a = btoi(bit.substr(16, 16));
-        b = btoi(bit.substr(11, 5));
+        b = exts(btoi(bit.substr(11, 5)));
         break;
     case 0x24: // stw
         opcode = STW;
         d = btoi(bit.substr(6, 5));
-        a = btoi(bit.substr(16, 16));
+        a = exts(btoi(bit.substr(16, 16)));
         b = btoi(bit.substr(11, 5));
         break;
     case 0x25: // stwu
         opcode = STWU;
         d = btoi(bit.substr(6, 5));
-        a = btoi(bit.substr(16, 16));
+        a = exts(btoi(bit.substr(16, 16)));
         b = btoi(bit.substr(11, 5));
         break;
     case 0x30:
         opcode = LFS;
         d = btoi(bit.substr(6, 5));
-        a = btoi(bit.substr(16, 16));
+        a = exts(btoi(bit.substr(16, 16)));
         b = btoi(bit.substr(11, 5));
         break;
     case 0x34:
         opcode = STFS;
         d = btoi(bit.substr(6, 5));
-        a = btoi(bit.substr(16, 16));
+        a = exts(btoi(bit.substr(16, 16)));
         b = btoi(bit.substr(11, 5));
         break;
     case 0x3f:

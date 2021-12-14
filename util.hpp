@@ -35,6 +35,13 @@ void print_binary_int1(int a){
     }
 }
 
+void print_binary_int_nspace(int a){
+    for(int i = 31; i >= 0; i--){
+        std::cout << (a >> i & 1);
+    }
+    std::cout << std::endl;
+}
+
 constexpr int bp(int k){ return 31 - k;}
 
 // 以下全てマニュアルの処理を実現する関数
