@@ -29,9 +29,9 @@ make をすると "sim" という実行ファイルが生成されます.
 make binary_to_assembly
 make assembly_to_binary
 ```
-binary_to_assemblyではbinary.txt内のバイナリをアセンブリに直してassembly.txtに結果を出力します.
+binary_to_assemblyではrun/bin内のバイナリをアセンブリに直してrun/asmに結果を出力します.
 
-binary_to_assemblyではassembly.s内のバイナリをアセンブリに直してbinary.txtに結果を出力します.
+assembly_to_binaryではrun/assembly.txt内に列挙されたアセンブリファイルを読んでバイナリをrun/binに結果を出力します.
 
 実際に実行する場合は以下を参照してください.
 
