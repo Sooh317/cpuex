@@ -88,7 +88,7 @@ void decode(const std::string file, MEMORY &mem){
 
     std::string str;
     while(std::getline(ifs, str)){
-        //printout(str);
+        // printout(str);
         put_instr_into_memory(str, mem);
 
     }

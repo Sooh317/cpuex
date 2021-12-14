@@ -14,7 +14,11 @@ void show_lable(const std::map<std::string, int>&);
 */
 
 void init_memory(MEMORY& mem, OPTION& option){
-    if(!option.binary){
+    if(option.asmTObin){
+        collect_label("assembly_binary/assembly.s", mem, 0);
+        decode("assembly_binary/assembly.s", mem);
+    }
+    else if(!option.binary){
         int tmp = 0;
         std::ifstream ifs("run/assembly.txt");
         std::string s;

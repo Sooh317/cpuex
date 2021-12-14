@@ -24,16 +24,16 @@ int main(int argc, char* argv[]){
     init_option(option, argc, argv);
     option.show_option();
 
+    init_memory(mem, option);
+    if(option.exec_mode == 1){
+        std::cout << "loading success!" << std::endl;
+        // show_lable(mem.lbl);
+    }
+
     if(option.binTOasm || option.asmTObin){
         translator(mem, option);
         return 0;
     }
-
-    init_memory(mem, option);
-
-
-    std::cout << "loading success!" << std::endl;
-    show_lable(mem.lbl);
 
     init_cpu(cpu, option, mem.lbl);
 

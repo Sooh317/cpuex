@@ -398,7 +398,6 @@ void execution(CPU& cpu, MEMORY& mem, OPTION& option, FPU& fpu, CACHE& cache){
 void translator(MEMORY& mem, OPTION& option){
     std::ifstream ifs;
     std::string s;
-    mem.lbl["L"] = 0;
     if(option.binTOasm){
         if(option.binary) ifs.open("assembly_binary/binary.txt");
         while((option.binary ? ifs : std::cin) >> s){
@@ -407,11 +406,18 @@ void translator(MEMORY& mem, OPTION& option){
         }
     }
     else{
-        if(option.assembly) ifs.open("assembly_binary/assembly.s");
-        while(std::getline(option.assembly ? ifs : std::cin, s)){
-            auto vec = remove_chars(s, " ,\t\n");
-            if(vec.size() == 0) continue;
-            auto [opc, d, a, b] = recognize_instr(mem.lbl, vec);
+        // if(option.assembly) ifs.open("assembly_binary/assembly.s");
+        // while(std::getline(option.assembly ? ifs : std::cin, s)){
+        //     auto vec = remove_chars(s, " ,\t\n");
+        //     if(vec.size() == 0) continue;
+        INSTR_KIND opc;
+        int d, a, b;
+        for(int i = 0; i < mem.index / 4; i++){
+            opc = mem.instr[i].opcode;
+            d = mem.instr[i].rd;
+            a = mem.instr[i].ra;
+            b = mem.instr[i].rb;
+            if(opc == NOT_INSTR) d = mem.data[i];
             show_instr_binary(opc, d, a, b);
         }
     }

@@ -922,6 +922,9 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
     case ADDIS:
         res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | (bitmask(16) & b);
         break;
+    case SUB:
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | ((0x10b) << 1);
+        break;
     case CMPWI:
         res |= ((d & bitmask(3)) << 23) | ((a & bitmask(5)) << 16) | (bitmask(16) & b);
         break;
@@ -936,23 +939,20 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
     case BLR:
         res |= (20 << 21) | (16 << 1);
         break;
-    case BCL:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(14)) << 2) | 1;
-        break;
     case BCTR:
         res |= (20 << 21) | (528 << 1);
         break;
     case BCTRL:
         res |= (20 << 21) | (528 << 1) | 1;
         break;
+    case BCL:
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(14)) << 2) | 1;
+        break;
     case LWZ:
         res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
         break;
     case LWZU:
         res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
-        break;
-    case SUB:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | ((0x10b) << 1);
         break;
     case STW:
         res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
@@ -1087,8 +1087,11 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
     case STWX:
         res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (151 << 1);
         break;
+    case NOT_INSTR:
+        res = d;
+        break;
     default:
-        printerr("## WARNING ##\nNOT instruction : maybe some raw data");
+        assert(false);
         break;
     }
     print_binary_int(res);
