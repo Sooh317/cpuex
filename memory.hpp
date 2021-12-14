@@ -37,7 +37,10 @@ void init_memory(MEMORY& mem, OPTION& option){
 }
 
 void show_lable(const std::map<std::string, int>& lbl){
+    int mx = 0;
     for(auto[str, line] : lbl){
         std::cout << str << " " << line << std::endl;
+        mx = std::max(mx, line);
     }
+    std::cout << mx << std::endl;
 }

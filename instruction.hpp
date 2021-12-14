@@ -726,7 +726,7 @@ int opcode_to_bit(INSTR_KIND kind){
 }
 
 
-void show_instr(INSTR_KIND instr, int d, int a, int b){
+void show_instr(MEMORY& mem, INSTR_KIND instr, int d, int a, int b){
     switch (instr){
     case ADD:
         fprintf(stdout, "add r%d, r%d, r%d\n", d, a, b);
@@ -743,17 +743,17 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
         fprintf(stdout, "cmpwi cr%d, r%d, %d\n", d, a, b);
         return;
     case BGT:
-        if(d == 0) fprintf(stdout, "bgt %d\n", a);
-        else fprintf(stdout, "bgt cr%d, %d\n", d, a);
+        if(d == 0) fprintf(stdout, "bgt %s\n", mem.inv[a].c_str());
+        else fprintf(stdout, "bgt cr%d, %s\n", d, mem.inv[a].c_str());
         return;
     case BL:
-        fprintf(stdout, "bl %d\n", d);
+        fprintf(stdout, "bl %s\n", mem.inv[d].c_str());
         return;
     case BLR:
         fprintf(stdout, "blr\n");
         return;
     case BCL:
-        fprintf(stdout, "bcl, %d, %d, %d\n", d, a, b);
+        fprintf(stdout, "bcl, %d, %d, %s\n", d, a, mem.inv[b].c_str());
         return;
     case BCTR:
         fprintf(stdout, "bctr\n");
@@ -817,19 +817,19 @@ void show_instr(INSTR_KIND instr, int d, int a, int b){
         fprintf(stdout, "xoris r%d, r%d, %d\n", d, a, b);
         return;
     case B:
-        fprintf(stdout, "b %d\n", d);
+        fprintf(stdout, "b %s\n", mem.inv[d].c_str());
         return;
     case BLT:
-        if(d == -1) fprintf(stdout, "blt %d\n", a);
-        else fprintf(stdout, "blt cr%d, %d\n", d, a);
+        if(d == -1) fprintf(stdout, "blt %s\n", mem.inv[a].c_str());
+        else fprintf(stdout, "blt cr%d, %s\n", d, mem.inv[a].c_str());
         return;
     case BGE:
-        if(d == -1) fprintf(stdout, "bge %d\n", a);
-        else fprintf(stdout, "bge cr%d, %d\n", d, a);
+        if(d == -1) fprintf(stdout, "bge %s\n", mem.inv[a].c_str());
+        else fprintf(stdout, "bge cr%d, %s\n", d, mem.inv[a].c_str());
         return;
     case BNE:
-        if(d == -1) fprintf(stdout, "bne %d\n", a);
-        else fprintf(stdout, "bne cr%d, %d\n", d, a);
+        if(d == -1) fprintf(stdout, "bne %s\n", mem.inv[a].c_str());
+        else fprintf(stdout, "bne cr%d, %s\n", d, mem.inv[a].c_str());
         return;
     case CMPW:
         fprintf(stdout, "cmpw cr%d, r%d, r%d\n", d, a, b);

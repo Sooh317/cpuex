@@ -20,10 +20,8 @@ INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
     return mem.instr[pc];
 }
 
-bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu, CACHE& cache){
+bool exec(CPU& cpu, MEMORY&mem, FPU& fpu, CACHE& cache){
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
-    if(option.display_assembly) show_instr(opc, d, a, b);
-    if(option.display_binary) show_instr_binary(opc, d, a, b);
     int c, bi, ea, tmp;
     [[maybe_unused]] int bo;
     bool cond_ok, ctr_ok;
@@ -263,8 +261,8 @@ bool exec(CPU& cpu, MEMORY&mem, OPTION& option, FPU& fpu, CACHE& cache){
     }
 }
 
-int simulate_whole(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu, CACHE& cache){
-    while(!exec(cpu, mem, option, fpu, cache));
+int simulate_whole(CPU& cpu, MEMORY &mem, FPU& fpu, CACHE& cache){
+    while(!exec(cpu, mem, fpu, cache));
     std::cerr << "program finised!" << std::endl;
     return 0;
 }
@@ -348,7 +346,7 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu, CACHE_PRO& ca
             std::swap(option.display_assembly, da);
             std::swap(option.display_binary, db);
             for(int i = 0; i < ss.Sval; i++){
-                if(exec(cpu, mem, option, fpu, cache)){
+                if(exec(cpu, mem, fpu, cache)){
                     std::cout << "program finished!" << std::endl;
                     return 0;
                 }
@@ -375,7 +373,10 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu, CACHE_PRO& ca
         --it;
         std::cout << cnt << "命令実行済" << std::endl;
         std::cout << it->second << " 内の" << (cpu.pc - it->first) / 4 + 1 << " 行目" << std::endl;
-        if(exec(cpu, mem, option, fpu, cache)){
+        auto[opc, d, a, b] = mem.instr[addr_to_index(cpu.pc)];
+        if(option.display_assembly) show_instr(mem, opc, d, a, b); 
+        if(option.display_binary) show_instr_binary(opc, d, a, b);
+        if(exec(cpu, mem, fpu, cache)){
             std::cout << "program finished!" << std::endl;
             return 0;
         }
@@ -385,7 +386,7 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu, CACHE_PRO& ca
 
 
 void execution(CPU& cpu, MEMORY& mem, OPTION& option, FPU& fpu, CACHE& cache){
-    if(option.exec_mode == 0) simulate_whole(cpu, mem, option, fpu, cache);
+    if(option.exec_mode == 0) simulate_whole(cpu, mem, fpu, cache);
     else if(option.exec_mode == 1){
         CACHE_PRO cache_pro;
         simulate_step(cpu, mem, option, fpu, cache_pro);
@@ -402,7 +403,7 @@ void translator(MEMORY& mem, OPTION& option){
         if(option.binary) ifs.open("assembly_binary/binary.txt");
         while((option.binary ? ifs : std::cin) >> s){
             auto[opc, d, a, b] = decode_bin(s);
-            show_instr(opc, d, a, b);
+            show_instr(mem, opc, d, a, b);
         }
     }
     else{
