@@ -34,6 +34,7 @@ void init_memory(MEMORY& mem, OPTION& option){
         std::string s;
         while(ifs >> s) mem.instr[mem.index++] = decode_bin(s);
     }
+    std::cerr << "ラベル[_min_caml_start]のアドレスは " << mem.lbl["_min_caml_start"] << " byte目です" << std::endl;
     if(option.exec_mode == 1){
         std::cout << "loading success!" << std::endl;
         // show_lable(mem.lbl);
