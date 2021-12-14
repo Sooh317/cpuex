@@ -372,8 +372,9 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu, CACHE_PRO& ca
         if(ss.next) continue;
         cnt++;
         auto it = mem.inv.upper_bound(cpu.pc);
-        std::cout << "Current Lable: " << std::prev(it)->second << std::endl;
-        std::cout << cnt << "命令目" << std::endl;
+        --it;
+        std::cout << cnt << "命令実行済" << std::endl;
+        std::cout << it->second << " 内の" << (cpu.pc - it->first) / 4 + 1 << " 行目" << std::endl;
         if(exec(cpu, mem, option, fpu, cache)){
             std::cout << "program finished!" << std::endl;
             return 0;
