@@ -149,6 +149,7 @@ bool exec(CPU& cpu, MEMORY&mem, FPU& fpu, CACHE& cache){
             cpu.fpr[d] = float(cpu.gpr[a]);
             return false;
         case IN:
+            std::cout << "input\n" << std::flush;
             std::cin >> tmp;
             cpu.gpr[d] = tmp;
             return false;
