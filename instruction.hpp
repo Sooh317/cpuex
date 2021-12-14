@@ -1090,7 +1090,6 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
         break;
     case NOT_INSTR:
         res = d;
-        std::cout << "-";
         break;
     default:
         assert(false);
