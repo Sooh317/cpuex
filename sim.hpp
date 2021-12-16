@@ -115,7 +115,6 @@ bool exec(CPU& cpu, MEMORY&mem, FPU& fpu, CACHE& cache){
             return false;
         case STW:   
             ea = (b ? cpu.gpr[b] : 0) + exts(a);
-            printout("stw");
             cache.swi(ea, mem, cpu.gpr[d]);
             return false;
         case STWU:
