@@ -115,6 +115,7 @@ bool exec(CPU& cpu, MEMORY&mem, FPU& fpu, CACHE& cache){
             return false;
         case STW:   
             ea = (b ? cpu.gpr[b] : 0) + exts(a);
+            printout("stw");
             cache.swi(ea, mem, cpu.gpr[d]);
             return false;
         case STWU:
@@ -307,6 +308,11 @@ void show_what(SHOW& ss, const std::string& s){
             auto res = remove_chars(t, " ,");
             for(int i = 0; i < (int)res.size(); i++) ss.index.emplace_back(stoi(res[i]));
         }
+        else if(c == 'l'){
+            ss.label = true;
+            std::cout << "ラベルのアドレスを入力してください" << std::endl;
+            std::cin >> ss.laddr;
+        }
         else if(c == 'B') ss.B = true;
         else if(c == 'F') ss.F = true;
         else if(c == 'g') ss.gr = true;
@@ -341,6 +347,11 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu, CACHE_PRO& ca
                 cache.show_cache_line(ind, mem);
                 std::cout << '\n';
             }
+        }
+        if(ss.label){
+            std::cout << "アドレス: " << ss.laddr << " のラベルは ";
+            if(mem.inv.count(ss.laddr)) std::cout << mem.inv[ss.laddr] << " です" << std::endl;
+            else std::cout << "存在しません" << std::endl;
         }
         if(ss.S){
             bool da = false, db = false;
