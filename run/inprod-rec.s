@@ -36,14 +36,14 @@ inprod.17:
 	fadd	f0, f1, f0				# 3
 	blr
 bge_else.54:
-	addis	r31, r31, ha16(l.39)
+	addis	r31, 0, ha16(l.39)
 	ori	r31, r31, lo16(l.39)
 	lfs	f0, 0(r31)				# 2
 	blr
 _min_caml_start: # main entry point
 #	main program starts
 	addi	r2, 0, 3				# 4
-	addis	r31, r31, ha16(l.42)
+	addis	r31, 0, ha16(l.42)
 	ori	r31, r31, lo16(l.42)
 	lfs	f0, 0(r31)				# 4
 	stw	r2, 0(r3)				# 4
@@ -54,7 +54,7 @@ _min_caml_start: # main entry point
 	addi	r3, r3, 8				# 4
 	lwz	r31, -4(r3)				# 4
 	mtspr	8, r31				# 4
-	addis	r31, r31, ha16(l.43)
+	addis	r31, 0, ha16(l.43)
 	ori	r31, r31, lo16(l.43)
 	lfs	f0, 0(r31)				# 5
 	lwz	r5, 0(r3)				# 5
@@ -68,7 +68,7 @@ _min_caml_start: # main entry point
 	lwz	r31, -8(r3)				# 5
 	mr	r5, r2				# 5
 	mtspr	8, r31				# 5
-	addis	r31, r31, ha16(l.44)
+	addis	r31, 0, ha16(l.44)
 	ori	r31, r31, lo16(l.44)
 	lfs	f0, 0(r31)				# 6
 	addi	r6, 0, 2				# 6
@@ -98,4 +98,5 @@ _min_caml_start: # main entry point
 	lwz	r31, -12(r3)				# 6
 	mtspr	8, r31				# 6
 #	main program ends
+	flush
 	halt

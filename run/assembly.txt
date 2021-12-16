@@ -1,2 +1,2 @@
 libmincaml.S
-inprod.s
+matmul.s

@@ -1,41 +1,41 @@
 	.data
 	.literal4
 	.align 2
-l.371:	 # 12.000000
-	.long	1094713344
+l.371:	 # 12.120000
+	.long	1094839173
 	.align 2
-l.368:	 # 11.000000
-	.long	1093664768
+l.368:	 # 11.110000
+	.long	1093780111
 	.align 2
-l.365:	 # 10.000000
-	.long	1092616192
+l.365:	 # 10.100000
+	.long	1092721050
 	.align 2
-l.362:	 # 9.000000
-	.long	1091567616
+l.362:	 # 9.900000
+	.long	1092511334
 	.align 2
-l.359:	 # 8.000000
-	.long	1090519040
+l.359:	 # 8.800000
+	.long	1091357901
 	.align 2
-l.356:	 # 7.000000
-	.long	1088421888
+l.356:	 # 7.700000
+	.long	1089889894
 	.align 2
-l.353:	 # 6.000000
-	.long	1086324736
+l.353:	 # 6.600000
+	.long	1087583027
 	.align 2
-l.350:	 # 5.000000
-	.long	1084227584
+l.350:	 # 5.500000
+	.long	1085276160
 	.align 2
-l.347:	 # 4.000000
-	.long	1082130432
+l.347:	 # 4.400000
+	.long	1082969293
 	.align 2
-l.344:	 # 3.000000
-	.long	1077936128
+l.344:	 # 3.300000
+	.long	1079194419
 	.align 2
-l.341:	 # 2.000000
-	.long	1073741824
+l.341:	 # 2.200000
+	.long	1074580685
 	.align 2
-l.338:	 # 1.000000
-	.long	1065353216
+l.338:	 # 1.100000
+	.long	1066192077
 	.align 2
 l.336:	 # 0.000000
 	.long	0
@@ -86,7 +86,7 @@ loop2.272:
 	bgt	cr7, ble_else.434				# 5
 	mr	r11, r4				# 6
 	addi	r4, r4, 28				# 6
-	addis	r12, r12, ha16(loop3.279)
+	addis	r12, 0, ha16(loop3.279)
 	ori	r12, r12, lo16(loop3.279)				# 6
 	stw	r12, 0(r11)				# 6
 	stw	r2, 24(r11)				# 6
@@ -128,7 +128,7 @@ loop1.267:
 	blt	cr7, bge_else.436				# 3
 	mr	r11, r4				# 4
 	addi	r4, r4, 28				# 4
-	addis	r12, r12, ha16(loop2.272)
+	addis	r12, 0, ha16(loop2.272)
 	ori	r12, r12, lo16(loop2.272)				# 4
 	stw	r12, 0(r11)				# 4
 	stw	r6, 24(r11)				# 4
@@ -162,7 +162,7 @@ bge_else.436:
 mul.140:
 	mr	r1, r4				# 2
 	addi	r4, r4, 24				# 2
-	addis	r10, r10, ha16(loop1.267)
+	addis	r10, 0, ha16(loop1.267)
 	ori	r10, r10, lo16(loop1.267)				# 2
 	stw	r10, 0(r1)				# 2
 	stw	r6, 20(r1)				# 2
@@ -221,7 +221,7 @@ make.148:
 	mtspr	8, r31				# 17
 	mr	r1, r4				# 18
 	addi	r4, r4, 20				# 18
-	addis	r5, r5, ha16(init.254)
+	addis	r5, 0, ha16(init.254)
 	ori	r5, r5, lo16(init.254)				# 18
 	stw	r5, 0(r1)				# 18
 	lwz	r5, -12(r3)				# 18
@@ -249,7 +249,7 @@ make.148:
 _min_caml_start: # main entry point
 #	main program starts
 	addi	r2, 0, 0				# 15
-	addis	r31, r31, ha16(l.336)
+	addis	r31, 0, ha16(l.336)
 	ori	r31, r31, lo16(l.336)
 	lfs	f0, 0(r31)				# 15
 	stfs	f0, 0(r3)				# 15
@@ -263,7 +263,7 @@ _min_caml_start: # main entry point
 	mtspr	8, r31				# 15
 	mr	r1, r4				# 16
 	addi	r4, r4, 16				# 16
-	addis	r5, r5, ha16(make.148)
+	addis	r5, 0, ha16(make.148)
 	ori	r5, r5, lo16(make.148)				# 16
 	stw	r5, 0(r1)				# 16
 	stw	r2, 12(r1)				# 16
@@ -316,63 +316,63 @@ _min_caml_start: # main entry point
 	mtspr	8, r31				# 26
 	lwz	r7, -20(r3)				# 27
 	lwz	r2, 0(r7)				# 27
-	addis	r31, r31, ha16(l.338)
+	addis	r31, 0, ha16(l.338)
 	ori	r31, r31, lo16(l.338)
 	lfs	f0, 0(r31)				# 27
 	stfs	f0, 0(r2)				# 27
 	lwz	r2, 0(r7)				# 27
-	addis	r31, r31, ha16(l.341)
+	addis	r31, 0, ha16(l.341)
 	ori	r31, r31, lo16(l.341)
 	lfs	f0, 0(r31)				# 27
 	stfs	f0, 4(r2)				# 27
 	lwz	r2, 0(r7)				# 27
-	addis	r31, r31, ha16(l.344)
+	addis	r31, 0, ha16(l.344)
 	ori	r31, r31, lo16(l.344)
 	lfs	f0, 0(r31)				# 27
 	stfs	f0, 8(r2)				# 27
 	lwz	r2, 4(r7)				# 28
-	addis	r31, r31, ha16(l.347)
+	addis	r31, 0, ha16(l.347)
 	ori	r31, r31, lo16(l.347)
 	lfs	f0, 0(r31)				# 28
 	stfs	f0, 0(r2)				# 28
 	lwz	r2, 4(r7)				# 28
-	addis	r31, r31, ha16(l.350)
+	addis	r31, 0, ha16(l.350)
 	ori	r31, r31, lo16(l.350)
 	lfs	f0, 0(r31)				# 28
 	stfs	f0, 4(r2)				# 28
 	lwz	r2, 4(r7)				# 28
-	addis	r31, r31, ha16(l.353)
+	addis	r31, 0, ha16(l.353)
 	ori	r31, r31, lo16(l.353)
 	lfs	f0, 0(r31)				# 28
 	stfs	f0, 8(r2)				# 28
 	lwz	r8, -24(r3)				# 29
 	lwz	r2, 0(r8)				# 29
-	addis	r31, r31, ha16(l.356)
+	addis	r31, 0, ha16(l.356)
 	ori	r31, r31, lo16(l.356)
 	lfs	f0, 0(r31)				# 29
 	stfs	f0, 0(r2)				# 29
 	lwz	r2, 0(r8)				# 29
-	addis	r31, r31, ha16(l.359)
+	addis	r31, 0, ha16(l.359)
 	ori	r31, r31, lo16(l.359)
 	lfs	f0, 0(r31)				# 29
 	stfs	f0, 4(r2)				# 29
 	lwz	r2, 4(r8)				# 30
-	addis	r31, r31, ha16(l.362)
+	addis	r31, 0, ha16(l.362)
 	ori	r31, r31, lo16(l.362)
 	lfs	f0, 0(r31)				# 30
 	stfs	f0, 0(r2)				# 30
 	lwz	r2, 4(r8)				# 30
-	addis	r31, r31, ha16(l.365)
+	addis	r31, 0, ha16(l.365)
 	ori	r31, r31, lo16(l.365)
 	lfs	f0, 0(r31)				# 30
 	stfs	f0, 4(r2)				# 30
 	lwz	r2, 8(r8)				# 31
-	addis	r31, r31, ha16(l.368)
+	addis	r31, 0, ha16(l.368)
 	ori	r31, r31, lo16(l.368)
 	lfs	f0, 0(r31)				# 31
 	stfs	f0, 0(r2)				# 31
 	lwz	r2, 8(r8)				# 31
-	addis	r31, r31, ha16(l.371)
+	addis	r31, 0, ha16(l.371)
 	ori	r31, r31, lo16(l.371)
 	lfs	f0, 0(r31)				# 31
 	stfs	f0, 4(r2)				# 31
@@ -484,4 +484,5 @@ _min_caml_start: # main entry point
 	lwz	r31, -32(r3)				# 40
 	mtspr	8, r31				# 40
 #	main program ends
+	flush
 	halt
