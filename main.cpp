@@ -19,7 +19,8 @@ int main(int argc, char* argv[]){
     CACHE cache;
     OPTION option;
     FPU fpu;
-    init_fpu(fpu);
+    TasukuFukami::init_fpu(fpu);
+    //fpu_test(fpu);
 
     init_option(option, argc, argv);
     option.show_option();

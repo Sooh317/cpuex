@@ -167,7 +167,7 @@ bool exec(CPU& cpu, MEMORY&mem, FPU& fpu, CACHE& cache){
             cpu.fpr[d] = std::abs(cpu.fpr[a]); // 多分これで問題ないよね...
             return false;
         case FADD:
-            cpu.fpr[d] = fadd(cpu.fpr[a], cpu.fpr[b]);
+            cpu.fpr[d] = TasukuFukami::fadd(cpu.fpr[a], cpu.fpr[b]);
             return false;
         case FCMPU: // NaNについては存在しないとする
             if(cpu.fpr[a] < cpu.fpr[b]) c = 0b1000;
@@ -179,22 +179,22 @@ bool exec(CPU& cpu, MEMORY&mem, FPU& fpu, CACHE& cache){
             cpu.cr = tmp;
             return false;
         case FDIV:
-            cpu.fpr[d] = fdiv(cpu.fpr[a], cpu.fpr[b], fpu);
+            cpu.fpr[d] = TasukuFukami::fdiv(cpu.fpr[a], cpu.fpr[b], fpu);
             return false;
         case FMR:
             cpu.fpr[d] = cpu.fpr[a];
             return false;
         case FMUL:
-            cpu.fpr[d] = fmul(cpu.fpr[a], cpu.fpr[b]);
+            cpu.fpr[d] = TasukuFukami::fmul(cpu.fpr[a], cpu.fpr[b]);
             return false;
         case FNEG:
             cpu.fpr[d] = -cpu.fpr[a];
             return false;
         case FSUB:
-            cpu.fpr[d] = fsub(cpu.fpr[a], cpu.fpr[b]);
+            cpu.fpr[d] = TasukuFukami::fsub(cpu.fpr[a], cpu.fpr[b]);
             return false;
         case FSQRT:
-            cpu.fpr[d] = fsqrt(cpu.fpr[d], fpu);
+            cpu.fpr[d] = TasukuFukami::fsqrt(cpu.fpr[d], fpu);
             return false;
         case FFLOOR: // stdを使ってます
             cpu.fpr[d] = std::floor(cpu.fpr[d]);
@@ -209,7 +209,7 @@ bool exec(CPU& cpu, MEMORY&mem, FPU& fpu, CACHE& cache){
             cpu.fpr[d] = std::sin(cpu.fpr[a]);
             return false;
         case FATAN:
-            cpu.fpr[d] = atan(cpu.fpr[d], fpu);
+            cpu.fpr[d] = TasukuFukami::atan(cpu.fpr[d], fpu);
             return false;
         case LFS:
             tmp = (b == 0 ? 0 : cpu.gpr[b]);
