@@ -1,6 +1,7 @@
 #pragma once
 #include "struct.hpp"
 #include "util.hpp"
+#include "cache.hpp"
 #include <string>
 #include <vector>
 
@@ -29,22 +30,22 @@ enum DIRECTIVE_KIND directive_kind(const std::string &ss){
 }
 
 // まだ改善が必要(dyld_stub_binding_helper)
-void process_long_directive(MEMORY& mem, const std::string& s){
+void process_long_directive(CACHE_PRO& cache_pro, MEMORY& mem, const std::string& s){
     mem.instr[mem.index >> 2].opcode = NOT_INSTR;
     for(int i = 0; i < (int)s.size(); i++){
         if(s[i] == '-' || ('0' <= s[i] && s[i] <= '9')) continue;
         else return;
     }
-    mem.data[mem.index >> 2] = stoi(s);
+    cache_pro.swi(mem.index, mem, stoi(s));
 }
 
-void process_ascii_directive(MEMORY& mem, const std::string& s){ // "...\0"の形
-    assert(false);
-    int index = mem.index;
-    mem.instr[index].opcode = NOT_INSTR;
-    for(int i = 1; i < (int)s.size(); i++){
-        mem.data[mem.index >> 2] = ((uint8_t)s[i]) << (mem.index & bitmask(3));
-        mem.index++;
-    }
-    mem.index = index;
-}
+// void process_ascii_directive(MEMORY& mem, const std::string& s){ // "...\0"の形
+//     assert(false);
+//     int index = mem.index;
+//     mem.instr[index].opcode = NOT_INSTR;
+//     for(int i = 1; i < (int)s.size(); i++){
+//         mem.data[mem.index >> 2] = ((uint8_t)s[i]) << (mem.index & bitmask(3));
+//         mem.index++;
+//     }
+//     mem.index = index;
+// }

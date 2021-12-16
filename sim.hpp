@@ -396,13 +396,12 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu, CACHE_PRO& ca
 }
 
 
-void execution(CPU& cpu, MEMORY& mem, OPTION& option, FPU& fpu, CACHE& cache){
-    if(option.exec_mode == 0) simulate_whole(cpu, mem, fpu, cache);
-    else if(option.exec_mode == 1){
-        CACHE_PRO cache_pro;
-        simulate_step(cpu, mem, option, fpu, cache_pro);
-        cache = cache_pro;
+void execution(CPU& cpu, MEMORY& mem, OPTION& option, FPU& fpu, CACHE_PRO& cache_pro){
+    if(option.exec_mode == 0){
+        CACHE cache = (CACHE)cache_pro;
+        simulate_whole(cpu, mem, fpu, cache);
     }
+    else if(option.exec_mode == 1) simulate_step(cpu, mem, option, fpu, cache_pro);
 }
 
 

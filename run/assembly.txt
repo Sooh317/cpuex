@@ -1,2 +1,2 @@
 libmincaml.S
-ack.s
+inprod.s

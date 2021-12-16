@@ -13,7 +13,7 @@ void init_memory(MEMORY&, OPTION&);
 void show_lable(const std::map<std::string, int>&);
 */
 
-void init_memory(MEMORY& mem, OPTION& option){
+void init_memory(CACHE_PRO& cache_pro, MEMORY& mem, OPTION& option){
     if(option.asmTObin || !option.binary){
         int tmp = 0;
         std::ifstream ifs("run/assembly.txt");
@@ -26,7 +26,7 @@ void init_memory(MEMORY& mem, OPTION& option){
         ifs.seekg(0, std::ios_base::beg);
         while(ifs >> s){
             s = "run/" + s;
-            decode(s, mem);
+            decode(s, mem, cache_pro);
         }
     }
     else{

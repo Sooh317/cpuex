@@ -16,7 +16,7 @@
 int main(int argc, char* argv[]){
     CPU cpu;
     MEMORY mem;
-    CACHE cache;
+    CACHE_PRO cache_pro;
     OPTION option;
     FPU fpu;
     TasukuFukami::init_fpu(fpu);
@@ -24,7 +24,7 @@ int main(int argc, char* argv[]){
 
     init_option(option, argc, argv);
     option.show_option();
-    init_memory(mem, option);
+    init_memory(cache_pro, mem, option);
 
     if(option.binTOasm || option.asmTObin){
         translator(mem, option);
@@ -33,7 +33,7 @@ int main(int argc, char* argv[]){
 
     init_cpu(cpu, option, mem.lbl);
 
-    execution(cpu, mem, option, fpu, cache);
+    execution(cpu, mem, option, fpu, cache_pro);
 
     show_result(cpu);
 
