@@ -143,7 +143,7 @@ bool exec(CPU& cpu, MEMORY&mem, FPU& fpu, CACHE& cache){
             cpu.gpr[d] = cpu.gpr[a] ^ (b << 16);
             return false;
         case FCTIWZ:
-            cpu.gpr[d] = int(std::floor(cpu.fpr[a]));
+            cpu.gpr[d] = int(std::trunc(cpu.fpr[a]));
             return false;
         case FCFIW:
             cpu.fpr[d] = float(cpu.gpr[a]);
