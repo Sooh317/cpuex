@@ -66,6 +66,7 @@ public:
 
     // addr is a multiple of 4
     DATA lw(int32_t addr, MEMORY& mem){
+        assert(addr % 4 == 0);
         int offset = addr & bitmask(CACHE_OFFSET_SIZE);
         int index = (addr >> CACHE_OFFSET_SIZE) & bitmask(CACHE_INDEX_SIZE);
         int tag = (addr >> (CACHE_INDEX_SIZE + CACHE_OFFSET_SIZE)) & bitmask(CACHE_TAG_SIZE);
@@ -158,6 +159,7 @@ public:
     }
 
     void swf(int32_t addr, MEMORY& mem, float f){
+        assert(addr % 4 == 0);
         DATA d = bit_cast<DATA, float>(f);
         mem.type[addr_to_index(addr)] = 1;
         update(addr);
@@ -165,6 +167,7 @@ public:
     }
     
     void swi(int32_t addr, MEMORY& mem, int i){
+        assert(addr % 4 == 0);
         DATA d = i;
         mem.type[addr_to_index(addr)] = 0;
         update(addr);
