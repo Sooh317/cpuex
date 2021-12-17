@@ -3,8 +3,6 @@ LF_PI:
 	.long 1078530011
 LF_HALFPI:
 	.long 1070141403
-LF_HALFPI:
-	.long 1070141403
 LF_QUATPI:
 	.long 1061752795
 # 	.text
