@@ -69,7 +69,7 @@ void put_instr_into_memory(std::string& str, MEMORY& mem, CACHE_PRO& cache_pro){
         //else if(kind == ASCII) process_ascii_directive(mem, s[1]);
         else if(kind == SOME_DIRECTIVE) return;
         else if(kind != ALIGN){
-            auto ins = recognize_instr(mem.lbl, s);
+            auto ins = recognize_instr(mem, s);
             //printout(opcode_to_string(ins.opcode));
             mem.instr[mem.index >> 2] = ins;
         }

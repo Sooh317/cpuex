@@ -436,7 +436,7 @@ void translator(MEMORY& mem, OPTION& option){
             while(std::getline(option.assembly ? ifs : std::cin, s)){
                 auto vec = remove_chars(s, " ,\t\n");
                 if(vec.size() == 0) continue;
-                auto[opc, d, a, b] = recognize_instr(mem.lbl, vec);
+                auto[opc, d, a, b] = recognize_instr(mem, vec);
                 show_instr_binary(opc, d, a, b);
             }
         }

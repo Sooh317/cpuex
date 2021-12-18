@@ -24,7 +24,7 @@ struct option_t{
         }
         if(asmTObin){
             std::cerr << "translate assembly to binary" << std::endl;
-            if(assembly) std::cerr << "reading assembly.s" << std::endl;
+            if(assembly) std::cerr << " - assemble files written in assembly.txt" << std::endl;
             return;
         }
         if(exec_mode == 0) std::cerr << "simulate whole" << std::endl;

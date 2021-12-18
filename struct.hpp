@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <unordered_map>
 #include <assert.h>
 #include "util.hpp"
 
@@ -162,12 +163,6 @@ enum INSTR_KIND{
     INSTR_UNKNOWN
 };
 
-enum INSTR_FORM{
-    DAB,
-    DAIMM,
-
-};
-
 struct instr_t{
     INSTR_KIND opcode;
     int32_t rd; // rd or rs
@@ -219,11 +214,29 @@ struct show_t{
 };
 using SHOW = show_t;
 
-// union data_t{
-//     int i;
-//     float f;
-// };
-// using DATA = data_t;
+enum INSTR_FORM{
+    D,
+    DA,
+    DIMM,
+    DAB,  // d a b
+    DAB2, // d a(b)
+    DAB3, // fd a(b)
+    DAIMM, // d a imm
+    CAB,   // cr a, b
+    CAIMM, // cr a, imm
+    CFF, 
+    BC, // branch (cr or nothing)
+    BDAL, // branch d a label
+    BLB, // branch label
+    FDAB, // fd fa fb
+    FDA, // fd fa
+    FR,  // fd ra
+    FRR, // fd ra rb
+    TSPR, // move to spr
+    FSPR, // move from spr
+    N,  // no condition branch
+    NOT, // not instruction
+};
 
 using DATA = int32_t;
 
@@ -234,8 +247,37 @@ struct memory_t{
     std::vector<bool> type; // type = 1 : float
     std::map<std::string, int> lbl;
     std::map<int, std::string> inv;
+    std::unordered_map<INSTR_KIND, INSTR_FORM> kind_to_form;
 
-    memory_t():index(0), instr(INSTR_SIZE), data(DATA_SIZE), type(DATA_SIZE){} 
+    memory_t():index(0), instr(INSTR_SIZE), data(DATA_SIZE), type(DATA_SIZE){
+        kind_to_form[IN] = D;
+        kind_to_form[MR] = DA;
+        kind_to_form[OUT] = DIMM;
+        kind_to_form[ADD] = kind_to_form[SUB] = DAB;
+        kind_to_form[MULHWU] = kind_to_form[STWX] = kind_to_form[LWZX] = DAB;
+        kind_to_form[LWZ] = kind_to_form[STW] = kind_to_form[LWZU] = DAB2;
+        kind_to_form[STWU] = DAB2;
+        kind_to_form[STFS] = kind_to_form[LFS] = DAB3;
+        kind_to_form[ORI] = kind_to_form[XORIS] = kind_to_form[ADDI] = DAIMM;
+        kind_to_form[MULLI] = kind_to_form[SLWI] = DAIMM;
+        kind_to_form[ADDIS] = kind_to_form[SRWI] = DAIMM;
+        kind_to_form[CMPW] = CAB;
+        kind_to_form[CMPWI] = CAIMM;
+        kind_to_form[FCMPU] = CFF;
+        kind_to_form[BNE] = kind_to_form[BGE] = kind_to_form[BLT] = kind_to_form[BGT] = BC;
+        kind_to_form[BCL] = BDAL;
+        kind_to_form[B] = kind_to_form[BL] = BLB;
+        kind_to_form[FADD] = kind_to_form[FSUB] = kind_to_form[FMUL] = kind_to_form[FDIV] = FDAB;
+        kind_to_form[FABS] = kind_to_form[FMR] = kind_to_form[FNEG] = kind_to_form[FSQRT] = kind_to_form[FCTIWZ] = FDA;
+        kind_to_form[FHALF] = kind_to_form[FFLOOR] = kind_to_form[FSIN] = kind_to_form[FCOS] = kind_to_form[FATAN] = FDA;
+        kind_to_form[FCFIW] = FR;
+        kind_to_form[LFSX] = kind_to_form[STFSX] = FRR;
+        kind_to_form[MTSPR] = TSPR;
+        kind_to_form[MFSPR] = FSPR;
+        kind_to_form[BLR] = kind_to_form[BCTR] = kind_to_form[BCTRL] = N;
+        kind_to_form[FLUSH] = kind_to_form[HALT] = N;
+        kind_to_form[NOT_INSTR] = NOT;
+    } 
 
     void show_memory(const SHOW& show){
         if(show.m){

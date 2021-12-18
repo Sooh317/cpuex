@@ -1,5 +1,5 @@
 main:
-	g++ -std=c++17 -I ./fmt/include -Wall -Wextra -fsanitize=address -O3 -o sim main.cpp
+	g++ -std=c++17 -I ./fmt/include -Wall -Wextra -O2 -o sim main.cpp
 
 install:
 	git clone https://github.com/fmtlib/fmt.git

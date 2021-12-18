@@ -51,7 +51,7 @@ LF_QUATPI:
 	.align 	2
 	.globl	min_caml_print_newline
 min_caml_print_newline:
-	addi 	r2, 0, 13	# '\n' == 13
+	addi 	r2, 0, 10	# '\n' == 10 (LF)
 	out		r2, 0
 	blr
 # print_int(x)
@@ -140,6 +140,8 @@ min_caml_read_int:
 	.globl	min_caml_read_float
 min_caml_read_float:
 	in		r2
+	stw		r2, 0(r3)
+	lfs		f0, 0(r3)
 	blr
 #	create_array
 	.text

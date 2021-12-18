@@ -7,15 +7,6 @@
 #include "struct.hpp"
 #include "util.hpp"
 
-/*
-enum INSTR_KIND opcode_of_instr(const std::string&);
-INSTR recognize_instr(std::map<std::string, int>&, const std::vector<std::string>&);
-int opcode_to_bit(INSTR_KIND kind);
-std::string opcode_to_string(INSTR_KIND);
-void show_instr(INSTR_KIND, int, int, int);
-void show_instr_binary(INSTR_KIND, int, int, int);
-*/
-
 enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "add") return ADD;
     if(s == "addi") return ADDI;
@@ -277,329 +268,65 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
     }
 }
 
-
-
-INSTR recognize_instr(std::map<std::string, int>& lbl, const std::vector<std::string> &s){
-    auto call = [&](int id, bool in_flag)->int{return internal_reg_number(s[id], in_flag, lbl);};
+INSTR recognize_instr(MEMORY& mem, const std::vector<std::string> &s){
+    auto call = [&](int id, bool in_flag)->int{return internal_reg_number(s[id], in_flag, mem.lbl);};
     INSTR_KIND opc = opcode_of_instr(s[0]);
+    INSTR_FORM f = mem.kind_to_form[opc];
     int rd = 0, ra = 0, rb = 0;
-    switch (opc){
-        case ADD:
+    if(f == D){
+        rd = call(1, 0);
+    }
+    else if(f == DA || f == DIMM || f == FDA || f == FR || f == TSPR || f == FSPR){
+        rd = call(1, 0);
+        ra = call(2, 0);
+    }   
+    else if(f == DAB || f == DAIMM || f == CAB || f == CAIMM || f == CFF || f == FDAB || f == FRR){
+        rd = call(1, 0);
+        ra = call(2, 0);
+        rb = call(3, 0);
+    }
+    else if(f == DAB2 || f == DAB3){
+        rd = call(1, 0);
+        ra = call(2, 0);
+        rb = call(2, 1);
+    }
+    else if(f == BC){
+        if(s.size() == 3){
             rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case SUB:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case ADDI:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case ADDIS:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case CMPWI:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case BGT:
-            if(s.size() == 3){
-                rd = call(1, 0);
-                if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
-                else{
-                    printout(s[2]);
-                    assert(false);
-                }
+            if(mem.lbl.find(s[2]) != mem.lbl.end()) ra = mem.lbl[s[2]];
+            else{
+                printout(s[2]);
+                assert(false);
             }
-            else if(s.size() == 2){ // 怪しいかも
-                rd = 0;
-                if(lbl.find(s[1]) != lbl.end()) ra = lbl[s[1]];
-                else{
-                    printout(s[1]);
-                    assert(false);
-                }
-            }
-            else assert(false);
-            break;
-        case BL:
-            if(lbl.find(s[1]) != lbl.end()) rd = lbl[s[1]];
+        }
+        else if(s.size() == 2){ // 怪しいかも
+            rd = 0;
+            if(mem.lbl.find(s[1]) != mem.lbl.end()) ra = mem.lbl[s[1]];
             else{
                 printout(s[1]);
                 assert(false);
             }
-            break;
-        case BLR: // 無条件分岐 to LR
-            break;
-        case BCL: // 注 : 常にラベルがくると仮定
-            rd = call(1, 0);
-            ra = call(2, 0);
-            if(lbl.find(s[3]) != lbl.end()) rb = lbl[s[3]];
-            else{
-                printout(s[3]);
-                assert(false);
-            }
-            break;
-        case BCTR: // 無条件分岐
-            break;
-        case BCTRL: // 無条件分岐
-            break;
-        case LWZ:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(2, 1);
-            break;
-        case LWZU:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(2, 1);
-            break;
-        case STW:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(2, 1);
-            break;
-        case STWU:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(2, 1);
-            break;
-        case MFSPR: // move from LR
-            rd = call(1, 0);
-            ra = call(2, 0);
-            break;  
-        case MR:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            break;
-        case MTSPR: // move to LR
-            rd = call(1, 0);
-            ra = call(2, 0);
-            break;
-        // 1st architecture
-        case XORIS:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case IN:
-            rd = call(1, 0);
-            break;
-        case OUT:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            break;
-        case FLUSH:
-            break;
-        case ORI:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case FCTIWZ:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            break;
-        case B:
-            if(lbl.find(s[1]) != lbl.end()) rd = lbl[s[1]];
-            else{
-                printout(s[1]);
-                assert(false);
-            }
-            break;
-        case BLT:
-            if(s.size() == 3){
-                rd = call(1, 0);
-                if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
-                else{
-                    printout(s[2]);
-                    assert(false);
-                }
-            }
-            else if(s.size() == 2){
-                rd = 0;
-                if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
-                else{
-                    printout(s[2]);
-                    assert(false);
-                }
-            }
-            else assert(false);
-            break;
-        case BGE:
-            if(s.size() == 3){
-                rd = call(1, 0);
-                if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
-                else{
-                    printout(s[2]);
-                    assert(false);
-                }
-            }
-            else if(s.size() == 2){
-                rd = 0;
-                if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
-                else{
-                    printout(s[2]);
-                    assert(false);
-                }
-            }
-            else assert(false);
-            break;
-        case BNE: //かなり怪しい
-            if(s.size() == 3){
-                rd = call(1, 0);
-                if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
-                else{
-                    printout(s[2]);
-                    assert(false);
-                }
-            }
-            else if(s.size() == 2){
-                rd = 0;
-                if(lbl.find(s[2]) != lbl.end()) ra = lbl[s[2]];
-                else{
-                    printout(s[2]);
-                    assert(false);
-                }
-            }
-            else assert(false);
-            break;
-        case CMPW:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case FABS:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            break;
-        case FADD:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case FCMPU:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case FCFIW:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            break;
-        case FDIV:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case FMR:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            break;
-        case FMUL:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case FNEG:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            break;
-        case FSUB:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case FSQRT:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            break;
-        case FHALF:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            break;
-        case FFLOOR:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            break;
-        case FCOS:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            break;
-        case FSIN:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            break;
-        case FATAN:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            break;
-        case LFS:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(2, 1);
-            break;
-        case LFSX:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case LWZX:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case MULLI:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case MULHWU:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case STFS:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(2, 1);
-            break;
-        case STFSX:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case SLWI: // 怪しい?
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case SRWI:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case STWX:
-            rd = call(1, 0);
-            ra = call(2, 0);
-            rb = call(3, 0);
-            break;
-        case NOT_INSTR:
-            break;
-        default:
-            //std::cerr << "line " << mem.index << std::endl;
-            //warning(s[0]);
-            break;
+        }
+        else assert(false);
+    }
+    else if(f == BLB){
+        if(mem.lbl.find(s[1]) != mem.lbl.end()) rd = mem.lbl[s[1]];
+        else{
+            printout(s[1]);
+            assert(false);
+        }
+    }
+    else if(f == BDAL){
+        rd = call(1, 0);
+        ra = call(2, 0);
+        if(mem.lbl.find(s[3]) != mem.lbl.end()) rb = mem.lbl[s[3]];
+        else{
+            printout(s[3]);
+            assert(false);
+        }
     }
     return INSTR(opc, rd, ra, rb);
 }
-
 
 int opcode_to_bit(INSTR_KIND kind){
     switch (kind){
@@ -725,191 +452,91 @@ int opcode_to_bit(INSTR_KIND kind){
     }
 }
 
-
 void show_instr(MEMORY& mem, INSTR_KIND instr, int d, int a, int b){
-    switch (instr){
-    case ADD:
-        fprintf(stdout, "add r%d, r%d, r%d\n", d, a, b);
-        return;
-    case ADDI:
-        if(a == 0) fprintf(stdout, "addi r%d, 0, %d\n", d, b);
-        else fprintf(stdout, "addi r%d, r%d, %d\n", d, a, b);
-        return;
-    case ADDIS:
-        if(a == 0) fprintf(stdout, "addis r%d, 0, %d\n", d, b);
-        else fprintf(stdout, "addis r%d, r%d, %d\n", d, a, b);
-        return;
-    case CMPWI:
-        fprintf(stdout, "cmpwi cr%d, r%d, %d\n", d, a, b);
-        return;
-    case BGT:
-        if(d == 0) fprintf(stdout, "bgt %s\n", mem.inv[a].c_str());
-        else fprintf(stdout, "bgt cr%d, %s\n", d, mem.inv[a].c_str());
-        return;
-    case BL:
-        fprintf(stdout, "bl %s\n", mem.inv[d].c_str());
-        return;
-    case BLR:
-        fprintf(stdout, "blr\n");
-        return;
-    case BCL:
-        fprintf(stdout, "bcl, %d, %d, %s\n", d, a, mem.inv[b].c_str());
-        return;
-    case BCTR:
-        fprintf(stdout, "bctr\n");
-        return;
-    case BCTRL:
-        fprintf(stdout, "bctrl\n");
-        return;
-    case LWZ:
-        if(b == 0) fprintf(stdout, "lwz, r%d, %d(0)\n", d, a);
-        else fprintf(stdout, "lwz, r%d, %d(r%d)\n", d, a, b);
-        return;
-    case LWZU:
-        fprintf(stdout, "lwzu r%d, %d(r%d)\n", d, a, b);
-        return;
-    case LWZX:
-        fprintf(stdout, "lwzx r%d, r%d, r%d\n", d, a, b);
-        return;
-    case SUB:
-        fprintf(stdout, "sub r%d, r%d, r%d\n", d, a, b);
-        return;
-    case STW:
-        if(b == 0) fprintf(stdout, "stw, r%d, %d(0)\n", d, a);
-        else fprintf(stdout, "stw, r%d, %d(r%d)\n", d, a, b);
-        return;
-    case STWU:
-        fprintf(stdout, "stwu r%d, %d(r%d)\n", d, a, b);
-        return;
-    case MFSPR:
-        fprintf(stdout, "mfspr r%d, %d\n", d, a);
-        return;
-    case MR:
-        fprintf(stdout, "mr r%d, r%d\n", d, a);
-        return;
-    case MTSPR:
-        fprintf(stdout, "mtspr %d, r%d\n", d, a);
-        return;
-    // 1st architecture
-    case FCTIWZ:
-        fprintf(stdout, "fctiwz f%d, f%d\n", d, a);
-        return;
-    case FCFIW:
-        fprintf(stdout, "fcfiw f%d, r%d\n", d, a);
-        return;
-    case IN:
-        fprintf(stdout, "in r%d\n", d);
-        //fprintf(stdout, "in r%d, %d\n", d, a);
-        return;
-    case OUT:
-        fprintf(stdout, "out r%d, %d\n", d, a);
-        return;
-    case FLUSH:
-        fprintf(stdout, "flush\n");
-        return;
-    case HALT:
-        fprintf(stdout, "halt\n");
-        return;
-    case ORI:
-        fprintf(stdout, "ori r%d, r%d, %d\n", d, a, b);
-        return;
-    case XORIS:
-        fprintf(stdout, "xoris r%d, r%d, %d\n", d, a, b);
-        return;
-    case B:
-        fprintf(stdout, "b %s\n", mem.inv[d].c_str());
-        return;
-    case BLT:
-        if(d == -1) fprintf(stdout, "blt %s\n", mem.inv[a].c_str());
-        else fprintf(stdout, "blt cr%d, %s\n", d, mem.inv[a].c_str());
-        return;
-    case BGE:
-        if(d == -1) fprintf(stdout, "bge %s\n", mem.inv[a].c_str());
-        else fprintf(stdout, "bge cr%d, %s\n", d, mem.inv[a].c_str());
-        return;
-    case BNE:
-        if(d == -1) fprintf(stdout, "bne %s\n", mem.inv[a].c_str());
-        else fprintf(stdout, "bne cr%d, %s\n", d, mem.inv[a].c_str());
-        return;
-    case CMPW:
-        fprintf(stdout, "cmpw cr%d, r%d, r%d\n", d, a, b);
-        return;
-    case FABS:
-        fprintf(stdout, "fabs f%d, f%d\n", d, a);
-        return;
-    case FADD:
-        fprintf(stdout, "fadd f%d, f%d, f%d\n", d, a, b);
-        return;
-    case FCMPU:
-        fprintf(stdout, "fcmpu cr%d, f%d, f%d\n", d, a, b);
-        return;
-    case FDIV:
-        fprintf(stdout, "fdiv f%d, f%d, f%d\n", d, a, b);
-        return;
-    case FMR:
-        fprintf(stdout, "fmr f%d, f%d\n", d, a);
-        return;
-    case FMUL:
-        fprintf(stdout, "fmul f%d, f%d, f%d\n", d, a, b);
-        return;
-    case FNEG:
-        fprintf(stdout, "fneg f%d, f%d\n", d, a);
-        return;
-    case FSUB:
-        fprintf(stdout, "fsub f%d, f%d, f%d\n", d, a, b);
-        return;
-    case FSQRT:
-        fprintf(stdout, "fsqrt f%d, f%d\n", d, a);
-        return;
-    case FHALF:
-        fprintf(stdout, "fhalf f%d, f%d\n", d, a);
-        return;
-    case FFLOOR:
-        fprintf(stdout, "ffloor f%d, f%d\n", d, a);
-        return;
-    case FSIN:
-        fprintf(stdout, "fsin f%d, f%d\n", d, a);
-        return;
-    case FCOS:
-        fprintf(stdout, "fcos f%d, f%d\n", d, a);
-        return;
-    case FATAN:
-        fprintf(stdout, "fatan f%d, f%d\n", d, a);
-        return;
-    case LFS:
-        fprintf(stdout, "lfs f%d, %d(r%d)\n", d, a, b);
-        return;
-    case LFSX:
-        fprintf(stdout, "lfsx f%d, r%d, r%d\n", d, a, b);
-        return;
-    case STFSX:
-        fprintf(stdout, "stfsx f%d, r%d, r%d\n", d, a, b);
-        return;
-    case MULLI:
-        fprintf(stdout, "mulli r%d, r%d, %d\n", d, a, b);
-        return;
-    case MULHWU:
-        fprintf(stdout, "mulhwu r%d, r%d, r%d\n", d, a, b);
-        return;
-    case SLWI:
-        fprintf(stdout, "slwi r%d, r%d, %d\n", d, a, b);
-        return;
-    case SRWI:
-        fprintf(stdout, "srwi r%d, r%d, %d\n", d, a, b);
-        return;
-    case STFS:
-        fprintf(stdout, "stfs f%d, %d(r%d)\n", d, a, b);
-        return;
-    case STWX:
-        fprintf(stdout, "stwx r%d, r%d, r%d\n", d, a, b);
-        return;
-    case NOT_INSTR:
-        fprintf(stdout, "%d\n", d);
-        return;
-    default:
-        fprintf(stdout, "## WARNING ##\nUNKNOWN_INSTRUCTION\n");
+    INSTR_FORM f = mem.kind_to_form[instr];
+    std::string s = opcode_to_string(instr);
+    std::string label;
+    switch (f){
+        case D:
+            printf("%s r%d\n", s.c_str(), d);
+            return;
+        case DA:
+            printf("%s r%d, r%d\n", s.c_str(), d, a);
+            return;
+        case DIMM:
+            printf("%s r%d, %d\n", s.c_str(), d, a);
+            return;
+        case DAB:
+            printf("%s r%d, r%d, r%d\n", s.c_str(), d, a, b);
+            return;
+        case DAB2:
+            if(b == 0) printf("%s, r%d, %d(0)\n", s.c_str(), d, a);
+            else printf("%s, r%d, %d(r%d)\n", s.c_str(), d, a, b);
+            return;
+        case DAB3:
+            if(b == 0) printf("%s, f%d, %d(0)\n", s.c_str(), d, a);
+            else printf("%s, f%d, %d(r%d)\n", s.c_str(), d, a, b);
+            return;
+        case DAIMM:
+            if(a != 0) printf("%s r%d, r%d, %d\n", s.c_str(), d, a, b);
+            else printf("%s r%d, 0, %d\n", s.c_str(), d, b);
+            return;
+        case CAB:
+            printf("%s cr%d, r%d, r%d\n", s.c_str(), d, a, b);
+            return;
+        case CAIMM:
+            printf("%s cr%d, r%d, %d\n", s.c_str(), d, a, b);
+            return;
+        case CFF:
+            printf("%s cr%d, f%d, f%d\n", s.c_str(), d, a, b);
+            return;
+        case BC:
+            if(mem.inv.count(a)) label = mem.inv[a];
+            else label = std::to_string(a);
+            if(d == 0) printf("%s %s\n", s.c_str(), label.c_str());
+            else printf("%s cr%d, %s\n", s.c_str(), d, label.c_str());
+            return;
+        case BDAL:
+            if(mem.inv.count(b)) label = mem.inv[b];
+            else label = std::to_string(b);
+            printf("%s %d, %d, %s\n", s.c_str(), d, a, label.c_str());
+            return;
+        case BLB:
+            if(mem.inv.count(d)) label = mem.inv[d];
+            else label = std::to_string(d);
+            printf("%s %s\n", s.c_str(), label.c_str());
+            return;
+        case FDAB:
+            printf("%s f%d, f%d, f%d\n", s.c_str(), d, a, b);
+            return;
+        case FDA:
+            printf("%s f%d, f%d\n", s.c_str(), d, a);
+            return;
+        case FR:
+            printf("%s f%d, r%d\n", s.c_str(), d, a);
+            return;
+        case FRR:
+            printf("%s f%d, r%d, r%d\n", s.c_str(), d, a, b);
+            return;
+        case TSPR:
+            printf("%s %d, r%d\n", s.c_str(), d, a);
+            return;
+        case FSPR:
+            printf("%s r%d, %d\n", s.c_str(), d, a);
+            return;
+        case N:
+            printf("%s\n", s.c_str());
+            return;
+        case NOT:
+            printf("%d", d);
+            return;
+        default:
+            printf("this may not be an instruction\n");
+            assert(false);
+            return;
     }
 }
+
 
 void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
     unsigned int res = opcode_to_bit(instr) << 26;
@@ -1029,7 +656,7 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
         res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (18 << 1);
         break;
     case FMR:
-        res |= res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (72 << 1);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (72 << 1);
         break;
     case FMUL:
         res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 6) | (25 << 1);
