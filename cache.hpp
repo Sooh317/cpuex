@@ -114,8 +114,8 @@ private:
 
     void internal_show(MEMORY& mem, int i, int addr, int index){
         std::cout << i << ": (";
-        if(mem.type[addr_to_index(addr) + i]) std::cout << bit_cast<float, int>(data[index][i]) << std::endl;
-        else std::cout << data[index][i] << std::endl;
+        if(mem.type[addr_to_index(addr) + i]) std::cout << bit_cast<float, int>(data[index][i]) << ", ";
+        else std::cout << data[index][i] << ", ";
         print_binary_int1(data[index][i]);
         std::cout << ")" << std::endl;
     }

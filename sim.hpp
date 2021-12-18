@@ -369,6 +369,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             std::cout << "c : crを表示\n";
             std::cout << "t : ctrを表示\n";
             std::cout << "l : lrを表示\n";
+            std::cout << "L : アドレス n のラベルを表示\n";
             std::cout << "m : メモリアドレス n 周辺を表示\n";
             std::cout << "M : メモリアドレス a-b を表示\n";
             std::cout << "C : nライン目のキャッシュを表示\n";
