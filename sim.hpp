@@ -16,15 +16,19 @@
 void output_cur_info(CPU&, MEMORY_PRO&);
 
 void notify_load(CPU& cpu, MEMORY_PRO& mem, int d, bool gpr){
+    cpu.pc -= 4;
     output_cur_info(cpu, mem);
-    if(gpr) std::cout << "アドレス:" << mem.notify << " から"<< "gpr[" << d << "] に " << cpu.gpr[d] << " がロードされました\n";
-    else std::cout << "アドレス:" << mem.notify << " から"<<  "fpr[" << d << "] に " << cpu.fpr[d] << " がロードされました\n";
+    cpu.pc += 4;
+    if(gpr) std::cout << "\033[33mロード:\n" << "gpr[" << d << "] = " << cpu.gpr[d] << " from " << "mem[" << mem.notify << "]\033[m\n";
+    else std::cout << "\033[33mロード:\n" << "fpr[" << d << "] = " << cpu.fpr[d] << " from " << "mem[" << mem.notify << "]\033[m\n";
     std::cout << '\n';
 }
 void notify_store(CPU& cpu, MEMORY_PRO& mem, int d, bool gpr){
+    cpu.pc -= 4;
     output_cur_info(cpu, mem);
-    if(gpr) std::cout << "gpr[" << d << "]からアドレス:" << mem.notify << "に " << cpu.gpr[d] << " がストアされました\n";
-    else std::cout << "fpr[" << d << "]からアドレス:" << mem.notify << "に " << cpu.fpr[d] << " がストアされました\n";
+    cpu.pc += 4;
+    if(gpr) std::cout << "\033[32mストア:\n" << "mem[" << mem.notify << "] = " << cpu.gpr[d] << " from " << "gpr[" << d << "]\033[m\n";
+    else std::cout << "\033[32mストア:\n" << "mem[" << mem.notify << "] = " << cpu.fpr[d] << " from " << "fpr[" << d << "]\033[m\n";
     std::cout << '\n';
 }
 
@@ -498,13 +502,13 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
                     }
                 }
             }
-            std::cout << "終了した命令数と次に実行する命令:\n";
             output_cur_info(cpu, mem);
             std::swap(option.display_assembly, da);
             std::swap(option.display_binary, db);
         }
         if(ss.next) continue;
         mem.cnt++;
+        std::cout << "終了した命令数と次に実行する命令:\n";
         output_cur_info(cpu, mem);
         auto[opc, d, a, b] = mem.instr[addr_to_index(cpu.pc)];
         if(option.display_assembly) show_instr(mem, opc, d, a, b); 
