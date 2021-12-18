@@ -45,5 +45,5 @@ _min_caml_start: # main entry point
 	lwz	r31, 0(r3)				# 5
 	mtspr	8, r31				# 5
 #	main program ends
-    flush
+	flush
 	halt

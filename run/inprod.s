@@ -101,16 +101,16 @@ inprod.29:
 	blr
 _min_caml_start: # main entry point
 #	main program starts
-	addis	r31, r31, ha16(l.63)
+	addis	r31, 0, ha16(l.63)
 	ori	r31, r31, lo16(l.63)
 	lfs	f0, 0(r31)				# 6
-	addis	r31, r31, ha16(l.64)
+	addis	r31, 0, ha16(l.64)
 	ori	r31, r31, lo16(l.64)
 	lfs	f1, 0(r31)				# 6
-	addis	r31, r31, ha16(l.65)
+	addis	r31, 0, ha16(l.65)
 	ori	r31, r31, lo16(l.65)
 	lfs	f2, 0(r31)				# 6
-	addis	r31, r31, ha16(l.66)
+	addis	r31, 0, ha16(l.66)
 	ori	r31, r31, lo16(l.66)
 	lfs	f3, 0(r31)				# 6
 	mr	r2, r4				# 6
@@ -118,13 +118,13 @@ _min_caml_start: # main entry point
 	stfs	f3, 8(r2)				# 6
 	stfs	f2, 4(r2)				# 6
 	stfs	f1, 0(r2)				# 6
-	addis	r31, r31, ha16(l.71)
+	addis	r31, 0, ha16(l.71)
 	ori	r31, r31, lo16(l.71)
 	lfs	f1, 0(r31)				# 6
-	addis	r31, r31, ha16(l.72)
+	addis	r31, 0, ha16(l.72)
 	ori	r31, r31, lo16(l.72)
 	lfs	f2, 0(r31)				# 6
-	addis	r31, r31, ha16(l.73)
+	addis	r31, 0, ha16(l.73)
 	ori	r31, r31, lo16(l.73)
 	lfs	f3, 0(r31)				# 6
 	mr	r5, r4				# 6
@@ -157,4 +157,5 @@ _min_caml_start: # main entry point
 	lwz	r31, -4(r3)				# 6
 	mtspr	8, r31				# 6
 #	main program ends
+	flush
 	halt

@@ -8,11 +8,6 @@
 #include <fstream>
 #include <string>
 
-/*
-void init_memory(MEMORY&, OPTION&);
-void show_lable(const std::map<std::string, int>&);
-*/
-
 void init_memory(CACHE_PRO& cache_pro, MEMORY& mem, OPTION& option){
     if(option.asmTObin || !option.binary){
         int tmp = 0;
@@ -28,13 +23,9 @@ void init_memory(CACHE_PRO& cache_pro, MEMORY& mem, OPTION& option){
             s = "run/" + s;
             decode(s, mem, cache_pro);
         }
+        std::cerr << "ラベル[_min_caml_start]のアドレスは " << mem.lbl["_min_caml_start"] << " byte目です" << std::endl;
     }
-    else{
-        std::ifstream ifs("run/binary.txt");
-        std::string s;
-        while(ifs >> s) mem.instr[mem.index++] = decode_bin(s);
-    }
-    std::cerr << "ラベル[_min_caml_start]のアドレスは " << mem.lbl["_min_caml_start"] << " byte目です" << std::endl;
+    
     if(option.exec_mode == 1){
         std::cout << "loading success!" << std::endl;
         // show_lable(mem.lbl);

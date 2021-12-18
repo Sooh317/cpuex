@@ -197,17 +197,6 @@ namespace TasukuFukami{
         }
         int newexp = (pre >> 23) & bitmask(8);
         int expdiff = newexp - ((post >> 23) & bitmask(8));
-        // union{float f; int i;} a, b, pre, post;
-        // a.f = f, b.f = g;
-        // int exp_a = (a.i >> 23) & bitmask(8), exp_b = (b.i >> 23) & bitmask(8);
-        // if(exp_a < exp_b) pre = b, post = a;
-        // else if(exp_a > exp_b) pre = a, post = b;
-        // else{
-        //     if((a.i & bitmask(23)) > (b.i & bitmask(23))) pre = a, post = b;
-        //     else pre = b, post = a;
-        // }
-        // int newexp = (pre.i >> 23) & bitmask(8);
-        // int expdiff = newexp - ((post.i >> 23) & bitmask(8));
         unsigned newmanti;
 
         if(((post >> 23) & bitmask(8)) == 0) newmanti = (pre & bitmask(23)); //post_exp = 0
@@ -247,10 +236,6 @@ namespace TasukuFukami{
         int a = bit_cast<int, float>(f), b = bit_cast<int, float>(g);
         unsigned manti1 = a & bitmask(23);
         unsigned manti2 = b & bitmask(23);
-        // union{float f; int i;} a, b;
-        // a.f = f, b.f = g;
-        // unsigned manti1 = a.i & bitmask(23);
-        // unsigned manti2 = b.i & bitmask(23);
 
         std::vector<unsigned> bits = {(1 << 23 | manti1)};
         std::vector<unsigned> carry(23, 0);
@@ -283,88 +268,59 @@ namespace TasukuFukami{
             bits[8*i] = (((bits[8*i] >> 23) & bitmask(4)) << 27) | (dos & bitmask(27));
             if(dos >= (1 << 27)) carry[8*i + 3] = 1;
         }
-
         // step4
         unsigned c = 0;
         for(int i = 0; i < 23; i++) c |= carry[i] << (22 - i);
         unsigned uno = bits[0] + (c << 8);
         unsigned dos = (bits[8] >> 8) + (bits[16] >> 16);
 
-
         // final
         unsigned ans = (uno >> 5) + (dos >> 5);
-        //std::cout << uno << " " << dos << " " << ans << std::endl;
 
         unsigned tmp = ans, cnt = 0;
 
         while(tmp) cnt++, tmp >>= 1;
 
-        // unsigned newsig = kth_bit(a.i, 0, 32) ^ kth_bit(b.i, 0, 32);
-        // int newexp = ((a.i >> 23) & bitmask(8)) + ((b.i >> 23) & bitmask(8)) - 127;
         unsigned newsig = kth_bit(a, 0, 32) ^ kth_bit(b, 0, 32);
         int newexp = ((a >> 23) & bitmask(8)) + ((b >> 23) & bitmask(8)) - 127;
         unsigned newmanti = ans >> (cnt - 24);
 
         if(cnt == 27) newexp++;
-        // if(newexp < 1 || ((a.i >> 23) & bitmask(8)) == 0 || ((b.i >> 23) & bitmask(8)) == 0) newexp = 0;
         if(newexp < 1 || ((a >> 23) & bitmask(8)) == 0 || ((b >> 23) & bitmask(8)) == 0) newexp = 0;
-
-        //std::cout << newsig << " " << newexp << " " << newmanti << std::endl;
 
         return make_float(newsig, newexp, newmanti);
     }
 
     float fsqrt(float f, const FPU& fpu){
         int d = bit_cast<int, float>(f);
-        // union{float f; int i;} d, tmp;
-        // d.f = f;
-        // unsigned tag = ((d.i >> 14) & bitmask(10)) ^ (1 << 9);
         unsigned tag = ((d >> 14) & bitmask(10)) ^ (1 << 9);
         auto [midy, mydydx] = fpu.Fsqrttable(tag);
-        // int exp = (d.i >> 23 & 1) ? 127 : 128;
-        // float midx = make_float(0, exp, (((d.i >> 14) & bitmask(9)) << 14) | (1 << 13));
-        // float target = make_float(0, exp, d.i);
         int exp = (d >> 23 & 1) ? 127 : 128;
         float midx = make_float(0, exp, (((d >> 14) & bitmask(9)) << 14) | (1 << 13));
         float target = make_float(0, exp, d);
         float dx = fsub(target, midx);
         float ydiff = fmul(dx, mydydx);
         float myans = fadd(midy, ydiff);
-        // tmp.f = myans;
         int tmp = bit_cast<int, float>(myans);
-        // int newexp = (d.i >> 24 & bitmask(7)) - ((d.i >> 23 & 1) ? 63 : 64) + ((tmp.i >> 23) & bitmask(8));
-        // if((d.i >> 23 & bitmask(8)) == 0) newexp = 0;
-        // return make_float(0, newexp, tmp.i);
         int newexp = (d >> 24 & bitmask(7)) - ((d >> 23 & 1) ? 63 : 64) + ((tmp >> 23) & bitmask(8));
         if((d >> 23 & bitmask(8)) == 0) newexp = 0;
         return make_float(0, newexp, tmp);
     }
 
     float finv(float f, const FPU& fpu){
-        // union{float f; int i;} d, normfl, tmp;
-        // d.f = f;
         int d = bit_cast<int, float>(f);
-        // unsigned sig = kth_bit(d.i, 0);
         unsigned sig = kth_bit(d, 0);
-        // int oldexp = (d.i >> 23 & bitmask(8)) - 127;
         int oldexp = (d >> 23 & bitmask(8)) - 127;
-        // normfl.f = make_float(0, 127, d.i);
         float normflf = make_float(0, 127, d);
-        // unsigned tag = (normfl.i >> 13) & bitmask(10);
         int normfl = bit_cast<int, float>(normflf);
         unsigned tag = (normfl >> 13) & bitmask(10);
         auto [midy, mydydx] = fpu.Finvtable(tag);
-        // d.i = ((d.i >> 13) << 13) | (1 << 12);
         d = ((d >> 13) << 13) | (1 << 12);
         float df = bit_cast<float, int>(d);
-        // float dx = fsub(normfl.f, d.f);
         float dx = fsub(normflf, df);
         float ydiff = fmul(dx, mydydx);
         float myans = fadd(midy, ydiff);
-        // tmp.f = myans;
         int tmp = bit_cast<int, float>(myans);
-        // int newexp = (tmp.i >> 23 & bitmask(8)) - oldexp;
-        // unsigned manti = tmp.i & bitmask(23);
         int newexp = (tmp >> 23 & bitmask(8)) - oldexp;
         unsigned manti = tmp & bitmask(23);
         if(newexp < 0){
@@ -375,16 +331,9 @@ namespace TasukuFukami{
     }   
 
     float fdiv(float f, float g, const FPU& fpu){
-        // union{float f; int i;} a, b, core;
-        // a.f = f, b.f = g;
-        // core.f = fmul(make_float(0, 127, a.i), finv(make_float(0, 127, b.i), fpu));
         int a = bit_cast<int, float>(f), b = bit_cast<int, float>(g);
         float ccore = fmul(make_float(0, 127, a), finv(make_float(0, 127, b), fpu));
         int core = bit_cast<int, float>(ccore);
-        // unsigned sig = kth_bit(a.i, 0) ^ kth_bit(b.i, 0);
-        // int diffexp = (a.i >> 23 & bitmask(8)) - (b.i >> 23 & bitmask(8));
-        // int newexp = std::max(0, (int)(core.i >> 23 & bitmask(8)) + diffexp);
-        // if(((a.i >> 23) & bitmask(8)) == 0 || ((b.i >> 23) & bitmask(8)) == 0) newexp = 0;
         unsigned sig = kth_bit(a, 0) ^ kth_bit(b, 0);
         int diffexp = (a >> 23 & bitmask(8)) - (b >> 23 & bitmask(8));
         int newexp = std::max(0, (int)(core >> 23 & bitmask(8)) + diffexp);
@@ -402,27 +351,19 @@ namespace TasukuFukami{
     }
 
     float atan(float f, const FPU& fpu){
-        // union{float f; int i;} d;
-        // d.f = f;
         int d = bit_cast<int, float>(f);
-        // unsigned sig = kth_bit(d.i, 0);
-        // int exp = d.i >> 23 & bitmask(8);
-        // unsigned manti = d.i & bitmask(23);
         unsigned sig = kth_bit(d, 0);
         int exp = d >> 23 & bitmask(8);
         unsigned manti = d & bitmask(23);
         if(exp >= 19 + 127){
-            // union{float f; int i;} tmp;
             int tmp = 0b00111111110010010000111111001111 | (sig << 31);
             return bit_cast<float, int>(tmp);
         }
         if(-125 + 127 <= exp && exp <= -11 + 127){
-            // union{float f; int i;} tmp;
             int tmp = 0b00111111011111111111111111111011;
             return fmul(f, bit_cast<float, int>(tmp));
         }
         if(exp == -126 + 127){
-            // union{float f; int i;} tmp;
             int tmp = 0b00000000110000000000000000000000;
             return make_float(sig, (tmp >> 23) & bitmask(8), tmp);
         }
@@ -446,7 +387,6 @@ namespace TasukuFukami{
         }
         float mydx = fsub(make_float(0, exp, manti), mymidx);
         float ydiff = fmul(mydydx, mydx);
-        // union{float f; int i;} myans;
         float myansf = fadd(mymidy, ydiff);
         int myans = bit_cast<int, float>(myansf);
         return make_float(sig, myans >> 23 & bitmask(8), myans);

@@ -19,12 +19,12 @@ struct option_t{
         std::cerr << "### showing options ###\n";
         if(binTOasm){
             std::cerr << "translate binary to assembly" << std::endl;
-            if(binary) std::cerr << "reading binary.txt" << std::endl;
+            if(binary) std::cerr << " - disassemble binary in run/bin" << std::endl;
             return;
         }
         if(asmTObin){
             std::cerr << "translate assembly to binary" << std::endl;
-            if(assembly) std::cerr << " - assemble files written in assembly.txt" << std::endl;
+            if(assembly) std::cerr << " - assemble files written in run/assembly.txt" << std::endl;
             return;
         }
         if(exec_mode == 0) std::cerr << "simulate whole" << std::endl;

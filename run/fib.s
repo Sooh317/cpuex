@@ -32,7 +32,7 @@ ble_else.23:
 	blr
 _min_caml_start: # main entry point
 #	main program starts
-	addi	r2, 0, 20				# 4
+	addi	r2, 0, 10				# 4
 	mfspr	r31, 8				# 4
 	stw	r31, 0(r3)				# 4
 	addi	r3, r3, -4				# 4
@@ -48,5 +48,5 @@ _min_caml_start: # main entry point
 	lwz	r31, 0(r3)				# 4
 	mtspr	8, r31				# 4
 #	main program ends
-    flush
+	flush
 	halt

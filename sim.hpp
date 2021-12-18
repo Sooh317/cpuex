@@ -416,10 +416,6 @@ void translator(MEMORY& mem, OPTION& option){
         }
     }
     else{
-        // if(option.assembly) ifs.open("assembly_binary/assembly.s");
-        // while(std::getline(option.assembly ? ifs : std::cin, s)){
-        //     auto vec = remove_chars(s, " ,\t\n");
-        //     if(vec.size() == 0) continue;
         if(option.assembly){
             INSTR_KIND opc;
             int d, a, b;
