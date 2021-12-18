@@ -412,6 +412,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             std::cout << "m : メモリアドレス n 周辺を表示\n";
             std::cout << "M : メモリアドレス a-b を表示\n";
             std::cout << "C : nライン目のキャッシュを表示\n";
+            std::cout << "N : 追跡したいアドレス n を指定\n";
             std::cout << "P : ブレイクポイント(file名,行数)/(ラベル名)の設定" << std::endl;
         }
         if(ss.gr) cpu.show_gpr();
