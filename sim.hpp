@@ -325,7 +325,7 @@ void show_what(SHOW& ss, const std::string& s){
         }
         else if(c == 'P'){
             ss.Point = true;
-            std::cout << "ファイル名と行数(ex: libmincaml.S, 55) または ラベル名(min_caml_print_int:)を入力してください" << std::endl;
+            std::cout << "ファイル名と行数(ex: libmincaml.S, 55) または ラベル名(ex: min_caml_print_int)を入力してください" << std::endl;
             console_B();
             std::string t; std::getline(std::cin, t);
             console_E();
@@ -443,7 +443,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
                 }
             }
             else{
-                ss.bpoint.first.pop_back();
+                if(ss.bpoint.first.back() == ':') ss.bpoint.first.pop_back();
                 if(!mem.lbl.count(ss.bpoint.first)){
                     std::cout << "No such label" << std::endl;
                     continue;
