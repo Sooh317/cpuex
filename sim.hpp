@@ -12,6 +12,7 @@
 #include "fpu.hpp"
 #include "cache.hpp"
 
+void output_cur_info(CPU&, MEMORY_PRO&);
 
 INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
     assert(cpu.pc < (unsigned int)mem.index);
@@ -20,11 +21,12 @@ INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
     return mem.instr[pc];
 }
 
-bool exec(CPU& cpu, MEMORY&mem, FPU& fpu, CACHE& cache){
+
+bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
     int c, bi, ea, tmp;
     [[maybe_unused]] int bo;
-    bool cond_ok, ctr_ok;
+    bool cond_ok, ctr_ok, ovf = false;
     switch(opc){
         case ADD:
             cpu.gpr[d] = cpu.gpr[a] + cpu.gpr[b];
@@ -127,7 +129,11 @@ bool exec(CPU& cpu, MEMORY&mem, FPU& fpu, CACHE& cache){
             if(a == 0b00001) cpu.gpr[d] = cpu.xer;
             else if(a == 0b01000) cpu.gpr[d] = cpu.lr;
             else if(a == 0b01001) cpu.gpr[d] = cpu.ctr;
-            else assert(false);
+            else{
+                cpu.pc -= 4;
+                output_cur_info(cpu, mem);
+                assert(false);
+            }
             return false;
         case MR:
             cpu.gpr[d] = cpu.gpr[a];
@@ -137,7 +143,11 @@ bool exec(CPU& cpu, MEMORY&mem, FPU& fpu, CACHE& cache){
             if(d == 0b00001) cpu.xer = cpu.gpr[a];
             else if(d == 0b01000) cpu.lr = cpu.gpr[a];
             else if(d == 0b01001) cpu.ctr = cpu.gpr[a];
-            else assert(false);
+            else{
+                cpu.pc -= 4;
+                output_cur_info(cpu, mem);
+                assert(false);
+            }
             return false;
         case XORIS:
             cpu.gpr[d] = cpu.gpr[a] ^ (b << 16);
@@ -177,7 +187,12 @@ bool exec(CPU& cpu, MEMORY&mem, FPU& fpu, CACHE& cache){
             cpu.cr = tmp;
             return false;
         case FDIV:
-            cpu.fpr[d] = TasukuFukami::fdiv(cpu.fpr[a], cpu.fpr[b], fpu);
+            cpu.fpr[d] = TasukuFukami::fdiv(cpu.fpr[a], cpu.fpr[b], fpu, ovf);
+            if(ovf){
+                cpu.pc -= 4;
+                output_cur_info(cpu, mem);
+                assert(false);
+            }
             return false;
         case FMR:
             cpu.fpr[d] = cpu.fpr[a];
@@ -254,13 +269,15 @@ bool exec(CPU& cpu, MEMORY&mem, FPU& fpu, CACHE& cache){
         case HALT:
             return true;
         default:
+            cpu.pc -= 4;    
+            output_cur_info(cpu, mem);
             warning(opcode_to_string(opc));
             assert(false);
             return false;
     }
 }
 
-int simulate_whole(CPU& cpu, MEMORY &mem, FPU& fpu, CACHE& cache){
+int simulate_whole(CPU& cpu, MEMORY_PRO &mem, FPU& fpu, CACHE& cache){
     while(!exec(cpu, mem, fpu, cache));
     std::cerr << "program finised!" << std::endl;
     return 0;
@@ -327,6 +344,13 @@ void show_what(SHOW& ss, const std::string& s){
     }
 }
 
+void output_cur_info(CPU& cpu, MEMORY_PRO &mem){
+    auto it = mem.inv.upper_bound(cpu.pc);
+    --it;
+    auto[id, line] = mem.FL[addr_to_index(cpu.pc)];
+    std::cout << "\033[1;31mFILE: \033[m" << mem.file[id] << "\n\033[1;31mLINE:\033[m " << line << std::endl;
+    std::cout << "\033[1;31mLABEL:\033[m " << it->second << std::endl;
+}
 
 int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO& cache){
     long long cnt = 0;    
@@ -420,13 +444,8 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
         if(ss.next) continue;
 
         cnt++;
-        auto it = mem.inv.upper_bound(cpu.pc);
-        auto[id, line] = mem.FL[addr_to_index(cpu.pc)];
-
-        --it;
         std::cout << cnt << "命令実行済" << std::endl;
-        std::cout << "\033[1;31mFILE: \033[m" << mem.file[id] << "\n\033[1;31mLINE:\033[m " << line << std::endl;
-        std::cout << "\033[1;31mLABEL:\033[m " << it->second << std::endl;
+        output_cur_info(cpu, mem);
         auto[opc, d, a, b] = mem.instr[addr_to_index(cpu.pc)];
         if(option.display_assembly) show_instr(mem, opc, d, a, b); 
         if(option.display_binary) show_instr_binary(opc, d, a, b);
@@ -442,8 +461,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
 void execution(CPU& cpu, MEMORY_PRO& mem_pro, OPTION& option, FPU& fpu, CACHE_PRO& cache_pro){
     if(option.exec_mode == 0){
         CACHE cache = (CACHE)cache_pro;
-        MEMORY mem = (MEMORY)mem_pro;
-        simulate_whole(cpu, mem, fpu, cache);
+        simulate_whole(cpu, mem_pro, fpu, cache);
     }
     else if(option.exec_mode == 1) simulate_step(cpu, mem_pro, option, fpu, cache_pro);
 }

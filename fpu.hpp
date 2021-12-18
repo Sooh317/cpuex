@@ -330,7 +330,7 @@ namespace TasukuFukami{
         return make_float(sig, newexp, manti);
     }   
 
-    float fdiv(float f, float g, const FPU& fpu){
+    float fdiv(float f, float g, const FPU& fpu, bool& ovf){
         int a = bit_cast<int, float>(f), b = bit_cast<int, float>(g);
         float ccore = fmul(make_float(0, 127, a), finv(make_float(0, 127, b), fpu));
         int core = bit_cast<int, float>(ccore);
@@ -339,13 +339,13 @@ namespace TasukuFukami{
         int newexp = std::max(0, (int)(core >> 23 & bitmask(8)) + diffexp);
         if(((a >> 23) & bitmask(8)) == 0 || ((b >> 23) & bitmask(8)) == 0) newexp = 0;
         if(newexp >= 256){
+            ovf = 1;
             std::cerr << "### overflowing in fdiv ###" << std::endl;
             print_float(f);
             print_float(g);
             print_float(f / g);
             double res = (double)f / (double)g;
             std::cout << res << std::endl;
-            assert(false);
         }
         return make_float(sig, newexp, core);
     }
@@ -521,6 +521,7 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
             f.i = mt(), g.i = mt();
             //print_binary_int(f.i);
             //print_binary_int(g.i);
+            bool ovf = false;
             if(!range_check(f.f, LOW, HIGH)) continue;
             if(tag == 3){
                 if((((g.i >> 23) & bitmask(8)) == 0) || !range_check(g.f, LOW, HIGH)) continue;
@@ -529,7 +530,7 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
                 if(((tmp.i >> 23) & bitmask(8)) == bitmask(8)) continue;
             }
             if(tag == 2) myans = TasukuFukami::fmul(f.f, g.f), ans = (double)f.f * (double)g.f;
-            else myans = TasukuFukami::fdiv(f.f, g.f, fpu), ans = (double)f.f / (double)g.f;
+            else myans = TasukuFukami::fdiv(f.f, g.f, fpu, ovf), ans = (double)f.f / (double)g.f;
             if(!range_check(ans, LOW, HIGH)) continue;
             if((((f.i >> 23) & bitmask(8)) == 0 || ((g.i >> 23) & bitmask(8)) == 0)){
                 union {float f; int i;} d;
