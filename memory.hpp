@@ -26,11 +26,14 @@ void init_memory(CACHE_PRO& cache_pro, MEMORY_PRO& mem_pro, OPTION& option){
         }
         std::cerr << "ラベル[_min_caml_start]のアドレスは " << mem_pro.lbl["_min_caml_start"] << " byte目です" << std::endl;
     }
-    
     if(option.exec_mode == 1){
         std::cout << "loading success!" << std::endl;
         // show_lable(mem.lbl);
     }
+    std::ifstream ifs("sld/contest");
+    int sld; 
+    int idx = 0;
+    while(ifs >> sld) mem_pro.sld[idx++] = sld;
 }
 
 void show_lable(const std::map<std::string, int>& lbl){

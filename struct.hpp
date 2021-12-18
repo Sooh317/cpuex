@@ -243,14 +243,16 @@ using DATA = int32_t;
 
 struct memory_t{
     int index;
+    int sldpointer = 0;
     std::vector<INSTR> instr; 
     std::vector<DATA> data;
     std::vector<bool> type; // type = 1 : float
     std::map<std::string, int> lbl;
     std::map<int, std::string> inv;
+    std::vector<int> sld;
     std::unordered_map<INSTR_KIND, INSTR_FORM> kind_to_form;
 
-    memory_t():index(0), instr(INSTR_SIZE), data(DATA_SIZE), type(DATA_SIZE){
+    memory_t():index(0), sldpointer(0), instr(INSTR_SIZE), data(DATA_SIZE), type(DATA_SIZE), sld(400){
         kind_to_form[IN] = D;
         kind_to_form[MR] = DA;
         kind_to_form[OUT] = DIMM;
