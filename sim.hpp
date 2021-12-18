@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <set>
 #include "struct.hpp"
 #include "option.hpp"
 #include "instruction.hpp"
@@ -13,6 +14,20 @@
 #include "cache.hpp"
 
 void output_cur_info(CPU&, MEMORY_PRO&);
+
+void notify_load(CPU& cpu, MEMORY_PRO& mem, int d, bool gpr){
+    output_cur_info(cpu, mem);
+    if(gpr) std::cout << "アドレス:" << mem.notify << " から"<< "gpr[" << d << "] に " << cpu.gpr[d] << " がロードされました\n";
+    else std::cout << "アドレス:" << mem.notify << " から"<<  "fpr[" << d << "] に " << cpu.fpr[d] << " がロードされました\n";
+    std::cout << '\n';
+}
+void notify_store(CPU& cpu, MEMORY_PRO& mem, int d, bool gpr){
+    output_cur_info(cpu, mem);
+    if(gpr) std::cout << "gpr[" << d << "]からアドレス:" << mem.notify << "に " << cpu.gpr[d] << " がストアされました\n";
+    else std::cout << "fpr[" << d << "]からアドレス:" << mem.notify << "に " << cpu.fpr[d] << " がストアされました\n";
+    std::cout << '\n';
+}
+
 
 INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
     assert(cpu.pc < (unsigned int)mem.index);
@@ -109,19 +124,23 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
         case LWZ: 
             ea = (b ? cpu.gpr[b] : 0) + exts(a);
             cpu.gpr[d] = cache.lw(ea, mem);
+            if(ea == mem.notify) notify_load(cpu, mem, d, 1);
             return false;
         case LWZU:
             ea = cpu.gpr[b] + exts(a);
             cpu.gpr[d] = cache.lw(ea, mem);
+            if(ea == mem.notify) notify_load(cpu, mem, d, 1);
             cpu.gpr[b] = ea;
             return false;
         case STW:   
             ea = (b ? cpu.gpr[b] : 0) + exts(a);
             cache.swi(ea, mem, cpu.gpr[d]);
+            if(ea == mem.notify) notify_store(cpu, mem, d, 1);
             return false;
         case STWU:
             ea = cpu.gpr[b] + exts(a);
             cache.swi(ea, mem, cpu.gpr[d]);
+            if(ea == mem.notify) notify_store(cpu, mem, d, 1);
             cpu.gpr[b] = ea;
             return false;
         case MFSPR:
@@ -228,21 +247,25 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             tmp = (b == 0 ? 0 : cpu.gpr[b]);
             ea = tmp + exts(a);
             cpu.fpr[d] = bit_cast<float, int>(cache.lw(ea, mem));
+            if(ea == mem.notify) notify_load(cpu, mem, d, 0);
             return false;
         case LFSX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = tmp + cpu.gpr[b];
             cpu.fpr[d] = bit_cast<float, int>(cache.lw(ea, mem));
+            if(ea == mem.notify) notify_load(cpu, mem, d, 0);
             return false;
         case STFSX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = tmp + cpu.gpr[b];
             cache.swf(ea, mem, cpu.fpr[d]);
+            if(ea == mem.notify) notify_store(cpu, mem, d, 0);
             return false;
         case LWZX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = tmp + cpu.gpr[b];
             cpu.gpr[d] = cache.lw(ea, mem);
+            if(ea == mem.notify) notify_load(cpu, mem, d, 1);
             return false;
         case MULLI:
             cpu.gpr[d] = int(((long long)cpu.gpr[a] * (long long)b) & bitmask(32));
@@ -260,11 +283,13 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             tmp = (b == 0 ? 0 : cpu.gpr[b]);
             ea = tmp + exts(a);
             cache.swf(ea, mem, cpu.fpr[d]);
+            if(ea == mem.notify) notify_store(cpu, mem, d, 0);
             return false;
         case STWX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = cpu.gpr[b] + tmp;
             cache.swi(ea, mem, cpu.gpr[d]);
+            if(ea == mem.notify) notify_store(cpu, mem, d, 1);
             return false;
         case HALT:
             return true;
@@ -339,6 +364,17 @@ void show_what(SHOW& ss, const std::string& s){
                 ss.bpoint.second = -1;
             }
         }
+        else if(c == 'N'){
+            ss.Notify = 1;
+            std::cout << "通知したいメモリアドレスを入力してください(ex 60360, 100000)" << std::endl;
+            console_B();
+            std::string t; std::getline(std::cin, t);
+            console_E();
+            auto res = remove_chars(t, " ,");
+            for(int i = 0; i < (int)res.size(); i++){
+                ss.nval.push_back(stoi(res[i]));
+            }
+        }
         else if(c == 'B') ss.B = true;
         else if(c == 'F') ss.F = true;
         else if(c == 'g') ss.gr = true;
@@ -360,7 +396,6 @@ void output_cur_info(CPU& cpu, MEMORY_PRO &mem){
 
 int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO& cache){
     std::string s;
-
     while(console_B(), std::getline(std::cin, s)){
         console_E();
         if(s.size() == 0) continue;
@@ -377,7 +412,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             std::cout << "m : メモリアドレス n 周辺を表示\n";
             std::cout << "M : メモリアドレス a-b を表示\n";
             std::cout << "C : nライン目のキャッシュを表示\n";
-            std::cout << "P : ブレイクポイント(file名,行数)の設定" << std::endl;
+            std::cout << "P : ブレイクポイント(file名,行数)/(ラベル名)の設定" << std::endl;
         }
         if(ss.gr) cpu.show_gpr();
         if(ss.fr) cpu.show_fpr();
@@ -387,6 +422,10 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
         if(ss.m || ss.M){
             mem.show_memory(ss);
             cache.show_cache(ss, mem);
+        }
+        if(ss.Notify){ // とりあえず1つ
+            for(int addr : ss.nval) mem.notify = addr;
+            std::cout << "アドレス:" << mem.notify << " を追跡します" << std::endl;
         }
         if(ss.cache){
             for(int ind : ss.index){
@@ -404,6 +443,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             std::swap(option.display_assembly, da);
             std::swap(option.display_binary, db);
             for(int i = 0; i < ss.Sval; i++){
+                mem.cnt++;
                 if(exec(cpu, mem, fpu, cache)){
                     std::cout << "program finished!" << std::endl;
                     return 0;
@@ -411,7 +451,6 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             }
             std::swap(option.display_assembly, da);
             std::swap(option.display_binary, db);
-            mem.cnt += ss.Sval;
             std::cout << ss.Sval << " steps finished!" << std::endl;
             ss.next = true;
         }
