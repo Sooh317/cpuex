@@ -345,6 +345,7 @@ void show_what(SHOW& ss, const std::string& s){
 }
 
 void output_cur_info(CPU& cpu, MEMORY_PRO &mem){
+    std::cout << mem.cnt << "命令実行済" << std::endl;
     auto it = mem.inv.upper_bound(cpu.pc);
     --it;
     auto[id, line] = mem.FL[addr_to_index(cpu.pc)];
@@ -353,7 +354,6 @@ void output_cur_info(CPU& cpu, MEMORY_PRO &mem){
 }
 
 int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO& cache){
-    long long cnt = 0;    
     std::string s;
 
     while(console_B(), std::getline(std::cin, s)){
@@ -406,7 +406,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             }
             std::swap(option.display_assembly, da);
             std::swap(option.display_binary, db);
-            cnt += ss.Sval;
+            mem.cnt += ss.Sval;
             std::cout << ss.Sval << " steps finished!" << std::endl;
             ss.next = true;
         }
@@ -428,7 +428,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             p.second = ss.bpoint.second;
             for(int i = 0; i < (int)mem.file.size(); i++) if(mem.file[i] == ss.bpoint.first) p.first = i;
             while(1){
-                cnt++;
+                mem.cnt++;
                 if(mem.FL[addr_to_index(cpu.pc)] == p) break;
                 if(exec(cpu, mem, fpu, cache)){
                     std::cout << "program finished!" << std::endl;
@@ -442,9 +442,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             std::swap(option.display_binary, db);
         }
         if(ss.next) continue;
-
-        cnt++;
-        std::cout << cnt << "命令実行済" << std::endl;
+        mem.cnt++;
         output_cur_info(cpu, mem);
         auto[opc, d, a, b] = mem.instr[addr_to_index(cpu.pc)];
         if(option.display_assembly) show_instr(mem, opc, d, a, b); 

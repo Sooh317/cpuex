@@ -325,6 +325,7 @@ struct memory_t{
 using MEMORY = memory_t;
 
 struct memory2_t : MEMORY{
+    long long cnt = 0;
     std::vector<std::string> file;
     std::vector<std::pair<int, int>> FL; // (file id, line)
     memory2_t():FL(INSTR_SIZE){}
