@@ -325,14 +325,19 @@ void show_what(SHOW& ss, const std::string& s){
         }
         else if(c == 'P'){
             ss.Point = true;
-            std::cout << "ファイル名と行数を入れてください(ex: libmincaml.S, 55) -> out r2, 0 まで実行します" << std::endl;
+            std::cout << "ファイル名と行数(ex: libmincaml.S, 55) または ラベル名(min_caml_print_int:)を入力してください" << std::endl;
             console_B();
             std::string t; std::getline(std::cin, t);
             console_E();
             auto res = remove_chars(t, " ,");
-            ss.bpoint.first = res[0];
-            ss.bpoint.second = stoi(res[1]);
-
+            if(res.size() == 2){
+                ss.bpoint.first = res[0];
+                ss.bpoint.second = stoi(res[1]);
+            }
+            else{
+                ss.bpoint.first = res[0];
+                ss.bpoint.second = -1;
+            }
         }
         else if(c == 'B') ss.B = true;
         else if(c == 'F') ss.F = true;
@@ -369,7 +374,6 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             std::cout << "c : crを表示\n";
             std::cout << "t : ctrを表示\n";
             std::cout << "l : lrを表示\n";
-            std::cout << "L : アドレス n のラベルを表示\n";
             std::cout << "m : メモリアドレス n 周辺を表示\n";
             std::cout << "M : メモリアドレス a-b を表示\n";
             std::cout << "C : nライン目のキャッシュを表示\n";
@@ -428,17 +432,34 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             std::pair<int, int> p;
             p.second = ss.bpoint.second;
             for(int i = 0; i < (int)mem.file.size(); i++) if(mem.file[i] == ss.bpoint.first) p.first = i;
-            while(1){
-                mem.cnt++;
-                if(mem.FL[addr_to_index(cpu.pc)] == p) break;
-                if(exec(cpu, mem, fpu, cache)){
-                    std::cout << "program finished!" << std::endl;
-                    return 0;
+            if(p.second >= 0){
+                while(1){
+                    mem.cnt++;
+                    if(mem.FL[addr_to_index(cpu.pc)] == p) break;
+                    if(exec(cpu, mem, fpu, cache)){
+                        std::cout << "program finished!" << std::endl;
+                        return 0;
+                    }
                 }
             }
-            auto[opc, d, a, b] = mem.instr[addr_to_index(cpu.pc)];
-            std::cout << "次に実行する命令 : ";
-            show_instr(mem, opc, d, a, b);
+            else{
+                ss.bpoint.first.pop_back();
+                if(!mem.lbl.count(ss.bpoint.first)){
+                    std::cout << "No such label" << std::endl;
+                    continue;
+                } 
+                ss.bpoint.second = mem.lbl[ss.bpoint.first];
+                while(1){
+                    mem.cnt++;
+                    if(cpu.pc == (unsigned int)ss.bpoint.second) break;
+                    if(exec(cpu, mem, fpu, cache)){
+                        std::cout << "program finished!" << std::endl;
+                        return 0;
+                    }
+                }
+            }
+            std::cout << "終了した命令数と次に実行する命令:\n";
+            output_cur_info(cpu, mem);
             std::swap(option.display_assembly, da);
             std::swap(option.display_binary, db);
         }
