@@ -275,6 +275,7 @@ min_caml_reduce_to_2pi:
 	stw		r2, 0(r3)
 	addis	r5, 0, ha16(LF_PI)
 	ori		r5, r5, lo16(LF_PI)
+    lwz		r5, 0(r5)
 	stw		r5, -4(r3)
 	lfs		f2, 0(r3)
 	lfs		f1, -4(r3)
