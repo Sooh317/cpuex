@@ -1,2 +1,2 @@
 libmincaml.S
-matmul.s
+print.s

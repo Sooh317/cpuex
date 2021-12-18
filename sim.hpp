@@ -272,45 +272,52 @@ void show_what(SHOW& ss, const std::string& s){
     std::string garbage;
     for(const char& c : s){
         if(c == 's') ss.next = false;
+        else if(c == 'h') ss.help = 1;
         else if(c == 'S'){
             ss.S = true;
             std::cout << "何ステップ進めますか?(ex: 25)" << std::endl;
-            std::cout << "\033[36m> " << std::flush;
+            console_B();
             std::cin >> ss.Sval;
-            std::cout << "\033[m";
+            console_E();
             std::getline(std::cin, garbage);
         }
         else if(c == 'M'){
             ss.M = true;
             std::cout << "メモリアドレスの範囲をbyte単位で指定してください(ex: 8-100, 200-300)" << std::endl;
-            std::cout << "\033[36m> " << std::flush;
+            console_B();
             std::string t; std::getline(std::cin, t);
             auto res = remove_chars(t, " -,");
             for(int i = 0; i < (int)res.size() / 2; i++) ss.Maddr.emplace_back(stoi(res[2*i]), stoi(res[2*i + 1]));
-            std::cout << "\033[m";
+            console_E();
         }
         else if(c == 'm'){
             ss.m = true;
             std::cout << "メモリアドレスをbyte単位で指定してください(ex: 100, 12, 300)" << std::endl;
-            std::cout << "\033[36m> " << std::flush;
+            console_B();
             std::string t; std::getline(std::cin, t);
             auto res = remove_chars(t, " ,");
             for(int i = 0; i < (int)res.size(); i++) ss.maddr.emplace_back(stoi(res[i]));
-            std::cout << "\033[m";
+            console_E();
         }
         else if(c == 'C'){
             ss.cache = true;
             std::cout << "表示するキャッシュのインデックスを指定してください(ex: 0, 3, 10)(max:" << CACHE_LINE_NUM - 1 << ")" << std::endl;
-            std::cout << "\033[36m> " << std::flush;
+            console_B();
             std::string t; std::getline(std::cin, t);
-            std::cout << "\033[m";
+            console_E();
             auto res = remove_chars(t, " ,");
             for(int i = 0; i < (int)res.size(); i++) ss.index.emplace_back(stoi(res[i]));
         }
-        else if(c == 'l'){
-            ss.label = true;
-            std::cout << "ラベルのアドレスを入力してください" << std::endl;
-            std::cin >> ss.laddr;
+        else if(c == 'P'){
+            ss.Point = true;
+            std::cout << "ファイル名と行数を入れてください(ex: libmincaml.S, 55) -> out r2, 0 まで実行します" << std::endl;
+            console_B();
+            std::string t; std::getline(std::cin, t);
+            console_E();
+            auto res = remove_chars(t, " ,");
+            ss.bpoint.first = res[0];
+            ss.bpoint.second = stoi(res[1]);
+
         }
         else if(c == 'B') ss.B = true;
         else if(c == 'F') ss.F = true;
@@ -323,15 +330,28 @@ void show_what(SHOW& ss, const std::string& s){
 }
 
 
-int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu, CACHE_PRO& cache){
+int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO& cache){
     long long cnt = 0;    
     std::string s;
 
-    while(std::cout << "\033[36m> " << std::flush, std::getline(std::cin, s)){
-        std::cout << "\033[m";
+    while(console_B(), std::getline(std::cin, s)){
+        console_E();
         if(s.size() == 0) continue;
         SHOW ss;
         show_what(ss, s);
+        if(ss.help){   
+            std::cout << "s : 1ステップ進める\n";
+            std::cout << "S : nステップ進める\n"; 
+            std::cout << "g : 汎用をレジスタ表示\n";
+            std::cout << "f : 浮動小数点レジスタを表示\n";
+            std::cout << "c : crを表示\n";
+            std::cout << "t : ctrを表示\n";
+            std::cout << "l : lrを表示\n";
+            std::cout << "m : メモリアドレス n 周辺を表示\n";
+            std::cout << "M : メモリアドレス a-b を表示\n";
+            std::cout << "C : nライン目のキャッシュを表示\n";
+            std::cout << "P : ブレイクポイント(file名,行数)の設定" << std::endl;
+        }
         if(ss.gr) cpu.show_gpr();
         if(ss.fr) cpu.show_fpr();
         if(ss.lr) cpu.show_lr();
@@ -378,12 +398,37 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu, CACHE_PRO& ca
             cpu.flushed.clear();
             std::cout << "flushed.txtを確認してください" << std::endl;
         }
+        if(ss.Point){
+            bool da = false, db = false;
+            std::swap(option.display_assembly, da);
+            std::swap(option.display_binary, db);
+            std::pair<int, int> p;
+            p.second = ss.bpoint.second;
+            for(int i = 0; i < (int)mem.file.size(); i++) if(mem.file[i] == ss.bpoint.first) p.first = i;
+            while(1){
+                cnt++;
+                if(mem.FL[addr_to_index(cpu.pc)] == p) break;
+                if(exec(cpu, mem, fpu, cache)){
+                    std::cout << "program finished!" << std::endl;
+                    return 0;
+                }
+            }
+            auto[opc, d, a, b] = mem.instr[addr_to_index(cpu.pc)];
+            std::cout << "次に実行する命令 : ";
+            show_instr(mem, opc, d, a, b);
+            std::swap(option.display_assembly, da);
+            std::swap(option.display_binary, db);
+        }
         if(ss.next) continue;
+
         cnt++;
         auto it = mem.inv.upper_bound(cpu.pc);
+        auto[id, line] = mem.FL[addr_to_index(cpu.pc)];
+
         --it;
         std::cout << cnt << "命令実行済" << std::endl;
-        std::cout << it->second << " 内の" << (cpu.pc - it->first) / 4 + 1 << " 行目" << std::endl;
+        std::cout << "\033[1;31mFILE: \033[m" << mem.file[id] << "\n\033[1;31mLINE:\033[m " << line << std::endl;
+        std::cout << "\033[1;31mLABEL:\033[m " << it->second << std::endl;
         auto[opc, d, a, b] = mem.instr[addr_to_index(cpu.pc)];
         if(option.display_assembly) show_instr(mem, opc, d, a, b); 
         if(option.display_binary) show_instr_binary(opc, d, a, b);
@@ -396,16 +441,17 @@ int simulate_step(CPU& cpu, MEMORY &mem, OPTION& option, FPU& fpu, CACHE_PRO& ca
 }
 
 
-void execution(CPU& cpu, MEMORY& mem, OPTION& option, FPU& fpu, CACHE_PRO& cache_pro){
+void execution(CPU& cpu, MEMORY_PRO& mem_pro, OPTION& option, FPU& fpu, CACHE_PRO& cache_pro){
     if(option.exec_mode == 0){
         CACHE cache = (CACHE)cache_pro;
+        MEMORY mem = (MEMORY)mem_pro;
         simulate_whole(cpu, mem, fpu, cache);
     }
-    else if(option.exec_mode == 1) simulate_step(cpu, mem, option, fpu, cache_pro);
+    else if(option.exec_mode == 1) simulate_step(cpu, mem_pro, option, fpu, cache_pro);
 }
 
 
-void translator(MEMORY& mem, OPTION& option){
+void translator(MEMORY_PRO& mem, OPTION& option){
     std::ifstream ifs;
     std::string s;
     if(option.binTOasm){

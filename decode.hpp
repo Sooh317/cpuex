@@ -11,16 +11,6 @@
 #include <map>
 
 
-/*
-std::vector<std::string> remove_chars(std::string&, const std::string&);
-void next_memory_address(int& ,const std::vector<std::string>&);
-void put_instr_into_memory(std::string&, MEMORY&, std::map<std::string, int>&);
-void decode(const std::string, MEMORY&);
-INSTR decode_bin(const std::string&);
-int collect_label(const std::string, std::map<std::string, int>&, int);
-*/
-
-
 // \r\n 未対応
 std::vector<std::string> remove_chars(std::string& str, const std::string &chrs){
     std::vector<std::string> res;
@@ -60,24 +50,24 @@ void next_memory_address(int &cnt, const std::vector<std::string> &s){
     // }
 }
 
-void put_instr_into_memory(std::string& str, MEMORY& mem, CACHE_PRO& cache_pro){
+void put_instr_into_memory(std::string& str, MEMORY_PRO& mem_pro, CACHE_PRO& cache_pro, int line){
     std::vector<std::string> s = remove_chars(str, ", \t\n");
     if(s.size() >= 1){
         if(s[0].back() == ':') return; // label
         DIRECTIVE_KIND kind = directive_kind(s[0]);
-        if(kind == LONG) process_long_directive(cache_pro, mem, s[1]);
+        if(kind == LONG) process_long_directive(cache_pro, mem_pro, s[1]);
         //else if(kind == ASCII) process_ascii_directive(mem, s[1]);
         else if(kind == SOME_DIRECTIVE) return;
         else if(kind != ALIGN){
-            auto ins = recognize_instr(mem, s);
-            //printout(opcode_to_string(ins.opcode));
-            mem.instr[mem.index >> 2] = ins;
+            auto ins = recognize_instr(mem_pro, s);
+            mem_pro.instr[mem_pro.index >> 2] = ins;
+            mem_pro.FL[mem_pro.index >> 2] = std::make_pair(mem_pro.file.size() - 1, line);
         }
-        next_memory_address(mem.index, s);
+        next_memory_address(mem_pro.index, s);
     }
 }
 
-void decode(const std::string file, MEMORY &mem, CACHE_PRO& cache_pro){
+void decode(const std::string file, MEMORY_PRO &mem_pro, CACHE_PRO& cache_pro){
     std::ifstream ifs(file);
 
     if(!ifs){
@@ -86,14 +76,14 @@ void decode(const std::string file, MEMORY &mem, CACHE_PRO& cache_pro){
     }
 
     std::string str;
+    int line = 1;
     while(std::getline(ifs, str)){
         // printout(str);
-        put_instr_into_memory(str, mem, cache_pro);
-
+        put_instr_into_memory(str, mem_pro, cache_pro, line++);
     }
 }
 
-int collect_label(const std::string file, MEMORY& mem, int tmp){
+int collect_label(const std::string file, MEMORY_PRO& mem_pro, int tmp){
     std::ifstream ifs(file);
     if(!ifs){
         std::cerr << "cannot open file" << std::endl;
@@ -105,8 +95,8 @@ int collect_label(const std::string file, MEMORY& mem, int tmp){
         if(str.size() == 0 || str[0] == '#') continue; // comment
         else if(str[0] != '\t' && str[0] != ' '){ // label
             str = remove_chars(str, " \t:")[0];
-            mem.lbl[str] = cnt;
-            mem.inv[cnt] = str;
+            mem_pro.lbl[str] = cnt;
+            mem_pro.inv[cnt] = str;
         }
         else{
             auto ss = remove_chars(str, ", \t\n");

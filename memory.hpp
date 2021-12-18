@@ -8,22 +8,23 @@
 #include <fstream>
 #include <string>
 
-void init_memory(CACHE_PRO& cache_pro, MEMORY& mem, OPTION& option){
+void init_memory(CACHE_PRO& cache_pro, MEMORY_PRO& mem_pro, OPTION& option){
     if(option.asmTObin || !option.binary){
         int tmp = 0;
         std::ifstream ifs("run/assembly.txt");
         std::string s;
         while(ifs >> s){
             s = "run/" + s;
-            tmp = collect_label(s, mem, tmp);
+            tmp = collect_label(s, mem_pro, tmp);
         }
         ifs.clear();
         ifs.seekg(0, std::ios_base::beg);
         while(ifs >> s){
+            mem_pro.file.emplace_back(s);
             s = "run/" + s;
-            decode(s, mem, cache_pro);
+            decode(s, mem_pro, cache_pro);
         }
-        std::cerr << "ラベル[_min_caml_start]のアドレスは " << mem.lbl["_min_caml_start"] << " byte目です" << std::endl;
+        std::cerr << "ラベル[_min_caml_start]のアドレスは " << mem_pro.lbl["_min_caml_start"] << " byte目です" << std::endl;
     }
     
     if(option.exec_mode == 1){

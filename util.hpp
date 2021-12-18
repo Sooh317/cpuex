@@ -97,4 +97,10 @@ inline int exts(int v){
 
 inline int addr_to_index(int k){ return k >> 2;}
 
+inline void console_B(){
+    std::cout << "\033[36m> " << std::flush;
+}
+inline void console_E(){
+    std::cout << "\033[m";
+}
 

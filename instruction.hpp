@@ -268,7 +268,7 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
     }
 }
 
-INSTR recognize_instr(MEMORY& mem, const std::vector<std::string> &s){
+INSTR recognize_instr(MEMORY_PRO& mem, const std::vector<std::string> &s){
     auto call = [&](int id, bool in_flag)->int{return internal_reg_number(s[id], in_flag, mem.lbl);};
     INSTR_KIND opc = opcode_of_instr(s[0]);
     INSTR_FORM f = mem.kind_to_form[opc];

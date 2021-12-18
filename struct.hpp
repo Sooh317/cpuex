@@ -202,15 +202,16 @@ enum DIRECTIVE_KIND{
 
 
 struct show_t{
-    bool S, gr, fr, lr, cr, ctr, m, M, cache, F, B, label;
+    bool S, gr, fr, lr, cr, ctr, m, M, cache, F, B, label, Point, help;
     bool next;
     int wid;
     long long Sval;
     int laddr;
+    std::pair<std::string, int> bpoint;
     std::vector<int> maddr;
     std::vector<std::pair<int, int>> Maddr;
     std::vector<int> index;
-    show_t():S(0), gr(0), fr(0), lr(0), cr(0), ctr(0), m(0), M(0), cache(0),F(0), B(0), label(0), next(1), wid(3), Sval(0){}
+    show_t():S(0), gr(0), fr(0), lr(0), cr(0), ctr(0), m(0), M(0), cache(0),F(0), B(0), label(0), Point(0), help(0), next(1), wid(3), Sval(0), bpoint("", 0){}
 };
 using SHOW = show_t;
 
@@ -317,7 +318,13 @@ struct memory_t{
             }
         }
     }
+    virtual ~memory_t() = default;
 };
 using MEMORY = memory_t;
 
-
+struct memory2_t : MEMORY{
+    std::vector<std::string> file;
+    std::vector<std::pair<int, int>> FL; // (file id, line)
+    memory2_t():FL(INSTR_SIZE){}
+};
+using MEMORY_PRO = memory2_t;

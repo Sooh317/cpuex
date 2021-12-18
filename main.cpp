@@ -15,7 +15,7 @@
 
 int main(int argc, char* argv[]){
     CPU cpu;
-    MEMORY mem;
+    MEMORY_PRO mem_pro;
     CACHE_PRO cache_pro;
     OPTION option;
     FPU fpu;
@@ -24,16 +24,16 @@ int main(int argc, char* argv[]){
 
     init_option(option, argc, argv);
     option.show_option();
-    init_memory(cache_pro, mem, option);
+    init_memory(cache_pro, mem_pro, option);
 
     if(option.binTOasm || option.asmTObin){
-        translator(mem, option);
+        translator(mem_pro, option);
         return 0;
     }
 
-    init_cpu(cpu, option, mem.lbl);
+    init_cpu(cpu, option, mem_pro.lbl);
 
-    execution(cpu, mem, option, fpu, cache_pro);
+    execution(cpu, mem_pro, option, fpu, cache_pro);
 
     show_result(cpu);
 
