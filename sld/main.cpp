@@ -6,9 +6,14 @@ using namespace std;
 int main(){
     fstream ifs("contest.sld"), ofs("contest");
     string s;
+    int cnt = 1;
     while(getline(ifs, s)){
         auto vec = remove_chars(s, " \t");
-        for(int i = 0; i < (int)vec.size(); i++){
+        for(int i = 0; i < (4 <= cnt && cnt <= 20 ? 4 : 0); i++){
+            string t = vec[i];
+            ofs << stoi(t) << endl;
+        }   
+        for(int i = (4 <= cnt && cnt <= 20 ? 4 : 0); i < (int)vec.size(); i++){
             string t = vec[i];
             int idx = -1;
             for(int j = 0; j < (int)t.size(); j++){
@@ -22,10 +27,11 @@ int main(){
                 ofs << bit_cast<int, float>(f) << endl;
             }
             else{
-                int val = stoi(t);
-                ofs << val << endl;
+                float f = float(stoi(t));
+                ofs << bit_cast<int, float>(f) << endl;
             }
         }
+        cnt++;
     }
     return 0;
 }
