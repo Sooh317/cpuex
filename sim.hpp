@@ -42,6 +42,7 @@ INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
 
 
 bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
+    mem.cnt++;
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
     int c, bi, ea, tmp;
     [[maybe_unused]] int bo;
@@ -498,7 +499,6 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             std::swap(option.display_assembly, da);
             std::swap(option.display_binary, db);
             for(int i = 0; i < ss.Sval; i++){
-                mem.cnt++;
                 if(exec(cpu, mem, fpu, cache)){
                     std::cout << "program finished!" << std::endl;
                     return 0;
@@ -529,7 +529,6 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             if(p.second >= 0){
                 while(1){
                     if(mem.FL[addr_to_index(cpu.pc)] == p) break;
-                    mem.cnt++;
                     if(exec(cpu, mem, fpu, cache)){
                         std::cout << "program finished!" << std::endl;
                         return 0;
@@ -545,7 +544,6 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
                 ss.bpoint.second = mem.lbl[ss.bpoint.first];
                 while(1){
                     if(cpu.pc == (unsigned int)ss.bpoint.second) break;
-                    mem.cnt++;
                     if(exec(cpu, mem, fpu, cache)){
                         std::cout << "program finished!" << std::endl;
                         return 0;
@@ -559,7 +557,6 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
         if(ss.next) continue;
         std::cout << "終了した命令数と次に実行する命令:\n";
         output_cur_info(cpu, mem);
-        mem.cnt++;
         auto[opc, d, a, b] = mem.instr[addr_to_index(cpu.pc)];
         if(option.display_assembly) show_instr(mem, opc, d, a, b); 
         if(option.display_binary) show_instr_binary(opc, d, a, b);

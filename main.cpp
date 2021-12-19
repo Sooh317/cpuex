@@ -35,7 +35,7 @@ int main(int argc, char* argv[]){
 
     execution(cpu, mem_pro, option, fpu, cache_pro);
 
-    show_result(cpu);
+    show_result(cpu, mem_pro, cache_pro);
 
     return 0;
 }
