@@ -127,22 +127,42 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             return false;
         case LWZ: 
             ea = (b ? cpu.gpr[b] : 0) + exts(a);
+            if(ea >= DATA_SIZE){
+                cpu.pc -= 4;
+                output_cur_info(cpu, mem);
+                assert(false);
+            }
             cpu.gpr[d] = cache.lw(ea, mem);
             if(ea == mem.notify) notify_load(cpu, mem, d, 1);
             return false;
         case LWZU:
             ea = cpu.gpr[b] + exts(a);
+            if(ea >= DATA_SIZE){
+                cpu.pc -= 4;
+                output_cur_info(cpu, mem);
+                assert(false);
+            }
             cpu.gpr[d] = cache.lw(ea, mem);
             if(ea == mem.notify) notify_load(cpu, mem, d, 1);
             cpu.gpr[b] = ea;
             return false;
         case STW:   
             ea = (b ? cpu.gpr[b] : 0) + exts(a);
+            if(ea >= DATA_SIZE){
+                cpu.pc -= 4;
+                output_cur_info(cpu, mem);
+                assert(false);
+            }
             cache.swi(ea, mem, cpu.gpr[d]);
             if(ea == mem.notify) notify_store(cpu, mem, d, 1);
             return false;
         case STWU:
             ea = cpu.gpr[b] + exts(a);
+            if(ea >= DATA_SIZE){
+                cpu.pc -= 4;
+                output_cur_info(cpu, mem);
+                assert(false);
+            }
             cache.swi(ea, mem, cpu.gpr[d]);
             if(ea == mem.notify) notify_store(cpu, mem, d, 1);
             cpu.gpr[b] = ea;
@@ -250,24 +270,44 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
         case LFS:
             tmp = (b == 0 ? 0 : cpu.gpr[b]);
             ea = tmp + exts(a);
+            if(ea >= DATA_SIZE){
+                cpu.pc -= 4;
+                output_cur_info(cpu, mem);
+                assert(false);
+            }
             cpu.fpr[d] = bit_cast<float, int>(cache.lw(ea, mem));
             if(ea == mem.notify) notify_load(cpu, mem, d, 0);
             return false;
         case LFSX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = tmp + cpu.gpr[b];
+            if(ea >= DATA_SIZE){
+                cpu.pc -= 4;
+                output_cur_info(cpu, mem);
+                assert(false);
+            }
             cpu.fpr[d] = bit_cast<float, int>(cache.lw(ea, mem));
             if(ea == mem.notify) notify_load(cpu, mem, d, 0);
             return false;
         case STFSX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = tmp + cpu.gpr[b];
+            if(ea >= DATA_SIZE){
+                cpu.pc -= 4;
+                output_cur_info(cpu, mem);
+                assert(false);
+            }
             cache.swf(ea, mem, cpu.fpr[d]);
             if(ea == mem.notify) notify_store(cpu, mem, d, 0);
             return false;
         case LWZX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = tmp + cpu.gpr[b];
+            if(ea >= DATA_SIZE){
+                cpu.pc -= 4;
+                output_cur_info(cpu, mem);
+                assert(false);
+            }
             cpu.gpr[d] = cache.lw(ea, mem);
             if(ea == mem.notify) notify_load(cpu, mem, d, 1);
             return false;
@@ -286,12 +326,22 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
         case STFS: // LFSと同じ
             tmp = (b == 0 ? 0 : cpu.gpr[b]);
             ea = tmp + exts(a);
+            if(ea >= DATA_SIZE){
+                cpu.pc -= 4;
+                output_cur_info(cpu, mem);
+                assert(false);
+            }
             cache.swf(ea, mem, cpu.fpr[d]);
             if(ea == mem.notify) notify_store(cpu, mem, d, 0);
             return false;
         case STWX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = cpu.gpr[b] + tmp;
+            if(ea >= DATA_SIZE){
+                cpu.pc -= 4;
+                output_cur_info(cpu, mem);
+                assert(false);
+            }
             cache.swi(ea, mem, cpu.gpr[d]);
             if(ea == mem.notify) notify_store(cpu, mem, d, 1);
             return false;
