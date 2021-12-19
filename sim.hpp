@@ -528,8 +528,8 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             for(int i = 0; i < (int)mem.file.size(); i++) if(mem.file[i] == ss.bpoint.first) p.first = i;
             if(p.second >= 0){
                 while(1){
-                    mem.cnt++;
                     if(mem.FL[addr_to_index(cpu.pc)] == p) break;
+                    mem.cnt++;
                     if(exec(cpu, mem, fpu, cache)){
                         std::cout << "program finished!" << std::endl;
                         return 0;
