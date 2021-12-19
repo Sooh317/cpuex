@@ -10,6 +10,7 @@ void show_result(const CPU& cpu, MEMORY_PRO& mem, CACHE_PRO& cache){
     wf << "命令数: " << mem.cnt << std::endl;
     wf << "キャッシュヒット: " << cache.hit << std::endl;
     wf << "キャッシュミス: " << cache.miss << std::endl;
+    wf << "ライトバック: " << cache.write_back << std::endl;
     wf << "ヒット率: " << (double)cache.hit * 100.0 / (double)(cache.miss + cache.hit) << std::endl;
     wf.close();
     std::cout << "出力結果はflushed.ppmを確認してください" << std::endl;

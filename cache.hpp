@@ -21,7 +21,7 @@ struct cache_t{
         state_t():dirty(0), accessed(0), tag(0){}
     };
     static const int width = CACHE_LINE_SIZE / 32;
-    int hit, miss, write_back;
+    long long hit, miss, write_back;
     std::vector<state_t> state;
     std::vector<std::vector<DATA>> data;
 
@@ -57,6 +57,7 @@ public:
             data[index][(offset >> 2)] = d;
         }
         else{ // miss
+            miss++;
             std::swap(tag, state[index].tag);
             if(state[index].dirty){
                 Write_Back(tag, index, mem);
