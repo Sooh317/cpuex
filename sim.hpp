@@ -127,7 +127,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             return false;
         case LWZ: 
             ea = (b ? cpu.gpr[b] : 0) + exts(a);
-            if(ea >= DATA_SIZE){
+            if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem);
                 assert(false);
@@ -137,7 +137,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             return false;
         case LWZU:
             ea = cpu.gpr[b] + exts(a);
-            if(ea >= DATA_SIZE){
+            if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem);
                 assert(false);
@@ -148,7 +148,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             return false;
         case STW:   
             ea = (b ? cpu.gpr[b] : 0) + exts(a);
-            if(ea >= DATA_SIZE){
+            if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem);
                 assert(false);
@@ -158,7 +158,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             return false;
         case STWU:
             ea = cpu.gpr[b] + exts(a);
-            if(ea >= DATA_SIZE){
+            if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem);
                 assert(false);
@@ -270,7 +270,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
         case LFS:
             tmp = (b == 0 ? 0 : cpu.gpr[b]);
             ea = tmp + exts(a);
-            if(ea >= DATA_SIZE){
+            if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem);
                 assert(false);
@@ -281,7 +281,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
         case LFSX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = tmp + cpu.gpr[b];
-            if(ea >= DATA_SIZE){
+            if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem);
                 assert(false);
@@ -292,7 +292,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
         case STFSX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = tmp + cpu.gpr[b];
-            if(ea >= DATA_SIZE){
+            if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem);
                 assert(false);
@@ -303,7 +303,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
         case LWZX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = tmp + cpu.gpr[b];
-            if(ea >= DATA_SIZE){
+            if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem);
                 assert(false);
@@ -326,7 +326,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
         case STFS: // LFSと同じ
             tmp = (b == 0 ? 0 : cpu.gpr[b]);
             ea = tmp + exts(a);
-            if(ea >= DATA_SIZE){
+            if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem);
                 assert(false);
@@ -337,7 +337,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
         case STWX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = cpu.gpr[b] + tmp;
-            if(ea >= DATA_SIZE){
+            if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem);
                 assert(false);
