@@ -573,6 +573,9 @@ void execution(CPU& cpu, MEMORY_PRO& mem_pro, OPTION& option, FPU& fpu, CACHE_PR
     if(option.exec_mode == 0){
         CACHE cache = (CACHE)cache_pro;
         simulate_whole(cpu, mem_pro, fpu, cache);
+        cache_pro.hit = cache.hit;
+        cache_pro.miss = cache.miss;
+        cache_pro.write_back = cache_pro.write_back;
     }
     else if(option.exec_mode == 1) simulate_step(cpu, mem_pro, option, fpu, cache_pro);
 }
