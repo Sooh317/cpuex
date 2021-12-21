@@ -562,6 +562,7 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
         res |= (12 << 21) | ((d & bitmask(5)) << 16) | ((a & bitmask(14)) << 2);
         break;
     case BL:
+        d /= 4;
         res |= ((d & bitmask(24)) << 2) | 1;
         break;
     case BLR:
@@ -574,6 +575,7 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
         res |= (20 << 21) | (528 << 1) | 1;
         break;
     case BCL:
+        b /= 4;
         res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(14)) << 2) | 1;
         break;
     case LWZ:
