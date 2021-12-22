@@ -38,7 +38,7 @@ struct cpu_t{
 
     void show_gpr(){
         std::cout << "\033[1;31m";
-        for(int i = 0; i < GPR_SIZE; i++){
+        for(int i = GPR_SIZE - 1; i >= 0; i--){
             std::cout << "gpr[" << i << "] = (" << gpr[i] << ", ";
             print_binary_int1(gpr[i]);
             std::cout << ")\n";
@@ -47,7 +47,7 @@ struct cpu_t{
     }
     void show_fpr(){
         std::cout << "\033[1;32m";
-        for(int i = 0; i < FPR_SIZE; i++){
+        for(int i = FPR_SIZE - 1; i >= 0; i--){
             int d = bit_cast<int, float>(fpr[i]);
             std::cout << "fpr[" << i << "] = (" << fpr[i] << ", ";
             print_binary_int1(d);

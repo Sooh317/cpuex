@@ -365,7 +365,9 @@ int simulate_whole(CPU& cpu, MEMORY_PRO &mem, FPU& fpu, CACHE& cache){
 
 void show_what(SHOW& ss, const std::string& s){
     std::string garbage;
-    for(const char& c : s){
+    std::set<char> st;
+    for(const char& c : s) st.insert(c);
+    for(const char& c : st){
         if(c == 's') ss.next = false;
         else if(c == 'h') ss.help = 1;
         else if(c == 'S'){
@@ -447,7 +449,7 @@ void output_cur_info(CPU& cpu, MEMORY_PRO &mem){
     auto[id, line] = mem.FL[addr_to_index(cpu.pc)];
     std::cout << "\033[1;31mFILE: \033[m" << mem.file[id] << "\n\033[1;31mLINE:\033[m " << line << std::endl;
     std::cout << "\033[1;31mLABEL:\033[m " << it->second << std::endl;
-    std::cout << "\033[1;31mADDR: \033[m" << cpu.pc << std::endl;
+    std::cout << "\033[1;31mADDR/4: \033[m" << cpu.pc/4 << std::endl;
 }
 
 int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO& cache){
