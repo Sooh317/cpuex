@@ -126,7 +126,7 @@ private:
         int index = calc_index(addr);
         int tag = calc_tag(addr);
         if(state[index].tag != tag){
-            std::cout << "Addr: " << addr << " is not on Cache" << std::endl;
+            std::cout << "Addr/4: " << addr/4 << " is not on Cache" << std::endl;
         }
         else{
             addr = calc_base_addr(addr);

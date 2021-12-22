@@ -103,17 +103,17 @@ Lprint_int_gtzero:
 	srwi 	r6, r6, 3
 	mulli	r7, r6, 10
 	sub		r7, r2, r7
-	stw		r7, -4(r3)
+	stw		r7, -4(r3) //66
 	addi 	r3, r3, -4
 	mr		r2, r6
 	addi	r5, r5, 1
 	cmpwi	cr7, r2, 0
 	bne		cr7, Lprint_int_gtzero
 Lprint_int_nonempty:
-	lwz		r2, 0(r3)
+	lwz		r2, 0(r3) # 72?
 	addi 	r3, r3, 4
 	addi 	r2, r2, 48		# '0' == 48
-	out 	r2, 0
+	out 	r2, 0 
 	addi	r5, r5, -1
 	cmpwi	cr7, r5, 0
 	bne		cr7, Lprint_int_nonempty
