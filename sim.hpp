@@ -603,7 +603,7 @@ void translator(MEMORY_PRO& mem, OPTION& option){
                 d = mem.instr[i].rd;
                 a = mem.instr[i].ra;
                 b = mem.instr[i].rb;
-                if(opc == NOT_INSTR) d = mem.data[i];
+                // if(i == 0) std::cout << opc << " " << d << " " << a << " " << b << std::endl;
                 show_instr_binary(opc, d, a, b);
             }
         }
