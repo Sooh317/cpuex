@@ -217,6 +217,7 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
                     return (s[0] == 'l' ? lo16(lbl[label1] - lbl[label2]) : ha16(lbl[label1] - lbl[label2]));
                 }
                 else{
+                    std::cerr <<"Label in " << s << " not found" << std::endl;
                     assert(false);
                     return 0;
                 }
@@ -227,6 +228,7 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
                     return (s[0] == 'l' ? lo16(lbl[label]) : ha16(lbl[label]));
                 }
                 else{
+                    std::cerr <<"Label in " << s << " not found" << std::endl;
                     assert(false);
                     return 0;
                 }
@@ -269,6 +271,7 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
 }
 
 INSTR recognize_instr(MEMORY_PRO& mem, const std::vector<std::string> &s){
+    std::cout << s[0] << std::endl;
     auto call = [&](int id, bool in_flag)->int{return internal_reg_number(s[id], in_flag, mem.lbl);};
     INSTR_KIND opc = opcode_of_instr(s[0]);
     INSTR_FORM f = mem.kind_to_form[opc];
