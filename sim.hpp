@@ -13,19 +13,19 @@
 #include "fpu.hpp"
 #include "cache.hpp"
 
-void output_cur_info(CPU&, MEMORY_PRO&);
+void output_cur_info(CPU&, MEMORY_PRO&, OPTION&);
 
-void notify_load(CPU& cpu, MEMORY_PRO& mem, int d, bool gpr){
+void notify_load(CPU& cpu, MEMORY_PRO& mem, OPTION& option, int d, bool gpr){
     cpu.pc -= 4;
-    output_cur_info(cpu, mem);
+    output_cur_info(cpu, mem, option);
     cpu.pc += 4;
     if(gpr) std::cout << "\033[33mロード:\n" << "gpr[" << d << "] = " << cpu.gpr[d] << " from " << "mem[" << mem.notify << "]\033[m\n";
     else std::cout << "\033[33mロード:\n" << "fpr[" << d << "] = " << cpu.fpr[d] << " from " << "mem[" << mem.notify << "]\033[m\n";
     std::cout << '\n';
 }
-void notify_store(CPU& cpu, MEMORY_PRO& mem, int d, bool gpr){
+void notify_store(CPU& cpu, MEMORY_PRO& mem, OPTION& option, int d, bool gpr){
     cpu.pc -= 4;
-    output_cur_info(cpu, mem);
+    output_cur_info(cpu, mem, option);
     cpu.pc += 4;
     if(gpr) std::cout << "\033[32mストア:\n" << "mem[" << mem.notify << "] = " << cpu.gpr[d] << " from " << "gpr[" << d << "]\033[m\n";
     else std::cout << "\033[32mストア:\n" << "mem[" << mem.notify << "] = " << cpu.fpr[d] << " from " << "fpr[" << d << "]\033[m\n";
@@ -41,7 +41,7 @@ INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
 }
 
 
-bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
+bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
     mem.cnt++;
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
     int c, bi, ea, tmp;
@@ -130,42 +130,42 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             ea = (b ? cpu.gpr[b] : 0) + exts(a);
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
-                output_cur_info(cpu, mem);
+                output_cur_info(cpu, mem, option);
                 assert(false);
             }
             cpu.gpr[d] = cache.lw(ea, mem);
-            if(ea == mem.notify) notify_load(cpu, mem, d, 1);
+            if(ea == mem.notify) notify_load(cpu, mem, option, d, 1);
             return false;
         case LWZU:
             ea = cpu.gpr[b] + exts(a);
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
-                output_cur_info(cpu, mem);
+                output_cur_info(cpu, mem, option);
                 assert(false);
             }
             cpu.gpr[d] = cache.lw(ea, mem);
-            if(ea == mem.notify) notify_load(cpu, mem, d, 1);
+            if(ea == mem.notify) notify_load(cpu, mem, option, d, 1);
             cpu.gpr[b] = ea;
             return false;
         case STW:   
             ea = (b ? cpu.gpr[b] : 0) + exts(a);
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
-                output_cur_info(cpu, mem);
+                output_cur_info(cpu, mem, option);
                 assert(false);
             }
             cache.swi(ea, mem, cpu.gpr[d]);
-            if(ea == mem.notify) notify_store(cpu, mem, d, 1);
+            if(ea == mem.notify) notify_store(cpu, mem, option, d, 1);
             return false;
         case STWU:
             ea = cpu.gpr[b] + exts(a);
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
-                output_cur_info(cpu, mem);
+                output_cur_info(cpu, mem, option);
                 assert(false);
             }
             cache.swi(ea, mem, cpu.gpr[d]);
-            if(ea == mem.notify) notify_store(cpu, mem, d, 1);
+            if(ea == mem.notify) notify_store(cpu, mem,option, d, 1);
             cpu.gpr[b] = ea;
             return false;
         case MFSPR:
@@ -175,7 +175,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             else if(a == 0b01001) cpu.gpr[d] = cpu.ctr;
             else{
                 cpu.pc -= 4;
-                output_cur_info(cpu, mem);
+                output_cur_info(cpu, mem, option);
                 assert(false);
             }
             return false;
@@ -189,7 +189,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             else if(d == 0b01001) cpu.ctr = cpu.gpr[a];
             else{
                 cpu.pc -= 4;
-                output_cur_info(cpu, mem);
+                output_cur_info(cpu, mem, option);
                 assert(false);
             }
             return false;
@@ -234,7 +234,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             cpu.fpr[d] = TasukuFukami::fdiv(cpu.fpr[a], cpu.fpr[b], fpu, ovf);
             if(ovf){
                 cpu.pc -= 4;
-                output_cur_info(cpu, mem);
+                output_cur_info(cpu, mem, option);
                 assert(false);
             }
             return false;
@@ -273,44 +273,44 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             ea = tmp + exts(a);
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
-                output_cur_info(cpu, mem);
+                output_cur_info(cpu, mem, option);
                 assert(false);
             }
             cpu.fpr[d] = bit_cast<float, int>(cache.lw(ea, mem));
-            if(ea == mem.notify) notify_load(cpu, mem, d, 0);
+            if(ea == mem.notify) notify_load(cpu, mem, option, d, 0);
             return false;
         case LFSX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = tmp + cpu.gpr[b];
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
-                output_cur_info(cpu, mem);
+                output_cur_info(cpu, mem, option);
                 assert(false);
             }
             cpu.fpr[d] = bit_cast<float, int>(cache.lw(ea, mem));
-            if(ea == mem.notify) notify_load(cpu, mem, d, 0);
+            if(ea == mem.notify) notify_load(cpu, mem, option, d, 0);
             return false;
         case STFSX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = tmp + cpu.gpr[b];
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
-                output_cur_info(cpu, mem);
+                output_cur_info(cpu, mem, option);
                 assert(false);
             }
             cache.swf(ea, mem, cpu.fpr[d]);
-            if(ea == mem.notify) notify_store(cpu, mem, d, 0);
+            if(ea == mem.notify) notify_store(cpu, mem, option, d, 0);
             return false;
         case LWZX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = tmp + cpu.gpr[b];
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
-                output_cur_info(cpu, mem);
+                output_cur_info(cpu, mem, option);
                 assert(false);
             }
             cpu.gpr[d] = cache.lw(ea, mem);
-            if(ea == mem.notify) notify_load(cpu, mem, d, 1);
+            if(ea == mem.notify) notify_load(cpu, mem, option, d, 1);
             return false;
         case MULLI:
             cpu.gpr[d] = int(((long long)cpu.gpr[a] * (long long)b) & bitmask(32));
@@ -329,36 +329,46 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             ea = tmp + exts(a);
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
-                output_cur_info(cpu, mem);
+                output_cur_info(cpu, mem, option);
                 assert(false);
             }
             cache.swf(ea, mem, cpu.fpr[d]);
-            if(ea == mem.notify) notify_store(cpu, mem, d, 0);
+            if(ea == mem.notify) notify_store(cpu, mem, option, d, 0);
             return false;
         case STWX:
             tmp = (a == 0 ? 0 : cpu.gpr[a]);
             ea = cpu.gpr[b] + tmp;
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
-                output_cur_info(cpu, mem);
+                output_cur_info(cpu, mem, option);
                 assert(false);
             }
             cache.swi(ea, mem, cpu.gpr[d]);
-            if(ea == mem.notify) notify_store(cpu, mem, d, 1);
+            if(ea == mem.notify) notify_store(cpu, mem, option, d, 1);
             return false;
         case HALT:
             return true;
         default:
             cpu.pc -= 4;    
-            output_cur_info(cpu, mem);
+            output_cur_info(cpu, mem, option);
             warning(opcode_to_string(opc));
             assert(false);
             return false;
     }
 }
 
-int simulate_whole(CPU& cpu, MEMORY_PRO &mem, FPU& fpu, CACHE& cache){
-    while(!exec(cpu, mem, fpu, cache));
+int simulate_whole(CPU& cpu, MEMORY_PRO &mem, FPU& fpu, CACHE& cache, OPTION& option){
+    while(!exec(cpu, mem, fpu, cache, option)){
+        if(option.ALL){
+            output_cur_info(cpu, mem, option);
+            cpu.show_gpr(false);
+            cpu.show_fpr(false);
+            cpu.show_lr(false);
+            cpu.show_cr(false);
+            cpu.show_ctr(false);
+            std::cout << '\n';
+        }
+    }
     std::cerr << "program finised!" << std::endl;
     return 0;
 }
@@ -442,14 +452,21 @@ void show_what(SHOW& ss, const std::string& s){
     }
 }
 
-void output_cur_info(CPU& cpu, MEMORY_PRO &mem){
-    std::cout << mem.cnt << "命令実行済" << std::endl;
+void output_cur_info(CPU& cpu, MEMORY_PRO &mem, OPTION& option){
+    std::cout << mem.cnt << "命令実行済" << '\n';
     auto it = mem.inv.upper_bound(cpu.pc);
     --it;
     auto[id, line] = mem.FL[addr_to_index(cpu.pc)];
-    std::cout << "\033[1;31mFILE: \033[m" << mem.file[id] << "\n\033[1;31mLINE:\033[m " << line << std::endl;
-    std::cout << "\033[1;31mLABEL:\033[m " << it->second << std::endl;
-    std::cout << "\033[1;31mADDR/4: \033[m" << cpu.pc/4 << std::endl;
+    if(option.ALL){
+        std::cout << "FILE: " << mem.file[id] << "\nLINE: " << line << '\n';
+        std::cout << "LABEL: " << it->second << '\n';
+        std::cout << "ADDR/4: " << cpu.pc/4 << '\n';
+    }
+    else{
+        std::cout << "\033[1;31mFILE: \033[m" << mem.file[id] << "\n\033[1;31mLINE:\033[m " << line << '\n';
+        std::cout << "\033[1;31mLABEL:\033[m " << it->second << '\n';
+        std::cout << "\033[1;31mADDR/4: \033[m" << cpu.pc/4 << '\n';
+    }
 }
 
 int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO& cache){
@@ -502,7 +519,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             std::swap(option.display_assembly, da);
             std::swap(option.display_binary, db);
             for(int i = 0; i < ss.Sval; i++){
-                if(exec(cpu, mem, fpu, cache)){
+                if(exec(cpu, mem, fpu, cache, option)){
                     std::cout << "program finished!" << std::endl;
                     return 0;
                 }
@@ -532,7 +549,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             if(p.second >= 0){
                 while(1){
                     if(mem.FL[addr_to_index(cpu.pc)] == p) break;
-                    if(exec(cpu, mem, fpu, cache)){
+                    if(exec(cpu, mem, fpu, cache, option)){
                         std::cout << "program finished!" << std::endl;
                         return 0;
                     }
@@ -547,23 +564,23 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
                 ss.bpoint.second = mem.lbl[ss.bpoint.first];
                 while(1){
                     if(cpu.pc == (unsigned int)ss.bpoint.second) break;
-                    if(exec(cpu, mem, fpu, cache)){
+                    if(exec(cpu, mem, fpu, cache, option)){
                         std::cout << "program finished!" << std::endl;
                         return 0;
                     }
                 }
             }
-            output_cur_info(cpu, mem);
+            output_cur_info(cpu, mem, option);
             std::swap(option.display_assembly, da);
             std::swap(option.display_binary, db);
         }
         if(ss.next) continue;
         std::cout << "終了した命令数と次に実行する命令:\n";
-        output_cur_info(cpu, mem);
+        output_cur_info(cpu, mem, option);
         auto[opc, d, a, b] = mem.instr[addr_to_index(cpu.pc)];
         if(option.display_assembly) show_instr(mem, opc, d, a, b); 
         if(option.display_binary) show_instr_binary(opc, d, a, b);
-        if(exec(cpu, mem, fpu, cache)){
+        if(exec(cpu, mem, fpu, cache, option)){
             std::cout << "program finished!" << std::endl;
             return 0;
         }
@@ -575,7 +592,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
 void execution(CPU& cpu, MEMORY_PRO& mem_pro, OPTION& option, FPU& fpu, CACHE_PRO& cache_pro){
     if(option.exec_mode == 0){
         CACHE cache = (CACHE)cache_pro;
-        simulate_whole(cpu, mem_pro, fpu, cache);
+        simulate_whole(cpu, mem_pro, fpu, cache, option);
         cache_pro.hit = cache.hit;
         cache_pro.miss = cache.miss;
         cache_pro.write_back = cache_pro.write_back;

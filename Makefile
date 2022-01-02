@@ -4,6 +4,9 @@ main:
 install:
 	git clone https://github.com/fmtlib/fmt.git
 
+all:
+	./sim -A >| run/res.txt
+
 binary_to_assembly:
 	./sim -ta -b >| run/asm
 

@@ -36,46 +36,46 @@ struct cpu_t{
         flushed.reserve(1024 * 1024);
     }
 
-    void show_gpr(){
-        std::cout << "\033[1;31m";
+    void show_gpr(bool col = true){
+        if(col) std::cout << "\033[1;31m";
         for(int i = GPR_SIZE - 1; i >= 0; i--){
             std::cout << "gpr[" << i << "] = (" << gpr[i] << ", ";
             print_binary_int1(gpr[i]);
             std::cout << ")\n";
         }
-        std::cout << "\033[m\n";
+        if(col) std::cout << "\033[m\n";
     }
-    void show_fpr(){
-        std::cout << "\033[1;32m";
+    void show_fpr(bool col = true){
+        if(col) std::cout << "\033[1;32m";
         for(int i = FPR_SIZE - 1; i >= 0; i--){
             int d = bit_cast<int, float>(fpr[i]);
             std::cout << "fpr[" << i << "] = (" << fpr[i] << ", ";
             print_binary_int1(d);
             std::cout << ")\n";
         }
-        std::cout << "\033[m\n";
+        if(col) std::cout << "\033[m\n";
     }
-    void show_cr(){
-        std::cout << "\033[1;33m";
+    void show_cr(bool col = true){
+        if(col) std::cout << "\033[1;33m";
         std::cout << "cr : ";
         print_binary_int1(cr);
-        std::cout << "\033[m\n";
-        std::cout << std::endl;
+        if(col) std::cout << "\033[m\n";
+        std::cout << '\n';
 
     }
-    void show_lr(){
-        std::cout << "\033[1;34m";
+    void show_lr(bool col = true){
+        if(col) std::cout << "\033[1;34m";
         std::cout << "lr : ";
         print_binary_int1(lr);
-        std::cout << "\033[m\n";
-        std::cout << std::endl;
+        if(col) std::cout << "\033[m\n";
+        std::cout << '\n';
     }
-    void show_ctr(){
-        std::cout << "\033[1;35m";
+    void show_ctr(bool col = true){
+        if(col) std::cout << "\033[1;35m";
         std::cout << "ctr : ";
         print_binary_int1(ctr);
-        std::cout << "\033[m\n";
-        std::cout << std::endl;
+        if(col) std::cout << "\033[m\n";
+        std::cout << '\n';
     }
 
     void flush(){
