@@ -78,7 +78,7 @@ void decode(const std::string& file, MEMORY_PRO &mem_pro, CACHE_PRO& cache_pro, 
     std::ifstream ifs(file);
 
     if(!ifs){
-        std::cerr << "cannot open file" << std::endl;
+        std::cerr << "cannot open " << file << std::endl;
         std::exit(1);
     }
 
@@ -92,7 +92,7 @@ void decode(const std::string& file, MEMORY_PRO &mem_pro, CACHE_PRO& cache_pro, 
 int collect_label(const std::string file, MEMORY_PRO& mem_pro, int tmp){
     std::ifstream ifs(file);
     if(!ifs){
-        std::cerr << "cannot open file" << std::endl;
+        std::cerr << "cannot open " << file << std::endl;
         std::exit(1);
     }
     int cnt = tmp;
