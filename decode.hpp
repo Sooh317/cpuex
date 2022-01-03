@@ -50,24 +50,31 @@ void next_memory_address(int &cnt, const std::vector<std::string> &s){
     // }
 }
 
-void put_instr_into_memory(std::string& str, MEMORY_PRO& mem_pro, CACHE_PRO& cache_pro, int line){
+void put_instr_into_memory(std::string& str, MEMORY_PRO& mem_pro, CACHE_PRO& cache_pro, int line, std::ofstream& ofs){
     std::vector<std::string> s = remove_chars(str, ", \t\n");
     if(s.size() >= 1){
-        if(s[0].back() == ':') return; // label
+        if(s[0].back() == ':'){
+            ofs << str << '\n';
+            return; // label
+        }
         DIRECTIVE_KIND kind = directive_kind(s[0]);
-        if(kind == LONG) process_long_directive(cache_pro, mem_pro, s[1]);
+        if(kind == LONG){
+            process_long_directive(cache_pro, mem_pro, s[1]);
+            ofs << str << "        ##" << mem_pro.index / 4 << '\n';
+        }
         //else if(kind == ASCII) process_ascii_directive(mem, s[1]);
         else if(kind == SOME_DIRECTIVE) return;
         else if(kind != ALIGN){
             auto ins = recognize_instr(mem_pro, s);
             mem_pro.instr[mem_pro.index >> 2] = ins;
             mem_pro.FL[mem_pro.index >> 2] = std::make_pair(mem_pro.file.size() - 1, line);
+            ofs << str << "        ##" << mem_pro.index / 4 << '\n';
         }
         next_memory_address(mem_pro.index, s);
     }
 }
 
-void decode(const std::string file, MEMORY_PRO &mem_pro, CACHE_PRO& cache_pro){
+void decode(const std::string& file, MEMORY_PRO &mem_pro, CACHE_PRO& cache_pro, std::ofstream& ofs){
     std::ifstream ifs(file);
 
     if(!ifs){
@@ -78,8 +85,7 @@ void decode(const std::string file, MEMORY_PRO &mem_pro, CACHE_PRO& cache_pro){
     std::string str;
     int line = 1;
     while(std::getline(ifs, str)){
-        // printout(str);
-        put_instr_into_memory(str, mem_pro, cache_pro, line++);
+        put_instr_into_memory(str, mem_pro, cache_pro, line++, ofs);
     }
 }
 

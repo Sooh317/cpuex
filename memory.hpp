@@ -12,6 +12,7 @@ void init_memory(CACHE_PRO& cache_pro, MEMORY_PRO& mem_pro, OPTION& option){
     if(option.asmTObin || !option.binary){
         int tmp = 0;
         std::ifstream ifs("run/assembly.txt");
+        std::ofstream ofs("run/asm");
         std::string s;
         while(ifs >> s){
             s = "run/" + s;
@@ -19,10 +20,12 @@ void init_memory(CACHE_PRO& cache_pro, MEMORY_PRO& mem_pro, OPTION& option){
         }
         ifs.clear();
         ifs.seekg(0, std::ios_base::beg);
+        ofs.clear();
+        ofs.seekp(0, std::ios_base::beg);
         while(ifs >> s){
             mem_pro.file.emplace_back(s);
             s = "run/" + s;
-            decode(s, mem_pro, cache_pro);
+            decode(s, mem_pro, cache_pro, ofs);
         }
         std::cerr << "ラベル[_min_caml_start]のアドレスは " << mem_pro.lbl["_min_caml_start"] << " byte目です" << std::endl;
     }

@@ -25,7 +25,7 @@ void print_binary_int(int a){
         std::cout << (a >> i & 1);
         if(i % 8 == 0) std::cout << " ";
     }
-    std::cout << std::endl;
+    std::cout << '\n';
 }
 
 void print_binary_int1(int a){
@@ -35,11 +35,11 @@ void print_binary_int1(int a){
     }
 }
 
-void print_binary_int_nspace(int a){
+void print_binary_int_nspace(int a, bool nl = true){
     for(int i = 31; i >= 0; i--){
         std::cout << (a >> i & 1);
     }
-    std::cout << std::endl;
+    if(nl) std::cout << '\n';
 }
 
 constexpr int bp(int k){ return 31 - k;}

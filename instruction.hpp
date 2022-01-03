@@ -540,7 +540,7 @@ void show_instr(MEMORY& mem, INSTR_KIND instr, int d, int a, int b){
 }
 
 
-void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
+void show_instr_binary(INSTR_KIND instr, int d, int a, int b, bool nl = true){
     unsigned int res = opcode_to_bit(instr) << 26;
     switch (instr){
     case ADD:
@@ -726,5 +726,5 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b){
         assert(false);
         break;
     }
-    print_binary_int_nspace(res);
+    print_binary_int_nspace(res, nl);
 }
