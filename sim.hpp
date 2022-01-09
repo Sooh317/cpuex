@@ -260,10 +260,10 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
             cpu.fpr[d] = cpu.fpr[a] / 2.0;
             return false;
         case FCOS: // stdを使ってる
-            cpu.fpr[d] = std::cos(cpu.fpr[a]);
+            cpu.fpr[d] = TasukuFukami::cos(cpu.fpr[a], fpu);
             return false;
         case FSIN: // stdを使ってる
-            cpu.fpr[d] = std::sin(cpu.fpr[a]);
+            cpu.fpr[d] = TasukuFukami::sin(cpu.fpr[a], fpu);
             return false;
         case FATAN:
             cpu.fpr[d] = TasukuFukami::atan(cpu.fpr[d], fpu);
