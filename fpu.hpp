@@ -17,6 +17,8 @@
  * 9 ~ 31 -> manti
 **/ 
 
+
+
 struct fpu_t{
 private:
     static const int FINV_TABLE_LINE = 1024;
@@ -43,19 +45,16 @@ public:
     float PI;
     float HALFPI;
     double LONGHALFPI;
+    double NIPI;
+    double PINI;
+    double MYPINI, MYNIPI;
+    int64_t IMYPINI, IMYNIPI;
     fpu_t():cnt_sqrt(0), cnt_inv(0), cnt_atan(0), cnt_sin(0), cnt_cos(0){
         fsqrttable.resize(FSQRT_TABLE_LINE);
         finvtable.resize(FINV_TABLE_LINE);
         atantable.resize(ATAN_TABLE_LINE);
         sintable.resize(SIN_TABLE_LINE);
         costable.resize(COS_TABLE_LINE);
-        int d = 0b01000000010010010000111111011011;
-        PI = bit_cast<float, int>(d);
-        d = 0b00111111110010010000111111011011;
-        HALFPI = bit_cast<float, int>(d);
-        uint64_t e;
-        e = 0b11111111111001001000011111101101010100010001000010110100100000ull;
-        LONGHALFPI = bit_cast<double, uint64_t>(e);
     }
     void add_data_fsqrt(const float f, const float g){
         assert(cnt_sqrt < FSQRT_TABLE_LINE);
@@ -119,6 +118,7 @@ public:
 using FPU = fpu_t;
 
 namespace TasukuFukami{
+    double round(double f, int k);
 
     float float_parse(const std::string &s){
         int d;
@@ -166,6 +166,21 @@ namespace TasukuFukami{
                 fpu.add_data_cos(float_parse(s.substr(0, 32)), float_parse(s.substr(32, 32)));
             }
         }
+        int d = 0b01000000010010010000111111011011;
+        fpu.PI = bit_cast<float, int>(d);
+        d = 0b00111111110010010000111111011011;
+        fpu.HALFPI = bit_cast<float, int>(d);
+        uint64_t e;
+        e = 0b11111111111001001000011111101101010100010001000010110100100000ull;
+        fpu.LONGHALFPI = bit_cast<double, uint64_t>(e);
+        e = 0b11111111100100010111110011000001101101110010011100100010000011ull;
+        fpu.NIPI = bit_cast<double, uint64_t>(e);
+        e = 0b11111111111001001000011111101101010100010001000010110100011000ull;
+        fpu.PINI = bit_cast<double, uint64_t>(e);
+        fpu.MYPINI = round(fpu.PINI, 26);
+        fpu.IMYPINI = int64_t(fpu.MYPINI * (1<<26));
+        fpu.MYNIPI = round(fpu.NIPI, 25);
+        fpu.IMYNIPI = int64_t(fpu.MYNIPI * (1<<26));
         fpu.check();
     }
 
@@ -177,6 +192,16 @@ namespace TasukuFukami{
                   << "\nexp : " << ((d >> 23) & bitmask(8)) << " = " << (int)((d >> 23) & bitmask(8)) - 127 \
                   << "\nman : " << ((1 << 23) | (d & bitmask(23))) << '\n';
         print_binary_int(d);
+    }
+
+    void print_double(double f){
+        int64_t d;
+        d = bit_cast<int64_t, double>(f);
+        std::cout << "value : " << f << '\n';
+        for(int i = 63; i >= 0; i--){
+            std::cout << (d >> i & 1);
+        }
+        std::cout << '\n';
     }
 
 
@@ -406,7 +431,7 @@ namespace TasukuFukami{
         }
         else if(-125 <= exp && exp <= -10){
             d = 0b00111111011111111111111111010101;
-            return fmul(f, bit_cast<float, int>(d));
+            return fmul(bit_cast<float, int>(d), f);
         }
         else if(exp == -126){
             d = 0b00000000110000000000000000000000;
@@ -436,31 +461,129 @@ namespace TasukuFukami{
 
     float cos_core(float f, const FPU& fpu){
         if(double(f) > fpu.HALFPI){
-            std::cerr << "CosOutOfRange\n" << std::endl;
+            std::cerr << "CosOutOfRange\n";
+            printerr(f);
             assert(false);
         }
-        // union {float f; int i;} d;
-        // int exp = int((d.i >> 23) & bitmask(8)) - 127;
-        int d = bit_cast<float, int>(f);
+        int d = bit_cast<int, float>(f);
         int exp = int((d >> 23) & bitmask(8)) - 127;
         if(-9 <= exp && exp <= -1){
-            // int tag = (d.i & bitmask(23)) >> (23 - fpu.Taglendict(exp));
             int tag = (d & bitmask(23)) >> (23 - fpu.Taglendict(exp));
             auto[mysep, mydydx] = fpu.Costable(fpu.Inddict(exp) + tag);
-
             return fadd(mysep, fmul(mydydx, f));
         }
-        else if(exp <= -10){
-            return make_float(0, 127, 0);
+        else if(exp <= -10) return make_float(0, 127, 0);
+        else return cos_exp0(f, fpu);
+    }
+
+    double round(double f, int k){
+        if(f < 0){
+            std::cerr << "In TasukuFukami::round(), negative f was passed\n";
+            assert(false);
+        }
+        k = 52 - k;
+        int64_t i = bit_cast<int64_t, double>(f);
+        int64_t mask = 0;
+        mask = ((~mask) >> k) << k;
+        i &= mask;
+        return bit_cast<double, int64_t>(i);
+    }
+
+    std::pair<int, float> reduce(float f, const FPU& fpu){
+        int fi = bit_cast<int, float>(f);
+        double na = ((fi & bitmask(23)) | (1<<23)) * fpu.IMYNIPI;
+        int64_t n = std::floor(na);
+
+        // na *= std::pow(2, (int(fi >> 23 & bitmask(8)) - 127) - 49);
+        
+        double a = na - n;
+        a = std::floor(a*(1<<27));
+        a *= fpu.IMYPINI;
+        a /= (1ll << 53);
+        a = TasukuFukami::round(a, 23);
+        return std::pair<int, float>(n & 3, float(a));
+    }
+
+    float cos(float f, const FPU& fpu){
+        if(std::abs(f) > fpu.HALFPI){
+            auto[quot, rem] = reduce(f, fpu);
+            float absrem = std::abs(rem);
+            float core;
+            int corei;
+            int sig = 0;
+            if(quot == 0){
+                core = cos_core(absrem, fpu);
+                corei = bit_cast<int, float>(core);
+                sig = (corei >> 31 & 1);
+            }
+            else if(quot == 1){
+                core = sin_core(absrem, fpu);
+                corei = bit_cast<int, float>(core);
+                sig = (corei >> 31 & 1) ^ 1;
+            }
+            else if(quot == 2){
+                core = cos_core(absrem, fpu);
+                corei = bit_cast<int, float>(core);
+                sig = (corei>> 31 & 1) ^ 1;
+            }
+            else{
+                core = sin_core(absrem, fpu);
+                corei = bit_cast<int, float>(core);
+                sig = (corei >> 31 & 1);
+            }
+            return make_float(sig, corei >> 23 & bitmask(8), corei);
         }
         else{
-            return cos_exp0(f, fpu);
+            float core = cos_core(std::abs(f), fpu);
+            int corei = bit_cast<int, float>(core);
+            int sig = (corei >> 31 & 1);
+            return make_float(sig, corei >> 23 & bitmask(8), corei);
         }
     }
+
+    float sin(float f, const FPU& fpu){
+        int fi = bit_cast<int, float>(f);
+        if(std::abs(f) > fpu.HALFPI){
+            auto[quot, rem] = reduce(f, fpu);
+            float absrem = std::abs(rem);
+            float core;
+            int corei;
+            int sig = 0;
+            if(quot == 0){
+                core = sin_core(absrem, fpu);
+                corei = bit_cast<int, float>(core);
+                sig = (corei >> 31 & 1);
+            }
+            else if(quot == 1){
+                core = cos_core(absrem, fpu);
+                corei = bit_cast<int, float>(core);
+                sig = (corei >> 31 & 1);
+            }
+            else if(quot == 2){
+                core = sin_core(absrem, fpu);
+                corei = bit_cast<int, float>(core);
+                sig = (corei>> 31 & 1) ^ 1;
+            }
+            else{
+                core = cos_core(absrem, fpu);
+                corei = bit_cast<int, float>(core);
+                sig = (corei >> 31 & 1) ^ 1;
+            }
+            return make_float(sig, corei >> 23 & bitmask(8), corei);
+        }
+        else{
+            float core = sin_core(std::abs(f), fpu);
+            int corei = bit_cast<int, float>(core);
+            int sig = (corei >> 31 & 1);
+            return make_float(sig ^ ((fi >> 31) & 1), corei >> 23 & bitmask(8), corei);
+        }
+    }
+
+
 }
 
 
-#define TEST_NUM 10000000
+#define TEST_NUM 100000
 
 
 bool range_check(double value, double L, double R){
@@ -476,8 +599,6 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
     else if(tag == 3) cout << "fdiv test start!" << endl;
     else if(tag == 4) cout << "fsqrt test start!" << endl;
     else if(tag == 5) cout << "atan test start!" << endl;
-    else if(tag == 6) cout << "sin test start!" << endl;
-    else if(tag == 7) cout << "cos test start!" << endl;
     random_device rnd;
     mt19937 mt(rnd());
     union{float f; int i;} f, g;
@@ -610,26 +731,21 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
         cerr << "atan test success!" << endl; 
     }
     else if(tag == 6 || tag == 7){
-        for(int i = 0; i < TEST_NUM; i++){
-            f.i = mt();
-            f.i &= bitmask(30);
-            f.i |= ((1 << 7) - 1) << 23;
-            if(f.f > fpu.HALFPI || -f.f > fpu.HALFPI) continue;
-            if(tag == 6) myans = TasukuFukami::sin_core(f.f, fpu), ans = std::sin(f.f);
-            else myans = TasukuFukami::cos_core(f.f, fpu), ans = std::cos(f.f);
-            l = abs(myans - ans);
-            r = max(c*abs(ans), EPS);
-            if(l < r) continue;
-            cout << (tag == 6 ? "sin " : "cos ") << "test failed:\n";
-            cout << "f \n";
-            TasukuFukami::print_float(f.f);
-            cout << "\nmyans \n";
-            TasukuFukami::print_float(myans);
-            cout << "\nans \n";
-            TasukuFukami::print_float(ans);
-            exit(0);
+        ifstream f;
+        f.open("memo");
+        string s;
+        while(f >> s){
+            int a = btoi(s);
+            float f = bit_cast<float, int>(a);
+            auto p = TasukuFukami::reduce(f, fpu);
+            float myans = (tag == 6 ? TasukuFukami::sin(f, fpu) : TasukuFukami::cos(f, fpu));
+            
+            int ans = bit_cast<int, float>(myans);
+            int ans2 = bit_cast<int, float>(p.second);
+            printout(p.first);
+            print_binary_int_nspace(ans);
+            print_binary_int_nspace(ans2);
         }
-        cerr << (tag == 6 ? "sin " : "cos ") << "test finished!\n";
     }
 }
 
@@ -641,10 +757,29 @@ void fpu_test(const FPU& fpu){
         LOW /= 2.0;
         HIGH *= 2.0;
     }
-    for(int i = 0; i <= 7; i++){
+    for(int i = 6; i <= 7; i++){
         test(EPS, LOW, HIGH, i, fpu);
     }
     return;
+}
+
+void make_test(const double LOW,const double HIGH){
+    using namespace std;
+    random_device rnd;
+    mt19937 mt(rnd());
+    ofstream file;
+    file.open("memo");
+    union{float f; int i;} f;
+    for(int i = 0; i < TEST_NUM; i++){
+        f.i = mt();
+        if(!range_check(f.f, LOW, HIGH)){
+            i--;
+            continue;
+        }
+        for(int j = 31; j >= 0; j--) file << (f.i >> j & 1);
+        file << '\n';
+    }
+    file.close();
 }
 
 #undef TEST_NUM
