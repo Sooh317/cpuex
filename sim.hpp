@@ -13,7 +13,7 @@
 #include "fpu.hpp"
 #include "cache.hpp"
 
-void output_cur_info(CPU&, MEMORY_PRO&, OPTION&);
+void output_cur_info(CPU&, MEMORY_PRO&, OPTION&, bool next=false);
 
 void notify_load(CPU& cpu, MEMORY_PRO& mem, OPTION& option, int d, bool gpr){
     cpu.pc -= 4;
@@ -373,73 +373,77 @@ int simulate_whole(CPU& cpu, MEMORY_PRO &mem, FPU& fpu, CACHE& cache, OPTION& op
     return 0;
 }
 
-void show_what(SHOW& ss, const std::string& s){
-    std::string garbage;
-    std::set<char> st;
-    for(const char& c : s) st.insert(c);
-    for(const char& c : st){
+void parse_step(SHOW& ss, const std::string& s){
+    auto judge = [&](const std::string& t)->std::pair<bool, int>{
+        if(t[1] != '[') ss.bad = 1;
+        std::string::size_type idx = t.find(']');
+        if(idx == std::string::npos) ss.bad = 1;
+        if(ss.bad) return std::make_pair(false, -1);
+        return std::make_pair(true, (int)idx);
+    };
+    auto res = remove_chars(s, " ;\n");
+    for(int i = 0; i < (int)res.size(); i++){
+        char c = res[i][0];
         if(c == 's') ss.next = false;
         else if(c == 'h') ss.help = 1;
         else if(c == 'S'){
             ss.S = true;
-            std::cout << "何ステップ進めますか?(ex: 25)" << std::endl;
-            console_B();
-            std::cin >> ss.Sval;
-            console_E();
-            std::getline(std::cin, garbage);
+            auto p = judge(res[i]);
+            if(!p.first) break;
+            ss.Sval = stoll(res[i].substr(2, (int)p.second - 2));
         }
         else if(c == 'M'){
             ss.M = true;
-            std::cout << "メモリアドレスの範囲をbyte単位で指定してください(ex: 8-100, 200-300)" << std::endl;
-            console_B();
-            std::string t; std::getline(std::cin, t);
-            auto res = remove_chars(t, " -,");
-            for(int i = 0; i < (int)res.size() / 2; i++) ss.Maddr.emplace_back(stoi(res[2*i]), stoi(res[2*i + 1]));
-            console_E();
+            auto p = judge(res[i]);
+            if(!p.first) break;
+            auto tmp = remove_chars(res[i].substr(2, (int)p.second - 2), " -,");
+            for(int i = 0; i < (int)tmp.size() / 2; i++) ss.Maddr.emplace_back(stoi(tmp[2*i]), stoi(tmp[2*i + 1]));
         }
         else if(c == 'm'){
             ss.m = true;
-            std::cout << "メモリアドレスをbyte単位で指定してください(ex: 100, 12, 300)" << std::endl;
-            console_B();
-            std::string t; std::getline(std::cin, t);
-            auto res = remove_chars(t, " ,");
-            for(int i = 0; i < (int)res.size(); i++) ss.maddr.emplace_back(stoi(res[i]));
-            console_E();
+            auto p = judge(res[i]);
+            if(!p.first) break;
+            auto tmp = remove_chars(res[i].substr(2, (int)p.second - 2), " ,");
+            for(int i = 0; i < (int)tmp.size(); i++) ss.maddr.emplace_back(stoi(tmp[i]));
         }
         else if(c == 'C'){
             ss.cache = true;
-            std::cout << "表示するキャッシュのインデックスを指定してください(ex: 0, 3, 10)(max:" << CACHE_LINE_NUM - 1 << ")" << std::endl;
-            console_B();
-            std::string t; std::getline(std::cin, t);
-            console_E();
-            auto res = remove_chars(t, " ,");
-            for(int i = 0; i < (int)res.size(); i++) ss.index.emplace_back(stoi(res[i]));
+            auto p = judge(res[i]);
+            if(!p.first) break;
+            auto tmp = remove_chars(res[i].substr(2, (int)p.second - 2), " ,");
+            for(int i = 0; i < (int)tmp.size(); i++) ss.index.emplace_back(stoi(tmp[i]));
         }
         else if(c == 'P'){
             ss.Point = true;
-            std::cout << "ファイル名と行数(ex: libmincaml.S, 55) または ラベル名(ex: min_caml_print_int)を入力してください" << std::endl;
-            console_B();
-            std::string t; std::getline(std::cin, t);
-            console_E();
-            auto res = remove_chars(t, " ,");
-            if(res.size() == 2){
-                ss.bpoint.first = res[0];
-                ss.bpoint.second = stoi(res[1]);
+            auto p = judge(res[i]);
+            if(!p.first) break;
+            auto tmp = remove_chars(res[i].substr(2, (int)p.second - 2), " ,");
+            if(tmp.size() == 2){
+                ss.bpoint.first = tmp[0];
+                ss.bpoint.second = stoi(tmp[1]);
             }
             else{
-                ss.bpoint.first = res[0];
-                ss.bpoint.second = -1;
+                if(tmp.size() != 1){
+                    ss.bad = 1;
+                    return;
+                }
+                if('0' <= tmp[0][0] && tmp[0][0] <= '9'){
+                    ss.bpoint.first = "None";
+                    ss.bpoint.second = stoi(tmp[0]);
+                }
+                else{
+                    ss.bpoint.first = res[0];
+                    ss.bpoint.second = -1;
+                }
             }
         }
         else if(c == 'N'){
             ss.Notify = 1;
-            std::cout << "通知したいメモリアドレスを入力してください(ex 60360, 100000)" << std::endl;
-            console_B();
-            std::string t; std::getline(std::cin, t);
-            console_E();
-            auto res = remove_chars(t, " ,");
-            for(int i = 0; i < (int)res.size(); i++){
-                ss.nval.push_back(stoi(res[i]));
+            auto p = judge(res[i]);
+            if(!p.first) break;
+            auto tmp = remove_chars(res[i].substr(2, (int)p.second - 2), " ,");
+            for(int i = 0; i < (int)tmp.size(); i++){
+                ss.nval.push_back(stoi(tmp[i]));
             }
         }
         else if(c == 'B') ss.B = true;
@@ -452,7 +456,86 @@ void show_what(SHOW& ss, const std::string& s){
     }
 }
 
-void output_cur_info(CPU& cpu, MEMORY_PRO &mem, OPTION& option){
+// void show_what(SHOW& ss, const std::string& s){
+//     std::string garbage;
+//     std::set<char> st;
+//     for(const char& c : s) st.insert(c);
+//     for(const char& c : st){
+//         if(c == 's') ss.next = false;
+//         else if(c == 'h') ss.help = 1;
+//         else if(c == 'S'){
+//             ss.S = true;
+//             std::cout << "何ステップ進めますか?(ex: 25)" << std::endl;
+//             console_B();
+//             std::cin >> ss.Sval;
+//             console_E();
+//             std::getline(std::cin, garbage);
+//         }
+//         else if(c == 'M'){
+//             ss.M = true;
+//             std::cout << "メモリアドレスの範囲をbyte単位で指定してください(ex: 8-100, 200-300)" << std::endl;
+//             console_B();
+//             std::string t; std::getline(std::cin, t);
+//             auto res = remove_chars(t, " -,");
+//             for(int i = 0; i < (int)res.size() / 2; i++) ss.Maddr.emplace_back(stoi(res[2*i]), stoi(res[2*i + 1]));
+//             console_E();
+//         }
+//         else if(c == 'm'){
+//             ss.m = true;
+//             std::cout << "メモリアドレスをbyte単位で指定してください(ex: 100, 12, 300)" << std::endl;
+//             console_B();
+//             std::string t; std::getline(std::cin, t);
+//             auto res = remove_chars(t, " ,");
+//             for(int i = 0; i < (int)res.size(); i++) ss.maddr.emplace_back(stoi(res[i]));
+//             console_E();
+//         }
+//         else if(c == 'C'){
+//             ss.cache = true;
+//             std::cout << "表示するキャッシュのインデックスを指定してください(ex: 0, 3, 10)(max:" << CACHE_LINE_NUM - 1 << ")" << std::endl;
+//             console_B();
+//             std::string t; std::getline(std::cin, t);
+//             console_E();
+//             auto res = remove_chars(t, " ,");
+//             for(int i = 0; i < (int)res.size(); i++) ss.index.emplace_back(stoi(res[i]));
+//         }
+//         else if(c == 'P'){
+//             ss.Point = true;
+//             std::cout << "ファイル名と行数(ex: libmincaml.S, 55) または ラベル名(ex: min_caml_print_int)を入力してください" << std::endl;
+//             console_B();
+//             std::string t; std::getline(std::cin, t);
+//             console_E();
+//             auto res = remove_chars(t, " ,");
+//             if(res.size() == 2){
+//                 ss.bpoint.first = res[0];
+//                 ss.bpoint.second = stoi(res[1]);
+//             }
+//             else{
+//                 ss.bpoint.first = res[0];
+//                 ss.bpoint.second = -1;
+//             }
+//         }
+//         else if(c == 'N'){
+//             ss.Notify = 1;
+//             std::cout << "通知したいメモリアドレスを入力してください(ex 60360, 100000)" << std::endl;
+//             console_B();
+//             std::string t; std::getline(std::cin, t);
+//             console_E();
+//             auto res = remove_chars(t, " ,");
+//             for(int i = 0; i < (int)res.size(); i++){
+//                 ss.nval.push_back(stoi(res[i]));
+//             }
+//         }
+//         else if(c == 'B') ss.B = true;
+//         else if(c == 'F') ss.F = true;
+//         else if(c == 'g') ss.gr = true;
+//         else if(c == 'f') ss.fr = true;
+//         else if(c == 'c') ss.cr = true;
+//         else if(c == 't') ss.ctr = true;
+//         else if(c == 'l') ss.lr = true;
+//     }
+// }
+
+void output_cur_info(CPU& cpu, MEMORY_PRO &mem, OPTION& option, bool next){
     std::cout << mem.cnt << "命令実行済" << '\n';
     auto it = mem.inv.upper_bound(cpu.pc);
     --it;
@@ -463,6 +546,7 @@ void output_cur_info(CPU& cpu, MEMORY_PRO &mem, OPTION& option){
         std::cout << "ADDR/4: " << cpu.pc/4 << '\n';
     }
     else{
+        if(next) std::cout << "次に実行する命令は\n";
         std::cout << "\033[1;31mFILE: \033[m" << mem.file[id] << "\n\033[1;31mLINE:\033[m " << line << '\n';
         std::cout << "\033[1;31mLABEL:\033[m " << it->second << '\n';
         std::cout << "\033[1;31mADDR/4: \033[m" << cpu.pc/4 << '\n';
@@ -475,7 +559,8 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
         console_E();
         if(s.size() == 0) continue;
         SHOW ss;
-        show_what(ss, s);
+        // show_what(ss, s);
+        parse_step(ss, s);
         if(ss.help){   
             std::cout << "s : 1ステップ進める\n";
             std::cout << "S : nステップ進める\n"; 
@@ -489,6 +574,10 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             std::cout << "C : nライン目のキャッシュを表示\n";
             std::cout << "N : 追跡したいアドレス n を指定\n";
             std::cout << "P : ブレイクポイント(file名,行数)/(ラベル名)の設定" << std::endl;
+        }
+        if(ss.bad){
+            std::cout << "無効なステップ実行" << std::endl;
+            continue;
         }
         if(ss.gr) cpu.show_gpr();
         if(ss.fr) cpu.show_fpr();
@@ -545,8 +634,18 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             std::swap(option.display_binary, db);
             std::pair<int, int> p;
             p.second = ss.bpoint.second;
+            p.first = -1;
             for(int i = 0; i < (int)mem.file.size(); i++) if(mem.file[i] == ss.bpoint.first) p.first = i;
-            if(p.second >= 0){
+            if(p.first == -1){
+                while(1){
+                    if(exec(cpu, mem, fpu, cache, option)){
+                        std::cout << "program finished!" << std::endl;
+                        return 0;
+                    }
+                    if(addr_to_index(cpu.pc) == p.second) break;
+                }
+            }
+            else if(p.second >= 0){
                 while(1){
                     if(mem.FL[addr_to_index(cpu.pc)] == p) break;
                     if(exec(cpu, mem, fpu, cache, option)){
@@ -570,12 +669,12 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
                     }
                 }
             }
-            output_cur_info(cpu, mem, option);
+            output_cur_info(cpu, mem, option, 1);
             std::swap(option.display_assembly, da);
             std::swap(option.display_binary, db);
         }
         if(ss.next) continue;
-        std::cout << "終了した命令数と次に実行する命令:\n";
+        std::cout << "終了した命令数 & 実行した命令:\n";
         output_cur_info(cpu, mem, option);
         auto[opc, d, a, b] = mem.instr[addr_to_index(cpu.pc)];
         if(option.display_assembly) show_instr(mem, opc, d, a, b); 
