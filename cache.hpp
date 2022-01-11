@@ -5,11 +5,20 @@
 #include "util.hpp"
 
 
-#define CACHE_TAG_SIZE 18
-#define CACHE_LINE_NUM 16
-#define CACHE_OFFSET_SIZE 5
-#define CACHE_LINE_SIZE 256
-#define CACHE_INDEX_SIZE 4
+// #define CACHE_TAG_SIZE 18
+// #define CACHE_LINE_NUM 16
+// #define CACHE_OFFSET_SIZE 5
+// #define CACHE_LINE_SIZE 256
+// #define CACHE_INDEX_SIZE 4
+
+// 27 - 12 - 6
+#define CACHE_TAG_SIZE 9
+// offset -> lineのどこ？ -> log(512/8)
+#define CACHE_OFFSET_SIZE 6
+#define CACHE_LINE_SIZE 512
+#define CACHE_INDEX_SIZE 12
+// 何行目 -> log(4096)
+#define CACHE_LINE_NUM (1<<12)
 
 // sw -> キャッシュ上に書き込み、必要ならメモリにライトバック
 // lw -> 読み込んだものを(DATA型)を返す
