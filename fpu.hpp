@@ -257,63 +257,89 @@ namespace TasukuFukami{
         return fadd(f, -g);
     }
 
+    // float fmul(float f, float g){
+    //     int a = bit_cast<int, float>(f), b = bit_cast<int, float>(g);
+    //     unsigned manti1 = a & bitmask(23);
+    //     unsigned manti2 = b & bitmask(23);
+
+    //     std::vector<unsigned> bits = {(1 << 23 | manti1)};
+    //     std::vector<unsigned> carry(23, 0);
+
+    //     for(int i = 0; i < 23; i++){
+    //         if(kth_bit(manti2, i, 23)) bits.emplace_back((1 << 23 | manti1));
+    //         else bits.emplace_back(0);
+    //     }
+
+    //     // step1 
+    //     for(int i = 0; i < 12; i++){
+    //         unsigned uno = (bits[2*i] & bitmask(23)) << 1;
+    //         unsigned dos = uno + bits[2*i + 1];
+    //         bits[2*i] = (((bits[2*i] >> 23) & bitmask(1)) << 24) | (dos & bitmask(24));
+    //         if(dos >= (1 << 24)) carry[2*i] = 1;
+    //     }
+
+    //     // step2
+    //     for(int i = 0; i < 6; i++){
+    //         unsigned uno = (bits[4*i] & bitmask(23)) << 2;
+    //         unsigned dos = uno + bits[4*i + 2];
+    //         bits[4*i] = (((bits[4*i] >> 23) & bitmask(2)) << 25) | (dos & bitmask(25));
+    //         if(dos >= (1 << 25)) carry[4*i + 1] = 1;
+    //     }
+
+    //     // step3
+    //     for(int i = 0; i < 3; i++){
+    //         unsigned uno = (bits[8*i] & bitmask(23)) << 4;
+    //         unsigned dos = uno + bits[8*i + 4];
+    //         bits[8*i] = (((bits[8*i] >> 23) & bitmask(4)) << 27) | (dos & bitmask(27));
+    //         if(dos >= (1 << 27)) carry[8*i + 3] = 1;
+    //     }
+    //     // step4
+    //     unsigned c = 0;
+    //     for(int i = 0; i < 23; i++) c |= carry[i] << (22 - i);
+    //     unsigned uno = bits[0] + (c << 8);
+    //     unsigned dos = (bits[8] >> 8) + (bits[16] >> 16);
+
+    //     // final
+    //     unsigned ans = (uno >> 5) + (dos >> 5);
+
+    //     unsigned tmp = ans, cnt = 0;
+
+    //     while(tmp) cnt++, tmp >>= 1;
+
+    //     unsigned newsig = kth_bit(a, 0, 32) ^ kth_bit(b, 0, 32);
+    //     int newexp = ((a >> 23) & bitmask(8)) + ((b >> 23) & bitmask(8)) - 127;
+    //     unsigned newmanti = ans >> (cnt - 24);
+
+    //     if(cnt == 27) newexp++;
+    //     if(newexp < 1 || ((a >> 23) & bitmask(8)) == 0 || ((b >> 23) & bitmask(8)) == 0) newexp = 0;
+
+    //     return make_float(newsig, newexp, newmanti);
+    // }
+
     float fmul(float f, float g){
-        int a = bit_cast<int, float>(f), b = bit_cast<int, float>(g);
-        unsigned manti1 = a & bitmask(23);
-        unsigned manti2 = b & bitmask(23);
-
-        std::vector<unsigned> bits = {(1 << 23 | manti1)};
-        std::vector<unsigned> carry(23, 0);
-
-        for(int i = 0; i < 23; i++){
-            if(kth_bit(manti2, i, 23)) bits.emplace_back((1 << 23 | manti1));
-            else bits.emplace_back(0);
-        }
-
-        // step1 
-        for(int i = 0; i < 12; i++){
-            unsigned uno = (bits[2*i] & bitmask(23)) << 1;
-            unsigned dos = uno + bits[2*i + 1];
-            bits[2*i] = (((bits[2*i] >> 23) & bitmask(1)) << 24) | (dos & bitmask(24));
-            if(dos >= (1 << 24)) carry[2*i] = 1;
-        }
-
-        // step2
-        for(int i = 0; i < 6; i++){
-            unsigned uno = (bits[4*i] & bitmask(23)) << 2;
-            unsigned dos = uno + bits[4*i + 2];
-            bits[4*i] = (((bits[4*i] >> 23) & bitmask(2)) << 25) | (dos & bitmask(25));
-            if(dos >= (1 << 25)) carry[4*i + 1] = 1;
-        }
-
-        // step3
-        for(int i = 0; i < 3; i++){
-            unsigned uno = (bits[8*i] & bitmask(23)) << 4;
-            unsigned dos = uno + bits[8*i + 4];
-            bits[8*i] = (((bits[8*i] >> 23) & bitmask(4)) << 27) | (dos & bitmask(27));
-            if(dos >= (1 << 27)) carry[8*i + 3] = 1;
-        }
-        // step4
-        unsigned c = 0;
-        for(int i = 0; i < 23; i++) c |= carry[i] << (22 - i);
-        unsigned uno = bits[0] + (c << 8);
-        unsigned dos = (bits[8] >> 8) + (bits[16] >> 16);
-
-        // final
-        unsigned ans = (uno >> 5) + (dos >> 5);
-
-        unsigned tmp = ans, cnt = 0;
-
-        while(tmp) cnt++, tmp >>= 1;
-
-        unsigned newsig = kth_bit(a, 0, 32) ^ kth_bit(b, 0, 32);
-        int newexp = ((a >> 23) & bitmask(8)) + ((b >> 23) & bitmask(8)) - 127;
-        unsigned newmanti = ans >> (cnt - 24);
-
-        if(cnt == 27) newexp++;
-        if(newexp < 1 || ((a >> 23) & bitmask(8)) == 0 || ((b >> 23) & bitmask(8)) == 0) newexp = 0;
-
-        return make_float(newsig, newexp, newmanti);
+        auto x = bit_cast<u32>(f);
+        auto y = bit_cast<u32>(g);
+        auto m1 = (x & bitmask(23)) | (1 << 23);
+        auto m2 = (y & bitmask(23)) | (1 << 23);
+        auto high1 = m1 >> 11;
+        auto high2 = m2 >> 11;
+        auto low1 = m1 & bitmask(11);
+        auto low2 = m2 & bitmask(11);
+        auto mul0 = high1 * high2;
+        auto mul1 = high1 * low2;
+        auto mul2 = high2 * low1;
+        auto add0 = (mul1 >> 10) + (mul2 >> 10);
+        auto add1 = mul0 + (add0 >> 1);
+        auto manti = ((add1 & (1 << 25)) ? ((add1 & bitmask(25)) >> 2) : ((add1 & bitmask(24)) >> 1));
+        auto s1 = x >> 31;
+        auto s2 = y >> 31;
+        int e1 = (x >> 23) & bitmask(8);
+        int e2 = (y >> 23) & bitmask(8);
+        auto sig = s1 ^ s2;
+        int exp = e1 + e2 + ((add1 & (1 << 25)) ? 1 : 0) - 127 * 2;
+        exp = ((e1 == 0 || e2 == 0) ? 0 : exp < -126 ? 0 : (bitmask(8) & (exp + 127)));
+        auto res = (sig << 31) | (exp << 23) | manti;
+        return bit_cast<float>(res);
     }
 
     float fsqrt(float f, const FPU& fpu){
@@ -583,7 +609,7 @@ namespace TasukuFukami{
 }
 
 
-#define TEST_NUM 100000
+#define TEST_NUM 100000000
 
 
 bool range_check(double value, double L, double R){
@@ -637,6 +663,7 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
         cerr.flush();
     }
     else if(tag == 2 || tag == 3){
+        double error = 0;
         int cnt = 0;
         while(cnt < TEST_NUM){
             f.i = mt(), g.i = mt();
@@ -663,6 +690,7 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
             }
             l = abs(myans - ans);
             r = max({c*abs(ans), EPS});
+            error = std::max(error, l / r);
             if(l < r) cnt++;
             else{
                 cout << (tag == 2 ? "fmul " : "fdiv ") << "test failed:\n";
@@ -677,6 +705,7 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
                 exit(0);
             }
         }
+        printout(error);
         cerr << (tag == 2 ? "fmul " : "fdiv ") << "test success!" << endl; 
         cerr.flush();
     }
@@ -757,7 +786,7 @@ void fpu_test(const FPU& fpu){
         LOW /= 2.0;
         HIGH *= 2.0;
     }
-    for(int i = 6; i <= 7; i++){
+    for(int i = 2; i <= 2; i++){
         test(EPS, LOW, HIGH, i, fpu);
     }
     return;
