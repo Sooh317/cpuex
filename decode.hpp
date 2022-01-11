@@ -12,7 +12,7 @@
 
 
 // \r\n 未対応
-std::vector<std::string> remove_chars(std::string& str, const std::string &chrs){
+std::vector<std::string> remove_chars(const std::string& str, const std::string &chrs){
     std::vector<std::string> res;
     std::string cur;
     for(int i = 0; i < (int)str.size(); i++){
