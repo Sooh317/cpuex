@@ -11,14 +11,14 @@
 // #define CACHE_LINE_SIZE 256
 // #define CACHE_INDEX_SIZE 4
 
-// 27 - 12 - 6
-#define CACHE_TAG_SIZE 9
+#define CACHE_LINE_SIZE 512
 // offset -> lineのどこ？ -> log(512/8)
 #define CACHE_OFFSET_SIZE 6
-#define CACHE_LINE_SIZE 512
-#define CACHE_INDEX_SIZE 12
+#define CACHE_INDEX_SIZE 10
 // 何行目 -> log(4096)
-#define CACHE_LINE_NUM (1<<12)
+#define CACHE_LINE_NUM (1<<CACHE_INDEX_SIZE)
+// 27 - 12 - 6
+#define CACHE_TAG_SIZE (27 - CACHE_INDEX_SIZE - CACHE_OFFSET_SIZE)
 
 // sw -> キャッシュ上に書き込み、必要ならメモリにライトバック
 // lw -> 読み込んだものを(DATA型)を返す
