@@ -259,10 +259,10 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
         case FHALF: // なにこれ
             cpu.fpr[d] = cpu.fpr[a] / 2.0;
             return false;
-        case FCOS: // stdを使ってる
+        case FCOS:
             cpu.fpr[d] = TasukuFukami::cos(cpu.fpr[a], fpu);
             return false;
-        case FSIN: // stdを使ってる
+        case FSIN:
             cpu.fpr[d] = TasukuFukami::sin(cpu.fpr[a], fpu);
             return false;
         case FATAN:
@@ -595,7 +595,7 @@ void execution(CPU& cpu, MEMORY_PRO& mem_pro, OPTION& option, FPU& fpu, CACHE_PR
         simulate_whole(cpu, mem_pro, fpu, cache, option);
         cache_pro.hit = cache.hit;
         cache_pro.miss = cache.miss;
-        cache_pro.write_back = cache_pro.write_back;
+        cache_pro.write_back = cache.write_back;
     }
     else if(option.exec_mode == 1) simulate_step(cpu, mem_pro, option, fpu, cache_pro);
 }
