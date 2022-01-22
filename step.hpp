@@ -96,7 +96,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
             return false;
         case BLT:
             // bi = d*4;
-            cond_ok = kth_bit(cpu.cr, 7*4+1);// cr7のみ
+            cond_ok = kth_bit(cpu.cr, 7*4);// cr7のみ
             if(cond_ok) cpu.pc = a;
             return false;
         case BGE:
