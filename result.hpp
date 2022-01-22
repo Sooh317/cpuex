@@ -12,6 +12,8 @@ void show_result(const CPU& cpu, MEMORY_PRO& mem, CACHE_PRO& cache){
     wf << "キャッシュミス: " << cache.miss << std::endl;
     wf << "ライトバック: " << cache.write_back << std::endl;
     wf << "ヒット率: " << (double)cache.hit * 100.0 / (double)(cache.miss + cache.hit) << std::endl;
+    wf << "sin使用数: " << mem.sincnt << std::endl;
+    wf << "cos使用数: " << mem.coscnt << std::endl;
     wf.close();
     std::cout << "出力結果はflushed.ppmを確認してください" << std::endl;
     std::cout << "統計情報はstatistics.txtを確認してください" << std::endl;

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <map>
 #include "struct.hpp"
@@ -14,13 +15,13 @@
 #include "result.hpp"
 
 int main(int argc, char* argv[]){
+    std::cout << std::setprecision(20);
     CPU cpu;
     MEMORY_PRO mem_pro;
     CACHE_PRO cache_pro;
     OPTION option;
     FPU fpu;
     TasukuFukami::init_fpu(fpu);
-    //fpu_test(fpu);
 
     init_option(option, argc, argv);
     option.show_option();
@@ -36,6 +37,6 @@ int main(int argc, char* argv[]){
     execution(cpu, mem_pro, option, fpu, cache_pro);
 
     show_result(cpu, mem_pro, cache_pro);
-
     return 0;
 }
+
