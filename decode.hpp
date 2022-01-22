@@ -130,7 +130,8 @@ INSTR decode_bin(const std::string& bit){
     case 0x1:
         opcode = OUT;
         d = btoi(bit.substr(6, 5));
-        a = btoi(bit.substr(16, 16));
+        // a = btoi(bit.substr(16, 16));
+        a = 0;
         break;
     case 0x2:
         opcode = FLUSH;
