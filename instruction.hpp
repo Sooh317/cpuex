@@ -187,15 +187,20 @@ std::string opcode_to_string(INSTR_KIND kind){
     return "-1";
 }
 
+std::pair<int, int> find_paren(const std::string& s){
+    int lparen = -1, rparen = (int)s.size() - 1;
+    for(int i = (int)s.size() - 2; i >= 0; i--){
+        if(s[i] == '('){
+            lparen = i;
+            break;
+        }
+    }
+    return std::make_pair(lparen, rparen);
+}
+
 int internal_reg_number(const std::string& s, bool in_paren, std::map<std::string, int>& lbl){
     if(in_paren){
-        int lparen = -1, rparen = (int)s.size() - 1;
-        for(int i = (int)s.size() - 2; i >= 0; i--){
-            if(s[i] == '('){
-                lparen = i;
-                break;
-            }
-        }
+        auto [lparen, rparen] = find_paren(s);
         return internal_reg_number(s.substr(lparen + 1, rparen - lparen - 1), 0, lbl);
     }
     if((s[0] == 'l' && s[1] == 'o') || (s[0] == 'h' && s[1] == 'a')){ // lo16() or ha16()
@@ -270,10 +275,84 @@ int internal_reg_number(const std::string& s, bool in_paren, std::map<std::strin
     }
 }
 
+void report(const std::vector<std::string>& s){
+    std::cerr << "illegal assembly" << std::endl;
+    for(int i = 0; i < (int)s.size(); i++){
+        std::cerr << s[i] << " ";
+    }
+    std::cerr << std::endl;
+}
+
+void asm_checker(const std::vector<std::string>& s, INSTR_FORM f){
+    if(f == D){
+        if(!(s.size() == 2 && (s[1][0] == 'r' || s[1] == "0"))) report(s), exit(1);
+    }
+    else if(f == DA){
+        if(!(s.size() == 3 && (s[1][0] == 'r' || s[1] == "0") && (s[2][0] == 'r' || s[2] == "0"))) report(s), exit(1);
+    }
+    else if(f == DIMM){
+        if(!(s.size() == 3 && (s[1][0] == 'r' || s[1] == "0") && ((s[2][0] == '0' && (s[2][1] == 'b' || s[2][1] == 'x')) || ('1' <= s[2][0] && s[2][0] <= '9')))) report(s), exit(1);
+    }
+    else if(f == FDA){
+        if(!(s.size() == 3 && s[1][0] == 'f' && s[2][0] == 'f')) report(s), exit(1);
+    }
+    else if(f == FR){
+        if(!(s.size() == 3 && s[1][0] == 'f' && (s[2][0] == 'r' || s[2] == "0"))) report(s), exit(1);
+    }
+    else if(f == TSPR){
+        if(!(s.size() == 3 && (s[1] == "1" || s[1] == "8" || s[1] == "9") && (s[2][0] == 'r' || s[2] == "0"))) report(s), exit(1);
+    }
+    else if(f == FSPR){
+        if(!(s.size() == 3 && (s[2] == "1" || s[2] == "8" || s[2] == "9") && (s[1][0] == 'r' || s[1] == "0"))) report(s), exit(1);
+    }   
+    else if(f == DAB){
+        if(!(s.size() == 4 && (s[1][0] == 'r' || s[1] == "0") && (s[2][0] == 'r' || s[2] == "0") && (s[3][0] == 'r' || s[3] == "0"))) report(s), exit(1);
+    }
+    else if(f == DAIMM){
+        if(!(s.size() == 4 && (s[1][0] == 'r' || s[1] == "0") && (s[2][0] == 'r' || s[2] == "0") && ((s[3][0] == '0' && (s[3][1] == 'b' || s[3][1] == 'x')) || ('1' <= s[3][0] && s[3][0] <= '9')))) report(s), exit(1);
+    }
+    else if(f == CAB){
+        if(!(s.size() == 4 && s[1] == "cr7" && (s[2][0] == 'r' || s[2] == "0") && (s[3][0] == 'r' || s[3] == "0"))) report(s), exit(1);
+    }
+    else if(f == CAIMM){
+        if(!(s.size() == 4 && s[1] == "cr7" && (s[2][0] == 'r' || s[2] == "0") && ((s[3][0] == '0' && (s[3][1] == 'b' || s[3][1] == 'x')) || ('1' <= s[3][0] && s[3][0] <= '9')))) report(s), exit(1);
+    }
+    else if(f == CFF){
+        if(!(s.size() == 4 && s[1] == "cr7" && s[2][0] == 'f' && s[3][0] == 'f')) report(s), exit(1);
+    }
+    else if(f == FDAB){
+        if(!(s.size() == 4 && s[1][0] == 'f' && s[2][0] == 'f' && s[3][0] == 'f')) report(s), exit(1);
+    }
+    else if(f == FRR){
+        if(!(s.size() == 4 && s[1][0] == 'f' && (s[2][0] == 'r' || s[2] == "0") && (s[3][0] == 'r' || s[3] == "0"))) report(s), exit(1);
+    }
+    else if(f == DAB2){
+        auto[l, r] = find_paren(s[2]);
+        if(!(s.size() == 3 && (s[1][0] == 'r' || s[1] == "0") && l != -1)) report(s), exit(1);
+    }
+    else if(f == DAB3){
+        auto[l, r] = find_paren(s[2]);
+        if(!(s.size() == 3 && s[1][0] == 'f' && l != -1)) report(s), exit(1);
+    }
+    else if(f == BC){
+        if(s.size() == 3){
+            if(s[1][0] != 'c') report(s), exit(1);
+        }
+        else if(s.size() != 2) report(s), exit(1);
+    }
+    else if(f == BLB){
+        if(s.size() != 2) report(s), exit(1);
+    }
+    else if(f == BDAL){
+        if(!(s.size() == 4 && '0' <= s[1][0] && s[1][0] <= '9' && '0' <= s[2][0] && s[2][0] <= '9')) report(s), exit(1);
+    }
+}
+
 INSTR recognize_instr(MEMORY_PRO& mem, const std::vector<std::string> &s){
     auto call = [&](int id, bool in_flag)->int{return internal_reg_number(s[id], in_flag, mem.lbl);};
     INSTR_KIND opc = opcode_of_instr(s[0]);
     INSTR_FORM f = mem.kind_to_form[opc];
+    asm_checker(s, f);
     int rd = 0, ra = 0, rb = 0;
     if(f == D){
         rd = call(1, 0);
