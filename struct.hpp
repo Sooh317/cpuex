@@ -11,7 +11,7 @@
 
 using GPR = int32_t; // general purpose register
 using FPR = float; // floating point register
-using CR = uint32_t; // condition register
+// using CR = uint32_t; // condition register
 using LR = uint32_t; // link register
 using CTR = uint32_t; // count register
 using XER = uint32_t; // xer register
@@ -21,7 +21,7 @@ using XER = uint32_t; // xer register
 #define SEND_BUFFER_SIZE 16
 
 struct cpu_t{
-    CR cr;
+    uint32_t cr;
     LR lr;
     CTR ctr;
     XER xer;

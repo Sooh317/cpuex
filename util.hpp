@@ -47,7 +47,7 @@ constexpr int bp(int k){ return 31 - k;}
 // 以下全てマニュアルの処理を実現する関数
 // kth_bit は実際には 31 - k 桁目(左からk番目)にあるとして扱う
 
-void clear_and_set(int &k, int l, int r, int v){ // clear [l, r] and substitute v
+void clear_and_set(uint32_t &k, int l, int r, int v){ // clear [l, r] and substitute v
     l = bp(l), r = bp(r);
     int32_t mask = ~(((1 << (l - r + 1)) - 1) << r);
     k = (k & mask) | (v << r);

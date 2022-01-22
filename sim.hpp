@@ -26,8 +26,8 @@ INSTR instr_fetch_fast(CPU& cpu, const MEMORY &mem){
 void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
     while(1){
         auto[opc, d, a, b] = instr_fetch_fast(cpu, mem);
-        int c, bi, ea, tmp;
-        [[maybe_unused]] int bo;
+        int c, ea, tmp;
+        [[maybe_unused]] int bo, bi;
         bool cond_ok, ctr_ok, ovf = false;
         switch(opc){
             case ADD:
@@ -48,9 +48,12 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
                 if(cpu.gpr[a] < tmp) c = 0b100;
                 else if(cpu.gpr[a] > tmp) c = 0b010;
                 else c = 0b001;
+                /*
                 tmp = cpu.cr;
-                clear_and_set(tmp, 4*d, 4*d + 3, (c << 1) | (cpu.xer & 1));
+                clear_and_set(tmp, 4*7, 4*7 + 3, (c << 1) | (cpu.xer & 1)); // cr7のみ
                 cpu.cr = tmp;
+                */
+                clear_and_set(cpu.cr, 4*7, 4*7 + 3, (c << 1) | (cpu.xer & 1)); // cr7のみ
                 break;
             case CMPW:
                 a = cpu.gpr[a];
@@ -58,32 +61,33 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
                 if(a < b) c = 0b100;
                 else if(a > b) c = 0b010;
                 else c = 0b001;
-                tmp = cpu.cr;
-                clear_and_set(tmp, 4*d, 4*d + 3, (c << 1) | (cpu.xer & 1));
-                cpu.cr = tmp;
+                // tmp = cpu.cr;
+                // clear_and_set(tmp, 4*7, 4*7 + 3, (c << 1) | (cpu.xer & 1));
+                // cpu.cr = tmp;
+                clear_and_set(cpu.cr, 4*7, 4*7 + 3, (c << 1) | (cpu.xer & 1)); // cr7のみ
                 break;
             case B:
                 cpu.pc = d;
                 break;
             case BGT:   
                 //bo = 0b01100;
-                bi = d*4 + 1;
-                cond_ok = kth_bit(cpu.cr, bi);
+                // bi = d*4 + 1;
+                cond_ok = kth_bit(cpu.cr, 7*4+1); // cr7のみ
                 if(cond_ok) cpu.pc = a;
                 break;
             case BLT:
-                bi = d*4;
-                cond_ok = kth_bit(cpu.cr, bi);
+                // bi = d*4;
+                cond_ok = kth_bit(cpu.cr, 7*4+1);// cr7のみ
                 if(cond_ok) cpu.pc = a;
                 break;
             case BGE:
-                bi = d*4;
-                cond_ok = kth_bit(cpu.cr, bi);
+                // bi = d*4;
+                cond_ok = kth_bit(cpu.cr, 7*4); // cr7のみ
                 if(!cond_ok) cpu.pc = a;
                 break;
             case BNE:
-                bi = d*4 + 2;
-                cond_ok = kth_bit(cpu.cr, bi) ^ 1;
+                // bi = d*4 + 2;
+                cond_ok = kth_bit(cpu.cr, 7*4+2) ^ 1; // cr7のみ
                 if(cond_ok) cpu.pc = a;
                 break;
             case BL:    
@@ -172,9 +176,10 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
                 else if(cpu.fpr[a] > cpu.fpr[b]) c = 0b0100;
                 else c = 0b0010;
                 // fpcc 無視してます
-                tmp = cpu.cr;
-                clear_and_set(tmp, 4*d, 4*d + 3, c);
-                cpu.cr = tmp;
+                // tmp = cpu.cr;
+                // clear_and_set(tmp, 4*d, 4*d + 3, c);
+                // cpu.cr = tmp;
+                clear_and_set(cpu.cr, 4*7, 4*7 + 3, c);
                 break;
             case FDIV:
                 cpu.fpr[d] = TasukuFukami::fdiv(cpu.fpr[a], cpu.fpr[b], fpu, ovf);

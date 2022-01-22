@@ -45,8 +45,8 @@ INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
 bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
     mem.cnt++;
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
-    int c, bi, ea, tmp;
-    [[maybe_unused]] int bo;
+    int c, ea, tmp;
+    [[maybe_unused]] int bo, bi;
     bool cond_ok, ctr_ok, ovf = false;
     switch(opc){
         case ADD:
@@ -67,9 +67,12 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
             if(cpu.gpr[a] < tmp) c = 0b100;
             else if(cpu.gpr[a] > tmp) c = 0b010;
             else c = 0b001;
+            /*
             tmp = cpu.cr;
-            clear_and_set(tmp, 4*d, 4*d + 3, (c << 1) | (cpu.xer & 1));
+            clear_and_set(tmp, 4*7, 4*7 + 3, (c << 1) | (cpu.xer & 1)); // cr7のみ
             cpu.cr = tmp;
+            */
+            clear_and_set(cpu.cr, 4*7, 4*7 + 3, (c << 1) | (cpu.xer & 1)); // cr7のみ
             return false;
         case CMPW:
             a = cpu.gpr[a];
@@ -77,32 +80,33 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
             if(a < b) c = 0b100;
             else if(a > b) c = 0b010;
             else c = 0b001;
-            tmp = cpu.cr;
-            clear_and_set(tmp, 4*d, 4*d + 3, (c << 1) | (cpu.xer & 1));
-            cpu.cr = tmp;
+            // tmp = cpu.cr;
+            // clear_and_set(tmp, 4*7, 4*7 + 3, (c << 1) | (cpu.xer & 1));
+            // cpu.cr = tmp;
+            clear_and_set(cpu.cr, 4*7, 4*7 + 3, (c << 1) | (cpu.xer & 1)); // cr7のみ
             return false;
         case B:
             cpu.pc = d;
             return false;
         case BGT:   
             //bo = 0b01100;
-            bi = d*4 + 1;
-            cond_ok = kth_bit(cpu.cr, bi);
+            // bi = d*4 + 1;
+            cond_ok = kth_bit(cpu.cr, 7*4+1); // cr7のみ
             if(cond_ok) cpu.pc = a;
             return false;
         case BLT:
-            bi = d*4;
-            cond_ok = kth_bit(cpu.cr, bi);
+            // bi = d*4;
+            cond_ok = kth_bit(cpu.cr, 7*4+1);// cr7のみ
             if(cond_ok) cpu.pc = a;
             return false;
         case BGE:
-            bi = d*4;
-            cond_ok = kth_bit(cpu.cr, bi);
+            // bi = d*4;
+            cond_ok = kth_bit(cpu.cr, 7*4); // cr7のみ
             if(!cond_ok) cpu.pc = a;
             return false;
         case BNE:
-            bi = d*4 + 2;
-            cond_ok = kth_bit(cpu.cr, bi) ^ 1;
+            // bi = d*4 + 2;
+            cond_ok = kth_bit(cpu.cr, 7*4+2) ^ 1; // cr7のみ
             if(cond_ok) cpu.pc = a;
             return false;
         case BL:    
@@ -227,9 +231,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
             else if(cpu.fpr[a] > cpu.fpr[b]) c = 0b0100;
             else c = 0b0010;
             // fpcc 無視してます
-            tmp = cpu.cr;
-            clear_and_set(tmp, 4*d, 4*d + 3, c);
-            cpu.cr = tmp;
+            clear_and_set(cpu.cr, 4*7, 4*7 + 3, c);
             return false;
         case FDIV:
             cpu.fpr[d] = TasukuFukami::fdiv(cpu.fpr[a], cpu.fpr[b], fpu, ovf);
