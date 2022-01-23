@@ -156,8 +156,8 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
                 cpu.gpr[d] = mem.sld[mem.sldpointer++];
                 break;
             case OUT: // imm + 1 byte目はどこ
-                a = 3 - a;
-                cpu.write(segment(cpu.gpr[d], 8*a, 8*a + 7));
+                // a = 3 - a;
+                cpu.write(segment(cpu.gpr[d], 8*3, 8*3 + 7));
                 break;
             case FLUSH: // 
                 cpu.flush();

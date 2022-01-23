@@ -211,8 +211,9 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
             cpu.gpr[d] = mem.sld[mem.sldpointer++];
             return false;
         case OUT: // imm + 1 byte目はどこ
-            a = 3 - a;
-            cpu.write(segment(cpu.gpr[d], 8*a, 8*a + 7));
+            // a = 3 - a;
+            // cpu.write(segment(cpu.gpr[d], 8*a, 8*a + 7));
+            cpu.write(segment(cpu.gpr[d], 8*3, 8*3 + 7));
             return false;
         case FLUSH: // 
             cpu.flush();
