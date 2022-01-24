@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <map>
 #include "struct.hpp"
@@ -14,6 +15,7 @@
 #include "result.hpp"
 
 int main(int argc, char* argv[]){
+    std::cout << std::fixed << std::setprecision(15);
     CPU cpu;
     MEMORY_PRO mem_pro;
     CACHE_PRO cache_pro;
