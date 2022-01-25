@@ -537,18 +537,11 @@ void parse_step(SHOW& ss, const std::string& s){
 
 void output_cur_info(CPU& cpu, MEMORY_PRO &mem, OPTION& option, bool next){
     std::cout << mem.cnt << "命令実行済" << '\n';
-    auto it = mem.inv.upper_bound(cpu.pc);
-    --it;
-    auto[id, line] = mem.FL[addr_to_index(cpu.pc)];
     if(option.ALL){
-        std::cout << "FILE: " << mem.file[id] << "\nLINE: " << line << '\n';
-        std::cout << "LABEL: " << it->second << '\n';
         std::cout << "ADDR/4: " << cpu.pc/4 << '\n';
     }
     else{
         if(next) std::cout << "次に実行する命令は\n";
-        std::cout << "\033[1;31mFILE: \033[m" << mem.file[id] << "\n\033[1;31mLINE:\033[m " << line << '\n';
-        std::cout << "\033[1;31mLABEL:\033[m " << it->second << '\n';
         std::cout << "\033[1;31mADDR/4: \033[m" << cpu.pc/4 << '\n';
     }
 }
@@ -634,40 +627,12 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             std::swap(option.display_binary, db);
             std::pair<int, int> p;
             p.second = ss.bpoint.second;
-            p.first = -1;
-            for(int i = 0; i < (int)mem.file.size(); i++) if(mem.file[i] == ss.bpoint.first) p.first = i;
-            if(p.first == -1){
-                while(1){
-                    if(exec(cpu, mem, fpu, cache, option)){
-                        std::cout << "program finished!" << std::endl;
-                        return 0;
-                    }
-                    if(addr_to_index(cpu.pc) == p.second) break;
+            while(1){
+                if(exec(cpu, mem, fpu, cache, option)){
+                    std::cout << "program finished!" << std::endl;
+                    return 0;
                 }
-            }
-            else if(p.second >= 0){
-                while(1){
-                    if(mem.FL[addr_to_index(cpu.pc)] == p) break;
-                    if(exec(cpu, mem, fpu, cache, option)){
-                        std::cout << "program finished!" << std::endl;
-                        return 0;
-                    }
-                }
-            }
-            else{
-                if(ss.bpoint.first.back() == ':') ss.bpoint.first.pop_back();
-                if(!mem.lbl.count(ss.bpoint.first)){
-                    std::cout << "No such label" << std::endl;
-                    continue;
-                } 
-                ss.bpoint.second = mem.lbl[ss.bpoint.first];
-                while(1){
-                    if(cpu.pc == (unsigned int)ss.bpoint.second) break;
-                    if(exec(cpu, mem, fpu, cache, option)){
-                        std::cout << "program finished!" << std::endl;
-                        return 0;
-                    }
-                }
+                if(addr_to_index(cpu.pc) == p.second) break;
             }
             output_cur_info(cpu, mem, option, 1);
             std::swap(option.display_assembly, da);
