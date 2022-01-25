@@ -352,7 +352,7 @@ INSTR recognize_instr(MEMORY_PRO& mem, const std::vector<std::string> &s){
     auto call = [&](int id, bool in_flag)->int{return internal_reg_number(s[id], in_flag, mem.lbl);};
     INSTR_KIND opc = opcode_of_instr(s[0]);
     INSTR_FORM f = mem.kind_to_form[opc];
-    asm_checker(s, f);
+    // asm_checker(s, f);
     int rd = 0, ra = 0, rb = 0;
     if(f == D){
         rd = call(1, 0);

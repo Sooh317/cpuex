@@ -326,9 +326,7 @@ using MEMORY = memory_t;
 
 struct memory2_t : MEMORY{
     long long cnt, sincnt, coscnt;
-    std::vector<std::string> file;
-    std::vector<std::pair<int, int>> FL; // (file id, line)
     int32_t notify;
-    memory2_t():cnt(0), sincnt(0), coscnt(0), FL(INSTR_SIZE), notify(-1){}
+    memory2_t():cnt(0), sincnt(0), coscnt(0), notify(-1){}
 };
 using MEMORY_PRO = memory2_t;
