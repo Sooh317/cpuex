@@ -44,8 +44,11 @@ INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
 bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
     mem.cnt++;
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
+    mem.icount[int(opc)]++;
     int c, bi, ea, tmp;
     [[maybe_unused]] int bo;
+    u32 v;
+    float ans;
     bool cond_ok, ctr_ok, ovf = false;
     switch(opc){
         case ADD:
@@ -61,7 +64,6 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
             cpu.gpr[d] = (a ? cpu.gpr[a] : 0) + int(b << 16);
             return false;
         case CMPWI:
-            c = 0;
             tmp = exts(b);
             if(cpu.gpr[a] < tmp) c = 0b100;
             else if(cpu.gpr[a] > tmp) c = 0b010;
@@ -71,8 +73,8 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
             cpu.cr = tmp;
             return false;
         case CMPW:
-            a = cpu.gpr[a];
-            b = cpu.gpr[b];
+            a = exts(cpu.gpr[a]);
+            b = exts(cpu.gpr[b]);
             if(a < b) c = 0b100;
             else if(a > b) c = 0b010;
             else c = 0b001;
@@ -220,6 +222,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
             return false;
         case FADD:
             cpu.fpr[d] = TasukuFukami::fadd(cpu.fpr[a], cpu.fpr[b]);
+            // cpu.fpr[d] = cpu.fpr[a] + cpu.fpr[b];
             return false;
         case FCMPU: // NaNについては存在しないとする
             if(cpu.fpr[a] < cpu.fpr[b]) c = 0b1000;
@@ -243,21 +246,25 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
             return false;
         case FMUL:
             cpu.fpr[d] = TasukuFukami::fmul(cpu.fpr[a], cpu.fpr[b]);
+            // cpu.fpr[d] = cpu.fpr[a] * cpu.fpr[b];
             return false;
         case FNEG:
             cpu.fpr[d] = -cpu.fpr[a];
             return false;
         case FSUB:
             cpu.fpr[d] = TasukuFukami::fsub(cpu.fpr[a], cpu.fpr[b]);
+            // cpu.fpr[d] = cpu.fpr[a] - cpu.fpr[b];
             return false;
         case FSQRT:
-            cpu.fpr[d] = TasukuFukami::fsqrt(cpu.fpr[d], fpu);
+            cpu.fpr[d] = TasukuFukami::fsqrt(cpu.fpr[a], fpu);
+            // cpu.fpr[d] = std::sqrt(cpu.fpr[a]);
             return false;
         case FFLOOR: // stdを使ってます
-            cpu.fpr[d] = std::floor(cpu.fpr[d]);
+            cpu.fpr[d] = std::floor(cpu.fpr[a]);
             return false;
         case FHALF: // なにこれ
-            cpu.fpr[d] = cpu.fpr[a] / 2.0;
+            // cpu.fpr[d] = cpu.fpr[a] / 2.0;
+            cpu.fpr[d] = TasukuFukami::fmul(cpu.fpr[a], 0.5);
             return false;
         case FCOS:
             cpu.fpr[d] = TasukuFukami::cos(cpu.fpr[a], fpu);
@@ -266,7 +273,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
             cpu.fpr[d] = TasukuFukami::sin(cpu.fpr[a], fpu);
             return false;
         case FATAN:
-            cpu.fpr[d] = TasukuFukami::atan(cpu.fpr[d], fpu);
+            cpu.fpr[d] = TasukuFukami::atan(cpu.fpr[a], fpu);
             return false;
         case LFS:
             tmp = (b == 0 ? 0 : cpu.gpr[b]);
@@ -453,6 +460,7 @@ void parse_step(SHOW& ss, const std::string& s){
         else if(c == 'c') ss.cr = true;
         else if(c == 't') ss.ctr = true;
         else if(c == 'l') ss.lr = true;
+        else if(c == 'I') ss.instr = true;
     }
 }
 
@@ -616,10 +624,15 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             cpu.show_sendbuf();
         }
         if(ss.F){
-            std::ofstream wf("flushed.txt");
+            std::ofstream wf("flushed.ppm");
             for(int i = 0; i < (int)cpu.flushed.size(); i++) wf << cpu.flushed[i];
             cpu.flushed.clear();
-            std::cout << "flushed.txtを確認してください" << std::endl;
+            std::cout << "flushed.ppmを確認してください" << std::endl;
+        }
+        if(ss.instr){
+            for(int i = 0; i < 55; i++){
+                std::cout << opcode_to_string(INSTR_KIND(i)) << ": " << mem.icount[i] << '\n';
+            }
         }
         if(ss.Point){
             bool da = false, db = false;
@@ -660,6 +673,9 @@ void execution(CPU& cpu, MEMORY_PRO& mem_pro, OPTION& option, FPU& fpu, CACHE_PR
         cache_pro.hit = cache.hit;
         cache_pro.miss = cache.miss;
         cache_pro.write_back = cache.write_back;
+        for(int i = 0; i < (int)mem_pro.icount.size(); i++){
+            std::cout << opcode_to_string((INSTR_KIND)i) <<": " << mem_pro.icount[i] << '\n';
+        }
     }
     else if(option.exec_mode == 1) simulate_step(cpu, mem_pro, option, fpu, cache_pro);
 }

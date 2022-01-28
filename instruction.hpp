@@ -511,7 +511,7 @@ void show_instr(MEMORY& mem, INSTR_KIND instr, int d, int a, int b){
         case FDAB:
             printf("%s f%d, f%d, f%d\n", s.c_str(), d, a, b);
             return;
-        case FDA:
+        case FDA: // fctiwz 違う
             printf("%s f%d, f%d\n", s.c_str(), d, a);
             return;
         case FR:

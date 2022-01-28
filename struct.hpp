@@ -94,7 +94,9 @@ struct cpu_t{
 
     void show_sendbuf(){
         std::cout << "pointer: " << sbptr << std::endl;
-        for(int i = 0; i < SEND_BUFFER_SIZE; i++) std::cout << (int8_t)send_buf[i];
+        for(int i = 0; i < SEND_BUFFER_SIZE; i++){
+            std::cout << "i=" << i << " : " << (int8_t)send_buf[i] << '\n';
+        }
         std::cout << "\n" << std::endl;
     }
 };
@@ -202,7 +204,7 @@ enum DIRECTIVE_KIND{
 
 
 struct show_t{
-    bool S, gr, fr, lr, cr, ctr, m, M, cache, F, B, label, Point, help, Notify, bad;
+    bool S, gr, fr, lr, cr, ctr, m, M, cache, F, B, label, Point, help, Notify, bad, instr;
     bool next;
     int wid;
     long long Sval;
@@ -212,7 +214,7 @@ struct show_t{
     std::vector<int> nval;
     std::vector<std::pair<int, int>> Maddr;
     std::vector<int> index;
-    show_t():S(0), gr(0), fr(0), lr(0), cr(0), ctr(0), m(0), M(0), cache(0),F(0), B(0), label(0), Point(0), help(0), Notify(0), bad(0), next(1), wid(3), Sval(0), bpoint("", 0){}
+    show_t():S(0), gr(0), fr(0), lr(0), cr(0), ctr(0), m(0), M(0), cache(0),F(0), B(0), label(0), Point(0), help(0), Notify(0), bad(0), instr(0), next(1), wid(3), Sval(0), bpoint("", 0){}
 };
 using SHOW = show_t;
 
@@ -327,7 +329,8 @@ using MEMORY = memory_t;
 
 struct memory2_t : MEMORY{
     long long cnt, sincnt, coscnt;
+    std::vector<long long> icount;
     int32_t notify;
-    memory2_t():cnt(0), sincnt(0), coscnt(0), notify(-1){}
+    memory2_t():cnt(0), sincnt(0), coscnt(0), icount(55), notify(-1){}
 };
 using MEMORY_PRO = memory2_t;

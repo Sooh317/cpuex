@@ -14,8 +14,10 @@
 #include "cache.hpp"
 #include "result.hpp"
 
+using namespace std;
+
 int main(int argc, char* argv[]){
-    std::cout << std::fixed << std::setprecision(15);
+    std::cout << std::fixed << std::setprecision(20);
     CPU cpu;
     MEMORY_PRO mem_pro;
     CACHE_PRO cache_pro;
@@ -23,6 +25,21 @@ int main(int argc, char* argv[]){
     FPU fpu;
     TasukuFukami::init_fpu(fpu);
     //fpu_test(fpu);
+
+    // ifstream ifs("fadd2");
+    // ofstream ofs("fadd2.txt");
+    // string s, t;
+    // bool ovf;
+    // while(ifs >> s){
+    //     float f = TasukuFukami::float_parse(s.substr(0, 32));
+    //     float g = TasukuFukami::float_parse(s.substr(32, 32));
+    //     float ans = TasukuFukami::fadd(f, g);
+    //     u32 v = bit_cast<u32>(ans);
+    //     for(int i = 31; i >= 0; i--){
+    //         ofs << (v >> i & 1);
+    //     }
+    //     ofs << '\n';
+    // }
 
     init_option(option, argc, argv);
     option.show_option();
