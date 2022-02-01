@@ -203,7 +203,7 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
                 cpu.fpr[d] = std::floor(cpu.fpr[d]);
                 break;
             case FHALF: // なにこれ
-                cpu.fpr[d] = cpu.fpr[a] / 2.0;
+                cpu.fpr[d] = TasukuFukami::fmul(cpu.fpr[a], 0.5);
                 break;
             case FCOS:
                 cpu.fpr[d] = TasukuFukami::cos(cpu.fpr[a], fpu);

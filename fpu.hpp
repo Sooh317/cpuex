@@ -217,7 +217,7 @@ namespace TasukuFukami{
         if(exp_a < exp_b) pre = b, post = a;
         else if(exp_a > exp_b) pre = a, post = b;
         else{
-            if((a & bitmask(23)) > (b & bitmask(23))) pre = a, post = b;
+            if((a & bitmask(23)) >= (b & bitmask(23))) pre = a, post = b;
             else pre = b, post = a;
         }
         int newexp = (pre >> 23) & bitmask(8);
