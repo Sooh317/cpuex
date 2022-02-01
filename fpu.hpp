@@ -217,7 +217,7 @@ namespace TasukuFukami{
         if(exp_a < exp_b) pre = b, post = a;
         else if(exp_a > exp_b) pre = a, post = b;
         else{
-            if((a & bitmask(23)) > (b & bitmask(23))) pre = a, post = b;
+            if((a & bitmask(23)) >= (b & bitmask(23))) pre = a, post = b;
             else pre = b, post = a;
         }
         int newexp = (pre >> 23) & bitmask(8);
@@ -671,6 +671,7 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
             //print_binary_int(g.i);
             bool ovf = false;
             if(!range_check(f.f, LOW, HIGH)) continue;
+            if(!range_check(g.f, LOW, HIGH)) continue;
             if(tag == 3){
                 if((((g.i >> 23) & bitmask(8)) == 0) || !range_check(g.f, LOW, HIGH)) continue;
                 union {float f; int i;} tmp;
@@ -780,10 +781,10 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
 
 void fpu_test(const FPU& fpu){
     double EPS = 1.0;
-    double LOW = -0.5, HIGH = 2.0;
+    double LOW = -2.0, HIGH = 2.0;
     for(int i = 0; i < 126; i++){
         EPS /= 2.0;
-        LOW /= 2.0;
+        LOW *= 2.0;
         HIGH *= 2.0;
     }
     for(int i = 2; i <= 2; i++){

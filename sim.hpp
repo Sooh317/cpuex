@@ -47,6 +47,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
     mem.icount[int(opc)]++;
     int c, bi, ea, tmp;
     [[maybe_unused]] int bo;
+    std::ofstream ofs;
     u32 v;
     float ans;
     bool cond_ok, ctr_ok, ovf = false;
