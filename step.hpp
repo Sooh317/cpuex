@@ -20,16 +20,16 @@ void notify_load(CPU& cpu, MEMORY_PRO& mem, OPTION& option, int d, bool gpr){
     cpu.pc -= 4;
     output_cur_info(cpu, mem, option);
     cpu.pc += 4;
-    if(gpr) std::cout << "\033[33mロード:\n" << "gpr[" << d << "] = " << cpu.gpr[d] << " from " << "mem[" << mem.notify << "]\033[m\n";
-    else std::cout << "\033[33mロード:\n" << "fpr[" << d << "] = " << cpu.fpr[d] << " from " << "mem[" << mem.notify << "]\033[m\n";
+    if(gpr) std::cout << "\033[33mロード:\n" << "gpr[" << d << "] = " << cpu.gpr[d].i << " from " << "mem[" << mem.notify << "]\033[m\n";
+    else std::cout << "\033[33mロード:\n" << "gpr[" << d << "] = " << cpu.gpr[d].f << " from " << "mem[" << mem.notify << "]\033[m\n";
     std::cout << '\n';
 }
 void notify_store(CPU& cpu, MEMORY_PRO& mem, OPTION& option, int d, bool gpr){
     cpu.pc -= 4;
     output_cur_info(cpu, mem, option);
     cpu.pc += 4;
-    if(gpr) std::cout << "\033[32mストア:\n" << "mem[" << mem.notify << "] = " << cpu.gpr[d] << " from " << "gpr[" << d << "]\033[m\n";
-    else std::cout << "\033[32mストア:\n" << "mem[" << mem.notify << "] = " << cpu.fpr[d] << " from " << "fpr[" << d << "]\033[m\n";
+    if(gpr) std::cout << "\033[32mストア:\n" << "mem[" << mem.notify << "] = " << cpu.gpr[d].i << " from " << "gpr[" << d << "]\033[m\n";
+    else std::cout << "\033[32mストア:\n" << "mem[" << mem.notify << "] = " << cpu.gpr[d].f << " from " << "fpr[" << d << "]\033[m\n";
     std::cout << '\n';
 }
 
@@ -49,135 +49,126 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
     [[maybe_unused]] int bo, bi;
     bool cond_ok, ctr_ok, ovf = false;
     switch(opc){
-        case ADD:
-            cpu.gpr[d] = cpu.gpr[a] + cpu.gpr[b];
+        case IN:
+            cpu.gpr[d].i = mem.sld[mem.sldpointer++];
             return false;
-        case SUB:
-            cpu.gpr[d] = cpu.gpr[a] - cpu.gpr[b];
+        case OUT: // imm + 1 byte目はどこ
+            cpu.write(segment(cpu.gpr[d].i, 8*3, 8*3 + 7));
+            return false;
+
+        case FLUSH:
+            cpu.flush();
+            return false;
+        case HALT:
+            return true;
+
+        case ADD:
+            cpu.gpr[d].i = cpu.gpr[a].i + cpu.gpr[b].i;
             return false;
         case ADDI:
-            cpu.gpr[d] = (a ? cpu.gpr[a] : 0) + exts(b);
+            cpu.gpr[d].i = (a ? cpu.gpr[a].i : 0) + exts(b);
             return false;
         case ADDIS:
-            cpu.gpr[d] = (a ? cpu.gpr[a] : 0) + int(b << 16);
+            cpu.gpr[d].i = (a ? cpu.gpr[a].i : 0) + int(b << 16);
+            return false;
+        case SUB:
+            cpu.gpr[d].i = cpu.gpr[a].i - cpu.gpr[b].i;
+            return false;
+        case SLWI:
+            cpu.gpr[d].i = (cpu.gpr[a].i & bitmask(32 - b)) << b;
+            return false;
+        case SRWI: // bitmask抜いた
+            cpu.gpr[d].i = cpu.gpr[a].i >> b;
+            return false;
+        case ORI:
+            cpu.gpr[d].i = cpu.gpr[a].i | (b & bitmask(16));
+            return false;
+
+        case CMPW:
+            if(cpu.gpr[a].i < cpu.gpr[b].i) c = 0b1000;
+            else if(cpu.gpr[a].i > cpu.gpr[b].i) c = 0b0100;
+            else c = 0b0010;
+            clear_and_set(cpu.cr, 4*7, 4*7 + 3, c); // cr7のみ
             return false;
         case CMPWI:
             c = 0;
             tmp = exts(b);
-            if(cpu.gpr[a] < tmp) c = 0b100;
-            else if(cpu.gpr[a] > tmp) c = 0b010;
-            else c = 0b001;
-            /*
-            tmp = cpu.cr;
-            clear_and_set(tmp, 4*7, 4*7 + 3, (c << 1) | (cpu.xer & 1)); // cr7のみ
-            cpu.cr = tmp;
-            */
-            clear_and_set(cpu.cr, 4*7, 4*7 + 3, (c << 1) | (cpu.xer & 1)); // cr7のみ
+            if(cpu.gpr[a].i < tmp) c = 0b1000;
+            else if(cpu.gpr[a].i > tmp) c = 0b0100;
+            else c = 0b0010;
+            clear_and_set(cpu.cr, 4*7, 4*7 + 3, c); // cr7のみ
             return false;
-        case CMPW:
-            a = cpu.gpr[a];
-            b = cpu.gpr[b];
-            if(a < b) c = 0b100;
-            else if(a > b) c = 0b010;
-            else c = 0b001;
-            // tmp = cpu.cr;
-            // clear_and_set(tmp, 4*7, 4*7 + 3, (c << 1) | (cpu.xer & 1));
-            // cpu.cr = tmp;
-            clear_and_set(cpu.cr, 4*7, 4*7 + 3, (c << 1) | (cpu.xer & 1)); // cr7のみ
+        case FCMPU: // NaNについては存在しないとする
+            if(cpu.gpr[a].f < cpu.gpr[b].f) c = 0b1000;
+            else if(cpu.gpr[a].f > cpu.gpr[b].f) c = 0b0100;
+            else c = 0b0010;
+            // fpcc 無視してます
+            clear_and_set(cpu.cr, 4*7, 4*7 + 3, c);
             return false;
+
         case B:
             cpu.pc = d;
-            return false;
-        case BGT:   
-            //bo = 0b01100;
-            // bi = d*4 + 1;
-            cond_ok = kth_bit(cpu.cr, 7*4+1); // cr7のみ
-            if(cond_ok) cpu.pc = a;
-            return false;
-        case BLT:
-            // bi = d*4;
-            cond_ok = kth_bit(cpu.cr, 7*4);// cr7のみ
-            if(cond_ok) cpu.pc = a;
-            return false;
-        case BGE:
-            // bi = d*4;
-            cond_ok = kth_bit(cpu.cr, 7*4); // cr7のみ
-            if(!cond_ok) cpu.pc = a;
-            return false;
-        case BNE:
-            // bi = d*4 + 2;
-            cond_ok = kth_bit(cpu.cr, 7*4+2) ^ 1; // cr7のみ
-            if(cond_ok) cpu.pc = a;
             return false;
         case BL:    
             cpu.lr = cpu.pc;
             cpu.pc = d;
             return false;
+        case BGE:
+            cond_ok = kth_bit(cpu.cr, 7*4); // cr7のみ
+            if(!cond_ok) cpu.pc = a;
+            return false;
         case BLR:
-            //print_binary_int(cpu.lr);
             cpu.pc = segment(cpu.lr, 0, 29) << 2;
             return false;
-        case BCL:
-            cpu.lr = cpu.pc;
-            if(!kth_bit(d, 2, 5)) cpu.ctr--;
-            ctr_ok = kth_bit(d, 2, 5) || ((cpu.ctr != 0) ^ kth_bit(d, 3, 5));
-            cond_ok = kth_bit(d, 0, 5) || (kth_bit(cpu.cr, a) ^ (!kth_bit(d, 1, 5)));
-            if(ctr_ok && cond_ok) cpu.pc = b;
-            return false;
-        case BCTR:
-            cpu.pc = segment(cpu.ctr, 0, 29) << 2;
-            return false;
-        case BCTRL:
-            cpu.lr = cpu.pc;
-            cpu.pc = segment(cpu.ctr, 0, 29) << 2;
-            return false;
+
         case LWZ: 
-            ea = (b ? cpu.gpr[b] : 0) + exts(a);
+            ea = (b ? cpu.gpr[b].i : 0) + exts(a);
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem, option);
                 assert(false);
             }
-            cpu.gpr[d] = cache.lw(ea, mem);
+            cpu.gpr[d].i = cache.lw(ea, mem);
             if(ea == mem.notify) notify_load(cpu, mem, option, d, 1);
             return false;
-        case LWZU:
-            ea = cpu.gpr[b] + exts(a);
+        case LWZX:
+            tmp = (a == 0 ? 0 : cpu.gpr[a].i);
+            ea = tmp + cpu.gpr[b].f;
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem, option);
                 assert(false);
             }
-            cpu.gpr[d] = cache.lw(ea, mem);
+            cpu.gpr[d].i = cache.lw(ea, mem);
             if(ea == mem.notify) notify_load(cpu, mem, option, d, 1);
-            cpu.gpr[b] = ea;
             return false;
         case STW:   
-            ea = (b ? cpu.gpr[b] : 0) + exts(a);
+            ea = (b ? cpu.gpr[b].i : 0) + exts(a);
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem, option);
                 assert(false);
             }
-            cache.swi(ea, mem, cpu.gpr[d]);
+            cache.swi(ea, mem, cpu.gpr[d].i);
             if(ea == mem.notify) notify_store(cpu, mem, option, d, 1);
             return false;
-        case STWU:
-            ea = cpu.gpr[b] + exts(a);
+        case STWX:
+            tmp = (a == 0 ? 0 : cpu.gpr[a].i);
+            ea = cpu.gpr[b].i + tmp;
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem, option);
                 assert(false);
             }
-            cache.swi(ea, mem, cpu.gpr[d]);
-            if(ea == mem.notify) notify_store(cpu, mem,option, d, 1);
-            cpu.gpr[b] = ea;
+            cache.swi(ea, mem, cpu.gpr[d].i);
+            if(ea == mem.notify) notify_store(cpu, mem, option, d, 1);
             return false;
+
         case MFSPR:
             assert((a >> 5) == 0);
-            if(a == 0b00001) cpu.gpr[d] = cpu.xer;
-            else if(a == 0b01000) cpu.gpr[d] = cpu.lr;
-            else if(a == 0b01001) cpu.gpr[d] = cpu.ctr;
+            if(a == 0b00001) cpu.gpr[d].i = cpu.xer;
+            else if(a == 0b01000) cpu.gpr[d].i = cpu.lr;
+            else if(a == 0b01001) cpu.gpr[d].i = cpu.ctr;
             else{
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem, option);
@@ -185,173 +176,68 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
             }
             return false;
         case MR:
-            cpu.gpr[d] = cpu.gpr[a];
+            cpu.gpr[d].i = cpu.gpr[a].i;
             return false;
         case MTSPR:
             assert((d >> 5) == 0);
-            if(d == 0b00001) cpu.xer = cpu.gpr[a];
-            else if(d == 0b01000) cpu.lr = cpu.gpr[a];
-            else if(d == 0b01001) cpu.ctr = cpu.gpr[a];
+            if(d == 0b00001) cpu.xer = cpu.gpr[a].i;
+            else if(d == 0b01000) cpu.lr = cpu.gpr[a].i;
+            else if(d == 0b01001) cpu.ctr = cpu.gpr[a].i;
             else{
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem, option);
                 assert(false);
             }
             return false;
-        case XORIS:
-            cpu.gpr[d] = cpu.gpr[a] ^ (b << 16);
-            return false;
-        case FCTIWZ:
-            cpu.gpr[d] = int(std::trunc(cpu.fpr[a]));
-            return false;
-        case FCFIW:
-            cpu.fpr[d] = float(cpu.gpr[a]);
-            return false;
-        case IN:
-            cpu.gpr[d] = mem.sld[mem.sldpointer++];
-            return false;
-        case OUT: // imm + 1 byte目はどこ
-            // a = 3 - a;
-            // cpu.write(segment(cpu.gpr[d], 8*a, 8*a + 7));
-            cpu.write(segment(cpu.gpr[d], 8*3, 8*3 + 7));
-            return false;
-        case FLUSH: // 
-            cpu.flush();
-            return false;
-        case ORI:
-            cpu.gpr[d] = cpu.gpr[a] | (b & bitmask(16));
-            return false;
-        case FABS:
-            cpu.fpr[d] = std::abs(cpu.fpr[a]); // 多分これで問題ないよね...
-            return false;
+
         case FADD:
-            cpu.fpr[d] = TasukuFukami::fadd(cpu.fpr[a], cpu.fpr[b]);
+            cpu.gpr[d].f = TasukuFukami::fadd(cpu.gpr[a].f, cpu.gpr[b].f);
             return false;
-        case FCMPU: // NaNについては存在しないとする
-            if(cpu.fpr[a] < cpu.fpr[b]) c = 0b1000;
-            else if(cpu.fpr[a] > cpu.fpr[b]) c = 0b0100;
-            else c = 0b0010;
-            // fpcc 無視してます
-            clear_and_set(cpu.cr, 4*7, 4*7 + 3, c);
+        case FSUB:
+            cpu.gpr[d].f = TasukuFukami::fsub(cpu.gpr[a].f, cpu.gpr[b].f);
+            return false;
+        case FMUL:
+            cpu.gpr[d].f = TasukuFukami::fmul(cpu.gpr[a].f, cpu.gpr[b].f);
             return false;
         case FDIV:
-            cpu.fpr[d] = TasukuFukami::fdiv(cpu.fpr[a], cpu.fpr[b], fpu, ovf);
+            cpu.gpr[d].f = TasukuFukami::fdiv(cpu.gpr[a].f, cpu.gpr[b].f, fpu, ovf);
             if(ovf){
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem, option);
                 assert(false);
             }
             return false;
-        case FMR:
-            cpu.fpr[d] = cpu.fpr[a];
-            return false;
-        case FMUL:
-            cpu.fpr[d] = TasukuFukami::fmul(cpu.fpr[a], cpu.fpr[b]);
+        case FABS:
+            cpu.gpr[d].f = std::abs(cpu.gpr[a].f); // 多分これで問題ないよね...
             return false;
         case FNEG:
-            cpu.fpr[d] = -cpu.fpr[a];
-            return false;
-        case FSUB:
-            cpu.fpr[d] = TasukuFukami::fsub(cpu.fpr[a], cpu.fpr[b]);
+            cpu.gpr[d].f = -cpu.gpr[a].f;
             return false;
         case FSQRT:
-            cpu.fpr[d] = TasukuFukami::fsqrt(cpu.fpr[d], fpu);
+            cpu.gpr[d].f = TasukuFukami::fsqrt(cpu.gpr[d].f, fpu);
             return false;
         case FFLOOR: // stdを使ってます
-            cpu.fpr[d] = std::floor(cpu.fpr[d]);
+            cpu.gpr[d].f = std::floor(cpu.gpr[d].f);
             return false;
         case FHALF: // なにこれ
-            cpu.fpr[d] = cpu.fpr[a] / 2.0;
-            return false;
-        case FCOS:
-            cpu.fpr[d] = TasukuFukami::cos(cpu.fpr[a], fpu);
+            cpu.gpr[d].f = TasukuFukami::fmul(cpu.gpr[a].f, 0.5);
             return false;
         case FSIN:
-            cpu.fpr[d] = TasukuFukami::sin(cpu.fpr[a], fpu);
+            cpu.gpr[d].f = TasukuFukami::sin(cpu.gpr[a].f, fpu);
+            return false;
+        case FCOS:
+            cpu.gpr[d].f = TasukuFukami::cos(cpu.gpr[a].f, fpu);
             return false;
         case FATAN:
-            cpu.fpr[d] = TasukuFukami::atan(cpu.fpr[d], fpu);
+            cpu.gpr[d].f = TasukuFukami::atan(cpu.gpr[a].f, fpu);
             return false;
-        case LFS:
-            tmp = (b == 0 ? 0 : cpu.gpr[b]);
-            ea = tmp + exts(a);
-            if(ea >= DATA_SIZE * 4){
-                cpu.pc -= 4;
-                output_cur_info(cpu, mem, option);
-                assert(false);
-            }
-            cpu.fpr[d] = bit_cast<float, int>(cache.lw(ea, mem));
-            if(ea == mem.notify) notify_load(cpu, mem, option, d, 0);
+        case FCTIWZ:
+            cpu.gpr[d].i = int(std::trunc(cpu.gpr[a].f));
             return false;
-        case LFSX:
-            tmp = (a == 0 ? 0 : cpu.gpr[a]);
-            ea = tmp + cpu.gpr[b];
-            if(ea >= DATA_SIZE * 4){
-                cpu.pc -= 4;
-                output_cur_info(cpu, mem, option);
-                assert(false);
-            }
-            cpu.fpr[d] = bit_cast<float, int>(cache.lw(ea, mem));
-            if(ea == mem.notify) notify_load(cpu, mem, option, d, 0);
+        case FCFIW:
+            cpu.gpr[d].f = float(cpu.gpr[a].i);
             return false;
-        case STFSX:
-            tmp = (a == 0 ? 0 : cpu.gpr[a]);
-            ea = tmp + cpu.gpr[b];
-            if(ea >= DATA_SIZE * 4){
-                cpu.pc -= 4;
-                output_cur_info(cpu, mem, option);
-                assert(false);
-            }
-            cache.swf(ea, mem, cpu.fpr[d]);
-            if(ea == mem.notify) notify_store(cpu, mem, option, d, 0);
-            return false;
-        case LWZX:
-            tmp = (a == 0 ? 0 : cpu.gpr[a]);
-            ea = tmp + cpu.gpr[b];
-            if(ea >= DATA_SIZE * 4){
-                cpu.pc -= 4;
-                output_cur_info(cpu, mem, option);
-                assert(false);
-            }
-            cpu.gpr[d] = cache.lw(ea, mem);
-            if(ea == mem.notify) notify_load(cpu, mem, option, d, 1);
-            return false;
-        case MULLI:
-            cpu.gpr[d] = int(((long long)cpu.gpr[a] * (long long)b) & bitmask(32));
-            return false;
-        case MULHWU:
-            cpu.gpr[d] = int(((((unsigned long long)cpu.gpr[a] & bitmask(32)) * ((unsigned long long)cpu.gpr[b] & bitmask(32)))) >> 32);
-            return false;
-        case SLWI:
-            cpu.gpr[d] = (cpu.gpr[a] & bitmask(32 - b)) << b;
-            return false;
-        case SRWI:
-            cpu.gpr[d] = (cpu.gpr[a] >> b) & bitmask(32 - b);
-            return false;
-        case STFS: // LFSと同じ
-            tmp = (b == 0 ? 0 : cpu.gpr[b]);
-            ea = tmp + exts(a);
-            if(ea >= DATA_SIZE * 4){
-                cpu.pc -= 4;
-                output_cur_info(cpu, mem, option);
-                assert(false);
-            }
-            cache.swf(ea, mem, cpu.fpr[d]);
-            if(ea == mem.notify) notify_store(cpu, mem, option, d, 0);
-            return false;
-        case STWX:
-            tmp = (a == 0 ? 0 : cpu.gpr[a]);
-            ea = cpu.gpr[b] + tmp;
-            if(ea >= DATA_SIZE * 4){
-                cpu.pc -= 4;
-                output_cur_info(cpu, mem, option);
-                assert(false);
-            }
-            cache.swi(ea, mem, cpu.gpr[d]);
-            if(ea == mem.notify) notify_store(cpu, mem, option, d, 1);
-            return false;
-        case HALT:
-            return true;
+            
         default:
             cpu.pc -= 4;    
             output_cur_info(cpu, mem, option);

@@ -9,16 +9,20 @@
 #include "util.hpp"
 
 
-using GPR = int32_t; // general purpose register
-using FPR = float; // floating point register
 // using CR = uint32_t; // condition register
+
 using LR = uint32_t; // link register
 using CTR = uint32_t; // count register
 using XER = uint32_t; // xer register
-#define GPR_SIZE 32
-#define FPR_SIZE 32
+#define GPR_SIZE 64
 #define RECV_BUFFER_SIZE 8
 #define SEND_BUFFER_SIZE 16
+
+union gpr_t{
+    int i; float f;
+};
+
+using GPR = gpr_t;
 
 struct cpu_t{
     uint32_t cr;
@@ -28,28 +32,28 @@ struct cpu_t{
     unsigned int pc;
     int sbptr; // send buffer pointer
     std::vector<GPR> gpr;
-    std::vector<FPR> fpr;
     std::vector<int8_t> send_buf;
     std::vector<int8_t> flushed;
 
-    cpu_t():cr(0), lr(0), ctr(0), xer(0),pc(0), sbptr(0), gpr(GPR_SIZE, 0), fpr(FPR_SIZE, 0), send_buf(SEND_BUFFER_SIZE, '\0'){
+    cpu_t():cr(0), lr(0), ctr(0), xer(0),pc(0), sbptr(0), send_buf(SEND_BUFFER_SIZE, '\0'){
+        for(int i = 0; i < 64; i++) gpr[i].i = 0;
         flushed.reserve(1024 * 1024);
     }
 
     void show_gpr(bool col = true){
         if(col) std::cout << "\033[1;31m";
         for(int i = GPR_SIZE - 1; i >= 0; i--){
-            std::cout << "gpr[" << i << "] = (" << gpr[i] << ", ";
-            print_binary_int1(gpr[i]);
+            std::cout << "gpr[" << i << "] = (" << gpr[i].i << ", ";
+            print_binary_int1(gpr[i].i);
             std::cout << ")\n";
         }
         if(col) std::cout << "\033[m\n";
     }
     void show_fpr(bool col = true){
         if(col) std::cout << "\033[1;32m";
-        for(int i = FPR_SIZE - 1; i >= 0; i--){
-            int d = bit_cast<int, float>(fpr[i]);
-            std::cout << "fpr[" << i << "] = (" << fpr[i] << ", ";
+        for(int i = GPR_SIZE - 1; i >= 0; i--){
+            int d = bit_cast<int, float>(gpr[i].f);
+            std::cout << "fpr[" << i << "] = (" << gpr[i].f << ", ";
             print_binary_int1(d);
             std::cout << ")\n";
         }
@@ -101,63 +105,58 @@ struct cpu_t{
 using CPU = cpu_t;
 
 enum INSTR_KIND{
-    // arithmetic operation
+    IN, 
+    OUT, 
+
+    FLUSH,
+    HALT,
+
     ADD, 
     ADDI,
     ADDIS, 
     SUB,
-    CMPWI, 
-    BGT,
+    SLWI, 
+    SRWI,
+    // MUL16
+    // MUL16i
+    ORI,
+
+    CMPW, 
+    CMPWI,
+    FCMPU,
+
+    B, 
     BL,
+    // BEQ, 
+    // BLE, 
+    BGE,
     BLR, // jump to LINK Register
-    BCTR,
-    BCTRL,
-    BCL,
+
     LWZ,
-    LWZU,
+    LWZX, 
     STW,
-    STWU, // store word with update
+    STWX, 
+    // LWI,
+    
     MFSPR, // move from link register
     MR,   // move register
     MTSPR, // refer to p526 
-    // 1st architecture
-    FCTIWZ,
-    XORIS,
-    B, 
-    BLT, 
-    BGE,
-    BNE, 
-    CMPW, 
-    FABS, 
+
     FADD, 
-    FCMPU,
-    FCFIW, 
-    FDIV, 
-    FMR, 
-    FMUL, 
-    FNEG,
     FSUB,
+    FMUL, 
+    FDIV, 
+    FABS, 
+    FNEG,
     FSQRT, 
     FFLOOR,
     FHALF,
-    FCOS,
     FSIN,
+    FCOS,
     FATAN,
-    IN, 
-    OUT, 
-    ORI,
-    FLUSH, 
-    LFS,
-    LFSX,  
-    STFSX,
-    LWZX, 
-    MULLI,
-    MULHWU,
-    SLWI, 
-    SRWI,
-    STFS, 
-    STWX, 
-    HALT,
+    FCTIWZ, // FTOI
+    FCFIW, //ITOF
+
     // ゴミ
     NOT_INSTR,
     INSTR_UNKNOWN
@@ -217,26 +216,14 @@ struct show_t{
 using SHOW = show_t;
 
 enum INSTR_FORM{
-    D,
-    DA,
-    DIMM,
-    DAB,  // d a b
-    DAB2, // d a(b)
-    DAB3, // fd a(b)
-    DAIMM, // d a imm
-    CAB,   // cr a, b
-    CAIMM, // cr a, imm
-    CFF, 
-    BC, // branch (cr or nothing)
-    BDAL, // branch d a label
-    BLB, // branch label
-    FDAB, // fd fa fb
-    FDA, // fd fa
-    FR,  // fd ra
-    FRR, // fd ra rb
-    TSPR, // move to spr
-    FSPR, // move from spr
-    N,  // no condition branch
+    R,
+    RR, 
+    RRR, 
+    RIR,
+    RI,
+    RRI, 
+    L, 
+    N, 
     NOT, // not instruction
 };
 
@@ -254,31 +241,32 @@ struct memory_t{
     std::unordered_map<INSTR_KIND, INSTR_FORM> kind_to_form;
 
     memory_t():index(0), sldpointer(0), instr(INSTR_SIZE), data(DATA_SIZE), type(DATA_SIZE), sld(400){
-        kind_to_form[IN] = kind_to_form[OUT] = D;
-        kind_to_form[MR] = DA;
-        kind_to_form[ADD] = kind_to_form[SUB] = DAB;
-        kind_to_form[MULHWU] = kind_to_form[STWX] = kind_to_form[LWZX] = DAB;
-        kind_to_form[LWZ] = kind_to_form[STW] = kind_to_form[LWZU] = DAB2;
-        kind_to_form[STWU] = DAB2;
-        kind_to_form[STFS] = kind_to_form[LFS] = DAB3;
-        kind_to_form[ORI] = kind_to_form[XORIS] = kind_to_form[ADDI] = DAIMM;
-        kind_to_form[MULLI] = kind_to_form[SLWI] = DAIMM;
-        kind_to_form[ADDIS] = kind_to_form[SRWI] = DAIMM;
-        kind_to_form[CMPW] = CAB;
-        kind_to_form[CMPWI] = CAIMM;
-        kind_to_form[FCMPU] = CFF;
-        kind_to_form[BNE] = kind_to_form[BGE] = kind_to_form[BLT] = kind_to_form[BGT] = BC;
-        kind_to_form[BCL] = BDAL;
-        kind_to_form[B] = kind_to_form[BL] = BLB;
-        kind_to_form[FADD] = kind_to_form[FSUB] = kind_to_form[FMUL] = kind_to_form[FDIV] = FDAB;
-        kind_to_form[FABS] = kind_to_form[FMR] = kind_to_form[FNEG] = kind_to_form[FSQRT] = kind_to_form[FCTIWZ] = FDA;
-        kind_to_form[FHALF] = kind_to_form[FFLOOR] = kind_to_form[FSIN] = kind_to_form[FCOS] = kind_to_form[FATAN] = FDA;
-        kind_to_form[FCFIW] = FR;
-        kind_to_form[LFSX] = kind_to_form[STFSX] = FRR;
-        kind_to_form[MTSPR] = TSPR;
-        kind_to_form[MFSPR] = FSPR;
-        kind_to_form[BLR] = kind_to_form[BCTR] = kind_to_form[BCTRL] = N;
+        kind_to_form[IN] = kind_to_form[OUT] = R;
+
         kind_to_form[FLUSH] = kind_to_form[HALT] = N;
+
+        kind_to_form[ADD] = kind_to_form[SUB] = RRR;
+        kind_to_form[ADDI] = kind_to_form[ADDIS] = RRI;
+        kind_to_form[SLWI] = kind_to_form[SRWI] = kind_to_form[ORI] = RRI;
+
+        kind_to_form[CMPW] = kind_to_form[FCMPU] = RR;
+        kind_to_form[CMPWI] = RI;
+
+        kind_to_form[B] = kind_to_form[BL] = L;
+        kind_to_form[BGE] = L;
+        kind_to_form[BLR] = N;
+
+        kind_to_form[STWX] = kind_to_form[LWZX] = RRR;
+        kind_to_form[LWZ] = kind_to_form[STW] = RIR;
+
+        kind_to_form[MR] = RR;
+        kind_to_form[MTSPR] = kind_to_form[MFSPR] = R;
+
+        kind_to_form[FADD] = kind_to_form[FSUB] = kind_to_form[FMUL] = kind_to_form[FDIV] = RRR;
+        kind_to_form[FABS] = kind_to_form[FNEG] = kind_to_form[FSQRT] = kind_to_form[FFLOOR] = RR;
+        kind_to_form[FHALF] = kind_to_form[FSIN] = kind_to_form[FCOS] = kind_to_form[FATAN] = RR;
+        kind_to_form[FCFIW] = kind_to_form[FCTIWZ] = RR;
+
         kind_to_form[NOT_INSTR] = NOT;
     } 
 
