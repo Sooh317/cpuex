@@ -448,6 +448,7 @@ void show_instr(MEMORY& mem, INSTR_KIND instr, int d, int a, int b){
         case RIR:
             if(b == 0) printf("%s, r%d, %d(0)\n", s.c_str(), d, a);
             else printf("%s, r%d, %d(r%d)\n", s.c_str(), d, a, b);
+            return;
         case RI:
             printf("%s r%d, %d\n", s.c_str(), d, a);
             return;

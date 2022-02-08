@@ -47,7 +47,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
     int c, ea, tmp;
     [[maybe_unused]] int bo, bi;
-    bool cond_ok, ctr_ok, ovf = false;
+    bool cond_ok, ovf = false;
     switch(opc){
         case IN:
             cpu.gpr[d].i = mem.sld[mem.sldpointer++];
@@ -237,7 +237,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
         case FCFIW:
             cpu.gpr[d].f = float(cpu.gpr[a].i);
             return false;
-            
+
         default:
             cpu.pc -= 4;    
             output_cur_info(cpu, mem, option);

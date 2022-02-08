@@ -28,7 +28,7 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
         auto[opc, d, a, b] = instr_fetch_fast(cpu, mem);
         int c, ea, tmp;
         [[maybe_unused]] int bo, bi;
-        bool cond_ok, ctr_ok, ovf = false;
+        bool cond_ok, ovf = false;
         switch(opc){
         case IN:
             cpu.gpr[d].i = mem.sld[mem.sldpointer++];
@@ -126,11 +126,6 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             if(a == 0b00001) cpu.gpr[d].i = cpu.xer;
             else if(a == 0b01000) cpu.gpr[d].i = cpu.lr;
             else if(a == 0b01001) cpu.gpr[d].i = cpu.ctr;
-            else{
-                cpu.pc -= 4;
-                output_cur_info(cpu, mem, option);
-                assert(false);
-            }
             continue;
         case MR:
             cpu.gpr[d].i = cpu.gpr[a].i;
@@ -140,11 +135,6 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             if(d == 0b00001) cpu.xer = cpu.gpr[a].i;
             else if(d == 0b01000) cpu.lr = cpu.gpr[a].i;
             else if(d == 0b01001) cpu.ctr = cpu.gpr[a].i;
-            else{
-                cpu.pc -= 4;
-                output_cur_info(cpu, mem, option);
-                assert(false);
-            }
             continue;
 
         case FADD:
@@ -192,10 +182,10 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             
         default:
             cpu.pc -= 4;    
-            output_cur_info(cpu, mem, option);
             warning(opcode_to_string(opc));
             assert(false);
             continue;
+        }
     }
 }
 

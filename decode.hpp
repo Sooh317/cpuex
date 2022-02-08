@@ -133,12 +133,6 @@ INSTR decode_bin(const std::string& bit){
     case 0x2:
         opcode = FLUSH;
         break;
-    case 0x1b:
-        opcode = XORIS;
-        d = btoi(bit.substr(11, 5));
-        a = btoi(bit.substr(6, 5));
-        b = btoi(bit.substr(16, 16));
-        break;
     case 0x1f: // add, mfspr, mr, mtspr
         imm = btoi(bit.substr(21, 10));
         if(imm == 0x153){ // mfspr
@@ -180,31 +174,11 @@ INSTR decode_bin(const std::string& bit){
             a = btoi(bit.substr(11, 5));
             b = btoi(bit.substr(16, 5));
         }
-        else if(imm == 0x00b){
-            opcode = MULHWU;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(11, 5));
-            b = btoi(bit.substr(16, 5));
-        }
         else if(imm == 0x0){
             opcode = CMPW;
             d = btoi(bit.substr(6, 3));
             a = btoi(bit.substr(11, 5));
             b = btoi(bit.substr(16, 5));
-        }
-        else if(imm == 0x217){
-            opcode = LFSX;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(11, 5));
-            b = btoi(bit.substr(16, 5));
-            break;
-        }
-        else if(imm == 0x297){
-            opcode = STFSX;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(11, 5));
-            b = btoi(bit.substr(16, 5));
-            break;
         }
         break;
     case 0xe: // addi
@@ -225,21 +199,9 @@ INSTR decode_bin(const std::string& bit){
         a = btoi(bit.substr(11, 5));
         b = exts(btoi(bit.substr(16, 16)));
         break;
-    case 0x07:
-        opcode = MULLI;
-        d = btoi(bit.substr(6, 5));
-        a = btoi(bit.substr(11, 5));
-        b = exts(btoi(bit.substr(16, 16)));
-        break;
     case 0x10: // bgt,  bcl
         //01000001100001111010101010101000
-        if(bit[30] == '0' && bit[31] == '1'){
-            opcode = BCL;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(11, 5));
-            b = exts(bit.substr(16, 14), 2);
-        }
-        else if(bit[30] == '0' && bit[31] == '0'){
+        /*if(bit[30] == '0' && bit[31] == '0'){
             d = btoi(bit.substr(11, 5));
             a = exts(bit.substr(16, 14), 2);
             if(bit.substr(6, 5)  == "01100"){
@@ -253,6 +215,7 @@ INSTR decode_bin(const std::string& bit){
             d /= 4;
         }
         else assert(false);
+        */
         break;
     case 0x12: // b 系列
         if(bit[30] == '0' && bit[31] == '0') opcode = B;
@@ -263,10 +226,6 @@ INSTR decode_bin(const std::string& bit){
     case 0x13: // bctr, blr
         imm = btoi(bit.substr(21, 10));
         if(imm == 16) opcode = BLR;
-        else if(imm == 528){
-            if(bit.back() == '1') opcode = BCTRL;
-            else opcode = BCTR;
-        }
         else assert(false);
         break;
     case 0x15:
@@ -290,32 +249,8 @@ INSTR decode_bin(const std::string& bit){
         a = exts(btoi(bit.substr(16, 16)));
         b = btoi(bit.substr(11, 5));
         break;
-    case 0x21: // lwzu
-        opcode = LWZU;
-        d = btoi(bit.substr(6, 5));
-        a = btoi(bit.substr(16, 16));
-        b = exts(btoi(bit.substr(11, 5)));
-        break;
     case 0x24: // stw
         opcode = STW;
-        d = btoi(bit.substr(6, 5));
-        a = exts(btoi(bit.substr(16, 16)));
-        b = btoi(bit.substr(11, 5));
-        break;
-    case 0x25: // stwu
-        opcode = STWU;
-        d = btoi(bit.substr(6, 5));
-        a = exts(btoi(bit.substr(16, 16)));
-        b = btoi(bit.substr(11, 5));
-        break;
-    case 0x30:
-        opcode = LFS;
-        d = btoi(bit.substr(6, 5));
-        a = exts(btoi(bit.substr(16, 16)));
-        b = btoi(bit.substr(11, 5));
-        break;
-    case 0x34:
-        opcode = STFS;
         d = btoi(bit.substr(6, 5));
         a = exts(btoi(bit.substr(16, 16)));
         b = btoi(bit.substr(11, 5));
@@ -398,11 +333,6 @@ INSTR decode_bin(const std::string& bit){
         }
         else if(imm == 0x46){ // mtfsb0 を借りた
             opcode = FHALF;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(16, 5));
-        }
-        else if(imm == 0x48){
-            opcode = FMR;
             d = btoi(bit.substr(6, 5));
             a = btoi(bit.substr(16, 5));
         }
