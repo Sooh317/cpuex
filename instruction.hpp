@@ -28,13 +28,16 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
 
     if(s == "b") return B;
     if(s == "bl") return BL;
-    if(s == "bge") return BGE;
     if(s == "blr") return BLR;
+    if(s == "beq") return BEQ;
+    if(s == "ble") return BLE;
+    if(s == "bge") return BGE;
 
     if(s == "lwz") return LWZ;
     if(s == "lwzx") return LWZX;
     if(s == "stw") return STW;
     if(s == "stwx") return STWX;
+    if(s == "lwi") return LWI;
 
     if(s == "mfspr") return MFSPR;
     if(s == "mr") return MR;
@@ -97,6 +100,10 @@ std::string opcode_to_string(INSTR_KIND kind){
         return "b";
     case BL:
         return "bl";
+    case BEQ:
+        return "beq";
+    case BLE:
+        return "ble";
     case BGE:
         return "bge";
     case BLR:
@@ -110,6 +117,8 @@ std::string opcode_to_string(INSTR_KIND kind){
         return "stw";
     case STWX:
         return "stwx";
+    case LWI:
+        return "lwi";
 
     case MFSPR:
         return "mfspr";
@@ -277,7 +286,15 @@ void asm_checker(const std::vector<std::string>& s, INSTR_FORM f){
         char c = s[1][0];
         int k = stoi(s[1].substr(1, s[1].size() - 1));
         if(!(c == 'r' && 0 <= k && k <= 63)) report(s), exit(1);
-        if(!((s[2][0] == '0' && (s[2][1] == 'x' || s[2][1] == 'b')) || ('1' <= s[2][0] && s[2][0] <= '9'))) report(s), exit(1);
+        if(!((s[2][0] == '0' && (s[2][1] == 'x' || s[2][1] == 'b')) || ('1' <= s[2][0] && s[2][0] <= '9') || (s[2][0] == '-'))) report(s), exit(1);
+    }
+    else if(f == RIR){
+        if(s.size() != 3) report(s), exit(1);
+        char c1 = s[1][0];
+        int k1 = stoi(s[1].substr(1, s[1].size() - 1));
+        if(!(c1 == 'r' && 0 <= k1 && k1 <= 63)) report(s), exit(1);
+        if(!((s[2][0] == '0' && (s[2][1] == 'x' || s[2][1] == 'b')) || ('1' <= s[2][0] && s[2][0] <= '9') || (s[2][0] == '-'))) report(s), exit(1);
+        if(s[2].back() != ')') report(s), exit(1);
     }
     else if(f == RRI){
         if(s.size() != 4) report(s), exit(1);
@@ -287,7 +304,13 @@ void asm_checker(const std::vector<std::string>& s, INSTR_FORM f){
         int k2 = stoi(s[2].substr(1, s[2].size() - 1));
         if(!(c1 == 'r' && 0 <= k1 && k1 <= 63)) report(s), exit(1);
         if(!(c2 == 'r' && 0 <= k2 && k2 <= 63)) report(s), exit(1);
-        if(!((s[2][0] == '0' && (s[2][1] == 'x' || s[2][1] == 'b')) || ('1' <= s[2][0] && s[2][0] <= '9'))) report(s), exit(1);
+        if(!((s[3][0] == '0' && (s[3][1] == 'x' || s[3][1] == 'b')) || ('1' <= s[3][0] && s[3][0] <= '9') || (s[3][0] == '-'))) report(s), exit(1);
+    }
+    else if(f == RL){
+        if(s.size() != 3) report(s), exit(1);
+        char c1 = s[1][0];
+        int k1 = stoi(s[1].substr(1, s[1].size() - 1));
+        if(!(c1 == 'r' && 0 <= k1 && k1 <= 63)) report(s), exit(1);
     }
     else if(f == L){
         if(s.size() != 2) report(s), exit(1);
@@ -321,6 +344,17 @@ INSTR recognize_instr(MEMORY_PRO& mem, const std::vector<std::string> &s){
         ra = call(2, 0);
         rb = call(2, 1);
     }
+    else if(f == RL){
+        rd = call(1, 0);
+        if(s.size() == 3){
+            if(mem.lbl.find(s[2]) != mem.lbl.end()) ra = mem.lbl[s[2]];
+            else{
+                printout(s[1]);
+                assert(false);
+            }
+        }
+        else assert(false);
+    }
     else if(f == L){
         if(s.size() == 2){ // 怪しいかも
             if(mem.lbl.find(s[1]) != mem.lbl.end()) ra = mem.lbl[s[1]];
@@ -338,90 +372,96 @@ INSTR recognize_instr(MEMORY_PRO& mem, const std::vector<std::string> &s){
 int opcode_to_bit(INSTR_KIND kind){
     switch (kind){
     case IN:
-        return 0x0;
+        return 0b0;
     case OUT:
-        return 0x1;
+        return 0b0;
     
     case FLUSH:
-        return 0x2;
+        return 0b0;
     case HALT:
-        return 0x3f;
+        return 0b0;
     
-    case ADD: // d a b oe 0x10a rc
-        return 0x1f;
+    case ADD:
+        return 0b1001;
     case ADDI: // d a simm
-        return 0xe;
+        return 0b0001;
     case ADDIS: // d a simm
-        return 0xf;
+        return 0b0010;
     case SUB: 
-        return 0x1f;
+        return 0b1001;
     case SLWI:
-        return 0x15;
+        return 0b0011;
     case SRWI:
-        return 0x15;
+        return 0b0100;
     case ORI:
-        return 0x18;
+        return 0b0110;
 
     case CMPW:
-        return 0x1f;
-    case CMPWI: // だるい
-        return 0x0b;
+        return 0b1010;
+    case CMPWI:
+        return 0b1010;
     case FCMPU:
-        return 0x3f;
+        return 0b1010;
 
     case B:
-        return 0x12;
-    case BL: // li aa lk
-        return 0x12;
+        return 0b1010;
+    case BL:
+        return 0b1010;
+    case BLE:
+        return 0b1010;
+    case BEQ:
+        return 0b1010;
     case BGE:
-        return 0x10;
-    case BLR: // bo bi bd aa lk
-        return 0x13;
+        return 0b1010;
+    case BLR:
+        return 0b1010;
 
     case LWZ: // d a d
-        return 0x20;
+        return 0b0111;
     case LWZX:
-        return 0x1f;
+        return 0b1011;
     case STW:// s a d
-        return 0x24;
+        return 0b1000;
     case STWX:
-        return 0x1f;
+        return 0b1011;
+    case LWI: 
+        return 0b1100;
 
     case MFSPR: // d spr 0x153 0
-        return 0x1f;
+        return 0b1011;
     case MR: // s a b 0x1bc rc
-        return 0x1f;
+        return 0x1011;
     case MTSPR: // s spr 0x1d3 0
-        return 0x1f;
+        return 0x1011;
     
     case FADD:
-        return 0x3f;
+        return 0b1001;
     case FSUB:
-        return 0x3f;
+        return 0b1001;
     case FMUL:
-        return 0x3f;
+        return 0b1001;
     case FDIV:
-        return 0x3f;
+        return 0b1001;
     case FABS:
-        return 0x3f;
+        return 0b1001;
     case FNEG:
-        return 0x3f;
+        return 0b1001;
     case FSQRT:
-        return 0x3f;
+        return 0b1001;
     case FFLOOR:
-        return 0x3f;
+        return 0b1001;
     case FHALF:
-        return 0x3f;
+        return 0b1001;
     case FSIN:
-        return 0x3f;
+        return 0b1001;
     case FCOS:
-        return 0x3f;
+        return 0b1001;
     case FATAN:
-        return 0x3f;
+        return 0b1001;
     case FCTIWZ:
-        return 0x3f;
+        return 0b1001;
     case FCFIW:
-        return 0x3f;
+        return 0b1001;
 
     default: // 生データが入っているとする
         return (~0x0); // 数字は 0, 文字列は0x1にする？
@@ -461,6 +501,11 @@ void show_instr(MEMORY& mem, INSTR_KIND instr, int d, int a, int b){
             else label = std::to_string(d);
             printf("%s %s\n", s.c_str(), label.c_str());
             return;
+        case RL:
+            if(mem.inv.count(a)) label = mem.inv[a];
+            else label = std::to_string(a);
+            printf("%s r%d, %s\n", s.c_str(), d, label.c_str());
+            return;
         case N:
             printf("%s\n", s.c_str());
             return;
@@ -476,135 +521,140 @@ void show_instr(MEMORY& mem, INSTR_KIND instr, int d, int a, int b){
 
 
 void show_instr_binary(INSTR_KIND instr, int d, int a, int b, bool nl = true){
-    unsigned int res = opcode_to_bit(instr) << 26;
+    unsigned int res = opcode_to_bit(instr) << 28;
     switch (instr){
     case IN:
-        res |= ((d & bitmask(5)) << 21);
         break;
     case OUT:
-        res |= ((d & bitmask(5)) << 21) | (a & bitmask(16));
+        res |= 1;
         break;
 
     case FLUSH:
+        res |= 0b10;
         break;
     case HALT:
-        res = (~0);
+        res |= 0b11;
         break;
 
     case ADD:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | ((0x10A) << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | ((b & bitmask(6)) << 10) | (0 << 2) | 0b01;
         break;
     case ADDI:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | (bitmask(16) & b);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (bitmask(16) & b);
         break;
     case ADDIS:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | (bitmask(16) & b);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (bitmask(16) & b);
         break;
     case SUB:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | ((0x10b) << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | ((b & bitmask(6)) << 10) | (1 << 2) | 0b01;
         break;
     case SLWI:
-        res |= ((a & bitmask(5)) << 21) | ((d & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (((31 - b) & bitmask(5)) << 1);
+        res |= ((a & bitmask(6)) << 22) | ((d & bitmask(6)) << 16) | (bitmask(16) & b);
         break;
     case SRWI:
-        res |= ((a & bitmask(5)) << 21) | ((d & bitmask(5)) << 16) | ((int(b & bitmask(5))) << 11) | ((b & bitmask(5)) << 6) | (31 << 1);
+        res |= ((a & bitmask(6)) << 22) | ((d & bitmask(6)) << 16) | (bitmask(16) & b);
         break;
     case ORI:
-        res |= ((a & bitmask(5)) << 21) | ((d & bitmask(5)) << 16) | (b & bitmask(16));
+        res |= ((a & bitmask(6)) << 22) | ((d & bitmask(6)) << 16) | (b & bitmask(16));
         break;
 
     case CMPW:
-        res |= ((d & bitmask(3)) << 23) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (0 << 2) | 0b00;
         break;
     case CMPWI:
-        res |= ((d & bitmask(3)) << 23) | ((a & bitmask(5)) << 16) | (bitmask(16) & b);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (0 << 2) | 0b01;
         break;
     case FCMPU:
-        res |= ((d & bitmask(3)) << 23) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (0 << 2) | 0b11;
         break;
 
     case B:
-        d >>= 2;
-        res |= ((d & bitmask(24)) << 2);
+        res |= ((d & bitmask(22)) << 6) | (0 << 2) | 0b10;
         break;
     case BL:
-        d /= 4;
-        res |= ((d & bitmask(24)) << 2) | 1;
+        res |= ((d & bitmask(22)) << 6) | (1 << 2) | 0b10;
+        break;
+    case BEQ:
+        res |= ((d & bitmask(22)) << 6) | (2 << 2) | 0b10;
+        break;
+    case BLE:
+        res |= ((d & bitmask(22)) << 6) | (3 << 2) | 0b10;
         break;
     case BGE:
-        d *= 4;
-        a /= 4;
-        res |= (4 << 21) | ((d & bitmask(5)) << 16) | ((a & bitmask(14)) << 2);
+        res |= ((d & bitmask(22)) << 6) | (4 << 2) | 0b10;
         break;
     case BLR:
-        res |= (20 << 21) | (16 << 1);
+        res |= ((d & bitmask(22)) << 6) | (5 << 2) | 0b10;
         break;
 
     case LWZ:
-        res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
+        res |= ((d & bitmask(6)) << 22) | ((b & bitmask(6)) << 16) | (a & bitmask(16));
         break;
     case LWZX:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (23 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | ((b & bitmask(6)) << 10) | (0 << 2) | 0b00;
         break;
     case STW:
-        res |= ((d & bitmask(5)) << 21) | ((b & bitmask(5)) << 16) | (a & bitmask(16));
+        res |= ((d & bitmask(6)) << 22) | ((b & bitmask(6)) << 16) | (a & bitmask(16));
         break;
     case STWX:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (151 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | ((b & bitmask(6)) << 10) | (0 << 2) | 0b01;
+        break;
+    case LWI:
+        res |= ((d & bitmask(6)) << 22) | (a & bitmask(22));
         break;
 
     case MFSPR:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(10)) << 11) | (339 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (1 << 2) | 0b11;
         break;
     case MR:
-        res |= ((a & bitmask(5)) << 21) | ((d & bitmask(5)) << 16) | ((a & bitmask(5)) << 11) | (444 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (0 << 2) | 0b10;
         break;
     case MTSPR:
-        res |= ((a & bitmask(5)) << 21) | ((d & bitmask(10)) << 11) | (467 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (0 << 2) | 0b11;
         break;
 
     
     case FADD:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (21 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | ((b & bitmask(6)) << 10) | (3 << 2) | 0b01;
         break;
     case FSUB:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (20 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | ((b & bitmask(6)) << 10) | (4 << 2) | 0b01;
         break;
     case FMUL:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 6) | (25 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | ((b & bitmask(6)) << 10) | (5 << 2) | 0b01;
         break;
     case FDIV:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (18 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | ((b & bitmask(6)) << 10) | (6 << 2) | 0b01;
         break;
     case FABS:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (264 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (0 << 2) | 0b00;
         break;
     case FNEG:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (40 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (1 << 2) | 0b00;
         break;
     case FSQRT:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (22 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (2 << 2) | 0b00;
         break;
     case FFLOOR:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (64 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (3 << 2) | 0b00;
         break;
     case FHALF:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (70 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (4 << 2) | 0b00;
         break;
     case FSIN:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (28 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (5 << 2) | 0b00;
         break;
     case FCOS:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (29 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (6 << 2) | 0b00;
         break;
     case FATAN:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (30 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (7 << 2) | 0b00;
         break;
     case FCTIWZ:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (15 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (8 << 2) | 0b00;
         break;
     case FCFIW:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (16 << 1);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (9 << 2) | 0b00;
         break;
 
     case NOT_INSTR:

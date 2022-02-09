@@ -47,7 +47,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
     int c, ea, tmp;
     [[maybe_unused]] int bo, bi;
-    bool cond_ok, ovf = false;
+    bool ovf = false;
     switch(opc){
         case IN:
             cpu.gpr[d].i = mem.sld[mem.sldpointer++];
@@ -73,6 +73,12 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
             return false;
         case SUB:
             cpu.gpr[d].i = cpu.gpr[a].i - cpu.gpr[b].i;
+            return false;
+        case MUL16:
+            cpu.gpr[d].i = int(u32((cpu.gpr[a].i & bitmask(16))) * u32(cpu.gpr[b].i & bitmask(16)));
+            return false;
+        case MUL16I:
+            cpu.gpr[d].i = int(u32((cpu.gpr[a].i & bitmask(16))) * u32(b & bitmask(16)));
             return false;
         case SLWI:
             cpu.gpr[d].i = (cpu.gpr[a].i & bitmask(32 - b)) << b;
@@ -113,9 +119,14 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
             cpu.lr = cpu.pc;
             cpu.pc = d;
             return false;
+        case BEQ:
+            if(kth_bit(cpu.cr, 7*4 + 2)) cpu.pc = d;
+            return false;
+        case BLE:
+            if(!kth_bit(cpu.cr, 7*4 + 1)) cpu.pc = d;
+            return false;
         case BGE:
-            cond_ok = kth_bit(cpu.cr, 7*4); // cr7のみ
-            if(!cond_ok) cpu.pc = a;
+            if(!kth_bit(cpu.cr, 7*4)) cpu.pc = a;
             return false;
         case BLR:
             cpu.pc = segment(cpu.lr, 0, 29) << 2;
@@ -133,7 +144,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
             return false;
         case LWZX:
             tmp = (a == 0 ? 0 : cpu.gpr[a].i);
-            ea = tmp + cpu.gpr[b].f;
+            ea = tmp + cpu.gpr[b].i;
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem, option);
@@ -163,31 +174,18 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
             cache.swi(ea, mem, cpu.gpr[d].i);
             if(ea == mem.notify) notify_store(cpu, mem, option, d, 1);
             return false;
+        // case LWI:
+        //     cpu.gpr[d].i = cache.lw(a, mem);
+        //     return false;
 
         case MFSPR:
-            assert((a >> 5) == 0);
-            if(a == 0b00001) cpu.gpr[d].i = cpu.xer;
-            else if(a == 0b01000) cpu.gpr[d].i = cpu.lr;
-            else if(a == 0b01001) cpu.gpr[d].i = cpu.ctr;
-            else{
-                cpu.pc -= 4;
-                output_cur_info(cpu, mem, option);
-                assert(false);
-            }
+            cpu.gpr[d].i = cpu.lr;
             return false;
         case MR:
             cpu.gpr[d].i = cpu.gpr[a].i;
             return false;
         case MTSPR:
-            assert((d >> 5) == 0);
-            if(d == 0b00001) cpu.xer = cpu.gpr[a].i;
-            else if(d == 0b01000) cpu.lr = cpu.gpr[a].i;
-            else if(d == 0b01001) cpu.ctr = cpu.gpr[a].i;
-            else{
-                cpu.pc -= 4;
-                output_cur_info(cpu, mem, option);
-                assert(false);
-            }
+            cpu.lr = cpu.gpr[d].i;
             return false;
 
         case FADD:

@@ -28,7 +28,7 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
         auto[opc, d, a, b] = instr_fetch_fast(cpu, mem);
         int c, ea, tmp;
         [[maybe_unused]] int bo, bi;
-        bool cond_ok, ovf = false;
+        bool ovf = false;
         switch(opc){
         case IN:
             cpu.gpr[d].i = mem.sld[mem.sldpointer++];
@@ -55,6 +55,12 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
         case SUB:
             cpu.gpr[d].i = cpu.gpr[a].i - cpu.gpr[b].i;
             continue;
+        case MUL16:
+            cpu.gpr[d].i = int(u32((cpu.gpr[a].i & bitmask(16))) * u32(cpu.gpr[b].i & bitmask(16)));
+            continue;
+        case MUL16I: // 多分だめ
+            cpu.gpr[d].i = int(u32((cpu.gpr[a].i & bitmask(16))) * u32(b & bitmask(16)));
+            continue;
         case SLWI:
             cpu.gpr[d].i = (cpu.gpr[a].i & bitmask(32 - b)) << b;
             continue;
@@ -66,22 +72,22 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             continue;
 
         case CMPW:
-            if(cpu.gpr[a].i < cpu.gpr[b].i) c = 0b1000;
-            else if(cpu.gpr[a].i > cpu.gpr[b].i) c = 0b0100;
+            if(cpu.gpr[d].i < cpu.gpr[a].i) c = 0b1000;
+            else if(cpu.gpr[d].i > cpu.gpr[a].i) c = 0b0100;
             else c = 0b0010;
             clear_and_set(cpu.cr, 4*7, 4*7 + 3, c); // cr7のみ
             continue;
         case CMPWI:
             c = 0;
-            tmp = exts(b);
-            if(cpu.gpr[a].i < tmp) c = 0b1000;
-            else if(cpu.gpr[a].i > tmp) c = 0b0100;
+            tmp = exts(a);
+            if(cpu.gpr[d].i < tmp) c = 0b1000;
+            else if(cpu.gpr[d].i > tmp) c = 0b0100;
             else c = 0b0010;
             clear_and_set(cpu.cr, 4*7, 4*7 + 3, c); // cr7のみ
             continue;
         case FCMPU: // NaNについては存在しないとする
-            if(cpu.gpr[a].f < cpu.gpr[b].f) c = 0b1000;
-            else if(cpu.gpr[a].f > cpu.gpr[b].f) c = 0b0100;
+            if(cpu.gpr[d].f < cpu.gpr[a].f) c = 0b1000;
+            else if(cpu.gpr[d].f > cpu.gpr[a].f) c = 0b0100;
             else c = 0b0010;
             // fpcc 無視してます
             clear_and_set(cpu.cr, 4*7, 4*7 + 3, c);
@@ -94,9 +100,14 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             cpu.lr = cpu.pc;
             cpu.pc = d;
             continue;
+        case BEQ:
+            if(kth_bit(cpu.cr, 7*4 + 2)) cpu.pc = d;
+            continue;
+        case BLE:
+            if(!kth_bit(cpu.cr, 7*4 + 1)) cpu.pc = d;
+            continue;
         case BGE:
-            cond_ok = kth_bit(cpu.cr, 7*4); // cr7のみ
-            if(!cond_ok) cpu.pc = a;
+            if(!kth_bit(cpu.cr, 7*4)) cpu.pc = d;
             continue;
         case BLR:
             cpu.pc = segment(cpu.lr, 0, 29) << 2;
@@ -108,7 +119,7 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             continue;
         case LWZX:
             tmp = (a == 0 ? 0 : cpu.gpr[a].i);
-            ea = tmp + cpu.gpr[b].f;
+            ea = tmp + cpu.gpr[b].i;
             cpu.gpr[d].i = cache.lw(ea, mem);
             continue;
         case STW:   
@@ -120,21 +131,18 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             ea = cpu.gpr[b].i + tmp;
             cache.swi(ea, mem, cpu.gpr[d].i);
             continue;
+        // case LWI:
+        //     cpu.gpr[d].i = cache.lw(a, mem);
+        //     continue;
 
         case MFSPR:
-            assert((a >> 5) == 0);
-            if(a == 0b00001) cpu.gpr[d].i = cpu.xer;
-            else if(a == 0b01000) cpu.gpr[d].i = cpu.lr;
-            else if(a == 0b01001) cpu.gpr[d].i = cpu.ctr;
+            cpu.gpr[d].i = cpu.lr;
             continue;
         case MR:
             cpu.gpr[d].i = cpu.gpr[a].i;
             continue;
         case MTSPR:
-            assert((d >> 5) == 0);
-            if(d == 0b00001) cpu.xer = cpu.gpr[a].i;
-            else if(d == 0b01000) cpu.lr = cpu.gpr[a].i;
-            else if(d == 0b01001) cpu.ctr = cpu.gpr[a].i;
+            cpu.lr = cpu.gpr[d].i;
             continue;
 
         case FADD:
@@ -196,7 +204,7 @@ void translator(MEMORY_PRO& mem, OPTION& option){
     if(option.binTOasm){
         if(option.binary) ifs.open("run/bin");
         while((option.binary ? ifs : std::cin) >> s){
-            auto[opc, d, a, b] = decode_bin(s);
+            auto[opc, d, a, b] = decode_bin(s, mem);
             show_instr(mem, opc, d, a, b);
         }
     }

@@ -110,240 +110,114 @@ int collect_label(const std::string file, MEMORY_PRO& mem_pro, int tmp){
     return cnt;
 }
 
-INSTR decode_bin(const std::string& bit){
-    int val = btoi(bit.substr(0, 6));
+INSTR decode_bin(const std::string& bit, MEMORY_PRO& mem){
+    int val = btoi(bit.substr(0, 4));
     INSTR_KIND opcode = NOT_INSTR;
-    int d = 0, a = 0, b = 0, imm;
+    int d = 0, a = 0, b = 0;
     if(bit.size() == 33){
         d = stoi(bit.substr(1, 32), nullptr, 2);
         return INSTR(opcode, d, a, b);
     }
     [[maybe_unused]]int mb, me;
-    switch (val){
-    case 0x0: // かわるかも
-        opcode = IN;
-        d = btoi(bit.substr(6, 5));
-        // a = btoi(bit.substr(11, 5));
-        break;
-    case 0x1:
-        opcode = OUT;
-        d = btoi(bit.substr(6, 5));
-        a = 0;
-        break;
-    case 0x2:
-        opcode = FLUSH;
-        break;
-    case 0x1f: // add, mfspr, mr, mtspr
-        imm = btoi(bit.substr(21, 10));
-        if(imm == 0x153){ // mfspr
-            opcode = MFSPR;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(11, 10));
-        }
-        else if(imm == 0x1d3){ // mtspr
-            opcode = MTSPR;
-            d = btoi(bit.substr(11, 10));
-            a = btoi(bit.substr(6, 5));
-        }
-        else if(imm == 0x1bc){ // mr
-            opcode = MR;
-            d = btoi(bit.substr(11, 5));
-            a = btoi(bit.substr(6, 5));
-        }
-        else if(imm == 0x017){
-            opcode = LWZX;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(11, 5));
-            b = btoi(bit.substr(16, 5));
-        }
-        else if(imm == 0x097){
-            opcode = STWX;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(11, 5));
-            b = btoi(bit.substr(16, 5));
-        }
-        else if(imm == 0x10a){ // add
-            opcode = ADD;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(11, 5));
-            b = btoi(bit.substr(16, 5));
-        }
-        else if(imm == 0x10b){
-            opcode = SUB;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(11, 5));
-            b = btoi(bit.substr(16, 5));
-        }
-        else if(imm == 0x0){
-            opcode = CMPW;
-            d = btoi(bit.substr(6, 3));
-            a = btoi(bit.substr(11, 5));
-            b = btoi(bit.substr(16, 5));
-        }
-        break;
-    case 0xe: // addi
-        opcode = ADDI;
-        d = btoi(bit.substr(6, 5));
-        a = btoi(bit.substr(11, 5));
-        b = exts(btoi(bit.substr(16, 16)));
-        break;
-    case 0xf: // addis
-        opcode = ADDIS;
-        d = btoi(bit.substr(6, 5));
-        a = btoi(bit.substr(11, 5));
-        b = btoi(bit.substr(16, 16));
-        break;
-    case 0x0b: // cmpwi
-        opcode = CMPWI;
-        d = btoi(bit.substr(6, 3));
-        a = btoi(bit.substr(11, 5));
-        b = exts(btoi(bit.substr(16, 16)));
-        break;
-    case 0x10: // bgt,  bcl
-        //01000001100001111010101010101000
-        /*if(bit[30] == '0' && bit[31] == '0'){
-            d = btoi(bit.substr(11, 5));
-            a = exts(bit.substr(16, 14), 2);
-            if(bit.substr(6, 5)  == "01100"){
-                if((d & bitmask(2)) == 1) opcode = BGT;
-                else if((d & bitmask(2)) == 0) opcode = BLT;
-            }
-            else if(bit.substr(6, 5) == "00100"){
-                if((d & bitmask(2)) == 2) opcode = BNE;
-                else if((d & bitmask(2)) == 0) opcode = BGE;
-            }
-            d /= 4;
-        }
+    if(val == 0b0000){
+        if(bit[30] == '0' && bit[31] == '0') opcode = IN;
+        else if(bit[30] == '0' && bit[31] == '1') opcode = OUT;
+        else if(bit[30] == '1' && bit[31] == '0') opcode = FLUSH;
+        else if(bit[30] == '1' && bit[31] == '1') opcode = HALT;
         else assert(false);
-        */
-        break;
-    case 0x12: // b 系列
-        if(bit[30] == '0' && bit[31] == '0') opcode = B;
-        else if(bit[30] == '0' && bit[31] == '1') opcode = BL;
-        d = exts(bit.substr(6, 24), 2);
-        assert(d >= 0 && d % 4 == 0);
-        break;
-    case 0x13: // bctr, blr
-        imm = btoi(bit.substr(21, 10));
-        if(imm == 16) opcode = BLR;
-        else assert(false);
-        break;
-    case 0x15:
-        mb = btoi(bit.substr(21, 5));
-        me = btoi(bit.substr(26, 5));
-        if(me == 31) opcode = SRWI;
-        else opcode = SLWI;
-        a = btoi(bit.substr(6, 5));
-        d = btoi(bit.substr(11, 5));
-        b = btoi(bit.substr(16, 5));
-        break; 
-    case 0x18:
-        opcode = ORI;
-        a = btoi(bit.substr(6, 5));
-        d = btoi(bit.substr(11, 5));
-        b = btoi(bit.substr(16, 16));
-        break;
-    case 0x20: // lwz
-        opcode = LWZ;
-        d = btoi(bit.substr(6, 5));
-        a = exts(btoi(bit.substr(16, 16)));
-        b = btoi(bit.substr(11, 5));
-        break;
-    case 0x24: // stw
-        opcode = STW;
-        d = btoi(bit.substr(6, 5));
-        a = exts(btoi(bit.substr(16, 16)));
-        b = btoi(bit.substr(11, 5));
-        break;
-    case 0x3f:
-        if(btoi(bit) == (~0)){
-            opcode = HALT;
-            break;
-        }
-        imm = btoi(bit.substr(21, 10));
-        if(imm == 0){
-            opcode = FCMPU;
-            d = btoi(bit.substr(6, 3));
-            a = btoi(bit.substr(11, 5));
-            b = btoi(bit.substr(16, 5));
-        }
-        else if(imm == 0x00f){
-            opcode = FCTIWZ;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(16, 5));
-        }
-        else if(imm == 0x010){
-            opcode = FCFIW;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(16, 5));
-        }
-        else if(imm == 0x012){
-            opcode = FDIV;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(11, 5));
-            b = btoi(bit.substr(16, 5));
-        }
-        else if(imm == 0x014){
-            opcode = FSUB;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(11, 5));
-            b = btoi(bit.substr(16, 5));
-        }
-        else if(imm == 0x015){
-            opcode = FADD;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(11, 5));
-            b = btoi(bit.substr(16, 5));
-        }
-        else if((imm & bitmask(5)) == 22){
-            opcode = FSQRT;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(16, 5));
-        }
-        else if((imm & bitmask(5)) == 25){
-            opcode = FMUL;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(11, 5));
-            b = btoi(bit.substr(21, 5));
-        }
-        else if((imm & bitmask(5)) == 28){
-            opcode = FSIN;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(16, 5));
-        }
-        else if((imm & bitmask(5)) == 29){
-            opcode = FCOS;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(16, 5));
-        }
-        else if((imm & bitmask(5)) == 30){
-            opcode = FATAN;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(16, 5));
-        }
-        else if(imm == 0x028){
-            opcode = FNEG;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(16, 5));
-        }
-        else if(imm == 0x40){ // mcrfs を借りた
-            opcode = FFLOOR;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(16, 5));
-        }
-        else if(imm == 0x46){ // mtfsb0 を借りた
-            opcode = FHALF;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(16, 5));
-        }
-        else if(imm == 0x108){
-            opcode = FABS;
-            d = btoi(bit.substr(6, 5));
-            a = btoi(bit.substr(16, 5));
-        }
-        break;
-    default:
-        break;
     }
+    else if(val == 0b0001) opcode = ADDI;
+    else if(val == 0b0010) opcode = ADDIS;
+    else if(val == 0b0011) opcode = SLWI;
+    else if(val == 0b0100) opcode = SRWI;
+    else if(val == 0b0101) opcode = MUL16I;
+    else if(val == 0b0110) opcode = ORI;
+    else if(val == 0b0111) opcode = LWZ;
+    else if(val == 0b1000) opcode = STW;
+    else if(val == 0b1001){
+        if(bit[30] == '0' && bit[31] == '1'){
+            if(btoi(bit.substr(22, 8)) == 0) opcode = ADD;
+            else if(btoi(bit.substr(22, 8)) == 1) opcode = SUB;
+            else if(btoi(bit.substr(22, 8)) == 2) opcode = MUL16;
+            else if(btoi(bit.substr(22, 8)) == 3) opcode = FADD;
+            else if(btoi(bit.substr(22, 8)) == 4) opcode = FSUB;
+            else if(btoi(bit.substr(22, 8)) == 5) opcode = FMUL;
+            else if(btoi(bit.substr(22, 8)) == 6) opcode = FDIV;
+            else assert(false);
+        }
+        // else if(bit[30] == '1' && bit[31] == '0') opcode = FADDMUL;
+        else if(bit[30] == '0' && bit[31] == '0'){
+            if(btoi(bit.substr(22, 8)) == 0) opcode = FABS;
+            else if(btoi(bit.substr(22, 8)) == 1) opcode = FNEG;
+            else if(btoi(bit.substr(22, 8)) == 2) opcode = FSQRT;
+            else if(btoi(bit.substr(22, 8)) == 3) opcode = FFLOOR;
+            else if(btoi(bit.substr(22, 8)) == 4) opcode = FHALF;
+            else if(btoi(bit.substr(22, 8)) == 5) opcode = FSIN;
+            else if(btoi(bit.substr(22, 8)) == 6) opcode = FCOS;
+            else if(btoi(bit.substr(22, 8)) == 7) opcode = FATAN;
+            else if(btoi(bit.substr(22, 8)) == 8) opcode = FCTIWZ;
+            else if(btoi(bit.substr(22, 8)) == 9) opcode = FCFIW;
+        }
+    }
+    else if(val == 0b1010){
+        if(bit[30] == '0' && bit[31] == '0') opcode = CMPW;
+        else if(bit[30] == '0' && bit[31] == '1') opcode = CMPWI;
+        else if(bit[30] == '1' && bit[31] == '1') opcode = FCMPU;
+        else{
+            if(btoi(bit.substr(26, 4)) == 0) opcode = B;
+            else if(btoi(bit.substr(26, 4)) == 1) opcode = BL;
+            else if(btoi(bit.substr(26, 4)) == 2) opcode = BEQ;
+            else if(btoi(bit.substr(26, 4)) == 3) opcode = BLE;
+            else if(btoi(bit.substr(26, 4)) == 4) opcode = BGE;
+            else if(btoi(bit.substr(26, 4)) == 5) opcode = BLR;
+            else assert(false);
+        }
+    }
+    else if(val == 0b1011){
+        if(bit[30] == '0' && bit[31] == '0') opcode = LWZX;
+        else if(bit[30] == '0' && bit[31] == '1') opcode = STWX;
+        else if(bit[30] == '1' && bit[31] == '0') opcode = MR;
+        else{
+            if(btoi(bit.substr(10, 20)) == 0) opcode = MTSPR;
+            else if(btoi(bit.substr(10, 20)) == 1) opcode = MFSPR;
+            else assert(false);
+        }
+    }
+    else if(val == 0b1100) opcode = LWI;
+
+    if(mem.kind_to_form[opcode] == R){
+        d = btoi(bit.substr(4, 6));
+    }
+    else if(mem.kind_to_form[opcode] == RR){
+        d = btoi(bit.substr(4, 6));
+        a = btoi(bit.substr(10, 6));
+    }
+    else if(mem.kind_to_form[opcode] == RRR){
+        d = btoi(bit.substr(4, 6));
+        a = btoi(bit.substr(10, 6));
+        b = btoi(bit.substr(16, 6));
+    }
+    else if(mem.kind_to_form[opcode] == RIR){
+        d = btoi(bit.substr(4, 6));
+        b = btoi(bit.substr(10, 6));
+        a = btoi(bit.substr(16, 16));
+    }
+    else if(mem.kind_to_form[opcode] == RRI){
+        d = btoi(bit.substr(4, 6));
+        a = btoi(bit.substr(10, 6));
+        b = btoi(bit.substr(16, 16));
+    }
+    else if(mem.kind_to_form[opcode] == RI){
+        d = btoi(bit.substr(4, 6));
+        b = btoi(bit.substr(10, 16));
+    }
+    else if(mem.kind_to_form[opcode] == L){
+        d = btoi(bit.substr(4, 22));
+    }
+    else if(mem.kind_to_form[opcode] == RL){
+        d = btoi(bit.substr(4, 6));
+        a = btoi(bit.substr(10, 22));
+    }
+
     return INSTR(opcode, d, a, b);
 }

@@ -117,8 +117,8 @@ enum INSTR_KIND{
     SUB,
     SLWI, 
     SRWI,
-    // MUL16
-    // MUL16i
+    MUL16,
+    MUL16I,
     ORI,
 
     CMPW, 
@@ -127,8 +127,8 @@ enum INSTR_KIND{
 
     B, 
     BL,
-    // BEQ, 
-    // BLE, 
+    BEQ, 
+    BLE, 
     BGE,
     BLR, // jump to LINK Register
 
@@ -136,7 +136,7 @@ enum INSTR_KIND{
     LWZX, 
     STW,
     STWX, 
-    // LWI,
+    LWI,
     
     MFSPR, // move from link register
     MR,   // move register
@@ -223,7 +223,8 @@ enum INSTR_FORM{
     RI,
     RRI, 
     L, 
-    N, 
+    N,
+    RL, 
     NOT, // not instruction
 };
 
@@ -247,17 +248,20 @@ struct memory_t{
 
         kind_to_form[ADD] = kind_to_form[SUB] = RRR;
         kind_to_form[ADDI] = kind_to_form[ADDIS] = RRI;
+        kind_to_form[MUL16] = RR;
+        kind_to_form[MUL16I] = RI;
         kind_to_form[SLWI] = kind_to_form[SRWI] = kind_to_form[ORI] = RRI;
 
         kind_to_form[CMPW] = kind_to_form[FCMPU] = RR;
         kind_to_form[CMPWI] = RI;
 
         kind_to_form[B] = kind_to_form[BL] = L;
-        kind_to_form[BGE] = L;
+        kind_to_form[BGE] = kind_to_form[BEQ] = kind_to_form[BLE] = L;
         kind_to_form[BLR] = N;
 
         kind_to_form[STWX] = kind_to_form[LWZX] = RRR;
         kind_to_form[LWZ] = kind_to_form[STW] = RIR;
+        kind_to_form[LWI] = RL;
 
         kind_to_form[MR] = RR;
         kind_to_form[MTSPR] = kind_to_form[MFSPR] = R;
