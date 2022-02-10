@@ -47,6 +47,7 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "fsub") return FSUB;
     if(s == "fmul") return FMUL;
     if(s == "fdiv") return FDIV;
+    if(s == "faddmul") return FADDMUL;
     if(s == "fabs") return FABS;
     if(s == "fneg") return FNEG;
     if(s == "fsqrt") return FSQRT;
@@ -135,6 +136,8 @@ std::string opcode_to_string(INSTR_KIND kind){
         return "fmul";
     case FDIV:
         return "fdiv";
+    case FADDMUL:
+        return "faddmul";
     case FABS:
         return "fabs";
     case FNEG:
@@ -281,6 +284,21 @@ void asm_checker(const std::vector<std::string>& s, INSTR_FORM f){
         if(!(c2 == 'r' && 0 <= k2 && k2 <= 63)) report(s), exit(1);
         if(!(c3 == 'r' && 0 <= k3 && k3 <= 63)) report(s), exit(1);
     }
+    else if(f == RRRR){
+        if(s.size() != 5) report(s), exit(1);
+        char c1 = s[1][0];
+        int k1 = stoi(s[1].substr(1, s[1].size() - 1));
+        char c2 = s[2][0];
+        int k2 = stoi(s[2].substr(1, s[2].size() - 1));
+        char c3 = s[3][0];
+        int k3 = stoi(s[3].substr(1, s[3].size() - 1));
+        char c4 = s[4][0];
+        int k4 = stoi(s[4].substr(1, s[4].size() - 1));
+        if(!(c1 == 'r' && 0 <= k1 && k1 <= 63)) report(s), exit(1);
+        if(!(c2 == 'r' && 0 <= k2 && k2 <= 63)) report(s), exit(1);
+        if(!(c3 == 'r' && 0 <= k3 && k3 <= 63)) report(s), exit(1);
+        if(!(c4 == 'r' && 0 <= k4 && k4 <= 63)) report(s), exit(1);
+    }
     else if(f == RI){
         if(s.size() != 3) report(s), exit(1);
         char c = s[1][0];
@@ -325,7 +343,7 @@ INSTR recognize_instr(MEMORY_PRO& mem, const std::vector<std::string> &s){
     auto call = [&](int id, bool in_flag)->int{return internal_reg_number(s[id], in_flag, mem.lbl);};
     INSTR_KIND opc = opcode_of_instr(s[0]);
     INSTR_FORM f = mem.kind_to_form[opc];
-    // asm_checker(s, f);
+    asm_checker(s, f);
     int rd = 0, ra = 0, rb = 0;
     if(f == R){
         rd = call(1, 0);
@@ -338,6 +356,11 @@ INSTR recognize_instr(MEMORY_PRO& mem, const std::vector<std::string> &s){
         rd = call(1, 0);
         ra = call(2, 0);
         rb = call(3, 0);
+    }
+    else if(f == RRRR){
+        rd = call(1, 0);
+        ra = (call(2, 0) << 6) | call(3, 0);
+        rb = call(4, 0);
     }
     else if(f == RIR){
         rd = call(1, 0);
@@ -442,6 +465,8 @@ int opcode_to_bit(INSTR_KIND kind){
         return 0b1001;
     case FDIV:
         return 0b1001;
+    case FADDMUL:
+        return 0b1001;
     case FABS:
         return 0b1001;
     case FNEG:
@@ -485,6 +510,9 @@ void show_instr(MEMORY& mem, INSTR_KIND instr, int d, int a, int b){
         case RRR:
             printf("%s r%d, r%d, r%d\n", s.c_str(), d, a, b);
             return;
+        case RRRR:
+            printf("%s r%d, r%d, r%d, r%d\n", s.c_str(), d, a >> 6, a & bitmask(6), b);
+            return;
         case RIR:
             if(b == 0) printf("%s, r%d, %d(0)\n", s.c_str(), d, a);
             else printf("%s, r%d, %d(r%d)\n", s.c_str(), d, a, b);
@@ -524,9 +552,10 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b, bool nl = true){
     unsigned int res = opcode_to_bit(instr) << 28;
     switch (instr){
     case IN:
+        res |= ((d & bitmask(6)) << 22) | 0b00;
         break;
     case OUT:
-        res |= 1;
+        res |= ((d & bitmask(6)) << 16) | 0b01;
         break;
 
     case FLUSH:
@@ -549,23 +578,23 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b, bool nl = true){
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | ((b & bitmask(6)) << 10) | (1 << 2) | 0b01;
         break;
     case SLWI:
-        res |= ((a & bitmask(6)) << 22) | ((d & bitmask(6)) << 16) | (bitmask(16) & b);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (bitmask(16) & b);
         break;
     case SRWI:
-        res |= ((a & bitmask(6)) << 22) | ((d & bitmask(6)) << 16) | (bitmask(16) & b);
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (bitmask(16) & b);
         break;
     case ORI:
-        res |= ((a & bitmask(6)) << 22) | ((d & bitmask(6)) << 16) | (b & bitmask(16));
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (b & bitmask(16));
         break;
 
     case CMPW:
-        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (0 << 2) | 0b00;
+        res |= ((d & bitmask(6)) << 16) | ((a & bitmask(6)) << 10) | (0 << 2) | 0b00;
         break;
-    case CMPWI:
-        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (0 << 2) | 0b01;
+    case CMPWI: // rAの位置注意
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(16)) << 6) | (0 << 2) | 0b01;
         break;
     case FCMPU:
-        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (0 << 2) | 0b11;
+        res |= ((d & bitmask(6)) << 16) | ((a & bitmask(6)) << 10) | (0 << 2) | 0b11;
         break;
 
     case B:
@@ -625,6 +654,9 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b, bool nl = true){
         break;
     case FDIV:
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | ((b & bitmask(6)) << 10) | (6 << 2) | 0b01;
+        break;
+    case FADDMUL:
+        res |= ((d & bitmask(6)) << 22) | (((a >> 6) & bitmask(6)) << 16) | (a & bitmask(6) << 10) | ((b & bitmask(6)) << 4) | (0 << 2) | 0b01;
         break;
     case FABS:
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (0 << 2) | 0b00;

@@ -154,6 +154,7 @@ enum INSTR_KIND{
     FSIN,
     FCOS,
     FATAN,
+    FADDMUL,
     FCTIWZ, // FTOI
     FCFIW, //ITOF
 
@@ -219,6 +220,7 @@ enum INSTR_FORM{
     R,
     RR, 
     RRR, 
+    RRRR,
     RIR,
     RI,
     RRI, 
@@ -267,6 +269,7 @@ struct memory_t{
         kind_to_form[MTSPR] = kind_to_form[MFSPR] = R;
 
         kind_to_form[FADD] = kind_to_form[FSUB] = kind_to_form[FMUL] = kind_to_form[FDIV] = RRR;
+        kind_to_form[FADDMUL] = RRRR;
         kind_to_form[FABS] = kind_to_form[FNEG] = kind_to_form[FSQRT] = kind_to_form[FFLOOR] = RR;
         kind_to_form[FHALF] = kind_to_form[FSIN] = kind_to_form[FCOS] = kind_to_form[FATAN] = RR;
         kind_to_form[FCFIW] = kind_to_form[FCTIWZ] = RR;

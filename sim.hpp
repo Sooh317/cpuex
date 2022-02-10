@@ -131,9 +131,9 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             ea = cpu.gpr[b].i + tmp;
             cache.swi(ea, mem, cpu.gpr[d].i);
             continue;
-        // case LWI:
-        //     cpu.gpr[d].i = cache.lw(a, mem);
-        //     continue;
+        case LWI:
+            cpu.gpr[d].i = cache.lw(a, mem);
+            continue;
 
         case MFSPR:
             cpu.gpr[d].i = cpu.lr;
@@ -153,6 +153,9 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             continue;
         case FMUL:
             cpu.gpr[d].f = TasukuFukami::fmul(cpu.gpr[a].f, cpu.gpr[b].f);
+            continue;
+        case FADDMUL:
+            cpu.gpr[d].f = TasukuFukami::fadd(TasukuFukami::fmul(cpu.gpr[a >> 6].f, cpu.gpr[a & bitmask(6)].f), cpu.gpr[b].f);
             continue;
         case FDIV:
             cpu.gpr[d].f = TasukuFukami::fdiv(cpu.gpr[a].f, cpu.gpr[b].f, fpu, ovf);

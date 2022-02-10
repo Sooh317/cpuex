@@ -145,7 +145,7 @@ INSTR decode_bin(const std::string& bit, MEMORY_PRO& mem){
             else if(btoi(bit.substr(22, 8)) == 6) opcode = FDIV;
             else assert(false);
         }
-        // else if(bit[30] == '1' && bit[31] == '0') opcode = FADDMUL;
+        else if(bit[30] == '1' && bit[31] == '0') opcode = FADDMUL;
         else if(bit[30] == '0' && bit[31] == '0'){
             if(btoi(bit.substr(22, 8)) == 0) opcode = FABS;
             else if(btoi(bit.substr(22, 8)) == 1) opcode = FNEG;
@@ -196,6 +196,11 @@ INSTR decode_bin(const std::string& bit, MEMORY_PRO& mem){
         d = btoi(bit.substr(4, 6));
         a = btoi(bit.substr(10, 6));
         b = btoi(bit.substr(16, 6));
+    }
+    else if(mem.kind_to_form[opcode] == RRRR){
+        d = btoi(bit.substr(4, 6));
+        a = btoi(bit.substr(10, 12));
+        b = btoi(bit.substr(22, 6));
     }
     else if(mem.kind_to_form[opcode] == RIR){
         d = btoi(bit.substr(4, 6));
