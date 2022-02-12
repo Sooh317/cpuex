@@ -37,23 +37,16 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
                 cpu.gpr[d] = cpu.gpr[a] - cpu.gpr[b];
                 break;
             case ADDI:
-                cpu.gpr[d] = (a ? cpu.gpr[a] : 0) + exts(b);
+                cpu.gpr[d] = (a ? cpu.gpr[a] : 0) + b;
                 break;
             case ADDIS:
                 cpu.gpr[d] = (a ? cpu.gpr[a] : 0) + int(b << 16);
                 break;
             case CMPWI:
-                c = 0;
-                tmp = exts(b);
-                if(cpu.gpr[a] < tmp) c = 0b100;
-                else if(cpu.gpr[a] > tmp) c = 0b010;
+                if(cpu.gpr[a] < b) c = 0b100;
+                else if(cpu.gpr[a] > b) c = 0b010;
                 else c = 0b001;
-                /*
-                tmp = cpu.cr;
-                clear_and_set(tmp, 4*7, 4*7 + 3, (c << 1) | (cpu.xer & 1)); // cr7のみ
-                cpu.cr = tmp;
-                */
-                clear_and_set(cpu.cr, 4*7, 4*7 + 3, (c << 1) | (cpu.xer & 1)); // cr7のみ
+                clear_and_set(cpu.cr, 4*7, 4*7 + 3, c << 1); // cr7のみ
                 break;
             case CMPW:
                 a = cpu.gpr[a];
@@ -61,34 +54,24 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
                 if(a < b) c = 0b100;
                 else if(a > b) c = 0b010;
                 else c = 0b001;
-                // tmp = cpu.cr;
-                // clear_and_set(tmp, 4*7, 4*7 + 3, (c << 1) | (cpu.xer & 1));
-                // cpu.cr = tmp;
-                clear_and_set(cpu.cr, 4*7, 4*7 + 3, (c << 1) | (cpu.xer & 1)); // cr7のみ
+                clear_and_set(cpu.cr, 4*7, 4*7 + 3, c << 1); // cr7のみ
                 break;
             case B:
                 cpu.pc = d;
                 break;
             case BGT:   
-                //bo = 0b01100;
-                // bi = d*4 + 1;
                 cond_ok = kth_bit(cpu.cr, 7*4+1); // cr7のみ
                 if(cond_ok) cpu.pc = a;
                 break;
             case BLT:
-                // bi = d*4;
                 cond_ok = kth_bit(cpu.cr, 7*4);// cr7のみ
                 if(cond_ok) cpu.pc = a;
                 break;
             case BGE:
-                // bi = d*4;
-                cond_ok = kth_bit(cpu.cr, 7*4); // cr7のみ
-                if(!cond_ok) cpu.pc = a;
+                if(!kth_bit(cpu.cr, 7*4)) cpu.pc = a;
                 break;
             case BNE:
-                // bi = d*4 + 2;
-                cond_ok = kth_bit(cpu.cr, 7*4+2) ^ 1; // cr7のみ
-                if(cond_ok) cpu.pc = a;
+                if(!kth_bit(cpu.cr, 7*4+2)) cpu.pc = a;
                 break;
             case BL:    
                 cpu.lr = cpu.pc;
@@ -113,34 +96,32 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
                 cpu.pc = segment(cpu.ctr, 0, 29) << 2;
                 break;
             case LWZ: 
-                ea = (b ? cpu.gpr[b] : 0) + exts(a);
+                ea = (b ? cpu.gpr[b] : 0) + a;
                 cpu.gpr[d] = cache.lw(ea, mem);
                 break;
             case LWZU:
-                ea = cpu.gpr[b] + exts(a);
+                ea = cpu.gpr[b] + a;
                 cpu.gpr[d] = cache.lw(ea, mem);
                 cpu.gpr[b] = ea;
                 break;
             case STW:   
-                ea = (b ? cpu.gpr[b] : 0) + exts(a);
+                ea = (b ? cpu.gpr[b] : 0) + a;
                 cache.swi(ea, mem, cpu.gpr[d]);
                 break;
             case STWU:
-                ea = cpu.gpr[b] + exts(a);
+                ea = cpu.gpr[b] + a;
                 cache.swi(ea, mem, cpu.gpr[d]);
                 cpu.gpr[b] = ea;
                 break;
             case MFSPR:
-                if(a == 0b00001) cpu.gpr[d] = cpu.xer;
-                else if(a == 0b01000) cpu.gpr[d] = cpu.lr;
+                if(a == 0b01000) cpu.gpr[d] = cpu.lr;
                 else if(a == 0b01001) cpu.gpr[d] = cpu.ctr;
                 break;
             case MR:
                 cpu.gpr[d] = cpu.gpr[a];
                 break;
             case MTSPR:
-                if(d == 0b00001) cpu.xer = cpu.gpr[a];
-                else if(d == 0b01000) cpu.lr = cpu.gpr[a];
+                if(d == 0b01000) cpu.lr = cpu.gpr[a];
                 else if(d == 0b01001) cpu.ctr = cpu.gpr[a];
                 break;
             case XORIS:
@@ -175,10 +156,6 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
                 if(cpu.fpr[a] < cpu.fpr[b]) c = 0b1000;
                 else if(cpu.fpr[a] > cpu.fpr[b]) c = 0b0100;
                 else c = 0b0010;
-                // fpcc 無視してます
-                // tmp = cpu.cr;
-                // clear_and_set(tmp, 4*d, 4*d + 3, c);
-                // cpu.cr = tmp;
                 clear_and_set(cpu.cr, 4*7, 4*7 + 3, c);
                 break;
             case FDIV:
@@ -216,7 +193,7 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
                 break;
             case LFS:
                 tmp = (b == 0 ? 0 : cpu.gpr[b]);
-                ea = tmp + exts(a);
+                ea = tmp + a;
                 cpu.fpr[d] = bit_cast<float, int>(cache.lw(ea, mem));
                 break;
             case LFSX:
@@ -248,7 +225,7 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
                 break;
             case STFS: // LFSと同じ
                 tmp = (b == 0 ? 0 : cpu.gpr[b]);
-                ea = tmp + exts(a);
+                ea = tmp + a;
                 cache.swf(ea, mem, cpu.fpr[d]);
                 break;
             case STWX:
