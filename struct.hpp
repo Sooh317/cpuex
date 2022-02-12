@@ -35,6 +35,7 @@ struct cpu_t{
     std::vector<int8_t> flushed;
 
     cpu_t():cr(0), lr(0), ctr(0),pc(0), sbptr(0), send_buf(SEND_BUFFER_SIZE, '\0'){
+        gpr.resize(64);
         for(int i = 0; i < 64; i++) gpr[i].i = 0;
         flushed.reserve(1024 * 1024);
     }
@@ -131,10 +132,10 @@ enum INSTR_KIND{
     BGE,
     BLR, // jump to LINK Register
 
-    LWZ,
-    LWZX, 
-    STW,
-    STWX, 
+    LW,
+    LWX, 
+    SW,
+    SWX, 
     LWI,
     
     MFSPR, // move from link register
@@ -259,8 +260,8 @@ struct memory_t{
         kind_to_form[BGE] = kind_to_form[BEQ] = kind_to_form[BLE] = L;
         kind_to_form[BLR] = N;
 
-        kind_to_form[STWX] = kind_to_form[LWZX] = RRR;
-        kind_to_form[LWZ] = kind_to_form[STW] = RIR;
+        kind_to_form[SWX] = kind_to_form[LWX] = RIR;
+        kind_to_form[LW] = kind_to_form[SW] = RRR;
         kind_to_form[LWI] = RL;
 
         kind_to_form[MR] = RR;

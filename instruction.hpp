@@ -33,10 +33,10 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "ble") return BLE;
     if(s == "bge") return BGE;
 
-    if(s == "lwz") return LWZ;
-    if(s == "lwzx") return LWZX;
-    if(s == "stw") return STW;
-    if(s == "stwx") return STWX;
+    if(s == "lw") return LW;
+    if(s == "lwx") return LWX;
+    if(s == "sw") return SW;
+    if(s == "swx") return SWX;
     if(s == "lwi") return LWI;
 
     if(s == "mfspr") return MFSPR;
@@ -110,14 +110,14 @@ std::string opcode_to_string(INSTR_KIND kind){
     case BLR:
         return "blr";
 
-    case LWZ:
-        return "lwz";
-    case LWZX:
-        return "lwzx";
-    case STW:
-        return "stw";
-    case STWX:
-        return "stwx";
+    case LW:
+        return "lw";
+    case LWX:
+        return "lwx";
+    case SW:
+        return "sw";
+    case SWX:
+        return "swx";
     case LWI:
         return "lwi";
 
@@ -304,14 +304,14 @@ void asm_checker(const std::vector<std::string>& s, INSTR_FORM f){
         char c = s[1][0];
         int k = stoi(s[1].substr(1, s[1].size() - 1));
         if(!(c == 'r' && 0 <= k && k <= 63)) report(s), exit(1);
-        if(!((s[2][0] == '0' && (s[2][1] == 'x' || s[2][1] == 'b')) || ('1' <= s[2][0] && s[2][0] <= '9') || (s[2][0] == '-'))) report(s), exit(1);
+        if(!((s[2][0] == '0' && (s[2][1] == 'x' || s[2][1] == 'b')) || ('0' <= s[2][0] && s[2][0] <= '9') || (s[2][0] == '-'))) report(s), exit(1);
     }
     else if(f == RIR){
         if(s.size() != 3) report(s), exit(1);
         char c1 = s[1][0];
         int k1 = stoi(s[1].substr(1, s[1].size() - 1));
         if(!(c1 == 'r' && 0 <= k1 && k1 <= 63)) report(s), exit(1);
-        if(!((s[2][0] == '0' && (s[2][1] == 'x' || s[2][1] == 'b')) || ('1' <= s[2][0] && s[2][0] <= '9') || (s[2][0] == '-'))) report(s), exit(1);
+        if(!((s[2][0] == '0' && (s[2][1] == 'x' || s[2][1] == 'b')) || ('0' <= s[2][0] && s[2][0] <= '9') || (s[2][0] == '-'))) report(s), exit(1);
         if(s[2].back() != ')') report(s), exit(1);
     }
     else if(f == RRI){
@@ -322,7 +322,7 @@ void asm_checker(const std::vector<std::string>& s, INSTR_FORM f){
         int k2 = stoi(s[2].substr(1, s[2].size() - 1));
         if(!(c1 == 'r' && 0 <= k1 && k1 <= 63)) report(s), exit(1);
         if(!(c2 == 'r' && 0 <= k2 && k2 <= 63)) report(s), exit(1);
-        if(!((s[3][0] == '0' && (s[3][1] == 'x' || s[3][1] == 'b')) || ('1' <= s[3][0] && s[3][0] <= '9') || (s[3][0] == '-'))) report(s), exit(1);
+        if(!((s[3][0] == '0' && (s[3][1] == 'x' || s[3][1] == 'b')) || ('0' <= s[3][0] && s[3][0] <= '9') || (s[3][0] == '-'))) report(s), exit(1);
     }
     else if(f == RL){
         if(s.size() != 3) report(s), exit(1);
@@ -380,7 +380,7 @@ INSTR recognize_instr(MEMORY_PRO& mem, const std::vector<std::string> &s){
     }
     else if(f == L){
         if(s.size() == 2){ // 怪しいかも
-            if(mem.lbl.find(s[1]) != mem.lbl.end()) ra = mem.lbl[s[1]];
+            if(mem.lbl.find(s[1]) != mem.lbl.end()) rd = mem.lbl[s[1]];
             else{
                 printout(s[1]);
                 assert(false);
@@ -439,13 +439,13 @@ int opcode_to_bit(INSTR_KIND kind){
     case BLR:
         return 0b1010;
 
-    case LWZ: // d a d
+    case LW: // d a d
         return 0b0111;
-    case LWZX:
+    case LWX:
         return 0b1011;
-    case STW:// s a d
+    case SW:// s a d
         return 0b1000;
-    case STWX:
+    case SWX:
         return 0b1011;
     case LWI: 
         return 0b1100;
@@ -616,16 +616,16 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b, bool nl = true){
         res |= ((d & bitmask(22)) << 6) | (5 << 2) | 0b10;
         break;
 
-    case LWZ:
+    case LW:
         res |= ((d & bitmask(6)) << 22) | ((b & bitmask(6)) << 16) | (a & bitmask(16));
         break;
-    case LWZX:
+    case LWX:
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | ((b & bitmask(6)) << 10) | (0 << 2) | 0b00;
         break;
-    case STW:
+    case SW:
         res |= ((d & bitmask(6)) << 22) | ((b & bitmask(6)) << 16) | (a & bitmask(16));
         break;
-    case STWX:
+    case SWX:
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | ((b & bitmask(6)) << 10) | (0 << 2) | 0b01;
         break;
     case LWI:

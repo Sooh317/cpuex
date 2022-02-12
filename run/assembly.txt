@@ -1,2 +1,1 @@
-libmincaml.S
-minrt_modified.s
+mini.s

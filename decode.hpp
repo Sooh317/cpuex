@@ -132,8 +132,8 @@ INSTR decode_bin(const std::string& bit, MEMORY_PRO& mem){
     else if(val == 0b0100) opcode = SRWI;
     else if(val == 0b0101) opcode = MUL16I;
     else if(val == 0b0110) opcode = ORI;
-    else if(val == 0b0111) opcode = LWZ;
-    else if(val == 0b1000) opcode = STW;
+    else if(val == 0b0111) opcode = LW;
+    else if(val == 0b1000) opcode = SW;
     else if(val == 0b1001){
         if(bit[30] == '0' && bit[31] == '1'){
             if(btoi(bit.substr(22, 8)) == 0) opcode = ADD;
@@ -174,8 +174,8 @@ INSTR decode_bin(const std::string& bit, MEMORY_PRO& mem){
         }
     }
     else if(val == 0b1011){
-        if(bit[30] == '0' && bit[31] == '0') opcode = LWZX;
-        else if(bit[30] == '0' && bit[31] == '1') opcode = STWX;
+        if(bit[30] == '0' && bit[31] == '0') opcode = LWX;
+        else if(bit[30] == '0' && bit[31] == '1') opcode = SWX;
         else if(bit[30] == '1' && bit[31] == '0') opcode = MR;
         else{
             if(btoi(bit.substr(10, 20)) == 0) opcode = MTSPR;

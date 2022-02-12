@@ -10,6 +10,7 @@
 #include "instruction.hpp"
 #include "option.hpp"
 #include "util.hpp"
+#include "step.hpp"
 #include "fpu.hpp"
 #include "cache.hpp"
 #include "result.hpp"
@@ -25,6 +26,7 @@ int main(int argc, char* argv[]){
 
     init_option(option, argc, argv);
     option.show_option();
+
     init_memory(cache_pro, mem_pro, option);
 
     if(option.binTOasm || option.asmTObin){
@@ -32,11 +34,16 @@ int main(int argc, char* argv[]){
         return 0;
     }
 
-    init_cpu(cpu, option, mem_pro.lbl);
+    init_cpu(cpu);
+
+    // for(auto p: mem_pro.lbl){
+    //     std::cout << p.first << " " << p.second << std::endl;
+    // }
 
     execution(cpu, mem_pro, option, fpu, cache_pro);
 
     show_result(cpu, mem_pro, cache_pro);
+
     return 0;
 }
 

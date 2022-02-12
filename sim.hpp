@@ -113,23 +113,23 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             cpu.pc = segment(cpu.lr, 0, 29) << 2;
             continue;
 
-        case LWZ: 
+        case LW: 
             ea = (b ? cpu.gpr[b].i : 0) + exts(a);
             cpu.gpr[d].i = (int32_t)cache.ld(ea, mem);
             continue;
-        case LWZX:
+        case LWX:
             tmp = (a == 0 ? 0 : cpu.gpr[a].i);
             ea = tmp + cpu.gpr[b].i;
             cpu.gpr[d].i = (int32_t)cache.ld(ea, mem);
             continue;
-        case STW:   
+        case SW:   
             ea = (b ? cpu.gpr[b].i : 0) + exts(a);
-            cache.stw(ea, mem, cpu.gpr[d].i);
+            cache.sw(ea, mem, cpu.gpr[d].i);
             continue;
-        case STWX:
+        case SWX:
             tmp = (a == 0 ? 0 : cpu.gpr[a].i);
             ea = cpu.gpr[b].i + tmp;
-            cache.stw(ea, mem, cpu.gpr[d].i);
+            cache.sw(ea, mem, cpu.gpr[d].i);
             continue;
         case LWI:
             cpu.gpr[d].i = (int32_t)cache.ld(a, mem);

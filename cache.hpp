@@ -57,7 +57,7 @@ public:
         state.resize(CACHE_LINE_NUM);
     }
 
-    void stw(int32_t addr, MEMORY& mem, DATA d){
+    void sw(int32_t addr, MEMORY& mem, DATA d){
         int offset = calc_offset(addr);
         int index = calc_index(addr);
         int tag = calc_tag(addr);
@@ -183,7 +183,7 @@ public:
 
     void sw(int32_t addr, MEMORY& mem, int32_t i){
         update(addr);
-        this->stw(addr, mem, (DATA)i);
+        this->sw(addr, mem, (DATA)i);
     }
 };
 using CACHE_PRO = cache2_t;

@@ -132,7 +132,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             cpu.pc = segment(cpu.lr, 0, 29) << 2;
             return false;
 
-        case LWZ: 
+        case LW: 
             ea = (b ? cpu.gpr[b].i : 0) + exts(a);
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
@@ -142,7 +142,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             cpu.gpr[d].i = cache.lw(ea, mem);
             if(ea == mem.notify) notify_load(cpu, mem, option, d, 1);
             return false;
-        case LWZX:
+        case LWX:
             tmp = (a == 0 ? 0 : cpu.gpr[a].i);
             ea = tmp + cpu.gpr[b].i;
             if(ea >= DATA_SIZE * 4){
@@ -153,7 +153,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             cpu.gpr[d].i = cache.lw(ea, mem);
             if(ea == mem.notify) notify_load(cpu, mem, option, d, 1);
             return false;
-        case STW:   
+        case SW:   
             ea = (b ? cpu.gpr[b].i : 0) + exts(a);
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
@@ -163,7 +163,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             cache.sw(ea, mem, cpu.gpr[d].i);
             if(ea == mem.notify) notify_store(cpu, mem, option, d, 1);
             return false;
-        case STWX:
+        case SWX:
             tmp = (a == 0 ? 0 : cpu.gpr[a].i);
             ea = cpu.gpr[b].i + tmp;
             if(ea >= DATA_SIZE * 4){
@@ -174,9 +174,9 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             cache.sw(ea, mem, cpu.gpr[d].i);
             if(ea == mem.notify) notify_store(cpu, mem, option, d, 1);
             return false;
-        // case LWI:
-        //     cpu.gpr[d].i = cache.lw(a, mem);
-        //     return false;
+        case LWI:
+            cpu.gpr[d].i = (int32_t)cache.ld(a, mem);
+            return false;
 
         case MFSPR:
             cpu.gpr[d].i = cpu.lr;
