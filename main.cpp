@@ -25,6 +25,7 @@ int main(int argc, char* argv[]){
 
     init_option(option, argc, argv);
     option.show_option();
+    
     init_memory(cache_pro, mem_pro, option);
 
     if(option.binTOasm || option.asmTObin){

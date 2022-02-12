@@ -47,7 +47,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
     int c, ea, tmp;
     [[maybe_unused]] int bo, bi;
-    bool cond_ok, ctr_ok, ovf = false;
+    [[maybe_unused]] bool cond_ok, ctr_ok, ovf = false;
     switch(opc){
         case ADD:
             cpu.gpr[d] = cpu.gpr[a] + cpu.gpr[b];
@@ -235,12 +235,12 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
             clear_and_set(cpu.cr, 4*7, 4*7 + 3, c);
             return false;
         case FDIV:
-            cpu.fpr[d] = TasukuFukami::fdiv(cpu.fpr[a], cpu.fpr[b], fpu, ovf);
-            if(ovf){
-                cpu.pc -= 4;
-                output_cur_info(cpu, mem, option);
-                assert(false);
-            }
+            cpu.fpr[d] = TasukuFukami::fdiv(cpu.fpr[a], cpu.fpr[b], fpu);
+            // if(ovf){
+            //     cpu.pc -= 4;
+            //     output_cur_info(cpu, mem, option);
+            //     assert(false);
+            // }
             return false;
         case FMR:
             cpu.fpr[d] = cpu.fpr[a];

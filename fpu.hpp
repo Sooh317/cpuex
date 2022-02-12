@@ -374,14 +374,14 @@ namespace TasukuFukami{
         int tmp = bit_cast<int, float>(myans);
         int newexp = (tmp >> 23 & bitmask(8)) - oldexp;
         unsigned manti = tmp & bitmask(23);
-        if(newexp < 0){
-            std::cerr << "exp too small, given float.exp may be more than 126" << std::endl;
-            assert(false);
-        }
+        // if(newexp < 0){
+        //     std::cerr << "exp too small, given float.exp may be more than 126" << std::endl;
+        //     assert(false);
+        // }
         return make_float(sig, newexp, manti);
     }   
 
-    float fdiv(float f, float g, const FPU& fpu, bool& ovf){
+    float fdiv(float f, float g, const FPU& fpu){
         int a = bit_cast<int, float>(f), b = bit_cast<int, float>(g);
         float ccore = fmul(make_float(0, 127, a), finv(make_float(0, 127, b), fpu));
         int core = bit_cast<int, float>(ccore);
@@ -389,15 +389,15 @@ namespace TasukuFukami{
         int diffexp = (a >> 23 & bitmask(8)) - (b >> 23 & bitmask(8));
         int newexp = std::max(0, (int)(core >> 23 & bitmask(8)) + diffexp);
         if(((a >> 23) & bitmask(8)) == 0 || ((b >> 23) & bitmask(8)) == 0) newexp = 0;
-        if(newexp >= 256){
-            ovf = 1;
-            std::cerr << "### overflowing in fdiv ###" << std::endl;
-            print_float(f);
-            print_float(g);
-            print_float(f / g);
-            double res = (double)f / (double)g;
-            std::cout << res << std::endl;
-        }
+        // if(newexp >= 256){
+        //     ovf = 1;
+        //     std::cerr << "### overflowing in fdiv ###" << std::endl;
+        //     print_float(f);
+        //     print_float(g);
+        //     print_float(f / g);
+        //     double res = (double)f / (double)g;
+        //     std::cout << res << std::endl;
+        // }
         return make_float(sig, newexp, core);
     }
 
@@ -476,7 +476,7 @@ namespace TasukuFukami{
             int retfromsin = bit_cast<int, float>(retfromsinf);
             return make_float(1, (retfromsin >> 23) & bitmask(8), retfromsin);
         }
-        else{ // わからん
+        else{ 
             // union {double f; uint64_t i;} tmp;
             double tmpf = fpu.LONGHALFPI - (double)f;
             uint64_t tmp = bit_cast<uint64_t, double>(tmpf);
@@ -486,11 +486,11 @@ namespace TasukuFukami{
     }
 
     float cos_core(float f, const FPU& fpu){
-        if(double(f) > fpu.HALFPI){
-            std::cerr << "CosOutOfRange\n";
-            printerr(f);
-            assert(false);
-        }
+        // if(double(f) > fpu.HALFPI){
+        //     std::cerr << "CosOutOfRange\n";
+        //     printerr(f);
+        //     assert(false);
+        // }
         int d = bit_cast<int, float>(f);
         int exp = int((d >> 23) & bitmask(8)) - 127;
         if(-9 <= exp && exp <= -1){
@@ -503,10 +503,10 @@ namespace TasukuFukami{
     }
 
     double round(double f, int k){
-        if(f < 0){
-            std::cerr << "In TasukuFukami::round(), negative f was passed\n";
-            assert(false);
-        }
+        // if(f < 0){
+        //     std::cerr << "In TasukuFukami::round(), negative f was passed\n";
+        //     assert(false);
+        // }
         k = 52 - k;
         int64_t i = bit_cast<int64_t, double>(f);
         int64_t mask = 0;
@@ -669,7 +669,6 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
             f.i = mt(), g.i = mt();
             //print_binary_int(f.i);
             //print_binary_int(g.i);
-            bool ovf = false;
             if(!range_check(f.f, LOW, HIGH)) continue;
             if(tag == 3){
                 if((((g.i >> 23) & bitmask(8)) == 0) || !range_check(g.f, LOW, HIGH)) continue;
@@ -678,7 +677,7 @@ void test(const double EPS,const double LOW,const double HIGH, int tag, const FP
                 if(((tmp.i >> 23) & bitmask(8)) == bitmask(8)) continue;
             }
             if(tag == 2) myans = TasukuFukami::fmul(f.f, g.f), ans = (double)f.f * (double)g.f;
-            else myans = TasukuFukami::fdiv(f.f, g.f, fpu, ovf), ans = (double)f.f / (double)g.f;
+            else myans = TasukuFukami::fdiv(f.f, g.f, fpu), ans = (double)f.f / (double)g.f;
             if(!range_check(ans, LOW, HIGH)) continue;
             if((((f.i >> 23) & bitmask(8)) == 0 || ((g.i >> 23) & bitmask(8)) == 0)){
                 union {float f; int i;} d;

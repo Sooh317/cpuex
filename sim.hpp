@@ -28,7 +28,7 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
         auto[opc, d, a, b] = instr_fetch_fast(cpu, mem);
         int c, ea, tmp;
         [[maybe_unused]] int bo, bi;
-        bool cond_ok, ctr_ok, ovf = false;
+        [[maybe_unused]] bool cond_ok, ctr_ok;
         switch(opc){
             case ADD:
                 cpu.gpr[d] = cpu.gpr[a] + cpu.gpr[b];
@@ -159,7 +159,7 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
                 clear_and_set(cpu.cr, 4*7, 4*7 + 3, c);
                 break;
             case FDIV:
-                cpu.fpr[d] = TasukuFukami::fdiv(cpu.fpr[a], cpu.fpr[b], fpu, ovf);
+                cpu.fpr[d] = TasukuFukami::fdiv(cpu.fpr[a], cpu.fpr[b], fpu);
                 break;
             case FMR:
                 cpu.fpr[d] = cpu.fpr[a];
