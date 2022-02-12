@@ -36,10 +36,6 @@ int main(int argc, char* argv[]){
 
     init_cpu(cpu);
 
-    // for(auto p: mem_pro.lbl){
-    //     std::cout << p.first << " " << p.second << std::endl;
-    // }
-
     execution(cpu, mem_pro, option, fpu, cache_pro);
 
     show_result(cpu, mem_pro, cache_pro);

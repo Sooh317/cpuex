@@ -47,7 +47,7 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             cpu.gpr[d].i = cpu.gpr[a].i + cpu.gpr[b].i;
             continue;
         case ADDI:
-            cpu.gpr[d].i = (a ? cpu.gpr[a].i : 0) + exts(b);
+            cpu.gpr[d].i = (a ? cpu.gpr[a].i : 0) + b;
             continue;
         case ADDIS:
             cpu.gpr[d].i = (a ? cpu.gpr[a].i : 0) + int(b << 16);
@@ -78,10 +78,8 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             clear_and_set(cpu.cr, 4*7, 4*7 + 3, c); // cr7のみ
             continue;
         case CMPWI:
-            c = 0;
-            tmp = exts(a);
-            if(cpu.gpr[d].i < tmp) c = 0b1000;
-            else if(cpu.gpr[d].i > tmp) c = 0b0100;
+            if(cpu.gpr[d].i < a) c = 0b1000;
+            else if(cpu.gpr[d].i > a) c = 0b0100;
             else c = 0b0010;
             clear_and_set(cpu.cr, 4*7, 4*7 + 3, c); // cr7のみ
             continue;
@@ -167,10 +165,10 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             cpu.gpr[d].f = -cpu.gpr[a].f;
             continue;
         case FSQRT:
-            cpu.gpr[d].f = TasukuFukami::fsqrt(cpu.gpr[d].f, fpu);
+            cpu.gpr[d].f = TasukuFukami::fsqrt(cpu.gpr[a].f, fpu);
             continue;
         case FFLOOR: // stdを使ってます
-            cpu.gpr[d].f = std::floor(cpu.gpr[d].f);
+            cpu.gpr[d].f = std::floor(cpu.gpr[a].f);
             continue;
         case FHALF: // なにこれ
             cpu.gpr[d].f = TasukuFukami::fmul(cpu.gpr[a].f, 0.5);

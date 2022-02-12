@@ -97,10 +97,8 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             clear_and_set(cpu.cr, 4*7, 4*7 + 3, c); // cr7のみ
             return false;
         case CMPWI:
-            c = 0;
-            tmp = exts(b);
-            if(cpu.gpr[a].i < tmp) c = 0b1000;
-            else if(cpu.gpr[a].i > tmp) c = 0b0100;
+            if(cpu.gpr[a].i < b) c = 0b1000;
+            else if(cpu.gpr[a].i > b) c = 0b0100;
             else c = 0b0010;
             clear_and_set(cpu.cr, 4*7, 4*7 + 3, c); // cr7のみ
             return false;
@@ -212,10 +210,10 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             cpu.gpr[d].f = -cpu.gpr[a].f;
             return false;
         case FSQRT:
-            cpu.gpr[d].f = TasukuFukami::fsqrt(cpu.gpr[d].f, fpu);
+            cpu.gpr[d].f = TasukuFukami::fsqrt(cpu.gpr[a].f, fpu);
             return false;
         case FFLOOR: // stdを使ってます
-            cpu.gpr[d].f = std::floor(cpu.gpr[d].f);
+            cpu.gpr[d].f = std::floor(cpu.gpr[a].f);
             return false;
         case FHALF: // なにこれ
             cpu.gpr[d].f = TasukuFukami::fmul(cpu.gpr[a].f, 0.5);
