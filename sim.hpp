@@ -132,7 +132,7 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             cache.stw(ea << 2, mem, cpu.gpr[d].i);
             continue;
         case LWI:
-            cpu.gpr[d].i = (int32_t)cache.ld(a, mem);
+            cpu.gpr[d].i = (int32_t)cache.ld(a << 2, mem);
             continue;
 
         case MFSPR:

@@ -133,13 +133,13 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             return false;
 
         case LW: 
-            ea = (b ? cpu.gpr[b].i : 0) + exts(a);
+            ea = (b ? cpu.gpr[b].i : 0) + a;
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem, option);
                 assert(false);
             }
-            cpu.gpr[d].i = cache.lw(ea, mem);
+            cpu.gpr[d].i = cache.lw(ea << 2, mem);
             if(ea == mem.notify) notify_load(cpu, mem, option, d, 1);
             return false;
         case LWX:
@@ -150,17 +150,17 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
                 output_cur_info(cpu, mem, option);
                 assert(false);
             }
-            cpu.gpr[d].i = cache.lw(ea, mem);
+            cpu.gpr[d].i = cache.lw(ea << 2, mem);
             if(ea == mem.notify) notify_load(cpu, mem, option, d, 1);
             return false;
         case SW:   
-            ea = (b ? cpu.gpr[b].i : 0) + exts(a);
+            ea = (b ? cpu.gpr[b].i : 0) + a;
             if(ea >= DATA_SIZE * 4){
                 cpu.pc -= 4;
                 output_cur_info(cpu, mem, option);
                 assert(false);
             }
-            cache.sw(ea, mem, cpu.gpr[d].i);
+            cache.sw(ea << 2, mem, cpu.gpr[d].i);
             if(ea == mem.notify) notify_store(cpu, mem, option, d, 1);
             return false;
         case SWX:
@@ -171,11 +171,11 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
                 output_cur_info(cpu, mem, option);
                 assert(false);
             }
-            cache.sw(ea, mem, cpu.gpr[d].i);
+            cache.sw(ea << 2, mem, cpu.gpr[d].i);
             if(ea == mem.notify) notify_store(cpu, mem, option, d, 1);
             return false;
         case LWI:
-            cpu.gpr[d].i = (int32_t)cache.ld(a, mem);
+            cpu.gpr[d].i = (int32_t)cache.ld(a << 2, mem);
             return false;
 
         case MFSPR:
