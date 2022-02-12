@@ -42,7 +42,7 @@ INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
 }
 
 
-bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
+bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option){
     mem.cnt++;
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
     int c, ea, tmp;
@@ -160,7 +160,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
                 output_cur_info(cpu, mem, option);
                 assert(false);
             }
-            cache.swi(ea, mem, cpu.gpr[d].i);
+            cache.sw(ea, mem, cpu.gpr[d].i);
             if(ea == mem.notify) notify_store(cpu, mem, option, d, 1);
             return false;
         case STWX:
@@ -171,7 +171,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
                 output_cur_info(cpu, mem, option);
                 assert(false);
             }
-            cache.swi(ea, mem, cpu.gpr[d].i);
+            cache.sw(ea, mem, cpu.gpr[d].i);
             if(ea == mem.notify) notify_store(cpu, mem, option, d, 1);
             return false;
         // case LWI:
@@ -229,10 +229,10 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
         case FATAN:
             cpu.gpr[d].f = TasukuFukami::atan(cpu.gpr[a].f, fpu);
             return false;
-        case FCTIWZ:
+        case FTOI:
             cpu.gpr[d].i = int(std::trunc(cpu.gpr[a].f));
             return false;
-        case FCFIW:
+        case ITOF:
             cpu.gpr[d].f = float(cpu.gpr[a].i);
             return false;
 
@@ -467,7 +467,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
         if(ss.ctr) cpu.show_ctr();
         if(ss.m || ss.M){
             mem.show_memory(ss);
-            cache.show_cache(ss, mem);
+            cache.show_cache(ss);
         }
         if(ss.Notify){ // とりあえず1つ
             for(int addr : ss.nval) mem.notify = addr;
@@ -475,7 +475,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
         }
         if(ss.cache){
             for(int ind : ss.index){
-                cache.show_cache_line(ind, mem);
+                cache.show_cache_line(ind);
                 std::cout << '\n';
             }
         }

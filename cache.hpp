@@ -11,11 +11,13 @@
 // #define CACHE_LINE_SIZE 256
 // #define CACHE_INDEX_SIZE 4
 
+// 1行のサイズ(bit)
 #define CACHE_LINE_SIZE 512
 // offset -> lineのどこ？ -> log(512/8)
 #define CACHE_OFFSET_SIZE 6
+// キャッシュの何行目かを引く部分の長さ
 #define CACHE_INDEX_SIZE 10
-// 何行目 -> log(4096)
+// キャッシュラインの数
 #define CACHE_LINE_NUM (1<<CACHE_INDEX_SIZE)
 // 27 - 12 - 6
 #define CACHE_TAG_SIZE (27 - CACHE_INDEX_SIZE - CACHE_OFFSET_SIZE)
@@ -55,7 +57,7 @@ public:
         state.resize(CACHE_LINE_NUM);
     }
 
-    void sw(int32_t addr, MEMORY& mem, DATA d){
+    void stw(int32_t addr, MEMORY& mem, DATA d){
         int offset = calc_offset(addr);
         int index = calc_index(addr);
         int tag = calc_tag(addr);
@@ -81,7 +83,7 @@ public:
     }
 
     // addr is a multiple of 4
-    DATA lw(int32_t addr, MEMORY& mem){
+    DATA ld(int32_t addr, MEMORY& mem){
         int offset = calc_offset(addr);
         int index = calc_index(addr);
         int tag = calc_tag(addr);
@@ -102,18 +104,6 @@ public:
         return data[index][offset >> 2];
     }
 
-    virtual void swf(int32_t addr, MEMORY& mem, float f){
-        DATA d = bit_cast<DATA, float>(f);
-        mem.type[addr_to_index(addr)] = 1;
-        sw(addr, mem, d);
-    }
-
-    virtual void swi(int32_t addr, MEMORY& mem, int i){
-        DATA d = i;
-        mem.type[addr_to_index(addr)] = 0;
-        sw(addr, mem, d);
-    }
-
     virtual ~cache_t() = default;
 };
 using CACHE = cache_t;
@@ -122,15 +112,15 @@ struct cache2_t : CACHE {
 private:
     std::vector<int> line2addr;
 
-    void internal_show(MEMORY& mem, int i, int addr, int index){
+    void internal_show(int i, int index){
         std::cout << i << ": (";
-        if(mem.type[addr_to_index(addr) + i]) std::cout << bit_cast<float, int>(data[index][i]) << ", ";
-        else std::cout << data[index][i] << ", ";
+        std::cout << data[index][i] << ", ";
+        std::cout << bit_cast<float, int>(data[index][i]) << ", ";
         print_binary_int1(data[index][i]);
         std::cout << ")" << std::endl;
     }
 
-    void show(int32_t addr, MEMORY& mem, bool on = true){
+    void show(int32_t addr, bool on = true){
         int offset = calc_offset(addr);
         int index = calc_index(addr);
         int tag = calc_tag(addr);
@@ -142,13 +132,13 @@ private:
             std::cout << "Cache line: " << index << ", Offset: " << (offset >> 2) << std::endl;
             for(int i = 0; i < width; i++){
                 if(on && i == (offset >> 2)) std::cout << "\033[1;34m";
-                internal_show(mem, i, addr, index);
+                internal_show(i, index);
                 if(on && i == (offset >> 2)) std::cout << "\033[m";
             }
         }
     }
     
-    void update(int32_t addr){
+    inline void update(int32_t addr){
         int index = calc_index(addr);
         line2addr[index] = calc_base_addr(addr);
     }
@@ -156,7 +146,7 @@ private:
 public:
     cache2_t():line2addr(CACHE_LINE_NUM, -1){}
     
-    void show_cache_line(int line, MEMORY& mem){
+    void show_cache_line(int line){
         if(line >= CACHE_LINE_NUM){
             std::cout << "Invalid line : " << line << std::endl;
             return;
@@ -169,13 +159,13 @@ public:
         std::cout << "Addr: " << addr << " ~ " << addr + width * 4 - 1 << std::endl;
         for(int i = 0; i < width; i++){
             std::cout << "\033[1;34m";
-            internal_show(mem, i, addr, line);
+            internal_show(i, line);
             std::cout << "\033[m";
         }
     }
 
-    void show_cache(const SHOW& ss, MEMORY& mem){
-        if(ss.m) for(int addr : ss.maddr) show(addr, mem);
+    void show_cache(const SHOW& ss){
+        if(ss.m) for(int addr : ss.maddr) show(addr);
         else{
             for(auto[from, to] : ss.Maddr){
                 std::cout << from << " ~ " << to << " のキャッシュ状況" << std::endl;
@@ -185,18 +175,15 @@ public:
 
     }
 
-    void swf(int32_t addr, MEMORY& mem, float f){
-        DATA d = bit_cast<DATA, float>(f);
-        mem.type[addr_to_index(addr)] = 1;
+
+    DATA lw(int32_t addr, MEMORY& mem){
         update(addr);
-        this->sw(addr, mem, d);
+        return this->ld(addr, mem);
     }
-    
-    void swi(int32_t addr, MEMORY& mem, int i){
-        DATA d = i;
-        mem.type[addr_to_index(addr)] = 0;
+
+    void sw(int32_t addr, MEMORY& mem, int32_t i){
         update(addr);
-        this->sw(addr, mem, d);
+        this->stw(addr, mem, (DATA)i);
     }
 };
 using CACHE_PRO = cache2_t;

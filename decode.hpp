@@ -155,8 +155,8 @@ INSTR decode_bin(const std::string& bit, MEMORY_PRO& mem){
             else if(btoi(bit.substr(22, 8)) == 5) opcode = FSIN;
             else if(btoi(bit.substr(22, 8)) == 6) opcode = FCOS;
             else if(btoi(bit.substr(22, 8)) == 7) opcode = FATAN;
-            else if(btoi(bit.substr(22, 8)) == 8) opcode = FCTIWZ;
-            else if(btoi(bit.substr(22, 8)) == 9) opcode = FCFIW;
+            else if(btoi(bit.substr(22, 8)) == 8) opcode = FTOI;
+            else if(btoi(bit.substr(22, 8)) == 9) opcode = ITOF;
         }
     }
     else if(val == 0b1010){

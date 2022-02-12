@@ -28,14 +28,13 @@ struct cpu_t{
     uint32_t cr;
     LR lr;
     CTR ctr;
-    XER xer;
     unsigned int pc;
     int sbptr; // send buffer pointer
     std::vector<GPR> gpr;
     std::vector<int8_t> send_buf;
     std::vector<int8_t> flushed;
 
-    cpu_t():cr(0), lr(0), ctr(0), xer(0),pc(0), sbptr(0), send_buf(SEND_BUFFER_SIZE, '\0'){
+    cpu_t():cr(0), lr(0), ctr(0),pc(0), sbptr(0), send_buf(SEND_BUFFER_SIZE, '\0'){
         for(int i = 0; i < 64; i++) gpr[i].i = 0;
         flushed.reserve(1024 * 1024);
     }
@@ -155,8 +154,8 @@ enum INSTR_KIND{
     FCOS,
     FATAN,
     FADDMUL,
-    FCTIWZ, // FTOI
-    FCFIW, //ITOF
+    FTOI, // FTOI
+    ITOF, //ITOF
 
     // ゴミ
     NOT_INSTR,
@@ -237,13 +236,12 @@ struct memory_t{
     int sldpointer = 0;
     std::vector<INSTR> instr; 
     std::vector<DATA> data;
-    std::vector<bool> type; // type = 1 : float
     std::map<std::string, int> lbl;
     std::map<int, std::string> inv;
     std::vector<int> sld;
     std::unordered_map<INSTR_KIND, INSTR_FORM> kind_to_form;
 
-    memory_t():index(0), sldpointer(0), instr(INSTR_SIZE), data(DATA_SIZE), type(DATA_SIZE), sld(400){
+    memory_t():index(0), sldpointer(0), instr(INSTR_SIZE), data(DATA_SIZE), sld(400){
         kind_to_form[IN] = kind_to_form[OUT] = R;
 
         kind_to_form[FLUSH] = kind_to_form[HALT] = N;
@@ -272,7 +270,7 @@ struct memory_t{
         kind_to_form[FADDMUL] = RRRR;
         kind_to_form[FABS] = kind_to_form[FNEG] = kind_to_form[FSQRT] = kind_to_form[FFLOOR] = RR;
         kind_to_form[FHALF] = kind_to_form[FSIN] = kind_to_form[FCOS] = kind_to_form[FATAN] = RR;
-        kind_to_form[FCFIW] = kind_to_form[FCTIWZ] = RR;
+        kind_to_form[ITOF] = kind_to_form[FTOI] = RR;
 
         kind_to_form[NOT_INSTR] = NOT;
     } 
@@ -284,7 +282,7 @@ struct memory_t{
                 std::cout << "around " << ad << std::endl;
                 for(int j = std::max(-(ad >> 2), -show.wid); j <= std::min(DATA_SIZE - 1 - (ad >> 2), show.wid); j++){
                     if(j == 0) std::cout << "\033[1;34m";
-                    std::cout << "mem[" << ad + 4*j << "~" << ad + 4*j + 3 << "] = (" << (type[(ad >> 2) + j] ? bit_cast<float, int>(data[(ad >> 2) + j]) : data[(ad >> 2) + j]) << ", 0b'";
+                    std::cout << "mem[" << ad + 4*j << "~" << ad + 4*j + 3 << "] = (" << data[(ad >> 2) + j] << ", " << bit_cast<float, int>(data[(ad >> 2) + j]) << ", 0b'";
                     for(int i = 31; i >= 0; i--){
                         std::cout << (data[(ad >> 2) + j] >> i & 1);
                         if(i % 8 == 0 && i) std::cout << " ";
@@ -304,7 +302,7 @@ struct memory_t{
                 std::cout << "from " << l << " to " << r << std::endl;
                 std::cout << "\033[1;34m";
                 for(int j = l; j <= r; j += 4){
-                    std::cout << "mem[" << j << "~" << j + 3 << "] = (" << (type[j >> 2] ? bit_cast<float, int>(data[j >> 2]) : data[j >> 2]) << ", 0b'";
+                    std::cout << "mem[" << j << "~" << j + 3 << "] = (" << data[j >> 2] << ", " << bit_cast<float, int>(data[j >> 2]) << ", 0b'";
                     for(int i = 31; i >= 0; i--){
                         std::cout << (data[j >> 2] >> i & 1);
                         if(i % 8 == 0 && i) std::cout << " ";

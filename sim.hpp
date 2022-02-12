@@ -115,24 +115,24 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
 
         case LWZ: 
             ea = (b ? cpu.gpr[b].i : 0) + exts(a);
-            cpu.gpr[d].i = cache.lw(ea, mem);
+            cpu.gpr[d].i = (int32_t)cache.ld(ea, mem);
             continue;
         case LWZX:
             tmp = (a == 0 ? 0 : cpu.gpr[a].i);
             ea = tmp + cpu.gpr[b].i;
-            cpu.gpr[d].i = cache.lw(ea, mem);
+            cpu.gpr[d].i = (int32_t)cache.ld(ea, mem);
             continue;
         case STW:   
             ea = (b ? cpu.gpr[b].i : 0) + exts(a);
-            cache.swi(ea, mem, cpu.gpr[d].i);
+            cache.stw(ea, mem, cpu.gpr[d].i);
             continue;
         case STWX:
             tmp = (a == 0 ? 0 : cpu.gpr[a].i);
             ea = cpu.gpr[b].i + tmp;
-            cache.swi(ea, mem, cpu.gpr[d].i);
+            cache.stw(ea, mem, cpu.gpr[d].i);
             continue;
         case LWI:
-            cpu.gpr[d].i = cache.lw(a, mem);
+            cpu.gpr[d].i = (int32_t)cache.ld(a, mem);
             continue;
 
         case MFSPR:
@@ -184,10 +184,10 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
         case FATAN:
             cpu.gpr[d].f = TasukuFukami::atan(cpu.gpr[a].f, fpu);
             continue;
-        case FCTIWZ:
+        case FTOI:
             cpu.gpr[d].i = int(std::trunc(cpu.gpr[a].f));
             continue;
-        case FCFIW:
+        case ITOF:
             cpu.gpr[d].f = float(cpu.gpr[a].i);
             continue;
             

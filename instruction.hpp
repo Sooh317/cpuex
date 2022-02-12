@@ -56,8 +56,8 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "fsin") return FSIN;
     if(s == "fcos") return FCOS;
     if(s == "fatan") return FATAN;
-    if(s == "fctiwz") return FCTIWZ;
-    if(s == "fcfiw") return FCFIW;
+    if(s == "ftoi") return FTOI;
+    if(s == "itof") return ITOF;
 
     std::cerr << s << " is unknown token\n";
     return INSTR_UNKNOWN;
@@ -152,10 +152,10 @@ std::string opcode_to_string(INSTR_KIND kind){
         return "fsin";
     case FCOS:
         return "fcos";
-    case FCTIWZ:
-        return "fctiwz";
-    case FCFIW:
-        return "fcfiw";
+    case FTOI:
+        return "ftoi";
+    case ITOF:
+        return "itof";
     case FATAN:
         return "fatan";
     case NOT_INSTR:
@@ -483,9 +483,9 @@ int opcode_to_bit(INSTR_KIND kind){
         return 0b1001;
     case FATAN:
         return 0b1001;
-    case FCTIWZ:
+    case FTOI:
         return 0b1001;
-    case FCFIW:
+    case ITOF:
         return 0b1001;
 
     default: // 生データが入っているとする
@@ -682,10 +682,10 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b, bool nl = true){
     case FATAN:
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (7 << 2) | 0b00;
         break;
-    case FCTIWZ:
+    case FTOI:
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (8 << 2) | 0b00;
         break;
-    case FCFIW:
+    case ITOF:
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (9 << 2) | 0b00;
         break;
 
