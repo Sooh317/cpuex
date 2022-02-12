@@ -1,18 +1,19 @@
     sub     r0, r0, r0  # r0 を 0 にする        ##0
     b       _min_caml_start        ##1
 _min_caml_start:
-    lwi     r1, global_var0        ##2
-    swx     r0, 0(r1)        ##3
-    fcos    r2, r0        ##4
-    swx     r2, 1(r1)        ##5
-    lwx     r60, 1(r1)        ##6
-    ftoi    r60, r60        ##7
-    addi    r61, r60, 48        ##8
-    out     r61        ##9
-    b       _min_caml_end        ##10
+    addis   r1, r0, ha16(global_var0)        ##2
+    ori     r1, r1, lo16(global_var0)        ##3
+    sw      r0, 0(r1)        ##4
+    fcos    r2, r0        ##5
+    sw      r2, 4(r1)        ##6
+    lw      r60, 4(r1)        ##7
+    ftoi    r60, r60        ##8
+    addi    r61, r60, 48        ##9
+    out     r61        ##10
+    b       _min_caml_end        ##11
 _min_caml_end:
-    flush        ##11
-    halt        ##12
+    flush        ##12
     halt        ##13
-    halt    # ここで text セクション終わり        ##14
+    halt        ##14
+    halt    # ここで text セクション終わり        ##15
 global_var0: # 適当なグローバル変数名

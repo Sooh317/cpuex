@@ -304,14 +304,14 @@ void asm_checker(const std::vector<std::string>& s, INSTR_FORM f){
         char c = s[1][0];
         int k = stoi(s[1].substr(1, s[1].size() - 1));
         if(!(c == 'r' && 0 <= k && k <= 63)) report(s), exit(1);
-        if(!((s[2][0] == '0' && (s[2][1] == 'x' || s[2][1] == 'b')) || ('0' <= s[2][0] && s[2][0] <= '9') || (s[2][0] == '-'))) report(s), exit(1);
+        if(!((s[2][0] == '0' && (s[2][1] == 'x' || s[2][1] == 'b')) || ('0' <= s[2][0] && s[2][0] <= '9') || (s[2][0] == '-') || (s[3].substr(0, 2) == "lo" || s[3].substr(0, 2) == "ha"))) report(s), exit(1);
     }
     else if(f == RIR){
         if(s.size() != 3) report(s), exit(1);
         char c1 = s[1][0];
         int k1 = stoi(s[1].substr(1, s[1].size() - 1));
         if(!(c1 == 'r' && 0 <= k1 && k1 <= 63)) report(s), exit(1);
-        if(!((s[2][0] == '0' && (s[2][1] == 'x' || s[2][1] == 'b')) || ('0' <= s[2][0] && s[2][0] <= '9') || (s[2][0] == '-'))) report(s), exit(1);
+        if(!((s[2][0] == '0' && (s[2][1] == 'x' || s[2][1] == 'b')) || ('0' <= s[2][0] && s[2][0] <= '9') || (s[2][0] == '-') || (s[3].substr(0, 2) == "lo" || s[3].substr(0, 2) == "ha"))) report(s), exit(1);
         if(s[2].back() != ')') report(s), exit(1);
     }
     else if(f == RRI){
@@ -322,7 +322,7 @@ void asm_checker(const std::vector<std::string>& s, INSTR_FORM f){
         int k2 = stoi(s[2].substr(1, s[2].size() - 1));
         if(!(c1 == 'r' && 0 <= k1 && k1 <= 63)) report(s), exit(1);
         if(!(c2 == 'r' && 0 <= k2 && k2 <= 63)) report(s), exit(1);
-        if(!((s[3][0] == '0' && (s[3][1] == 'x' || s[3][1] == 'b')) || ('0' <= s[3][0] && s[3][0] <= '9') || (s[3][0] == '-'))) report(s), exit(1);
+        if(!((s[3][0] == '0' && (s[3][1] == 'x' || s[3][1] == 'b')) || ('0' <= s[3][0] && s[3][0] <= '9') || (s[3][0] == '-') || (s[3].substr(0, 2) == "lo" || s[3].substr(0, 2) == "ha"))) report(s), exit(1);
     }
     else if(f == RL){
         if(s.size() != 3) report(s), exit(1);

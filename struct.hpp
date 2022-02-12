@@ -260,8 +260,8 @@ struct memory_t{
         kind_to_form[BGE] = kind_to_form[BEQ] = kind_to_form[BLE] = L;
         kind_to_form[BLR] = N;
 
-        kind_to_form[SWX] = kind_to_form[LWX] = RIR;
-        kind_to_form[LW] = kind_to_form[SW] = RRR;
+        kind_to_form[LW] = kind_to_form[SW] = RIR;
+        kind_to_form[SWX] = kind_to_form[LWX] = RRR;
         kind_to_form[LWI] = RL;
 
         kind_to_form[MR] = RR;
