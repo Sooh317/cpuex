@@ -324,6 +324,46 @@ struct memory_t{
 };
 using MEMORY = memory_t;
 
+struct fastmemory_t{
+    int index;
+    int sldpointer = 0;
+    std::vector<INSTR> instr; 
+    std::vector<DATA> data;
+    std::map<std::string, int> lbl;
+    std::vector<int> sld;
+    std::unordered_map<INSTR_KIND, INSTR_FORM> kind_to_form;
+
+    fastmemory_t():index(0), sldpointer(0), instr(INSTR_SIZE), data(DATA_SIZE), sld(400){
+        kind_to_form[IN] = kind_to_form[OUT] = D;
+        kind_to_form[MR] = DA;
+        kind_to_form[ADD] = kind_to_form[SUB] = DAB;
+        kind_to_form[MULHWU] = kind_to_form[STWX] = kind_to_form[LWZX] = DAB;
+        kind_to_form[LWZ] = kind_to_form[STW] = kind_to_form[LWZU] = DAB2;
+        kind_to_form[STWU] = DAB2;
+        kind_to_form[STFS] = kind_to_form[LFS] = DAB3;
+        kind_to_form[ORI] = kind_to_form[XORIS] = kind_to_form[ADDI] = DAIMM;
+        kind_to_form[MULLI] = kind_to_form[SLWI] = DAIMM;
+        kind_to_form[ADDIS] = kind_to_form[SRWI] = DAIMM;
+        kind_to_form[CMPW] = CAB;
+        kind_to_form[CMPWI] = CAIMM;
+        kind_to_form[FCMPU] = CFF;
+        kind_to_form[BNE] = kind_to_form[BGE] = kind_to_form[BLT] = kind_to_form[BGT] = BC;
+        kind_to_form[BCL] = BDAL;
+        kind_to_form[B] = kind_to_form[BL] = BLB;
+        kind_to_form[FADD] = kind_to_form[FSUB] = kind_to_form[FMUL] = kind_to_form[FDIV] = FDAB;
+        kind_to_form[FABS] = kind_to_form[FMR] = kind_to_form[FNEG] = kind_to_form[FSQRT] = kind_to_form[FCTIWZ] = FDA;
+        kind_to_form[FHALF] = kind_to_form[FFLOOR] = kind_to_form[FSIN] = kind_to_form[FCOS] = kind_to_form[FATAN] = FDA;
+        kind_to_form[FCFIW] = FR;
+        kind_to_form[LFSX] = kind_to_form[STFSX] = FRR;
+        kind_to_form[MTSPR] = TSPR;
+        kind_to_form[MFSPR] = FSPR;
+        kind_to_form[BLR] = kind_to_form[BCTR] = kind_to_form[BCTRL] = N;
+        kind_to_form[FLUSH] = kind_to_form[HALT] = N;
+        kind_to_form[NOT_INSTR] = NOT;
+    }
+};
+using FASTMEMORY = fastmemory_t;
+
 struct memory2_t : MEMORY{
     long long cnt, sincnt, coscnt;
     int32_t notify;

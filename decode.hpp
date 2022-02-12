@@ -50,7 +50,7 @@ void next_memory_address(int &cnt, const std::vector<std::string> &s){
     // }
 }
 
-void put_instr_into_memory(std::string& str, MEMORY_PRO& mem_pro, CACHE_PRO& cache_pro, std::ofstream& ofs){
+void put_instr_into_memory(std::string& str, FASTCACHE* cache, FASTMEMORY* mem, MEMORY_PRO* mem_pro, CACHE_PRO* cache_pro, std::ofstream& ofs, const OPTION& option){
     std::vector<std::string> s = remove_chars(str, ", \t\n");
     if(s.size() >= 1){
         if(s[0].back() == ':'){
@@ -59,21 +59,24 @@ void put_instr_into_memory(std::string& str, MEMORY_PRO& mem_pro, CACHE_PRO& cac
         }
         DIRECTIVE_KIND kind = directive_kind(s[0]);
         if(kind == LONG){
-            process_long_directive(cache_pro, mem_pro, s[1]);
-            ofs << str << "        ##" << mem_pro.index / 4 << '\n';
+            process_long_directive(cache, mem, cache_pro, mem_pro, s[1], option);
+            if(option.exec_mode == 1) ofs << str << "        ##" << mem_pro->index / 4 << '\n';
+            else ofs << str << "        ##" << mem->index / 4 << '\n';
         }
         //else if(kind == ASCII) process_ascii_directive(mem, s[1]);
         else if(kind == SOME_DIRECTIVE) return;
         else if(kind != ALIGN){
-            auto ins = recognize_instr(mem_pro, s);
-            mem_pro.instr[mem_pro.index >> 2] = ins;
-            ofs << str << "        ##" << mem_pro.index / 4 << '\n';
+            auto ins = recognize_instr(mem, mem_pro, s, option);
+            if(option.exec_mode == 1) mem_pro->instr[mem_pro->index >> 2] = ins;
+            else mem->instr[mem->index >> 2] = ins;
+            ofs << str << "        ##" << (option.exec_mode == 1 ? mem_pro->index : mem->index)  / 4 << '\n';
         }
-        next_memory_address(mem_pro.index, s);
+        if(option.exec_mode == 1) next_memory_address(mem_pro->index, s);
+        else next_memory_address(mem->index, s);
     }
 }
 
-void decode(const std::string& file, MEMORY_PRO &mem_pro, CACHE_PRO& cache_pro, std::ofstream& ofs){
+void decode(const std::string& file, FASTCACHE* cache, FASTMEMORY* mem, MEMORY_PRO* mem_pro, CACHE_PRO* cache_pro, std::ofstream& ofs, const OPTION& option){
     std::ifstream ifs(file);
 
     if(!ifs){
@@ -83,11 +86,11 @@ void decode(const std::string& file, MEMORY_PRO &mem_pro, CACHE_PRO& cache_pro, 
 
     std::string str;
     while(std::getline(ifs, str)){
-        put_instr_into_memory(str, mem_pro, cache_pro, ofs);
+        put_instr_into_memory(str, cache, mem, mem_pro, cache_pro, ofs, option);
     }
 }
 
-int collect_label(const std::string file, MEMORY_PRO& mem_pro, int tmp){
+int collect_label(const std::string file, FASTMEMORY* mem, MEMORY_PRO* mem_pro, int tmp, const OPTION& option){
     std::ifstream ifs(file);
     if(!ifs){
         std::cerr << "cannot open " << file << std::endl;
@@ -99,8 +102,13 @@ int collect_label(const std::string file, MEMORY_PRO& mem_pro, int tmp){
         if(str.size() == 0 || str[0] == '#') continue; // comment
         else if(str[0] != '\t' && str[0] != ' '){ // label
             str = remove_chars(str, " \t:")[0];
-            mem_pro.lbl[str] = cnt;
-            mem_pro.inv[cnt] = str;
+            if(option.exec_mode == 1){
+                mem_pro->lbl[str] = cnt;
+                mem_pro->inv[cnt] = str;
+            }
+            else{
+                mem->lbl[str] = cnt;
+            }
         }
         else{
             auto ss = remove_chars(str, ", \t\n");

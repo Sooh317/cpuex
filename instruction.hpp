@@ -348,10 +348,12 @@ void asm_checker(const std::vector<std::string>& s, INSTR_FORM f){
     }
 }
 
-INSTR recognize_instr(MEMORY_PRO& mem, const std::vector<std::string> &s){
-    auto call = [&](int id, bool in_flag)->int{return internal_reg_number(s[id], in_flag, mem.lbl);};
+INSTR recognize_instr(FASTMEMORY* mem, MEMORY_PRO* mem_pro, const std::vector<std::string> &s, const OPTION& option){
+    auto call = [&](int id, bool in_flag)->int{
+        return (option.exec_mode == 1 ? internal_reg_number(s[id], in_flag, mem_pro->lbl) : internal_reg_number(s[id], in_flag, mem->lbl));
+    };
     INSTR_KIND opc = opcode_of_instr(s[0]);
-    INSTR_FORM f = mem.kind_to_form[opc];
+    INSTR_FORM f = (option.exec_mode == 1 ? mem_pro->kind_to_form[opc] : mem->kind_to_form[opc]);
     // asm_checker(s, f);
     int rd = 0, ra = 0, rb = 0;
     if(f == D){
@@ -374,37 +376,74 @@ INSTR recognize_instr(MEMORY_PRO& mem, const std::vector<std::string> &s){
     else if(f == BC){
         if(s.size() == 3){
             rd = call(1, 0);
-            if(mem.lbl.find(s[2]) != mem.lbl.end()) ra = mem.lbl[s[2]];
+            if(option.exec_mode == 0){
+                if(mem->lbl.find(s[2]) != mem->lbl.end()) ra = mem->lbl[s[2]];
+                else{
+                    printout(s[2]);
+                    assert(false);
+                }
+            }
             else{
-                printout(s[2]);
-                assert(false);
+                if(mem_pro->lbl.find(s[2]) != mem_pro->lbl.end()) ra = mem_pro->lbl[s[2]];
+                else{
+                    printout(s[2]);
+                    assert(false);
+                }
             }
         }
         else if(s.size() == 2){ // 怪しいかも
             rd = 0;
-            if(mem.lbl.find(s[1]) != mem.lbl.end()) ra = mem.lbl[s[1]];
+            if(option.exec_mode == 0){
+                if(mem->lbl.find(s[1]) != mem->lbl.end()) ra = mem->lbl[s[1]];
+                else{
+                    printout(s[1]);
+                    assert(false);
+                }
+            }
             else{
-                printout(s[1]);
-                assert(false);
+                if(mem_pro->lbl.find(s[1]) != mem_pro->lbl.end()) ra = mem_pro->lbl[s[1]];
+                else{
+                    printout(s[1]);
+                    assert(false);
+                }
             }
         }
         else assert(false);
     }
     else if(f == BLB){
-        if(mem.lbl.find(s[1]) != mem.lbl.end()) rd = mem.lbl[s[1]];
+        if(option.exec_mode == 0){
+            if(mem->lbl.find(s[1]) != mem->lbl.end()) rd = mem->lbl[s[1]];
+            else{
+                printout(s[1]);
+                assert(false);
+            }
+        }
         else{
-            printout(s[1]);
-            assert(false);
+            if(mem_pro->lbl.find(s[1]) != mem_pro->lbl.end()) ra = mem_pro->lbl[s[1]];
+            else{
+                printout(s[1]);
+                assert(false);
+            }
         }
     }
     else if(f == BDAL){
         rd = call(1, 0);
         ra = call(2, 0);
-        if(mem.lbl.find(s[3]) != mem.lbl.end()) rb = mem.lbl[s[3]];
-        else{
-            printout(s[3]);
-            assert(false);
+        if(option.exec_mode == 0){
+            if(mem->lbl.find(s[3]) != mem->lbl.end()) rb = mem->lbl[s[3]];
+            else{
+                printout(s[3]);
+                assert(false);
+            }
         }
+        else{
+            if(mem_pro->lbl.find(s[3]) != mem_pro->lbl.end()) ra = mem_pro->lbl[s[3]];
+            else{
+                printout(s[3]);
+                assert(false);
+            }
+        }
+
     }
     return INSTR(opc, rd, ra, rb);
 }

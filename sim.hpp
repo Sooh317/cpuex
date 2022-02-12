@@ -17,13 +17,13 @@
 
 
 
-INSTR instr_fetch_fast(CPU& cpu, const MEMORY &mem){
+INSTR instr_fetch_fast(CPU& cpu, const FASTMEMORY &mem){
     unsigned int pc = addr_to_index(cpu.pc);
     cpu.pc += 4;
     return mem.instr[pc];
 }
 
-void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
+void exec_fast(CPU& cpu, FASTMEMORY& mem, FPU& fpu, FASTCACHE& cache){
     while(1){
         auto[opc, d, a, b] = instr_fetch_fast(cpu, mem);
         int c, ea, tmp;
@@ -244,25 +244,25 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
 }
 
 
-void translator(MEMORY_PRO& mem, OPTION& option){
+void translator(FASTMEMORY* mem, MEMORY_PRO* mem_pro, OPTION& option){
     std::ifstream ifs;
     std::string s;
     if(option.binTOasm){
         if(option.binary) ifs.open("run/bin");
         while((option.binary ? ifs : std::cin) >> s){
             auto[opc, d, a, b] = decode_bin(s);
-            show_instr(mem, opc, d, a, b);
+            show_instr(*mem_pro, opc, d, a, b);
         }
     }
     else{
         if(option.assembly){
             INSTR_KIND opc;
             int d, a, b;
-            for(int i = 0; i < mem.index / 4; i++){
-                opc = mem.instr[i].opcode;
-                d = mem.instr[i].rd;
-                a = mem.instr[i].ra;
-                b = mem.instr[i].rb;
+            for(int i = 0; i < mem_pro->index / 4; i++){
+                opc = mem_pro->instr[i].opcode;
+                d = mem_pro->instr[i].rd;
+                a = mem_pro->instr[i].ra;
+                b = mem_pro->instr[i].rb;
                 // if(i == 0) std::cout << opc << " " << d << " " << a << " " << b << std::endl;
                 show_instr_binary(opc, d, a, b);
             }
@@ -271,20 +271,16 @@ void translator(MEMORY_PRO& mem, OPTION& option){
             while(std::getline(option.assembly ? ifs : std::cin, s)){
                 auto vec = remove_chars(s, " ,\t\n");
                 if(vec.size() == 0) continue;
-                auto[opc, d, a, b] = recognize_instr(mem, vec);
+                auto[opc, d, a, b] = recognize_instr(mem, mem_pro, vec, option);
                 show_instr_binary(opc, d, a, b);
             }
         }
     }
 }
 
-void execution(CPU& cpu, MEMORY_PRO& mem_pro, OPTION& option, FPU& fpu, CACHE_PRO& cache_pro){
+void execution(CPU& cpu, FASTMEMORY* mem, FASTCACHE* cache, MEMORY_PRO* mem_pro, OPTION& option, FPU& fpu, CACHE_PRO* cache_pro){
     if(option.exec_mode == 0){
-        CACHE cache = (CACHE)cache_pro;
-        exec_fast(cpu, mem_pro, fpu, cache);
-        cache_pro.hit = cache.hit;
-        cache_pro.miss = cache.miss;
-        cache_pro.write_back = cache.write_back;
+        exec_fast(cpu, *mem, fpu, *cache);
     }
-    else if(option.exec_mode == 1) simulate_step(cpu, mem_pro, option, fpu, cache_pro);
+    else if(option.exec_mode == 1) simulate_step(cpu, *mem_pro, option, fpu, *cache_pro);
 }

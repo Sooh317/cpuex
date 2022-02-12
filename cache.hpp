@@ -200,3 +200,91 @@ public:
     }
 };
 using CACHE_PRO = cache2_t;
+
+struct fastcache_t{
+    struct state_t{
+        bool dirty, accessed;
+        int tag;
+        state_t():dirty(0), accessed(0), tag(0){}
+    };
+    static const int width = CACHE_LINE_SIZE / 32;
+    std::vector<state_t> state;
+    std::vector<std::vector<DATA>> data;
+
+    inline int calc_offset(int32_t addr){return addr & bitmask(CACHE_OFFSET_SIZE);}
+    inline int calc_index(int32_t addr){return (addr >> CACHE_OFFSET_SIZE) & bitmask(CACHE_INDEX_SIZE);}
+    inline int calc_tag(int32_t addr){return (addr >> (CACHE_INDEX_SIZE + CACHE_OFFSET_SIZE)) & bitmask(CACHE_TAG_SIZE);}
+    inline int calc_base_addr(int32_t addr){return addr & ((~0) ^ bitmask(CACHE_OFFSET_SIZE));} // 下のoffset size分だけ0にクリア}
+    inline int restore_base_addr(int tag, int index){return (tag << (CACHE_INDEX_SIZE + CACHE_OFFSET_SIZE)) | (index << CACHE_OFFSET_SIZE);}
+
+private:
+    void Write_Back(int tag, int index, FASTMEMORY& mem){
+        int old_addr = restore_base_addr(tag, index);
+        for(int i = 0; i < width; i++){
+            mem.data[(old_addr >> 2) + i] = data[index][i];
+        }
+    }
+
+public:
+    fastcache_t(){
+        data.resize(CACHE_LINE_NUM, std::vector<DATA>(width));
+        state.resize(CACHE_LINE_NUM);
+    }
+
+    void sw(int32_t addr, FASTMEMORY& mem, DATA d){
+        int offset = calc_offset(addr);
+        int index = calc_index(addr);
+        int tag = calc_tag(addr);
+        addr = calc_base_addr(addr);
+        if(state[index].tag == tag){ // hit
+            state[index].dirty = 1;
+            data[index][(offset >> 2)] = d;
+        }
+        else{ // miss
+            std::swap(tag, state[index].tag);
+            if(state[index].dirty){
+                Write_Back(tag, index, mem);
+            }
+            // 仕様による
+            state[index].dirty = 1;
+            for(int i = 0; i < width; i++){
+                data[index][i] = mem.data[addr_to_index(addr) + i];
+            }
+            data[index][offset >> 2] = d;
+        }
+    }
+
+    // addr is a multiple of 4
+    DATA lw(int32_t addr, FASTMEMORY& mem){
+        int offset = calc_offset(addr);
+        int index = calc_index(addr);
+        int tag = calc_tag(addr);
+        addr = calc_base_addr(addr);
+        if(state[index].tag != tag){
+            std::swap(state[index].tag, tag);
+            if(state[index].dirty){
+                Write_Back(tag, index, mem);
+                state[index].dirty = 0;
+            }
+            for(int i = 0; i < width; i++){
+                data[index][i] = mem.data[addr_to_index(addr) + i]; // line size により maskの長さが変わるので注意
+            }
+        }
+
+        return data[index][offset >> 2];
+    }
+
+    virtual void swf(int32_t addr, FASTMEMORY& mem, float f){
+        DATA d = bit_cast<DATA, float>(f);
+        sw(addr, mem, d);
+    }
+
+    virtual void swi(int32_t addr, FASTMEMORY& mem, int i){
+        DATA d = i;
+        sw(addr, mem, d);
+    }
+
+    virtual ~fastcache_t() = default;
+
+};
+using FASTCACHE = fastcache_t;

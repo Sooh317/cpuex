@@ -34,7 +34,7 @@ void notify_store(CPU& cpu, MEMORY_PRO& mem, OPTION& option, int d, bool gpr){
 }
 
 
-INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
+INSTR instr_fetch1(CPU& cpu, const MEMORY &mem){
     assert(cpu.pc < (unsigned int)mem.index);
     unsigned int pc = addr_to_index(cpu.pc);
     cpu.pc += 4;
@@ -44,7 +44,7 @@ INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
 
 bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
     mem.cnt++;
-    auto[opc, d, a, b] = instr_fetch(cpu, mem);
+    auto[opc, d, a, b] = instr_fetch1(cpu, mem);
     int c, ea, tmp;
     [[maybe_unused]] int bo, bi;
     [[maybe_unused]] bool cond_ok, ctr_ok, ovf = false;
