@@ -1,4 +1,5 @@
-	.literal4
+	.data
+    .literal4
 LF_PI:
 	.long 1078530011
 LF_HALFPI:

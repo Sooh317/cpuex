@@ -1,4 +1,12 @@
 	.data
+    .literal4
+LF_PI:
+	.long 1078530011
+LF_HALFPI:
+	.long 1070141403
+LF_QUATPI:
+	.long 1061752795
+	.data
 	.literal4
 	.align 2
 l.17709:	 # -200.000000
