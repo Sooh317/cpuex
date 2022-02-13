@@ -43,8 +43,8 @@ INSTR instr_fetch1(CPU& cpu, const MEMORY &mem){
 
 
 bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
-    mem.cnt++;
     auto[opc, d, a, b] = instr_fetch1(cpu, mem);
+    mem.opc_cnt[opc]++;
     int c, ea, tmp;
     [[maybe_unused]] int bo, bi;
     [[maybe_unused]] bool cond_ok, ctr_ok, ovf = false;
@@ -87,49 +87,69 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
             return false;
         case B:
             cpu.pc = d;
+            mem.opc_plus[B] += 2;
             return false;
         case BGT:   
             //bo = 0b01100;
             // bi = d*4 + 1;
             cond_ok = kth_bit(cpu.cr, 7*4+1); // cr7のみ
-            if(cond_ok) cpu.pc = a;
+            if(cond_ok){
+                cpu.pc = a;
+                mem.opc_plus[BGT] += 2;
+            }
             return false;
         case BLT:
             // bi = d*4;
             cond_ok = kth_bit(cpu.cr, 7*4);// cr7のみ
-            if(cond_ok) cpu.pc = a;
+            if(cond_ok){
+                cpu.pc = a;
+                mem.opc_plus[BLT] += 2;
+            }
             return false;
         case BGE:
             // bi = d*4;
             cond_ok = kth_bit(cpu.cr, 7*4); // cr7のみ
-            if(!cond_ok) cpu.pc = a;
+            if(!cond_ok){
+                cpu.pc = a;
+                mem.opc_plus[BGE] += 2;
+            }
             return false;
         case BNE:
             // bi = d*4 + 2;
             cond_ok = kth_bit(cpu.cr, 7*4+2) ^ 1; // cr7のみ
-            if(cond_ok) cpu.pc = a;
+            if(cond_ok){
+                cpu.pc = a;
+                mem.opc_plus[BNE] += 2;
+            }
             return false;
         case BL:    
             cpu.lr = cpu.pc;
             cpu.pc = d;
+            mem.opc_plus[BL] += 2;
             return false;
         case BLR:
             //print_binary_int(cpu.lr);
             cpu.pc = segment(cpu.lr, 0, 29) << 2;
+            mem.opc_plus[BLR] += 2;
             return false;
         case BCL:
             cpu.lr = cpu.pc;
             if(!kth_bit(d, 2, 5)) cpu.ctr--;
             ctr_ok = kth_bit(d, 2, 5) || ((cpu.ctr != 0) ^ kth_bit(d, 3, 5));
             cond_ok = kth_bit(d, 0, 5) || (kth_bit(cpu.cr, a) ^ (!kth_bit(d, 1, 5)));
-            if(ctr_ok && cond_ok) cpu.pc = b;
+            if(ctr_ok && cond_ok){
+                cpu.pc = b;
+                mem.opc_plus[BCL] += 2;
+            }
             return false;
         case BCTR:
             cpu.pc = segment(cpu.ctr, 0, 29) << 2;
+            mem.opc_plus[BCTR] += 2;
             return false;
         case BCTRL:
             cpu.lr = cpu.pc;
             cpu.pc = segment(cpu.ctr, 0, 29) << 2;
+            mem.opc_plus[BCTRL] += 2;
             return false;
         case LWZ: 
             ea = (b ? cpu.gpr[b] : 0) + exts(a);
@@ -540,7 +560,7 @@ void parse_step(SHOW& ss, const std::string& s){
 // }
 
 void output_cur_info(CPU& cpu, MEMORY_PRO &mem, OPTION& option, bool next){
-    std::cout << mem.cnt << "命令実行済" << '\n';
+    std::cout << std::accumulate(mem.opc_cnt.begin(), mem.opc_cnt.end(), 0ll) << "命令実行済" << '\n';
     if(option.ALL){
         std::cout << "ADDR/4: " << cpu.pc/4 << '\n';
     }
@@ -551,6 +571,11 @@ void output_cur_info(CPU& cpu, MEMORY_PRO &mem, OPTION& option, bool next){
 }
 
 int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO& cache){
+    if(option.prediction){
+        while(!exec(cpu, mem, fpu, cache, option)){;}
+        std::cout << "program finished!" << std::endl;
+        return 0;
+    }
     std::string s;
     while(console_B(), std::getline(std::cin, s)){
         console_E();

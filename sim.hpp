@@ -282,5 +282,8 @@ void execution(CPU& cpu, FASTMEMORY* mem, FASTCACHE* cache, MEMORY_PRO* mem_pro,
     if(option.exec_mode == 0){
         exec_fast(cpu, *mem, fpu, *cache);
     }
-    else if(option.exec_mode == 1) simulate_step(cpu, *mem_pro, option, fpu, *cache_pro);
+    else if(option.exec_mode == 1){
+        
+        simulate_step(cpu, *mem_pro, option, fpu, *cache_pro);
+    }
 }
