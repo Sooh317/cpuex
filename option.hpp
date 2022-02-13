@@ -14,7 +14,8 @@ struct option_t{
     bool asmTObin;
     bool assembly;
     int label_addr;
-    option_t():display_binary(0), display_assembly(0),ALL(0), exec_mode(0), binary(0), binTOasm(0), asmTObin(0), assembly(0), label_addr(0){}
+    bool prediction;
+    option_t():display_binary(0), display_assembly(0),ALL(0), exec_mode(0), binary(0), binTOasm(0), asmTObin(0), assembly(0), label_addr(0), prediction(0){}
 
     void show_option(){
         std::cerr << "### showing options ###\n";
@@ -33,6 +34,7 @@ struct option_t{
         if(display_assembly) std::cerr << "display instructions in assembly" << std::endl;
         if(display_binary) std::cerr << "display instructions in binary" << std::endl;
         if(binary) std::cerr << "reading binary" << std::endl;
+        if(prediction) std::cerr << "showing estimated time of the program" << std::endl;
         if(assembly) std::cerr << "### invalid option ###\nYou can use -a only if you use -tb" << std::endl;
         else std::cerr << "reading assembly" << std::endl;
         std::cerr << "### options end ###\n" << std::endl;
@@ -46,6 +48,11 @@ void init_option(OPTION& option, int argc, char* argv[]){
             if(argv[i][1] == 's'){
                 option.exec_mode = 1;
                 option.display_binary = option.display_assembly = 1;
+            }
+            else if(argv[i][1] == 'p'){
+                option.exec_mode = 1;
+                option.display_binary = option.display_assembly = 1;
+                option.prediction = 1;
             }
             else if(argv[i][1] == 'A'){
                 option.ALL = 1;
