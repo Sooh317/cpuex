@@ -44,6 +44,8 @@ assembly_to_binaryではrun/assembly.txt内に列挙されたアセンブリフ�
 
 -sを指定した場合、暗黙に-da, -dbが指定されます.
 
+****
+ * -p : 実行時間予測を行います.
 
 ****
 
