@@ -65,6 +65,7 @@ void init_option(OPTION& option, int argc, char* argv[]){
             }
             else if(argv[i][1] == 'b') option.binary = 1;
             else if(argv[i][1] == 't'){
+                option.exec_mode = 1;
                 if(argv[i][2] == 'a') option.binTOasm = 1;
                 else if(argv[i][2] == 'b') option.asmTObin = 1;
             }
