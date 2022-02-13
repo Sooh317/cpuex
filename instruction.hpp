@@ -658,7 +658,7 @@ void show_instr(MEMORY& mem, INSTR_KIND instr, int d, int a, int b){
 }
 
 
-void show_instr_binary(INSTR_KIND instr, int d, int a, int b, bool nl = true){
+u32 instr_to_binary(INSTR_KIND instr, int d, int a, int b){
     unsigned int res = opcode_to_bit(instr) << 26;
     switch (instr){
     case ADD:
@@ -781,7 +781,7 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b, bool nl = true){
         res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (72 << 1);
         break;
     case FMUL:
-        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 6) | (25 << 1);
+        res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 16) | ((b & bitmask(5)) << 11) | (25 << 1);
         break;
     case FSQRT:
         res |= ((d & bitmask(5)) << 21) | ((a & bitmask(5)) << 11) | (22 << 1);
@@ -844,5 +844,10 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b, bool nl = true){
         assert(false);
         break;
     }
+    return res;
+}
+
+void show_instr_binary(INSTR_KIND instr, int d, int a, int b, bool nl = true){
+    u32 res = instr_to_binary(instr, d, a, b);
     print_binary_int_nspace(res, nl);
 }

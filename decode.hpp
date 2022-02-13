@@ -377,7 +377,7 @@ INSTR decode_bin(const std::string& bit){
             opcode = FMUL;
             d = btoi(bit.substr(6, 5));
             a = btoi(bit.substr(11, 5));
-            b = btoi(bit.substr(21, 5));
+            b = btoi(bit.substr(16, 5));
         }
         else if((imm & bitmask(5)) == 28){
             opcode = FSIN;
