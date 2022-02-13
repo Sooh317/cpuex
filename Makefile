@@ -8,7 +8,7 @@ all:
 	./sim -A >| run/res.txt
 
 binary_to_assembly:
-	./sim -ta -b >| run/asm
+	./sim -ta -b >| run/asm1
 
 assembly_to_binary:
 	./sim -tb -a >| run/bin
