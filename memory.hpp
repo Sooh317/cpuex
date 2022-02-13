@@ -51,9 +51,9 @@ void init_memory(CACHE_PRO& cache_pro, MEMORY_PRO& mem_pro, OPTION& option){
         
         decode("run/text", mem_pro, cache_pro, ofs);
         decode("run/data", mem_pro, cache_pro, ofs);
-        
-        // std::cerr << "ラベル[_min_caml_start]のアドレスは " << mem_pro.lbl["_min_caml_start"] << " byte目です" << std::endl;
+
     }
+
     if(option.exec_mode == 1){
         std::cout << "loading success!" << std::endl;
         // show_lable(mem.lbl);

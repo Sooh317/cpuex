@@ -121,9 +121,9 @@ enum INSTR_KIND{
     MUL16I,
     ORI,
 
-    CMPW, 
-    CMPWI,
-    FCMPU,
+    CMP, 
+    CMPI,
+    FCMP,
 
     B, 
     BL,
@@ -138,9 +138,9 @@ enum INSTR_KIND{
     SWX, 
     LWI,
     
-    MFSPR, // move from link register
-    MR,   // move register
-    MTSPR, // refer to p526 
+    MFLR, // move from link register
+    MV,   // move register
+    MTLR, // refer to p526 
 
     FADD, 
     FSUB,
@@ -253,8 +253,8 @@ struct memory_t{
         kind_to_form[MUL16I] = RI;
         kind_to_form[SLWI] = kind_to_form[SRWI] = kind_to_form[ORI] = RRI;
 
-        kind_to_form[CMPW] = kind_to_form[FCMPU] = RR;
-        kind_to_form[CMPWI] = RI;
+        kind_to_form[CMP] = kind_to_form[FCMP] = RR;
+        kind_to_form[CMPI] = RI;
 
         kind_to_form[B] = kind_to_form[BL] = L;
         kind_to_form[BGE] = kind_to_form[BEQ] = kind_to_form[BLE] = L;
@@ -264,8 +264,8 @@ struct memory_t{
         kind_to_form[SWX] = kind_to_form[LWX] = RRR;
         kind_to_form[LWI] = RL;
 
-        kind_to_form[MR] = RR;
-        kind_to_form[MTSPR] = kind_to_form[MFSPR] = R;
+        kind_to_form[MV] = RR;
+        kind_to_form[MTLR] = kind_to_form[MFLR] = R;
 
         kind_to_form[FADD] = kind_to_form[FSUB] = kind_to_form[FMUL] = kind_to_form[FDIV] = RRR;
         kind_to_form[FADDMUL] = RRRR;

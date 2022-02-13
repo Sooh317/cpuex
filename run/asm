@@ -1,19 +1,1580 @@
-    sub     r0, r0, r0  # r0 を 0 にする        ##0
-    b       _min_caml_start        ##1
-_min_caml_start:
-    addis   r1, r0, ha16(global_var0)        ##2
-    ori     r1, r1, lo16(global_var0)        ##3
-    sw      r0, 0(r1)        ##4
-    fcos    r2, r0        ##5
-    sw      r2, 4(r1)        ##6
-    lw      r60, 4(r1)        ##7
-    ftoi    r60, r60        ##8
-    addi    r61, r60, 48        ##9
-    out     r61        ##10
-    b       _min_caml_end        ##11
-_min_caml_end:
-    flush        ##12
-    halt        ##13
-    halt        ##14
-    halt    # ここで text セクション終わり        ##15
-global_var0: # 適当なグローバル変数名
+sub r0, r0, r0
+b 8
+addi r28, r0, 0
+addis r28, r0, 0
+ori r28, r28, 0
+mv r9, r4
+addi r4, r4, 0
+mv r28, r4
+addi r4, r4, 2
+sw, r9, 0(r28)
+sw, r9, 1(r28)
+addi r9, r0, 1
+addi r61, r0, 1
+cmpi r61, 0
+bge 6256
+mv r28, r4
+addi r4, r4, 3
+sw, r9, 0(r28)
+sw, r9, 1(r28)
+sw, r9, 2(r28)
+addi r61, r0, 2
+cmpi r61, 0
+bge 6212
+mv r28, r4
+addi r4, r4, 2
+sw, r9, 0(r28)
+sw, r9, 1(r28)
+addi r9, r0, 1
+cmpi r9, 0
+bge 6168
+lw, r9, 0(r28)
+addis r61, r0, 16256
+ori r61, r61, 0
+sw, r61, 0(r9)
+addis r61, r0, 16384
+ori r61, r61, 0
+sw, r61, 1(r9)
+addis r61, r0, 16448
+ori r61, r61, 0
+sw, r61, 2(r9)
+lw, r61, 1(r28)
+addis r9, r0, 16512
+ori r9, r9, 0
+sw, r9, 0(r61)
+addis r9, r0, 16544
+ori r9, r9, 0
+sw, r9, 1(r61)
+addis r9, r0, 16576
+ori r9, r9, 0
+sw, r9, 2(r61)
+lw, r9, 0(r28)
+addis r61, r0, 16608
+ori r61, r61, 0
+sw, r61, 0(r9)
+addis r61, r0, 16640
+ori r61, r61, 0
+sw, r61, 1(r9)
+lw, r9, 1(r28)
+addis r61, r0, 16656
+ori r61, r61, 0
+sw, r61, 0(r9)
+addis r61, r0, 16672
+ori r61, r61, 0
+sw, r61, 1(r9)
+lw, r61, 2(r28)
+addis r9, r0, 16688
+ori r9, r9, 0
+sw, r9, 0(r61)
+addis r9, r0, 16704
+ori r9, r9, 0
+sw, r9, 1(r61)
+addi r9, r0, 1
+cmpi r9, 0
+bge 6048
+lw, r9, 0(r28)
+lw, r9, 0(r9)
+ftoi r9, r9
+cmpi r9, 0
+bge 6032
+addi r9, r0, 45
+out r0
+sub r9, r0, r9
+cmpi r9, 0
+beq 6020
+cmpi r9, 0
+bge 4856
+cmpi r9, 0
+bge 4832
+cmpi r9, 0
+bge 4808
+mv r9, r9
+cmpi r9, 0
+bge 4696
+addi r9, r9, 48
+out r0
+addi r9, r0, 10
+out r0
+lw, r9, 1(r9)
+ftoi r9, r9
+cmpi r9, 0
+bge 4680
+addi r9, r0, 45
+out r0
+sub r9, r0, r9
+cmpi r9, 0
+beq 4668
+cmpi r9, 0
+bge 3512
+cmpi r9, 0
+bge 3488
+cmpi r9, 0
+bge 3464
+mv r9, r9
+cmpi r9, 0
+bge 3352
+addi r9, r9, 48
+out r0
+out r0
+lw, r9, 1(r28)
+lw, r9, 0(r9)
+ftoi r9, r9
+cmpi r9, 0
+bge 3336
+addi r9, r0, 45
+out r0
+sub r9, r0, r9
+cmpi r9, 0
+beq 3324
+cmpi r9, 0
+bge 2168
+cmpi r9, 0
+bge 2144
+cmpi r9, 0
+bge 2120
+mv r9, r9
+cmpi r9, 0
+bge 2008
+addi r9, r9, 48
+out r0
+out r0
+lw, r9, 1(r9)
+ftoi r9, r9
+cmpi r9, 0
+bge 1992
+addi r9, r0, 45
+out r0
+sub r9, r0, r9
+cmpi r9, 0
+beq 1976
+cmpi r9, 0
+bge 816
+cmpi r9, 0
+bge 792
+cmpi r9, 0
+bge 768
+mv r9, r9
+cmpi r9, 0
+bge 648
+addi r9, r9, 48
+out r0
+out r0
+blr
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 740
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+cmpi r9, 0
+beq 724
+addi r9, r9, 48
+out r0
+addi r9, r9, 48
+out r0
+out r0
+blr
+addi r9, r9, 48
+out r0
+out r0
+blr
+addi r9, r9, 65526
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 740
+b 664
+addi r9, r0, 49
+out r0
+addi r9, r9, 65436
+cmpi r9, 0
+bge 648
+b 632
+addi r9, r0, 50
+out r0
+addi r9, r9, 65336
+cmpi r9, 0
+bge 648
+b 632
+mv r61, r4
+addi r4, r4, 10
+sw, r28, 0(r61)
+sw, r28, 1(r61)
+sw, r28, 2(r61)
+sw, r28, 3(r61)
+sw, r28, 4(r61)
+sw, r28, 5(r61)
+sw, r28, 6(r61)
+sw, r28, 7(r61)
+sw, r28, 8(r61)
+sw, r28, 9(r61)
+addis r61, r0, 15258
+ori r61, r61, 51712
+cmp r0, r61
+ble 1876
+mv r9, r9
+addis r61, r0, 1525
+ori r61, r61, 57600
+cmp r0, r61
+ble 1776
+mv r9, r9
+addis r61, r0, 152
+ori r61, r61, 38528
+cmp r0, r61
+ble 1676
+mv r9, r9
+addis r61, r0, 15
+ori r61, r61, 16960
+cmp r0, r61
+ble 1576
+mv r9, r9
+addis r61, r0, 1
+ori r61, r61, 34464
+cmp r0, r61
+ble 1484
+mv r9, r9
+cmpi r9, 0
+bge 1392
+mv r9, r9
+cmpi r9, 0
+bge 1300
+mv r9, r9
+cmpi r9, 0
+bge 1208
+mv r9, r9
+cmpi r9, 0
+bge 1124
+mv r9, r9
+sw, r9, 0(r61)
+addi r9, r0, 9
+addi r9, r0, 0
+cmpi r9, 0
+bge 1040
+out r0
+blr
+lwx r9, r61, r9
+cmpi r9, 0
+beq 1084
+addi r9, r9, 48
+out r0
+addi r9, r9, 65535
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 1040
+b 1032
+cmpi r9, 0
+beq 1100
+addi r9, r0, 48
+out r0
+addi r9, r9, 65535
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 1040
+b 1032
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 1180
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r9, r9
+b 1012
+addi r9, r9, 65526
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 1180
+b 1140
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 1272
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 2(r61)
+mv r9, r9
+cmpi r9, 0
+bge 1124
+b 1008
+addi r9, r9, 65436
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 1272
+b 1224
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 1364
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 3(r61)
+mv r9, r9
+cmpi r9, 0
+bge 1208
+b 996
+addi r9, r9, 64536
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 1364
+b 1316
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 1456
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 4(r61)
+mv r9, r9
+cmpi r9, 0
+bge 1300
+b 984
+addi r9, r9, 55536
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 1456
+b 1408
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 1548
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 5(r61)
+mv r9, r9
+cmpi r9, 0
+bge 1392
+b 972
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 1548
+b 1500
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 1648
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 6(r61)
+mv r9, r9
+addis r61, r0, 1
+ori r61, r61, 34464
+cmp r0, r61
+ble 1484
+b 960
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 1648
+b 1592
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 1748
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 7(r61)
+mv r9, r9
+addis r61, r0, 15
+ori r61, r61, 16960
+cmp r0, r61
+ble 1576
+b 940
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 1748
+b 1692
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 1848
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 8(r61)
+mv r9, r9
+addis r61, r0, 152
+ori r61, r61, 38528
+cmp r0, r61
+ble 1676
+b 920
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 1848
+b 1792
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 1948
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 9(r61)
+mv r9, r9
+addis r61, r0, 1525
+ori r61, r61, 57600
+cmp r0, r61
+ble 1776
+b 900
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 1948
+b 1892
+addi r9, r0, 48
+out r0
+out r0
+blr
+mv r9, r9
+cmpi r9, 0
+beq 1976
+b 596
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 2092
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+cmpi r9, 0
+beq 2080
+addi r9, r9, 48
+out r0
+addi r9, r9, 48
+out r0
+b 556
+addi r9, r9, 48
+out r0
+b 556
+addi r9, r9, 65526
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 2092
+b 2024
+addi r9, r0, 49
+out r0
+addi r9, r9, 65436
+cmpi r9, 0
+bge 2008
+b 548
+addi r9, r0, 50
+out r0
+addi r9, r9, 65336
+cmpi r9, 0
+bge 2008
+b 548
+mv r61, r4
+addi r4, r4, 10
+sw, r28, 0(r61)
+sw, r28, 1(r61)
+sw, r28, 2(r61)
+sw, r28, 3(r61)
+sw, r28, 4(r61)
+sw, r28, 5(r61)
+sw, r28, 6(r61)
+sw, r28, 7(r61)
+sw, r28, 8(r61)
+sw, r28, 9(r61)
+addis r61, r0, 15258
+ori r61, r61, 51712
+cmp r0, r61
+ble 3224
+mv r9, r9
+addis r61, r0, 1525
+ori r61, r61, 57600
+cmp r0, r61
+ble 3124
+mv r9, r9
+addis r61, r0, 152
+ori r61, r61, 38528
+cmp r0, r61
+ble 3024
+mv r9, r9
+addis r61, r0, 15
+ori r61, r61, 16960
+cmp r0, r61
+ble 2924
+mv r9, r9
+addis r61, r0, 1
+ori r61, r61, 34464
+cmp r0, r61
+ble 2832
+mv r9, r9
+cmpi r9, 0
+bge 2740
+mv r9, r9
+cmpi r9, 0
+bge 2648
+mv r9, r9
+cmpi r9, 0
+bge 2556
+mv r9, r9
+cmpi r9, 0
+bge 2472
+mv r9, r9
+sw, r9, 0(r61)
+addi r9, r0, 9
+addi r9, r0, 0
+cmpi r9, 0
+bge 2388
+b 556
+lwx r9, r61, r9
+cmpi r9, 0
+beq 2432
+addi r9, r9, 48
+out r0
+addi r9, r9, 65535
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 2388
+b 556
+cmpi r9, 0
+beq 2448
+addi r9, r0, 48
+out r0
+addi r9, r9, 65535
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 2388
+b 556
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 2528
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r9, r9
+b 2364
+addi r9, r9, 65526
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 2528
+b 2488
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 2620
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 2(r61)
+mv r9, r9
+cmpi r9, 0
+bge 2472
+b 2360
+addi r9, r9, 65436
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 2620
+b 2572
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 2712
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 3(r61)
+mv r9, r9
+cmpi r9, 0
+bge 2556
+b 2348
+addi r9, r9, 64536
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 2712
+b 2664
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 2804
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 4(r61)
+mv r9, r9
+cmpi r9, 0
+bge 2648
+b 2336
+addi r9, r9, 55536
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 2804
+b 2756
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 2896
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 5(r61)
+mv r9, r9
+cmpi r9, 0
+bge 2740
+b 2324
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 2896
+b 2848
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 2996
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 6(r61)
+mv r9, r9
+addis r61, r0, 1
+ori r61, r61, 34464
+cmp r0, r61
+ble 2832
+b 2312
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 2996
+b 2940
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 3096
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 7(r61)
+mv r9, r9
+addis r61, r0, 15
+ori r61, r61, 16960
+cmp r0, r61
+ble 2924
+b 2292
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 3096
+b 3040
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 3196
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 8(r61)
+mv r9, r9
+addis r61, r0, 152
+ori r61, r61, 38528
+cmp r0, r61
+ble 3024
+b 2272
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 3196
+b 3140
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 3296
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 9(r61)
+mv r9, r9
+addis r61, r0, 1525
+ori r61, r61, 57600
+cmp r0, r61
+ble 3124
+b 2252
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 3296
+b 3240
+addi r9, r0, 48
+out r0
+b 556
+mv r9, r9
+cmpi r9, 0
+beq 3324
+b 512
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 3436
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+cmpi r9, 0
+beq 3424
+addi r9, r9, 48
+out r0
+addi r9, r9, 48
+out r0
+b 468
+addi r9, r9, 48
+out r0
+b 468
+addi r9, r9, 65526
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 3436
+b 3368
+addi r9, r0, 49
+out r0
+addi r9, r9, 65436
+cmpi r9, 0
+bge 3352
+b 460
+addi r9, r0, 50
+out r0
+addi r9, r9, 65336
+cmpi r9, 0
+bge 3352
+b 460
+mv r61, r4
+addi r4, r4, 10
+sw, r28, 0(r61)
+sw, r28, 1(r61)
+sw, r28, 2(r61)
+sw, r28, 3(r61)
+sw, r28, 4(r61)
+sw, r28, 5(r61)
+sw, r28, 6(r61)
+sw, r28, 7(r61)
+sw, r28, 8(r61)
+sw, r28, 9(r61)
+addis r61, r0, 15258
+ori r61, r61, 51712
+cmp r0, r61
+ble 4568
+mv r9, r9
+addis r61, r0, 1525
+ori r61, r61, 57600
+cmp r0, r61
+ble 4468
+mv r9, r9
+addis r61, r0, 152
+ori r61, r61, 38528
+cmp r0, r61
+ble 4368
+mv r9, r9
+addis r61, r0, 15
+ori r61, r61, 16960
+cmp r0, r61
+ble 4268
+mv r9, r9
+addis r61, r0, 1
+ori r61, r61, 34464
+cmp r0, r61
+ble 4176
+mv r9, r9
+cmpi r9, 0
+bge 4084
+mv r9, r9
+cmpi r9, 0
+bge 3992
+mv r9, r9
+cmpi r9, 0
+bge 3900
+mv r9, r9
+cmpi r9, 0
+bge 3816
+mv r9, r9
+sw, r9, 0(r61)
+addi r9, r0, 9
+addi r9, r0, 0
+cmpi r9, 0
+bge 3732
+b 468
+lwx r9, r61, r9
+cmpi r9, 0
+beq 3776
+addi r9, r9, 48
+out r0
+addi r9, r9, 65535
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 3732
+b 468
+cmpi r9, 0
+beq 3792
+addi r9, r0, 48
+out r0
+addi r9, r9, 65535
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 3732
+b 468
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 3872
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r9, r9
+b 3708
+addi r9, r9, 65526
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 3872
+b 3832
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 3964
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 2(r61)
+mv r9, r9
+cmpi r9, 0
+bge 3816
+b 3704
+addi r9, r9, 65436
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 3964
+b 3916
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 4056
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 3(r61)
+mv r9, r9
+cmpi r9, 0
+bge 3900
+b 3692
+addi r9, r9, 64536
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 4056
+b 4008
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 4148
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 4(r61)
+mv r9, r9
+cmpi r9, 0
+bge 3992
+b 3680
+addi r9, r9, 55536
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 4148
+b 4100
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 4240
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 5(r61)
+mv r9, r9
+cmpi r9, 0
+bge 4084
+b 3668
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 4240
+b 4192
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 4340
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 6(r61)
+mv r9, r9
+addis r61, r0, 1
+ori r61, r61, 34464
+cmp r0, r61
+ble 4176
+b 3656
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 4340
+b 4284
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 4440
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 7(r61)
+mv r9, r9
+addis r61, r0, 15
+ori r61, r61, 16960
+cmp r0, r61
+ble 4268
+b 3636
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 4440
+b 4384
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 4540
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 8(r61)
+mv r9, r9
+addis r61, r0, 152
+ori r61, r61, 38528
+cmp r0, r61
+ble 4368
+b 3616
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 4540
+b 4484
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 4640
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 9(r61)
+mv r9, r9
+addis r61, r0, 1525
+ori r61, r61, 57600
+cmp r0, r61
+ble 4468
+b 3596
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 4640
+b 4584
+addi r9, r0, 48
+out r0
+b 468
+mv r9, r9
+cmpi r9, 0
+beq 4668
+b 424
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 4780
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+cmpi r9, 0
+beq 4768
+addi r9, r9, 48
+out r0
+addi r9, r9, 48
+out r0
+b 380
+addi r9, r9, 48
+out r0
+b 380
+addi r9, r9, 65526
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 4780
+b 4712
+addi r9, r0, 49
+out r0
+addi r9, r9, 65436
+cmpi r9, 0
+bge 4696
+b 372
+addi r9, r0, 50
+out r0
+addi r9, r9, 65336
+cmpi r9, 0
+bge 4696
+b 372
+addi r9, r0, 10
+mv r61, r4
+addi r4, r4, 10
+addi r9, r9, 65535
+addi r9, r0, 0
+cmp r0, r9
+ble 5996
+mv r61, r61
+addis r61, r0, 15258
+ori r61, r61, 51712
+cmp r0, r61
+ble 5896
+mv r9, r9
+addis r61, r0, 1525
+ori r61, r61, 57600
+cmp r0, r61
+ble 5796
+mv r9, r9
+addis r61, r0, 152
+ori r61, r61, 38528
+cmp r0, r61
+ble 5696
+mv r9, r9
+addis r61, r0, 15
+ori r61, r61, 16960
+cmp r0, r61
+ble 5596
+mv r9, r9
+addis r61, r0, 1
+ori r61, r61, 34464
+cmp r0, r61
+ble 5504
+mv r9, r9
+cmpi r9, 0
+bge 5412
+mv r9, r9
+cmpi r9, 0
+bge 5320
+mv r9, r9
+cmpi r9, 0
+bge 5228
+mv r9, r9
+cmpi r9, 0
+bge 5144
+mv r9, r9
+sw, r9, 0(r61)
+addi r9, r0, 9
+addi r9, r0, 0
+cmpi r9, 0
+bge 5060
+b 380
+lwx r9, r61, r9
+cmpi r9, 0
+beq 5104
+addi r9, r9, 48
+out r0
+addi r9, r9, 65535
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 5060
+b 380
+cmpi r9, 0
+beq 5120
+addi r9, r0, 48
+out r0
+addi r9, r9, 65535
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 5060
+b 380
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 5200
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r9, r9
+b 5036
+addi r9, r9, 65526
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 5200
+b 5160
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 5292
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 2(r61)
+mv r9, r9
+cmpi r9, 0
+bge 5144
+b 5032
+addi r9, r9, 65436
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 5292
+b 5244
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 5384
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 3(r61)
+mv r9, r9
+cmpi r9, 0
+bge 5228
+b 5020
+addi r9, r9, 64536
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 5384
+b 5336
+mv r9, r9
+addi r9, r0, 0
+cmpi r9, 0
+bge 5476
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 4(r61)
+mv r9, r9
+cmpi r9, 0
+bge 5320
+b 5008
+addi r9, r9, 55536
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmpi r9, 0
+bge 5476
+b 5428
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 5568
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 5(r61)
+mv r9, r9
+cmpi r9, 0
+bge 5412
+b 4996
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 5568
+b 5520
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 5668
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 6(r61)
+mv r9, r9
+addis r61, r0, 1
+ori r61, r61, 34464
+cmp r0, r61
+ble 5504
+b 4984
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 5668
+b 5612
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 5768
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 7(r61)
+mv r9, r9
+addis r61, r0, 15
+ori r61, r61, 16960
+cmp r0, r61
+ble 5596
+b 4964
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 5768
+b 5712
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 5868
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 8(r61)
+mv r9, r9
+addis r61, r0, 152
+ori r61, r61, 38528
+cmp r0, r61
+ble 5696
+b 4944
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 5868
+b 5812
+mv r9, r9
+addi r9, r0, 0
+cmp r0, r61
+ble 5968
+mv r61, r4
+addi r4, r4, 2
+sw, r9, 0(r61)
+sw, r9, 1(r61)
+mv r61, r61
+lw, r9, 1(r61)
+lw, r9, 0(r61)
+sw, r9, 9(r61)
+mv r9, r9
+addis r61, r0, 1525
+ori r61, r61, 57600
+cmp r0, r61
+ble 5796
+b 4924
+sub r9, r9, r61
+addi r9, r9, 1
+mv r9, r9
+mv r9, r9
+cmp r0, r61
+ble 5968
+b 5912
+swx r28, r9, r61
+addi r9, r9, 1
+mv r9, r9
+cmp r0, r9
+ble 5996
+b 4884
+addi r9, r0, 48
+out r0
+b 380
+mv r9, r9
+cmpi r9, 0
+beq 6020
+b 336
+addi r9, r0, 1
+cmpi r9, 0
+bge 6080
+addi r9, r9, 65535
+mv r9, r9
+cmpi r9, 0
+bge 6048
+b 296
+addi r9, r0, 2
+cmpi r9, 0
+bge 6112
+addi r9, r9, 65535
+mv r9, r9
+cmpi r9, 0
+bge 6080
+b 6060
+lwx r61, r28, r9
+lwx r61, r61, r9
+lwx r61, r28, r9
+lwx r61, r61, r9
+lwx r61, r28, r9
+lwx r9, r61, r9
+fmul r9, r61, r9
+fadd r28, r61, r9
+swx r28, r9, r61
+addi r9, r9, 65535
+mv r9, r9
+cmpi r9, 0
+bge 6112
+b 6092
+mv r61, r4
+addi r4, r4, 2
+sw, r28, 0(r61)
+sw, r28, 1(r61)
+mv r61, r61
+swx r61, r9, r28
+addi r9, r9, 65535
+mv r9, r9
+cmpi r9, 0
+bge 6168
+b 120
+mv r9, r4
+addi r4, r4, 2
+sw, r28, 0(r9)
+sw, r28, 1(r9)
+mv r9, r9
+swx r9, r61, r28
+addi r61, r61, 65535
+mv r61, r61
+cmpi r61, 0
+bge 6212
+b 92
+mv r9, r4
+addi r4, r4, 3
+sw, r28, 0(r9)
+sw, r28, 1(r9)
+sw, r28, 2(r9)
+mv r9, r9
+swx r9, r61, r28
+addi r61, r61, 65535
+mv r61, r61
+cmpi r61, 0
+bge 6256
+b 60
+flush
+halt
+halt
+halt

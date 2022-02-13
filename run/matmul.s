@@ -1,6 +1,7 @@
 	.text
 	sub		r0, r0, r0
 	b		_min_caml_start
+	# main program start
 _min_caml_start:
 	addi	r28, r0, 0		# 425
 	addis	r28, r0, 0
@@ -105,6 +106,7 @@ _min_caml_start:
 .b1742:
 	addi	r9, r9, 48		# 1264
 	out		r9		# 946
+		# 962
 .b1656:
 	addi	r9, r0, 10		# 848
 	out		r9		# 880
@@ -134,6 +136,7 @@ _min_caml_start:
 .b1834:
 	addi	r9, r9, 48		# 1264
 	out		r9		# 946
+		# 962
 .b1752:
 	out		r9		# 880
 	lw		r9, 1(r28)		# 1065
@@ -163,6 +166,7 @@ _min_caml_start:
 .b1926:
 	addi	r9, r9, 48		# 1264
 	out		r9		# 946
+		# 962
 .b1844:
 	out		r9		# 880
 	lw		r9, 1(r9)		# 1107
@@ -191,7 +195,9 @@ _min_caml_start:
 .b2018:
 	addi	r9, r9, 48		# 1264
 	out		r9		# 946
+		# 962
 	out		r9		# 880
+		# 896
 	blr		# 0
 .b2017:
 	mv		r9, r9		# 990
@@ -213,12 +219,16 @@ _min_caml_start:
 	out		r9		# 946
 	addi	r9, r9, 48		# 1410
 	out		r9		# 946
+		# 962
 	out		r9		# 880
+		# 896
 	blr		# 0
 .b2023:
 	addi	r9, r9, 48		# 1346
 	out		r9		# 946
+		# 962
 	out		r9		# 880
+		# 896
 	blr		# 0
 .b2021:
 	addi	r9, r9, -10
@@ -309,6 +319,7 @@ _min_caml_start:
 	bge		.b2005		# 1483
 .b1936:
 	out		r9		# 880
+		# 896
 	blr		# 0
 .b2005:
 	lwx		r9, r61, r9,		# 1508
@@ -329,6 +340,7 @@ _min_caml_start:
 .b2011:
 	addi	r9, r0, 48		# 1571
 	out		r9		# 946
+		# 962
 .b2009:
 	addi	r9, r9, -1
 	mv		r9, r9		# 1600
@@ -588,7 +600,9 @@ _min_caml_start:
 .b1937:
 	addi	r9, r0, 48		# 1921
 	out		r9		# 946
+		# 962
 	out		r9		# 880
+		# 896
 	blr		# 0
 .b1934:
 	mv		r9, r9		# 1883
@@ -615,10 +629,12 @@ _min_caml_start:
 	out		r9		# 946
 	addi	r9, r9, 48		# 1410
 	out		r9		# 946
+		# 962
 	b		.b1844		# 962
 .b1931:
 	addi	r9, r9, 48		# 1346
 	out		r9		# 946
+		# 962
 	b		.b1844		# 962
 .b1929:
 	addi	r9, r9, -10
@@ -727,6 +743,7 @@ _min_caml_start:
 .b1919:
 	addi	r9, r0, 48		# 1571
 	out		r9		# 946
+		# 962
 .b1917:
 	addi	r9, r9, -1
 	mv		r9, r9		# 1600
@@ -986,6 +1003,7 @@ _min_caml_start:
 .b1845:
 	addi	r9, r0, 48		# 1921
 	out		r9		# 946
+		# 962
 	b		.b1844		# 962
 .b1842:
 	mv		r9, r9		# 1883
@@ -1012,10 +1030,12 @@ _min_caml_start:
 	out		r9		# 946
 	addi	r9, r9, 48		# 1410
 	out		r9		# 946
+		# 962
 	b		.b1752		# 962
 .b1839:
 	addi	r9, r9, 48		# 1346
 	out		r9		# 946
+		# 962
 	b		.b1752		# 962
 .b1837:
 	addi	r9, r9, -10
@@ -1124,6 +1144,7 @@ _min_caml_start:
 .b1827:
 	addi	r9, r0, 48		# 1571
 	out		r9		# 946
+		# 962
 .b1825:
 	addi	r9, r9, -1
 	mv		r9, r9		# 1600
@@ -1383,6 +1404,7 @@ _min_caml_start:
 .b1753:
 	addi	r9, r0, 48		# 1921
 	out		r9		# 946
+		# 962
 	b		.b1752		# 962
 .b1750:
 	mv		r9, r9		# 1883
@@ -1409,10 +1431,12 @@ _min_caml_start:
 	out		r9		# 946
 	addi	r9, r9, 48		# 1410
 	out		r9		# 946
+		# 962
 	b		.b1656		# 962
 .b1747:
 	addi	r9, r9, 48		# 1346
 	out		r9		# 946
+		# 962
 	b		.b1656		# 962
 .b1745:
 	addi	r9, r9, -10
@@ -1518,6 +1542,7 @@ _min_caml_start:
 .b1735:
 	addi	r9, r0, 48		# 1571
 	out		r9		# 946
+		# 962
 .b1733:
 	addi	r9, r9, -1
 	mv		r9, r9		# 1600
@@ -1784,6 +1809,7 @@ _min_caml_start:
 .b1657:
 	addi	r9, r0, 48		# 1921
 	out		r9		# 946
+		# 962
 	b		.b1656		# 962
 .b1654:
 	mv		r9, r9		# 1883
@@ -1862,8 +1888,11 @@ _min_caml_start:
 	cmpi	r61, 0
 	bge		.b1631		# 469
 	b		.b1629
+	# main program end
 _min_caml_end:
 	flush
 	halt
 	halt
 	halt
+# === .data section ===
+	.data

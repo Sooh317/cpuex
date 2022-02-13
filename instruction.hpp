@@ -22,9 +22,9 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "srwi") return SRWI;
     if(s == "ori") return ORI;
 
-    if(s == "cmpw") return CMPW;
-    if(s == "cmpwi") return CMPWI;
-    if(s == "fcmpu") return FCMPU;
+    if(s == "cmp") return CMP;
+    if(s == "cmpi") return CMPI;
+    if(s == "fcmp") return FCMP;
 
     if(s == "b") return B;
     if(s == "bl") return BL;
@@ -39,9 +39,9 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "swx") return SWX;
     if(s == "lwi") return LWI;
 
-    if(s == "mfspr") return MFSPR;
-    if(s == "mr") return MR;
-    if(s == "mtspr") return MTSPR;
+    if(s == "mflr") return MFLR;
+    if(s == "mv") return MV;
+    if(s == "mtlr") return MTLR;
 
     if(s == "fadd") return FADD;
     if(s == "fsub") return FSUB;
@@ -90,12 +90,12 @@ std::string opcode_to_string(INSTR_KIND kind){
     case ORI:
         return "ori";
 
-    case CMPW:
-        return "cmpw";
-    case CMPWI:
-        return "cmpwi";
-    case FCMPU:
-        return "fcmpu";
+    case CMP:
+        return "cmp";
+    case CMPI:
+        return "cmpi";
+    case FCMP:
+        return "fcmp";
 
     case B:
         return "b";
@@ -121,12 +121,12 @@ std::string opcode_to_string(INSTR_KIND kind){
     case LWI:
         return "lwi";
 
-    case MFSPR:
-        return "mfspr";
-    case MR:
-        return "mr";
-    case MTSPR:
-        return "mtspr";
+    case MFLR:
+        return "mflr";
+    case MV:
+        return "mv";
+    case MTLR:
+        return "mtlr";
 
     case FADD:
         return "fadd";
@@ -419,11 +419,11 @@ int opcode_to_bit(INSTR_KIND kind){
     case ORI:
         return 0b0110;
 
-    case CMPW:
+    case CMP:
         return 0b1010;
-    case CMPWI:
+    case CMPI:
         return 0b1010;
-    case FCMPU:
+    case FCMP:
         return 0b1010;
 
     case B:
@@ -450,12 +450,12 @@ int opcode_to_bit(INSTR_KIND kind){
     case LWI: 
         return 0b1100;
 
-    case MFSPR: // d spr 0x153 0
+    case MFLR: // d spr 0x153 0
         return 0b1011;
-    case MR: // s a b 0x1bc rc
-        return 0x1011;
-    case MTSPR: // s spr 0x1d3 0
-        return 0x1011;
+    case MV: // s a b 0x1bc rc
+        return 0b1011;
+    case MTLR: // s spr 0x1d3 0
+        return 0b1011;
     
     case FADD:
         return 0b1001;
@@ -514,15 +514,13 @@ void show_instr(MEMORY& mem, INSTR_KIND instr, int d, int a, int b){
             printf("%s r%d, r%d, r%d, r%d\n", s.c_str(), d, a >> 6, a & bitmask(6), b);
             return;
         case RIR:
-            if(b == 0) printf("%s, r%d, %d(0)\n", s.c_str(), d, a);
-            else printf("%s, r%d, %d(r%d)\n", s.c_str(), d, a, b);
+            printf("%s, r%d, %d(r%d)\n", s.c_str(), d, a, b);
             return;
         case RI:
             printf("%s r%d, %d\n", s.c_str(), d, a);
             return;
         case RRI:
-            if(a != 0) printf("%s r%d, r%d, %d\n", s.c_str(), d, a, b);
-            else printf("%s r%d, 0, %d\n", s.c_str(), d, b);
+            printf("%s r%d, r%d, %d\n", s.c_str(), d, a, b);
             return;
         case L:
             if(mem.inv.count(d)) label = mem.inv[d];
@@ -587,13 +585,13 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b, bool nl = true){
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (b & bitmask(16));
         break;
 
-    case CMPW:
+    case CMP:
         res |= ((d & bitmask(6)) << 16) | ((a & bitmask(6)) << 10) | (0 << 2) | 0b00;
         break;
-    case CMPWI: // rAの位置注意
+    case CMPI: // rAの位置注意
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(16)) << 6) | (0 << 2) | 0b01;
         break;
-    case FCMPU:
+    case FCMP:
         res |= ((d & bitmask(6)) << 16) | ((a & bitmask(6)) << 10) | (0 << 2) | 0b11;
         break;
 
@@ -632,13 +630,13 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b, bool nl = true){
         res |= ((d & bitmask(6)) << 22) | (a & bitmask(22));
         break;
 
-    case MFSPR:
+    case MFLR:
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (1 << 2) | 0b11;
         break;
-    case MR:
+    case MV:
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (0 << 2) | 0b10;
         break;
-    case MTSPR:
+    case MTLR:
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (0 << 2) | 0b11;
         break;
 

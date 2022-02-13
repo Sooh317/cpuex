@@ -90,19 +90,19 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             cpu.gpr[d].i = cpu.gpr[a].i | (b & bitmask(16));
             return false;
 
-        case CMPW:
+        case CMP:
             if(cpu.gpr[a].i < cpu.gpr[b].i) c = 0b1000;
             else if(cpu.gpr[a].i > cpu.gpr[b].i) c = 0b0100;
             else c = 0b0010;
             clear_and_set(cpu.cr, 4*7, 4*7 + 3, c); // cr7のみ
             return false;
-        case CMPWI:
+        case CMPI:
             if(cpu.gpr[a].i < b) c = 0b1000;
             else if(cpu.gpr[a].i > b) c = 0b0100;
             else c = 0b0010;
             clear_and_set(cpu.cr, 4*7, 4*7 + 3, c); // cr7のみ
             return false;
-        case FCMPU: // NaNについては存在しないとする
+        case FCMP: // NaNについては存在しないとする
             if(cpu.gpr[a].f < cpu.gpr[b].f) c = 0b1000;
             else if(cpu.gpr[a].f > cpu.gpr[b].f) c = 0b0100;
             else c = 0b0010;
@@ -176,13 +176,13 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             cpu.gpr[d].i = (int32_t)cache.ld(a << 2, mem);
             return false;
 
-        case MFSPR:
+        case MFLR:
             cpu.gpr[d].i = cpu.lr;
             return false;
-        case MR:
+        case MV:
             cpu.gpr[d].i = cpu.gpr[a].i;
             return false;
-        case MTSPR:
+        case MTLR:
             cpu.lr = cpu.gpr[d].i;
             return false;
 

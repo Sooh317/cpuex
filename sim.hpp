@@ -71,19 +71,19 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             cpu.gpr[d].i = cpu.gpr[a].i | (b & bitmask(16));
             continue;
 
-        case CMPW:
+        case CMP:
             if(cpu.gpr[d].i < cpu.gpr[a].i) c = 0b1000;
             else if(cpu.gpr[d].i > cpu.gpr[a].i) c = 0b0100;
             else c = 0b0010;
             clear_and_set(cpu.cr, 4*7, 4*7 + 3, c); // cr7のみ
             continue;
-        case CMPWI:
+        case CMPI:
             if(cpu.gpr[d].i < a) c = 0b1000;
             else if(cpu.gpr[d].i > a) c = 0b0100;
             else c = 0b0010;
             clear_and_set(cpu.cr, 4*7, 4*7 + 3, c); // cr7のみ
             continue;
-        case FCMPU: // NaNについては存在しないとする
+        case FCMP: // NaNについては存在しないとする
             if(cpu.gpr[d].f < cpu.gpr[a].f) c = 0b1000;
             else if(cpu.gpr[d].f > cpu.gpr[a].f) c = 0b0100;
             else c = 0b0010;
@@ -133,13 +133,13 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             cpu.gpr[d].i = (int32_t)cache.ld(a << 2, mem);
             continue;
 
-        case MFSPR:
+        case MFLR:
             cpu.gpr[d].i = cpu.lr;
             continue;
-        case MR:
+        case MV:
             cpu.gpr[d].i = cpu.gpr[a].i;
             continue;
-        case MTSPR:
+        case MTLR:
             cpu.lr = cpu.gpr[d].i;
             continue;
 

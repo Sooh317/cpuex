@@ -160,9 +160,9 @@ INSTR decode_bin(const std::string& bit, MEMORY_PRO& mem){
         }
     }
     else if(val == 0b1010){
-        if(bit[30] == '0' && bit[31] == '0') opcode = CMPW;
-        else if(bit[30] == '0' && bit[31] == '1') opcode = CMPWI;
-        else if(bit[30] == '1' && bit[31] == '1') opcode = FCMPU;
+        if(bit[30] == '0' && bit[31] == '0') opcode = CMP;
+        else if(bit[30] == '0' && bit[31] == '1') opcode = CMPI;
+        else if(bit[30] == '1' && bit[31] == '1') opcode = FCMP;
         else{
             if(btoi(bit.substr(26, 4)) == 0) opcode = B;
             else if(btoi(bit.substr(26, 4)) == 1) opcode = BL;
@@ -176,10 +176,10 @@ INSTR decode_bin(const std::string& bit, MEMORY_PRO& mem){
     else if(val == 0b1011){
         if(bit[30] == '0' && bit[31] == '0') opcode = LWX;
         else if(bit[30] == '0' && bit[31] == '1') opcode = SWX;
-        else if(bit[30] == '1' && bit[31] == '0') opcode = MR;
+        else if(bit[30] == '1' && bit[31] == '0') opcode = MV;
         else{
-            if(btoi(bit.substr(10, 20)) == 0) opcode = MTSPR;
-            else if(btoi(bit.substr(10, 20)) == 1) opcode = MFSPR;
+            if(btoi(bit.substr(10, 20)) == 0) opcode = MTLR;
+            else if(btoi(bit.substr(10, 20)) == 1) opcode = MFLR;
             else assert(false);
         }
     }
