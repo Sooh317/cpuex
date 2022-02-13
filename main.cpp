@@ -48,7 +48,7 @@ int main(int argc, char* argv[]){
 
     execution(cpu, mem, cache, mem_pro, option, fpu, cache_pro);
 
-    if(option.exec_mode == 1) show_result(cpu, *mem_pro, *cache_pro);
+    show_result(cpu, mem_pro, cache_pro, option);
 
     if(option.exec_mode == 0){
         delete cache;

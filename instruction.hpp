@@ -419,7 +419,7 @@ INSTR recognize_instr(FASTMEMORY* mem, MEMORY_PRO* mem_pro, const std::vector<st
             }
         }
         else{
-            if(mem_pro->lbl.find(s[1]) != mem_pro->lbl.end()) ra = mem_pro->lbl[s[1]];
+            if(mem_pro->lbl.find(s[1]) != mem_pro->lbl.end()) rd = mem_pro->lbl[s[1]];
             else{
                 printout(s[1]);
                 assert(false);
@@ -437,7 +437,7 @@ INSTR recognize_instr(FASTMEMORY* mem, MEMORY_PRO* mem_pro, const std::vector<st
             }
         }
         else{
-            if(mem_pro->lbl.find(s[3]) != mem_pro->lbl.end()) ra = mem_pro->lbl[s[3]];
+            if(mem_pro->lbl.find(s[3]) != mem_pro->lbl.end()) rb = mem_pro->lbl[s[3]];
             else{
                 printout(s[3]);
                 assert(false);
