@@ -9,6 +9,85 @@
 #include "util.hpp"
 
 
+enum INSTR_KIND{
+    // arithmetic operation
+    ADD, 
+    ADDI,
+    ADDIS, 
+    SUB,
+    CMPWI, 
+    BGT,
+    BL,
+    BLR, // jump to LINK Register
+    BCTR,
+    BCTRL,
+    BCL,
+    LWZ,
+    LWZU,
+    STW,
+    STWU, // store word with update
+    MFSPR, // move from link register
+    MR,   // move register
+    MTSPR, // refer to p526 
+    // 1st architecture
+    FCTIWZ,
+    XORIS,
+    B, 
+    BLT, 
+    BGE,
+    BNE, 
+    CMPW, 
+    FABS, 
+    FADD, 
+    FCMPU,
+    FCFIW, 
+    FDIV, 
+    FMR, 
+    FMUL, 
+    FNEG,
+    FSUB,
+    FSQRT, 
+    FFLOOR,
+    FHALF,
+    FCOS,
+    FSIN,
+    FATAN,
+    IN, 
+    OUT, 
+    ORI,
+    FLUSH, 
+    LFS,
+    LFSX,  
+    STFSX,
+    LWZX, 
+    MULLI,
+    MULHWU,
+    SLWI, 
+    SRWI,
+    STFS, 
+    STWX, 
+    HALT,
+    // ゴミ
+    NOT_INSTR,
+    INSTR_UNKNOWN, 
+    TOTAL,
+};
+
+
+struct instr_t{
+    INSTR_KIND opcode;
+    int32_t rd; // rd or rs
+    int32_t ra;
+    int32_t rb;
+    instr_t(INSTR_KIND _opcode,int32_t _rd,int32_t _ra, int32_t _rb):opcode(_opcode), rd(_rd), ra(_ra), rb(_rb){}
+    instr_t(){}
+
+    void show(){
+        std::cout << "opcode : " << opcode << "\n" << "rd : " << rd << "\n" << "ra : " << ra << "\n" <<  "rb : " << rb << std::endl;
+    }
+};
+using INSTR = instr_t;
+
 using GPR = int32_t; // general purpose register
 using FPR = float; // floating point register
 // using CR = uint32_t; // condition register
@@ -31,9 +110,12 @@ struct cpu_t{
     std::vector<FPR> fpr;
     std::vector<int8_t> send_buf;
     std::vector<int8_t> flushed;
+    INSTR history;
 
     cpu_t():cr(0), lr(0), ctr(0), xer(0),pc(0), sbptr(0), gpr(GPR_SIZE, 0), fpr(FPR_SIZE, 0), send_buf(SEND_BUFFER_SIZE, '\0'){
         flushed.reserve(1024 * 1024);
+        history.opcode = NOT_INSTR;
+        history.ra = history.rb = history.rd = -1;
     }
 
     void show_gpr(bool col = true){
@@ -99,84 +181,6 @@ struct cpu_t{
     }
 };
 using CPU = cpu_t;
-
-enum INSTR_KIND{
-    // arithmetic operation
-    ADD, 
-    ADDI,
-    ADDIS, 
-    SUB,
-    CMPWI, 
-    BGT,
-    BL,
-    BLR, // jump to LINK Register
-    BCTR,
-    BCTRL,
-    BCL,
-    LWZ,
-    LWZU,
-    STW,
-    STWU, // store word with update
-    MFSPR, // move from link register
-    MR,   // move register
-    MTSPR, // refer to p526 
-    // 1st architecture
-    FCTIWZ,
-    XORIS,
-    B, 
-    BLT, 
-    BGE,
-    BNE, 
-    CMPW, 
-    FABS, 
-    FADD, 
-    FCMPU,
-    FCFIW, 
-    FDIV, 
-    FMR, 
-    FMUL, 
-    FNEG,
-    FSUB,
-    FSQRT, 
-    FFLOOR,
-    FHALF,
-    FCOS,
-    FSIN,
-    FATAN,
-    IN, 
-    OUT, 
-    ORI,
-    FLUSH, 
-    LFS,
-    LFSX,  
-    STFSX,
-    LWZX, 
-    MULLI,
-    MULHWU,
-    SLWI, 
-    SRWI,
-    STFS, 
-    STWX, 
-    HALT,
-    // ゴミ
-    NOT_INSTR,
-    INSTR_UNKNOWN, 
-    TOTAL,
-};
-
-struct instr_t{
-    INSTR_KIND opcode;
-    int32_t rd; // rd or rs
-    int32_t ra;
-    int32_t rb;
-    instr_t(INSTR_KIND _opcode,int32_t _rd,int32_t _ra, int32_t _rb):opcode(_opcode), rd(_rd), ra(_ra), rb(_rb){}
-    instr_t(){}
-
-    void show(){
-        std::cout << "opcode : " << opcode << "\n" << "rd : " << rd << "\n" << "ra : " << ra << "\n" <<  "rb : " << rb << std::endl;
-    }
-};
-using INSTR = instr_t;
 
 #define INSTR_SIZE 1024*1024
 #define DATA_SIZE 1024*1024*32
@@ -369,6 +373,7 @@ struct memory2_t : MEMORY{
     int32_t notify;
     std::vector<unsigned long long> opc_cnt;
     std::vector<long long> opc_plus;
-    memory2_t():notify(-1), opc_cnt(INSTR_KIND::TOTAL), opc_plus(INSTR_KIND::TOTAL){}
+    long long stall;
+    memory2_t():notify(-1), opc_cnt(INSTR_KIND::TOTAL), opc_plus(INSTR_KIND::TOTAL), stall(0){}
 };
 using MEMORY_PRO = memory2_t;
