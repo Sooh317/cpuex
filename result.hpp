@@ -2,19 +2,55 @@
 #include "struct.hpp"
 #include "util.hpp"
 
-void show_result(const CPU& cpu, MEMORY_PRO& mem, CACHE_PRO& cache){
+#define FREQ 78000000.0
+
+long long estimate(MEMORY_PRO* mem, CACHE_PRO* cache){
+    long long total = std::accumulate(mem->opc_cnt.begin(), mem->opc_cnt.end(), 0ull);
+    // branch
+    total += std::accumulate(mem->opc_plus.begin(), mem->opc_plus.end(), 0ull);
+    // fpu
+    total += mem->opc_cnt[FADD];
+    total += mem->opc_cnt[FSUB];
+    total += mem->opc_cnt[FMUL];
+    total += 9ll * mem->opc_cnt[FDIV];
+    total += 7ll * mem->opc_cnt[FSQRT];
+    total += 11ll * (mem->opc_cnt[FSIN] + mem->opc_cnt[FCOS]);
+    total += 7ll * mem->opc_cnt[FATAN];
+    total += 2ll * mem->opc_cnt[FFLOOR];
+    total += mem->opc_cnt[FCFIW];
+    // lw, sw
+    total += 2ll * cache->lwhit;
+    total += 1ll * cache->swhit;
+    total += 200ll * (cache->lwmiss + cache->swmiss);
+
+    return total;
+}
+
+void show_result(const CPU& cpu, MEMORY_PRO* mem_pro, CACHE_PRO* cache_pro, const OPTION& option){
+
     std::ofstream wf("flushed.ppm");
     for(int i = 0; i < (int)cpu.flushed.size(); i++) wf << cpu.flushed[i];
     wf.close();
-    wf.open("statistics.txt");
-    wf << "命令数: " << mem.cnt << std::endl;
-    wf << "キャッシュヒット: " << cache.hit << std::endl;
-    wf << "キャッシュミス: " << cache.miss << std::endl;
-    wf << "ライトバック: " << cache.write_back << std::endl;
-    wf << "ヒット率: " << (double)cache.hit * 100.0 / (double)(cache.miss + cache.hit) << std::endl;
-    wf << "sin使用数: " << mem.sincnt << std::endl;
-    wf << "cos使用数: " << mem.coscnt << std::endl;
-    wf.close();
+
+    if(option.exec_mode == 1){
+        wf.open("statistics.txt");
+        wf << "命令数: " << std::accumulate(mem_pro->opc_cnt.begin(), mem_pro->opc_cnt.end(), 0ull) << std::endl;
+        wf << "内訳\n";
+        for(int i = 0; i < INSTR_KIND::TOTAL; i++){
+            wf << '\t' << opcode_to_string(INSTR_KIND(i)) << ": " << mem_pro->opc_cnt[i] << '\n';
+        }
+        wf << "キャッシュヒット(sw): " << cache_pro->swhit << std::endl;
+        wf << "キャッシュヒット(lw): " << cache_pro->lwhit << std::endl;
+        wf << "キャッシュミス(sw): " << cache_pro->swmiss << std::endl;
+        wf << "キャッシュミス(lw): " << cache_pro->lwmiss << std::endl;
+        wf << "ライトバック: " << cache_pro->write_back << std::endl;
+        wf << "ヒット率: " << (double)(cache_pro->swhit + cache_pro->lwhit) * 100.0 / (double)((cache_pro->swmiss + cache_pro->lwmiss) + (cache_pro->swhit + cache_pro->lwhit)) << std::endl;
+        long long cycle = estimate(mem_pro, cache_pro);
+        if(option.prediction) wf << "実行時間予測:"<< '\n';
+        wf << "\tcycle数: " << cycle << '\n';
+        wf << "\t予想秒数: " << (double)cycle / FREQ << '\n';
+        wf.close();
+    }
     std::cout << "出力結果はflushed.ppmを確認してください" << std::endl;
     std::cout << "統計情報はstatistics.txtを確認してください" << std::endl;
 }
