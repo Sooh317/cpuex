@@ -62,7 +62,7 @@ void init_memory(FASTCACHE* cache, FASTMEMORY* mem ,CACHE_PRO* cache_pro, MEMORY
     }
 
     if(option.exec_mode == 1){
-        std::cout << "loading success!" << std::endl;
+        std::cerr << "loading success!" << std::endl;
         // show_lable(mem.lbl);
     }
 }
