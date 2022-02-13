@@ -160,7 +160,8 @@ enum INSTR_KIND{
     HALT,
     // ゴミ
     NOT_INSTR,
-    INSTR_UNKNOWN
+    INSTR_UNKNOWN, 
+    TOTAL,
 };
 
 struct instr_t{
@@ -365,8 +366,9 @@ struct fastmemory_t{
 using FASTMEMORY = fastmemory_t;
 
 struct memory2_t : MEMORY{
-    long long cnt, sincnt, coscnt;
     int32_t notify;
-    memory2_t():cnt(0), sincnt(0), coscnt(0), notify(-1){}
+    std::vector<unsigned long long> opc_cnt;
+    std::vector<long long> opc_plus;
+    memory2_t():notify(-1), opc_cnt(INSTR_KIND::TOTAL), opc_plus(INSTR_KIND::TOTAL){}
 };
 using MEMORY_PRO = memory2_t;
