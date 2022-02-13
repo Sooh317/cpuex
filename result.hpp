@@ -2,10 +2,11 @@
 #include "struct.hpp"
 #include "util.hpp"
 
-#define FREQ 70
+#define FREQ 60
+#define BAUDRATE 57600
 
 long long estimate(MEMORY_PRO* mem, CACHE_PRO* cache){
-    long long total = 2 * std::accumulate(mem->opc_cnt.begin(), mem->opc_cnt.end(), 0ull);
+    long long total = std::accumulate(mem->opc_cnt.begin(), mem->opc_cnt.end(), 0ull);
     // branch
     total += std::accumulate(mem->opc_plus.begin(), mem->opc_plus.end(), 0ull);
     // fpu
@@ -21,7 +22,7 @@ long long estimate(MEMORY_PRO* mem, CACHE_PRO* cache){
     // lw, sw
     total += 2ll * cache->lwhit;
     total += 1ll * cache->swhit;
-    total += (long long)(55*100 / FREQ) * (cache->lwmiss + cache->swmiss);
+    total += (long long)((55.0*100 / FREQ) * (cache->lwmiss + cache->swmiss));
     // stall
     total += mem->stall;
     
@@ -51,7 +52,7 @@ void show_result(const CPU& cpu, MEMORY_PRO* mem_pro, CACHE_PRO* cache_pro, cons
         long long cycle = estimate(mem_pro, cache_pro);
         if(option.prediction) wf << "実行時間予測:"<< '\n';
         wf << "\tcycle数: " << cycle << '\n';
-        wf << "\t予想秒数: " << (double)cycle / (FREQ * 1000000) << '\n';
+        wf << "\t予想秒数: " << (double)cycle / (FREQ * 1000000) + (12061.0 * 4 * 10 / BAUDRATE) << '\n';
         wf.close();
     }
     std::cout << "出力結果はflushed.ppmを確認してください" << std::endl;

@@ -62,11 +62,10 @@ int stall(INSTR& prev, const INSTR& cur){
     int c1 = segment(bit, 6, 10);
     int c2 = segment(bit, 11, 15);
     int c3 = segment(bit, 16, 20);
-    int c4 = segment(bit, 21, 25);
 
     prev = cur;
 
-    return (w1 == c1 || w1 == c2 || w1 == c3 || w1 == c4 || w2 == c1 || w2 == c2 || w2 == c3 || w2 == c4);
+    return (w1 == c1 || w1 == c2 || w1 == c3 || w2 == c1 || w2 == c2 || w2 == c3);
 }
 
 bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache, OPTION& option){
