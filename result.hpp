@@ -2,10 +2,10 @@
 #include "struct.hpp"
 #include "util.hpp"
 
-#define FREQ 78000000.0
+#define FREQ 70
 
 long long estimate(MEMORY_PRO* mem, CACHE_PRO* cache){
-    long long total = std::accumulate(mem->opc_cnt.begin(), mem->opc_cnt.end(), 0ull);
+    long long total = 2 * std::accumulate(mem->opc_cnt.begin(), mem->opc_cnt.end(), 0ull);
     // branch
     total += std::accumulate(mem->opc_plus.begin(), mem->opc_plus.end(), 0ull);
     // fpu
@@ -21,8 +21,10 @@ long long estimate(MEMORY_PRO* mem, CACHE_PRO* cache){
     // lw, sw
     total += 2ll * cache->lwhit;
     total += 1ll * cache->swhit;
-    total += 200ll * (cache->lwmiss + cache->swmiss);
-
+    total += (long long)(55*100 / FREQ) * (cache->lwmiss + cache->swmiss);
+    // stall
+    total += mem->stall;
+    
     return total;
 }
 
@@ -45,10 +47,11 @@ void show_result(const CPU& cpu, MEMORY_PRO* mem_pro, CACHE_PRO* cache_pro, cons
         wf << "キャッシュミス(lw): " << cache_pro->lwmiss << std::endl;
         wf << "ライトバック: " << cache_pro->write_back << std::endl;
         wf << "ヒット率: " << (double)(cache_pro->swhit + cache_pro->lwhit) * 100.0 / (double)((cache_pro->swmiss + cache_pro->lwmiss) + (cache_pro->swhit + cache_pro->lwhit)) << std::endl;
+        wf << "ストール数:" << mem_pro->stall << std::endl;
         long long cycle = estimate(mem_pro, cache_pro);
         if(option.prediction) wf << "実行時間予測:"<< '\n';
         wf << "\tcycle数: " << cycle << '\n';
-        wf << "\t予想秒数: " << (double)cycle / FREQ << '\n';
+        wf << "\t予想秒数: " << (double)cycle / (FREQ * 1000000) << '\n';
         wf.close();
     }
     std::cout << "出力結果はflushed.ppmを確認してください" << std::endl;
