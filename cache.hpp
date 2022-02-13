@@ -30,7 +30,7 @@ struct cache_t{
         state_t():dirty(0), accessed(0), tag(0){}
     };
     static const int width = CACHE_LINE_SIZE / 32;
-    long long hit, miss, write_back;
+    long long lwhit, lwmiss, swhit, swmiss, write_back;
     std::vector<state_t> state;
     std::vector<std::vector<DATA>> data;
 
@@ -50,7 +50,7 @@ private:
     }
 
 public:
-    cache_t():hit(0), miss(0), write_back(0){
+    cache_t():lwhit(0), lwmiss(0), swhit(0), swmiss(0), write_back(0){
         data.resize(CACHE_LINE_NUM, std::vector<DATA>(width));
         state.resize(CACHE_LINE_NUM);
     }
@@ -61,12 +61,12 @@ public:
         int tag = calc_tag(addr);
         addr = calc_base_addr(addr);
         if(state[index].tag == tag){ // hit
-            ++hit;
+            ++swhit;
             state[index].dirty = 1;
             data[index][(offset >> 2)] = d;
         }
         else{ // miss
-            miss++;
+            swmiss++;
             std::swap(tag, state[index].tag);
             if(state[index].dirty){
                 Write_Back(tag, index, mem);
@@ -87,7 +87,7 @@ public:
         int tag = calc_tag(addr);
         addr = calc_base_addr(addr);
         if(state[index].tag != tag){
-            ++miss;
+            ++lwmiss;
             std::swap(state[index].tag, tag);
             if(state[index].dirty){
                 Write_Back(tag, index, mem);
@@ -97,7 +97,7 @@ public:
                 data[index][i] = mem.data[addr_to_index(addr) + i]; // line size により maskの長さが変わるので注意
             }
         }
-        else ++hit;
+        else ++lwhit;
 
         return data[index][offset >> 2];
     }
