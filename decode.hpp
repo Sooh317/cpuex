@@ -188,6 +188,7 @@ INSTR decode_bin(const std::string& bit, MEMORY_PRO& mem){
         }
     }
     else if(val == 0b1100) opcode = LWI;
+    else if(val == 0b1101) opcode = LLI;
 
     if(mem.kind_to_form[opcode] == R){
         d = btoi(bit.substr(4, 6));

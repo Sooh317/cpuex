@@ -178,6 +178,9 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
         case LWI:
             cpu.gpr[d].i = (int32_t)cache.ld(a << 2, mem);
             return false;
+        case LLI:
+            cpu.gpr[d].i = a;
+            return false;
 
         case MFLR:
             cpu.gpr[d].i = cpu.lr;

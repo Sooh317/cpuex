@@ -40,6 +40,7 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "sw") return SW;
     if(s == "swx") return SWX;
     if(s == "lwi") return LWI;
+    if(s == "lli") return LLI;
 
     if(s == "mflr") return MFLR;
     if(s == "mv") return MV;
@@ -126,6 +127,8 @@ std::string opcode_to_string(INSTR_KIND kind){
         return "swx";
     case LWI:
         return "lwi";
+    case LLI:
+        return "lli";
 
     case MFLR:
         return "mflr";
@@ -459,6 +462,8 @@ int opcode_to_bit(INSTR_KIND kind){
         return 0b1011;
     case LWI: 
         return 0b1100;
+    case LLI:
+        return 0b1101;
 
     case MFLR: // d spr 0x153 0
         return 0b1011;
@@ -643,6 +648,9 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b, bool nl = true){
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | ((b & bitmask(6)) << 10) | (0 << 2) | 0b01;
         break;
     case LWI:
+        res |= ((d & bitmask(6)) << 22) | (a & bitmask(22));
+        break;
+    case LLI:
         res |= ((d & bitmask(6)) << 22) | (a & bitmask(22));
         break;
 

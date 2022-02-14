@@ -137,6 +137,7 @@ enum INSTR_KIND{
     SW,
     SWX, 
     LWI,
+    LLI,
     
     MFLR, // move from link register
     MV,   // move register
@@ -263,7 +264,7 @@ struct memory_t{
 
         kind_to_form[LW] = kind_to_form[SW] = RIR;
         kind_to_form[SWX] = kind_to_form[LWX] = RRR;
-        kind_to_form[LWI] = RL;
+        kind_to_form[LWI] = kind_to_form[LLI] = RL;
 
         kind_to_form[MV] = RR;
         kind_to_form[MTLR] = kind_to_form[MFLR] = R;

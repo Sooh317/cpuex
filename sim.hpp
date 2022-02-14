@@ -130,6 +130,9 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
         case LWI:
             cpu.gpr[d].i = (int32_t)cache.ld(a << 2, mem);
             continue;
+        case LLI:
+            cpu.gpr[d].i = a;
+            continue;
 
         case MFLR:
             cpu.gpr[d].i = cpu.lr;

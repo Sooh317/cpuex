@@ -1,6 +1,7 @@
 	.text
 	sub		r0, r0, r0
 	b		_min_caml_start
+	# fib.176
 fib.176:
 .Entry@fib.176:
 	mv		r2, r1				# 0
@@ -31,6 +32,7 @@ fib.176:
 	blr				# 42
 .b664:
 	blr				# 33
+	# main program start
 _min_caml_start:
 	addi	r1, r0, 10				# 71
 	mflr	r63
@@ -400,8 +402,11 @@ _min_caml_start:
 	cmpi	r2, 0
 	beq		.b669				# 1907
 	b		.b670
+	# main program end
 _min_caml_end:
 	flush
 	halt
 	halt
 	halt
+# === .data section ===
+	.data
