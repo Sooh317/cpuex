@@ -2,13 +2,13 @@
 #include "struct.hpp"
 #include "util.hpp"
 
-#define FREQ 60
-#define BAUDRATE 57600
+#define FREQ 80
+#define BAUDRATE 500000
 
 long long estimate(MEMORY_PRO* mem, CACHE_PRO* cache){
-    long long total = std::accumulate(mem->opc_cnt.begin(), mem->opc_cnt.end(), 0ull);
+    long long total = std::accumulate(mem->opc_cnt.begin(), mem->opc_cnt.end(), 0ll);
     // branch
-    total += std::accumulate(mem->opc_plus.begin(), mem->opc_plus.end(), 0ull);
+    total += std::accumulate(mem->opc_plus.begin(), mem->opc_plus.end(), 0ll);
     // fpu
     total += mem->opc_cnt[FADD];
     total += mem->opc_cnt[FSUB];
@@ -20,7 +20,7 @@ long long estimate(MEMORY_PRO* mem, CACHE_PRO* cache){
     total += 2ll * mem->opc_cnt[FFLOOR];
     total += mem->opc_cnt[FCFIW];
     // lw, sw
-    total += 2ll * cache->lwhit;
+    total += 1ll * cache->lwhit;
     total += 1ll * cache->swhit;
     total += (long long)((55.0*100 / FREQ) * (cache->lwmiss + cache->swmiss));
     // stall
