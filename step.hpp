@@ -89,20 +89,20 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             return false;
 
         case CMP:
-            if(cpu.gpr[a].i < cpu.gpr[b].i) c = 0b1000;
-            else if(cpu.gpr[a].i > cpu.gpr[b].i) c = 0b0100;
+            if(cpu.gpr[d].i < cpu.gpr[a].i) c = 0b1000;
+            else if(cpu.gpr[d].i > cpu.gpr[a].i) c = 0b0100;
             else c = 0b0010;
             clear_and_set(cpu.cr, 4*7, 4*7 + 3, c); // cr7のみ
             return false;
         case CMPI:
-            if(cpu.gpr[a].i < b) c = 0b1000;
-            else if(cpu.gpr[a].i > b) c = 0b0100;
+            if(cpu.gpr[d].i < a) c = 0b1000;
+            else if(cpu.gpr[d].i > a) c = 0b0100;
             else c = 0b0010;
             clear_and_set(cpu.cr, 4*7, 4*7 + 3, c); // cr7のみ
             return false;
         case FCMP: // NaNについては存在しないとする
-            if(cpu.gpr[a].f < cpu.gpr[b].f) c = 0b1000;
-            else if(cpu.gpr[a].f > cpu.gpr[b].f) c = 0b0100;
+            if(cpu.gpr[d].f < cpu.gpr[a].f) c = 0b1000;
+            else if(cpu.gpr[d].f > cpu.gpr[a].f) c = 0b0100;
             else c = 0b0010;
             // fpcc 無視してます
             clear_and_set(cpu.cr, 4*7, 4*7 + 3, c);
