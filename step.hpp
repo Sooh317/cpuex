@@ -17,7 +17,7 @@
 void output_cur_info(CPU&, MEMORY_PRO&, OPTION&, bool next=false);
 
 void notify_load(CPU& cpu, MEMORY_PRO& mem, OPTION& option, int d, bool gpr){
-    cpu.pc -= 4;
+    cpu.pc--;
     output_cur_info(cpu, mem, option);
     cpu.pc += 4;
     if(gpr) std::cout << "\033[33mロード:\n" << "gpr[" << d << "] = " << cpu.gpr[d].i << " from " << "mem[" << mem.notify << "]\033[m\n";
@@ -25,7 +25,7 @@ void notify_load(CPU& cpu, MEMORY_PRO& mem, OPTION& option, int d, bool gpr){
     std::cout << '\n';
 }
 void notify_store(CPU& cpu, MEMORY_PRO& mem, OPTION& option, int d, bool gpr){
-    cpu.pc -= 4;
+    cpu.pc--;
     output_cur_info(cpu, mem, option);
     cpu.pc += 4;
     if(gpr) std::cout << "\033[32mストア:\n" << "mem[" << mem.notify << "] = " << cpu.gpr[d].i << " from " << "gpr[" << d << "]\033[m\n";
@@ -130,8 +130,9 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
 
         case LW: 
             ea = (b ? cpu.gpr[b].i : 0) + a;
-            if(ea >= DATA_SIZE * 4){
-                cpu.pc -= 4;
+            if(ea >= DATA_SIZE || ea < 0){
+                std::cerr << "mem[" << ea << "]への不正メモリアクセス" << std::endl;
+                cpu.pc--;
                 output_cur_info(cpu, mem, option);
                 assert(false);
             }
@@ -141,8 +142,9 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
         case LWX:
             tmp = (a == 0 ? 0 : cpu.gpr[a].i);
             ea = tmp + cpu.gpr[b].i;
-            if(ea >= DATA_SIZE * 4){
-                cpu.pc -= 4;
+            if(ea >= DATA_SIZE || ea < 0){
+                std::cerr << "mem[" << ea << "]への不正メモリアクセス" << std::endl;
+                cpu.pc--;
                 output_cur_info(cpu, mem, option);
                 assert(false);
             }
@@ -151,8 +153,9 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             return false;
         case SW:   
             ea = (b ? cpu.gpr[b].i : 0) + a;
-            if(ea >= DATA_SIZE * 4){
-                cpu.pc -= 4;
+            if(ea >= DATA_SIZE || ea < 0){
+                std::cerr << "mem[" << ea << "]への不正メモリアクセス" << std::endl;
+                cpu.pc -= 1;
                 output_cur_info(cpu, mem, option);
                 assert(false);
             }
@@ -162,8 +165,9 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
         case SWX:
             tmp = (a == 0 ? 0 : cpu.gpr[a].i);
             ea = cpu.gpr[b].i + tmp;
-            if(ea >= DATA_SIZE * 4){
-                cpu.pc -= 4;
+            if(ea >= DATA_SIZE || ea < 0){
+                std::cerr << "mem[" << ea << "]への不正メモリアクセス" << std::endl;
+                cpu.pc--;
                 output_cur_info(cpu, mem, option);
                 assert(false);
             }
@@ -196,7 +200,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
         case FDIV:
             cpu.gpr[d].f = TasukuFukami::fdiv(cpu.gpr[a].f, cpu.gpr[b].f, fpu, ovf);
             if(ovf){
-                cpu.pc -= 4;
+                cpu.pc--;
                 output_cur_info(cpu, mem, option);
                 assert(false);
             }
@@ -233,7 +237,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             return false;
 
         default:
-            cpu.pc -= 4;    
+            cpu.pc--;    
             output_cur_info(cpu, mem, option);
             warning(opcode_to_string(opc));
             assert(false);

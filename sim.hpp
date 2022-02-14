@@ -188,7 +188,7 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             continue;
             
         default:
-            cpu.pc -= 4;    
+            cpu.pc--;    
             warning(opcode_to_string(opc));
             assert(false);
             continue;
