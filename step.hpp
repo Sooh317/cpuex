@@ -484,6 +484,7 @@ void parse_step(SHOW& ss, const std::string& s){
                 ss.nval.push_back(stoi(tmp[i]));
             }
         }
+        else if(c == 'R') ss.done = true;
         else if(c == 'B') ss.B = true;
         else if(c == 'F') ss.F = true;
         else if(c == 'g') ss.gr = true;
@@ -597,6 +598,10 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
         SHOW ss;
         // show_what(ss, s);
         parse_step(ss, s);
+        if(ss.done){
+            while(!exec(cpu, mem, fpu, cache, option)){;}
+            return 0;
+        }
         if(ss.help){   
             std::cout << "s : 1ステップ進める\n";
             std::cout << "S : nステップ進める\n"; 
@@ -610,6 +615,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             std::cout << "C : nライン目のキャッシュを表示\n";
             std::cout << "N : 追跡したいアドレス n を指定\n";
             std::cout << "P : ブレイクポイント(file名,行数)/(ラベル名)の設定" << std::endl;
+            std::cout << "R : 最後まで一気に実行" << std::endl;
         }
         if(ss.bad){
             std::cout << "無効なステップ実行" << std::endl;
