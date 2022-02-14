@@ -185,7 +185,7 @@ using INSTR = instr_t;
 enum DIRECTIVE_KIND{
     ALIGN, 
     ASCII,
-    LONG, 
+    SIZE, 
 /*
     CSTRING, 
     GLOBL,
@@ -251,7 +251,7 @@ struct memory_t{
         kind_to_form[ADD] = kind_to_form[SUB] = RRR;
         kind_to_form[ADDI] = kind_to_form[ADDIS] = RRI;
         kind_to_form[MUL16] = RR;
-        kind_to_form[MUL16I] = RI;
+        kind_to_form[MUL16I] = RRI;
         kind_to_form[SLWI] = kind_to_form[SRWI] = kind_to_form[ORI] = RRI;
 
         kind_to_form[CMP] = kind_to_form[FCMP] = RR;

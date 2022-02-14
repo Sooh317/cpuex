@@ -37,7 +37,11 @@ std::vector<std::string> remove_chars(const std::string& str, const std::string 
 void next_memory_address(int &cnt, const std::vector<std::string> &s){
     if(s.size() == 0) return;
     DIRECTIVE_KIND kind = directive_kind(s[0]);
-    if(kind == NOT_DIRECTIVE || kind == LONG) cnt += 1;
+    if(kind == SIZE){
+        assert(s.size() == 2);
+        cnt += stoi(s[1]);
+    }
+    if(kind == NOT_DIRECTIVE) cnt += 1;
     // else if(kind == ALIGN){
     //     assert(s.size() >= 2);
     //     int k = 1 << stoi(s[1]);
@@ -58,7 +62,7 @@ void put_instr_into_memory(std::string& str, MEMORY_PRO& mem_pro, CACHE_PRO& cac
             return; // label
         }
         DIRECTIVE_KIND kind = directive_kind(s[0]);
-        if(kind == LONG){
+        if(kind == SIZE){
             process_long_directive(cache_pro, mem_pro, s[1]);
             ofs << str << "        ##" << mem_pro.index << '\n';
         }

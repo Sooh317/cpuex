@@ -8,7 +8,7 @@
 
 enum DIRECTIVE_KIND directive_kind(const std::string &ss){
     if(ss == ".align") return ALIGN;
-    else if(ss == ".long") return LONG;
+    else if(ss == ".size") return SIZE;
     else if(ss[0] == '.') return SOME_DIRECTIVE;
     else return NOT_DIRECTIVE;
 }
