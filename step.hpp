@@ -41,8 +41,9 @@ INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
 
 
 bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option){
-    mem.cnt++;
     auto[opc, d, a, b] = instr_fetch(cpu, mem);
+    mem.cnt++;
+    mem.opc_cnt[opc]++;
     int c, ea, tmp;
     [[maybe_unused]] int bo, bi;
     bool ovf = false;

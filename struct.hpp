@@ -160,7 +160,8 @@ enum INSTR_KIND{
 
     // ゴミ
     NOT_INSTR,
-    INSTR_UNKNOWN
+    INSTR_UNKNOWN,
+    TOTAL
 };
 
 struct instr_t{
@@ -319,8 +320,9 @@ struct memory_t{
 using MEMORY = memory_t;
 
 struct memory2_t : MEMORY{
-    long long cnt, sincnt, coscnt;
+    long long cnt;
+    std::vector<long long> opc_cnt;
     int32_t notify;
-    memory2_t():cnt(0), sincnt(0), coscnt(0), notify(-1){}
+    memory2_t():cnt(0), opc_cnt(INSTR_KIND::TOTAL), notify(-1){}
 };
 using MEMORY_PRO = memory2_t;
