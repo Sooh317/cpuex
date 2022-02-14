@@ -129,7 +129,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             return false;
 
         case LW: 
-            ea = (b ? cpu.gpr[b].i : 0) + a;
+            ea = cpu.gpr[b].i + a;
             if(ea >= DATA_SIZE || ea < 0){
                 std::cerr << "mem[" << ea << "]への不正メモリアクセス" << std::endl;
                 cpu.pc--;
@@ -140,7 +140,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             if(ea == mem.notify) notify_load(cpu, mem, option, d, 1);
             return false;
         case LWX:
-            tmp = (a == 0 ? 0 : cpu.gpr[a].i);
+            tmp = cpu.gpr[a].i;
             ea = tmp + cpu.gpr[b].i;
             if(ea >= DATA_SIZE || ea < 0){
                 std::cerr << "mem[" << ea << "]への不正メモリアクセス" << std::endl;
@@ -152,7 +152,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             if(ea == mem.notify) notify_load(cpu, mem, option, d, 1);
             return false;
         case SW:   
-            ea = (b ? cpu.gpr[b].i : 0) + a;
+            ea = cpu.gpr[b].i + a;
             if(ea >= DATA_SIZE || ea < 0){
                 std::cerr << "mem[" << ea << "]への不正メモリアクセス" << std::endl;
                 cpu.pc -= 1;
@@ -163,7 +163,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             if(ea == mem.notify) notify_store(cpu, mem, option, d, 1);
             return false;
         case SWX:
-            tmp = (a == 0 ? 0 : cpu.gpr[a].i);
+            tmp = cpu.gpr[a].i;
             ea = cpu.gpr[b].i + tmp;
             if(ea >= DATA_SIZE || ea < 0){
                 std::cerr << "mem[" << ea << "]への不正メモリアクセス" << std::endl;
