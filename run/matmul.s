@@ -106,7 +106,6 @@ _min_caml_start:
 .b1742:
 	addi	r9, r61, 48				# 1264
 	out		r9				# 946
-
 .b1656:
 	addi	r10, r0, 10				# 848
 	out		r10				# 880
@@ -136,7 +135,6 @@ _min_caml_start:
 .b1834:
 	addi	r61, r9, 48				# 1264
 	out		r61				# 946
-
 .b1752:
 	out		r10				# 880
 	lw		r51, 1(r13)				# 1065
@@ -166,7 +164,6 @@ _min_caml_start:
 .b1926:
 	addi	r9, r62, 48				# 1264
 	out		r9				# 946
-
 .b1844:
 	out		r10				# 880
 	lw		r61, 1(r51)				# 1107
@@ -195,10 +192,8 @@ _min_caml_start:
 .b2018:
 	addi	r61, r9, 48				# 1264
 	out		r61				# 946
-
 	out		r10				# 880
-
-	blr				# 0
+	b		_min_caml_end				# 896
 .b2017:
 	mv		r61, r9				# 990
 	addi	r28, r0, 0				# 990
@@ -219,17 +214,13 @@ _min_caml_start:
 	out		r61				# 946
 	addi	r61, r9, 48				# 1410
 	out		r61				# 946
-
 	out		r10				# 880
-
-	blr				# 0
+	b		_min_caml_end				# 896
 .b2023:
 	addi	r61, r9, 48				# 1346
 	out		r61				# 946
-
 	out		r10				# 880
-
-	blr				# 0
+	b		_min_caml_end				# 896
 .b2021:
 	addi	r9, r61, -10				# 1005
 	addi	r62, r28, 1				# 1005
@@ -319,8 +310,7 @@ _min_caml_start:
 	bge		.b2005				# 1483
 .b1936:
 	out		r10				# 880
-
-	blr				# 0
+	b		_min_caml_end				# 896
 .b2005:
 	lwx		r62, r9, r61				# 1508
 	cmpi	r62, 0
@@ -340,11 +330,9 @@ _min_caml_start:
 .b2011:
 	addi	r62, r0, 48				# 1571
 	out		r62				# 946
-
 .b2009:
 	addi	r62, r61, -1				# 1600
 	mv		r61, r62				# 1600
-
 	cmpi	r61, 0
 	bge		.b2005				# 1483
 	b		.b1936
@@ -600,10 +588,8 @@ _min_caml_start:
 .b1937:
 	addi	r9, r0, 48				# 1921
 	out		r9				# 946
-
 	out		r10				# 880
-
-	blr				# 0
+	b		_min_caml_end				# 896
 .b1934:
 	mv		r61, r9				# 1883
 	cmpi	r61, 0
@@ -629,12 +615,10 @@ _min_caml_start:
 	out		r9				# 946
 	addi	r9, r62, 48				# 1410
 	out		r9				# 946
-
 	b		.b1844				# 962
 .b1931:
 	addi	r9, r62, 48				# 1346
 	out		r9				# 946
-
 	b		.b1844				# 962
 .b1929:
 	addi	r61, r9, -10				# 1005
@@ -743,11 +727,9 @@ _min_caml_start:
 .b1919:
 	addi	r15, r0, 48				# 1571
 	out		r15				# 946
-
 .b1917:
 	addi	r15, r61, -1				# 1600
 	mv		r61, r15				# 1600
-
 	cmpi	r61, 0
 	bge		.b1913				# 1483
 	b		.b1844
@@ -1003,7 +985,6 @@ _min_caml_start:
 .b1845:
 	addi	r9, r0, 48				# 1921
 	out		r9				# 946
-
 	b		.b1844				# 962
 .b1842:
 	mv		r61, r9				# 1883
@@ -1030,12 +1011,10 @@ _min_caml_start:
 	out		r61				# 946
 	addi	r61, r9, 48				# 1410
 	out		r61				# 946
-
 	b		.b1752				# 962
 .b1839:
 	addi	r61, r9, 48				# 1346
 	out		r61				# 946
-
 	b		.b1752				# 962
 .b1837:
 	addi	r9, r61, -10				# 1005
@@ -1144,11 +1123,9 @@ _min_caml_start:
 .b1827:
 	addi	r15, r0, 48				# 1571
 	out		r15				# 946
-
 .b1825:
 	addi	r15, r61, -1				# 1600
 	mv		r61, r15				# 1600
-
 	cmpi	r61, 0
 	bge		.b1821				# 1483
 	b		.b1752
@@ -1404,7 +1381,6 @@ _min_caml_start:
 .b1753:
 	addi	r9, r0, 48				# 1921
 	out		r9				# 946
-
 	b		.b1752				# 962
 .b1750:
 	mv		r61, r9				# 1883
@@ -1431,12 +1407,10 @@ _min_caml_start:
 	out		r9				# 946
 	addi	r9, r62, 48				# 1410
 	out		r9				# 946
-
 	b		.b1656				# 962
 .b1747:
 	addi	r9, r62, 48				# 1346
 	out		r9				# 946
-
 	b		.b1656				# 962
 .b1745:
 	addi	r62, r15, -10				# 1005
@@ -1542,11 +1516,9 @@ _min_caml_start:
 .b1735:
 	addi	r15, r0, 48				# 1571
 	out		r15				# 946
-
 .b1733:
 	addi	r15, r9, -1				# 1600
 	mv		r9, r15				# 1600
-
 	cmpi	r9, 0
 	bge		.b1729				# 1483
 	b		.b1656
@@ -1809,7 +1781,6 @@ _min_caml_start:
 .b1657:
 	addi	r9, r0, 48				# 1921
 	out		r9				# 946
-
 	b		.b1656				# 962
 .b1654:
 	mv		r9, r61				# 1883
