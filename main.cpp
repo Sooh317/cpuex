@@ -28,11 +28,7 @@ int main(int argc, char* argv[]){
     option.show_option();
 
     init_memory(cache_pro, mem_pro, option);
-
-    for(auto p : mem_pro.lbl){
-        std::cout << p.first << " " << p.second << std::endl;
-    }
-
+    
     if(option.binTOasm || option.asmTObin){
         translator(mem_pro, option);
         return 0;
