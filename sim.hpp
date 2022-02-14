@@ -18,9 +18,7 @@
 
 
 INSTR instr_fetch_fast(CPU& cpu, const MEMORY &mem){
-    unsigned int pc = addr_to_index(cpu.pc);
-    cpu.pc += 4;
-    return mem.instr[pc];
+    return mem.instr[cpu.pc++];
 }
 
 void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
@@ -213,7 +211,7 @@ void translator(MEMORY_PRO& mem, OPTION& option){
         if(option.assembly){
             INSTR_KIND opc;
             int d, a, b;
-            for(int i = 0; i < mem.index / 4; i++){
+            for(int i = 0; i < mem.index; i++){
                 opc = mem.instr[i].opcode;
                 d = mem.instr[i].rd;
                 a = mem.instr[i].ra;

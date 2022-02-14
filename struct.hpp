@@ -177,8 +177,8 @@ struct instr_t{
 };
 using INSTR = instr_t;
 
-#define INSTR_SIZE 1024*1024
-#define DATA_SIZE 1024*1024*32
+#define INSTR_SIZE 1024*1024/32
+#define DATA_SIZE 1024*1024
 
 // http://apfel.mathematik.uni-ulm.de/~lehn/sghpc_ws14/OSXAssembler.pdf
 enum DIRECTIVE_KIND{
@@ -280,12 +280,12 @@ struct memory_t{
         if(show.m){
             for(int ad : show.maddr){
                 ad = ((ad >> 2) << 2);
-                std::cout << "around " << ad << std::endl;
-                for(int j = std::max(-(ad >> 2), -show.wid); j <= std::min(DATA_SIZE - 1 - (ad >> 2), show.wid); j++){
+                std::cout << "around " << ad << " in the order of (int, float, binary)" << std::endl;
+                for(int j = std::max(-ad, -show.wid); j <= std::min(DATA_SIZE - 1 - ad, show.wid); j++){
                     if(j == 0) std::cout << "\033[1;34m";
-                    std::cout << "mem[" << ad + 4*j << "~" << ad + 4*j + 3 << "] = (" << data[(ad >> 2) + j] << ", " << bit_cast<float, int>(data[(ad >> 2) + j]) << ", 0b'";
+                    std::cout << "mem[" << ad + j << "] = (" << data[ad + j] << ", " << bit_cast<float, int>(data[ad + j]) << ", 0b'";
                     for(int i = 31; i >= 0; i--){
-                        std::cout << (data[(ad >> 2) + j] >> i & 1);
+                        std::cout << (data[ad + j] >> i & 1);
                         if(i % 8 == 0 && i) std::cout << " ";
                     }
                     std::cout << ")" << std::endl;
@@ -302,10 +302,10 @@ struct memory_t{
                 }
                 std::cout << "from " << l << " to " << r << std::endl;
                 std::cout << "\033[1;34m";
-                for(int j = l; j <= r; j += 4){
-                    std::cout << "mem[" << j << "~" << j + 3 << "] = (" << data[j >> 2] << ", " << bit_cast<float, int>(data[j >> 2]) << ", 0b'";
+                for(int j = l; j <= r; j ++){
+                    std::cout << "mem[" << j << "] = (" << data[j] << ", " << bit_cast<float, int>(data[j]) << ", 0b'";
                     for(int i = 31; i >= 0; i--){
-                        std::cout << (data[j >> 2] >> i & 1);
+                        std::cout << (data[j] >> i & 1);
                         if(i % 8 == 0 && i) std::cout << " ";
                     }
                     std::cout << ")" << std::endl;

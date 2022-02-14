@@ -36,9 +36,7 @@ void notify_store(CPU& cpu, MEMORY_PRO& mem, OPTION& option, int d, bool gpr){
 
 INSTR instr_fetch(CPU& cpu, const MEMORY &mem){
     assert(cpu.pc < (unsigned int)mem.index);
-    unsigned int pc = addr_to_index(cpu.pc);
-    cpu.pc += 4;
-    return mem.instr[pc];
+    return mem.instr[cpu.pc++];
 }
 
 
@@ -66,7 +64,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             cpu.gpr[d].i = cpu.gpr[a].i + cpu.gpr[b].i;
             return false;
         case ADDI:
-            cpu.gpr[d].i = (a ? cpu.gpr[a].i : 0) + exts(b);
+            cpu.gpr[d].i = (a ? cpu.gpr[a].i : 0) + b;
             return false;
         case ADDIS:
             cpu.gpr[d].i = (a ? cpu.gpr[a].i : 0) + int(b << 16);
@@ -124,7 +122,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             if(!kth_bit(cpu.cr, 7*4 + 1)) cpu.pc = d;
             return false;
         case BGE:
-            if(!kth_bit(cpu.cr, 7*4)) cpu.pc = a;
+            if(!kth_bit(cpu.cr, 7*4)) cpu.pc = d;
             return false;
         case BLR:
             cpu.pc = segment(cpu.lr, 0, 29) << 2;
@@ -424,11 +422,11 @@ void parse_step(SHOW& ss, const std::string& s){
 void output_cur_info(CPU& cpu, MEMORY_PRO &mem, OPTION& option, bool next){
     std::cout << mem.cnt << "命令実行済" << '\n';
     if(option.ALL){
-        std::cout << "ADDR/4: " << cpu.pc/4 << '\n';
+        std::cout << "ADDR: " << cpu.pc << '\n';
     }
     else{
         if(next) std::cout << "次に実行する命令は\n";
-        std::cout << "\033[1;31mADDR/4: \033[m" << cpu.pc/4 << '\n';
+        std::cout << "\033[1;31mADDR: \033[m" << cpu.pc << '\n';
     }
 }
 
@@ -511,7 +509,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             bool da = false, db = false;
             std::swap(option.display_assembly, da);
             std::swap(option.display_binary, db);
-            std::pair<int, int> p;
+            std::pair<int, u32> p;
             p.second = ss.bpoint.second;
             p.first = -1;
             while(1){
@@ -519,7 +517,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
                     std::cout << "program finished!" << std::endl;
                     return 0;
                 }
-                if(addr_to_index(cpu.pc) == p.second) break;
+                if(cpu.pc == p.second) break;
             }
             output_cur_info(cpu, mem, option, 1);
             std::swap(option.display_assembly, da);
@@ -528,7 +526,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
         if(ss.next) continue;
         std::cout << "終了した命令数 & 実行した命令:\n";
         output_cur_info(cpu, mem, option);
-        auto[opc, d, a, b] = mem.instr[addr_to_index(cpu.pc)];
+        auto[opc, d, a, b] = mem.instr[cpu.pc];
         if(option.display_assembly) show_instr(mem, opc, d, a, b); 
         if(option.display_binary) show_instr_binary(opc, d, a, b);
         if(exec(cpu, mem, fpu, cache, option)){

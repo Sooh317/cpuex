@@ -116,6 +116,7 @@ private:
         std::cout << i << ": (";
         std::cout << data[index][i] << ", ";
         std::cout << bit_cast<float, int>(data[index][i]) << ", ";
+        std::cout << "0b'";
         print_binary_int1(data[index][i]);
         std::cout << ")" << std::endl;
     }
@@ -165,10 +166,11 @@ public:
     }
 
     void show_cache(const SHOW& ss){
-        if(ss.m) for(int addr : ss.maddr) show(addr);
+        if(ss.m) for(int addr : ss.maddr) show(addr << 2);
         else{
             for(auto[from, to] : ss.Maddr){
                 std::cout << from << " ~ " << to << " のキャッシュ状況" << std::endl;
+                std::cout << "未support" << std::endl;
                 
             }
         }

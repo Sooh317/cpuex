@@ -14,11 +14,11 @@ enum DIRECTIVE_KIND directive_kind(const std::string &ss){
 }
 
 void process_long_directive(CACHE_PRO& cache_pro, MEMORY_PRO& mem, const std::string& s){
-    mem.instr[mem.index >> 2].opcode = NOT_INSTR;
+    mem.instr[mem.index].opcode = NOT_INSTR;
     for(int i = 0; i < (int)s.size(); i++){
         if(s[i] == '-' || ('0' <= s[i] && s[i] <= '9')) continue;
         else return;
     }
-    mem.instr[mem.index >> 2].rd = stoi(s);
+    mem.instr[mem.index].rd = stoi(s);
     cache_pro.sw(mem.index, mem, stoi(s));
 }
