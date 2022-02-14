@@ -20,6 +20,8 @@ enum INSTR_KIND opcode_of_instr(const std::string& s){
     if(s == "sub") return SUB;
     if(s == "slwi") return SLWI;
     if(s == "srwi") return SRWI;
+    if(s == "mul16") return MUL16;
+    if(s == "mul16i") return MUL16I;
     if(s == "ori") return ORI;
 
     if(s == "cmp") return CMP;
@@ -87,6 +89,10 @@ std::string opcode_to_string(INSTR_KIND kind){
         return "slwi";
     case SRWI:
         return "srwi";
+    case MUL16:
+        return "mul16";
+    case MUL16I:
+        return "mul16i";
     case ORI:
         return "ori";
 
@@ -416,6 +422,10 @@ int opcode_to_bit(INSTR_KIND kind){
         return 0b0011;
     case SRWI:
         return 0b0100;
+    case MUL16:
+        return 0b1001;
+    case MUL16I:
+        return 0b0101;
     case ORI:
         return 0b0110;
 
@@ -581,6 +591,11 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b, bool nl = true){
     case SRWI:
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (bitmask(16) & b);
         break;
+    case MUL16:
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | ((b & bitmask(16)) << 10) | (2 << 2) | 0b01;
+        break;
+    case MUL16I:
+        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (bitmask(16) & b);
     case ORI:
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (b & bitmask(16));
         break;
