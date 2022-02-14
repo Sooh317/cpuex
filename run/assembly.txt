@@ -1,1 +1,1 @@
-fib1.s
+fib.s

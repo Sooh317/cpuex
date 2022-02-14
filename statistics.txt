@@ -1,34 +1,34 @@
-命令数: 234
+命令数: 0
 内訳
 	in: 0
-	out: 8
-	flush: 1
-	halt: 1
+	out: 0
+	flush: 0
+	halt: 0
 	add: 0
-	addi: 33
-	addis: 6
-	sub: 6
+	addi: 0
+	addis: 0
+	sub: 0
 	slwi: 0
 	srwi: 0
-	instr_unknown: 0
-	instr_unknown: 0
-	ori: 6
-	cmp: 12
-	cmpi: 36
+	mul16: 0
+	mul16i: 0
+	ori: 0
+	cmp: 0
+	cmpi: 0
 	fcmp: 0
-	b: 6
+	b: 0
 	bl: 0
-	beq: 19
-	ble: 12
-	bge: 17
+	beq: 0
+	ble: 0
+	bge: 0
 	blr: 0
-	lw: 4
-	lwx: 10
-	sw: 17
+	lw: 0
+	lwx: 0
+	sw: 0
 	swx: 0
 	lwi: 0
 	mflr: 0
-	mv: 39
+	mv: 0
 	mtlr: 0
 	fadd: 0
 	fsub: 0
@@ -43,11 +43,11 @@
 	fcos: 0
 	fatan: 0
 	faddmul: 0
-	ftoi: 1
+	ftoi: 0
 	itof: 0
 	not_instr: 0
 	instr_unknown: 0
-キャッシュヒット: 30
-キャッシュミス: 1
+キャッシュヒット: 12116569
+キャッシュミス: 6
 ライトバック: 0
-ヒット率: 96.7742
+ヒット率: 100

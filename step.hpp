@@ -19,7 +19,7 @@ void output_cur_info(CPU&, MEMORY_PRO&, OPTION&, bool next=false);
 void notify_load(CPU& cpu, MEMORY_PRO& mem, OPTION& option, int d, bool gpr){
     cpu.pc--;
     output_cur_info(cpu, mem, option);
-    cpu.pc += 4;
+    cpu.pc++;
     if(gpr) std::cout << "\033[33mロード:\n" << "gpr[" << d << "] = " << cpu.gpr[d].i << " from " << "mem[" << mem.notify << "]\033[m\n";
     else std::cout << "\033[33mロード:\n" << "gpr[" << d << "] = " << cpu.gpr[d].f << " from " << "mem[" << mem.notify << "]\033[m\n";
     std::cout << '\n';
@@ -27,7 +27,7 @@ void notify_load(CPU& cpu, MEMORY_PRO& mem, OPTION& option, int d, bool gpr){
 void notify_store(CPU& cpu, MEMORY_PRO& mem, OPTION& option, int d, bool gpr){
     cpu.pc--;
     output_cur_info(cpu, mem, option);
-    cpu.pc += 4;
+    cpu.pc++;
     if(gpr) std::cout << "\033[32mストア:\n" << "mem[" << mem.notify << "] = " << cpu.gpr[d].i << " from " << "gpr[" << d << "]\033[m\n";
     else std::cout << "\033[32mストア:\n" << "mem[" << mem.notify << "] = " << cpu.gpr[d].f << " from " << "fpr[" << d << "]\033[m\n";
     std::cout << '\n';
@@ -126,7 +126,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             if(!kth_bit(cpu.cr, 7*4)) cpu.pc = d;
             return false;
         case BLR:
-            cpu.pc = segment(cpu.lr, 0, 29) << 2;
+            cpu.pc = cpu.lr;
             return false;
 
         case LW: 

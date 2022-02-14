@@ -106,7 +106,7 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             if(!kth_bit(cpu.cr, 7*4)) cpu.pc = d;
             continue;
         case BLR:
-            cpu.pc = segment(cpu.lr, 0, 29) << 2;
+            cpu.pc = cpu.lr;
             continue;
 
         case LW: 

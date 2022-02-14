@@ -647,13 +647,13 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b, bool nl = true){
         break;
 
     case MFLR:
-        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (1 << 2) | 0b11;
+        res |= ((d & bitmask(6)) << 22) | (1 << 2) | 0b11;
         break;
     case MV:
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (0 << 2) | 0b10;
         break;
     case MTLR:
-        res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (0 << 2) | 0b11;
+        res |= ((d & bitmask(6)) << 22) | (0 << 2) | 0b11;
         break;
 
     
