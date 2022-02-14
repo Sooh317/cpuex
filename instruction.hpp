@@ -596,6 +596,7 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b, bool nl = true){
         break;
     case MUL16I:
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (bitmask(16) & b);
+        break;
     case ORI:
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (b & bitmask(16));
         break;

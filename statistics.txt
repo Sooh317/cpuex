@@ -1,7 +1,53 @@
-命令数: 0
+命令数: 234
+内訳
+	in: 0
+	out: 8
+	flush: 1
+	halt: 1
+	add: 0
+	addi: 33
+	addis: 6
+	sub: 6
+	slwi: 0
+	srwi: 0
+	instr_unknown: 0
+	instr_unknown: 0
+	ori: 6
+	cmp: 12
+	cmpi: 36
+	fcmp: 0
+	b: 6
+	bl: 0
+	beq: 19
+	ble: 12
+	bge: 17
+	blr: 0
+	lw: 4
+	lwx: 10
+	sw: 17
+	swx: 0
+	lwi: 0
+	mflr: 0
+	mv: 39
+	mtlr: 0
+	fadd: 0
+	fsub: 0
+	fmul: 0
+	fdiv: 0
+	fabs: 0
+	fneg: 0
+	fsqrt: 0
+	ffloor: 0
+	fhalf: 0
+	fsin: 0
+	fcos: 0
+	fatan: 0
+	faddmul: 0
+	ftoi: 1
+	itof: 0
+	not_instr: 0
+	instr_unknown: 0
 キャッシュヒット: 30
 キャッシュミス: 1
 ライトバック: 0
 ヒット率: 96.7742
-sin使用数: 0
-cos使用数: 0
