@@ -31,8 +31,7 @@ _min_caml_start:
 .b811:
 	addi	r61, r9, 48				# 1264
 	out		r61				# 946
-
-	blr				# 0
+	b		_min_caml_end				# 962
 .b810:
 	mv		r28, r9				# 990
 	addi	r62, r0, 0				# 990
@@ -53,13 +52,11 @@ _min_caml_start:
 	out		r9				# 946
 	addi	r9, r28, 48				# 1410
 	out		r9				# 946
-
-	blr				# 0
+	b		_min_caml_end				# 962
 .b816:
 	addi	r9, r28, 48				# 1346
 	out		r9				# 946
-
-	blr				# 0
+	b		_min_caml_end				# 962
 .b814:
 	addi	r9, r28, -10				# 1005
 	addi	r61, r62, 1				# 1005
@@ -168,11 +165,9 @@ _min_caml_start:
 .b804:
 	addi	r28, r0, 48				# 1571
 	out		r28				# 946
-
 .b802:
 	addi	r28, r62, -1				# 1600
 	mv		r62, r28				# 1600
-
 	cmpi	r62, 0
 	bge		.b798				# 1483
 	b		_min_caml_end
@@ -428,8 +423,7 @@ _min_caml_start:
 .b730:
 	addi	r9, r0, 48				# 1921
 	out		r9				# 946
-
-	blr				# 0
+	b		_min_caml_end				# 962
 .b728:
 	mv		r28, r9				# 1883
 	cmpi	r28, 0
