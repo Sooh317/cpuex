@@ -2,7 +2,7 @@
 #include "struct.hpp"
 #include "util.hpp"
 
-#define FREQ 70
+#define FREQ 85
 #define BAUDRATE 500000
 
 long long estimate(MEMORY_PRO* mem, CACHE_PRO* cache){
@@ -21,7 +21,7 @@ long long estimate(MEMORY_PRO* mem, CACHE_PRO* cache){
     total += 2ll * mem->opc_cnt[FCFIW];
     // lw, sw
     total += 1ll * cache->lwhit;
-    total += 1ll * cache->swhit;
+    total += 0ll * cache->swhit;
     total += (long long)((55.0*100 / FREQ) * (cache->lwmiss + cache->swmiss));
     // stall
     total += mem->stall;
