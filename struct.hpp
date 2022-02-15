@@ -281,7 +281,6 @@ struct memory_t{
     void show_memory(const SHOW& show){
         if(show.m){
             for(int ad : show.maddr){
-                ad = ((ad >> 2) << 2);
                 std::cout << "around " << ad << " in the order of (int, float, binary)" << std::endl;
                 for(int j = std::max(-ad, -show.wid); j <= std::min(DATA_SIZE - 1 - ad, show.wid); j++){
                     if(j == 0) std::cout << "\033[1;34m";
