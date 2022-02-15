@@ -179,8 +179,8 @@ struct instr_t{
 };
 using INSTR = instr_t;
 
-#define INSTR_SIZE 1024*1024/32
-#define DATA_SIZE 1024*1024
+#define INSTR_SIZE 1024*1024
+#define DATA_SIZE 1024*1024 * 8
 
 // http://apfel.mathematik.uni-ulm.de/~lehn/sghpc_ws14/OSXAssembler.pdf
 enum DIRECTIVE_KIND{
