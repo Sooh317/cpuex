@@ -3,7 +3,7 @@
 #include "util.hpp"
 
 #define FREQ 85
-#define BAUDRATE 500000
+#define BAUDRATE 3000000
 
 long long estimate(MEMORY_PRO* mem, CACHE_PRO* cache){
     long long total = std::accumulate(mem->opc_cnt.begin(), mem->opc_cnt.end(), 0ll);
@@ -22,7 +22,7 @@ long long estimate(MEMORY_PRO* mem, CACHE_PRO* cache){
     // lw, sw
     total += 1ll * cache->lwhit;
     total += 0ll * cache->swhit;
-    total += (long long)((55.0*100 / FREQ) * (cache->lwmiss + cache->swmiss));
+    total += (long long)(50ll * (cache->lwmiss + cache->swmiss));
     // stall
     total += mem->stall;
     

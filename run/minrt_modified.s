@@ -10972,8 +10972,8 @@ _min_caml_start: # main entry point
 	addis	r5, 0, ha16(n_reflections.2463)
 	ori	r5, r5, lo16(n_reflections.2463)
 	stw	r2, 0(r5)
-#    addi    r5, 0, 512             # 512512    
-	addi	r5, 0, 128				# 2295
+    addi    r5, 0, 512             # 512512    
+#	addi	r5, 0, 128				# 2295
 	lwz	r6, -4(r3)				# 2276
 	slwi	r7, r6, 2				# 2276
 	lwz	r8, -56(r3)				# 2276
@@ -10981,8 +10981,8 @@ _min_caml_start: # main entry point
 	lwz	r7, 0(r3)				# 2277
 	slwi	r9, r7, 2				# 2277
 	stwx	r5, r8, r9				# 2277
-#    addi    r9, 0, 256             # 512512
-	addi	r9, 0, 64				# 2278
+    addi    r9, 0, 256             # 512512
+#	addi	r9, 0, 64				# 2278
 	slwi	r10, r6, 2				# 2278
 	lwz	r11, -60(r3)				# 2278
 	stwx	r9, r11, r10				# 2278
