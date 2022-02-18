@@ -46,7 +46,6 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
     mem.opc_cnt[opc]++;
     int c, ea, tmp;
     [[maybe_unused]] int bo, bi;
-    std::ofstream sin, cos;
     bool ovf = false;
     switch(opc){
         case IN:
@@ -201,6 +200,9 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             return false;
         case FMUL:
             cpu.gpr[d].f = TasukuFukami::fmul(cpu.gpr[a].f, cpu.gpr[b].f);
+            return false;
+        case FADDMUL:
+            cpu.gpr[d].f = TasukuFukami::fadd(TasukuFukami::fmul(cpu.gpr[a >> 6].f, cpu.gpr[a & bitmask(6)].f), cpu.gpr[b].f);
             return false;
         case FDIV:
             cpu.gpr[d].f = TasukuFukami::fdiv(cpu.gpr[a].f, cpu.gpr[b].f, fpu, ovf);
@@ -500,7 +502,7 @@ int simulate_step(CPU& cpu, MEMORY_PRO &mem, OPTION& option, FPU& fpu, CACHE_PRO
             bool da = false, db = false;
             std::swap(option.display_assembly, da);
             std::swap(option.display_binary, db);
-            for(int i = 0; i < ss.Sval; i++){
+            for(long long i = 0; i < ss.Sval; i++){
                 if(exec(cpu, mem, fpu, cache, option)){
                     std::cout << "program finished!" << std::endl;
                     return 0;
