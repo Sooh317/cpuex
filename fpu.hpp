@@ -518,10 +518,8 @@ namespace TasukuFukami{
     std::pair<int, float> reduce(float f, const FPU& fpu){
         int fi = bit_cast<int, float>(f);
         double na = ((fi & bitmask(23)) | (1<<23)) * fpu.IMYNIPI;
+        na *= std::pow(2, (int(fi >> 23 & bitmask(8)) - 127) - 49);
         int64_t n = std::floor(na);
-
-        // na *= std::pow(2, (int(fi >> 23 & bitmask(8)) - 127) - 49);
-        
         double a = na - n;
         a = std::floor(a*(1<<27));
         a *= fpu.IMYPINI;
@@ -571,6 +569,7 @@ namespace TasukuFukami{
         int fi = bit_cast<int, float>(f);
         if(std::abs(f) > fpu.HALFPI){
             auto[quot, rem] = reduce(f, fpu);
+            int tmp = bit_cast<int>(rem);
             float absrem = std::abs(rem);
             float core;
             int corei;
