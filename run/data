@@ -1,1 +1,91 @@
 	.data
+n_objects.2512:
+	.size 1
+dummy.2515:
+	.size 1
+Tt267.2522:
+	.size 1
+objects.2523:
+	.size 60
+screen.2526:
+	.size 3
+viewpoint.2529:
+	.size 3
+light.2532:
+	.size 3
+beam.2535:
+	.size 1
+Ta280.2540:
+	.size 1
+and_net.2541:
+	.size 50
+Ta283.2545:
+	.size 1
+Ta285.2546:
+	.size 1
+or_net.2547:
+	.size 1
+solver_dist.2550:
+	.size 1
+intsec_rectside.2553:
+	.size 1
+tmin.2556:
+	.size 1
+intersection_point.2559:
+	.size 3
+intersected_object_id.2562:
+	.size 1
+nvector.2565:
+	.size 3
+texture_color.2568:
+	.size 3
+diffuse_ray.2571:
+	.size 3
+rgb.2574:
+	.size 3
+image_size.2577:
+	.size 2
+image_center.2580:
+	.size 2
+scan_pitch.2583:
+	.size 1
+startp.2586:
+	.size 3
+startp_fast.2589:
+	.size 3
+screenx_dir.2592:
+	.size 3
+screeny_dir.2595:
+	.size 3
+screenz_dir.2598:
+	.size 3
+ptrace_dirvec.2601:
+	.size 3
+dummyf.2604:
+	.size 1
+dummyff.2606:
+	.size 1
+Tt326.2608:
+	.size 1
+dummy_vs.2609:
+	.size 1
+dirvecs.2611:
+	.size 5
+dummyf2.2614:
+	.size 1
+v3.2617:
+	.size 3
+consts.2619:
+	.size 60
+dummyf3.2623:
+	.size 1
+dummyff3.2625:
+	.size 1
+dummydv.2626:
+	.size 1
+Tt339.2630:
+	.size 1
+reflections.2631:
+	.size 180
+n_reflections.2634:
+	.size 1

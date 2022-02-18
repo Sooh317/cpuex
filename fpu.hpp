@@ -569,7 +569,6 @@ namespace TasukuFukami{
         int fi = bit_cast<int, float>(f);
         if(std::abs(f) > fpu.HALFPI){
             auto[quot, rem] = reduce(f, fpu);
-            int tmp = bit_cast<int>(rem);
             float absrem = std::abs(rem);
             float core;
             int corei;

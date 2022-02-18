@@ -1,1 +1,1 @@
-fib10.s
+minrt.s

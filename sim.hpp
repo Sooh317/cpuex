@@ -185,6 +185,7 @@ void exec_fast(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE& cache){
             continue;
         case FTOI:
             cpu.gpr[d].i = int(std::trunc(cpu.gpr[a].f));
+            // cpu.gpr[d].i = int(cpu.gpr[a].f);
             continue;
         case ITOF:
             cpu.gpr[d].f = float(cpu.gpr[a].i);

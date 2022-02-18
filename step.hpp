@@ -46,6 +46,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
     mem.opc_cnt[opc]++;
     int c, ea, tmp;
     [[maybe_unused]] int bo, bi;
+    std::ofstream sin, cos;
     bool ovf = false;
     switch(opc){
         case IN:
@@ -235,6 +236,7 @@ bool exec(CPU& cpu, MEMORY_PRO& mem, FPU& fpu, CACHE_PRO& cache, OPTION& option)
             return false;
         case FTOI:
             cpu.gpr[d].i = int(std::trunc(cpu.gpr[a].f));
+            // cpu.gpr[d].i = int(cpu.gpr[a].f);
             return false;
         case ITOF:
             cpu.gpr[d].f = float(cpu.gpr[a].i);

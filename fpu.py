@@ -849,20 +849,17 @@ def reduce(fl, display=False):
         print("0"*(51 - len(binnow)) + binnow)
 
     n = math.floor(na)
-    
+
     a = (na - n)
     a = math.floor(a*2**27)
     # (28*27)
     a *= IMYPINI
-
     if display:
         print("a:")
         binnow = bin(a)[2:]
         print("0"*(55-len(binnow)) + binnow)
-        
     a /= 2**(26+27)
     a = myround(a, 23)
-
     return n%4, float64tomyfloat(a)
 
 
@@ -1127,4 +1124,6 @@ def test():
             for i in reversed(range(23)): print((mmm >> i & 1), end='')
             print('')
 
-test()
+#test()
+f = myfloat(0, 0b10000001, 0b110110111000100110001000)
+k = reduce(f, True)
