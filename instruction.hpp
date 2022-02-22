@@ -678,7 +678,7 @@ void show_instr_binary(INSTR_KIND instr, int d, int a, int b, bool nl = true){
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | ((b & bitmask(6)) << 10) | (6 << 2) | 0b01;
         break;
     case FADDMUL:
-        res |= ((d & bitmask(6)) << 22) | (((a >> 6) & bitmask(6)) << 16) | (a & bitmask(6) << 10) | ((b & bitmask(6)) << 4) | (0 << 2) | 0b10;
+        res |= ((d & bitmask(6)) << 22) | (((a >> 6) & bitmask(6)) << 16) | ((a & bitmask(6)) << 10) | ((b & bitmask(6)) << 4) | (0 << 2) | 0b10;
         break;
     case FABS:
         res |= ((d & bitmask(6)) << 22) | ((a & bitmask(6)) << 16) | (0 << 2) | 0b00;
