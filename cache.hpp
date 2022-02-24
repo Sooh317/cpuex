@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <set>
+#include <math.h>
 #include "struct.hpp"
 #include "util.hpp"
 
@@ -12,9 +13,9 @@
 // #define CACHE_INDEX_SIZE 4
 
 // 1行のサイズ(bit)
-#define CACHE_LINE_SIZE 512
+#define CACHE_LINE_SIZE 1024
 // offset -> lineのどこ？ -> log(512/8)
-#define CACHE_OFFSET_SIZE 6
+#define CACHE_OFFSET_SIZE 7
 // キャッシュの何行目かを引く部分の長さ
 #define CACHE_INDEX_SIZE 10
 // キャッシュラインの数
