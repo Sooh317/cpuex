@@ -3,9 +3,6 @@
  
 PowerPC 32bit版のシミュレータです.
 
-アセンブリを読ませて実行します.
- 
- 
 # Requirement
  
 * gcc 11.1.0
@@ -13,68 +10,35 @@ PowerPC 32bit版のシミュレータです.
 # Usage
   
 ```bash
-git clone git@github.com:Sooh317/cpu_experiment.git
-cd cpu_experiment
 make install #重要
 ```
-"assembly.txt" には読ませたいアセンブリのファイル名を列挙してください.
+"assembly.txt"には読ませたいアセンブリのファイル名を列挙してください.<br>
+デフォルトでレイトレプログラム128*128が実行されます.
+512*512を実行したい場合はminrt128.s -> minrt512.sとしてください.
 
-_min_caml_start のラベルがついた命令から順に実行します.
+<br>
+make をすると "sim" という実行ファイルが生成されます.<br>
 
 ```bash
 make
 ```
-make をすると "sim" という実行ファイルが生成されます.
+
+binary_to_assemblyではrun/bin内のバイナリをアセンブリに直してrun/asmに結果を出力します.
+assembly_to_binaryではrun/assembly.txt内に列挙されたアセンブリファイルを読んでバイナリをrun/binに結果を出力します.
+
 ```bash
 make binary_to_assembly
 make assembly_to_binary
 ```
-binary_to_assemblyではrun/bin内のバイナリをアセンブリに直してrun/asmに結果を出力します.
-
-assembly_to_binaryではrun/assembly.txt内に列挙されたアセンブリファイルを読んでバイナリをrun/binに結果を出力します.
-
-実際に実行する場合は以下を参照してください.
-
 
 # Option
 
-実行時にいくつかのオプションを設定することができます.
-****
- * -s : ステップ実行を行います.(stepのs)
-
--sを指定した場合、暗黙に-da, -dbが指定されます.
-
+実行時にオプションを設定することができます.
 
 ****
+ * -s : ステップ実行を行います.
+****
 
- * -da : 命令列をアセンブリで出力しながら実行します.(display assemblyのda)
-
-
- * -db : 命令列をバイナリで出力しながら実行します.(display binaryのdb)
-
--da及び-dbで表示されるバイナリは左側が上位(0)で右側が下位(31)になっています.
-
-これはマニュアルに則した実装です.
-
-***
-
- * -ta : バイナリからアセンブリへの翻訳を行います.(to assemblyのta)
- * -tb : アセンブリからバイナリへの翻訳を行います.(to binaryのtb)
-
--aや-bと合わせることで、まとめて翻訳を行うことも可能です.
-(branchまわりはバグりますが、他の翻訳はチェック済み)
-
-***
-
- * -a : assembly.s からassemblyを読む
-
--tbの時だけ有効
-
-***
- * -b : バイナリをbinary.txtから読ませます.(binaryのb)
-
-(branchまわりの仕様がまだカスなのでバグります)
-***
 
 # Example
 
@@ -83,34 +47,12 @@ assembly_to_binaryではrun/assembly.txt内に列挙されたアセンブリフ�
 ```bash
 ./sim 
 ```
-実行結果だけ表示させます.(何を表示すべきかまだ決めてない)
+実行結果だけflushed.ppmに表示させます.
 
 ```bash
-./sim -s [-da] [-db]
+./sim -s
 ```
-飛びたいラベルを指定しながらステップ実行します.
-
-ラベルに飛んだ後のステップ実行中には命令のアセンブリとバイナリが表示されます.
-
--daや-dbを指定しない場合は、アセンブリもバイナリも表示されます.
-
-```bash
-./sim -da > res.txt
-```
-プログラムを最後まで実行し、実行したアセンブリをres.txtに格納します.
-
-
-```bash
-./sim -ta [-b]
-```
-バイナリを入力としてアセンブリを吐くインタープリタとして動きます
-
--bを指定した場合は、binary.txtから読み込みます.
-
-```bash
-./sim -tb -a > res.txt
-```
-assembly.sに書いてあるアセンブリをバイナリに変換してres.txtに格納します.
+ステップ実行を行います.
 
 # step execution specifications
  - "h : ヘルプの表示"
@@ -132,9 +74,5 @@ assembly.sに書いてあるアセンブリをバイナリに変換してres.txt
 ```bash
 s;g;c;l # ";"で区切って複数命令を指定(スペースは入れないで)
 P[4320] # asmファイルの中の ##4320 がある行が次に実行される状態へ飛ぶ
-m[0,300,440];C[3,4]
+m[0,300,440];C[3,4] #コンマの後にスペースは入れてはいけません
 ```
-
-# Note
- 
-実行巻き戻しも多分そのうち追加します.

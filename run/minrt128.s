@@ -1,6 +1,7 @@
 	.text
 	sub		r0, r0, r0
 	b		_min_caml_start
+	# read_net_item.2806
 read_net_item.2806:
 .Entry@read_net_item.2806:
 	sw		r1, 0(r3)				# 0
@@ -38,6 +39,7 @@ read_net_item.2806:
 	cmp		r9, r61
 	ble		.b47461				# 12758
 	b		.b47459
+	# read_or_network.2808
 read_or_network.2808:
 .Entry@read_or_network.2808:
 	sw		r1, 0(r3)				# 0
@@ -85,6 +87,7 @@ read_or_network.2808:
 	cmp		r61, r28
 	ble		.b47467				# 12959
 	b		.b47465
+	# trace_diffuse_ray.3007
 trace_diffuse_ray.3007:
 .Entry@trace_diffuse_ray.3007:
 	addi	r41, r0, 0				# 28622
@@ -2396,6 +2399,7 @@ trace_diffuse_ray.3007:
 	fcmp	r9, r41
 	ble		.b47525				# 3098
 	b		.b47527
+	# pretrace_line.3071
 pretrace_line.3071:
 .Entry@pretrace_line.3071:
 	sw		r1, 0(r3)				# 0
@@ -7816,6 +7820,7 @@ pretrace_line.3071:
 .b48075:
 	addis	r61, r0, 16256				# 1801
 	b		.b48074				# 1801
+	# main program start
 _min_caml_start:
 	addi	r41, r0, 0				# 154
 	lli		r54, n_objects.2525				# 138
@@ -14159,8 +14164,101 @@ T.loop50042:
 .b49499:
 	addi	r51, r0, 0				# 3188
 	b		.b49498				# 3188
+	# main program end
 _min_caml_end:
 	flush
 	halt
 	halt
 	halt
+# === .data section ===
+	.data
+n_objects.2525:
+	.size 1
+dummy.2528:
+	.size 1
+Tt270.2535:
+	.size 1
+objects.2536:
+	.size 60
+screen.2539:
+	.size 3
+viewpoint.2542:
+	.size 3
+light.2545:
+	.size 3
+beam.2548:
+	.size 1
+Ta283.2553:
+	.size 1
+and_net.2554:
+	.size 50
+Ta286.2558:
+	.size 1
+Ta288.2559:
+	.size 1
+or_net.2560:
+	.size 1
+solver_dist.2563:
+	.size 1
+intsec_rectside.2566:
+	.size 1
+tmin.2569:
+	.size 1
+intersection_point.2572:
+	.size 3
+intersected_object_id.2575:
+	.size 1
+nvector.2578:
+	.size 3
+texture_color.2581:
+	.size 3
+diffuse_ray.2584:
+	.size 3
+rgb.2587:
+	.size 3
+image_size.2590:
+	.size 2
+image_center.2593:
+	.size 2
+scan_pitch.2596:
+	.size 1
+startp.2599:
+	.size 3
+startp_fast.2602:
+	.size 3
+screenx_dir.2605:
+	.size 3
+screeny_dir.2608:
+	.size 3
+screenz_dir.2611:
+	.size 3
+ptrace_dirvec.2614:
+	.size 3
+dummyf.2617:
+	.size 1
+dummyff.2619:
+	.size 1
+Tt329.2621:
+	.size 1
+dummy_vs.2622:
+	.size 1
+dirvecs.2624:
+	.size 5
+dummyf2.2627:
+	.size 1
+v3.2630:
+	.size 3
+consts.2632:
+	.size 60
+dummyf3.2636:
+	.size 1
+dummyff3.2638:
+	.size 1
+dummydv.2639:
+	.size 1
+Tt342.2643:
+	.size 1
+reflections.2644:
+	.size 180
+n_reflections.2647:
+	.size 1
